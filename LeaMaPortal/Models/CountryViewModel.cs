@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace LeaMaPortal.Controllers
+namespace LeaMaPortal.Models
 {
     public class CountryViewModel
     {
