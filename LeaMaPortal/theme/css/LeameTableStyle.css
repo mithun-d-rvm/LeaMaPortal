@@ -1,0 +1,152 @@
+﻿.rTable {
+  	display: table;
+  	width: 100%;
+}
+.rTableRow {
+  	display: table-row;
+}
+.rTableHeading {
+  	display: table-header-group;
+  	background-color: #ddd;
+}
+.rTableCell, .rTableHead {
+  	display: table-cell;
+  	padding: 3px 10px;
+  	border: 1px solid #999999;
+}
+.rTableHeading {
+  	display: table-header-group;
+  	background-color: #ddd;
+  	font-weight: bold;
+}
+.rTableFoot {
+  	display: table-footer-group;
+  	font-weight: bold;
+  	background-color: #ddd;
+}
+.rTableBody {
+  	display: table-row-group;
+}
+
+ /*form Avoid Display blockquote aside a table*/
+ .rTable {
+  	display: block;
+  	width: 100%;
+}
+.rTableHeading, .rTableBody, .rTableFoot, .rTableRow{
+  	clear: both;
+}
+.rTableHead, .rTableFoot{
+  	background-color: #DDD;
+  	font-weight: bold;
+}
+.rTableCell, .rTableHead {
+  	border: 1px solid #999999;
+  	float: left;
+  	height: 17px;
+  	overflow: hidden;
+  	padding: 3px 1.8%;
+  	width: 28%;
+}
+.rTable:after {
+  	visibility: hidden;
+  	display: block;
+  	font-size: 0;
+  	content: " ";
+  	clear: both;
+  	height: 0;
+}
+
+ .Table
+    {
+        display: table;
+    }
+    .Title
+    {
+        display: table-caption;
+        text-align: center;
+        font-weight: bold;
+        font-size: larger;
+    }
+    .Heading
+    {
+        display: table-row;
+        font-weight: bold;
+        /*text-align: center;*/
+        background-color:#E6E6E4;
+
+    }
+    .Row
+    {
+        display: table-row;
+    }
+    .Cell
+    {
+        display: table-cell;
+        border: solid;
+        border-width:1px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-color:#CAC2C2;
+    }
+ 
+
+    /* DivTable.com */
+.divTable{
+	display: table;
+	width: 100%;
+}
+.divTableRow {
+    
+	display: table-row;
+}
+.divTableHeading {
+    display: table-row;
+    font-weight: bold;
+	background-color:#554289;
+    color:#ffffff !important;
+	/*display: table-header-group;*/
+}
+.divTableCell, .divTableHead {
+	/*border: 1px solid #999999;*/
+
+        border-bottom: 1px solid #999999;
+	display: table-cell;
+	padding: 15px 6px;
+}
+/*.divTableHeading {
+	/*background-color: #EEE;
+	display: table-header-group;
+	font-weight: bold;
+}*/
+.divTableFoot {
+	background-color: #EEE;
+	display: table-footer-group;
+	font-weight: bold;
+}
+.divTableBody {
+	display: table-row-group;
+}
+
+.divFontHeadTable
+{
+     /*font-family: ProximaNova;*/
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  /*color: #9fa9ba;*/
+}
+
+.divFontBodyTable {
+  /*font-family: Abel;*/
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+}

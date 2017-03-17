@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/theme/js/Chart.min.js"></script>
+<div style="margin-top: -20px;
+    margin-bottom: 30px;
+    color: darkblue;
+    font-weight: bold;">
+    OVERALL PERFORMANCE FOR CURRENT MONTH
+</div>
+<div class="market-updates">
+			<div class="col-md-4 market-update-gd">
+				<div class="market-update-block clr-block-1">
+					<div class="col-md-8 market-update-left">
+						<h3>87,155 </h3>
+						<h4>EARNINGS HISTORY</h4>
+						<p>Other hand, we denounce</p>
+					</div>
+					<div class="col-md-4 market-update-right">
+						<i class="fa fa-file-text-o"> </i>
+					</div>
+				  <div class="clearfix"> </div>
+				</div>
+			</div>
+
+
+    <div class="col-md-4 market-update-gd">
+        <div>
+            <div class="market-update-block clr-block-2">
+                <div class="col-md-6 market-update-left">
+                    <div style="padding: 1em 1em;">
+                        <h3>135</h3>
+                        <h4>VACANT PROPERTIES</h4>
+                        <p>Other hand, we denounce</p>
+                    </div>
+                </div>
+                <div class="col-md-6 market-update-right">
+
+                    <div class="col-md-12" style="height: 85px; background-color: #cbe7f3;">
+                        Test
+                    </div>
+                    <div class="col-md-12" style="background-color: pink;height: 86px;">
+                        Test
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+
+
+			<div class="col-md-4 market-update-gd">
+				<div class="market-update-block clr-block-3">
+					<div class="col-md-8 market-update-left">
+						<h3>23</h3>
+						<h4>TOTAL LOSS</h4>
+						<p>Other hand, we denounce</p>
+					</div>
+					<div class="col-md-4 market-update-right">
+						<i class="fa fa-envelope-o"> </i>
+					</div>
+				  <div class="clearfix"> </div>
+				</div>
+			</div>
+		   <div class="clearfix"> </div>
+		</div>
+
+<div style="padding-top:20px;"> &nbsp; </div>
+
+<div class="col-md-4 chart-blo-1">
+    <div class="line-chart">
+        <h5>UTILITY DUES</h5>
+        <h3>64,300</h3>
+        <canvas id="line" height="300" width="460" style="width: 460px; height: 300px;"> </canvas>
+        <script>
+                        var lineChartData = {
+						labels : ["","","","","","",""],
+						datasets : [
+							{
+								fillColor : "rgba(252, 130, 19, 0.74)",
+								strokeColor : "#FC8213",
+								pointColor : "#FC8213",
+								pointStrokeColor : "#fff",
+								data : [65,59,90,81,56,55,40]
+							}
+						]
+
+					};
+                       new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
+
+        </script>
+    </div>
+</div>
+
+<div class="col-md-4 chart-blo-1">
+    <div class="line-chart">
+        <h5>RENT DUES</h5>
+        <h3>122,456</h3>
+        <canvas id="line2" height="300" width="460" style="width: 460px; height: 300px;"> </canvas>
+        <script>
+                        var lineChartData = {
+						labels : ["","","","","","",""],
+						datasets : [
+							{
+								fillColor : "rgba(252, 130, 19, 0.74)",
+								strokeColor : "#FC8213",
+								pointColor : "#FC8213",
+								pointStrokeColor : "#fff",
+								data : [65,59,90,81,56,55,40]
+							}
+						]
+
+					};
+                       new Chart(document.getElementById("line2").getContext("2d")).Line(lineChartData);
+
+        </script>
+    </div>
+</div>
+
+<div class="col-md-4 chart-blo-1">
+    <div class="line-chart">
+        <h5>TOTAL EXPENSES</h5>
+        <h3>199,758</h3>
+        <canvas id="line3" height="300" width="460" style="width: 460px; height: 300px;"> </canvas>
+        <script>
+                        var lineChartData = {
+						labels : ["","","","","","",""],
+						datasets : [
+							{
+								fillColor : "rgba(252, 130, 19, 0.74)",
+								strokeColor : "#FC8213",
+								pointColor : "#FC8213",
+								pointStrokeColor : "#fff",
+								data : [65,59,90,81,56,55,40]
+							}
+						]
+
+					};
+                       new Chart(document.getElementById("line3").getContext("2d")).Line(lineChartData);
+
+        </script>
+    </div>
+</div>
