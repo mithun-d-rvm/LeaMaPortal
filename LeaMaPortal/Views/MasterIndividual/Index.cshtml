@@ -1,0 +1,450 @@
+﻿<!--
+  File Name      : MasterIndividual.cshtml
+  Description    : Master page for individual
+  Created Date   : 18-Mar-2017
+  Notes          : <Notes>
+-->
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Title:
+            </div>
+            <div class="col-md-8">
+                <select class="master-form-input">
+                    <option> MR. </option>
+                    <option> MRS. </option>
+                    <option> MS. </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Middle Name:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Company Name/ Educational Institute:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Marital Status
+            </div>
+            <div class="col-md-8">
+                <div class="col-md-6" style="margin-left: -20px;">
+                    <div class="col-md-1">
+                        <input type="checkbox" class="input-checkbox">
+                    </div>
+                    <div class="col-md-8 m-t-3">
+                        <span> Family </span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-1">
+                        <input type="checkbox" class="input-checkbox">
+                    </div>
+                    <div class="col-md-8 m-t-3">
+                        <span> Single </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Address 01:
+            </div>
+            <div class="col-md-8">
+                <textarea class="master-form-input"></textarea>
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                City:
+            </div>
+            <div class="col-md-8">
+                <select class="master-form-input">
+                    <option> Manly </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Email:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Landline:
+            </div>
+            <div class="col-md-8">
+                <div class="col-md-3" style="margin-left: -15px;">
+                    <input type="text" class="master-form-input">
+                </div>
+                <div class="col-md-3" style="margin-left: -15px;">
+                    <input type="text" class="master-form-input">
+                </div>
+                <div class="col-md-6" style="margin-left: 32%;
+                width: 64%;
+                position: absolute;">
+                    <input type="text" class="master-form-input">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Nationality:
+            </div>
+            <div class="col-md-8">
+                <select class="master-form-input">
+                    <option> Australia </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Emirate Issue Date:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Passport Number:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Passport Issue Date:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Visa Type:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Visa Expiry Date:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Family Number:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                ADWEA Resigtration Id:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        @*<div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+            <div class="col-md-4">
+                <button class="btn master-form-btn">Submit</button>
+            </div>
+        </div>*@
+    </div>
+
+    <div class="col-md-6">
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Tenant ID:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                First Name:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Last Name:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Profession:
+            </div>
+            <div class="col-md-8">
+                <select class="master-form-input">
+                    <option> Farmer </option>
+                    <option> Engineer </option>
+                    <option> Doctor </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Address:
+            </div>
+            <div class="col-md-8">
+                <textarea class="master-form-input"></textarea>
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Emirate:
+            </div>
+            <div class="col-md-8">
+                <select class="master-form-input">
+                    <option> Default </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Post Box:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Mobile:
+            </div>
+            <div class="col-md-8">
+                <div class="col-md-3" style="margin-left: -15px;">
+                    <input type="text" class="master-form-input">
+                </div>
+                <div class="col-md-3" style="margin-left: -15px;">
+                    <input type="text" class="master-form-input">
+                </div>
+                <div class="col-md-6" style="margin-left: 32%;
+                width: 64%;
+                position: absolute;">
+                    <input type="text" class="master-form-input">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Fax:
+            </div>
+            <div class="col-md-8">
+                <div class="col-md-3" style="margin-left: -15px;">
+                    <input type="text" class="master-form-input">
+                </div>
+                <div class="col-md-3" style="margin-left: -15px;">
+                    <input type="text" class="master-form-input">
+                </div>
+                <div class="col-md-6" style="margin-left: 32%;
+                width: 64%;
+                position: absolute;">
+                    <input type="text" class="master-form-input">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Emirates ID:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Emirates Expiry Date:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>    
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Place of Insurance:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Passport Expiry Date:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Visa Issue Date:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Date of Birth:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                Family Book City:
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="master-form-input" />
+            </div>
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+            <div class="col-md-4">
+                <button class="btn master-form-btn">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row p-b-25">
+    <span> <strong> Document Details </strong> </span>
+</div>
+
+<div class="row">
+    <div class="col-md-10 document-row">
+        <div class="col-md-1">
+            ID
+        </div>
+        <div class="col-md-3">
+            Document Name
+        </div>
+        <div class="col-md-4">
+            Document Details
+        </div>
+    </div>
+</div>
+<div class="row ht-5">
+    &nbsp;
+</div>
+
+<!-- Begin Dynamic row -->
+
+@Html.Partial("_DocumentDetailsRow")
+@Html.Partial("_DocumentDetailsRow")
+<!-- End Dynamic row -->
+
+<!-- Begin Grid view -->
+<div class="row">
+    &nbsp;
+</div>
+<div class="row leama-fieldset leama-header-top" style="background-color:white;">
+    <div class="col-md-12">
+        <div class="col-md-12 leama-fieldset ">
+            <div class="col-md-2 pull-left">
+                @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="leama-field form-control" />
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-info leama-search-btn col-md-4">Go</button>
+            </div>
+        </div>
+
+        <div class="col-md-12 leama-fieldset ">
+            &nbsp;
+        </div>
+
+        <div class="divTable leama-fieldset col-md-12">
+
+
+            <div class="divTableBody divFontBodyTable">
+                <div class="divTableHeading">
+                    <div class="divTableCell">Country Name</div>
+                    <div class="divTableCell">Action</div>
+
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">Chennai</div>
+                    <div class="divTableCell">
+                        @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
+                        @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
+                        @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
+                    </div>
+
+                </div>
+                <div class="divTableRow divFontBodyTable">
+                    <div class="divTableCell">Coimbatore</div>
+                    <div class="divTableCell">
+                        @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
+                        @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
+                        @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-sm-12">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ul class="pagination pull-right">
+                    <li><a href="#">1</a></li>
+                    <li class="active"><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Grid view -->

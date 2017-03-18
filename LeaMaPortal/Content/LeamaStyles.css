@@ -1,0 +1,134 @@
+﻿/*
+  File Name      : LeamaStyles.css
+  Description    : Leama Sytems styles
+  Created Date   : 12-Mar-2017
+  Notes          : <Notes>
+*/
+
+/* Common Styles */
+
+.p-t-17{
+    padding-top:17px;
+}
+.p-b-25{
+    padding-bottom: 25px;
+}
+.m-t-3{
+    margin-top:3px;
+}
+.m-t-6{
+    margin-top:6px;
+}
+.p-b-10{
+    padding-bottom:10px;
+}
+.font-15{
+    font-size: 15px;
+}
+.full-width{
+    width:100% !important;
+}
+.width-60{
+    width:60% !important;
+}
+.ht-5{
+    height:5px;
+}
+.p-35{
+    padding: 35px;
+}
+/* Dashboard */
+
+.logo-thumb{
+    padding:25px;
+    background-color: #000421;
+    color:white;
+    margin-bottom: -7px;
+}
+/* Menu */
+.menu{
+    background-color: #000421;
+    color: white;
+}
+
+/* Sub Header Menu */
+.sub-header-main{
+    height: 100px; 
+    font-size: 12px;
+    margin-top: 71px;
+    border-bottom: 1px solid black;
+}
+.subheader-profile{
+    padding:6%;
+    font-size: 16px;
+}
+.subheader-select {
+    text-transform: uppercase;
+    height: 40px;
+    font-weight: bold;
+    font-size: 16px;
+}
+.subheader-select option{
+    padding:2px;
+}
+
+/* Sidebar Menu */
+.sidebar-btn {
+    border: 1px solid black;
+    color: black;
+    border-radius: 15px !important;
+    padding: 5px;
+    background-color: #ffb100;
+    text-decoration: none;
+    width: 80% !important;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+/* Master Page */
+.master-form-input{
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #c7c6c6;
+    width:100%;
+}
+.form-input-padding{
+    padding:20px 25px 10px 15px;
+}
+.input-checkbox{
+    height: 20px;
+    width: 20px;
+}
+.master-form-btn {
+    background-color: #554289;
+    color: white;
+    border-radius: 15px !important;
+    width: 200px;
+    padding: 10px !important;
+}
+.report-form-row{
+    background-color: rgba(232, 232, 232, 0.73); 
+    padding: 15px 0px;
+}
+.report-checkbox-align{
+    margin-left:-10px; 
+    margin-top: -5px;
+}
+
+/* Master Individual Page */
+.document-btn {
+    border: 1px solid black;
+    color: black;
+    border-radius: 15px !important;
+    background-color: white;
+    padding: 5px;
+    width:100% !important;
+}
+.document-btn:hover{
+    background-color:#554289;
+    color:white;
+}
+.document-row{
+    padding: 15px 0px 20px 0px;
+    background-color: #f3f3f3;
+}
