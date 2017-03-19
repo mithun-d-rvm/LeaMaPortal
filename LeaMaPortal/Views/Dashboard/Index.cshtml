@@ -3,142 +3,285 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/theme/js/Chart.min.js"></script>
-<div style="margin-top: -20px;
-    margin-bottom: 30px;
-    color: darkblue;
+
+<div class="inner-block" style="background: #eff3f6;">
+    <div class="blank">
+
+
+
+        <div class="portlet-grid-page">
+            <h4 class="p-b-25">OVERALL PERFORMANCE FOR CURRENT MONTH</h4>
+
+
+            <div class="portlet-grid panel-primary" style="background-color:#554289;">
+                <div class="panel-body">
+                    <div class="row" style="padding-bottom: 18px;font-size: 12px;
+    color: white;">
+                        <div class="col-md-6" style="font-size: 12px;">
+                            <strong>  EARNING HISTORY </strong>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="">
+                                <div class="col-md-6">
+                                    <span class="report-text"> Month </span>
+                                </div>
+                                <div class="col-md-6">
+                                    <span class="report-text"> Year </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">                            
+                            <div style="font-size: 30px;
+                    color: #52ce6f;
+                    padding-bottom: 18px;">
+                                <span> 78,380 </span>
+                                <span class="per-month">AED</span>
+                            </div>
+                            <div>
+                                <i class="fa fa-chevron-up" style="font-size: 34px;
+    background-color: rgba(73, 50, 123, 0.57);
+    padding: 6px;
+    border-radius: 20px;
+    color: #52ce6f;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="portlet-grid panel-primary">
+                <div class="row">
+                    <div class="col-md-6 text-center" style="font-size: 12px;color: #594286;
+                padding-left: 25px;
+                padding-top: 7px;">
+                        <div style="padding-bottom: 18px;">
+                            <strong>  VACANT PROPERTIES </strong>
+                        </div>
+                        <div style="font-size: 40px;
+                    color: #FC8213;
+                    padding-bottom: 18px;">
+                            26
+                        </div>
+                        <div style="color: green;
+                    text-transform: uppercase;
+                    font-size: 10px;
+                    padding-bottom: 15px;">
+                            Not Occupied &gt; <span style="background-color: darkgreen;
+                    color: white;
+                    border-radius: 5px;
+                    padding: 3px;">15</span>
+                        </div>
+                        <div style="color: red;
+                    text-transform: uppercase;
+                    font-size: 10px;">
+                            Lease Expired &gt; <span style="background-color: red;
+                    color: white;
+                    border-radius: 5px;
+                    padding: 3px;">18</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center" style="margin-top: 4px;
+                padding-right: 20px;">
+                        <div class="col-md-12" style="background-color: #e8f5ff;
+                    height: 85px;
+                    /* padding-top: 8px; */">
+                            <div style="font-size: 30px;margin-top: 7px;">
+                                <i class="fa fa-home"></i>
+                                <span> 10 </span>
+                            </div>
+                            <div style="font-size: 8px;
+                        background-color: #0474c8;
+                        padding: 3px;
+                        color: white;
+                        border-radius: 4px;
+                        text-transform: uppercase;
+                        /* width: 50%; */">Residential</div>
+                        </div>
+                        <div class="col-md-12" style="background-color: #fff3fd;
+                    height: 85px;
+                    /* padding-top: 8px; */">
+                            <div style="font-size: 30px;margin-top: 7px;">
+                                <i class="fa fa-home"></i>
+                                <span> 16 </span>
+                            </div>
+                            <div style="font-size: 8px;
+                        background-color: #b24a9a;
+                        padding: 3px;
+                        color: white;
+                        border-radius: 4px;
+                        text-transform: uppercase;
+                        /* width: 50%; */">Commercial</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-grid panel-primary">
+                <div class="panel-body">
+                    <div class="row">
+                        @*<div class="col-md-12">*@
+                        <div class="col-md-7" style="font-size: 12px;
+    color: #594286;
+    text-transform: uppercase;
     font-weight: bold;">
-    OVERALL PERFORMANCE FOR CURRENT MONTH
-</div>
-<div class="market-updates">
-			<div class="col-md-4 market-update-gd">
-				<div class="market-update-block clr-block-1">
-					<div class="col-md-8 market-update-left">
-						<h3>87,155 </h3>
-						<h4>EARNINGS HISTORY</h4>
-						<p>Other hand, we denounce</p>
-					</div>
-					<div class="col-md-4 market-update-right">
-						<i class="fa fa-file-text-o"> </i>
-					</div>
-				  <div class="clearfix"> </div>
-				</div>
-			</div>
+                            Total loss from vacant properties
+                        </div>
+                        <div class="col-md-5">
+                            <i class="fa fa-chevron-down" style="border-radius: 3px;
+    background-color: #d35847;
+    color: white;
+    padding: 5px;"></i> <span style="font-size: 25px;
+    color: #d35847;">36,100</span>
+                        </div>
+                        @*</div>*@
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6" style="background-color: #f9f9f9;
+    height: 110px;
+    margin-top: 10px;
+    width: 44%;
+    margin-left: 9px;">
+                            <div style="margin-top: 16px;">
+                                <span style="background-color: #0474c8;
+    font-size: 10px;
+    color: white;
+    padding: 2px;
+    border-radius: 5px;">RES</span> 10
+                            </div>
+                            <div style="font-size: 30px;color: #2c2e35;">
+                                <span> 11,500 </span>
+                                <span class="per-month">AED</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="background-color: #f9f9f9;
+    height: 110px;
+    margin-top: 10px;
+    margin-left: 5px;">
+                            <div style="margin-top: 16px;">
+                                <span style="background-color: #b24a9a;
+                              font-size :10px;
+                              color: white;
+                              padding :2px;
+                              border-radius: 5px;">COM</span> 16
+                            </div>
+                            <div style="font-size: 30px;color: #2c2e35;">
+                                <span> 12,231 </span>
+                                <span class="per-month">AED</span>
+                            </div>
+                        </div>
+                    </div>
 
 
-    <div class="col-md-4 market-update-gd">
-        <div>
-            <div class="market-update-block clr-block-2">
-                <div class="col-md-6 market-update-left">
-                    <div style="padding: 1em 1em;">
-                        <h3>135</h3>
-                        <h4>VACANT PROPERTIES</h4>
-                        <p>Other hand, we denounce</p>
+
+                </div>
+            </div>
+
+
+            <div class="portlet-grid panel-primary">
+                <div class="panel-body">
+                    <div style="font-size: 12px;
+    color: #354052;
+    padding-bottom: 15px;">UTILITY DUES</div>
+                    <div class="text-center" style="padding-top: 20px;
+    font-size: 30px;
+    color: #0daeff;">
+                        <i class="fa fa-home" style="color: white;
+    background-color: #554289;
+    border-radius: 6px;"></i>
+                        <span> 64,300 </span>
+                        <span class="per-month">AED</span>
                     </div>
                 </div>
-                <div class="col-md-6 market-update-right">
+            </div>
 
-                    <div class="col-md-12" style="height: 85px; background-color: #cbe7f3;">
-                        Test
-                    </div>
-                    <div class="col-md-12" style="background-color: pink;height: 86px;">
-                        Test
+
+            <div class="portlet-grid panel-primary">
+                <div class="panel-body">
+                    <div style="font-size: 12px;
+    color: #354052;
+    padding-bottom: 15px;">RENT DUES</div>
+                    <div class="text-center" style="padding-top: 20px;
+    font-size: 30px;
+    color: #0daeff;">
+                        <i class="fa fa-money" style="color: white;
+    background-color: #554289;
+    border-radius: 6px;"></i>
+                        <span> 122,541 </span>
+                        <span class="per-month">AED</span>
                     </div>
                 </div>
-                <div class="clearfix"> </div>
+            </div>
+
+
+            <div class="portlet-grid panel-primary">
+                <div class="panel-body">
+                    <div style="font-size: 12px;
+    color: #354052;
+    padding-bottom: 15px;">TOTAL EXPENSE</div>
+                    <div class="text-center" style="padding-top: 20px;
+    font-size: 30px;
+    color: #2c2e35;">
+                        <span> 199,751 </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portlet-grid" style="width: 98%;height: 100px;">
+                <div class="panel-body" style="margin-top: 15px;">
+                    <div class="col-md-3" style="font-size: 16px;
+    color: #432f76;
+    font-weight: bold;
+    margin-top: 9px;">
+                        IMPORTANT NOTIFICATIONS
+                    </div>
+                    <div class="col-md-8" style="font-size: 15px;">
+                        <button class="" style="width: 207px;
+    height: 40px;
+    border-radius: 50px;
+    border: solid 1px #554289;
+    background: transparent;">
+                            PDC Notification
+                            <span style="font-size: 10px;
+    background-color: #e61d1d;
+    border-radius: 10px;
+    padding: 3px;
+    color: white;">12</span>
+                        </button>
+
+                        <button class="" style="width: 207px;
+    height: 40px;
+    border-radius: 50px;
+    border: solid 1px #554289;
+    background: transparent;
+    margin-left: 15px;">
+                            Renewals
+                            <span style="font-size: 10px;
+    background-color: #e61d1d;
+    border-radius: 10px;
+    padding: 3px;
+    color: white;">12</span>
+                        </button>
+
+                        <button class="" style="width: 207px;
+    height: 40px;
+    border-radius: 50px;
+    border: solid 1px #554289;
+    background: transparent;
+    margin-left: 15px;">
+                            Contracts Expiry
+                            <span style="font-size: 10px;
+    background-color: #e61d1d;
+    border-radius: 10px;
+    padding: 3px;
+    color: white;">12</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-
-			<div class="col-md-4 market-update-gd">
-				<div class="market-update-block clr-block-3">
-					<div class="col-md-8 market-update-left">
-						<h3>23</h3>
-						<h4>TOTAL LOSS</h4>
-						<p>Other hand, we denounce</p>
-					</div>
-					<div class="col-md-4 market-update-right">
-						<i class="fa fa-envelope-o"> </i>
-					</div>
-				  <div class="clearfix"> </div>
-				</div>
-			</div>
-		   <div class="clearfix"> </div>
-		</div>
-
-<div style="padding-top:20px;"> &nbsp; </div>
-
-<div class="col-md-4 chart-blo-1">
-    <div class="line-chart">
-        <h5>UTILITY DUES</h5>
-        <h3>64,300</h3>
-        <canvas id="line" height="300" width="460" style="width: 460px; height: 300px;"> </canvas>
-        <script>
-                        var lineChartData = {
-						labels : ["","","","","","",""],
-						datasets : [
-							{
-								fillColor : "rgba(252, 130, 19, 0.74)",
-								strokeColor : "#FC8213",
-								pointColor : "#FC8213",
-								pointStrokeColor : "#fff",
-								data : [65,59,90,81,56,55,40]
-							}
-						]
-
-					};
-                       new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
-
-        </script>
-    </div>
 </div>
 
-<div class="col-md-4 chart-blo-1">
-    <div class="line-chart">
-        <h5>RENT DUES</h5>
-        <h3>122,456</h3>
-        <canvas id="line2" height="300" width="460" style="width: 460px; height: 300px;"> </canvas>
-        <script>
-                        var lineChartData = {
-						labels : ["","","","","","",""],
-						datasets : [
-							{
-								fillColor : "rgba(252, 130, 19, 0.74)",
-								strokeColor : "#FC8213",
-								pointColor : "#FC8213",
-								pointStrokeColor : "#fff",
-								data : [65,59,90,81,56,55,40]
-							}
-						]
-
-					};
-                       new Chart(document.getElementById("line2").getContext("2d")).Line(lineChartData);
-
-        </script>
-    </div>
-</div>
-
-<div class="col-md-4 chart-blo-1">
-    <div class="line-chart">
-        <h5>TOTAL EXPENSES</h5>
-        <h3>199,758</h3>
-        <canvas id="line3" height="300" width="460" style="width: 460px; height: 300px;"> </canvas>
-        <script>
-                        var lineChartData = {
-						labels : ["","","","","","",""],
-						datasets : [
-							{
-								fillColor : "rgba(252, 130, 19, 0.74)",
-								strokeColor : "#FC8213",
-								pointColor : "#FC8213",
-								pointStrokeColor : "#fff",
-								data : [65,59,90,81,56,55,40]
-							}
-						]
-
-					};
-                       new Chart(document.getElementById("line3").getContext("2d")).Line(lineChartData);
-
-        </script>
-    </div>
-</div>

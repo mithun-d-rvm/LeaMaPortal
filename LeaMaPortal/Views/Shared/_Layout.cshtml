@@ -5,12 +5,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Leama Systems</title>
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- Layout Files -->
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/LeamaStyles.css")
+    @Styles.Render("~/Content/custom.css")
     @Scripts.Render("~/bundles/modernizr")
     <!-- Custom Theme css -->
     @Styles.Render("~/theme/css/bootstrap.css")
-    @Styles.Render("~/theme/css/style.css")
+    @Styles.Render("~/theme/css/style.css")    
     <!--icons-css-->
 
     <script src="~/theme/js/jquery-2.1.1.min.js"></script>
@@ -19,12 +22,17 @@
     <!--Google Fonts-->
     <link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
+
+    <!-- Page styles -->
+    <link href="~/theme/css/leemastyle.css" rel="stylesheet" />
+    <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
 </head>
 <body>
     <div class="page-container">
         <div class="left-content">
             <div class="mother-grid-inner">
                 @Html.Partial("_TopNavBar")
+                @Html.Partial("_SubHeaderMenu")
                 <!-- script-for sticky-nav -->
                 <script>
 		$(document).ready(function() {
@@ -42,15 +50,11 @@
                 </script>
                 <!-- /script-for sticky-nav -->
                 <!--inner block start here-->
-                <div class="inner-block">
-                    @RenderBody()
-                    @*<div class="blank">
-                        <h2>Blank Page</h2>
-                        <div class="blankpage-main">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-                        </div>
-                    </div>*@
-                </div>
+                @*<div class="inner-block">
+                    <div class="blank">*@                        
+                        @RenderBody()
+                    @*</div>
+                </div>*@
                 <!--inner block end here-->
                 <!--copy rights start here-->
                 @Html.Partial("_Footer")                
