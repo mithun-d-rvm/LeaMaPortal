@@ -1,0 +1,61 @@
+﻿@model LeaMaPortal.Models.MasterViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.DropDownList("FormMasterId", null, htmlAttributes: new { @class = "form-control" })
+<div id="Container"></div>
+<script>
+    
+    $(function () {
+        var type = parseInt($("#FormMasterId").val());
+        //alert(type);
+        formMaster(type);
+    });
+    $("#FormMasterId").change(function () {
+        var type = parseInt($("#FormMasterId").val());
+        formMaster(type);
+    });
+    function formMaster(type)
+    {
+        switch (type) {
+            case 1:
+
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                GetCountry();
+                break;
+        }
+
+    }
+    function GetCountry()
+    {
+        $("#Container").empty();
+        $.ajax(
+        {
+            url: "../Country/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) 
+                {
+                $("#Container").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+             //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+</script>

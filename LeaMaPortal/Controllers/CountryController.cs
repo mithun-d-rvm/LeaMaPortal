@@ -7,7 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LeaMaPortal.Models.DBContext;
-
+using LeaMaPortal.Models;
+using System.Threading.Tasks;
 namespace LeaMaPortal.Controllers
 {
     public class CountryController : Controller
@@ -15,9 +16,21 @@ namespace LeaMaPortal.Controllers
         private Entities db = new Entities();
 
         // GET: Country
-        public ActionResult Index()
+        public async Task<PartialViewResult> Index()
         {
-            return View();
+            try
+            {
+                CountryViewModel model = new CountryViewModel();
+                model.List =await db.tbl_country.Where(x=>x.Delmark!="*").Select(x => new CountryViewModel() {
+                    Id=x.Id,
+                    Country=x.Country_name
+                }).ToListAsync();  
+                return PartialView("../Master/Country/_List", model);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         // GET: Country/Details/5
@@ -45,32 +58,65 @@ namespace LeaMaPortal.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Country_name,Id,Accyear,Createddatetime,Createduser,Delmark")] tbl_country tbl_country)
+        public async Task<ActionResult> AddOrUpdate([Bind(Include = "Country,Id")] CountryViewModel model)
         {
-            if (ModelState.IsValid)
+            MessageResult result = new MessageResult();
+            try
             {
-                db.tbl_country.Add(tbl_country);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    //Accyear,Createddatetime,Createduser,Delmark
+                    tbl_country tbl_country = new tbl_country();
+                    tbl_country.Country_name = model.Country;
+                    if (model.Id == 0)
+                    {
+                        tbl_country.Createddatetime = DateTime.Now;
+                        tbl_country.Accyear = DateTime.Now.Year;
+                        tbl_country.Createduser = "arul";
+                        db.tbl_country.Add(tbl_country);
+                    }
+                    else
+                    {
+                        db.Entry(tbl_country).State = EntityState.Modified;
+                    }
+                    await db.SaveChangesAsync();
+                   
+                }
+                return Json(result);
+            }
+            catch
+            {
+                throw;
             }
 
-            return View(tbl_country);
+            
         }
 
         // GET: Country/Edit/5
-        public ActionResult Edit(string id)
+        public async Task<ActionResult> Edit(string id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
+                }
+                tbl_country tbl_country =await db.tbl_country.FindAsync(id);
+                if (tbl_country == null)
+                {
+                    return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
+                }
+                CountryViewModel model = new CountryViewModel()
+                {
+                    Id = tbl_country.Id,
+                    Country = tbl_country.Country_name,
+                };
+                return Json(model,JsonRequestBehavior.AllowGet);
             }
-            tbl_country tbl_country = db.tbl_country.Find(id);
-            if (tbl_country == null)
+            catch
             {
-                return HttpNotFound();
+                return Json( new MessageResult() {Errors="Internal server error" }, JsonRequestBehavior.AllowGet);
             }
-            return View(tbl_country);
         }
 
         // POST: Country/Edit/5
@@ -90,18 +136,29 @@ namespace LeaMaPortal.Controllers
         }
 
         // GET: Country/Delete/5
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
-            if (id == null)
+            MessageResult result = new MessageResult();
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
+                }
+                tbl_country tbl_country = await db.tbl_country.FindAsync(id);
+                if (tbl_country == null)
+                {
+                    return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
+                }
+                tbl_country.Delmark = "*";
+                db.Entry(tbl_country).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
-            tbl_country tbl_country = db.tbl_country.Find(id);
-            if (tbl_country == null)
+            catch
             {
-                return HttpNotFound();
+                return Json(new MessageResult() { Errors = "Internal server error" }, JsonRequestBehavior.AllowGet);
             }
-            return View(tbl_country);
         }
 
         // POST: Country/Delete/5
