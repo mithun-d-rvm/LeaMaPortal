@@ -5,7 +5,9 @@
   Notes          : <Notes>
 -->
 
-
+@{
+    var user = LeaMaPortal.Helpers.AuthenticationHelper.GetLoggedinUserDetails().GetAwaiter().GetResult();
+}
 <div class="sub-header-main">
     @*<div class="col-md-7 pull-left p-35">
         <span> <i class="fa fa-filter"></i> FILTER PERFORMANCE BY :  </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -31,8 +33,8 @@
                 <p style="color:#9fa9ba;">Logged in as:</p>
             </div>
             <div class="user-name">
-                <p style="color:#1a91eb;">Malorum</p>
-                <span style="color:#7f8fa4;">Caretaker</span>
+                <p style="color:#1a91eb;">@user.Name</p>
+                <span style="color:#7f8fa4;">@user.Category</span>
                 <i class="fa fa-angle-down"></i>
             </div>
 

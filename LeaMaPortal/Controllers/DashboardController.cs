@@ -12,7 +12,7 @@ namespace LeaMaPortal.Controllers
     public class DashboardController : Controller
     {
         // GET: Dashboard
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             return View();
         }
