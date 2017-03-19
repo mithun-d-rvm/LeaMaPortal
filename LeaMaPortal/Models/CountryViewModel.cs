@@ -7,7 +7,8 @@ namespace LeaMaPortal.Models
 {
     public class CountryViewModel
     {
-        public string Country { get; set; }
+        public int Id { get; set; }
+        public string Country_name { get; set; }
 
     }
 }

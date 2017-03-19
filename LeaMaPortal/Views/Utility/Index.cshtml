@@ -1,8 +1,9 @@
-﻿@model LeaMaPortal.Models.CountryViewModel
+﻿@model LeaMaPortal.Models.UtilityViewModel
 
 @{
-  //  Layout = null;
+    ViewBag.Title = "Index";
 }
+
 <link href="~/content/bootstrap.css" rel="stylesheet" />
 <link href="~/theme/css/leemastyle.css" rel="stylesheet" />
 <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
@@ -29,37 +30,44 @@
             </div>
         </div>*@
     <div class="leama-inner-block col-md-12 ">
-        <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
+
+
+
+        <div class="col-md-12 leama-fieldset leama-header-top">
             <div class="row">
                 <div class="col-md-12 leama-fieldset ">
                     <div class="col-md-2 pull-left">
-                        @Html.LabelFor(model => model.Country_name, htmlAttributes: new { @class = "leama-field-name" })
+                        @Html.LabelFor(model => model.Utility_id, htmlAttributes: new { @class = "leama-field-name" })
                     </div>
                     <div class="col-sm-4">
-                        @Html.EditorFor(model => model.Country_name, new { htmlAttributes = new { @class = "leama-field form-control" } })
-                    </div>
-                    <div class="col-md-4">
-                        <button type="submit" class="leama-btn">Submit</button>
+                        @Html.EditorFor(model => model.Utility_id, new { htmlAttributes = new { @class = "leama-field form-control" } })
                     </div>
                 </div>
-                @*<div class="col-md-12 leama-fieldset leama-header-top">
-                        <div class="col-md-12 pull-left">
-                            <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
-                        </div>
-                    </div>*@
-            </div>
-        </div>
-        <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
-            <div class="row">
                 <div class="col-md-12 leama-fieldset ">
                     <div class="col-md-2 pull-left">
-                        @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
+                        @Html.LabelFor(model => model.Utility_Name, htmlAttributes: new { @class = "leama-field-name" })
                     </div>
-                    <div class="col-md-4">
-                        <input type="text" class="leama-field form-control" />
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.Utility_Name, new { htmlAttributes = new { @class = "leama-field form-control" } })
                     </div>
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-info leama-search-btn col-md-4">Go</button>
+                </div>
+                <div class="col-md-12 leama-fieldset ">
+                    <div class="col-md-12 pull-left">
+                        <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 leama-fieldset leama-header-top">
+            <div class="row">
+                <div action="" class="col-md-12 leama-fieldset">
+                    <div class="col-md-4 input-group">
+                        <input type="Search" placeholder="Search" class="form-control" />
+                        <div class="input-group-btn">
+                            <button class="btn btn-info leama-search-button-style">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -71,13 +79,15 @@
 
 
                     <div class="divTableBody divFontBodyTable">
-                        <div class="divTableHeading">
-                            <div class="divTableCell">Country Name</div>
+                        <div class="divTableHeading ">
+                            <div class="divTableCell ">Utility Id</div>
+                            <div class="divTableCell">Utility Name</div>
                             <div class="divTableCell">Action</div>
 
                         </div>
                         <div class="divTableRow">
-                            <div class="divTableCell">Chennai</div>
+                            <div class="divTableCell">123</div>
+                            <div class="divTableCell">Utility Name</div>
                             <div class="divTableCell">
                                 @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
                                 @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
@@ -85,8 +95,9 @@
                             </div>
 
                         </div>
-                        <div class="divTableRow divFontBodyTable">
-                            <div class="divTableCell">Coimbatore</div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">123</div>
+                            <div class="divTableCell">Utility Name</div>
                             <div class="divTableCell">
                                 @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
                                 @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
@@ -114,6 +125,6 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 </body>
 </html>
