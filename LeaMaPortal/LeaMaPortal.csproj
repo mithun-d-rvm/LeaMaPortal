@@ -176,6 +176,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper.cs" />
     <Compile Include="Models\CountryViewModel.cs" />
     <Compile Include="Models\DBContext\Entities.cs" />
     <Compile Include="Models\DBContext\tbl_agreement.cs" />
@@ -238,6 +239,7 @@
     <Compile Include="Models\DBContext\view_invoice_receipt_pending.cs" />
     <Compile Include="Models\DBContext\view_tenant.cs" />
     <Compile Include="Models\MasterViewModel.cs" />
+    <Compile Include="Models\TenantIndividualViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -404,6 +406,7 @@
     <Content Include="Views\Master\Index.cshtml" />
     <Content Include="Views\Shared\_SubHeaderMenu.cshtml" />
     <Content Include="Views\MasterIndividual\_DocumentDetailsRow.cshtml" />
+    <Content Include="Views\MasterIndividual\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
