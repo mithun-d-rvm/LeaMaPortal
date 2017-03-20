@@ -130,7 +130,7 @@ a:hover {
   top: 0px;
   left:0px;
   bottom: 0;
-  background-color:#000421;
+  background-color:#202121;
   color: #aaabae;
   z-index: 999;
 }
@@ -814,8 +814,8 @@ ul.dropdown-menu.drp-mnu li {
 /*--header strip end here-*/
 /*inner-block--*/
 .inner-block {
-    padding: 1.3em 2em 4em 2em;
-    /*background: #fafafa;*/
+    padding: 3em 2em 4em 2em;
+    background: #fafafa;
 }
 /*.market-update-block {
     padding: 2em 2em;
@@ -1535,9 +1535,7 @@ background-color:#000;
 .copyrights {
     padding: 1.5em 1em;
     text-align: center;
-    /*bottom: 0px;
-    position: fixed;*/
-    box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.15);
+    /*box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.15);*/
 }
 .copyrights p {
     font-size: 1em;
@@ -4730,4 +4728,13 @@ ul.dropdown-menu {
 .b_tooltip {
     padding: 4px 7px 7px 7px;
 }
+}
+.p-t-17{
+    padding-top:17px;
+}
+.logo-thumb{
+    padding:25px;
+    background-color: #000421;
+    color:white;
+    margin-bottom: -7px;
 }
