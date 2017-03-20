@@ -1,23 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
-
+using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.Models;
 namespace LeaMaPortal.Controllers
 {
     public class MasterController : Controller
     {
+        private Entities db = new Entities();
+
         // GET: Master
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            try
+            {
+                MasterViewModel model = new MasterViewModel();
+                ViewBag.FormMasterId = new SelectList( db.tbl_formmaster.OrderBy(x => x.MenuName), "Id", "MenuName");
+                return View(model);
+            }
+            catch(Exception ex)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+           
         }
 
         // GET: Master/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbl_country tbl_country = await db.tbl_country.FindAsync(id);
+            if (tbl_country == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbl_country);
         }
 
         // GET: Master/Create
@@ -27,63 +53,86 @@ namespace LeaMaPortal.Controllers
         }
 
         // POST: Master/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create([Bind(Include = "Country_name,Id,Accyear,Createddatetime,Createduser,Delmark")] tbl_country tbl_country)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
+                db.tbl_country.Add(tbl_country);
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(tbl_country);
         }
 
         // GET: Master/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbl_country tbl_country = await db.tbl_country.FindAsync(id);
+            if (tbl_country == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbl_country);
         }
 
         // POST: Master/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit([Bind(Include = "Country_name,Id,Accyear,Createddatetime,Createduser,Delmark")] tbl_country tbl_country)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(tbl_country).State = EntityState.Modified;
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(tbl_country);
         }
 
         // GET: Master/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbl_country tbl_country = await db.tbl_country.FindAsync(id);
+            if (tbl_country == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbl_country);
         }
 
         // POST: Master/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            tbl_country tbl_country = await db.tbl_country.FindAsync(id);
+            db.tbl_country.Remove(tbl_country);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                return View();
+                db.Dispose();
             }
+            base.Dispose(disposing);
         }
     }
 }
