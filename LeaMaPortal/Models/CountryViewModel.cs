@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MvcPaging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,6 +12,6 @@ namespace LeaMaPortal.Models
         [Required]
         public string Country { get; set; }
         public int Id { get; set; }
-        public List<CountryViewModel> List { get; set; }
+        public IList<CountryViewModel> List { get; set; }
     }
 }

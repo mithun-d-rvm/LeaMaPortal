@@ -1,0 +1,11 @@
+﻿@Html.DropDownList("FormMasterId", null, htmlAttributes: new { @class = "form-control" })
+<script>
+    $("#FormMasterId").change(function () {
+        var type = parseInt($("#FormMasterId").val());        
+        formMaster(type);
+    });
+    $(function () {
+        var type = parseInt($("#FormMasterId").val());
+        formMaster(type);
+    });
+</script>

@@ -10,6 +10,7 @@ using LeaMaPortal.Models.DBContext;
 using LeaMaPortal.Models;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using MvcPaging;
 
 namespace LeaMaPortal.Controllers
 {
@@ -18,18 +19,22 @@ namespace LeaMaPortal.Controllers
         private Entities db = new Entities();
         string user = "arul";
         // GET: Country
-        public async Task<PartialViewResult> Index()
+        public async Task<PartialViewResult> Index(string Search, int? page, int? defaultPageSize)
         {
             try
             {
+                ViewData["Search"] = Search;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+                int  PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
+                ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, defaultPageSize);
                 CountryViewModel model = new CountryViewModel();
-                model.List =await db.tbl_country.Where(x=>x.Delmark!="*").Select(x => new CountryViewModel() {
+                model.List = db.tbl_country.Where(x=>x.Delmark!="*").OrderBy(x=>x.Country_name).Select(x => new CountryViewModel() {
                     Id=x.Id,
                     Country=x.Country_name
-                }).ToListAsync();  
-                return PartialView("../Master/Country/_List", model);
+                }).ToPagedList(currentPageIndex, PageSize);  
+                return PartialView("../Master/Country/_List", model.List);
             }
-            catch
+            catch(Exception e)
             {
                 throw;
             }
@@ -55,7 +60,11 @@ namespace LeaMaPortal.Controllers
         {
             return View();
         }
-
+        [HttpGet]
+        public PartialViewResult AddOrUpdate()
+        {
+            return PartialView("../Master/Country/_AddOrUpdate", new CountryViewModel());
+        }
         // POST: Country/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
