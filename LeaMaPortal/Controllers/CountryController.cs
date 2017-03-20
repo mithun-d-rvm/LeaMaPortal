@@ -9,12 +9,14 @@ using System.Web.Mvc;
 using LeaMaPortal.Models.DBContext;
 using LeaMaPortal.Models;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+
 namespace LeaMaPortal.Controllers
 {
     public class CountryController : Controller
     {
         private Entities db = new Entities();
-
+        string user = "arul";
         // GET: Country
         public async Task<PartialViewResult> Index()
         {
@@ -65,24 +67,40 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    MySqlParameter pa = new MySqlParameter();
+                    string PFlag = "INSERT";
+
                     //Accyear,Createddatetime,Createduser,Delmark
-                    tbl_country tbl_country = new tbl_country();
-                    tbl_country.Country_name = model.Country;
+                    //tbl_country tbl_country = new tbl_country();
+                    //tbl_country.Country_name = model.Country;
                     if (model.Id == 0)
                     {
-                        tbl_country.Createddatetime = DateTime.Now;
-                        tbl_country.Accyear = DateTime.Now.Year;
-                        tbl_country.Createduser = "arul";
-                        db.tbl_country.Add(tbl_country);
+                        tbl_country tbl_country = await db.tbl_country.FindAsync(model.Country);
+                        if (tbl_country != null)
+                        {
+                            PFlag = "UPDATE";
+                            model.Id = tbl_country.Id;
+                        }
+                        //tbl_country.Createddatetime = DateTime.Now;
+                        //tbl_country.Accyear = DateTime.Now.Year;
+                        //tbl_country.Createduser = "arul";
+                        //db.tbl_country.Add(tbl_country);
                     }
                     else
                     {
-                        db.Entry(tbl_country).State = EntityState.Modified;
+                        PFlag = "UPDATE";
+                       // db.Entry(tbl_country).State = EntityState.Modified;
                     }
+                    object[] param = { new MySqlParameter("@PFlag", PFlag),
+                                           new MySqlParameter("@PId", model.Id),
+                                           new MySqlParameter("@PCountry_name",model.Country),
+                                           new MySqlParameter("@PCreateduser",user)
+                                         };
+                   var RE= db.Database.SqlQuery<tbl_country>("Usp_Country_All(@PFlag,@PId,@PCountry_name,@PCreateduser)", param);
                     await db.SaveChangesAsync();
                    
                 }
-                return Json(result);
+                return Json(result,JsonRequestBehavior.AllowGet);
             }
             catch
             {
@@ -150,9 +168,17 @@ namespace LeaMaPortal.Controllers
                 {
                     return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
                 }
-                tbl_country.Delmark = "*";
-                db.Entry(tbl_country).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                object[] param = { new MySqlParameter("@PFlag", "DELETE"),
+                                           new MySqlParameter("@PId", tbl_country.Id),
+                                           new MySqlParameter("@PCountry_name",tbl_country.Country_name),
+                                           new MySqlParameter("@PCreateduser",user)
+                                         };
+                db.Database.SqlQuery<tbl_country>("Usp_Country_All(@PFlag,@PId,@PCountry_name,@PCreateduser)", param);
+                //await db.SaveChangesAsync();
+
+                //tbl_country.Delmark = "*";
+                //db.Entry(tbl_country).State = EntityState.Modified;
+                //await db.SaveChangesAsync();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch

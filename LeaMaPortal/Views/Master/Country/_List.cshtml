@@ -157,7 +157,6 @@
                     debugger;
                     //var data=jQuery.parseJSON(result);
                     if (result.Errors == undefined || result.Errors == "") {
-                        alert(result.Id);
                         $("#CountryId").val(result.Id);
                         $("#CountryName").val(result.Country);
                     }
@@ -199,7 +198,7 @@
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                     },
                     complete: function () {
-                        GetCountry();
+                        //GetCountry();
                         // $("#").addClass("hide");
                     }
                 });
