@@ -1,13 +1,20 @@
-﻿using System;
+﻿using LeaMaPortal.Models;
+using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.Resources;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace LeaMaPortal.Controllers
 {
     public class AuthenticationController : Controller
     {
+        private Entities db = new Entities();
         // GET: Authentication
         public ActionResult Index()
         {
@@ -17,6 +24,27 @@ namespace LeaMaPortal.Controllers
         public ActionResult Login()
         {
             return View();
+        }
+
+        // POST: Login/Create
+        [HttpPost]
+        public async Task<ActionResult> Login([Bind(Include = "UserName,Password")] LoginModel LoginModel, string returnUrl)
+        {
+            try
+            {
+                var user = await db.tbl_userrights.FirstOrDefaultAsync(x => x.Userid == LoginModel.UserName && x.Pwd == LoginModel.Password && x.Delmark == null);
+                if (user == null)
+                {
+                    ViewBag.ErrorMessage = ErrorMessage.InvalidUsernameAndPassword;
+                    return View(LoginModel);
+                }
+                FormsAuthentication.SetAuthCookie(LoginModel.UserName, true);
+                return RedirectToLocal(returnUrl);
+            }
+            catch (Exception e)
+            {
+                return View(LoginModel);
+            }
         }
 
         // GET: Authentication/Details/5
@@ -88,6 +116,17 @@ namespace LeaMaPortal.Controllers
             catch
             {
                 return View();
+            }
+        }
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Dashboard");
             }
         }
     }
