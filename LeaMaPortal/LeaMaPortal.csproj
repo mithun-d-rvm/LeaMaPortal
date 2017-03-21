@@ -175,6 +175,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
+    <Compile Include="Controllers\MasterIndividualController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -248,6 +249,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom.css" />
+    <Content Include="Content\LeamaStyles.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -403,6 +406,10 @@
     <Content Include="Views\Master\Country\_List.cshtml" />
     <Content Include="Views\Master\Country\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\_Filter.cshtml" />
+    <Content Include="Views\MasterIndividual\Index.cshtml" />
+    <Content Include="Views\Master\Index.cshtml" />
+    <Content Include="Views\Shared\_SubHeaderMenu.cshtml" />
+    <Content Include="Views\MasterIndividual\_DocumentDetailsRow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

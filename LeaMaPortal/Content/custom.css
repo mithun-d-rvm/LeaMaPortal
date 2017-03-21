@@ -1,0 +1,16 @@
+﻿/*
+  File Name      : custom.css
+  Description    : Leama Sytems custom styles
+  Created Date   : 12-Mar-2017
+  Notes          : <Notes>
+*/
+
+
+/* Theme styles custom css */
+
+.portlet-grid{
+    height:180px;
+}
+.panel-body{
+    padding:15px !important;
+}
