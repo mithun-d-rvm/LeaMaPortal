@@ -31,6 +31,17 @@ namespace LeaMaPortal.Controllers
            
         }
 
+        public PartialViewResult Filter()
+        {
+            try
+            {
+                ViewBag.FormMasterId = new SelectList(db.tbl_formmaster.OrderBy(x => x.MenuName), "Id", "MenuName",5);
+                return PartialView("_Filter");
+            }
+            catch
+            { throw; }
+        }
+
         // GET: Master/Details/5
         public async Task<ActionResult> Details(string id)
         {
