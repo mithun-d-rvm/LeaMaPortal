@@ -33,6 +33,9 @@
 
                 GetCountry();
                 break;
+            case 10:
+                GetTenantCompany();
+                break;
         }
 
     }
@@ -92,6 +95,26 @@
             },
             complete: function () {
              //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+    function GetTenantCompany() {
+        $("#Container").empty();
+        $.ajax(
+        {
+            url: "../TenantCompany/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#Container").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
             }
         });
     }

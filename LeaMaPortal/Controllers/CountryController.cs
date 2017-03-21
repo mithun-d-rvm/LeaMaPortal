@@ -17,7 +17,7 @@ namespace LeaMaPortal.Controllers
     public class CountryController : Controller
     {
         private Entities db = new Entities();
-        string user = "arul";
+        //string user = 
         // GET: Country
         public async Task<PartialViewResult> Index(string Search, int? page, int? defaultPageSize)
         {
@@ -117,7 +117,7 @@ namespace LeaMaPortal.Controllers
                     object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PId", model.Id),
                                            new MySqlParameter("@PCountry_name",model.Country),
-                                           new MySqlParameter("@PCreateduser",user)
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
                     var RE = await db.Database.SqlQuery<object>("CALL Usp_Country_All(@PFlag,@PId,@PCountry_name,@PCreateduser)", param).ToListAsync();
                     await db.SaveChangesAsync();
@@ -194,9 +194,9 @@ namespace LeaMaPortal.Controllers
                 object[] param = { new MySqlParameter("@PFlag", "DELETE"),
                                            new MySqlParameter("@PId", tbl_country.Id),
                                            new MySqlParameter("@PCountry_name",tbl_country.Country_name),
-                                           new MySqlParameter("@PCreateduser",user)
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
-                db.Database.SqlQuery<tbl_country>("Usp_Country_All(@PFlag,@PId,@PCountry_name,@PCreateduser)", param);
+                var spResult = await db.Database.SqlQuery<object>("Usp_Country_All(@PFlag,@PId,@PCountry_name,@PCreateduser)", param).ToListAsync();
                 //await db.SaveChangesAsync();
 
                 //tbl_country.Delmark = "*";
