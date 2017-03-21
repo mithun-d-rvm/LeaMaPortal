@@ -37,7 +37,7 @@ namespace LeaMaPortal.Models
         public string Pincode { get; set; }
         [DisplayName("Phoneno")]
         public string Phoneno { get; set; }
-        [DisplayName("Email")]
+        [DisplayName("Email ID")]
         public string Email { get; set; }
         [DisplayName("Date of Joining")]
         public DateTime Doj { get; set; }
