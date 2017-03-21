@@ -110,6 +110,12 @@
                     var defaultPageSize = $("#defaultPageSize").val();
                     getCountryList(search, 1, defaultPageSize)
                 });
+                $("#btn-search").click(function (e) {
+                    var search = $("#Search").val();
+                    var defaultPageSize = $("#defaultPageSize").val();
+                    getCountryList(search, 1, defaultPageSize)
+                });
+                
                 function getCountryList(search,page,defaultPageSize)
                 {
                     $.ajax(

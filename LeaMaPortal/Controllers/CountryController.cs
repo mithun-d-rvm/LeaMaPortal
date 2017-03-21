@@ -28,10 +28,24 @@ namespace LeaMaPortal.Controllers
                 int  PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
                 ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, defaultPageSize);
                 CountryViewModel model = new CountryViewModel();
-                model.List = db.tbl_country.Where(x=>x.Delmark!="*").OrderBy(x=>x.Country_name).Select(x => new CountryViewModel() {
-                    Id=x.Id,
-                    Country=x.Country_name
-                }).ToPagedList(currentPageIndex, PageSize);  
+                if(string.IsNullOrWhiteSpace(Search))
+                {
+                    model.List = db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name).Select(x => new CountryViewModel()
+                    {
+                        Id = x.Id,
+                        Country = x.Country_name
+                    }).ToPagedList(currentPageIndex, PageSize);
+                }
+                else
+                {
+                    model.List = db.tbl_country.Where(x => x.Delmark != "*" && x.Country_name.ToLower().Contains(Search.ToLower()))
+                                  .OrderBy(x => x.Country_name).Select(x => new CountryViewModel()
+                    {
+                        Id = x.Id,
+                        Country = x.Country_name
+                    }).ToPagedList(currentPageIndex, PageSize);
+                }
+                 
                 return PartialView("../Master/Country/_List", model.List);
             }
             catch(Exception e)
