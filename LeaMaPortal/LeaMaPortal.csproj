@@ -167,7 +167,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\CaretakerController.cs" />
     <Compile Include="Controllers\ChecklistController.cs" />
+    <Compile Include="Controllers\ContractApprovalSettingController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\FacilityController.cs" />
@@ -180,7 +182,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CaretakerViewModel.cs" />
     <Compile Include="Models\CheckListViewModel.cs" />
+    <Compile Include="Models\ContractApprovalSettingViewModel.cs" />
     <Compile Include="Models\CountryViewModel.cs" />
     <Compile Include="Models\DBContext\Entities.cs" />
     <Compile Include="Models\DBContext\tbl_agreement.cs" />
@@ -411,6 +415,8 @@
     <Content Include="Views\Checklist\Index.cshtml" />
     <Content Include="Views\Utility\Index.cshtml" />
     <Content Include="Views\Meter\Index.cshtml" />
+    <Content Include="Views\ContractApprovalSetting\Index.cshtml" />
+    <Content Include="Views\Caretaker\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
