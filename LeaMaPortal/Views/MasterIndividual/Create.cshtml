@@ -34,8 +34,8 @@
             </div>
             <div class="col-md-12 form-input-padding">
                 <div class="col-md-4">
-                    @*@Html.LabelFor(model => model.Middle_Name, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    Middle Name:
+                    @Html.LabelFor(model => model.Middle_Name, htmlAttributes: new { @class = "control-label" })
+                    @*Middle Name:*@
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.Middle_Name, new { htmlAttributes = new { @class = "master-form-input" } })
