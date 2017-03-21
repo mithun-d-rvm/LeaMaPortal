@@ -6,7 +6,7 @@
 }
 
 .leama-field {
-  /*width: 294px;*/
+  width: 100%;
   height: 40px;
   border-radius: 5px;
   background-color: #ffffff;
@@ -45,6 +45,8 @@
 }
 .leama-header-top{
     padding-top: 15px;
+      background-color:white; 
+    box-shadow: 7px 7px 7px #c5c2c7;
 }
 .leama-inner-block{
     padding: 1em 2em 4em 2em;
@@ -52,11 +54,30 @@
 
     /* height: 0px; */
     /* max-height: none; */
-     height: 510px;
+     /*height: 510px;*/
     /* max-height: initial; */
 }
 p {
     margin: 0px 0 16px !important;
     /* vertical-align: middle; */
 }
+/*.form-control
+{
+    height:41px !important;
+}*/
+.leama-search-button-style
+{    
+    height: 41px !important;
+    background-color: #554289;
+    border-color: #554289;
+}
 
+.leama-search-button-style:hover { 
+     background-color: #554289;
+    border-color: #554289;
+}
+
+.input-group
+{
+    z-index:0;
+}
