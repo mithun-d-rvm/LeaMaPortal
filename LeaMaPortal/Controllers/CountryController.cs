@@ -119,7 +119,7 @@ namespace LeaMaPortal.Controllers
                                            new MySqlParameter("@PCountry_name",model.Country),
                                            new MySqlParameter("@PCreateduser",user)
                                          };
-                   var RE= db.Database.SqlQuery<tbl_country>("Usp_Country_All(@PFlag,@PId,@PCountry_name,@PCreateduser)", param);
+                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Country_All(@PFlag,@PId,@PCountry_name,@PCreateduser)", param).ToListAsync();
                     await db.SaveChangesAsync();
                    
                 }
