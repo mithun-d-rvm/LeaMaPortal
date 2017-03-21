@@ -24,9 +24,9 @@ a:hover {
   text-decoration:none;
 }
 .fixed{
-	position: fixed;
+	position: absolute;
 	top: 0;
-	 width:87%;
+	 width:86%;
     margin: 0 auto;
 	z-index: 1;
 	background:#fff;

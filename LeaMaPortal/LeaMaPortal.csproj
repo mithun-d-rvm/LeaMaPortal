@@ -85,8 +85,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MvcPaging">
-      <HintPath>..\..\..\REF\MvcPagingDemo\MvcPagingDemo\bin\MvcPaging.dll</HintPath>
+    <Reference Include="MvcPaging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MVC4.Paging.3.1.1\lib\net40\MvcPaging.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
@@ -180,6 +181,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\MasterIndividualController.cs" />
+    <Compile Include="Controllers\PropertyMasterController.cs" />
     <Compile Include="Controllers\MeterController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\UtilityController.cs" />
@@ -424,6 +426,9 @@
     <Content Include="Views\Master\Index.cshtml" />
     <Content Include="Views\Shared\_SubHeaderMenu.cshtml" />
     <Content Include="Views\MasterIndividual\_DocumentDetailsRow.cshtml" />
+    <Content Include="Views\PropertyMaster\Index.cshtml" />
+    <Content Include="Views\PropertyMaster\_FecilityDetails.cshtml" />
+    <Content Include="Views\PropertyMaster\_UtilityDetails.cshtml" />
     <Content Include="Views\Region\Index.cshtml" />
     <Content Include="Views\Facility\Index.cshtml" />
     <Content Include="Views\Checklist\Index.cshtml" />

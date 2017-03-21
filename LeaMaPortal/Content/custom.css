@@ -14,3 +14,6 @@
 .panel-body{
     padding:15px !important;
 }
+.inner-block{
+    min-height: 830px;
+}
