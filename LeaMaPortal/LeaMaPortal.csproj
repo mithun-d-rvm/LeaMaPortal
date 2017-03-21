@@ -85,6 +85,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcPaging">
+      <HintPath>..\..\..\REF\MvcPagingDemo\MvcPagingDemo\bin\MvcPaging.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
@@ -238,6 +241,7 @@
     <Compile Include="Models\DBContext\view_invoice_receipt_pending.cs" />
     <Compile Include="Models\DBContext\view_tenant.cs" />
     <Compile Include="Models\MasterViewModel.cs" />
+    <Compile Include="PagingProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -400,6 +404,8 @@
     <Content Include="Views\Master\Edit.cshtml" />
     <Content Include="Views\Master\Index.cshtml" />
     <Content Include="Views\Master\Country\_List.cshtml" />
+    <Content Include="Views\Master\Country\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\_Filter.cshtml" />
     <Content Include="Views\MasterIndividual\Index.cshtml" />
     <Content Include="Views\Master\Index.cshtml" />
     <Content Include="Views\Shared\_SubHeaderMenu.cshtml" />

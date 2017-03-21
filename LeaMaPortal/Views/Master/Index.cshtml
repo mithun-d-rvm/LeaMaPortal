@@ -5,15 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.DropDownList("FormMasterId", null, htmlAttributes: new { @class = "form-control" })
-<div id="Container"></div>
+<div id="ContainerAddOrUpdate"></div>
+<div id="ContainerList"></div>
 <script>
-    
-    $(function () {
-        var type = parseInt($("#FormMasterId").val());
-        //alert(type);
-        formMaster(type);
-    });
+     $(function () {
+        $("#TopNavBarFilter").empty();
+        GetCountryFilter();
+     });
+     
     $("#FormMasterId").change(function () {
         var type = parseInt($("#FormMasterId").val());
         formMaster(type);
@@ -31,14 +30,52 @@
             case 4:
                 break;
             case 5:
+
                 GetCountry();
                 break;
         }
 
     }
+    function GetCountryFilter()
+    {
+        $("#TopNavBarFilter").empty();
+        $.ajax(
+       {
+           url: "../Master/Filter",
+           type: "Get",
+           data: {},
+           processData: false,
+           success: function (html) {
+               $("#TopNavBarFilter").html(html);
+           },
+           error: function (jqXhr, textStatus, errorThrown) {
+               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+           },
+           complete: function () {
+               //   $("#VerifyIdDetailsLoader").addClass("hide");
+           }
+       });
+    }
     function GetCountry()
     {
-        $("#Container").empty();
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../Country/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
         $.ajax(
         {
             url: "../Country/Index",
@@ -48,7 +85,7 @@
             processData: false,
             success: function (html) 
                 {
-                $("#Container").html(html);
+                $("#ContainerList").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
