@@ -451,6 +451,8 @@
     <Content Include="Views\ContractApprovalSetting\Index.cshtml" />
     <Content Include="Views\Caretaker\Index.cshtml" />
     <Content Include="Views\Master\TenantCompany\_List.cshtml" />
+    <Content Include="Views\Master\Region\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\Region\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
