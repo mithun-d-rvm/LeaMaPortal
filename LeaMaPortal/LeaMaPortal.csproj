@@ -176,6 +176,7 @@
     <Compile Include="Controllers\ContractApprovalSettingController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\EmailTemplateController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FacilityController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -183,7 +184,9 @@
     <Compile Include="Controllers\MasterIndividualController.cs" />
     <Compile Include="Controllers\PropertyMasterController.cs" />
     <Compile Include="Controllers\MeterController.cs" />
+    <Compile Include="Controllers\PropertyTypeController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
+    <Compile Include="Controllers\SlabController.cs" />
     <Compile Include="Controllers\UtilityController.cs" />
     <Compile Include="Controllers\TenantCompanyController.cs" />
     <Compile Include="Global.asax.cs">
@@ -256,7 +259,10 @@
     <Compile Include="Models\DBContext\view_invoice_agreement.cs" />
     <Compile Include="Models\DBContext\view_invoice_receipt_pending.cs" />
     <Compile Include="Models\DBContext\view_tenant.cs" />
+    <Compile Include="Models\EmailTemplateViewModel.cs" />
     <Compile Include="Models\MasterViewModel.cs" />
+    <Compile Include="Models\PropertyTypeViewModel.cs" />
+    <Compile Include="Models\SlabViewModel.cs" />
     <Compile Include="PagingProperty.cs" />
     <Compile Include="Models\FacilityViewModel.cs" />
     <Compile Include="Models\MeterViewModel.cs" />
@@ -453,6 +459,9 @@
     <Content Include="Views\ContractApprovalSetting\Index.cshtml" />
     <Content Include="Views\Caretaker\Index.cshtml" />
     <Content Include="Views\Master\TenantCompany\_List.cshtml" />
+    <Content Include="Views\EmailTemplate\Index.cshtml" />
+    <Content Include="Views\PropertyType\Index.cshtml" />
+    <Content Include="Views\Slab\Index.cshtml" />
     <Content Include="Views\Master\Region\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\Region\_List.cshtml" />
     <Content Include="Views\MasterIndividual\Create.cshtml" />
@@ -463,7 +472,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Error\" />
-    <Folder Include="Views\tbl_agreement_checklist\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
