@@ -457,6 +457,8 @@
     <Content Include="Views\Master\Region\_List.cshtml" />
     <Content Include="Views\MasterIndividual\Create.cshtml" />
     <Content Include="Views\MasterIndividual\List.cshtml" />
+    <Content Include="Views\Master\TenantIndividual\Create.cshtml" />
+    <Content Include="Views\Master\TenantIndividual\_AddOrUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

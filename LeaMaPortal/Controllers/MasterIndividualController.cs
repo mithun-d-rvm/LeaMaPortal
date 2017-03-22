@@ -33,9 +33,9 @@ namespace LeaMaPortal.Controllers
         }
 
         // GET: MasterIndividual/Create
-        public ActionResult Create()
+        public PartialViewResult Create()
         {
-            return View();
+            return PartialView("../Master/TenantIndividual/_AddOrUpdate");
         }
 
         // POST: MasterIndividual/Create
@@ -64,11 +64,13 @@ namespace LeaMaPortal.Controllers
                 ,@Ptenantdocdetails 
                                     )", param).ToListAsync();
 
-                return RedirectToAction("List");
+                //return Json(result, JsonRequestBehavior.AllowGet);
+                //return PartialView("../Master/TenantIndividual/_AddOrUpdate");
+                return RedirectToAction("Index", "Master");
             }
             catch (Exception ex)
             {
-                return View();
+                throw ex;
             }
         }
 
