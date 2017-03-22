@@ -1,4 +1,5 @@
-﻿@model LeaMaPortal.Models.CheckListViewModel
+﻿
+@model LeaMaPortal.Models.PropertyTypeViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -17,26 +18,36 @@
 <body>
  
     <div class="leama-inner-block col-md-12 ">
-
-
-
         <div class="col-md-12 leama-fieldset leama-header-top">
             <div class="row">
                 <div class="col-md-12 leama-fieldset ">
                     <div class="col-md-2 pull-left">
-                        @Html.LabelFor(model => model.Checklist_id, htmlAttributes: new { @class = "leama-field-name" })
+                        @Html.LabelFor(model => model.PropertyType, htmlAttributes: new { @class = "leama-field-name" })
                     </div>
-                    <div class="col-sm-4">
-                        @Html.EditorFor(model => model.Checklist_id, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                    <div class="col-sm-4 ">
+                        <select class="col-md-12 leama-field">
+                            <option value="PropertyType">Property Type</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-12 leama-fieldset ">
                     <div class="col-md-2 pull-left">
-                        @Html.LabelFor(model => model.Checklist_Name, htmlAttributes: new { @class = "leama-field-name" })
+                        @Html.LabelFor(model => model.PropertyCategory, htmlAttributes: new { @class = "leama-field-name" })
                     </div>
                     <div class="col-sm-4">
-                        @Html.EditorFor(model => model.Checklist_Name, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                        @Html.EditorFor(model => model.PropertyCategory, new { htmlAttributes = new { @class = "leama-field form-control" } })
                     </div>
+                </div>
+                <div class="col-md-12 leama-fieldset ">
+                    <div class="col-md-2 pull-left">
+                        @Html.LabelFor(model => model.Usage_name, htmlAttributes: new { @class = "leama-field-name" })
+                    </div>
+                    <div class="col-sm-4 ">
+                        <select class="col-md-12 leama-field">
+                            <option value="Usage_name">Usage name</option>
+                        </select>
+                    </div>
+                    
                 </div>
                 <div class="col-md-12 leama-fieldset ">
                     <div class="col-md-12 pull-left">
@@ -49,7 +60,7 @@
             <div class="row">
                 <div action="" class="col-md-12 leama-fieldset">
                     <div class="col-md-4 input-group">
-                        <input type="Search" placeholder="Search" class="search-btn form-control" />
+                        <input type="Search" placeholder="Search" class="form-control" />
                         <div class="input-group-btn">
                             <button class="btn btn-info leama-search-button-style">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -67,14 +78,16 @@
 
                     <div class="divTableBody divFontBodyTable">
                         <div class="divTableHeading ">
-                            <div class="divTableCell ">Checklist Id</div>
-                            <div class="divTableCell">Checklist Name</div>
-                            <div class="divTableCell">Action</div>
+                            <div class="divTableCell ">@Html.LabelFor(model => model.PropertyType)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.PropertyCategory)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.Usage_name)</div>
 
                         </div>
                         <div class="divTableRow">
-                            <div class="divTableCell">123</div>
-                            <div class="divTableCell">Checklist Name</div>
+                            <div class="divTableCell ">@Html.LabelFor(model => model.PropertyType)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.PropertyCategory)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.Usage_name)</div>
+
                             <div class="divTableCell">
                                 @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
                                 @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
@@ -83,8 +96,10 @@
 
                         </div>
                         <div class="divTableRow">
-                            <div class="divTableCell">123</div>
-                            <div class="divTableCell">Checklist Name</div>
+                            <div class="divTableCell ">@Html.LabelFor(model => model.PropertyType)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.PropertyCategory)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.Usage_name)</div>
+
                             <div class="divTableCell">
                                 @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
                                 @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
