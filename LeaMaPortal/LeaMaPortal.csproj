@@ -460,6 +460,8 @@
     <Content Include="Views\EmailTemplate\Index.cshtml" />
     <Content Include="Views\PropertyType\Index.cshtml" />
     <Content Include="Views\Slab\Index.cshtml" />
+    <Content Include="Views\Master\Region\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\Region\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
