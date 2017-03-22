@@ -26,6 +26,12 @@ namespace LeaMaPortal.Controllers
             return View();
         }
 
+        public ActionResult List()
+        {
+            var list = db.tbl_tenant_individual.ToList();
+            return View(list);
+        }
+
         // GET: MasterIndividual/Create
         public ActionResult Create()
         {
@@ -38,8 +44,10 @@ namespace LeaMaPortal.Controllers
         {
             try
             {
-                var param = Helper.GetMySqlParameters<TenantIndividualViewModel>(model, "INSERT", "somu");
-                var RE = db.Database.SqlQuery<tbl_tenant_individual>(@"Usp_Tenant_Individual_All(@PFlag,@PTenant_Id,@PTitle  ,@PFirst_Name  ,@PMiddle_Name  ,@PLast_Name  ,@PCompany_Educational   ,@PProfession  ,@PMarital_Status  ,@Paddress  ,@Paddress1  ,@PEmirate  ,@PCity  ,@PPostboxNo  ,@PEmail  ,@PMobile_Countrycode  ,@PMobile_Areacode  ,@PMobile_No  ,@PLandline_Countrycode  ,@PLandline_Areacode  ,@PLandline_No  ,@PFax_Countrycode  ,@PFax_Areacode  ,@PFax_No  ,@PNationality  ,@PEmiratesid  ,@PEmirate_issuedate  ,@PEmirate_expirydate  ,@PPassportno  
+                model.Type = "Individual";
+                object[] param = Helper.GetMySqlParameters<TenantIndividualViewModel>(model, "INSERT", "somu");
+
+                var result = await db.Database.SqlQuery<object>(@"CALL Usp_Tenant_Individual_All(@PFlag,@PTenant_Id,@PTitle  ,@PFirst_Name  ,@PMiddle_Name  ,@PLast_Name  ,@PCompany_Educational   ,@PProfession  ,@PMarital_Status  ,@Paddress  ,@Paddress1  ,@PEmirate  ,@PCity  ,@PPostboxNo  ,@PEmail  ,@PMobile_Countrycode  ,@PMobile_Areacode  ,@PMobile_No  ,@PLandline_Countrycode  ,@PLandline_Areacode  ,@PLandline_No  ,@PFax_Countrycode  ,@PFax_Areacode  ,@PFax_No  ,@PNationality  ,@PEmiratesid  ,@PEmirate_issuedate  ,@PEmirate_expirydate  ,@PPassportno  
                 ,@PPlaceofissuance  
                 ,@PPassport_Issuedate
                 ,@PPassport_Expirydate  
@@ -54,33 +62,9 @@ namespace LeaMaPortal.Controllers
                 ,@PType  
                 ,@PCreateduser  
                 ,@Ptenantdocdetails 
+                                    )", param).ToListAsync();
 
-                                    )", param).ToList();
-
-                //                StringBuilder sb = new StringBuilder();
-                //                sb.Append(@"CALL Usp_Tenant_Individual_All(
-                //                    @PFlag, @PTenant_Id, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @PCompany_Educational, @PProfession, @PMarital_Status, @Paddress, @Paddress1, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PEmiratesid, @PEmirate_issuedate, @PEmirate_expirydate, @PPassportno
-                //, @PPlaceofissuance
-                //, @PPassport_Issuedate
-                //, @PPassport_Expirydate
-                //, @PVisaType
-                //, @PVisano
-                //, @PVisa_IssueDate
-                //, @PVisa_ExpiryDate
-                //, @PDob
-                //, @PFamilyno
-                //, @PFamilybookcity
-                //, @PADWEA_Regid
-                //, @PType
-                //, @PCreateduser
-                //, @Ptenantdocdetails)");
-
-                //                string commandText = sb.ToString();
-
-                //                var results = db.Database.SqlQuery<tbl_tenant_individual>(commandText, param).ToList();
-
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
             catch (Exception ex)
             {

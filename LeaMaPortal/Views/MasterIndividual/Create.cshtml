@@ -502,18 +502,49 @@
 
         </div>
         <div class="col-md-10 document-row" id="GridView">
-            <div class="col-md-3">
-                <input type="text" class="master-form-input" />
+            @*<table>
+                <tr>
+                    <td>
+                        <input type="text" id="DocumentName" name="DocumentName">
+                    </td>
+                    <td> </td>
+                    <td>
+                        <input type="text" id="DocumentDet" name="DocumentDet">
+                    </td>
+                    <td></td>
+                    <td><input id="addbutton" type="button" value="Add Row" /></td>
+                    
+                </tr>
+            </table>
+            <table id="DocumentTable">
+                <tbody>
+
+                </tbody>
+            </table>*@
+            <div class="col-md-12">
+                <div class="col-md-4 text-left">Content Name</div>
+                <div class="col-md-4 text-left">Content Det</div>
+                <div class="col-md-4 text-left"><input type="button" id="addbutton" value="Add" /></div>
+
+                
             </div>
-            <div class="col-md-4">
-                <input type="text" class="master-form-input" />
-            </div>
-            <div class="col-md-2">
-                <button class="document-btn" onclick="AddNewRecord()">Add</button>
-            </div>
-            <div class="col-md-2">
-                <button class="document-btn">Delete</button>
-            </div>
+            <div class="clearfix"><br /><br /></div>
+            <table id="tblcontent" class="col-md-12">
+                <tr>
+                   
+                    <td class="col-md-4">
+                        <input type="text" id="txtTitle" name="txtTitle">
+                    </td>
+                    <td class="col-md-4">
+                        <input type="text" id="txtLink" name="txtLink">
+                    </td>
+                    <td class="col-md-4">
+                        <button type="button" class="removebutton" title="Remove this row">X</button>
+                    </td>
+                </tr>
+                
+            </table>
+           
         </div>
 
         <div class="col-md-12 form-input-padding">
@@ -524,10 +555,53 @@
                 <button class="btn master-form-btn" type="submit">Submit</button>
             </div>
         </div>
-
+        
     </div>
                         }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script>
+    var i = 1;
+    
+    $("#addbutton").click(function () {
+        $("table tr:first").clone().find("input").each(function () {
+            $(this).val('').attr({
+                'id': function (_, id) {
+                    return id + i
+                },
+                'name': function (_, name) {
+                    return name + i
+                },
+                'value': ''
+            });
+        }).end().appendTo("table");
+        i++;
+    });
+
+    $(document).on('click', 'button.removebutton', function () {
+        $(this).closest('tr').remove();
+        return false;
+    });
+
+    //$("#addbutton").click(function () {
+    //    var DocumentName = $("#DocumentName").val();
+    //    var DocumentDet = $("#DocumentDet").val();
+    //    alert(DocumentName + DocumentDet);
+    //    $("#DocumentTable > tbody:last-child").append("<tr> <td>" + DocumentName + "</td> <td>" + DocumentDet +
+    //        "</td> <td><input type='button' value='X' onclick='myfunc(event);' class='removebutton' /></td></tr>");
+       
+    //});
+    //function myfunc(e)
+    //{
+    //    alert(1);
+    //    $(this).closest('tr').remove();
+    //}
+    //$(".removebutton").click(function () { alert(1); $(this).closest('tr').remove(); });
+    //$(document).on('click', 'button.removebutton', function () {
+    //    alert("aa");
+    //    $(this).closest('tr').remove();
+    //    return false;
+    //});
+</script>

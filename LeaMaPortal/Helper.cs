@@ -8,10 +8,13 @@ namespace LeaMaPortal
 {
     public static class Helper
     {
-        public static object[] GetMySqlParameters<T>(T model, string flag, string CreatedUser)
+        public static object[] GetMySqlParameters<T>(T model, string flag, string CreatedUser = null, MySqlParameter optionalParam = null)
         {
             List<MySqlParameter> parameters = new List<MySqlParameter>();
             parameters.Add(new MySqlParameter("@PFlag", flag));
+            if (optionalParam != null)
+                parameters.Add(optionalParam);
+
             foreach (var property in model.GetType().GetProperties().ToList())
             {
                 if (property.Name == "Createduser")

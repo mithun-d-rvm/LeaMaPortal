@@ -407,6 +407,7 @@
     <Content Include="Views\Shared\_SubHeaderMenu.cshtml" />
     <Content Include="Views\MasterIndividual\_DocumentDetailsRow.cshtml" />
     <Content Include="Views\MasterIndividual\Create.cshtml" />
+    <Content Include="Views\MasterIndividual\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

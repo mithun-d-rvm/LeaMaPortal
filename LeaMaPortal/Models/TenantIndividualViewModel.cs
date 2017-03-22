@@ -168,5 +168,7 @@ namespace LeaMaPortal.Models
 
         //[StringLength(1)]
         //public string Delmark { get; set; }
+        public string tenantdocdetails { get; set; }
+
     }
 }
