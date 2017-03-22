@@ -66,7 +66,7 @@ namespace LeaMaPortal.Controllers
 
                 //return Json(result, JsonRequestBehavior.AllowGet);
                 //return PartialView("../Master/TenantIndividual/_AddOrUpdate");
-                return RedirectToAction("Index", "Master");
+                return RedirectToAction("Index", "Dashboard");
             }
             catch (Exception ex)
             {
