@@ -1,4 +1,4 @@
-﻿@model LeaMaPortal.Models.MeterViewModel
+﻿@model LeaMaPortal.Models.SlabViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -15,13 +15,22 @@
     <title>Index</title>
 </head>
 <body>
- 
+   
     <div class="leama-inner-block col-md-12 ">
 
 
 
         <div class="col-md-12 leama-fieldset leama-header-top">
             <div class="row">
+                <div class="col-md-12 leama-fieldset ">
+                    <div class="col-md-2 pull-left">
+                        @Html.LabelFor(model => model.SlabId, htmlAttributes: new { @class = "leama-field-name" })
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.SlabId, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                    </div>
+                </div>
+
                 <div class="col-md-12 leama-fieldset ">
                     <div class="col-md-2 pull-left">
                         @Html.LabelFor(model => model.Utility_id, htmlAttributes: new { @class = "leama-field-name" })
@@ -32,61 +41,53 @@
                 </div>
                 <div class="col-md-12 leama-fieldset ">
                     <div class="col-md-2 pull-left">
-                        @Html.LabelFor(model => model.Utility, htmlAttributes: new { @class = "leama-field-name" })
+                        @Html.LabelFor(model => model.Utility_Name, htmlAttributes: new { @class = "leama-field-name" })
                     </div>
                     <div class="col-sm-4 ">
                         <select class="col-md-12 leama-field">
-                            <option value="Utility">Utility</option>
+                            <option value="Utility_Name">Utility_Name</option>
                         </select>
                     </div>
-                   
                 </div>
+           
                 <div class="col-md-12 leama-fieldset ">
                     <div class="col-md-2 pull-left">
-                        @Html.LabelFor(model => model.Meter_no, htmlAttributes: new { @class = "leama-field-name" })
+                        @Html.LabelFor(model => model.Unit_From, htmlAttributes: new { @class = "leama-field-name" })
                     </div>
                     <div class="col-sm-4">
-                        @Html.EditorFor(model => model.Meter_no, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                        @Html.EditorFor(model => model.Unit_From, new { htmlAttributes = new { @class = "leama-field form-control" } })
                     </div>
                 </div>
                 <div class="col-md-12 leama-fieldset ">
                     <div class="col-md-2 pull-left">
-                        @Html.LabelFor(model => model.Accno, htmlAttributes: new { @class = "leama-field-name" })
+                        @Html.LabelFor(model => model.Unit_to, htmlAttributes: new { @class = "leama-field-name" })
                     </div>
                     <div class="col-sm-4">
-                        @Html.EditorFor(model => model.Accno, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                        @Html.EditorFor(model => model.Unit_to, new { htmlAttributes = new { @class = "leama-field form-control" } })
                     </div>
                 </div>
                 <div class="col-md-12 leama-fieldset ">
                     <div class="col-md-2 pull-left">
-                        @Html.LabelFor(model => model.Property_id, htmlAttributes: new { @class = "leama-field-name" })
+                        @Html.LabelFor(model => model.rate, htmlAttributes: new { @class = "leama-field-name" })
                     </div>
-                    <div class="col-sm-4">                     
-                            <select class="col-md-12 leama-field">
-                                <option value="PropertyId">Property</option>
-                            </select>
-                       
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.rate, new { htmlAttributes = new { @class = "leama-field form-control" } })
                     </div>
                 </div>
                 <div class="col-md-12 leama-fieldset ">
                     <div class="col-md-2 pull-left">
-                        @Html.LabelFor(model => model.unit_id, htmlAttributes: new { @class = "leama-field-name" })
+                        @Html.LabelFor(model => model.Colour, htmlAttributes: new { @class = "leama-field-name" })
                     </div>
-                    <div class="col-sm-4">                      
-                                <select class="col-md-12 leama-field">
-                                    <option value="Unit">Unit</option>
-                                </select>
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.Colour, new { htmlAttributes = new { @class = "leama-field form-control" } })
                     </div>
                 </div>
                 <div class="col-md-12 leama-fieldset ">
                     <div class="col-md-2 pull-left">
-                        @Html.LabelFor(model => model.Dueday, htmlAttributes: new { @class = "leama-field-name" })
+                        @Html.LabelFor(model => model.Residence_type, htmlAttributes: new { @class = "leama-field-name" })
                     </div>
-                    <div class="col-sm-4">                     
-                                <select class="col-md-12 leama-field">
-                                    <option value="DueDay">DueDay</option>
-                                </select>
-                        </div>
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.Residence_type, new { htmlAttributes = new { @class = "leama-field form-control" } })
                     </div>
                 </div>
                 <div class="col-md-12 leama-fieldset ">
@@ -118,25 +119,26 @@
 
                     <div class="divTableBody divFontBodyTable">
                         <div class="divTableHeading ">
+                            <div class="divTableCell ">@Html.LabelFor(model => model.SlabId)</div>
                             <div class="divTableCell">@Html.LabelFor(model => model.Utility_id)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.Utility_Name)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.Meter_no)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.Accno)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.Property_id)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.unit_id)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.Dueday)</div>
-                   
+                            <div class="divTableCell ">@Html.LabelFor(model => model.Utility_Name)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.Unit_From)</div>
+                            <div class="divTableCell ">@Html.LabelFor(model => model.Unit_to)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.rate)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.Colour)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.Residence_type)</div>
                             <div class="divTableCell">Action</div>
 
                         </div>
                         <div class="divTableRow">
+                            <div class="divTableCell ">@Html.LabelFor(model => model.SlabId)</div>
                             <div class="divTableCell">@Html.LabelFor(model => model.Utility_id)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.Utility_Name)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.Meter_no)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.Accno)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.Property_id)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.unit_id)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.Dueday)</div>
+                            <div class="divTableCell ">@Html.LabelFor(model => model.Utility_Name)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.Unit_From)</div>
+                            <div class="divTableCell ">@Html.LabelFor(model => model.Unit_to)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.rate)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.Colour)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.Residence_type)</div>
                             <div class="divTableCell">
                                 @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
                                 @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
@@ -145,13 +147,14 @@
 
                         </div>
                         <div class="divTableRow">
+                            <div class="divTableCell ">@Html.LabelFor(model => model.SlabId)</div>
                             <div class="divTableCell">@Html.LabelFor(model => model.Utility_id)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.Utility_Name)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.Meter_no)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.Accno)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.Property_id)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.unit_id)</div>
-                            <div class="divTableCell">@Html.LabelFor(model => model.Dueday)</div>
+                            <div class="divTableCell ">@Html.LabelFor(model => model.Utility_Name)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.Unit_From)</div>
+                            <div class="divTableCell ">@Html.LabelFor(model => model.Unit_to)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.rate)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.Colour)</div>
+                            <div class="divTableCell">@Html.LabelFor(model => model.Residence_type)</div>
                             <div class="divTableCell">
                                 @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
                                 @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |

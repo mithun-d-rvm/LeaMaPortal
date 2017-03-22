@@ -8,17 +8,16 @@
 <div id="ContainerAddOrUpdate"></div>
 <div id="ContainerList"></div>
 <script>
-     $(function () {
+    $(function () {
         $("#TopNavBarFilter").empty();
         GetCountryFilter();
-     });
-     
+    });
+
     $("#FormMasterId").change(function () {
         var type = parseInt($("#FormMasterId").val());
         formMaster(type);
     });
-    function formMaster(type)
-    {
+    function formMaster(type) {
         switch (type) {
             case 1:
 
@@ -34,14 +33,20 @@
                 break;
             case 9:
                 GetPropertyMaster();
+    break;
+            case 6:
+                GetRegion();
+                break;
             case 10:
                 GetTenantCompany();
+                break;
+            case 11:
+                GetTenantIndividual();
                 break;
         }
 
     }
-    function GetCountryFilter()
-    {
+    function GetCountryFilter() {
         $("#TopNavBarFilter").empty();
         $.ajax(
        {
@@ -60,8 +65,7 @@
            }
        });
     }
-    function GetCountry()
-    {
+    function GetCountry() {
         $("#ContainerAddOrUpdate").empty();
         $.ajax(
         {
@@ -87,20 +91,19 @@
             data: {},
             contentType: "application/json",
             processData: false,
-            success: function (html) 
-                {
+            success: function (html) {
                 $("#ContainerList").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-             //   $("#VerifyIdDetailsLoader").addClass("hide");
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
             }
         });
     }
     function GetTenantCompany() {
-        $("#Container").empty();
+        $("#ContainerAddOrUpdate").empty();
         $.ajax(
         {
             url: "../TenantCompany/Index",
@@ -110,6 +113,66 @@
             processData: false,
             success: function (html) {
                 $("#Container").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+    function GetTenantIndividual() {
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../MasterIndividual/Create",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+</script>
+<!-- Region Section -->
+<script>
+    function GetRegion() {
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../Region/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+        $.ajax(
+        {
+            url: "../Region/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
