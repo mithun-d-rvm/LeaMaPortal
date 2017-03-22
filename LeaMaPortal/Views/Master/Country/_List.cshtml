@@ -1,5 +1,6 @@
-﻿@model LeaMaPortal.Models.CountryViewModel
-
+﻿@*@model LeaMaPortal.Models.CountryViewModel*@
+@using MvcPaging
+@model IPagedList<LeaMaPortal.Models.CountryViewModel>
 @{
   Layout = null;
 }
@@ -8,7 +9,7 @@
 <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
 <!DOCTYPE html>
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Country" }))
+@*@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Country" }))
 {
     @Html.HiddenFor(m=>m.Id,new { @id="CountryId"})
     <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
@@ -26,7 +27,7 @@
             </div>
         </div>
     </div>
-}
+}*@
     <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
         <div class="row">
             <div class="col-md-12 leama-fieldset ">
@@ -34,10 +35,10 @@
                     @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-md-4">
-                    <input type="text" class="leama-field form-control" />
+                    <input type="text" class="leama-field form-control" name="Search" id="Search" value="@ViewData["Search"]"/>
                 </div>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-info leama-search-btn col-md-4">Go</button>
+                    <button type="button" id="btn-search" class="btn btn-info leama-search-btn col-md-4">Go</button>
                 </div>
             </div>
 
@@ -54,12 +55,12 @@
                         <div class="divTableCell">Action</div>
 
                     </div>
-                @foreach (var item in Model.List)
+                @foreach (var item in Model)
                 {
                     <div class="divTableRow">
                         <div class="divTableCell">@item.Country</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit country-edit", title = "Edit" ,@data_id=@item.Country })  |
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit country-edit", title = "Edit", @data_id = @item.Country })  |
                             @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash country-delete", @style = "color:red", @title = "Delete", @data_id = @item.Country }) 
                             
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
@@ -70,79 +71,92 @@
                     
 
                 </div>
+                <div class="col-md-12">
+                    <br />
+                    @Html.HiddenFor(m=>m.PageNumber)
+                    <div class="col-md-2">
+                        @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="col-lg-10 text-right">
+                        @for (int i = 1; i <= Model.PageCount; i++)
+                        {
+                            if (i == Model.PageNumber)
+                            {
+                                <input type="button" style="background:green" data-id="@i" value="@i" class="" />
+                            }
+                            else
+                            {
+                                <input type="button" data-id="@i" value="@i" class="Page" />
+                            }
 
-            </div>
-            <div class="col-sm-12">
-                <div class="col-sm-6">
-                </div>
-                <div class="col-sm-6">
-                    <ul class="pagination pull-right">
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                    </ul>
+                        }
+                    </div>
                 </div>
             </div>
+            
+
+
+            <script type="text/javascript">
+                $(".Page").click(function(e)
+                {
+                    var page = parseInt($(this).data("id"));
+                    var defaultPageSize = $("#defaultPageSize").val();
+                    var search = $("#Search").val();
+                    //alert(page);
+                    getCountryList(search,page,defaultPageSize)
+                });
+                $("#defaultPageSize").change(function () {
+                    var search = $("#Search").val();
+                    var defaultPageSize = $("#defaultPageSize").val();
+                    getCountryList(search, 1, defaultPageSize)
+                });
+                $("#btn-search").click(function (e) {
+                    var search = $("#Search").val();
+                    var defaultPageSize = $("#defaultPageSize").val();
+                    getCountryList(search, 1, defaultPageSize)
+                });
+                
+                function getCountryList(search,page,defaultPageSize)
+                {
+                    $.ajax(
+                       {
+                           url: "../Country/Index",
+                           type: "Get",
+                           data: { Search: search, page: page, defaultPageSize: defaultPageSize },
+                           success: function (html) {
+                               $("#ContainerList").html(html);
+                           },
+                           error: function (jqXhr, textStatus, errorThrown) {
+                               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                           },
+                           complete: function () {
+                               //   $("#VerifyIdDetailsLoader").addClass("hide");
+                           }
+                       });
+                }
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+            </script>
         </div>
 
 
     </div>
 
 <script>
-    //Add or update
-    $("form#Country").off("submit").on("submit", function (e) {
-        e.preventDefault();
-        // $("#icon-success").addClass("hide");
-        //$("#VerifyIdDetailsLoader").removeClass("hide");
-        try {
-            var form = $("form#Country");
-            
-            // var form = $('"form#VerifyId')[0]; // You need to use standart javascript object here
-            //var formData = new FormData(form);
-            $.ajax(
-                {
-                    url: "../Country/AddOrUpdate",
-                    // dataType: "jsonp",
-                    method: "POST",
-                    data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
-                    contentType: "application/json",
-                    processData: false,
-                    success: function (response) {
-                        GetCountry();
-                    },
-                    error: function (jqXhr, textStatus, errorThrown) {
-                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                    },
-                    complete: function () {
-                       // $("#").addClass("hide");
-                    }
-
-                });
-
-        }
-        catch (ex) {
-            alert(ex);
-        }
-
-    });
-    $.fn.serializeObject = function () {
-        var o = {};
-        var a = this.serializeArray();
-        $.each(a, function () {
-            if (o[this.name] !== undefined) {
-                if (!o[this.name].push) {
-                    o[this.name] = [o[this.name]];
-                }
-                o[this.name].push(this.value || '');
-            } else {
-                o[this.name] = this.value || '';
-            }
-        });
-        return o;
-    };
-
+   
     //Edit get
     
     $(".country-edit").click(function (e) {

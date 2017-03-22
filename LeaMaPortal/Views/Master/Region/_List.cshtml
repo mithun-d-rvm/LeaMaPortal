@@ -1,0 +1,195 @@
+﻿@*@model LeaMaPortal.Models.RegionViewModel*@
+@using MvcPaging
+@model IPagedList<LeaMaPortal.Models.RegionViewModel>
+@{
+    Layout = null;
+}
+<link href="~/content/bootstrap.css" rel="stylesheet" />
+<link href="~/theme/css/leemastyle.css" rel="stylesheet" />
+<link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
+<!DOCTYPE html>
+
+<div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
+    <div class="row">
+        <div class="col-md-12 leama-fieldset ">
+            <div class="col-md-2 pull-left">
+                @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="leama-field form-control" name="Search" id="Search" value="@ViewData["Search"]" />
+            </div>
+            <div class="col-md-4">
+                <button type="button" id="btn-search" class="btn btn-info leama-search-btn col-md-4">Go</button>
+            </div>
+        </div>
+
+        <div class="col-md-12 leama-fieldset ">
+            &nbsp;
+        </div>
+
+        <div class="divTable leama-fieldset col-md-12">
+
+
+            <div class="divTableBody divFontBodyTable">
+                <div class="divTableHeading">
+                    <div class="divTableCell ">Region Name</div>
+                    <div class="divTableCell">Country Name</div>
+                    <div class="divTableCell">Action</div>
+
+                </div>
+                @foreach (var item in Model)
+                {
+                    <div class="divTableRow">
+                        <div class="divTableCell">@item.Region_Name</div>
+                        <div class="divTableCell">@item.Country</div>
+                        <div class="divTableCell">
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit region-edit", title = "Edit", @data_id = @item.Region_Name + '-' + @item.Country })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash region-delete", @style = "color:red", @title = "Delete", @data_id = @item.Region_Name + '-' + @item.Country })
+                            @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="col-md-12">
+                <br />
+                @Html.HiddenFor(m => m.PageNumber)
+                <div class="col-md-2">
+                    @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+                <div class="col-lg-10 text-right">
+                    @for (int i = 1; i <= Model.PageCount; i++)
+                    {
+                        if (i == Model.PageNumber)
+                        {
+                            <input type="button" style="background:green" data-id="@i" value="@i" class="" />
+                        }
+                        else
+                        {
+                            <input type="button" data-id="@i" value="@i" class="Page" />
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+                $(".Page").click(function(e)
+                {
+                    var page = parseInt($(this).data("id"));
+                    var defaultPageSize = $("#defaultPageSize").val();
+                    var search = $("#Search").val();
+                    //alert(page);
+                    getRegionList(search,page,defaultPageSize)
+                });
+                $("#defaultPageSize").change(function () {
+                    var search = $("#Search").val();
+                    var defaultPageSize = $("#defaultPageSize").val();
+                    getRegionList(search, 1, defaultPageSize)
+                });
+                $("#btn-search").click(function (e) {
+                    var search = $("#Search").val();
+                    var defaultPageSize = $("#defaultPageSize").val();
+                    getRegionList(search, 1, defaultPageSize)
+                });
+
+                function getRegionList(search,page,defaultPageSize)
+                {
+                    $.ajax(
+                       {
+                           url: "../Region/Index",
+                           type: "Get",
+                           data: { Search: search, page: page, defaultPageSize: defaultPageSize },
+                           success: function (html) {
+                               $("#ContainerList").html(html);
+                           },
+                           error: function (jqXhr, textStatus, errorThrown) {
+                               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                           },
+                           complete: function () {
+                               //   $("#VerifyIdDetailsLoader").addClass("hide");
+                           }
+                       });
+                }
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+        </script>
+    </div>
+
+
+</div>
+
+<script>
+    //Edit get
+
+    $(".region-edit").click(function (e) {
+        e.preventDefault();
+        var id = $(this).data("id");
+        var param = id.split('-');
+        $.ajax(
+            {
+                url: "../Region/Edit",
+                type: "Get",
+                data: { RegionName: param[0], CountryName : param[1] },
+                success: function (result) {
+                    debugger;
+                    //var data=jQuery.parseJSON(result);
+                    if (result.Errors == undefined || result.Errors == "") {
+                        $("#RegionId").val(result.Id);
+                        $("#Country").val(result.Country);
+                        $("#RegionName").val(result.Region_Name);
+                    }
+                    else {
+                        alert(data.Errors);
+                    }
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    // $("#").addClass("hide");
+                }
+            });
+    });
+
+    // delete
+    $(".region-delete").click(function (e) {
+        e.preventDefault();
+        var id = $(this).data("id");
+        var param = id.split('-');
+        var r = confirm("Are you sure want to delete?");
+        if (r == false) {
+            return;
+        }
+        else {
+            $.ajax(
+                {
+                    url: "../Region/Delete",
+                    type: "Get",
+                    data: { RegionName: param[0], CountryName: param[1] },
+                    success: function (response) {
+                        GetRegion();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+                });
+        }
+    });
+
+</script>

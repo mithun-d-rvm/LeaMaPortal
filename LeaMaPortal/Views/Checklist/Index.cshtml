@@ -1,0 +1,130 @@
+﻿@model LeaMaPortal.Models.CheckListViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/content/bootstrap.css" rel="stylesheet" />
+<link href="~/theme/css/leemastyle.css" rel="stylesheet" />
+<link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @*<p>
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+
+    @*<div class="row pull-left">
+            <div class="col-md-12 leama-fielset leama-field-block ">
+
+
+
+            </div>
+            <div class="col-md-12 leama-fielset">
+                <button type="submit" class="col-md-offset-4 leama-btn">Submit</button>
+            </div>
+        </div>*@
+    <div class="leama-inner-block col-md-12 ">
+
+
+
+        <div class="col-md-12 leama-fieldset leama-header-top">
+            <div class="row">
+                <div class="col-md-12 leama-fieldset ">
+                    <div class="col-md-2 pull-left">
+                        @Html.LabelFor(model => model.Checklist_id, htmlAttributes: new { @class = "leama-field-name" })
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.Checklist_id, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                    </div>
+                </div>
+                <div class="col-md-12 leama-fieldset ">
+                    <div class="col-md-2 pull-left">
+                        @Html.LabelFor(model => model.Checklist_Name, htmlAttributes: new { @class = "leama-field-name" })
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.Checklist_Name, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                    </div>
+                </div>
+                <div class="col-md-12 leama-fieldset ">
+                    <div class="col-md-12 pull-left">
+                        <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 leama-fieldset leama-header-top">
+            <div class="row">
+                <div action="" class="col-md-12 leama-fieldset">
+                    <div class="col-md-4 input-group">
+                        <input type="Search" placeholder="Search" class="form-control" />
+                        <div class="input-group-btn">
+                            <button class="btn btn-info leama-search-button-style">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 leama-fieldset ">
+                    &nbsp;
+                </div>
+
+                <div class="divTable leama-fieldset col-md-12">
+
+
+                    <div class="divTableBody divFontBodyTable">
+                        <div class="divTableHeading ">
+                            <div class="divTableCell ">Checklist Id</div>
+                            <div class="divTableCell">Checklist Name</div>
+                            <div class="divTableCell">Action</div>
+
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">123</div>
+                            <div class="divTableCell">Checklist Name</div>
+                            <div class="divTableCell">
+                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
+                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
+                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
+                            </div>
+
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">123</div>
+                            <div class="divTableCell">Checklist Name</div>
+                            <div class="divTableCell">
+                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
+                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
+                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                    </div>
+                    <div class="col-sm-6">
+                        <ul class="pagination pull-right">
+                            <li><a href="#">1</a></li>
+                            <li class="active"><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
