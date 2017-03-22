@@ -17,3 +17,7 @@
 .inner-block{
     min-height: 830px;
 }
+}
+label{
+    font-weight:normal !important;
+}

@@ -194,6 +194,7 @@
     <Compile Include="Models\ContractApprovalSettingViewModel.cs" />
     <Compile Include="Helpers\AuthenticationHelper.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Models\CountryViewModel.cs" />
     <Compile Include="Models\DBContext\Entities.cs" />
     <Compile Include="Models\DBContext\tbl_agreement.cs" />
@@ -262,6 +263,7 @@
     <Compile Include="Models\RegionViewModel.cs" />
     <Compile Include="Models\UtilityViewModel.cs" />
     <Compile Include="Models\TenantCompanyViewModel.cs" />
+    <Compile Include="Models\TenantIndividualViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ErrorMessage.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -454,6 +456,10 @@
     <Content Include="Views\Master\TenantCompany\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\Region\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\Region\_List.cshtml" />
+    <Content Include="Views\MasterIndividual\Create.cshtml" />
+    <Content Include="Views\MasterIndividual\List.cshtml" />
+    <Content Include="Views\Master\TenantIndividual\Create.cshtml" />
+    <Content Include="Views\Master\TenantIndividual\_AddOrUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
