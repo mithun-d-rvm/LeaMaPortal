@@ -1,0 +1,770 @@
+﻿
+<!--
+  File Name      : _List.cshtml
+  Description    : Master page for tenant company
+  Created Date   : 20-Mar-2017
+  Notes          : <Notes>
+-->
+
+@model LeaMaPortal.Models.TenantCompanyViewModel
+@{
+    Layout = null;
+}
+<link href="~/content/bootstrap.css" rel="stylesheet" />
+<link href="~/theme/css/leemastyle.css" rel="stylesheet" />
+<link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
+<!DOCTYPE html>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "TenantCompany" }))
+{
+    <div class="inner-block">
+        <div class="blank">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Tenant Type:
+                        </div>
+                        <div class="col-md-8">
+                            @{
+                                List<SelectListItem> TenantType = new List<SelectListItem>
+                                    ();
+                                TenantType.Add(new SelectListItem
+                                {
+                                    Text = "Government",
+                                    Value = "Government"
+                                });
+                                TenantType.Add(new SelectListItem
+                                {
+                                    Text = "Person",
+                                    Value = "Person",
+                                    Selected = true
+                                });
+                                TenantType.Add(new SelectListItem
+                                {
+                                    Text = "Company",
+                                    Value = "Company"
+                                });
+                            }
+
+                            @Html.DropDownListFor(model => model.TenantType, TenantType, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
+                            
+                            
+                                    @*<select class="master-form-input">
+                        <option value="Government"> Government </option>
+                        <option value=""> Company </option>
+                    </select>*@
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Title:
+                        </div>
+                        <div class="col-md-8">
+                            @*<select class="master-form-input">
+                                <option> MR. </option>
+                                <option> MRS. </option>
+                                <option> MS. </option>
+                            </select>*@
+                            @{
+                                List<SelectListItem> Title = new List<SelectListItem>();
+                                Title.Add(new SelectListItem
+                                {
+                                    Text = "MR.",
+                                    Value = "MR."
+                                });
+                                Title.Add(new SelectListItem
+                                {
+                                    Text = "MRS.",
+                                    Value = "MRS.",
+                                    Selected = true
+                                });
+                                Title.Add(new SelectListItem
+                                {
+                                    Text = "MS.",
+                                    Value = "MS."
+                                });
+                            }
+
+                            @Html.DropDownListFor(model => model.Title, Title, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Middle Name:
+                        </div>
+                        <div class="col-md-8">
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Company Name:
+                        </div>
+                        <div class="col-md-8">
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Marital Status
+                        </div>
+                        <div class="col-md-8">
+                            @*<div class="col-md-6" style="margin-left: -20px;">
+                                <div class="col-md-1">
+                                    <input type="checkbox" class="input-checkbox">
+                                </div>
+                                <div class="col-md-8 m-t-3">
+                                    <span> Family </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-1">
+                                    <input type="checkbox" class="input-checkbox">
+                                </div>
+                                <div class="col-md-8 m-t-3">
+                                    <span> Single </span>
+                                </div>
+                            </div>*@
+                            @Html.RadioButtonFor(model => model.MaritalStatus, "Family") Family
+                            @Html.RadioButtonFor(model => model.MaritalStatus, "Single") Single
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Address 01:
+                        </div>
+                        <div class="col-md-8">
+                            @*<textarea class="master-form-input"></textarea>*@
+                            @Html.TextAreaFor(model => model.Address1, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            City:
+                        </div>
+                        <div class="col-md-8">
+                            @*<select class="master-form-input">
+                                <option> Manly </option>
+                            </select>*@
+                            @{
+                                List<SelectListItem> City = new List<SelectListItem>();
+                                City.Add(new SelectListItem
+                                {
+                                    Text = "Manly",
+                                    Value = "Manly"
+                                });
+                                City.Add(new SelectListItem
+                                {
+                                    Text = "Chennai",
+                                    Value = "Chennai",
+                                    Selected = true
+                                });
+                                City.Add(new SelectListItem
+                                {
+                                    Text = "London",
+                                    Value = "London"
+                                });
+                            }
+
+                            @Html.DropDownListFor(model => model.City, City, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Email:
+                        </div>
+                        <div class="col-md-8">
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Landline:
+                        </div>
+                        <div class="col-md-8">
+                            <div class="col-md-3" style="margin-left: -15px;">
+                                @*<input type="text" class="master-form-input">*@
+                                @Html.EditorFor(model => model.LandlineCountryCode, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @Html.ValidationMessageFor(model => model.LandlineCountryCode, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-3" style="margin-left: -15px;">
+                                @*<input type="text" class="master-form-input">*@
+
+                                @Html.EditorFor(model => model.LandlineAreaCode, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @Html.ValidationMessageFor(model => model.LandlineAreaCode, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6" style="margin-left: 32%;width: 64%;position: absolute;">
+                                @*<input type="text" class="master-form-input">*@
+
+                                @Html.EditorFor(model => model.LandlineNo, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @Html.ValidationMessageFor(model => model.LandlineNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Nationality:
+                        </div>
+                        <div class="col-md-8">
+                            @*<select class="master-form-input">
+                                <option> Australia </option>
+                            </select>*@
+
+                            @{
+                                List<SelectListItem> Nationality = new List<SelectListItem>();
+                                Nationality.Add(new SelectListItem
+                                {
+                                    Text = "Australia",
+                                    Value = "Australia"
+                                });
+                                Nationality.Add(new SelectListItem
+                                {
+                                    Text = "India",
+                                    Value = "India",
+                                    Selected = true
+                                });
+                                Nationality.Add(new SelectListItem
+                                {
+                                    Text = "England",
+                                    Value = "England"
+                                });
+                            }
+
+                            @Html.DropDownListFor(model => model.Nationality, Nationality, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Chamber of Commerce & Industry Unified ID:
+                        </div>
+                        <div class="col-md-8">
+                            @*<input type="text" class="master-form-input" />*@
+
+                            @Html.EditorFor(model => model.Cocandindustryuid, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Cocandindustryuid, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Trade License issue Date:
+                        </div>
+                        <div class="col-md-8">
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.LicenseIssueDate, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.LicenseIssueDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            ADWEA registration Id:
+                        </div>
+                        <div class="col-md-8">
+                            @*<input type="text" class="master-form-input" />*@
+
+                            @Html.EditorFor(model => model.ADWEARegid, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.ADWEARegid, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    @*<div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Visa Type:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="master-form-input" />
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Visa Expiry Date:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="master-form-input" />
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Family Number:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="master-form-input" />
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            ADWEA Resigtration Id:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="master-form-input" />
+                        </div>
+                    </div>*@
+                    @*<div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            &nbsp;
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn master-form-btn">Submit</button>
+                        </div>
+                    </div>*@
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Tenant ID:
+                        </div>
+                        <div class="col-md-8">
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.TenantId, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.TenantId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            First Name:
+                        </div>
+                        <div class="col-md-8">
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Last Name:
+                        </div>
+                        <div class="col-md-8">
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    @*<div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Profession:
+                        </div>
+                        <div class="col-md-8">
+                            <select class="master-form-input">
+                                <option> Farmer </option>
+                                <option> Engineer </option>
+                                <option> Doctor </option>
+                            </select>
+                        </div>
+                    </div>*@
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Address:
+                        </div>
+                        <div class="col-md-8">
+                            @*<textarea class="master-form-input"></textarea>*@
+                            @Html.TextAreaFor(model => model.Address, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Emirate:
+                        </div>
+                        <div class="col-md-8">
+                            <select class="master-form-input">
+                                <option value="Default"> Default </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Post Box:
+                        </div>
+                        <div class="col-md-8">
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.PostboxNo, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.PostboxNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Mobile:
+                        </div>
+                        <div class="col-md-8">
+                            <div class="col-md-3" style="margin-left: -15px;">
+                                @*<input type="text" class="master-form-input">*@
+                                @Html.EditorFor(model => model.MobileCountryCode, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @Html.ValidationMessageFor(model => model.MobileCountryCode, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-3" style="margin-left: -15px;">
+                                @*<input type="text" class="master-form-input">*@
+                                @Html.EditorFor(model => model.MobileAreaCode, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @Html.ValidationMessageFor(model => model.MobileAreaCode, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6" style="margin-left: 32%;width: 64%;position: absolute;">
+                                @*<input type="text" class="master-form-input">*@
+                                @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Fax:
+                        </div>
+                        <div class="col-md-8">
+                            <div class="col-md-3" style="margin-left: -15px;">
+                                @*<input type="text" class="master-form-input">*@
+                                @Html.EditorFor(model => model.FaxCountryCode, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @Html.ValidationMessageFor(model => model.FaxCountryCode, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-3" style="margin-left: -15px;">
+                                @*<input type="text" class="master-form-input">*@
+                                @Html.EditorFor(model => model.FaxAreaCode, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @Html.ValidationMessageFor(model => model.FaxAreaCode, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6" style="margin-left: 32%;width: 64%;position: absolute;">
+                                @*<input type="text" class="master-form-input">*@
+                                @Html.EditorFor(model => model.FaxNo, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @Html.ValidationMessageFor(model => model.FaxNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Company Activity:
+                        </div>
+                        <div class="col-md-8">
+                            <select class="master-form-input">
+                                <option value="Activity1"> Activity1 </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Trade License Number:
+                        </div>
+                        <div class="col-md-8">
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.TradelicenseNo, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.TradelicenseNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Trade License Expiry Date:
+                        </div>
+                        <div class="col-md-8">
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.LicenseExpiryDate, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.LicenseExpiryDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Issuance authority:
+                        </div>
+                        <div class="col-md-8">
+                            <select class="master-form-input">
+                                <option value="Authority1"> Authority1 </option>
+                            </select>
+                        </div>
+                    </div>
+                    @*<div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Visa Issue Date:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="master-form-input" />
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Date of Birth:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="master-form-input" />
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Family Book City:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="master-form-input" />
+                        </div>
+                    </div>*@
+                    @*<div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            &nbsp;
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn master-form-btn">Submit</button>
+                        </div>
+                    </div>*@
+                </div>
+            </div>
+
+            @*<div class="row p-b-25">
+                <span> <strong> Company Details </strong> </span>
+            </div>*@
+
+            @*<div class="col-md-10 document-row" id="GridView">
+                <div class="col-md-12">
+                    <div class="col-md-4 text-left">Branch</div>
+                    <div class="col-md-4 text-left">City</div>
+                    <div class="col-md-4 text-left">Address 01</div>
+                    <div class="col-md-4 text-left">Address 02</div>
+                    <div class="col-md-4 text-left">State</div>
+                    <div class="col-md-4 text-left">Country</div>
+                    <div class="col-md-4 text-left">Pincode</div>
+                    <div class="col-md-4 text-left">Phonenumber</div>
+                    <div class="col-md-4 text-left">Remarks</div>
+                    <div class="col-md-4 text-left">Email Id</div>
+                    <div class="col-md-4 text-left">Fax</div>
+                    <div class="col-md-4 text-left"><input type="button" id="addDetailsbutton" value="Add" /></div>
+
+
+                </div>
+                <div class="clearfix"><br /><br /></div>
+                <table id="tblDetailscontent" class="col-md-12">
+                    <tr>
+
+                        <td class="col-md-4">
+                            <input type="text" id="txtBranch" name="txtBranch">
+                        </td>
+                        <td class="col-md-4">
+                            <input type="text" id="txtCity" name="txtCity">
+                        </td>
+                        <td class="col-md-4">
+                            <textarea id="txtAdd01" name="txtAdd01"></textarea>
+                        </td>
+                        <td class="col-md-4">
+                            <textarea id="txtAdd02" name="txtAdd02"></textarea>
+                        </td>
+                        <td class="col-md-4">
+                            <input type="text" id="txtState" name="txtState">
+                        </td>
+                        <td class="col-md-4">
+                            <input type="text" id="txtCountry" name="txtCountry">
+                        </td>
+                        <td class="col-md-4">
+                            <input type="text" id="txtPincode" name="txtPincode">
+                        </td>
+                        <td class="col-md-4">
+                            <input type="text" id="txtPhonenumber" name="txtPhonenumber">
+                        </td>
+                        <td class="col-md-4">
+                            <textarea id="txtRemarks" name="txtRemarks"></textarea>
+                        </td>
+                        <td class="col-md-4">
+                            <input type="text" id="txtEmailid" name="txtEmailid">
+                        </td>
+                        <td class="col-md-4">
+                            <input type="text" id="txtFax" name="txtFax">
+                        </td>
+                       
+                        <td class="col-md-4">
+                            <button type="button" class="removeDetailsbutton" title="Remove this row">X</button>
+                        </td>
+                    </tr>
+
+                </table>
+        </div>*@
+            <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+            <div class="col-md-4">
+                <button class="btn master-form-btn" type="submit">Submit</button>
+            </div>
+        </div>
+
+            @*<div class="row p-b-25">
+                <span> <strong> Company Contact Details </strong> </span>
+            </div>*@
+
+            @*<div class="col-md-10 document-row" id="GridView">
+                <div class="col-md-12">
+                    <div class="col-md-4 text-left">Contact Person Name</div>
+                    <div class="col-md-4 text-left">Designation</div>
+                    <div class="col-md-4 text-left">Department</div>
+                    <div class="col-md-4 text-left">Landline Number</div>
+                    <div class="col-md-4 text-left">Extension</div>
+                    <div class="col-md-4 text-left">Mobile Number</div>
+                    <div class="col-md-4 text-left">Title</div>
+                    <div class="col-md-4 text-left"><input type="button" id="addContactbutton" value="Add" /></div>
+
+
+                </div>
+                <div class="clearfix"><br /><br /></div>
+                <table id="tblContactcontent" class="col-md-12">
+                    <tr>
+
+                        <td class="col-md-4">
+                            <input type="text" id="txtcPersonName" name="txtcPersonName">
+                        </td>
+                        <td class="col-md-4">
+                            <input type="text" id="txtDesignation" name="txtDesignation">
+                        </td>
+                        <td class="col-md-4">
+                            <input type="text" id="txtDept" name="txtDept">
+                        </td>
+                        <td class="col-md-4">
+                            <input type="text" id="txtLandlineno" name="txtLandlineno">
+                        </td>
+                        <td class="col-md-4">
+                            <input type="text" id="txtExtension" name="txtExtension">
+                        </td>
+                        <td class="col-md-4">
+                            <input type="text" id="txtMobileno" name="txtMobileno">
+                        </td>
+                        <td class="col-md-4">
+                            <input type="text" id="txtTitle" name="txtTitle">
+                        </td>
+                        <td class="col-md-4">
+                            <button type="button" class="removeContactbutton" title="Remove this row">X</button>
+                        </td>
+                    </tr>
+
+                </table>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn master-form-btn" type="submit">Submit</button>
+                    </div>
+                </div>
+
+            </div>*@
+
+            <div class="row">
+                &nbsp;
+            </div>
+
+        </div>
+    </div>
+}
+
+<script>
+    var i = 1;
+
+    $("#addDetailsbutton").click(function () {
+        $("#tblDetailscontent table tr:first").clone().find("input").each(function () {
+            $(this).val('').attr({
+                'id': function (_, id) {
+                    return id + i
+                },
+                'name': function (_, name) {
+                    return name + i
+                },
+                'value': ''
+            });
+        }).end().appendTo("table");
+        i++;
+    });
+
+    $(document).on('click', 'button.removeDetailsbutton', function () {
+        $(this).closest('tr').remove();
+        return false;
+    });
+
+    var j = 1;
+    $("#addContactbutton").click(function () {
+        $("#tblContactcontent tr:first").clone().find("input").each(function () {
+            $(this).val('').attr({
+                'id': function (_, id) {
+                    return id + j
+                },
+                'name': function (_, name) {
+                    return name + j
+                },
+                'value': ''
+            });
+        }).end().appendTo("table");
+        j++;
+    });
+
+    $(document).on('click', 'button.removeContactbutton', function () {
+        $(this).closest('tr').remove();
+        return false;
+    });
+
+    //$("#addbutton").click(function () {
+    //    var DocumentName = $("#DocumentName").val();
+    //    var DocumentDet = $("#DocumentDet").val();
+    //    alert(DocumentName + DocumentDet);
+    //    $("#DocumentTable > tbody:last-child").append("<tr> <td>" + DocumentName + "</td> <td>" + DocumentDet +
+    //        "</td> <td><input type='button' value='X' onclick='myfunc(event);' class='removebutton' /></td></tr>");
+
+    //});
+    //function myfunc(e)
+    //{
+    //    alert(1);
+    //    $(this).closest('tr').remove();
+    //}
+    //$(".removebutton").click(function () { alert(1); $(this).closest('tr').remove(); });
+    //$(document).on('click', 'button.removebutton', function () {
+    //    alert("aa");
+    //    $(this).closest('tr').remove();
+    //    return false;
+    //});
+</script>
+<script>
+    //Add or update
+    $("form#TenantCompany").off("submit").on("submit", function (e) {
+        e.preventDefault();
+        // $("#icon-success").addClass("hide");
+        //$("#VerifyIdDetailsLoader").removeClass("hide");
+        try {
+            var form = $("form#TenantCompany");
+
+            // var form = $('"form#VerifyId')[0]; // You need to use standart javascript object here
+            //var formData = new FormData(form);
+            $.ajax(
+                {
+                    url: "../TenantCompany/AddOrUpdate",
+                    // dataType: "jsonp",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        debugger;
+                        GetTenantCompany();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+
+</script>
