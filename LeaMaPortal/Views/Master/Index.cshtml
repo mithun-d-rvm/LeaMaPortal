@@ -31,6 +31,9 @@
             case 5:
                 GetCountry();
                 break;
+            case 9:
+                GetPropertyMaster();
+    break;
             case 6:
                 GetRegion();
                 break;
@@ -179,4 +182,42 @@
             }
         });
     }
+
+    function GetPropertyMaster()
+    {
+        $("#ContainerAddOrUpdate").empty();
+        //$.ajax(
+        //{
+        //    url: "../Country/AddOrUpdate",
+        //    type: "Get",
+        //    data: {},
+        //    contentType: "application/json",
+        //    processData: false,
+        //    success: function (html) {
+        //        $("#ContainerAddOrUpdate").html(html);
+        //    },
+        //    error: function (jqXhr, textStatus, errorThrown) {
+        //        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+        //    },
+        //    complete: function () {
+        //        //   $("#VerifyIdDetailsLoader").addClass("hide");
+        //    }
+        //});
+        $.ajax(
+        {
+            url: "../PropertyMaster/Index",
+            type: "Get",
+            data: { Search :""},
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+
 </script>
