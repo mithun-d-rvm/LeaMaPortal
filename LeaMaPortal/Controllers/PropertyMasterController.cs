@@ -9,9 +9,9 @@ namespace LeaMaPortal.Controllers
     public class PropertyMasterController : Controller
     {
         // GET: PropertyMaster
-        public ActionResult Index()
+        public PartialViewResult Index(string Search, int? page, int? defaultPageSize)
         {
-            return View();
+            return PartialView("../Master/PropertyMaster/Index");
         }
 
         // GET: PropertyMaster/Details/5

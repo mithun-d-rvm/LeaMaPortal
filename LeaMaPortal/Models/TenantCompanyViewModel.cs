@@ -66,9 +66,9 @@ namespace LeaMaPortal.Models
 
         public string TradelicenseNo { get; set; }
 
-        public DateTime LicenseIssueDate { get; set; }
+        public DateTime? LicenseIssueDate { get; set; }
 
-        public DateTime LicenseExpiryDate { get; set; }
+        public DateTime? LicenseExpiryDate { get; set; }
 
         public string Issuance_authority { get; set; }
 
@@ -80,7 +80,7 @@ namespace LeaMaPortal.Models
     {
         public int Id { get; set; }
 
-        public int TenantId { get; set; }
+        public int? TenantId { get; set; }
 
         public string Branch { get; set; }
 
@@ -108,7 +108,7 @@ namespace LeaMaPortal.Models
     {
         public int Id { get; set; }
 
-        public int TenantId { get; set; }
+        public int? TenantId { get; set; }
 
         public string ContactPersonName { get; set; }
 

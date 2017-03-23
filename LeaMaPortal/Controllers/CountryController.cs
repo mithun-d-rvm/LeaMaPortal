@@ -10,7 +10,7 @@ using LeaMaPortal.Models.DBContext;
 using LeaMaPortal.Models;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-//using MvcPaging;
+using MvcPaging;
 
 namespace LeaMaPortal.Controllers
 {
@@ -30,20 +30,20 @@ namespace LeaMaPortal.Controllers
                 CountryViewModel model = new CountryViewModel();
                 if(string.IsNullOrWhiteSpace(Search))
                 {
-                    //model.List = db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name).Select(x => new CountryViewModel()
-                    //{
-                    //    Id = x.Id,
-                    //    Country = x.Country_name
-                    //}).ToPagedList(currentPageIndex, PageSize);
+                    model.List = db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name).Select(x => new CountryViewModel()
+                    {
+                        Id = x.Id,
+                        Country = x.Country_name
+                    }).ToPagedList(currentPageIndex, PageSize);
                 }
                 else
                 {
-                    //model.List = db.tbl_country.Where(x => x.Delmark != "*" && x.Country_name.ToLower().Contains(Search.ToLower()))
-                    //              .OrderBy(x => x.Country_name).Select(x => new CountryViewModel()
-                    //{
-                    //    Id = x.Id,
-                    //    Country = x.Country_name
-                    //}).ToPagedList(currentPageIndex, PageSize);
+                    model.List = db.tbl_country.Where(x => x.Delmark != "*" && x.Country_name.ToLower().Contains(Search.ToLower()))
+                                  .OrderBy(x => x.Country_name).Select(x => new CountryViewModel()
+                                  {
+                                      Id = x.Id,
+                                      Country = x.Country_name
+                                  }).ToPagedList(currentPageIndex, PageSize);
                 }
                  
                 return PartialView("../Master/Country/_List", model.List);

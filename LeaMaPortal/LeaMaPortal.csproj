@@ -448,9 +448,9 @@
     <Content Include="Views\Master\Index.cshtml" />
     <Content Include="Views\Shared\_SubHeaderMenu.cshtml" />
     <Content Include="Views\MasterIndividual\_DocumentDetailsRow.cshtml" />
-    <Content Include="Views\PropertyMaster\Index.cshtml" />
-    <Content Include="Views\PropertyMaster\_FecilityDetails.cshtml" />
-    <Content Include="Views\PropertyMaster\_UtilityDetails.cshtml" />
+    <Content Include="Views\Master\PropertyMaster\Index.cshtml" />
+    <Content Include="Views\Master\PropertyMaster\_FecilityDetails.cshtml" />
+    <Content Include="Views\Master\PropertyMaster\_UtilityDetails.cshtml" />
     <Content Include="Views\Region\Index.cshtml" />
     <Content Include="Views\Facility\Index.cshtml" />
     <Content Include="Views\Checklist\Index.cshtml" />
@@ -462,12 +462,14 @@
     <Content Include="Views\EmailTemplate\Index.cshtml" />
     <Content Include="Views\PropertyType\Index.cshtml" />
     <Content Include="Views\Slab\Index.cshtml" />
+    <Content Include="Views\Master\TenantCompany\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\Region\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\Region\_List.cshtml" />
     <Content Include="Views\MasterIndividual\Create.cshtml" />
     <Content Include="Views\MasterIndividual\List.cshtml" />
     <Content Include="Views\Master\TenantIndividual\Create.cshtml" />
     <Content Include="Views\Master\TenantIndividual\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\PropertyMaster\_AddOrUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

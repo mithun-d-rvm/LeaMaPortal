@@ -1,5 +1,6 @@
 ﻿using LeaMaPortal.Models;
 using LeaMaPortal.Models.DBContext;
+using MvcPaging;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace LeaMaPortal.Controllers
     {
         private Entities db = new Entities();
         // GET: TenantCompany
-        public async Task<PartialViewResult> Index()
+        public async Task<PartialViewResult> Index(string Search, int? page, int? defaultPageSize)
         {
             try
             {
@@ -24,53 +25,214 @@ namespace LeaMaPortal.Controllers
                 //    Id = x.Id,
                 //    Country = x.Country_name
                 //}).ToListAsync();
-                var model = new TenantCompanyViewModel();
-                object[] parameters = {
-                     new MySqlParameter("@PFlag", "SELECT"),
-                     new MySqlParameter("@PTenant_Id", 0),
-                     new MySqlParameter("@PCompanyName", ""),
-                     new MySqlParameter("@PMarital_Status", ""),
-                     new MySqlParameter("@PTitle", ""),
-                     new MySqlParameter("@PFirst_Name", ""),
-                     new MySqlParameter("@PMiddle_Name", ""),
-                     new MySqlParameter("@PLast_Name", ""),
-                     new MySqlParameter("@Paddress", ""),
-                     new MySqlParameter("@Paddress1", ""),
-                     new MySqlParameter("@PEmirate", ""),
-                     new MySqlParameter("@PCity", ""),
-                     new MySqlParameter("@PPostboxNo", ""),
-                     new MySqlParameter("@PEmail", ""),
-                     new MySqlParameter("@PMobile_Countrycode", ""),
-                     new MySqlParameter("@PMobile_Areacode", ""),
-                     new MySqlParameter("@PMobile_No", ""),
-                     new MySqlParameter("@PLandline_Countrycode", ""),
-                     new MySqlParameter("@PLandline_Areacode", ""),
-                     new MySqlParameter("@PLandline_No", ""),
-                     new MySqlParameter("@PFax_Countrycode", ""),
-                     new MySqlParameter("@PFax_Areacode", ""),
-                     new MySqlParameter("@PFax_No", ""),
-                     new MySqlParameter("@PNationality", ""),
-                     new MySqlParameter("@PActitvity", ""),
-                     new MySqlParameter("@PCocandindustryuid", ""),
-                     new MySqlParameter("@PTradelicenseNo", ""),
-                     new MySqlParameter("@PLicense_issueDate", "1991-10-12"),
-                     new MySqlParameter("@PLicense_ExpiryDate", "1991-10-12"),
-                     new MySqlParameter("@PIssuance_authority", ""),
-                     new MySqlParameter("@PADWEA_Regid", ""),
-                     new MySqlParameter("@PType", ""),
-                     new MySqlParameter("@PCreateduser", ""),
-                     new MySqlParameter("@Ptenant_companydt", ""),
-                     new MySqlParameter("@Ptenant_companydt1", ""),
-                     new MySqlParameter("@Ptenant_companydoc", "")
 
-                };
-                var tenantCompany = await db.Database.SqlQuery<dynamic>("CALL Usp_Tenant_Company_All(@PFlag, @PTenant_Id, @PCompanyName, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser, @Ptenant_companydt, @Ptenant_companydt1, @Ptenant_companydoc)", parameters).ToListAsync();
-                return PartialView("../Master/TenantCompany/_List", model);
+                ViewData["Search"] = Search;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+                int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
+                ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, PageSize);
+                //TenantCompanyViewModel model = new TenantCompanyViewModel();
+                var tenantCompanies = db.tbl_tenant_company.Where(x => x.Delmark != "*");
+                if (!string.IsNullOrWhiteSpace(Search))
+                {
+                    tenantCompanies = tenantCompanies.Where(x => x.CompanyName.Contains(Search));
+                }
+                var tenantCompany = tenantCompanies.OrderBy(x => x.Id).Select(x => new TenantCompanyViewModel()
+                {
+                    Address = x.address,
+                    Address1 = x.address1,
+                    ADWEARegid = x.ADWEA_Regid,
+                    City = x.City,
+                    Cocandindustryuid = x.Cocandindustryuid,
+                    ComapanyActivity = x.Cocandindustryuid,
+                    CompanyName = x.CompanyName,
+                    Email = x.Email,
+                    Emirate = x.Emirate,
+                    FaxAreaCode = x.Fax_Areacode,
+                    FaxCountryCode = x.Fax_Countrycode,
+                    FaxNo = x.Fax_No,
+                    FirstName = x.First_Name,
+                    Id = x.Id,
+                    Issuance_authority = x.Issuance_authority,
+                    LicenseExpiryDate = x.License_ExpiryDate,
+                    LandlineAreaCode = x.Landline_Areacode,
+                    LandlineCountryCode = x.Landline_Countrycode,
+                    LandlineNo = x.Landline_No,
+                    LastName = x.Last_Name,
+                    LicenseIssueDate = x.License_issueDate,
+                    MaritalStatus = x.Marital_Status,
+                    MiddleName = x.Middle_Name,
+                    MobileAreaCode = x.Mobile_Areacode,
+                    MobileCountryCode = x.Mobile_Countrycode,
+                    MobileNo = x.Mobile_No,
+                    Nationality = x.Nationality,
+                    PostboxNo = x.PostboxNo,
+                    TenantId = x.Tenant_Id,
+                    TenantType = x.Type,
+                    Title = x.Title,
+                    TradelicenseNo = x.TradelicenseNo,
+                    CompanyContactDetails = db.tbl_tenant_companydt1.Where(y => y.Tenant_Id == x.Tenant_Id).Select(z => new CompanyContactDetail()
+                    {
+                        ContactPersonName = z.Cper,
+                        Department = z.Dept,
+                        Designation = z.Desig,
+                        Extension = z.Ext,
+                        Id = z.Id,
+                        MobileNo = z.MobNo,
+                        Phone = z.Phone,
+                        Salutations = z.Salutations,
+                        TenantId = z.Tenant_Id
+                    }).ToList(),
+                    CompanyDetails = db.tbl_tenant_companydt.Where(y => y.Tenant_Id == x.Tenant_Id).Select(z => new CompanyDetail()
+                    {
+                        Branch = z.Branch,
+                        BranchAddress = z.BranchAdd,
+                        BranchAddress1 = z.Branchadd1,
+                        City = z.City,
+                        Country = z.Country,
+                        EmailId = z.EMailID,
+                        FaxNo = z.FaxNo,
+                        Id = z.Id,
+                        Phoneno = z.PhoneNo,
+                        Pincode = z.Pincode,
+                        Remarks = z.Remarks,
+                        State = z.State,
+                        TenantId = z.Tenant_Id
+                    }).ToList()
+                }).ToPagedList(currentPageIndex, PageSize);
+
+                //}
+                //else
+                //{
+                //    model.List = db.tbl_country.Where(x => x.Delmark != "*" && x.Country_name.ToLower().Contains(Search.ToLower()))
+                //                  .OrderBy(x => x.Country_name).Select(x => new CountryViewModel()
+                //                  {
+                //                      Id = x.Id,
+                //                      Country = x.Country_name
+                //                  }).ToPagedList(currentPageIndex, PageSize);
+                //}
+
+                //var model = new TenantCompanyViewModel();
+                //object[] parameters = {
+                //     new MySqlParameter("@PFlag", "SELECT"),
+                //     new MySqlParameter("@PTenant_Id", 0),
+                //     new MySqlParameter("@PCompanyName", ""),
+                //     new MySqlParameter("@PMarital_Status", ""),
+                //     new MySqlParameter("@PTitle", ""),
+                //     new MySqlParameter("@PFirst_Name", ""),
+                //     new MySqlParameter("@PMiddle_Name", ""),
+                //     new MySqlParameter("@PLast_Name", ""),
+                //     new MySqlParameter("@Paddress", ""),
+                //     new MySqlParameter("@Paddress1", ""),
+                //     new MySqlParameter("@PEmirate", ""),
+                //     new MySqlParameter("@PCity", ""),
+                //     new MySqlParameter("@PPostboxNo", ""),
+                //     new MySqlParameter("@PEmail", ""),
+                //     new MySqlParameter("@PMobile_Countrycode", ""),
+                //     new MySqlParameter("@PMobile_Areacode", ""),
+                //     new MySqlParameter("@PMobile_No", ""),
+                //     new MySqlParameter("@PLandline_Countrycode", ""),
+                //     new MySqlParameter("@PLandline_Areacode", ""),
+                //     new MySqlParameter("@PLandline_No", ""),
+                //     new MySqlParameter("@PFax_Countrycode", ""),
+                //     new MySqlParameter("@PFax_Areacode", ""),
+                //     new MySqlParameter("@PFax_No", ""),
+                //     new MySqlParameter("@PNationality", ""),
+                //     new MySqlParameter("@PActitvity", ""),
+                //     new MySqlParameter("@PCocandindustryuid", ""),
+                //     new MySqlParameter("@PTradelicenseNo", ""),
+                //     new MySqlParameter("@PLicense_issueDate", "1991-10-12"),
+                //     new MySqlParameter("@PLicense_ExpiryDate", "1991-10-12"),
+                //     new MySqlParameter("@PIssuance_authority", ""),
+                //     new MySqlParameter("@PADWEA_Regid", ""),
+                //     new MySqlParameter("@PType", ""),
+                //     new MySqlParameter("@PCreateduser", ""),
+                //     new MySqlParameter("@Ptenant_companydt", ""),
+                //     new MySqlParameter("@Ptenant_companydt1", ""),
+                //     new MySqlParameter("@Ptenant_companydoc", "")
+
+                //};
+                //var tenantCompany = await db.Database.SqlQuery<dynamic>("CALL Usp_Tenant_Company_All(@PFlag, @PTenant_Id, @PCompanyName, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser, @Ptenant_companydt, @Ptenant_companydt1, @Ptenant_companydoc)", parameters).ToListAsync();
+                return PartialView("../Master/TenantCompany/_List", tenantCompany);
             }
             catch(Exception e)
             {
                 throw;
             }
+        }
+
+        [HttpGet]
+        public PartialViewResult AddOrUpdate()
+        {
+            return PartialView("../Master/TenantCompany/_AddOrUpdate", new TenantCompanyViewModel());
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddOrUpdate(TenantCompanyViewModel model)
+        {
+            MessageResult result = new MessageResult();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    MySqlParameter pa = new MySqlParameter();
+                    string PFlag = null;
+                    if (model.Id == 0)
+                    {
+                        PFlag = "INSERT";
+                    }
+                    else
+                    {
+                        PFlag = "UPDATE";
+                    }
+                    object[] parameters = {
+                         new MySqlParameter("@PFlag", PFlag),
+                         new MySqlParameter("@PTenant_Id", model.TenantId),
+                         new MySqlParameter("@PCompanyName",model.CompanyName),
+                         new MySqlParameter("@PMarital_Status", model.MaritalStatus),
+                         new MySqlParameter("@PTitle", model.Title),
+                         new MySqlParameter("@PFirst_Name", model.FirstName),
+                         new MySqlParameter("@PMiddle_Name", model.MiddleName),
+                         new MySqlParameter("@PLast_Name", model.LastName),
+                         new MySqlParameter("@Paddress", model.Address),
+                         new MySqlParameter("@Paddress1", model.Address1),
+                         new MySqlParameter("@PEmirate", model.Emirate),
+                         new MySqlParameter("@PCity", model.City),
+                         new MySqlParameter("@PPostboxNo", model.PostboxNo),
+                         new MySqlParameter("@PEmail", model.Email),
+                         new MySqlParameter("@PMobile_Countrycode", model.MobileCountryCode),
+                         new MySqlParameter("@PMobile_Areacode", model.MobileAreaCode),
+                         new MySqlParameter("@PMobile_No", model.MobileNo),
+                         new MySqlParameter("@PLandline_Countrycode", model.LandlineCountryCode),
+                         new MySqlParameter("@PLandline_Areacode", model.LandlineAreaCode),
+                         new MySqlParameter("@PLandline_No", model.LandlineNo),
+                         new MySqlParameter("@PFax_Countrycode", model.FaxCountryCode),
+                         new MySqlParameter("@PFax_Areacode", model.FaxAreaCode),
+                         new MySqlParameter("@PFax_No", model.FaxNo),
+                         new MySqlParameter("@PNationality", model.Nationality),
+                         new MySqlParameter("@PActitvity", model.ComapanyActivity),
+                         new MySqlParameter("@PCocandindustryuid", model.Cocandindustryuid),
+                         new MySqlParameter("@PTradelicenseNo", model.TradelicenseNo),
+                         new MySqlParameter("@PLicense_issueDate", model.LicenseIssueDate),
+                         new MySqlParameter("@PLicense_ExpiryDate", model.LicenseExpiryDate),
+                         new MySqlParameter("@PIssuance_authority", model.Issuance_authority),
+                         new MySqlParameter("@PADWEA_Regid", model.ADWEARegid),
+                         new MySqlParameter("@PType", model.TenantType),
+                         new MySqlParameter("@PCreateduser", System.Web.HttpContext.Current.User.Identity.Name),
+                         new MySqlParameter("@Ptenant_companydt", null),
+                         new MySqlParameter("@Ptenant_companydt1", null),
+                         new MySqlParameter("@Ptenant_companydoc", null)
+
+                    };
+                    var tenantCompany = await db.Database.SqlQuery<object>("CALL Usp_Tenant_Company_All(@PFlag, @PTenant_Id, @PCompanyName, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser, @Ptenant_companydt, @Ptenant_companydt1, @Ptenant_companydoc)", parameters).ToListAsync();
+                }
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception e)
+            {
+                throw;
+            }
+
+
         }
     }
 }
