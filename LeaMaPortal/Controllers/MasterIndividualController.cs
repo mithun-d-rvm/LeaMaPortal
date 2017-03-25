@@ -1,5 +1,6 @@
 ﻿using LeaMaPortal.Models;
 using LeaMaPortal.Models.DBContext;
+using MvcPaging;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,29 @@ namespace LeaMaPortal.Controllers
     public class MasterIndividualController : Controller
     {
         private Entities db = new Entities();
+        private string user = "rmv";
         // GET: MasterIndividual
-        public ActionResult Index()
+        public ActionResult Index(string Search, int? page, int? defaultPageSize)
         {
-            return View();
+            try
+            {
+                ViewData["Search"] = Search;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+                int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
+                ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, PageSize);
+                //TenantCompanyViewModel model = new TenantCompanyViewModel();
+                var query = db.tbl_tenant_individual.Where(x => x.Delmark != "*");
+                if (!string.IsNullOrWhiteSpace(Search))
+                {
+                    query = query.Where(x => x.First_Name.Contains(Search));
+                }
+                var list = query.OrderBy(x => x.Tenant_Id).ToPagedList(currentPageIndex, PageSize);
+                return PartialView("../Master/TenantIndividual/_List",list);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         // GET: MasterIndividual/Details/5
@@ -35,19 +55,44 @@ namespace LeaMaPortal.Controllers
         // GET: MasterIndividual/Create
         public PartialViewResult Create()
         {
-            return PartialView("../Master/TenantIndividual/_AddOrUpdate");
+            try
+            {
+                TenantIndividualViewModel model = new TenantIndividualViewModel();
+                ViewBag.TitleDisplay = new SelectList(Common.Title);
+                //var region = .Select(x => x.Region_Name);
+                ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
+                //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
+                ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
+                ViewBag.Profession = new SelectList(Common.Profession);
+                var tenant = db.tbl_tenant_individual.OrderByDescending(x => x.Tenant_Id).FirstOrDefault();
+                ViewBag.Tenant_Id = tenant != null ? tenant.Tenant_Id + 1 : 1;
+                return PartialView("../Master/TenantIndividual/_AddOrUpdate", model);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         // POST: MasterIndividual/Create
         [HttpPost]
-        public async Task<ActionResult> Create(TenantIndividualViewModel model)
+        public async Task<JsonResult> Create(TenantIndividualViewModel model)
         {
             try
             {
+                MessageResult result = new MessageResult();
                 model.Type = "Individual";
-                object[] param = Helper.GetMySqlParameters<TenantIndividualViewModel>(model, "INSERT", "somu");
+                string PFlag =Common.UPDATE;
+                if (model.Tenant_Id==0)
+                {
+                    PFlag = Common.INSERT;
+                    var tenant = db.tbl_tenant_individual.OrderByDescending(x => x.Tenant_Id).FirstOrDefault();
+                    model.Tenant_Id = tenant != null ? tenant.Tenant_Id + 1 : 1;
+                }
+                
+                object[] param = Helper.GetMySqlParameters<TenantIndividualViewModel>(model, PFlag, user);
 
-                var result = await db.Database.SqlQuery<object>(@"CALL Usp_Tenant_Individual_All(@PFlag,@PTenant_Id,@PTitle  ,@PFirst_Name  ,@PMiddle_Name  ,@PLast_Name  ,@PCompany_Educational   ,@PProfession  ,@PMarital_Status  ,@Paddress  ,@Paddress1  ,@PEmirate  ,@PCity  ,@PPostboxNo  ,@PEmail  ,@PMobile_Countrycode  ,@PMobile_Areacode  ,@PMobile_No  ,@PLandline_Countrycode  ,@PLandline_Areacode  ,@PLandline_No  ,@PFax_Countrycode  ,@PFax_Areacode  ,@PFax_No  ,@PNationality  ,@PEmiratesid  ,@PEmirate_issuedate  ,@PEmirate_expirydate  ,@PPassportno  
+                var _result = await db.Database.SqlQuery<object>(@"CALL Usp_Tenant_Individual_All(@PFlag,@PTenant_Id,@PTitle  ,@PFirst_Name  ,@PMiddle_Name  ,@PLast_Name  ,@PCompany_Educational   ,@PProfession  ,@PMarital_Status  ,@Paddress  ,@Paddress1  ,@PEmirate  ,@PCity  ,@PPostboxNo  ,@PEmail  ,@PMobile_Countrycode  ,@PMobile_Areacode  ,@PMobile_No  ,@PLandline_Countrycode  ,@PLandline_Areacode  ,@PLandline_No  ,@PFax_Countrycode  ,@PFax_Areacode  ,@PFax_No  ,@PNationality  ,@PEmiratesid  ,@PEmirate_issuedate  ,@PEmirate_expirydate  ,@PPassportno  
                 ,@PPlaceofissuance  
                 ,@PPassport_Issuedate
                 ,@PPassport_Expirydate  
@@ -64,9 +109,9 @@ namespace LeaMaPortal.Controllers
                 ,@Ptenantdocdetails 
                                     )", param).ToListAsync();
 
-                //return Json(result, JsonRequestBehavior.AllowGet);
+                return Json(result, JsonRequestBehavior.AllowGet);
                 //return PartialView("../Master/TenantIndividual/_AddOrUpdate");
-                return RedirectToAction("Index", "Dashboard");
+                //return RedirectToAction("Index", "Dashboard");
             }
             catch (Exception ex)
             {
@@ -75,47 +120,108 @@ namespace LeaMaPortal.Controllers
         }
 
         // GET: MasterIndividual/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: MasterIndividual/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<PartialViewResult> Edit(int tenantId,string type)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                var tenant =await db.tbl_tenant_individual.FindAsync(tenantId, type);
+                TenantIndividualViewModel model = Map(tenant);
+                ViewBag.TitleDisplay = new SelectList(Common.Title,tenant.Title);
+                //var region = .Select(x => x.Region_Name);
+                ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name",tenant.City);
+                //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
+                ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name",tenant.Nationality);
+                ViewBag.Profession = new SelectList(Common.Profession,tenant.Profession);
+                
+                ViewBag.Tenant_Id = tenantId;
+                return PartialView("../Master/TenantIndividual/_AddOrUpdate", model);
             }
             catch
             {
-                return View();
+                throw;
             }
         }
 
+       public TenantIndividualViewModel Map(tbl_tenant_individual tenant)
+        {
+             return new TenantIndividualViewModel()
+            {
+                Tenant_Id = tenant.Tenant_Id,
+                Title = tenant.Title,
+                First_Name = tenant.First_Name,
+                Middle_Name = tenant.Middle_Name,
+                Last_Name = tenant.Last_Name,
+                Company_Educational = tenant.Company_Educational,
+                Profession = tenant.Profession,
+                Marital_Status = tenant.Marital_Status,
+                address = tenant.address,
+                address1 = tenant.address1,
+                Emirate = tenant.Emirate,
+                City = tenant.City,
+                PostboxNo = tenant.PostboxNo,
+                Email = tenant.Email,
+                Mobile_Countrycode = tenant.Mobile_Countrycode,
+                Mobile_Areacode = tenant.Mobile_Areacode,
+                Mobile_No = tenant.Mobile_No,
+                Landline_Countrycode = tenant.Landline_Countrycode,
+                Landline_Areacode = tenant.Landline_Areacode,
+                Landline_No = tenant.Landline_No,
+                Fax_Countrycode = tenant.Fax_Countrycode,
+                Fax_Areacode = tenant.Fax_Areacode,
+                Fax_No = tenant.Fax_No,
+                Nationality = tenant.Nationality,
+                Emiratesid = tenant.Emiratesid,
+                Emirate_issuedate = tenant.Emirate_issuedate,
+                Emirate_expirydate = tenant.Emirate_expirydate,
+                Passportno = tenant.Passportno,
+                Placeofissuance = tenant.Placeofissuance,
+                Passport_Expirydate = tenant.Passport_Expirydate,
+                Passport_Issuedate = tenant.Passport_Issuedate,
+                VisaType = tenant.VisaType,
+                Visano = tenant.Visano,
+                Visa_IssueDate = tenant.Visa_IssueDate,
+                Visa_ExpiryDate = tenant.Visa_ExpiryDate,
+                Dob = tenant.Dob.HasValue? tenant.Dob.Value.Date: tenant.Dob,
+                Familyno = tenant.Familyno,
+                Familybookcity = tenant.Familybookcity,
+                ADWEA_Regid = tenant.ADWEA_Regid,
+                Type = tenant.Type
+            };
+        }
         // GET: MasterIndividual/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int tenantId, string type)
         {
-            return View();
-        }
-
-        // POST: MasterIndividual/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
+            MessageResult result = new MessageResult();
             try
             {
-                // TODO: Add delete logic here
+                var model =await db.tbl_tenant_individual.FindAsync(tenantId, type);
 
-                return RedirectToAction("Index");
+                object[] param = Helper.GetMySqlParameters<TenantIndividualViewModel>(Map(model), Common.DELETE, user);
+
+                var _result = await db.Database.SqlQuery<object>(@"CALL Usp_Tenant_Individual_All(@PFlag,@PTenant_Id,@PTitle  ,@PFirst_Name  ,@PMiddle_Name  ,@PLast_Name  ,@PCompany_Educational   ,@PProfession  ,@PMarital_Status  ,@Paddress  ,@Paddress1  ,@PEmirate  ,@PCity  ,@PPostboxNo  ,@PEmail  ,@PMobile_Countrycode  ,@PMobile_Areacode  ,@PMobile_No  ,@PLandline_Countrycode  ,@PLandline_Areacode  ,@PLandline_No  ,@PFax_Countrycode  ,@PFax_Areacode  ,@PFax_No  ,@PNationality  ,@PEmiratesid  ,@PEmirate_issuedate  ,@PEmirate_expirydate  ,@PPassportno  
+                ,@PPlaceofissuance  
+                ,@PPassport_Issuedate
+                ,@PPassport_Expirydate  
+                ,@PVisaType  
+                ,@PVisano  
+                ,@PVisa_IssueDate  
+                ,@PVisa_ExpiryDate 
+                ,@PDob  
+                ,@PFamilyno  
+                ,@PFamilybookcity  
+                ,@PADWEA_Regid  
+                ,@PType  
+                ,@PCreateduser  
+                ,@Ptenantdocdetails 
+                                    )", param).ToListAsync();
+                
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch
             {
-                return View();
+                return Json(new MessageResult() { Errors = "Internal server error" }, JsonRequestBehavior.AllowGet);
             }
         }
+
     }
 }

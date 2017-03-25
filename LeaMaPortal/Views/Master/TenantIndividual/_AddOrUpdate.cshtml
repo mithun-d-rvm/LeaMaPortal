@@ -10,9 +10,10 @@
 @*<h2>Create</h2>*@
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null, null, FormMethod.Post,new { @id = "TenantIndividualAddOrUpdate" }))
+
 {
-    @Html.AntiForgeryToken()
+    @*@Html.AntiForgeryToken()*@
 
     @*<div class="form-horizontal">*@
 
@@ -28,36 +29,13 @@
                     @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @*<select class="master-form-input">
-                            <option> MR. </option>
-                            <option> MRS. </option>
-                            <option> MS. </option>
-                        </select>*@
-                    @{
-                        List<SelectListItem> Title = new List<SelectListItem>();
-                        Title.Add(new SelectListItem
-                        {
-                            Text = "MR.",
-                            Value = "MR."
-                        });
-                        Title.Add(new SelectListItem
-                        {
-                            Text = "MRS.",
-                            Value = "MRS.",
-                            Selected = true
-                        });
-                        Title.Add(new SelectListItem
-                        {
-                            Text = "MS.",
-                            Value = "MS."
-                        });
+                    @{ 
+                        var title = (SelectList)ViewBag.TitleDisplay;
                     }
-
-                    @Html.DropDownListFor(model => model.Title, Title, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
-
-
-                </div>
-            </div>
+                        @Html.DropDownList("Title", title, new { @class = "master-form-input" })
+                    
+                </div >
+            </div >
             <div class="col-md-12 form-input-padding">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.Middle_Name, htmlAttributes: new { @class = "control-label" })
@@ -86,22 +64,7 @@
                     @Html.LabelFor(model => model.Marital_Status, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @*<div class="col-md-6" style="margin-left: -20px;">
-                            <div class="col-md-1">
-                                <input type="checkbox" class="input-checkbox">
-                            </div>
-                            <div class="col-md-8 m-t-3">
-                                <span> Family</span>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="col-md-1">
-                                <input type="checkbox" class="input-checkbox">
-                            </div>
-                            <div class="col-md-8 m-t-3">
-                                <span> Single</span>
-                            </div>
-                        </div>*@
+
                     @Html.RadioButtonFor(model => model.Marital_Status, "Family") Family
                     @Html.RadioButtonFor(model => model.Marital_Status, "Single") Single
                 </div>
@@ -122,32 +85,11 @@
                     @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @{
-                        List<SelectListItem> City = new List<SelectListItem>();
-                        City.Add(new SelectListItem
-                        {
-                            Text = "Manly",
-                            Value = "Manly"
-                        });
-                        City.Add(new SelectListItem
-                        {
-                            Text = "Chennai",
-                            Value = "Chennai",
-                            Selected = true
-                        });
-                        City.Add(new SelectListItem
-                        {
-                            Text = "London",
-                            Value = "London"
-                        });
-                    }
-
-                    @Html.DropDownListFor(model => model.City, City, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
+                  
+                    @Html.DropDownList("City",null,htmlAttributes: new { @class = "master-form-input" })
 
 
-                    @*<select class="master-form-input">
-                            <option> Manly</option>
-                        </select>*@
+
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -188,31 +130,11 @@
                     @Html.LabelFor(model => model.Nationality, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @{
-                        List<SelectListItem> Nationality = new List<SelectListItem>();
-                        Nationality.Add(new SelectListItem
-                        {
-                            Text = "Australia",
-                            Value = "Australia"
-                        });
-                        Nationality.Add(new SelectListItem
-                        {
-                            Text = "India",
-                            Value = "India",
-                            Selected = true
-                        });
-                        Nationality.Add(new SelectListItem
-                        {
-                            Text = "England",
-                            Value = "England"
-                        });
-                    }
+                   
 
-                    @Html.DropDownListFor(model => model.Nationality, Nationality, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
+                    @Html.DropDownList("Nationality",null, htmlAttributes: new { @class = "master-form-input" })
 
-                    @*<select class="master-form-input">
-                            <option> Australia</option>
-                        </select>*@
+                    
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -295,7 +217,9 @@
                     @Html.LabelFor(model => model.Tenant_Id, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Tenant_Id, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.HiddenFor(model => model.Tenant_Id)
+                    <input type="text" value="@ViewBag.Tenant_Id" class="master-form-input" />
+                    @*@Html.EditorFor(model => model.Tenant_Id, new { htmlAttributes = new { @class = "master-form-input" } })*@
                     @Html.ValidationMessageFor(model => model.Tenant_Id, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -331,26 +255,26 @@
                             <option> Doctor </option>
                         </select>*@
                     @{
-                        List<SelectListItem> Profession = new List<SelectListItem>();
-                        Profession.Add(new SelectListItem
-                        {
-                            Text = "Farmer ",
-                            Value = "Farmer "
-                        });
-                        Profession.Add(new SelectListItem
-                        {
-                            Text = "Engineer",
-                            Value = "Engineer",
-                            Selected = true
-                        });
-                        Profession.Add(new SelectListItem
-                        {
-                            Text = "Doctor",
-                            Value = "Doctor"
-                        });
+//List<SelectListItem> Profession = new List<SelectListItem>();
+//Profession.Add(new SelectListItem
+//{
+//    Text = "Farmer ",
+//    Value = "Farmer "
+//});
+//Profession.Add(new SelectListItem
+//{
+//    Text = "Engineer",
+//    Value = "Engineer",
+//    Selected = true
+//});
+//Profession.Add(new SelectListItem
+//{
+//    Text = "Doctor",
+//    Value = "Doctor"
+//});
                     }
 
-                    @Html.DropDownListFor(model => model.Profession, Profession, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
+                    @Html.DropDownList("Profession",null, htmlAttributes: new { @class = "master-form-input" })
 
 
                 </div>
@@ -555,6 +479,7 @@
             </div>
             <div class="col-md-4">
                 <button class="btn master-form-btn" type="submit">Submit</button>
+                <div class="col-md-1 pull-left"><br /><br /> <img src="~/Images/loader.gif" class="fa hide" id="img-add-or-update-loader" /></div>
             </div>
         </div>
 
@@ -587,23 +512,58 @@
         return false;
     });
 
-    //$("#addbutton").click(function () {
-    //    var DocumentName = $("#DocumentName").val();
-    //    var DocumentDet = $("#DocumentDet").val();
-    //    alert(DocumentName + DocumentDet);
-    //    $("#DocumentTable > tbody:last-child").append("<tr> <td>" + DocumentName + "</td> <td>" + DocumentDet +
-    //        "</td> <td><input type='button' value='X' onclick='myfunc(event);' class='removebutton' /></td></tr>");
+    $("form#TenantIndividualAddOrUpdate").off("submit").on("submit", function (e) {
+        e.preventDefault();
+        $("#img-add-or-update-loader").removeClass("hide");
+        try {
+            var form = $("form#TenantIndividualAddOrUpdate");
+            $.ajax(
+                {
+                    url: "../MasterIndividual/Create",
+                    // dataType: "jsonp",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        if (response.Errors ==null||response.Errors =="") {
+                            GetTenantIndividual();
+                        }
+                        else {
+                            alert(response.Errors);
+                        }
 
-    //});
-    //function myfunc(e)
-    //{
-    //    alert(1);
-    //    $(this).closest('tr').remove();
-    //}
-    //$(".removebutton").click(function () { alert(1); $(this).closest('tr').remove(); });
-    //$(document).on('click', 'button.removebutton', function () {
-    //    alert("aa");
-    //    $(this).closest('tr').remove();
-    //    return false;
-    //});
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        $("#img-add-or-update-loader").addClass("hide");
+                    }
+
+                });
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+
+    });
+
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
 </script>

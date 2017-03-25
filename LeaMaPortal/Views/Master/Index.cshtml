@@ -33,7 +33,7 @@
                 break;
             case 9:
                 GetPropertyMaster();
-    break;
+                break;
             case 6:
                 GetRegion();
                 break;
@@ -66,6 +66,7 @@
        });
     }
     function GetCountry() {
+        $("#img-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $.ajax(
         {
@@ -81,9 +82,10 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
+        $("#img-loader").removeClass("hide");
         $.ajax(
         {
             url: "../Country/Index",
@@ -98,12 +100,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
     }
     function GetTenantCompany() {
-
+        $("#img-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $.ajax(
         {
@@ -119,9 +121,10 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
+        $("#img-loader").removeClass("hide");
         $.ajax(
         {
             url: "../TenantCompany/Index",
@@ -136,11 +139,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
     }
     function GetTenantIndividual() {
+        $("#img-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $.ajax(
         {
@@ -156,14 +160,34 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
+        $("#img-loader").removeClass("hide");
+        $("#ContainerList").empty();
+        $.ajax(
+       {
+           url: "../MasterIndividual/Index",
+           type: "Get",
+           data: {},
+           contentType: "application/json",
+           processData: false,
+           success: function (html) {
+               $("#ContainerList").html(html);
+           },
+           error: function (jqXhr, textStatus, errorThrown) {
+               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+           },
+           complete: function () {
+               $("#img-loader").addClass("hide");
+           }
+       });
     }
 </script>
 <!-- Region Section -->
 <script>
     function GetRegion() {
+        $("#img-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $.ajax(
         {
@@ -179,9 +203,10 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
+        $("#img-loader").removeClass("hide");
         $.ajax(
         {
             url: "../Region/Index",
@@ -196,13 +221,14 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
     }
 
     function GetPropertyMaster()
     {
+
         $("#ContainerAddOrUpdate").empty();
         //$.ajax(
         //{
