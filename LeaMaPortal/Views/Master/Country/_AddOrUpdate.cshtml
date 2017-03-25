@@ -1,0 +1,81 @@
+﻿@model LeaMaPortal.Models.CountryViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Country" }))
+{
+    @Html.HiddenFor(m => m.Id, new { @id = "CountryId" })
+    <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
+        <div class="row">
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "CountryName" } })
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="leama-btn">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    //Add or update
+    $("form#Country").off("submit").on("submit", function (e) {
+        e.preventDefault();
+        // $("#icon-success").addClass("hide");
+        //$("#VerifyIdDetailsLoader").removeClass("hide");
+        try {
+            var form = $("form#Country");
+
+            // var form = $('"form#VerifyId')[0]; // You need to use standart javascript object here
+            //var formData = new FormData(form);
+            $.ajax(
+                {
+                    url: "../Country/AddOrUpdate",
+                    // dataType: "jsonp",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        GetCountry();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+
+</script>
