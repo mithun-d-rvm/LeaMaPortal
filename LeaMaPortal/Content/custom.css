@@ -17,3 +17,16 @@
 .inner-block{
     min-height: 830px;
 }
+#menu li a:active{
+    background-color: #eb9a15;
+}
+
+/* Bootstrap styles */
+
+input[type="button"]:focus, input[type="button"]:active, button:focus
+{
+    outline:none !important;
+}
+.textarea.form-control{
+    resize:none !important;
+}

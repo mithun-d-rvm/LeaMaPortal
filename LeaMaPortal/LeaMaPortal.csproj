@@ -173,6 +173,8 @@
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\MasterIndividualController.cs" />
     <Compile Include="Controllers\PropertyMasterController.cs" />
+    <Compile Include="Controllers\TcaController.cs" />
+    <Compile Include="Controllers\UserCreationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -400,6 +402,22 @@
     <Content Include="Views\PropertyMaster\Index.cshtml" />
     <Content Include="Views\PropertyMaster\_FecilityDetails.cshtml" />
     <Content Include="Views\PropertyMaster\_UtilityDetails.cshtml" />
+    <Content Include="Views\Tca\Index.cshtml" />
+    <Content Include="Views\Tca\_AgreementPdc.cshtml" />
+    <Content Include="Views\Tca\_AgreementPdcDetails.cshtml" />
+    <Content Include="Views\Tca\Closure\_ClosureDetails.cshtml" />
+    <Content Include="Views\Tca\_AgreementDocument.cshtml" />
+    <Content Include="Views\Tca\_AgreementDocumentDetails.cshtml" />
+    <Content Include="Views\UserCreation\Index.cshtml" />
+    <Content Include="Views\Tca\_AgreementUtility.cshtml" />
+    <Content Include="Views\Tca\_AgreementUtilityDetails.cshtml" />
+    <Content Include="Views\Tca\_AgreementUnitDetails.cshtml" />
+    <Content Include="Views\Tca\_AgreementUnit.cshtml" />
+    <Content Include="Views\Tca\_AgreementCheckList.cshtml" />
+    <Content Include="Views\Tca\_AgreementCheckListDetails.cshtml" />
+    <Content Include="Views\Tca\Renewal\_RenewalDetails.cshtml" />
+    <Content Include="Views\Tca\Status\_StatusDetails.cshtml" />
+    <Content Include="Views\Tca\Agreement\_AgreementForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
