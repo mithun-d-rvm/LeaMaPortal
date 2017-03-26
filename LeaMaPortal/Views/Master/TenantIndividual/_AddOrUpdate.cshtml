@@ -10,7 +10,7 @@
 @*<h2>Create</h2>*@
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "TenantIndividual" }))
 {
     @Html.AntiForgeryToken()
 
@@ -606,4 +606,58 @@
     //    $(this).closest('tr').remove();
     //    return false;
     //});
+
+    <script>
+    //Add or update
+    $("form#Region").off("submit").on("submit", function (e) {
+        e.preventDefault();
+        // $("#icon-success").addClass("hide");
+        //$("#VerifyIdDetailsLoader").removeClass("hide");
+        try {
+            var form = $("form#Region");
+
+            // var form = $('"form#VerifyId')[0]; // You need to use standart javascript object here
+            //var formData = new FormData(form);
+            $.ajax(
+                {
+                    url: "../Region/AddOrUpdate",
+                    // dataType: "jsonp",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        GetRegion();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+</script>
 </script>
