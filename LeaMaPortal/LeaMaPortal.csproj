@@ -262,6 +262,7 @@
     <Compile Include="Models\EmailTemplateViewModel.cs" />
     <Compile Include="Models\MasterViewModel.cs" />
     <Compile Include="Models\PropertyTypeViewModel.cs" />
+    <Compile Include="Models\PropertyViewModel.cs" />
     <Compile Include="Models\SlabViewModel.cs" />
     <Compile Include="PagingProperty.cs" />
     <Compile Include="Models\FacilityViewModel.cs" />

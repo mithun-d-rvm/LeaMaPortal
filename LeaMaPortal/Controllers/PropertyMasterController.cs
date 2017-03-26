@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LeaMaPortal.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,7 +14,11 @@ namespace LeaMaPortal.Controllers
         {
             return PartialView("../Master/PropertyMaster/Index");
         }
-
+        [HttpGet]
+        public PartialViewResult AddOrUpdate()
+        {
+            return PartialView("../Master/PropertyMaster/_AddOrUpdate", new PropertyViewModel());
+        }
         // GET: PropertyMaster/Details/5
         public ActionResult Details(int id)
         {
