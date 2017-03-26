@@ -1,6 +1,7 @@
-﻿@*@model LeaMaPortal.Models.RegionViewModel*@
+﻿
+@*@model LeaMaPortal.Models.UtilityViewModel*@
 @using MvcPaging
-@model IPagedList<LeaMaPortal.Models.RegionViewModel>
+@model IPagedList<LeaMaPortal.Models.UtilityViewModel>
 @{
     Layout = null;
 }
@@ -32,19 +33,19 @@
 
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
-                    <div class="divTableCell ">Region Name</div>
-                    <div class="divTableCell">Country Name</div>
+                    <div class="divTableCell ">Utility Id</div>
+                    <div class="divTableCell">Utility Name</div>
                     <div class="divTableCell">Action</div>
 
                 </div>
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
-                        <div class="divTableCell">@item.Region_Name</div>
-                        <div class="divTableCell">@item.Country</div>
+                        <div class="divTableCell">@item.Utility_id</div>
+                        <div class="divTableCell">@item.Utility_Name</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit region-edit", title = "Edit", @data_id = @item.Region_Name + '-' + @item.Country })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash region-delete", @style = "color:red", @title = "Delete", @data_id = @item.Region_Name + '-' + @item.Country })
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit utility-edit", title = "Edit", @data_id =  @item.Utility_id + '-' + @item.Utility_Name + '-' + @item.Id })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash utility-delete", @style = "color:red", @title = "Delete", @data_id = @item.Utility_id + '-' + @item.Utility_Name + '-' + @item.Id })
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
                     </div>
@@ -80,24 +81,24 @@
                     var defaultPageSize = $("#defaultPageSize").val();
                     var search = $("#Search").val();
                     //alert(page);
-                    getRegionList(search,page,defaultPageSize)
+                    getUtilityList(search,page,defaultPageSize)
                 });
                 $("#defaultPageSize").change(function () {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getRegionList(search, 1, defaultPageSize)
+                    getUtilityList(search, 1, defaultPageSize)
                 });
                 $("#btn-search").click(function (e) {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getRegionList(search, 1, defaultPageSize)
+                    getUtilityList(search, 1, defaultPageSize)
                 });
 
-                function getRegionList(search,page,defaultPageSize)
+                function getUtilityList(search, page, defaultPageSize)
                 {
                     $.ajax(
                        {
-                           url: "../Region/Index",
+                           url: "../Utility/Index",
                            type: "Get",
                            data: { Search: search, page: page, defaultPageSize: defaultPageSize },
                            success: function (html) {
@@ -135,23 +136,22 @@
 <script>
     //Edit get
 
-    $(".region-edit").click(function (e) {
+    $(".utility-edit").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
         var param = id.split('-');
         $.ajax(
             {
-                url: "../Region/Edit",
+                url: "../Utility/Edit",
                 type: "Get",
-                data: { RegionName: param[0], CountryName : param[1] },
+                data: { Id : param[2], UtilityId: param[0], UtilityName : param[1] },
                 success: function (result) {
-                    //var data=jQuery.parseJSON(result);
                     if (result.Errors == undefined || result.Errors == "") {
-                        $("#RegionId").val(result.Id);
-                        $("#Country").val(result.Country);
-                        $("#RegionName").val(result.Region_Name);
-                        $("#CountryPK").val(result.Country);
-                        $("#RegionNamePK").val(result.Region_Name);
+                        $("#UtilityId").val(result.Id);
+                        $("#Utility_Id").val(result.Utility_id);
+                        $("#UtilityName").val(result.Utility_Name);
+                        //$("#Utility_IdKey").val(result.Utility_id);
+                        //$("#UtilityNameKey").val(result.Utility_Name);
                     }
                     else {
                         alert(data.Errors);
@@ -161,13 +161,12 @@
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
-                    // $("#").addClass("hide");
                 }
             });
     });
 
     // delete
-    $(".region-delete").click(function (e) {
+    $(".utility-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
         var param = id.split('-');
@@ -178,11 +177,11 @@
         else {
             $.ajax(
                 {
-                    url: "../Region/Delete",
+                    url: "../Utility/Delete",
                     type: "Get",
-                    data: { RegionName: param[0], CountryName: param[1] },
+                    data: { UtilityId: param[0], UtilityName: param[1] },
                     success: function (response) {
-                        GetRegion();
+                        GetUtility();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");

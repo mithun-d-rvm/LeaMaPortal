@@ -470,6 +470,14 @@
     <Content Include="Views\Master\TenantIndividual\Create.cshtml" />
     <Content Include="Views\Master\TenantIndividual\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\PropertyMaster\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\Utility\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\Utility\_List.cshtml" />
+    <Content Include="Views\Master\Facility\_List.cshtml" />
+    <Content Include="Views\Master\Facility\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\CheckList\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\CheckList\_List.cshtml" />
+    <Content Include="Views\Master\EmailTemplate\_List.cshtml" />
+    <Content Include="Views\Master\EmailTemplate\_AddOrUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
