@@ -7,6 +7,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.Models;
+using MvcPaging;
+using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
 namespace LeaMaPortal.Controllers
 {
@@ -15,109 +19,166 @@ namespace LeaMaPortal.Controllers
         private Entities db = new Entities();
 
         // GET: EmailTemplate
-        public ActionResult Index()
+        public PartialViewResult Index(string Search, int? page, int? defaultPageSize)
         {
-         
-            return View();
-        }
-
-        // GET: EmailTemplate/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewData["Search"] = Search;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+                int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
+                ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, defaultPageSize);
+                IList<EmailTemplateViewModel> list;
+                if (string.IsNullOrWhiteSpace(Search))
+                {
+                    list = db.tbl_emailtemplate.Where(x => x.Delmark != "*").OrderBy(x => x.TemplateName).Select(x => new EmailTemplateViewModel()
+                    {
+                        Id = x.Id,
+                        TemplateID = x.TemplateID,
+                        TemplateName = x.TemplateName,
+                        Body = x.Body,
+                        BodyText = x.Bodytext,
+                        Subject = x.Subject,
+                        SubjectParameter = x.SubjectParameter
+                    }).ToPagedList(currentPageIndex, PageSize);
+                }
+                else
+                {
+                    list = db.tbl_emailtemplate.Where(x => x.Delmark != "*"
+                                    && x.TemplateName.ToLower().Contains(Search.ToLower()))
+                                  .OrderBy(x => x.TemplateName).Select(x => new EmailTemplateViewModel()
+                                  {
+                                      Id = x.Id,
+                                      TemplateID = x.TemplateID,
+                                      TemplateName = x.TemplateName,
+                                      Body = x.Body,
+                                      BodyText = x.Bodytext,
+                                      Subject = x.Subject,
+                                      SubjectParameter = x.SubjectParameter
+                                  }).ToPagedList(currentPageIndex, PageSize);
+                }
+
+                return PartialView("../Master/EmailTemplate/_List", list);
             }
-            tbl_agreement_closure_utility tbl_agreement_closure_utility = db.tbl_agreement_closure_utility.Find(id);
-            if (tbl_agreement_closure_utility == null)
+            catch (Exception e)
             {
-                return HttpNotFound();
+                throw;
             }
-            return View(tbl_agreement_closure_utility);
         }
 
-        // GET: EmailTemplate/Create
-        public ActionResult Create()
+        [HttpGet]
+        public PartialViewResult AddOrUpdate()
         {
-            ViewBag.Agreement_No = new SelectList(db.tbl_agreement_closure, "Agreement_No", "Advance_Security_Amount_Paid");
-            return View();
+            EmailTemplateViewModel model = new EmailTemplateViewModel();
+            return PartialView("../Master/EmailTemplate/_AddOrUpdate", model);
         }
-
-        // POST: EmailTemplate/Create
+        // POST: EmailTemplate/AddOrUpadate
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Agreement_No,Utility_id,Utility_Name,Payable,Amount_Type,Amount,Delmark")] tbl_agreement_closure_utility tbl_agreement_closure_utility)
+        public async Task<ActionResult> AddOrUpdate([Bind(Include = "TemplateID,TemplateName,Id,Body,BodyText, Subject,SubjectParameter")] EmailTemplateViewModel model)
         {
-            if (ModelState.IsValid)
+            MessageResult result = new MessageResult();
+            try
             {
-                db.tbl_agreement_closure_utility.Add(tbl_agreement_closure_utility);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    MySqlParameter pa = new MySqlParameter();
+                    string PFlag = "INSERT";
 
-            ViewBag.Agreement_No = new SelectList(db.tbl_agreement_closure, "Agreement_No", "Advance_Security_Amount_Paid", tbl_agreement_closure_utility.Agreement_No);
-            return View(tbl_agreement_closure_utility);
+                    if (model.Id == 0)
+                    {
+
+                    }
+                    else
+                    {
+                        PFlag = "UPDATE";
+                    }
+                    object[] param = { new MySqlParameter("@PFlag", PFlag),
+                                           new MySqlParameter("@PId", model.Id),
+                                           new MySqlParameter("@PTemplateID",model.TemplateID),
+                                            new MySqlParameter("@PTemplateName",model.TemplateName),
+                                            new MySqlParameter("@PSubject",model.Subject),
+                                            new MySqlParameter("@PBodytext",model.BodyText),
+                                            new MySqlParameter("@PSubjectParameter",model.SubjectParameter),
+                                            new MySqlParameter("@PBodyParameter",""),
+                                            new MySqlParameter("@PInActive",false),
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                         };
+                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Emailtemplate_All(@PFlag,@PId,@PTemplateID,@PTemplateName,@PSubject,@PBodytext,@PSubjectParameter,@PBodyParameter,@PInActive,@PCreateduser)", param).ToListAsync();
+                    await db.SaveChangesAsync();
+
+                }
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        // GET: EmailTemplate/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int Id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (Id == 0)
+                {
+                    return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
+                }
+                tbl_emailtemplate tbl_email = await db.tbl_emailtemplate.FindAsync(Id);
+                if (tbl_email == null)
+                {
+                    return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
+                }
+                EmailTemplateViewModel model = new EmailTemplateViewModel()
+                {
+                    Id = tbl_email.Id,
+                    TemplateID = tbl_email.TemplateID,
+                    TemplateName = tbl_email.TemplateName,
+                    Body = tbl_email.Body,
+                    BodyText = tbl_email.Bodytext,
+                    Subject = tbl_email.Subject,
+                    SubjectParameter = tbl_email.SubjectParameter
+                };
+                return Json(model, JsonRequestBehavior.AllowGet);
             }
-            tbl_agreement_closure_utility tbl_agreement_closure_utility = db.tbl_agreement_closure_utility.Find(id);
-            if (tbl_agreement_closure_utility == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return Json(new MessageResult() { Errors = ex.Message }, JsonRequestBehavior.AllowGet);
             }
-            ViewBag.Agreement_No = new SelectList(db.tbl_agreement_closure, "Agreement_No", "Advance_Security_Amount_Paid", tbl_agreement_closure_utility.Agreement_No);
-            return View(tbl_agreement_closure_utility);
         }
 
-        // POST: EmailTemplate/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Agreement_No,Utility_id,Utility_Name,Payable,Amount_Type,Amount,Delmark")] tbl_agreement_closure_utility tbl_agreement_closure_utility)
+        public async Task<ActionResult> Delete(int Id)
         {
-            if (ModelState.IsValid)
+            MessageResult result = new MessageResult();
+            try
             {
-                db.Entry(tbl_agreement_closure_utility).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (Id == 0)
+                {
+                    return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
+                }
+                tbl_emailtemplate tbl_email = await db.tbl_emailtemplate.FindAsync(Id);
+                if (tbl_email == null)
+                {
+                    return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
+                }
+                object[] param = { new MySqlParameter("@PFlag", "DELETE"),
+                                           new MySqlParameter("@PId", tbl_email.Id),
+                                           new MySqlParameter("@PTemplateID",tbl_email.TemplateID),
+                                            new MySqlParameter("@PTemplateName",tbl_email.TemplateName),
+                                            new MySqlParameter("@PSubject",tbl_email.Subject),
+                                            new MySqlParameter("@PBodytext",tbl_email.Bodytext),
+                                            new MySqlParameter("@PSubjectParameter",tbl_email.SubjectParameter),
+                                            new MySqlParameter("@PBodyParameter",tbl_email.BodyParameter),
+                                            new MySqlParameter("@PInActive",true),
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                         };
+                var spResult = await db.Database.SqlQuery<object>("Usp_Emailtemplate_All(@PFlag,@PId,@PTemplateID,@PTemplateName,@PSubject,@PBodytext,@PSubjectParameter,@PBodyParameter,@PInActive,@PCreateduser)", param).ToListAsync();
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
-            ViewBag.Agreement_No = new SelectList(db.tbl_agreement_closure, "Agreement_No", "Advance_Security_Amount_Paid", tbl_agreement_closure_utility.Agreement_No);
-            return View(tbl_agreement_closure_utility);
-        }
-
-        // GET: EmailTemplate/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
+            catch (Exception ex)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Json(new MessageResult() { Errors = ex.Message }, JsonRequestBehavior.AllowGet);
             }
-            tbl_agreement_closure_utility tbl_agreement_closure_utility = db.tbl_agreement_closure_utility.Find(id);
-            if (tbl_agreement_closure_utility == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbl_agreement_closure_utility);
-        }
-
-        // POST: EmailTemplate/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbl_agreement_closure_utility tbl_agreement_closure_utility = db.tbl_agreement_closure_utility.Find(id);
-            db.tbl_agreement_closure_utility.Remove(tbl_agreement_closure_utility);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
