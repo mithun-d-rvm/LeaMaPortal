@@ -23,11 +23,13 @@
                     </a>
                 </div>
             </li>*@
-            <li id="menu-home"><a href="index.html">
-                                   <i class="fa fa-bell" style="color:white;"></i>
-                @*<i class="fa fa-tachometer"></i>*@
-                @*<img src="~/Images/PropertyProf.png" />*@ <br />
-                <div class="p-t-17">NOTIFICATION</div></a>
+            <li id="menu-home">
+                <a href="index.html">
+                    <i class="fa fa-bell" style="color:white;"></i>
+                    @*<i class="fa fa-tachometer"></i>*@
+                    @*<img src="~/Images/PropertyProf.png" />*@ <br />
+                    <div class="p-t-17">NOTIFICATION</div>
+                </a>
             </li>
             <li id="menu-home">
                 <a href="index.html">
@@ -40,21 +42,34 @@
                 <a href="index.html">
                     @*<i class="fa fa-tachometer"></i>*@
                     <img src="~/Images/invoice.png" /><br />
-                    <div class="p-t-17">INVOICING</div>
+                    <div class="p-t-17">
+                        
+                      @Html.ActionLink("INVOICING", "Index", "Invoice", new { area = "" }, new { @class = "fmc-a" })
+            
+
+
+</div>
+                    
+
                 </a>
             </li>
             <li id="menu-home">
                 <a href="index.html">
                     @*<i class="fa fa-tachometer"></i>*@
                     <img src="~/Images/Payments.png" /><br />
-                    <div class="p-t-17">PAYMENTS</div>
+                   <div class="p-t-17">@Html.ActionLink("PAYMENTS", "Index", "Payment", new { area = "" }, new { @class = "fmc-a" })
+                   
+</div>
                 </a>
             </li>
             <li id="menu-home">
                 <a href="index.html">
                     @*<i class="fa fa-tachometer"></i>*@
                     <img src="~/Images/Reciepts.png" /><br />
-                    <div class="p-t-17">RECEIPTS</div>
+                    <div class="p-t-17">
+                        @Html.ActionLink("RECEIPTS", "Index", "Receipts", new { area = "" }, new { @class = "fmc-a" })
+
+                </div>
                 </a>
             </li>
             <li id="menu-home">
