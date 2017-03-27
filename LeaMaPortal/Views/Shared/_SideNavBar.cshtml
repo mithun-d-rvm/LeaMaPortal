@@ -25,47 +25,38 @@
             </li>*@
             <li id="menu-home">
                 <a href="index.html">
-                    <i class="fa fa-bell" style="color:white;"></i> <br />
+                    <i class="fa fa-bell" style="color:white;"></i>
                     <div class="p-t-17">NOTIFICATION</div>
                 </a>
             </li>
             <li id="menu-home">
                 <a href="~/Tca/Index">
-                    <img src="~/Images/PropertyProf.png" /> <br />
+                    <img src="~/Images/PropertyProf.png" /><br />
                     <div class="p-t-17">TCA</div>
                 </a>
             </li>
             <li id="menu-home">
-                <a href="index.html">
+                <a href="~/Invoice/Index">
                     <img src="~/Images/invoice.png" /><br />
                     <div class="p-t-17">
-                        
-                      @Html.ActionLink("INVOICING", "Index", "Invoice", new { area = "" }, new { @class = "fmc-a" })
-            
-
-
-</div>
-                    
-
+                      INVOICE
+                    </div>
                 </a>
             </li>            
             <li id="menu-home">
-                <a href="index.html">
-                    @*<i class="fa fa-tachometer"></i>*@
+                <a href="~/Payment/Index">
                     <img src="~/Images/Payments.png" /><br />
-                   <div class="p-t-17">@Html.ActionLink("PAYMENTS", "Index", "Payment", new { area = "" }, new { @class = "fmc-a" })
-                   
-</div>
+                    <div class="p-t-17">
+                        PAYMENTS
+                    </div>
                 </a>
             </li>
             <li id="menu-home">
-                <a href="index.html">
-                    @*<i class="fa fa-tachometer"></i>*@
+                <a href="~/Receipts/Index">
                     <img src="~/Images/Reciepts.png" /><br />
                     <div class="p-t-17">
-                        @Html.ActionLink("RECEIPTS", "Index", "Receipts", new { area = "" }, new { @class = "fmc-a" })
-
-                </div>
+                        RECEIPTS
+                    </div>
                 </a>
             </li>
             @*<li id="menu-home">
