@@ -1,4 +1,5 @@
-﻿@model LeaMaPortal.Models.RegionViewModel
+﻿
+@model LeaMaPortal.Models.CheckListViewModel
 
 @{
     Layout = null;
@@ -6,27 +7,25 @@
 
 <!DOCTYPE html>
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Region" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "CheckList" }))
 {
-    @Html.HiddenFor(m => m.Id, new { @id = "RegionId" })
-    @Html.HiddenFor(m => m.Region_Name_PK, new { @id = "RegionNamePK" })
-    @Html.HiddenFor(m => m.Country_PK, new { @id = "CountryPK" })
+    @Html.HiddenFor(m => m.Id, new { @id = "CheckListId" })
     <div class="col-md-12 leama-fieldset leama-header-top">
         <div class="row">
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-2 pull-left">
-                    @Html.LabelFor(model => model.Region_Name, htmlAttributes: new { @class = "leama-field-name" })
+                    @Html.LabelFor(model => model.Checklist_id, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Region_Name, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "RegionName" } })
+                    @Html.EditorFor(model => model.Checklist_id, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "CheckList_Id" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-2 pull-left">
-                    @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "leama-field-name" })
+                    @Html.LabelFor(model => model.Checklist_Name, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
-                <div class="col-sm-4 ">
-                    @Html.DropDownList("Country", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Country" })
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Checklist_Name, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "CheckListName" } })
                 </div>
                 @*<div class="col-md-4">
                         <button type="submit" class="leama-btn">Submit</button>
@@ -42,31 +41,25 @@
 }
 <script>
     //Add or update
-    $("form#Region").off("submit").on("submit", function (e) {
+    $("form#CheckList").off("submit").on("submit", function (e) {
         e.preventDefault();
-        // $("#icon-success").addClass("hide");
-        //$("#VerifyIdDetailsLoader").removeClass("hide");
         try {
-            var form = $("form#Region");
-
-            // var form = $('"form#VerifyId')[0]; // You need to use standart javascript object here
-            //var formData = new FormData(form);
+            var form = $("form#CheckList");
             $.ajax(
                 {
-                    url: "../Region/AddOrUpdate",
+                    url: "../CheckList/AddOrUpdate",
                     // dataType: "jsonp",
                     method: "POST",
-                    data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
+                    data: JSON.stringify($(form).serializeObject()), 
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
-                        GetRegion();
+                        GetCheckList();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                     },
                     complete: function () {
-                        // $("#").addClass("hide");
                     }
 
                 });
