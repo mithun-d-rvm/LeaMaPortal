@@ -165,7 +165,7 @@ a:hover {
 #menu li a:hover {
   /*color:#fdbb30;*/
   transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
-  background-color:#6d32a5;
+  background-color:#eb9a15;
 }
 #menu li.active > a {
   background-color: #2b303a;

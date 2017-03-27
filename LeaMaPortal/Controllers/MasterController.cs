@@ -21,6 +21,7 @@ namespace LeaMaPortal.Controllers
             try
             {
                 MasterViewModel model = new MasterViewModel();
+                ViewBag.FormMasterSelected = Common.DefaultMaster;
                 ViewBag.FormMasterId = new SelectList( db.tbl_formmaster.OrderBy(x => x.MenuName), "Id", "MenuName");
                 return View(model);
             }
@@ -31,11 +32,11 @@ namespace LeaMaPortal.Controllers
            
         }
 
-        public PartialViewResult Filter()
+        public PartialViewResult Filter(int selected=1)
         {
             try
             {
-                ViewBag.FormMasterId = new SelectList(db.tbl_formmaster.OrderBy(x => x.MenuName), "Id", "MenuName",5);
+                ViewBag.FormMasterId = new SelectList(db.tbl_formmaster.OrderBy(x => x.MenuName), "Id", "MenuName", selected);
                 return PartialView("_Filter");
             }
             catch

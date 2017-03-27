@@ -9,7 +9,7 @@ namespace LeaMaPortal.Models
 {
     public class TenantIndividualViewModel
     {
-
+       
         [Display(Name = "Tenant ID:")]
         public int Tenant_Id { get; set; }
         [StringLength(5)]
@@ -159,16 +159,48 @@ namespace LeaMaPortal.Models
         [StringLength(100)]
         public string Type { get; set; }
 
-        //public int? Accyear { get; set; }
-
-        //public DateTime? Createddatetime { get; set; }
-
         [StringLength(150)]
         public string Createduser { get; set; }
-
-        //[StringLength(1)]
-        //public string Delmark { get; set; }
+        
         public string tenantdocdetails { get; set; }
+        public List<TenantDocumentVM> TenantDocument { get; set; }
+        public List<tbl_tenant_individual_docVM> TenantDocumentList { get; set; }
+    }
 
+    public class TenantDocumentVM
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public HttpPostedFileBase File { get; set; }
+    }
+
+    public partial class tbl_tenant_individual_doc
+    {
+        public int id { get; set; }
+
+        public int? Tenant_Id { get; set; }
+
+        [StringLength(150)]
+        public string Doc_name { get; set; }
+
+        [StringLength(300)]
+        public string Doc_Path { get; set; }
+
+        [StringLength(1)]
+        public string Delmark { get; set; }
+    }
+    public partial class tbl_tenant_individual_docVM
+    {
+        public int id { get; set; }
+
+        public int? Tenant_Id { get; set; }
+
+        [StringLength(150)]
+        public string Doc_name { get; set; }
+
+        [StringLength(300)]
+        public string Doc_Path { get; set; }
+
+     
     }
 }

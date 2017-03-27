@@ -9,6 +9,8 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Region" }))
 {
     @Html.HiddenFor(m => m.Id, new { @id = "RegionId" })
+    @Html.HiddenFor(m => m.Region_Name_PK, new { @id = "RegionNamePK" })
+    @Html.HiddenFor(m => m.Country_PK, new { @id = "CountryPK" })
     <div class="col-md-12 leama-fieldset leama-header-top">
         <div class="row">
             <div class="col-md-12 leama-fieldset ">
