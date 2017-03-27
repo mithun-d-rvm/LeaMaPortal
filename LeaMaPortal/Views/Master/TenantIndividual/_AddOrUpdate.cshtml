@@ -10,7 +10,7 @@
 @*<h2>Create</h2>*@
 
 
-@using (Html.BeginForm(null, null, FormMethod.Post,new { @id = "TenantIndividualAddOrUpdate" }))
+@using (Html.BeginForm("Create","MasterIndividual", FormMethod.Post,new { @id = "TenantIndividualAddOrUpdate", @enctype = "multipart/form-data" }))
 
 {
     @*@Html.AntiForgeryToken()*@
@@ -29,10 +29,9 @@
                     @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @{ 
-                        var title = (SelectList)ViewBag.TitleDisplay;
-                    }
-                        @Html.DropDownList("Title", title, new { @class = "master-form-input" })
+                   
+                        @Html.HiddenFor(model => model.Title)
+                        @Html.DropDownList("TitleDisplay",null, new { @class = "master-form-input" })
                     
                 </div >
             </div >
@@ -249,34 +248,7 @@
                     @Html.LabelFor(model => model.Profession, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @*<select class="master-form-input">
-                            <option> Farmer </option>
-                            <option> Engineer </option>
-                            <option> Doctor </option>
-                        </select>*@
-                    @{
-//List<SelectListItem> Profession = new List<SelectListItem>();
-//Profession.Add(new SelectListItem
-//{
-//    Text = "Farmer ",
-//    Value = "Farmer "
-//});
-//Profession.Add(new SelectListItem
-//{
-//    Text = "Engineer",
-//    Value = "Engineer",
-//    Selected = true
-//});
-//Profession.Add(new SelectListItem
-//{
-//    Text = "Doctor",
-//    Value = "Doctor"
-//});
-                    }
-
                     @Html.DropDownList("Profession",null, htmlAttributes: new { @class = "master-form-input" })
-
-
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -428,25 +400,6 @@
 
         </div>
         <div class="col-md-10 document-row" id="GridView">
-            @*<table>
-                    <tr>
-                        <td>
-                            <input type="text" id="DocumentName" name="DocumentName">
-                        </td>
-                        <td> </td>
-                        <td>
-                            <input type="text" id="DocumentDet" name="DocumentDet">
-                        </td>
-                        <td></td>
-                        <td><input id="addbutton" type="button" value="Add Row" /></td>
-
-                    </tr>
-                </table>
-                <table id="DocumentTable">
-                    <tbody>
-
-                    </tbody>
-                </table>*@
             <div class="col-md-12">
                 <div class="col-md-4 text-left">Content Name</div>
                 <div class="col-md-4 text-left">Content Det</div>
@@ -454,24 +407,50 @@
 
 
             </div>
-            <div class="clearfix"><br /><br /></div>
-            <table id="tblcontent" class="col-md-12">
-                <tr>
+            <div class="clearfix"><br /></div>
+                @if (Model.TenantDocumentList != null)
+                {
+                    <div class="col-md-12">
+                        <table class="col-md-12">
+                            @for (int i = 0; i < Model.TenantDocumentList.Count; i++)
+                        {
+                        <tr class="col-md-12">
+                            <td class="col-md-4 text-left">
+                                @Html.HiddenFor(m => m.TenantDocumentList[i].id)
+                                @Html.HiddenFor(m => m.TenantDocumentList[i].Doc_Path)
+                                @Html.HiddenFor(m => m.TenantDocumentList[i].Doc_name)
+                                @Model.TenantDocumentList[i].Doc_name
+                            </td>
+                            <td class="col-md-4 text-left"><a href="~/Documents/TenantIndividual/@Model.TenantDocumentList[i].Doc_Path" target="_blank">Download</a></td>
+                            <td class="col-md-4 text-left">
+                                <button type="button" class="removebutton" title="Remove this row">X </button>
+                            </td>
 
-                    <td class="col-md-4">
-                        <input type="text" id="txtTitle" name="txtTitle">
-                    </td>
-                    <td class="col-md-4">
-                        <input type="text" id="txtLink" name="txtLink">
-                    </td>
-                    <td class="col-md-4">
-                        <button type="button" class="removebutton" title="Remove this row">X</button>
-                    </td>
-                </tr>
+                        </tr>
+                        }
+                        </table>
+                    </div>
+                        <hr />
+                }
 
-            </table>
 
-        </div>
+                        <table id="tblcontent" class="col-md-12">
+                            <tr>
+
+                                <td class="col-md-4">
+                                    <input type="text" id="txtTitle" name="TenantDocument[0].Name">
+                                </td>
+                                <td class="col-md-4">
+                                    <input type="file" id="txtLink" name="TenantDocument[0].File">
+                                </td>
+                                <td class="col-md-4">
+                                    <button type="button" class="removebutton" title="Remove this row">X </button>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </div>
 
         <div class="col-md-12 form-input-padding">
             <div class="col-md-4">
@@ -490,20 +469,54 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 <script>
+   
     var i = 1;
 
     $("#addbutton").click(function () {
-        $("table tr:first").clone().find("input").each(function () {
-            $(this).val('').attr({
-                'id': function (_, id) {
-                    return id + i
-                },
-                'name': function (_, name) {
-                    return name + i
-                },
-                'value': ''
-            });
-        }).end().appendTo("table");
+        var j = 0;
+        $("table#tblcontent tr:first").clone().find("input").each(function () {
+            if (j == 0)
+            {
+                $(this).val('').attr({
+                    'id': function (_, id) {
+                        return id + i
+                    },
+                    'name': function (_, name) {
+                        //return name + i
+                        return 'TenantDocument[' + i + '].Name'
+                    },
+                    'value': ''
+                });
+            }
+            else if (j == 1)
+            {
+                $(this).val('').attr({
+                    'id': function (_, id) {
+                        return id + i
+                    },
+                    'name': function (_, name) {
+                        //return name + i
+                        return 'TenantDocument[' + i + '].File'
+                    },
+                    'value': ''
+                });
+            }
+            else
+            {
+                $(this).val('').attr({
+                    'id': function (_, id) {
+                        return id + i
+                    },
+                    'name': function (_, name) {
+                        return name + i
+                        //return 'doc[' + i + '].Filename'
+                    },
+                    'value': ''
+                });
+            }
+           
+            j++;
+        }).end().appendTo("#tblcontent");
         i++;
     });
 
@@ -511,10 +524,13 @@
         $(this).closest('tr').remove();
         return false;
     });
-
+    $("#TitleDisplay").on('change', function (e) {
+        $("#Title").val($("#TitleDisplay").val());
+    });
     $("form#TenantIndividualAddOrUpdate").off("submit").on("submit", function (e) {
-        e.preventDefault();
         $("#img-add-or-update-loader").removeClass("hide");
+        return;
+        e.preventDefault();
         try {
             var form = $("form#TenantIndividualAddOrUpdate");
             $.ajax(

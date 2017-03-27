@@ -58,7 +58,8 @@ namespace LeaMaPortal.Controllers
             try
             {
                 TenantIndividualViewModel model = new TenantIndividualViewModel();
-                ViewBag.TitleDisplay = new SelectList(Common.Title);
+                model.Title = Common.DefaultTitle;
+                ViewBag.TitleDisplay = new SelectList(Common.Title,Common.DefaultTitle);
                 //var region = .Select(x => x.Region_Name);
                 ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
                 //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
@@ -68,7 +69,7 @@ namespace LeaMaPortal.Controllers
                 ViewBag.Tenant_Id = tenant != null ? tenant.Tenant_Id + 1 : 1;
                 return PartialView("../Master/TenantIndividual/_AddOrUpdate", model);
             }
-            catch
+            catch(Exception e)
             {
                 throw;
             }
@@ -76,7 +77,7 @@ namespace LeaMaPortal.Controllers
 
         // POST: MasterIndividual/Create
         [HttpPost]
-        public async Task<JsonResult> Create(TenantIndividualViewModel model)
+        public async Task<ActionResult> Create(TenantIndividualViewModel model)
         {
             try
             {
@@ -89,7 +90,56 @@ namespace LeaMaPortal.Controllers
                     var tenant = db.tbl_tenant_individual.OrderByDescending(x => x.Tenant_Id).FirstOrDefault();
                     model.Tenant_Id = tenant != null ? tenant.Tenant_Id + 1 : 1;
                 }
-                
+                string tenantDoc = model.tenantdocdetails;
+                try
+                {
+                    if(model.TenantDocumentList!=null)
+                    {
+                        foreach (var item in model.TenantDocumentList)
+                        {
+                            if (string.IsNullOrWhiteSpace(tenantDoc))
+                            {
+                                tenantDoc = "(" + model.Tenant_Id + ",'" + item.Doc_name + "','" + item.Doc_Path + "')";
+                            }
+                            else
+                            {
+                                tenantDoc += ",(" + model.Tenant_Id + ",'" + item.Doc_name + "','" + item.Doc_Path + "')";
+                            }
+                        }
+                    }
+                    if(model.TenantDocument!=null)
+                    {
+                        foreach (var item in model.TenantDocument)
+                        {
+                            Guid guid = Guid.NewGuid();
+                            try
+                            {
+                                if (item.File != null)
+                                {
+                                    HttpPostedFileBase file = item.File; //Uploaded file
+                                    int fileSize = file.ContentLength;
+                                    string fileName = file.FileName;
+                                    string mimeType = file.ContentType;
+                                    //System.IO.Stream fileContent = file.InputStream;
+                                    fileName = guid + fileName;
+                                    //To save file, use SaveAs method
+                                    file.SaveAs(Server.MapPath("~/" + Common.TenantIndividualDocumentContainer) + fileName); //File will be saved in application root
+                                    if (string.IsNullOrWhiteSpace(tenantDoc))
+                                    {
+                                        tenantDoc = "(" + model.Tenant_Id + ",'" + item.Name + "','" + fileName + "')";
+                                    }
+                                    else
+                                    {
+                                        tenantDoc += ",(" + model.Tenant_Id + ",'" + item.Name + "','" + fileName + "')";
+                                    }
+                                }
+                            }
+                            catch { }
+                        }
+                    }
+                }
+                catch { }
+                model.tenantdocdetails = tenantDoc;
                 object[] param = Helper.GetMySqlParameters<TenantIndividualViewModel>(model, PFlag, user);
 
                 var _result = await db.Database.SqlQuery<object>(@"CALL Usp_Tenant_Individual_All(@PFlag,@PTenant_Id,@PTitle  ,@PFirst_Name  ,@PMiddle_Name  ,@PLast_Name  ,@PCompany_Educational   ,@PProfession  ,@PMarital_Status  ,@Paddress  ,@Paddress1  ,@PEmirate  ,@PCity  ,@PPostboxNo  ,@PEmail  ,@PMobile_Countrycode  ,@PMobile_Areacode  ,@PMobile_No  ,@PLandline_Countrycode  ,@PLandline_Areacode  ,@PLandline_No  ,@PFax_Countrycode  ,@PFax_Areacode  ,@PFax_No  ,@PNationality  ,@PEmiratesid  ,@PEmirate_issuedate  ,@PEmirate_expirydate  ,@PPassportno  
@@ -108,14 +158,17 @@ namespace LeaMaPortal.Controllers
                 ,@PCreateduser  
                 ,@Ptenantdocdetails 
                                     )", param).ToListAsync();
-
-                return Json(result, JsonRequestBehavior.AllowGet);
+                MasterViewModel mastermodel = new MasterViewModel();
+                ViewBag.FormMasterSelected = 11;
+                ViewBag.FormMasterId = new SelectList(db.tbl_formmaster.OrderBy(x => x.MenuName), "Id", "MenuName");
+                return View("../Master/Index", mastermodel);
+                //return Json(result, JsonRequestBehavior.AllowGet);
                 //return PartialView("../Master/TenantIndividual/_AddOrUpdate");
                 //return RedirectToAction("Index", "Dashboard");
             }
             catch (Exception ex)
             {
-                throw ex;
+                return RedirectToAction("Index", "Error");
             }
         }
 
@@ -132,8 +185,15 @@ namespace LeaMaPortal.Controllers
                 //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
                 ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name",tenant.Nationality);
                 ViewBag.Profession = new SelectList(Common.Profession,tenant.Profession);
-                
                 ViewBag.Tenant_Id = tenantId;
+                model.TenantDocumentList = db.tbl_tenant_individual_doc.Where(x => x.Tenant_Id == tenantId).AsEnumerable().Select(x => new tbl_tenant_individual_docVM()
+                {
+                    id=x.id,
+                    Tenant_Id=x.Tenant_Id,
+                    Doc_name=x.Doc_name,
+                    Doc_Path=x.Doc_Path
+                }).ToList();
+                
                 return PartialView("../Master/TenantIndividual/_AddOrUpdate", model);
             }
             catch

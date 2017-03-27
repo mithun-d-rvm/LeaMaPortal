@@ -7,6 +7,7 @@
 
 <div id="ContainerAddOrUpdate"></div>
 <div id="ContainerList"></div>
+<input type="hidden" id="FormMasterSelected" value="@ViewBag.FormMasterSelected" />
 <script>
     $(function () {
         $("#TopNavBarFilter").empty();
@@ -48,12 +49,13 @@
     }
     function GetCountryFilter() {
         $("#TopNavBarFilter").empty();
+        var FormMasterSelected = $("#FormMasterSelected").val();
         $.ajax(
        {
            url: "../Master/Filter",
            type: "Get",
-           data: {},
-           processData: false,
+           data: { selected: FormMasterSelected },
+           
            success: function (html) {
                $("#TopNavBarFilter").html(html);
            },
