@@ -6,6 +6,9 @@
 -->
 
 <!--header start here-->
+@{
+    var user = LeaMaPortal.Helpers.AuthenticationHelper.GetLoggedinUserDetails().GetAwaiter().GetResult();
+}
 <div class="header-main">
     <div class="header-left">
         <h3>LeaMa System</h3>
@@ -34,8 +37,8 @@
                 <p>Logged in as:</p>
             </div>
             <div class="user-name">
-                <p>Malorum</p>
-                <span>Caretaker</span>
+                <p>@user.Name</p>
+                <span>@user.Category</span>
                 <i class="fa fa-angle-down"></i>
             </div>
             

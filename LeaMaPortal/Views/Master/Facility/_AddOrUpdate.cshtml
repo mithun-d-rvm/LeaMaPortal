@@ -1,0 +1,87 @@
+﻿
+@model LeaMaPortal.Models.FacilityViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Facility" }))
+{
+    @Html.HiddenFor(m => m.Id, new { @id = "FacilityId" })
+    <div class="col-md-12 leama-fieldset leama-header-top">
+        <div class="row">
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Facility_id, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Facility_id, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Facility_Id" } })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Facility_Name, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Facility_Name, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "FacilityName" } })
+                </div>
+                @*<div class="col-md-4">
+                        <button type="submit" class="leama-btn">Submit</button>
+                    </div>*@
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-12 pull-left">
+                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    //Add or update
+    $("form#Facility").off("submit").on("submit", function (e) {
+        e.preventDefault();
+        try {
+            var form = $("form#Facility");
+            $.ajax(
+                {
+                    url: "../Facility/AddOrUpdate",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()), 
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        GetFacility();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+
+                });
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+</script>

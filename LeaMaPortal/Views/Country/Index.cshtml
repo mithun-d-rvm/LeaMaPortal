@@ -28,25 +28,25 @@
                 <button type="submit" class="col-md-offset-4 leama-btn">Submit</button>
             </div>
         </div>*@
-    
+    <div class="leama-inner-block col-md-12 ">
         <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
             <div class="row">
                 <div class="col-md-12 leama-fieldset ">
                     <div class="col-md-2 pull-left">
-                        @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "leama-field-name" })
+                        @Html.LabelFor(model => model.Country_name, htmlAttributes: new { @class = "leama-field-name" })
                     </div>
                     <div class="col-sm-4">
-                        @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                        @Html.EditorFor(model => model.Country_name, new { htmlAttributes = new { @class = "leama-field form-control" } })
                     </div>
                     <div class="col-md-4">
                         <button type="submit" class="leama-btn">Submit</button>
                     </div>
                 </div>
                 @*<div class="col-md-12 leama-fieldset leama-header-top">
-                    <div class="col-md-12 pull-left">
-                        <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
-                    </div>
-                </div>*@
+                        <div class="col-md-12 pull-left">
+                            <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                        </div>
+                    </div>*@
             </div>
         </div>
         <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
@@ -68,46 +68,36 @@
                 </div>
 
                 <div class="divTable leama-fieldset col-md-12">
-                    
 
-                        <div class="divTableBody divFontBodyTable">
-                            <div class="divTableHeading">
-                                <div class="divTableCell">Country Name</div>
-                                <div class="divTableCell">Action</div>
 
+                    <div class="divTableBody divFontBodyTable">
+                        <div class="divTableHeading">
+                            <div class="divTableCell">Country Name</div>
+                            <div class="divTableCell">Action</div>
+
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell">Chennai</div>
+                            <div class="divTableCell">
+                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
+                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
+                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
                             </div>
-                            <div class="divTableRow">
-                                <div class="divTableCell">Chennai</div>
-                                <div class="divTableCell">
-                                    @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
-                                    @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
-                                    @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
 
-
-
-
-
-
-
-
-
-
-                                </div>
-
-                            </div>
-                            <div class="divTableRow divFontBodyTable">
-                                <div class="divTableCell">Coimbatore</div>
-                                <div class="divTableCell">
-                                    @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
-                                    @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
-                                    @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
-
-                                </div>
+                        </div>
+                        <div class="divTableRow divFontBodyTable">
+                            <div class="divTableCell">Coimbatore</div>
+                            <div class="divTableCell">
+                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
+                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
+                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
 
                             </div>
 
                         </div>
-                 
+
+                    </div>
+
                 </div>
                 <div class="col-sm-12">
                     <div class="col-sm-6">
@@ -121,127 +111,9 @@
                             <li><a href="#">5</a></li>
                         </ul>
                     </div>
-                    </div>
-
-
-
-
-
-                    @*<div class="col-md-12 leama-fieldset "><b> <u>Country Table</u> </b> </div>*@
-
-                    @*<div class="Table col-md-12">
-
-                                <div class="Heading">
-                                    <div class="Cell col-md-6">
-                                        <p> Country Name </p>
-            </div>
-                                    <div class="Cell col-md-6">
-                                        <p> Action </p>
-            </div>
-
-                                </div>
-                                <div class="Row">
-                                    <div class="Cell col-md-6">
-                                       <p> Chennai  </p>
-                                    </div>
-                                    <div class="Cell col-md-6">
-                                        <p>
-                                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
-                                            @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
-                                            @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
-
-                                            </p>
-            </div>
-
-                                </div>
-                                <div class="Row">
-                                    <div class="Cell  col-md-6">
-                                       <p> Coimbatore </p>
-                                    </div>
-                                    <div class="Cell Cell-Center col-md-6">
-                                        <p>
-                                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit",  title = "Edit" })  |
-                                            @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
-                                            @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
-
-                                        </p>
-                                    </div>
-
-                                </div>
-
-                                <div>
-                                    <ul class="pagination">
-                                        <li><a href="#">1</a></li>
-                                        <li class="active"><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                    </ul>
-                                </div>
-                            </div>*@
-
-
                 </div>
-
-
+            </div>
         </div>
-
-
-      
-  
-
-
-   
-
-
-
-
-
-            @*<table class="table">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Id)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Accyear)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Createddatetime)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Createduser)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Delmark)
-                        </th>
-                        <th></th>
-                    </tr>
-
-                @foreach (var item in Model) {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Accyear)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Createddatetime)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Createduser)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Delmark)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id=item.Country_name }) |
-                            @Html.ActionLink("Details", "Details", new { id=item.Country_name }) |
-                            @Html.ActionLink("Delete", "Delete", new { id=item.Country_name })
-                        </td>
-                    </tr>
-                }
-
-                </table>*@
+        </div>
 </body>
 </html>

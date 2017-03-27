@@ -30,3 +30,8 @@ input[type="button"]:focus, input[type="button"]:active, button:focus
 .textarea.form-control{
     resize:none !important;
 }
+
+
+label{
+    font-weight:normal !important;
+}

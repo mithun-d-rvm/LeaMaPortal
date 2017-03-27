@@ -8,17 +8,16 @@
 <div id="ContainerAddOrUpdate"></div>
 <div id="ContainerList"></div>
 <script>
-     $(function () {
+    $(function () {
         $("#TopNavBarFilter").empty();
         GetCountryFilter();
-     });
-     
+    });
+
     $("#FormMasterId").change(function () {
         var type = parseInt($("#FormMasterId").val());
         formMaster(type);
     });
-    function formMaster(type)
-    {
+    function formMaster(type) {
         switch (type) {
             case 1:
 
@@ -30,14 +29,36 @@
             case 4:
                 break;
             case 5:
-
                 GetCountry();
+                break;
+            case 9:
+                GetPropertyMaster();
+    break;
+            case 6:
+                GetRegion();
+                break;
+            case 10:
+                GetTenantCompany();
+                break;
+            case 11:
+                GetTenantIndividual();
+                break;
+            case 12:
+                GetCheckList();
+                break;
+            case 13:
+                GetFacility();
+                break;
+            case 14:
+                GetUtility();
+                break;
+            case 18:
+                GetEmailTemplate();
                 break;
         }
 
     }
-    function GetCountryFilter()
-    {
+    function GetCountryFilter() {
         $("#TopNavBarFilter").empty();
         $.ajax(
        {
@@ -56,8 +77,7 @@
            }
        });
     }
-    function GetCountry()
-    {
+    function GetCountry() {
         $("#ContainerAddOrUpdate").empty();
         $.ajax(
         {
@@ -83,16 +103,302 @@
             data: {},
             contentType: "application/json",
             processData: false,
-            success: function (html) 
-                {
+            success: function (html) {
                 $("#ContainerList").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-             //   $("#VerifyIdDetailsLoader").addClass("hide");
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
             }
         });
     }
+    function GetTenantCompany() {
+
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../TenantCompany/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+        $.ajax(
+        {
+            url: "../TenantCompany/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+    function GetTenantIndividual() {
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../MasterIndividual/Create",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+</script>
+<!-- Region Section -->
+<script>
+    function GetRegion() {
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../Region/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+        $.ajax(
+        {
+            url: "../Region/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+
+    function GetPropertyMaster()
+    {
+        $("#ContainerAddOrUpdate").empty();
+        //$.ajax(
+        //{
+        //    url: "../Country/AddOrUpdate",
+        //    type: "Get",
+        //    data: {},
+        //    contentType: "application/json",
+        //    processData: false,
+        //    success: function (html) {
+        //        $("#ContainerAddOrUpdate").html(html);
+        //    },
+        //    error: function (jqXhr, textStatus, errorThrown) {
+        //        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+        //    },
+        //    complete: function () {
+        //        //   $("#VerifyIdDetailsLoader").addClass("hide");
+        //    }
+        //});
+        $.ajax(
+        {
+            url: "../PropertyMaster/Index",
+            type: "Get",
+            data: { Search :""},
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+
+    function GetCheckList() {
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../CheckList/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+        $.ajax(
+        {
+            url: "../CheckList/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+
+    function GetFacility() {
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../Facility/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+        $.ajax(
+        {
+            url: "../Facility/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+
+    function GetUtility() {
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../Utility/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+        $.ajax(
+        {
+            url: "../Utility/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+    function GetEmailTemplate() {
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../EmailTemplate/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+        $.ajax(
+        {
+            url: "../EmailTemplate/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+
 </script>
