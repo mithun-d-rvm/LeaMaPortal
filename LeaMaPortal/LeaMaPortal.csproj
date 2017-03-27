@@ -170,6 +170,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\CaretakerController.cs" />
     <Compile Include="Controllers\ChecklistController.cs" />
@@ -294,6 +295,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\CloseCont.png" />
     <Content Include="Images\invoice.png" />
+    <Content Include="Images\loader.gif" />
     <Content Include="Images\Notification.png" />
     <Content Include="Images\Payments.png" />
     <Content Include="Images\PropertyProf.png" />
@@ -478,9 +480,11 @@
     <Content Include="Views\Master\CheckList\_List.cshtml" />
     <Content Include="Views\Master\EmailTemplate\_List.cshtml" />
     <Content Include="Views\Master\EmailTemplate\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\TenantIndividual\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Documents\TenantIndividual\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>

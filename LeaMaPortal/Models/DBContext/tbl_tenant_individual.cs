@@ -19,7 +19,7 @@ namespace LeaMaPortal.Models.DBContext
 
         [StringLength(5)]
         public string Title { get; set; }
-
+        [Required]
         [StringLength(100)]
         public string First_Name { get; set; }
 
@@ -34,10 +34,10 @@ namespace LeaMaPortal.Models.DBContext
 
         [StringLength(100)]
         public string Profession { get; set; }
-
+        [Required]
         [StringLength(100)]
         public string Marital_Status { get; set; }
-
+        [Required]
         [StringLength(500)]
         public string address { get; set; }
 
