@@ -1,0 +1,71 @@
+﻿@*@model LeaMaPortal.Models.CompanyDetail
+@using (Html.BeginCollectionItem("CompanyDetails"))
+{
+    <div class="row" id="companyDetailsForm">
+        <div id="Gridview" class="row document-row">
+            <div class="col-md-12">
+                <div class="col-md-2 form-group">
+                    <label for="branch">Branch</label>
+                    @Html.EditorFor(model => model.Branch, new { htmlAttributes = new { @class = "master-form-input" } })
+                    
+                </div>
+                <div class="col-md-2 form-group">
+                    <label for="city">City</label>
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "master-form-input" } })
+                    
+                </div>
+                <div class="col-md-2 form-group">
+                    <label for="add01">Address 01</label>
+                    @Html.TextAreaFor(model => model.BranchAddress, new { htmlAttributes = new { @class = "master-form-input" } })
+                    
+                </div>
+                <div class="col-md-2 form-group">
+                    <label for="add02">Address 02</label>
+                    @Html.TextAreaFor(model => model.BranchAddress1, new { htmlAttributes = new { @class = "master-form-input" } })
+                    
+                </div>
+                <div class="col-md-2 form-group">
+                    <label for="state">State</label>
+                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "master-form-input" } })
+                    
+                </div>
+                <div class="col-md-2 form-group">
+                    <label for="country">Country</label>
+                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "master-form-input" } })
+                    
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-2 form-group">
+                    <label for="pincode">Pincode</label>
+                    @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "master-form-input" } })
+                    
+                </div>
+                <div class="col-md-2 form-group">
+                    <label for="phno">Phone Number</label>
+                    @Html.EditorFor(model => model.Phoneno, new { htmlAttributes = new { @class = "master-form-input" } })
+                    
+                </div>
+                <div class="col-md-2 form-group">
+                    <label for="remarks">Remarks</label>
+                    @Html.TextAreaFor(model => model.Remarks, new { htmlAttributes = new { @class = "master-form-input" } })
+                    
+                </div>
+                <div class="col-md-2 form-group">
+                    <label for="emailid">Email id</label>
+                    @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "master-form-input" } })
+                    
+                </div>
+                <div class="col-md-2 form-group">
+                    <label for="fax">Fax</label>
+                    @Html.EditorFor(model => model.FaxNo, new { htmlAttributes = new { @class = "master-form-input" } })
+                    
+                </div>
+                <div class="col-md-2 btn-group">
+                    <input type="button" class="document-btn" id="add" value="Add" onclick="Add(this)">
+                </div>
+            </div>
+        </div>
+
+    </div>
+}*@

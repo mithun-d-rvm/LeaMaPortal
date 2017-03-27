@@ -31,9 +31,12 @@
             case 5:
                 GetCountry();
                 break;
+            case 7:
+                GetCaretaker();
+                break;
             case 9:
                 GetPropertyMaster();
-    break;
+                break;
             case 6:
                 GetRegion();
                 break;
@@ -105,6 +108,7 @@
     function GetTenantCompany() {
 
         $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
         $.ajax(
         {
             url: "../TenantCompany/AddOrUpdate",
@@ -160,6 +164,47 @@
             }
         });
     }
+
+    function GetCaretaker() {
+
+        $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
+        $.ajax(
+        {
+            url: "../Caretaker/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+        $.ajax(
+        {
+            url: "../Caretaker/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+
 </script>
 <!-- Region Section -->
 <script>

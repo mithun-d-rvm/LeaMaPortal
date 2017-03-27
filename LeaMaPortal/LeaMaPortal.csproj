@@ -470,6 +470,8 @@
     <Content Include="Views\Master\TenantIndividual\Create.cshtml" />
     <Content Include="Views\Master\TenantIndividual\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\PropertyMaster\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\Caretaker\_List.cshtml" />
+    <Content Include="Views\Master\Caretaker\_AddOrUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

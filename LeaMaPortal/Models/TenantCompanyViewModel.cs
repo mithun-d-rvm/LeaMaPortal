@@ -8,6 +8,11 @@ namespace LeaMaPortal.Models
 {
     public class TenantCompanyViewModel
     {
+        public TenantCompanyViewModel()
+        {
+            CompanyContactDetails = new List<CompanyContactDetail>();
+            CompanyDetails = new List<CompanyDetail>();
+        }
         public int Id { get; set; }
 
         [Required]
