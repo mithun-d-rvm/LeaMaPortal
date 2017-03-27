@@ -181,11 +181,14 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FacilityController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\MasterIndividualController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\PropertyMasterController.cs" />
     <Compile Include="Controllers\MeterController.cs" />
     <Compile Include="Controllers\PropertyTypeController.cs" />
+    <Compile Include="Controllers\ReceiptsController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\SlabController.cs" />
     <Compile Include="Controllers\UtilityController.cs" />
@@ -263,8 +266,11 @@
     <Compile Include="Models\DBContext\view_invoice_receipt_pending.cs" />
     <Compile Include="Models\DBContext\view_tenant.cs" />
     <Compile Include="Models\EmailTemplateViewModel.cs" />
+    <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\MasterViewModel.cs" />
+    <Compile Include="Models\PaymentViewModel.cs" />
     <Compile Include="Models\PropertyTypeViewModel.cs" />
+    <Compile Include="Models\ReceiptViewModel.cs" />
     <Compile Include="Models\SlabViewModel.cs" />
     <Compile Include="PagingProperty.cs" />
     <Compile Include="Models\FacilityViewModel.cs" />
@@ -502,6 +508,15 @@
     <Content Include="Views\Tca\Status\_StatusDetails.cshtml" />
     <Content Include="Views\Tca\Agreement\_AgreementForm.cshtml" />
     <Content Include="Views\Master\TenantIndividual\_List.cshtml" />
+    <Content Include="Views\Invoice\_AddorUpdate.cshtml" />
+    <Content Include="Views\Invoice\_InvoiceDetails.cshtml" />
+    <Content Include="Views\Receipts\_AddorUpdate.cshtml" />
+    <Content Include="Views\Receipts\_ReceiptDetails.cshtml" />
+    <Content Include="Views\Payment\_AddorUpdate.cshtml" />
+    <Content Include="Views\Payment\_PaymentDetails.cshtml" />
+    <Content Include="Views\Invoice\Index.cshtml" />
+    <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\Receipts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

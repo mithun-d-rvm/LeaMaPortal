@@ -38,19 +38,34 @@
             <li id="menu-home">
                 <a href="index.html">
                     <img src="~/Images/invoice.png" /><br />
-                    <div class="p-t-17">INVOICING</div>
+                    <div class="p-t-17">
+                        
+                      @Html.ActionLink("INVOICING", "Index", "Invoice", new { area = "" }, new { @class = "fmc-a" })
+            
+
+
+</div>
+                    
+
                 </a>
             </li>            
             <li id="menu-home">
                 <a href="index.html">
-                    <img src="~/Images/Reciepts.png" /><br />
-                    <div class="p-t-17">RECEIPTS</div>
+                    @*<i class="fa fa-tachometer"></i>*@
+                    <img src="~/Images/Payments.png" /><br />
+                   <div class="p-t-17">@Html.ActionLink("PAYMENTS", "Index", "Payment", new { area = "" }, new { @class = "fmc-a" })
+                   
+</div>
                 </a>
             </li>
             <li id="menu-home">
                 <a href="index.html">
-                    <img src="~/Images/Payments.png" /><br />
-                    <div class="p-t-17">PAYMENTS</div>
+                    @*<i class="fa fa-tachometer"></i>*@
+                    <img src="~/Images/Reciepts.png" /><br />
+                    <div class="p-t-17">
+                        @Html.ActionLink("RECEIPTS", "Index", "Receipts", new { area = "" }, new { @class = "fmc-a" })
+
+                </div>
                 </a>
             </li>
             @*<li id="menu-home">
