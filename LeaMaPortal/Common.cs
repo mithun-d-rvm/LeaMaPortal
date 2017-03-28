@@ -13,7 +13,7 @@ namespace LeaMaPortal
         public static List<string> Profession = new List<string>() { "Engineer", "Teacher", "Shop keeper","Doctor","Farmer" };
 
         public const string INSERT = "INSERT", UPDATE = "UPDATE", DELETE = "DELETE", SELECT= "SELECT",View = "View";
-        public const int DefaultMaster = 11;
+        public const int DefaultMaster = 10;
         public const string TenantIndividualDocumentContainer = "Documents/TenantIndividual/";
     }
 }

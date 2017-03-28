@@ -73,8 +73,8 @@ namespace LeaMaPortal.Models
         public string Issuance_authority { get; set; }
 
         public string ADWEARegid { get; set; }
-        public ICollection<CompanyDetail> CompanyDetails { get; set; }
-        public ICollection<CompanyContactDetail> CompanyContactDetails { get; set; }
+        public List<CompanyDetail> CompanyDetails { get; set; }
+        public List<CompanyContactDetail> CompanyContactDetails { get; set; }
     }
     public class CompanyDetail
     {
