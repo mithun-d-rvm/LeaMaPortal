@@ -411,9 +411,9 @@
                         {
                             <tr class="col-md-12">
                                 <td class="col-md-4 text-left">
-                                    @Html.HiddenFor(m => m.TenantDocumentList[i].id)
-                                    @Html.HiddenFor(m => m.TenantDocumentList[i].Doc_Path)
-                                    @Html.HiddenFor(m => m.TenantDocumentList[i].Doc_name)
+                                    @Html.HiddenFor(m => m.TenantDocumentList[i].id,new {@data_name= "id" })
+                                    @Html.HiddenFor(m => m.TenantDocumentList[i].Doc_Path, new { @data_name = "Doc_Path" })
+                                    @Html.HiddenFor(m => m.TenantDocumentList[i].Doc_name, new { @data_name = "Doc_name" })
                                     @Model.TenantDocumentList[i].Doc_name
                                 </td>
                                 <td class="col-md-4 text-left"><a href="~/Documents/TenantIndividual/@Model.TenantDocumentList[i].Doc_Path" target="_blank">Download</a></td>
@@ -442,10 +442,10 @@
                             <tr>
 
                                 <td class="col-md-4">
-                                    <input type="text" id="txtTitle" name="TenantDocument[0].Name">
+                                    <input type="text" id="txtTitle" name="TenantDocument[0].Name" data-name="Name">
                                 </td>
                                 <td class="col-md-4">
-                                    <input type="file" id="txtLink" name="TenantDocument[0].File">
+                                    <input type="file" id="txtLink" name="TenantDocument[0].File" data-name="File">
                                 </td>
                                 <td class="col-md-4">
                                     <button type="button" class="removebutton" title="Remove this row">X </button>
@@ -529,33 +529,18 @@
         var existfilelist = document.getElementById('tblcontent');
         var newindex = 0;
         $(existfilelist).find('> tbody > tr').each(function () {
-            var index = 0;
+           
             $(this).find("input").each(function () {
-                switch (index) {
-                    case 0:
-                        $(this).attr({
-                            'id': function (_, id) {
-                                return id + newindex
-                            },
-                            'name': function (_, name) {
-                                //return name + iTenantDocument[0].Name
-                                return 'TenantDocument[' + newindex + '].Name'
-                            }
-                        });
-                        break;
-                    case 1:
-                        $(this).attr({
-                            'id': function (_, id) {
-                                return id + index
-                            },
-                            'name': function (_, name) {
-                                //return name + i
-                                return 'TenantDocument[' + newindex + '].File'
-                            }
-                        });
-                        break;
-                }
-                index++;
+                var dataname = $(this).data("name");
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'TenantDocument[' + newindex + '].' + dataname
+                    }
+                });
             });
             newindex++;
            
@@ -568,48 +553,18 @@
         var existfilelist = document.getElementById('exist-file-list');
         var newindex = 0;
         $(existfilelist).find('> tbody > tr').each(function () {
-            var index = 0;
-            $(this).find("input").each(function () {
-                switch(index)
-                {
-                    case 0:
-                        $(this).attr({
-                            'id': function (_, id) {
-                                return id + newindex
-                            },
-                            'name': function (_, name) {
-                                //return name + i
-                                return 'TenantDocumentList[' + newindex + '].Id'
-                            }
-                        });
-                        break;
-                    case 1:
-                        $(this).attr({
-                            'id': function (_, id) {
-                                return id + index
-                            },
-                            'name': function (_, name) {
-                                //return name + i
-                                return 'TenantDocumentList[' + newindex + '].Doc_Path'
-                            }
-                        });
-                        break;
-                    case 2:
-                        $(this).attr({
-                            'id': function (_, id) {
-                                return id + index
-                            },
-                            'name': function (_, name) {
-                                //return name + i
-                                return 'TenantDocumentList[' + newindex + '].Doc_name'
-                            }
-                        });
-                        break;
-
-                            
-                }
-                index++;
-            });
+                $(this).find("input").each(function () {
+                    var dataname = $(this).data("name");
+                    $(this).attr({
+                        'id': function (_, id) {
+                            return id + newindex
+                        },
+                        'name': function (_, name) {
+                            //return name + iTenantDocument[0].Name
+                            return 'TenantDocumentList[' + newindex + '].' + dataname
+                        }
+                    });
+                });
             newindex++;
         });
         return false;
