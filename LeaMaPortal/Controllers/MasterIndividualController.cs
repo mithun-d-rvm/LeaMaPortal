@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace LeaMaPortal.Controllers
 {
@@ -158,13 +159,13 @@ namespace LeaMaPortal.Controllers
                 ,@PCreateduser  
                 ,@Ptenantdocdetails 
                                     )", param).ToListAsync();
-                MasterViewModel mastermodel = new MasterViewModel();
-                ViewBag.FormMasterSelected = 11;
-                ViewBag.FormMasterId = new SelectList(db.tbl_formmaster.OrderBy(x => x.MenuName), "Id", "MenuName");
-                return View("../Master/Index", mastermodel);
+                //MasterViewModel mastermodel = new MasterViewModel();
+                //ViewBag.FormMasterSelected = 11;
+                //ViewBag.FormMasterId = new SelectList(db.tbl_formmaster.OrderBy(x => x.MenuName), "Id", "MenuName");
+                //return View("../Master/Index", mastermodel);
                 //return Json(result, JsonRequestBehavior.AllowGet);
                 //return PartialView("../Master/TenantIndividual/_AddOrUpdate");
-                //return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("../Master/Index", new { selected=11 });
             }
             catch (Exception ex)
             {
@@ -186,13 +187,14 @@ namespace LeaMaPortal.Controllers
                 ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name",tenant.Nationality);
                 ViewBag.Profession = new SelectList(Common.Profession,tenant.Profession);
                 ViewBag.Tenant_Id = tenantId;
-                model.TenantDocumentList = db.tbl_tenant_individual_doc.Where(x => x.Tenant_Id == tenantId).AsEnumerable().Select(x => new tbl_tenant_individual_docVM()
+                model.TenantDocumentList =await db.tbl_tenant_individual_doc.Where(x => x.Tenant_Id == tenantId)
+                                            .Select(x => new tbl_tenant_individual_docVM()
                 {
                     id=x.id,
                     Tenant_Id=x.Tenant_Id,
                     Doc_name=x.Doc_name,
                     Doc_Path=x.Doc_Path
-                }).ToList();
+                }).ToListAsync();
                 
                 return PartialView("../Master/TenantIndividual/_AddOrUpdate", model);
             }

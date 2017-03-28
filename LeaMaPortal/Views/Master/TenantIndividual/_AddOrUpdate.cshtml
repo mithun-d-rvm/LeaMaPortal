@@ -400,6 +400,33 @@
 
         </div>
         <div class="col-md-10 document-row" id="GridView">
+         
+            @if (Model.TenantDocumentList != null)
+                {
+                <div class="col-md-12">
+                    @if (Model.TenantDocumentList.Count > 0)
+                    {<h3>Existing Documents</h3>}
+                    <table class="col-md-12" id="exist-file-list">
+                        @for (int i = 0; i < Model.TenantDocumentList.Count; i++)
+                        {
+                            <tr class="col-md-12">
+                                <td class="col-md-4 text-left">
+                                    @Html.HiddenFor(m => m.TenantDocumentList[i].id)
+                                    @Html.HiddenFor(m => m.TenantDocumentList[i].Doc_Path)
+                                    @Html.HiddenFor(m => m.TenantDocumentList[i].Doc_name)
+                                    @Model.TenantDocumentList[i].Doc_name
+                                </td>
+                                <td class="col-md-4 text-left"><a href="~/Documents/TenantIndividual/@Model.TenantDocumentList[i].Doc_Path" target="_blank">Download</a></td>
+                                <td class="col-md-4 text-left">
+                                    <button type="button" class="remove-exist-file" title="Remove this row">X </button>
+                                </td>
+
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div class="clearfix"><br /></div>
+            }
             <div class="col-md-12">
                 <div class="col-md-4 text-left">Content Name</div>
                 <div class="col-md-4 text-left">Content Det</div>
@@ -407,31 +434,8 @@
 
 
             </div>
-            <div class="clearfix"><br /></div>
-                @if (Model.TenantDocumentList != null)
-                {
-                    <div class="col-md-12">
-                        <table class="col-md-12">
-                            @for (int i = 0; i < Model.TenantDocumentList.Count; i++)
-                        {
-                        <tr class="col-md-12">
-                            <td class="col-md-4 text-left">
-                                @Html.HiddenFor(m => m.TenantDocumentList[i].id)
-                                @Html.HiddenFor(m => m.TenantDocumentList[i].Doc_Path)
-                                @Html.HiddenFor(m => m.TenantDocumentList[i].Doc_name)
-                                @Model.TenantDocumentList[i].Doc_name
-                            </td>
-                            <td class="col-md-4 text-left"><a href="~/Documents/TenantIndividual/@Model.TenantDocumentList[i].Doc_Path" target="_blank">Download</a></td>
-                            <td class="col-md-4 text-left">
-                                <button type="button" class="removebutton" title="Remove this row">X </button>
-                            </td>
-
-                        </tr>
-                        }
-                        </table>
-                    </div>
-                        <hr />
-                }
+            <div class="clearfix"><br /><br /></div>
+               
 
 
                         <table id="tblcontent" class="col-md-12">
@@ -522,8 +526,95 @@
 
     $(document).on('click', 'button.removebutton', function () {
         $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('tblcontent');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+            var index = 0;
+            $(this).find("input").each(function () {
+                switch (index) {
+                    case 0:
+                        $(this).attr({
+                            'id': function (_, id) {
+                                return id + newindex
+                            },
+                            'name': function (_, name) {
+                                //return name + iTenantDocument[0].Name
+                                return 'TenantDocument[' + newindex + '].Name'
+                            }
+                        });
+                        break;
+                    case 1:
+                        $(this).attr({
+                            'id': function (_, id) {
+                                return id + index
+                            },
+                            'name': function (_, name) {
+                                //return name + i
+                                return 'TenantDocument[' + newindex + '].File'
+                            }
+                        });
+                        break;
+                }
+                index++;
+            });
+            newindex++;
+           
+        });
+        i = newindex;
         return false;
     });
+    $(document).on('click', 'button.remove-exist-file', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('exist-file-list');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+            var index = 0;
+            $(this).find("input").each(function () {
+                switch(index)
+                {
+                    case 0:
+                        $(this).attr({
+                            'id': function (_, id) {
+                                return id + newindex
+                            },
+                            'name': function (_, name) {
+                                //return name + i
+                                return 'TenantDocumentList[' + newindex + '].Id'
+                            }
+                        });
+                        break;
+                    case 1:
+                        $(this).attr({
+                            'id': function (_, id) {
+                                return id + index
+                            },
+                            'name': function (_, name) {
+                                //return name + i
+                                return 'TenantDocumentList[' + newindex + '].Doc_Path'
+                            }
+                        });
+                        break;
+                    case 2:
+                        $(this).attr({
+                            'id': function (_, id) {
+                                return id + index
+                            },
+                            'name': function (_, name) {
+                                //return name + i
+                                return 'TenantDocumentList[' + newindex + '].Doc_name'
+                            }
+                        });
+                        break;
+
+                            
+                }
+                index++;
+            });
+            newindex++;
+        });
+        return false;
+    });
+    
     $("#TitleDisplay").on('change', function (e) {
         $("#Title").val($("#TitleDisplay").val());
     });
