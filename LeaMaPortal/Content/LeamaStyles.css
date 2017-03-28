@@ -25,6 +25,12 @@
 .p-b-10{
     padding-bottom:10px;
 }
+.p-b-7 {
+    padding-bottom: 7px;
+}
+.p-b-10-p {
+    padding-bottom: 10%;
+}
 .font-15{
     font-size: 15px;
 }
@@ -40,6 +46,40 @@
 .p-35{
     padding: 35px;
 }
+.font-smaller{
+    font-size: smaller;
+}
+.font-x-large{
+    font-size:x-large;
+}
+.font-40{
+    font-size: 40px !important;
+}
+.ht-50{
+    height:50px !important;
+}
+.m-l-m-40{
+    margin-left: -40px;
+}
+
+/* Custom Width */
+
+.w-md-13 {
+    width: 13% !important;
+}
+.w-md-14 {
+    width: 14% !important;
+}
+.w-md-15 {
+    width: 15% !important;
+}
+.w-md-16 {
+    width: 16% !important;
+}
+.w-md-10{
+    width:10% !important;
+}
+
 /* Dashboard */
 
 .logo-thumb{
@@ -88,15 +128,18 @@
 
 /* Sidebar Menu */
 .sidebar-btn {
-    border: 1px solid black;
+    border: 1px solid white;
     color: black;
     border-radius: 15px !important;
     padding: 5px;
-    background-color: #ffb100;
+    /*background-color: #ffb100;*/
     text-decoration: none;
     width: 80% !important;
     margin-left: 20px;
     margin-top: 15px;
+}
+.sidebar-btn:hover, .sidebar-btn:active{
+    border-color:black;
 }
 
 /* Master Page */
@@ -146,6 +189,24 @@
     padding: 15px 0px 20px 0px;
     background-color: #f3f3f3;
 }
+
+/* Agreement Closure */
+.p-lr-20{
+    padding-left:20px;
+    padding-right:20px;
+}
+.popup-heading{
+    font-size:x-large;
+    padding-top:5%;
+}
+.tca-modal-md{
+    width: 1100px !important;
+    margin-right: 40px !important;
+}
+
 .search-btn{
     height:41px !important;
 }
+.label-default-remove {
+    font-weight: normal !important;
+}         
