@@ -74,6 +74,7 @@ namespace LeaMaPortal.Controllers
         {
             return View();
         }
+
         [HttpGet]
         public PartialViewResult AddOrUpdate()
         {
