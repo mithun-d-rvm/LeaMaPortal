@@ -1,0 +1,246 @@
+﻿
+@model LeaMaPortal.Models.PaymentViewModel
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="inner-block">
+    <div class="blank">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.PaymentNo, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+
+                        @Html.EditorFor(model => model.PaymentNo, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.PaymentDate, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.PaymentType, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.PaymentType, new SelectList(ViewBag.PaymentType, "Value", "Text"), htmlAttributes: new { @class = "master-form-input" })
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.PaymentMode, new SelectList(ViewBag.PaymentMode, "Value", "Text"), htmlAttributes: new { @class = "master-form-input" })
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Supplier_id, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        <select class="col-md-12 leama-field">
+                            <option value="Supplier_id">Supplier_id</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.agreement_no, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        <select class="col-md-12 leama-field">
+                            <option value="Agreement_No">Agreement No</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Property_id, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.Property_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        <select class="col-md-12 leama-field">
+                            <option value="Property_ID">Property No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Property_Name, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        <select class="col-md-12 leama-field">
+                            <option value="Property_Name">Property Name</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Unit_ID, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.Unit_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        <select class="col-md-12 leama-field">
+                            <option value="Unit_ID">Unit ID</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.unit_Name, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.unit_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        <select class="col-md-12 leama-field">
+                            <option value="unit_Name">Unit Name</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-6">
+
+
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.AmtInWords, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.AmtInWords, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.AdvAcCode, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @*@Html.EditorFor(model => model.AdvAcCode, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                            <select class="col-md-12 leama-field">
+                                <option value="unit_Name">AdvacedAccno</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.PDCstatus, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.PDCstatus, new SelectList(ViewBag.PDCStatus, "Value", "Text"), htmlAttributes: new { @class = "master-form-input" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.DDChequeNo, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.DDChequeNo, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.DDChequeDate, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.DDChequeDate, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.BankAcCode, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @*@Html.EditorFor(model => model.BankAcCode, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                            <select class="col-md-12 leama-field">
+                                <option value="BankAcCode">Bank Account Code</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.BankAcName, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @*@Html.EditorFor(model => model.BankAcName, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                            <select class="col-md-12 leama-field">
+                                <option value="Bank Account Name">Bank Account Name</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Narration, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            &nbsp;
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn master-form-btn">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+    
+        <div class="row">
+            <div class="col-md-12 document-row">
+                <div class="col-md-1">
+                    ID
+                </div>
+                <div class="col-md-2">
+                    Invoice Type
+                </div>
+                <div class="col-md-2">
+                    Invoice Number
+                </div>
+                <div class="col-md-2">
+                    Invoice Date
+                </div>
+                <div class="col-md-2">
+                    Invoice Description
+                </div>
+            </div>
+        </div>
+        <div class="row ht-5">
+            &nbsp;
+        </div>
+
+        <!-- Begin Dynamic row -->
+        @Html.Partial("_PaymentDetails")
+        <!-- End Dynamic row -->
+
+
+
+    </div>
+</div>
+
+

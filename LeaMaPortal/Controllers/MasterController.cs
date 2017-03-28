@@ -16,11 +16,12 @@ namespace LeaMaPortal.Controllers
         private Entities db = new Entities();
 
         // GET: Master
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int selected = 0)
         {
             try
             {
                 MasterViewModel model = new MasterViewModel();
+                ViewBag.FormMasterSelected =selected==0? Common.DefaultMaster:selected;
                 ViewBag.FormMasterId = new SelectList( db.tbl_formmaster.OrderBy(x => x.MenuName), "Id", "MenuName");
                 return View(model);
             }
@@ -31,11 +32,11 @@ namespace LeaMaPortal.Controllers
            
         }
 
-        public PartialViewResult Filter()
+        public PartialViewResult Filter(int selected=1)
         {
             try
             {
-                ViewBag.FormMasterId = new SelectList(db.tbl_formmaster.OrderBy(x => x.MenuName), "Id", "MenuName",5);
+                ViewBag.FormMasterId = new SelectList(db.tbl_formmaster.OrderBy(x => x.MenuName), "Id", "MenuName", selected);
                 return PartialView("_Filter");
             }
             catch

@@ -8,9 +8,9 @@
 @*<h2>Create</h2>*@
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null,null,FormMethod.Post,new {@id="TenantIndividualAddOrUpdate" }))
 {
-    @Html.AntiForgeryToken()
+    @*@Html.AntiForgeryToken()*@
 
     @*<div class="form-horizontal">*@
 
@@ -19,7 +19,7 @@
 
     <div class="row">
         <div class="col-md-6">
-
+           
             <div class="col-md-12 form-input-padding">
                 <div class="col-md-4">
                     @*Title:*@
@@ -563,6 +563,9 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 <script>
+
+
+    
     var i = 1;
     
     $("#addbutton").click(function () {
@@ -584,6 +587,62 @@
         $(this).closest('tr').remove();
         return false;
     });
+
+    $("form#TenantIndividualAddOrUpdate").off("submit").on("submit",function (e) {
+        e.preventDefault();
+        try {
+            var form = $("form#TenantIndividualAddOrUpdate");
+            $.ajax(
+                {
+                    url: "../MasterIndividual/Create",
+                    // dataType: "jsonp",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        if (response.Errors == "")
+                        {
+                            GetTenantIndividual();
+                        }
+                        else
+                        {
+                            alert(response.Errors);
+                        }
+                       
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+
+    });
+
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
 
     //$("#addbutton").click(function () {
     //    var DocumentName = $("#DocumentName").val();

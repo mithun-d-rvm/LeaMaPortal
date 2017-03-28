@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace LeaMaPortal.Controllers
 {
@@ -160,10 +161,123 @@ namespace LeaMaPortal.Controllers
             }
         }
 
+        //[HttpGet]
+        //public PartialViewResult AddCompanyDetail()
+        //{
+        //    return PartialView("../Master/TenantCompany/_CompanyDetail", new CompanyDetail()
+        //    {
+        //        Branch = "",
+        //        BranchAddress = "",
+        //        BranchAddress1 = "",
+        //        City = "",
+        //        Country = "",
+        //        EmailId = "",
+        //        FaxNo = "",
+        //        Id = 0,
+        //        Phoneno = "",
+        //        Pincode = "",
+        //        Remarks = "",
+        //        State = "",
+        //        TenantId = 0
+        //    });
+        //}
+
         [HttpGet]
         public PartialViewResult AddOrUpdate()
         {
+            //var tenantCompanies = new TenantCompanyViewModel();
+            //tenantCompanies.CompanyDetails.Add(new CompanyDetail()
+            //{
+            //    Branch = "",
+            //    BranchAddress = "",
+            //    BranchAddress1 = "",
+            //    City = "",
+            //    Country = "",
+            //    EmailId = "",
+            //    FaxNo = "",
+            //    Id = 0,
+            //    Phoneno = "",
+            //    Pincode = "",
+            //    Remarks = "",
+            //    State = "",
+            //    TenantId = 0
+            //});
+                
             return PartialView("../Master/TenantCompany/_AddOrUpdate", new TenantCompanyViewModel());
+        }
+
+        [HttpGet]
+        public PartialViewResult Edit(int id)
+        {
+            var tenantCompany = db.tbl_tenant_company.Where(x => x.Delmark != "*" && x.Tenant_Id == id).FirstOrDefault();
+            if (tenantCompany == null)
+            {
+                return PartialView("../Master/TenantCompany/_AddOrUpdate", new TenantCompanyViewModel());
+            }
+            var tenantCompanyData = new TenantCompanyViewModel()
+            {
+                Address = tenantCompany.address,
+                Address1 = tenantCompany.address1,
+                ADWEARegid = tenantCompany.ADWEA_Regid,
+                City = tenantCompany.City,
+                Cocandindustryuid = tenantCompany.Cocandindustryuid,
+                ComapanyActivity = tenantCompany.Cocandindustryuid,
+                CompanyName = tenantCompany.CompanyName,
+                Email = tenantCompany.Email,
+                Emirate = tenantCompany.Emirate,
+                FaxAreaCode = tenantCompany.Fax_Areacode,
+                FaxCountryCode = tenantCompany.Fax_Countrycode,
+                FaxNo = tenantCompany.Fax_No,
+                FirstName = tenantCompany.First_Name,
+                Id = tenantCompany.Id,
+                Issuance_authority = tenantCompany.Issuance_authority,
+                LicenseExpiryDate = tenantCompany.License_ExpiryDate,
+                LandlineAreaCode = tenantCompany.Landline_Areacode,
+                LandlineCountryCode = tenantCompany.Landline_Countrycode,
+                LandlineNo = tenantCompany.Landline_No,
+                LastName = tenantCompany.Last_Name,
+                LicenseIssueDate = tenantCompany.License_issueDate,
+                MaritalStatus = tenantCompany.Marital_Status,
+                MiddleName = tenantCompany.Middle_Name,
+                MobileAreaCode = tenantCompany.Mobile_Areacode,
+                MobileCountryCode = tenantCompany.Mobile_Countrycode,
+                MobileNo = tenantCompany.Mobile_No,
+                Nationality = tenantCompany.Nationality,
+                PostboxNo = tenantCompany.PostboxNo,
+                TenantId = tenantCompany.Tenant_Id,
+                TenantType = tenantCompany.Type,
+                Title = tenantCompany.Title,
+                TradelicenseNo = tenantCompany.TradelicenseNo,
+                CompanyContactDetails = db.tbl_tenant_companydt1.Where(y => y.Tenant_Id == tenantCompany.Tenant_Id).Select(z => new CompanyContactDetail()
+                {
+                    ContactPersonName = z.Cper,
+                    Department = z.Dept,
+                    Designation = z.Desig,
+                    Extension = z.Ext,
+                    Id = z.Id,
+                    MobileNo = z.MobNo,
+                    Phone = z.Phone,
+                    Salutations = z.Salutations,
+                    TenantId = z.Tenant_Id
+                }).ToList(),
+                CompanyDetails = db.tbl_tenant_companydt.Where(y => y.Tenant_Id == tenantCompany.Tenant_Id).Select(z => new CompanyDetail()
+                {
+                    Branch = z.Branch,
+                    BranchAddress = z.BranchAdd,
+                    BranchAddress1 = z.Branchadd1,
+                    City = z.City,
+                    Country = z.Country,
+                    EmailId = z.EMailID,
+                    FaxNo = z.FaxNo,
+                    Id = z.Id,
+                    Phoneno = z.PhoneNo,
+                    Pincode = z.Pincode,
+                    Remarks = z.Remarks,
+                    State = z.State,
+                    TenantId = z.Tenant_Id
+                }).ToList()
+            };
+            return PartialView("../Master/TenantCompany/_AddOrUpdate", tenantCompanyData);
         }
 
         [HttpPost]
@@ -233,6 +347,70 @@ namespace LeaMaPortal.Controllers
             }
 
 
+        }
+
+        public async Task<ActionResult> Delete(int id)
+        {
+            MessageResult result = new MessageResult();
+            try
+            {
+                var tenantCompany = await db.tbl_tenant_company.FirstOrDefaultAsync(x => x.Tenant_Id == id);
+                if (tenantCompany == null)
+                {
+                    return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
+                }
+                object[] parameters = {
+                     new MySqlParameter("@PFlag", "DELETE"),
+                     new MySqlParameter("@PTenant_Id", id),
+                     new MySqlParameter("@PCompanyName", ""),
+                     new MySqlParameter("@PMarital_Status", ""),
+                     new MySqlParameter("@PTitle", ""),
+                     new MySqlParameter("@PFirst_Name", ""),
+                     new MySqlParameter("@PMiddle_Name", ""),
+                     new MySqlParameter("@PLast_Name", ""),
+                     new MySqlParameter("@Paddress", ""),
+                     new MySqlParameter("@Paddress1", ""),
+                     new MySqlParameter("@PEmirate", ""),
+                     new MySqlParameter("@PCity", ""),
+                     new MySqlParameter("@PPostboxNo", ""),
+                     new MySqlParameter("@PEmail", ""),
+                     new MySqlParameter("@PMobile_Countrycode", ""),
+                     new MySqlParameter("@PMobile_Areacode", ""),
+                     new MySqlParameter("@PMobile_No", ""),
+                     new MySqlParameter("@PLandline_Countrycode", ""),
+                     new MySqlParameter("@PLandline_Areacode", ""),
+                     new MySqlParameter("@PLandline_No", ""),
+                     new MySqlParameter("@PFax_Countrycode", ""),
+                     new MySqlParameter("@PFax_Areacode", ""),
+                     new MySqlParameter("@PFax_No", ""),
+                     new MySqlParameter("@PNationality", ""),
+                     new MySqlParameter("@PActitvity", ""),
+                     new MySqlParameter("@PCocandindustryuid", ""),
+                     new MySqlParameter("@PTradelicenseNo", ""),
+                     new MySqlParameter("@PLicense_issueDate", "1991-10-12"),
+                     new MySqlParameter("@PLicense_ExpiryDate", "1991-10-12"),
+                     new MySqlParameter("@PIssuance_authority", ""),
+                     new MySqlParameter("@PADWEA_Regid", ""),
+                     new MySqlParameter("@PType", ""),
+                     new MySqlParameter("@PCreateduser", ""),
+                     new MySqlParameter("@Ptenant_companydt", ""),
+                     new MySqlParameter("@Ptenant_companydt1", ""),
+                     new MySqlParameter("@Ptenant_companydoc", "")
+
+                };
+                var spResult = await db.Database.SqlQuery<object>("CALL Usp_Tenant_Company_All(@PFlag, @PTenant_Id, @PCompanyName, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser, @Ptenant_companydt, @Ptenant_companydt1, @Ptenant_companydoc)", parameters).ToListAsync();
+                
+                //await db.SaveChangesAsync();
+
+                //tbl_country.Delmark = "*";
+                //db.Entry(tbl_country).State = EntityState.Modified;
+                //await db.SaveChangesAsync();
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new MessageResult() { Errors = "Internal server error" }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

@@ -1,0 +1,45 @@
+﻿
+<!--
+  File Name      : _InvoiceDetails.cshtml
+  Description    : Partial page for fecility details
+  Created Date   : 20-Mar-2017
+  Notes          : <Notes>
+-->
+
+@model LeaMaPortal.Models.InvoiceDetailsViewModel
+@{
+    ViewBag.Title = "Dashboard";
+   
+}
+
+
+  
+    <div class="row">
+        <div class="col-md-12 document-row" id="GridView">
+            <div class="col-md-1">
+                1.
+            </div>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.item, new { htmlAttributes = new { @class = "master-form-input" } })
+            </div>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "master-form-input" } })
+            </div>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.qty, new { htmlAttributes = new { @class = "master-form-input" } })
+            </div>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "master-form-input" } })
+            </div>
+            <div class="col-md-1">
+                <button class="document-btn">Add</button>
+            </div>
+            <div class="col-md-1">
+                <button class="document-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+    <div class="row ht-5">
+        &nbsp;
+    </div>
+

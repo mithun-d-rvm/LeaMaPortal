@@ -167,9 +167,7 @@
                 url: "../Country/Edit",
                 type: "Get",
                 data: { id: id },
-                success: function (result) {
-                    debugger;
-                    //var data=jQuery.parseJSON(result);
+                success: function (result) {  
                     if (result.Errors == undefined || result.Errors == "") {
                         $("#CountryId").val(result.Id);
                         $("#CountryName").val(result.Country);
@@ -183,7 +181,6 @@
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
-                    // $("#").addClass("hide");
                 }
             });
     });
