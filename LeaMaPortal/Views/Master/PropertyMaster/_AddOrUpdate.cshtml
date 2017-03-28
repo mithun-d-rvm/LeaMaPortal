@@ -5,7 +5,7 @@
     Layout = null;
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create","PropertyMaster",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -113,19 +113,19 @@
                                 List<SelectListItem> Zone = new List<SelectListItem>();
                                 Zone.Add(new SelectListItem
                                 {
-                                    Text = "Manly",
-                                    Value = "Manly"
+                                    Text = "Zone 1 ",
+                                    Value = "Zone 1 "
                                 });
                                 Zone.Add(new SelectListItem
                                 {
-                                    Text = "Chennai",
-                                    Value = "Chennai",
+                                    Text = "Zone 2",
+                                    Value = "Zone 2",
                                     Selected = true
                                 });
                                 Zone.Add(new SelectListItem
                                 {
-                                    Text = "London",
-                                    Value = "London"
+                                    Text = "Zone 3",
+                                    Value = "Zone 3"
                                 });
                             }
 
@@ -148,19 +148,18 @@
                                 List<SelectListItem> Sector = new List<SelectListItem>();
                                 Sector.Add(new SelectListItem
                                 {
-                                    Text = "Manly",
-                                    Value = "Manly"
+                                    Text = "Sector 1",
+                                    Value = "Sector 1"
                                 });
                                 Sector.Add(new SelectListItem
                                 {
-                                    Text = "Chennai",
-                                    Value = "Chennai",
-                                    Selected = true
+                                    Text = "Sector 2",
+                                    Value = "Sector 2",
                                 });
                                 Sector.Add(new SelectListItem
                                 {
-                                    Text = "London",
-                                    Value = "London"
+                                    Text = "Sector 3",
+                                    Value = "Sector 3"
                                 });
                             }
 
@@ -639,7 +638,8 @@
                                     <option> ID 2 </option>
                                     <option> ID 3 </option>
                                 </select>*@
-                            @Html.DropDownListFor(model => model.Externalrefno, Model.ExternalrefnoList, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
+                            @Html.EditorFor(model => model.Externalrefno_unit, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Externalrefno_unit, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">

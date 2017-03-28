@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LeaMaPortal.Models.DBContext;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace LeaMaPortal.Models
 {
-    public class PropertyViewModel
+    public class PropertyViewModel 
     {
         [StringLength(100)]
         [DisplayName("Property Type:")]
@@ -129,8 +130,8 @@ namespace LeaMaPortal.Models
 
         [DisplayName("Property Valued Date:")]
         public DateTime? Valued_Date { get; set; }
-        
-        
+
+
         [DisplayName("Available From:")]
         public DateTime? Vacant_Start_Date { get; set; }
 
@@ -251,5 +252,7 @@ namespace LeaMaPortal.Models
         [StringLength(1)]
         public string Delmark { get; set; }
 
+        public string propertiesdt { get; set; }
+        public string propertiesdt1 { get; set; }
     }
 }

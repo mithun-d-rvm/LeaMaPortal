@@ -287,30 +287,31 @@
 
     function GetPropertyMaster()
     {
-
+        $("#img-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
-        //$.ajax(
-        //{
-        //    url: "../Country/AddOrUpdate",
-        //    type: "Get",
-        //    data: {},
-        //    contentType: "application/json",
-        //    processData: false,
-        //    success: function (html) {
-        //        $("#ContainerAddOrUpdate").html(html);
-        //    },
-        //    error: function (jqXhr, textStatus, errorThrown) {
-        //        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-        //    },
-        //    complete: function () {
-        //        //   $("#VerifyIdDetailsLoader").addClass("hide");
-        //    }
-        //});
         $.ajax(
         {
             url: "../PropertyMaster/AddOrUpdate",
             type: "Get",
             data: { Search :""},
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../PropertyMaster/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
             success: function (html) {
                 $("#ContainerList").html(html);
             },
@@ -318,7 +319,7 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
     }
