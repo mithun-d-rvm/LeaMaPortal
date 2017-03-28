@@ -68,8 +68,8 @@
                         <div class="divTableCell">@item.Phoneno/</div>
                         <div class="divTableCell">@item.Doj/</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit country-edit", title = "Edit", @data_id = @item.Country })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash country-delete", @style = "color:red", @title = "Delete", @data_id = @item.Country })
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit cartaker-edit", title = "Edit", @data_id = @item.Caretaker_id })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash cartaker-delete", @style = "color:red", @title = "Delete", @data_id = @item.Caretaker_id })
 
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
@@ -166,7 +166,7 @@
 
     //Edit get
 
-    $(".country-edit").click(function (e) {
+    $(".cartaker-edit").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
         $.ajax(
@@ -195,7 +195,7 @@
             });
     });
 
-    $(".country-delete").click(function (e) {
+    $(".cartaker-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
         var r = confirm("Are you sure want to delete?");

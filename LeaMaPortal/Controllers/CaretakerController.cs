@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using LeaMaPortal.Models.DBContext;
 using LeaMaPortal.Models;
 using MvcPaging;
+using MySql.Data.MySqlClient;
+using System.Threading.Tasks;
 
 namespace LeaMaPortal.Controllers
 {
@@ -59,6 +61,55 @@ namespace LeaMaPortal.Controllers
         {
             return PartialView("../Master/Caretaker/_AddOrUpdate", new CaretakerViewModel());
         }
+
+        [HttpPost]
+        public async Task<ActionResult> AddOrUpdate(CaretakerViewModel model)
+        {
+            MessageResult result = new MessageResult();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    MySqlParameter pa = new MySqlParameter();
+                    string PFlag = null;
+                    if (model.Id == 0)
+                    {
+                        PFlag = "INSERT";
+                    }
+                    else
+                    {
+                        PFlag = "UPDATE";
+                    }
+                    object[] parameters = {
+                         new MySqlParameter("@PFlag", PFlag),
+                         new MySqlParameter("@PId", model.Id),
+                         new MySqlParameter("@PPCaretaker_id",model.Caretaker_id),
+                         new MySqlParameter("@PCaretaker_name", model.Caretaker_Name),
+                         new MySqlParameter("@PDob", model.Dob),
+                         new MySqlParameter("@PAddress1", model.Address1),
+                         new MySqlParameter("@PAddress2", model.Address2),
+                         new MySqlParameter("@PRegion_name", model.Region_Name),
+                         new MySqlParameter("@PCountry", model.Country),
+                         new MySqlParameter("@PCity", model.City),
+                         new MySqlParameter("@PState", model.State),
+                         new MySqlParameter("@PPincode", model.Pincode),
+                         new MySqlParameter("@PPhoneno", model.Phoneno),
+                         new MySqlParameter("@PEmail", model.Email),
+                         new MySqlParameter("@PDoj", model.Doj),
+                         new MySqlParameter("@PCreatedUser",System.Web.HttpContext.Current.User.Identity.Name)
+                    };
+                    var tenantCompany = await db.Database.SqlQuery<object>("call leama.Usp_Caretaker_All(@PFlag, @PId, @PCaretaker_id, @PCaretaker_Name, @PDob, @PAddress1, @PAddress2, @PRegion_Name, @PCountry, @PCity, @PState, @PPincode, @PPhoneno, @PEmail, @PDoj, @PCreateduser)", parameters).ToListAsync();
+                }
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
+
+        }
+
 
         // GET: Caretaker/Details/5
         public ActionResult Details(int? id)
