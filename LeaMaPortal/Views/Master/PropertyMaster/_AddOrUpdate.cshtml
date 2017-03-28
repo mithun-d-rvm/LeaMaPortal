@@ -17,8 +17,8 @@
                 <div class="col-md-6">
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
-                            @*Property Type:*@
-                            @Html.LabelFor(model => model.Property_Flag, htmlAttributes: new { @class = "control-label" })
+                            Property Type:
+                            @*@Html.LabelFor(model => model.Property_Flag, htmlAttributes: new { @class = "control-label" })*@
                         </div>
                         <div class="col-md-8">
                             @*<div class="col-md-6">
@@ -74,8 +74,29 @@
                             Compound:
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Compound, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Compound, "", new { @class = "text-danger" })
+                            @{
+                                List<SelectListItem> Compound = new List<SelectListItem>();
+                                Compound.Add(new SelectListItem
+                                {
+                                    Text = "Manly",
+                                    Value = "Manly"
+                                });
+                                Compound.Add(new SelectListItem
+                                {
+                                    Text = "Chennai",
+                                    Value = "Chennai",
+                                    Selected = true
+                                });
+                                Compound.Add(new SelectListItem
+                                {
+                                    Text = "London",
+                                    Value = "London"
+                                });
+                            }
+
+                            @Html.DropDownListFor(model => model.Compound, Compound, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
+
+
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -84,10 +105,10 @@
                         </div>
                         <div class="col-md-8">
                             @*<select class="master-form-input">
-                                <option> Zone 1 </option>
-                                <option> Zone 2 </option>
-                                <option> Zone 3 </option>
-                            </select>*@
+                                    <option> Zone 1 </option>
+                                    <option> Zone 2 </option>
+                                    <option> Zone 3 </option>
+                                </select>*@
                             @{
                                 List<SelectListItem> Zone = new List<SelectListItem>();
                                 Zone.Add(new SelectListItem
@@ -119,12 +140,12 @@
                         </div>
                         <div class="col-md-8">
                             @*<select class="master-form-input">
-                                <option> Sector 1 </option>
-                                <option> Sector 2 </option>
-                                <option> Sector 3 </option>
-                            </select>*@
+                                    <option> Sector 1 </option>
+                                    <option> Sector 2 </option>
+                                    <option> Sector 3 </option>
+                                </select>*@
                             @{
-                                List<SelectListItem> Sector= new List<SelectListItem>();
+                                List<SelectListItem> Sector = new List<SelectListItem>();
                                 Sector.Add(new SelectListItem
                                 {
                                     Text = "Manly",
@@ -176,12 +197,12 @@
                         </div>
                         <div class="col-md-8">
                             @*<select class="master-form-input">
-                                <option> New </option>
-                                <option> 1 Year old </option>
-                                <option> More than 1 year </option>
-                            </select>*@
+                                    <option> New </option>
+                                    <option> 1 Year old </option>
+                                    <option> More than 1 year </option>
+                                </select>*@
                             @{
-                                List<SelectListItem> PropertyUsage= new List<SelectListItem>();
+                                List<SelectListItem> PropertyUsage = new List<SelectListItem>();
                                 PropertyUsage.Add(new SelectListItem
                                 {
                                     Text = "Manly",
@@ -211,10 +232,10 @@
                         </div>
                         <div class="col-md-8">
                             @*<select class="master-form-input">
-                                <option> Category 1 </option>
-                                <option> Category 2 </option>
-                                <option> Category 3 </option>
-                            </select>*@
+                                    <option> Category 1 </option>
+                                    <option> Category 2 </option>
+                                    <option> Category 3 </option>
+                                </select>*@
                             @{
                                 List<SelectListItem> PropertyCategory = new List<SelectListItem>();
                                 PropertyCategory.Add(new SelectListItem
@@ -296,12 +317,12 @@
                         </div>
                         <div class="col-md-8">
                             @*<select class="master-form-input">
-                                <option> Region 1 </option>
-                                <option> Region 2 </option>
-                                <option> Region 3 </option>
-                            </select>*@
+                                    <option> Region 1 </option>
+                                    <option> Region 2 </option>
+                                    <option> Region 3 </option>
+                                </select>*@
                             @{
-                                List<SelectListItem> Region= new List<SelectListItem>();
+                                List<SelectListItem> Region = new List<SelectListItem>();
                                 Region.Add(new SelectListItem
                                 {
                                     Text = "Manly",
@@ -489,10 +510,10 @@
                         </div>
                         <div class="col-md-8">
                             @*<select class="master-form-input">
-                                <option> ID 1 </option>
-                                <option> ID 2 </option>
-                                <option> ID 3 </option>
-                            </select>*@
+                                    <option> ID 1 </option>
+                                    <option> ID 2 </option>
+                                    <option> ID 3 </option>
+                                </select>*@
                             @{
                                 List<SelectListItem> Taqtheeq = new List<SelectListItem>();
                                 Taqtheeq.Add(new SelectListItem
@@ -523,10 +544,10 @@
                         </div>
                         <div class="col-md-8">
                             @*<select class="master-form-input">
-                                <option> ID 1 </option>
-                                <option> ID 2 </option>
-                                <option> ID 3 </option>
-                            </select>*@
+                                    <option> ID 1 </option>
+                                    <option> ID 2 </option>
+                                    <option> ID 3 </option>
+                                </select>*@
                             @{
                                 List<SelectListItem> MainProperty = new List<SelectListItem>();
                                 MainProperty.Add(new SelectListItem
@@ -557,10 +578,10 @@
                         </div>
                         <div class="col-md-8">
                             @*<select class="master-form-input">
-                                <option> Villa </option>
-                                <option> Real Estate </option>
-                                <option> Bunglow </option>
-                            </select>*@
+                                    <option> Villa </option>
+                                    <option> Real Estate </option>
+                                    <option> Bunglow </option>
+                                </select>*@
                             @{
                                 List<SelectListItem> MainPropertyName = new List<SelectListItem>();
                                 MainPropertyName.Add(new SelectListItem
@@ -596,38 +617,43 @@
                     </div>
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
-                            Units Name:
+                            Unit Name:
                         </div>
                         <div class="col-md-8">
-                            <select class="master-form-input">
-                                <option> ID 1 </option>
-                                <option> ID 2 </option>
-                                <option> ID 3 </option>
-                            </select>
+                            @*<select class="master-form-input">
+                                    <option> ID 1 </option>
+                                    <option> ID 2 </option>
+                                    <option> ID 3 </option>
+                                </select>*@
+                            @Html.EditorFor(model => model.Unit_Property_Name, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Unit_Property_Name, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
-                            External Ref No:
+                            External Ref No (Unit):
                         </div>
                         <div class="col-md-8">
-                            <select class="master-form-input">
-                                <option> ID 1 </option>
-                                <option> ID 2 </option>
-                                <option> ID 3 </option>
-                            </select>
+                            @*<select class="master-form-input">
+                                    <option> ID 1 </option>
+                                    <option> ID 2 </option>
+                                    <option> ID 3 </option>
+                                </select>*@
+                            @Html.DropDownListFor(model => model.Externalrefno, Model.ExternalrefnoList, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
-                            Property Value (in AED):
+                            Property Value (in AED) (Unit):
                         </div>
                         <div class="col-md-8">
-                            <select class="master-form-input">
-                                <option> Villa </option>
-                                <option> Real Estate </option>
-                                <option> Bunglow </option>
-                            </select>
+                            @*<select class="master-form-input">
+                                    <option> Villa </option>
+                                    <option> Real Estate </option>
+                                    <option> Bunglow </option>
+                                </select>*@
+                            @Html.EditorFor(model => model.AEDvalue_unit, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.AEDvalue_unit, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -635,15 +661,19 @@
                             Purchased Date:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.Purchased_date, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Purchased_date, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
-                            Property Value Date:
+                            Property Valued Date:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.Valued_Date, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Valued_Date, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -651,7 +681,9 @@
                             Occupancy Status:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -659,15 +691,17 @@
                             Available From:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            @Html.EditorFor(model => model.Vacant_Start_Date, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Vacant_Start_Date, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
-                            Min Rental Rate/Month (in AED):
+                            Min Rental Rate/Month (in AED) (Unit):
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            @Html.EditorFor(model => model.Rental_Rate_Month, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Rental_Rate_Month, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -675,7 +709,8 @@
                             Floor Number:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            @Html.EditorFor(model => model.Floorno, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Floorno, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -683,7 +718,9 @@
                             FLoor Level:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.Floorlevel, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Floorlevel, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -691,23 +728,25 @@
                             Units Usage:
                         </div>
                         <div class="col-md-8">
-                            <select class="master-form-input">
-                                <option> ID 1 </option>
-                                <option> ID 2 </option>
-                                <option> ID 3 </option>
-                            </select>
+                            @*<select class="master-form-input">
+                                    <option> ID 1 </option>
+                                    <option> ID 2 </option>
+                                    <option> ID 3 </option>
+                                </select>*@
+                            @Html.DropDownListFor(model => model.Property_Usage_unit, Model.Property_Usage_unitList, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
-                            Property Category:
+                            Property Category (Unit):
                         </div>
                         <div class="col-md-8">
-                            <select class="master-form-input">
-                                <option> ID 1 </option>
-                                <option> ID 2 </option>
-                                <option> ID 3 </option>
-                            </select>
+                            @*<select class="master-form-input">
+                                    <option> ID 1 </option>
+                                    <option> ID 2 </option>
+                                    <option> ID 3 </option>
+                                </select>*@
+                            @Html.DropDownListFor(model => model.Property_Type_unit, Model.Property_Type_unitList, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -715,7 +754,8 @@
                             Total Area:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            @Html.EditorFor(model => model.Total_Area, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Total_Area, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -723,7 +763,8 @@
                             Unit Common Area:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            @Html.EditorFor(model => model.Unit_Common_Area, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Unit_Common_Area, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -731,7 +772,8 @@
                             Common Area:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            @Html.EditorFor(model => model.commonarea, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.commonarea, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -739,7 +781,17 @@
                             Parking Number:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            @Html.EditorFor(model => model.Parkingno, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Parkingno, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Comments (Unit):
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Unitcomments, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Unitcomments, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -747,7 +799,8 @@
                             Car Taker Name:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            @Html.EditorFor(model => model.Caretaker_Name, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Caretaker_Name, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -755,11 +808,22 @@
                             Car Taker ID:
                         </div>
                         <div class="col-md-8">
-                            <select class="master-form-input">
-                                <option> ID 1 </option>
-                                <option> ID 2 </option>
-                                <option> ID 3 </option>
-                            </select>
+                            @*<select class="master-form-input">
+                                    <option> ID 1 </option>
+                                    <option> ID 2 </option>
+                                    <option> ID 3 </option>
+                                </select>*@
+                            @Html.DropDownListFor(model => model.Caretaker_ID, Model.Caretaker_IDList, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            Occupancy Status (Unit):
+                        </div>
+                        <div class="col-md-8">
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.Status_unit, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Status_unit, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -784,130 +848,130 @@
                     </div>
                 </div>
             </div>
+            @*
+                <div class="row p-b-25">
+                    <span> <strong> Fecility Details </strong> </span>
+                </div>
 
-            <div class="row p-b-25">
-                <span> <strong> Fecility Details </strong> </span>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 document-row">
-                    <div class="col-md-1">
-                        ID
-                    </div>
-                    <div class="col-md-2">
-                        Fecility ID
-                    </div>
-                    <div class="col-md-2">
-                        Fecility Name
-                    </div>
-                    <div class="col-md-3">
-                        Numbers Available
+                <div class="row">
+                    <div class="col-md-12 document-row">
+                        <div class="col-md-1">
+                            ID
+                        </div>
+                        <div class="col-md-2">
+                            Fecility ID
+                        </div>
+                        <div class="col-md-2">
+                            Fecility Name
+                        </div>
+                        <div class="col-md-3">
+                            Numbers Available
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row ht-5">
-                &nbsp;
-            </div>
-
-            <!-- Begin Dynamic row -->
-            @*@Html.Partial("_FecilityDetails")*@
-            <!-- End Dynamic row -->
-
-            <div class="row p-b-25 p-t-17">
-                <span> <strong> Utility Details </strong> </span>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 document-row">
-                    <div class="col-md-1">
-                        ID
-                    </div>
-                    <div class="col-md-3">
-                        Utility ID
-                    </div>
-                    <div class="col-md-4">
-                        Utility Name
-                    </div>
+                <div class="row ht-5">
+                    &nbsp;
                 </div>
-            </div>
-            <div class="row ht-5">
-                &nbsp;
-            </div>
 
-            <!-- Begin Dynamic row -->
-            @*@Html.Partial("_UtilityDetails")*@
-            <!-- End Dynamic row -->
-            <!-- Begin Grid view -->
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row leama-fieldset leama-header-top" style="background-color:white;">
-                <div class="col-md-12">
-                    <div class="col-md-12 leama-fieldset ">
-                        <div class="col-md-2 pull-left">
-                            @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
+                <!-- Begin Dynamic row -->
+                @Html.Partial("_FecilityDetails")
+                        <!-- End Dynamic row -->
+
+                        <div class="row p-b-25 p-t-17">
+                            <span> <strong> Utility Details </strong> </span>
                         </div>
-                        <div class="col-md-4">
-                            <input type="text" class="leama-field form-control" />
-                        </div>
-                        <div class="col-md-4">
-                            <button type="submit" class="btn btn-info leama-search-btn col-md-4">Go</button>
-                        </div>
-                    </div>
 
-                    <div class="col-md-12 leama-fieldset ">
-                        &nbsp;
-                    </div>
-
-                    <div class="divTable leama-fieldset col-md-12">
-
-
-                        <div class="divTableBody divFontBodyTable">
-                            <div class="divTableHeading">
-                                <div class="divTableCell">Country Name</div>
-                                <div class="divTableCell">Action</div>
-
+                        <div class="row">
+                            <div class="col-md-12 document-row">
+                                <div class="col-md-1">
+                                    ID
+                                </div>
+                                <div class="col-md-3">
+                                    Utility ID
+                                </div>
+                                <div class="col-md-4">
+                                    Utility Name
+                                </div>
                             </div>
-                            <div class="divTableRow">
-                                <div class="divTableCell">Chennai</div>
-                                <div class="divTableCell">
-                                    @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
-                                    @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
-                                    @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
+                        </div>
+                        <div class="row ht-5">
+                            &nbsp;
+                        </div>
+
+                        <!-- Begin Dynamic row -->
+                        @Html.Partial("_UtilityDetails")
+                        <!-- End Dynamic row -->
+                        <!-- Begin Grid view -->
+                        <div class="row">
+                            &nbsp;
+                        </div>
+                        <div class="row leama-fieldset leama-header-top" style="background-color:white;">
+                            <div class="col-md-12">
+                                <div class="col-md-12 leama-fieldset ">
+                                    <div class="col-md-2 pull-left">
+                                        @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" class="leama-field form-control" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="submit" class="btn btn-info leama-search-btn col-md-4">Go</button>
+                                    </div>
                                 </div>
 
-                            </div>
-                            <div class="divTableRow divFontBodyTable">
-                                <div class="divTableCell">Coimbatore</div>
-                                <div class="divTableCell">
-                                    @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
-                                    @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
-                                    @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
-
+                                <div class="col-md-12 leama-fieldset ">
+                                    &nbsp;
                                 </div>
 
+                                <div class="divTable leama-fieldset col-md-12">
+
+
+                                    <div class="divTableBody divFontBodyTable">
+                                        <div class="divTableHeading">
+                                            <div class="divTableCell">Country Name</div>
+                                            <div class="divTableCell">Action</div>
+
+                                        </div>
+                                        <div class="divTableRow">
+                                            <div class="divTableCell">Chennai</div>
+                                            <div class="divTableCell">
+                                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
+                                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
+                                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
+                                            </div>
+
+                                        </div>
+                                        <div class="divTableRow divFontBodyTable">
+                                            <div class="divTableCell">Coimbatore</div>
+                                            <div class="divTableCell">
+                                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
+                                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
+                                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="col-sm-6">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <ul class="pagination pull-right">
+                                            <li><a href="#">1</a></li>
+                                            <li class="active"><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">5</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-
                         </div>
-
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="col-sm-6">
-                        </div>
-                        <div class="col-sm-6">
-                            <ul class="pagination pull-right">
-                                <li><a href="#">1</a></li>
-                                <li class="active"><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Grid view -->
-
+                        <!-- End Grid view -->
+            *@
         </div>
     </div>
-}
+                                }

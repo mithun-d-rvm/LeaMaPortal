@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace LeaMaPortal.Models
 {
@@ -93,6 +94,9 @@ namespace LeaMaPortal.Models
         [DisplayName("External ref no:")]
         public string Externalrefno { get; set; }
 
+        [NotMapped]
+        public SelectList ExternalrefnoList { get; set; }
+
         [DisplayName("Number of Floors:")]
         public int? Noofoffloors { get; set; }
 
@@ -116,6 +120,9 @@ namespace LeaMaPortal.Models
 
         [DisplayName("Property Value (in AED):")]
         public float? AEDvalue { get; set; }
+
+        [NotMapped]
+        public SelectList AEDvalueList { get; set; }
 
         [DisplayName("Purchased Date:")]
         public DateTime? Purchased_date { get; set; }
@@ -153,6 +160,9 @@ namespace LeaMaPortal.Models
         [DisplayName("Units Name:")]
         public string Unit_Property_Name { get; set; }
 
+        [NotMapped]
+        public SelectList Unit_Property_NameList { get; set; }
+
         [StringLength(100)]
         [DisplayName("External Ref No:")]
         public string Externalrefno_unit { get; set; }
@@ -188,9 +198,15 @@ namespace LeaMaPortal.Models
         [DisplayName("Units Usage:")]
         public string Property_Usage_unit { get; set; }
 
+        [NotMapped]
+        public SelectList Property_Usage_unitList { get; set; }
+
         [StringLength(100)]
         [DisplayName("Property Category (Unit):")]
         public string Property_Type_unit { get; set; }
+
+        [NotMapped]
+        public SelectList Property_Type_unitList { get; set; }
 
         [DisplayName("Total Area:")]
         public float? Total_Area { get; set; }
@@ -218,6 +234,9 @@ namespace LeaMaPortal.Models
 
         [DisplayName("Car Taker ID:")]
         public int? Caretaker_ID { get; set; }
+
+        [NotMapped]
+        public SelectList Caretaker_IDList { get; set; }
 
         [DisplayName("Using by Hameem and not for lease:")]
         public int? Company_occupied_Flag { get; set; }

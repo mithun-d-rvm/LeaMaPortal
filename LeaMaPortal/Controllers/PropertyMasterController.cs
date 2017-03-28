@@ -17,7 +17,8 @@ namespace LeaMaPortal.Controllers
         [HttpGet]
         public PartialViewResult AddOrUpdate()
         {
-            return PartialView("../Master/PropertyMaster/_AddOrUpdate", new PropertyViewModel());
+            PropertyViewModel model = new PropertyViewModel();
+            return PartialView("../Master/PropertyMaster/_AddOrUpdate", model);
         }
         // GET: PropertyMaster/Details/5
         public ActionResult Details(int id)
