@@ -44,6 +44,18 @@
             case 11:
                 GetTenantIndividual();
                 break;
+            case 12:
+                GetCheckList();
+                break;
+            case 13:
+                GetFacility();
+                break;
+            case 14:
+                GetUtility();
+                break;
+            case 18:
+                GetEmailTemplate();
+                break;
         }
 
     }
@@ -254,6 +266,157 @@
             url: "../PropertyMaster/Index",
             type: "Get",
             data: { Search :""},
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+
+    function GetCheckList() {
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../CheckList/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+        $.ajax(
+        {
+            url: "../CheckList/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+
+    function GetFacility() {
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../Facility/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+        $.ajax(
+        {
+            url: "../Facility/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+
+    function GetUtility() {
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../Utility/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+        $.ajax(
+        {
+            url: "../Utility/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+    function GetEmailTemplate() {
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../EmailTemplate/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+        $.ajax(
+        {
+            url: "../EmailTemplate/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
             success: function (html) {
                 $("#ContainerList").html(html);
             },

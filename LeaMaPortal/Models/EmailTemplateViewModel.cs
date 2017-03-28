@@ -10,7 +10,7 @@ namespace LeaMaPortal.Models
     {
         public int Id { get; set; }
         [DisplayName("Template ID")]
-        public string TemplateID { get; set; }
+        public int? TemplateID { get; set; }
         [DisplayName("Template Name")]
         public string TemplateName { get; set; }
         [DisplayName("Subject")]
