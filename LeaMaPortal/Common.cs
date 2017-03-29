@@ -15,5 +15,11 @@ namespace LeaMaPortal
         public const string INSERT = "INSERT", UPDATE = "UPDATE", DELETE = "DELETE", SELECT= "SELECT",View = "View";
         public const int DefaultMaster = 10;
         public const string TenantIndividualDocumentContainer = "Documents/TenantIndividual/";
+
+        //tenant company
+        public static List<string> TenantType = new List<string>() { "Government","Person", "Company" };
+        public static List<string> Emirate = new List<string>() { "Default" };
+        public static List<string> ComapanyActivity = new List<string>() { "Activity1" };
+        public static List<string> Issuance_authority = new List<string>() { "List-1" };
     }
 }

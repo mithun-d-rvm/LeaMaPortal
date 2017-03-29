@@ -202,8 +202,21 @@ namespace LeaMaPortal.Controllers
             //    State = "",
             //    TenantId = 0
             //});
-                
-            return PartialView("../Master/TenantCompany/_AddOrUpdate", new TenantCompanyViewModel());
+            TenantCompanyViewModel model = new TenantCompanyViewModel();
+            var tenantId = db.tbl_tenant_company.OrderByDescending(x => x.Id).FirstOrDefault();
+            ViewBag.TenantId = tenantId!=null? tenantId.Tenant_Id+1: 1;
+            ViewBag.TenantType= new SelectList(Common.TenantType);
+
+            model.Title = Common.DefaultTitle;
+            ViewBag.TitleDisplay = new SelectList(Common.Title, Common.DefaultTitle);
+
+            ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
+            //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
+            ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
+            ViewBag.Emirate = new SelectList(Common.Emirate);
+            ViewBag.ComapanyActivity = new SelectList(Common.ComapanyActivity);
+            ViewBag.Issuance_authority = new SelectList(Common.Issuance_authority);
+            return PartialView("../Master/TenantCompany/_AddOrUpdate",model );
         }
 
         [HttpGet]
@@ -214,6 +227,15 @@ namespace LeaMaPortal.Controllers
             {
                 return PartialView("../Master/TenantCompany/_AddOrUpdate", new TenantCompanyViewModel());
             }
+            ViewBag.TenantId = tenantCompany.Tenant_Id;
+            ViewBag.TenantType = new SelectList(Common.TenantType, tenantCompany.Type);
+            ViewBag.TitleDisplay = new SelectList(Common.Title,tenantCompany.Title);
+            ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name",tenantCompany.City);
+            //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
+            ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name",tenantCompany.Nationality);
+            ViewBag.Emirate = new SelectList(Common.Emirate,tenantCompany.Emirate);
+            ViewBag.ComapanyActivity = new SelectList(Common.ComapanyActivity,tenantCompany.Actitvity);
+            ViewBag.Issuance_authority = new SelectList(Common.Issuance_authority,tenantCompany.Issuance_authority);
             var tenantCompanyData = new TenantCompanyViewModel()
             {
                 Address = tenantCompany.address,
@@ -248,7 +270,7 @@ namespace LeaMaPortal.Controllers
                 TenantType = tenantCompany.Type,
                 Title = tenantCompany.Title,
                 TradelicenseNo = tenantCompany.TradelicenseNo,
-                CompanyContactDetails = db.tbl_tenant_companydt1.Where(y => y.Tenant_Id == tenantCompany.Tenant_Id).Select(z => new CompanyContactDetail()
+                CompanyContactExistDetails = db.tbl_tenant_companydt1.Where(y => y.Tenant_Id == tenantCompany.Tenant_Id).Select(z => new CompanyContactDetail()
                 {
                     ContactPersonName = z.Cper,
                     Department = z.Dept,
@@ -260,7 +282,7 @@ namespace LeaMaPortal.Controllers
                     Salutations = z.Salutations,
                     TenantId = z.Tenant_Id
                 }).ToList(),
-                CompanyDetails = db.tbl_tenant_companydt.Where(y => y.Tenant_Id == tenantCompany.Tenant_Id).Select(z => new CompanyDetail()
+                CompanyExistDetails = db.tbl_tenant_companydt.Where(y => y.Tenant_Id == tenantCompany.Tenant_Id).Select(z => new CompanyDetail()
                 {
                     Branch = z.Branch,
                     BranchAddress = z.BranchAdd,
@@ -292,12 +314,53 @@ namespace LeaMaPortal.Controllers
                     string PFlag = null;
                     if (model.Id == 0)
                     {
+                        var tenantId = db.tbl_tenant_company.OrderByDescending(x => x.Id).FirstOrDefault();
+                        model.TenantId = tenantId != null ? tenantId.Tenant_Id + 1 : 1;
                         PFlag = "INSERT";
                     }
                     else
                     {
                         PFlag = "UPDATE";
                     }
+                    string companyDet = "";
+                    if(model.CompanyExistDetails!=null)
+                    {
+                        foreach(var item in model.CompanyExistDetails)
+                        {
+                            
+                                if (string.IsNullOrWhiteSpace(companyDet))
+                                {
+                                    companyDet = "(" + model.TenantId + ",'" + item.Branch + "','" + item.BranchAddress +
+                                        "','" + item.BranchAddress1 + "','" + item.City + "','" + item.State + "','" + item.Country + "','" + item.Pincode
+                                        + "','" + item.Phoneno + "','" + item.EmailId + "','" + item.FaxNo + "','" + item.Remarks + "','" + DateTime.Now.Year + "')";
+                                }
+                                else
+                                {
+                                    companyDet += ",(" + model.TenantId + ",'" + item.Branch + "','" + item.BranchAddress +
+                                       "','" + item.BranchAddress1 + "','" + item.City + "','" + item.State + "','" + item.Country + "','" + item.Pincode
+                                       + "','" + item.Phoneno + "','" + item.EmailId + "','" + item.FaxNo + "','" + item.Remarks + "','" + DateTime.Now.Year + "')";
+                                }
+                        }
+                    }
+                    if (model.CompanyDetails != null)
+                    {
+                        foreach (var item in model.CompanyDetails)
+                        {
+                                if (string.IsNullOrWhiteSpace(companyDet))
+                                {
+                                    companyDet = "(" + model.TenantId + ",'" + item.Branch + "','" + item.BranchAddress +
+                                        "','" + item.BranchAddress1 + "','" + item.City + "','" + item.State + "','" + item.Country + "','" + item.Pincode
+                                        + "','" + item.Phoneno + "','" + item.EmailId + "','" + item.FaxNo + "','" + item.Remarks + "','" + DateTime.Now.Year + "')";
+                                }
+                                else
+                                {
+                                    companyDet += ",(" + model.TenantId + ",'" + item.Branch + "','" + item.BranchAddress +
+                                       "','" + item.BranchAddress1 + "','" + item.City + "','" + item.State + "','" + item.Country + "','" + item.Pincode
+                                       + "','" + item.Phoneno + "','" + item.EmailId + "','" + item.FaxNo + "','" + item.Remarks + "','" + DateTime.Now.Year + "')";
+                                }
+                        }
+                    }
+
                     object[] parameters = {
                          new MySqlParameter("@PFlag", PFlag),
                          new MySqlParameter("@PTenant_Id", model.TenantId),
@@ -332,14 +395,15 @@ namespace LeaMaPortal.Controllers
                          new MySqlParameter("@PADWEA_Regid", model.ADWEARegid),
                          new MySqlParameter("@PType", model.TenantType),
                          new MySqlParameter("@PCreateduser", System.Web.HttpContext.Current.User.Identity.Name),
-                         new MySqlParameter("@Ptenant_companydt", null),
+                         new MySqlParameter("@Ptenant_companydt", companyDet),
                          new MySqlParameter("@Ptenant_companydt1", null),
                          new MySqlParameter("@Ptenant_companydoc", null)
 
                     };
                     var tenantCompany = await db.Database.SqlQuery<object>("CALL Usp_Tenant_Company_All(@PFlag, @PTenant_Id, @PCompanyName, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser, @Ptenant_companydt, @Ptenant_companydt1, @Ptenant_companydoc)", parameters).ToListAsync();
                 }
-                return Json(result, JsonRequestBehavior.AllowGet);
+                return RedirectToAction("../Master/Index", new { selected = 10 });
+                //return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch(Exception e)
             {

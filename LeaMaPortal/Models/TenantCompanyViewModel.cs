@@ -79,7 +79,9 @@ namespace LeaMaPortal.Models
 
         public string ADWEARegid { get; set; }
         public List<CompanyDetail> CompanyDetails { get; set; }
+        public List<CompanyDetail> CompanyExistDetails { get; set; }
         public List<CompanyContactDetail> CompanyContactDetails { get; set; }
+        public List<CompanyContactDetail> CompanyContactExistDetails { get; set; }
     }
     public class CompanyDetail
     {
