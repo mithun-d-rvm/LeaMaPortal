@@ -16,6 +16,7 @@
 <!DOCTYPE html>
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "TenantCompany" }))
 {
+    @Html.HiddenFor(m => m.Id, new { @id = "Id" })
     <div class="inner-block">
         <div class="blank">
             <div class="row">
@@ -472,6 +473,7 @@
                             </select>
                         </div>
                     </div>
+
                     @*<div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
                             Visa Issue Date:
@@ -506,141 +508,133 @@
                     </div>*@
                 </div>
             </div>
-
-            <div class="row p-b-25">
-                <span> <strong> Company Details </strong> </span>
-            </div>
-
-            <div class="col-md-10 document-row" id="GridView">
-                <div class="col-md-12">
-                    <div class="col-md-4 text-left">Branch</div>
-                    <div class="col-md-4 text-left">City</div>
-                    <div class="col-md-4 text-left">Address 01</div>
-                    <div class="col-md-4 text-left">Address 02</div>
-                    <div class="col-md-4 text-left">State</div>
-                    <div class="col-md-4 text-left">Country</div>
-                    <div class="col-md-4 text-left">Pincode</div>
-                    <div class="col-md-4 text-left">Phonenumber</div>
-                    <div class="col-md-4 text-left">Remarks</div>
-                    <div class="col-md-4 text-left">Email Id</div>
-                    <div class="col-md-4 text-left">Fax</div>
-                    <div class="col-md-4 text-left"><input type="button" id="addDetailsbutton" value="Add" /></div>
-
-
+            <div class="row">
+                <div class="row p-b-25 p-t-17">
+                    <span> <strong> Company Details </strong> </span>
                 </div>
-                <div class="clearfix"><br /><br /></div>
-                <table id="tblDetailscontent" class="col-md-12">
-                    <tr>
-
-                        <td class="col-md-4">
-                            <input type="text" id="txtBranch" name="txtBranch">
-                        </td>
-                        <td class="col-md-4">
-                            <input type="text" id="txtCity" name="txtCity">
-                        </td>
-                        <td class="col-md-4">
-                            <textarea id="txtAdd01" name="txtAdd01"></textarea>
-                        </td>
-                        <td class="col-md-4">
-                            <textarea id="txtAdd02" name="txtAdd02"></textarea>
-                        </td>
-                        <td class="col-md-4">
-                            <input type="text" id="txtState" name="txtState">
-                        </td>
-                        <td class="col-md-4">
-                            <input type="text" id="txtCountry" name="txtCountry">
-                        </td>
-                        <td class="col-md-4">
-                            <input type="text" id="txtPincode" name="txtPincode">
-                        </td>
-                        <td class="col-md-4">
-                            <input type="text" id="txtPhonenumber" name="txtPhonenumber">
-                        </td>
-                        <td class="col-md-4">
-                            <textarea id="txtRemarks" name="txtRemarks"></textarea>
-                        </td>
-                        <td class="col-md-4">
-                            <input type="text" id="txtEmailid" name="txtEmailid">
-                        </td>
-                        <td class="col-md-4">
-                            <input type="text" id="txtFax" name="txtFax">
-                        </td>
-                       
-                        <td class="col-md-4">
-                            <button type="button" class="removeDetailsbutton" title="Remove this row">X</button>
-                        </td>
-                    </tr>
-
-                </table>
-        </div>
+                @*<div class="row">
+                    <div class="col-md-12 document-row">
+                        <div class="col-md-1">
+                            Branch
+                        </div>
+                        <div class="col-md-1">
+                            City
+                        </div>
+                        <div class="col-md-1">
+                            Address 01
+                        </div>
+                        <div class="col-md-1">
+                            Address 02
+                        </div>
+                        <div class="col-md-1">
+                            State
+                        </div>
+                        <div class="col-md-1">
+                            Country
+                        </div>
+                        <div class="col-md-1">
+                            Pincode
+                        </div>
+                        <div class="col-md-1">
+                            Phone Number
+                        </div>
+                        <div class="col-md-1">
+                            Remarks
+                        </div>
+                        <div class="col-md-1">
+                            Email Id
+                        </div>
+                        <div class="col-md-1">
+                            FaxSSS
+                        </div>
+                    </div>
+                </div>*@
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+                @*<input type="button" class="document-btn" id="add" value="Add" onclick="Add(this)">
+                @Html.Partial("../Master/TenantCompany/_CompanyDetail", new LeaMaPortal.Models.CompanyDetail())*@
+                @*@if (Model.CompanyDetails.Count() == 0)
+                {
+                    Html.Partial("/TenantCompany/_CompanyDetail", new LeaMaPortal.Models.CompanyDetail());
+                }*@
+                @*@using (Html.BeginForm())
+                {
+                    <input type="button" class="document-btn" id="add" value="Add" onclick="Add(this)">
+                    foreach (var CompanyDetail in Model.CompanyDetails.ToList())
+                    {
+                        @Html.Partial("../Master/TenantCompany/_CompanyDetail", CompanyDetail);
+                    }
+                }*@
+                <div class="row" id="companyDetailsForm">
+                    <div id="Gridview" class="row document-row">
+                        <div class="col-md-12">
+                            <div class="col-md-2 form-group">
+                                <label for="branch">Branch</label>
+                                <input type="text" class="master-form-input" id="branch" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="city">City</label>
+                                <input type="text" class="master-form-input" id="city" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="add01">Address 01</label>
+                                <textarea id="add01" class="master-form-input"></textarea>
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="add02">Address 02</label>
+                                <textarea id="add02" class="master-form-input"></textarea>
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="state">State</label>
+                                <input type="text" class="master-form-input" id="state" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="country">Country</label>
+                                <input type="text" class="master-form-input" id="country" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-2 form-group">
+                                <label for="pincode">Pincode</label>
+                                <input type="text" class="master-form-input" id="pincode" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="phno">Phone Number</label>
+                                <input type="text" class="master-form-input" id="phno" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="remarks">Remarks</label>
+                                <textarea id="remarks" class="master-form-input"></textarea>
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="emailid">Email id</label>
+                                <input type="text" class="master-form-input" id="emailid" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="fax">Fax</label>
+                                <input type="text" class="master-form-input" id="fax" />
+                            </div>
+                            <div class="col-md-2 btn-group">
+                                <input type="button" class="document-btn" id="add" value="Add" onclick="Add(this)">
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+            </div>
+            
             <div class="col-md-12 form-input-padding">
             <div class="col-md-4">
                 &nbsp;
             </div>
             <div class="col-md-4">
-                <button class="btn master-form-btn" type="submit">Submit</button>
+                <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
             </div>
         </div>
-
-            @*<div class="row p-b-25">
-                <span> <strong> Company Contact Details </strong> </span>
-            </div>*@
-
-            @*<div class="col-md-10 document-row" id="GridView">
-                <div class="col-md-12">
-                    <div class="col-md-4 text-left">Contact Person Name</div>
-                    <div class="col-md-4 text-left">Designation</div>
-                    <div class="col-md-4 text-left">Department</div>
-                    <div class="col-md-4 text-left">Landline Number</div>
-                    <div class="col-md-4 text-left">Extension</div>
-                    <div class="col-md-4 text-left">Mobile Number</div>
-                    <div class="col-md-4 text-left">Title</div>
-                    <div class="col-md-4 text-left"><input type="button" id="addContactbutton" value="Add" /></div>
-
-
-                </div>
-                <div class="clearfix"><br /><br /></div>
-                <table id="tblContactcontent" class="col-md-12">
-                    <tr>
-
-                        <td class="col-md-4">
-                            <input type="text" id="txtcPersonName" name="txtcPersonName">
-                        </td>
-                        <td class="col-md-4">
-                            <input type="text" id="txtDesignation" name="txtDesignation">
-                        </td>
-                        <td class="col-md-4">
-                            <input type="text" id="txtDept" name="txtDept">
-                        </td>
-                        <td class="col-md-4">
-                            <input type="text" id="txtLandlineno" name="txtLandlineno">
-                        </td>
-                        <td class="col-md-4">
-                            <input type="text" id="txtExtension" name="txtExtension">
-                        </td>
-                        <td class="col-md-4">
-                            <input type="text" id="txtMobileno" name="txtMobileno">
-                        </td>
-                        <td class="col-md-4">
-                            <input type="text" id="txtTitle" name="txtTitle">
-                        </td>
-                        <td class="col-md-4">
-                            <button type="button" class="removeContactbutton" title="Remove this row">X</button>
-                        </td>
-                    </tr>
-
-                </table>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        &nbsp;
-                    </div>
-                    <div class="col-md-4">
-                        <button class="btn master-form-btn" type="submit">Submit</button>
-                    </div>
-                </div>
-
-            </div>*@
-
             <div class="row">
                 &nbsp;
             </div>
@@ -650,48 +644,130 @@
 }
 
 <script>
-    var i = 1;
+    var count = 1;
+    function Add(e) {
 
-    $("#addDetailsbutton").click(function () {
-        $("#tblDetailscontent table tr:first").clone().find("input").each(function () {
-            $(this).val('').attr({
-                'id': function (_, id) {
-                    return id + i
-                },
-                'name': function (_, name) {
-                    return name + i
-                },
-                'value': ''
-            });
-        }).end().appendTo("table");
-        i++;
-    });
+        @{
+            Model.CompanyDetails.Add(new LeaMaPortal.Models.CompanyDetail());
+        }
 
-    $(document).on('click', 'button.removeDetailsbutton', function () {
-        $(this).closest('tr').remove();
-        return false;
-    });
 
-    var j = 1;
-    $("#addContactbutton").click(function () {
-        $("#tblContactcontent tr:first").clone().find("input").each(function () {
-            $(this).val('').attr({
-                'id': function (_, id) {
-                    return id + j
-                },
-                'name': function (_, name) {
-                    return name + j
-                },
-                'value': ''
-            });
-        }).end().appendTo("table");
-        j++;
-    });
+        //$.ajax({
+        //    url: '../TenantCompany/AddCompanyDetail'
+        //}).success(function (partialView) {
+        //    $('#companyDetailsForm').append(partialView);
+        //    //$('#new-Employee').append(partialView);
+        //});
 
-    $(document).on('click', 'button.removeContactbutton', function () {
-        $(this).closest('tr').remove();
-        return false;
-    });
+
+        debugger;
+        var branch = document.getElementById("branch").value;
+        var city = document.getElementById("city").value;
+        var add01 = document.getElementById("add01").value;
+        var add02 = document.getElementById("add02").value;
+        var state = document.getElementById("state").value;
+        var country = document.getElementById("country").value;
+        var pincode = document.getElementById("pincode").value;
+        var phno = document.getElementById("phno").value;
+        var remarks = document.getElementById("remarks").value;
+        var emailid = document.getElementById("emailid").value;
+        var fax = document.getElementById("fax").value;
+
+
+        var html = "<div class='col-md-12 document-row' id='GridView"+count+"'>";
+        //html=html+"<div class='col-md-1'>";
+        //html = html + count;
+        //html=html+" </div>";
+        html = html + "<div class='col-md-12'>"
+        html = html + " <div class='col-md-2 form-group'> <label for='branch'>Branch</label> <input id='branch" + count + "'  type='text' value='" + branch + "' class='master-form-input' name='CompanyDetails[" + count + "].Branch' /></div>";
+        html = html + "<div class='col-md-2 form-group'> <label for='City'>city</label><input id='city" + count + "' type='text'  value='" + city + "' class='master-form-input' name='CompanyDetails[" + count + "].City' /></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='add01'>Address 01</label><textarea id='add01" + count + "' class='master-form-input' name='CompanyDetails[" + count + "].BranchAddress'>" + add01 + "</textarea></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='add02'>Address 02</label><textarea id='add02" + count + "'class='master-form-input' name='CompanyDetails[" + count + "].BranchAddress1'>" + add02 + "</textarea></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='state'>State</label><input id='state" + count + "'  type='text' value='" + state + "' class='master-form-input' name='CompanyDetails[" + count + "].State'/></div>";
+        html = html + "<div class='col-md-2 form-group'> <label for='country'>Country</label> <input id='country" + count + "' type='text'  value='" + country + "' class='master-form-input' name='CompanyDetails[" + count + "].Country' /></div>";
+        html = html + "</div>"
+        html = html + "<div class='col-md-12'>"
+        html = html + " <div class='col-md-2 form-group'> <label for='pincode'>Pincode</label><input id='pincode" + count + "'  type='text' value='" + pincode + "' class='master-form-input' name='CompanyDetails[" + count + "].Pincode'/></div>";
+        html = html + "<div class='col-md-2 form-group'> <label for='Phno'>Phone Number</label><input id='phno" + count + "' type='text'  value='" + phno + "' class='master-form-input' name='CompanyDetails[" + count + "].Phoneno'/></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='remarks'>Remarks</label><textarea id='remarks" + count + "'class='master-form-input' name='CompanyDetails[" + count + "].Remarks'>" + remarks + "</textarea></div>";
+        html = html + "<div class='col-md-2 form-group'> <label for='emailid'>Email Id</label><input id='emailid" + count + "' type='text'  value='" + emailid + "' class='master-form-input' name='CompanyDetails[" + count + "].EmailId' /></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='fax'>Fax</label><input id='fax" + count + "'  type='text' value='" + fax + "' class='master-form-input' name='CompanyDetails[" + count + "].FaxNo' /></div>";
+      //  html=html+ "<div class='col-md-2'><button class='document-btn'>Add</button> </div>";
+        html = html + "<div class='col-md-2'>  <button class='document-btn' id='Delete" + count + "' onclick='Delete(this)'>Delete</button></div>";
+        html = html + "</div>"
+        html = html + "</div>";
+        html=html+"<div class='row ht-5'> &nbsp;</div>"
+        $('#companyDetailsForm').append(html);
+
+
+
+        document.getElementById("branch").value="";
+        document.getElementById("city").value="";
+        document.getElementById("add01").value="";
+        document.getElementById("add02").value="";
+        document.getElementById("state").value="";
+        document.getElementById("country").value="";
+        document.getElementById("pincode").value="";
+        document.getElementById("phno").value="";
+        document.getElementById("remarks").value="";
+        document.getElementById("emailid").value="";
+        document.getElementById("fax").value="";
+       count = count + 1;
+
+    }
+    function Delete(e) {
+        debugger;
+        DeleteRow = e.parentNode.parentNode.parentNode.id;
+        $('#' + DeleteRow).remove();
+    }
+</script>
+
+
+
+
+<script>
+    //var i = 1;
+
+    //$("#addDetailsbutton").click(function () {
+    //    $("#tblDetailscontent table tr:first").clone().find("input").each(function () {
+    //        $(this).val('').attr({
+    //            'id': function (_, id) {
+    //                return id + i
+    //            },
+    //            'name': function (_, name) {
+    //                return name + i
+    //            },
+    //            'value': ''
+    //        });
+    //    }).end().appendTo("table");
+    //    i++;
+    //});
+
+    //$(document).on('click', 'button.removeDetailsbutton', function () {
+    //    $(this).closest('tr').remove();
+    //    return false;
+    //});
+
+    //var j = 1;
+    //$("#addContactbutton").click(function () {
+    //    $("#tblContactcontent tr:first").clone().find("input").each(function () {
+    //        $(this).val('').attr({
+    //            'id': function (_, id) {
+    //                return id + j
+    //            },
+    //            'name': function (_, name) {
+    //                return name + j
+    //            },
+    //            'value': ''
+    //        });
+    //    }).end().appendTo("table");
+    //    j++;
+    //});
+
+    //$(document).on('click', 'button.removeContactbutton', function () {
+    //    $(this).closest('tr').remove();
+    //    return false;
+    //});
 
     //$("#addbutton").click(function () {
     //    var DocumentName = $("#DocumentName").val();
@@ -716,6 +792,7 @@
 <script>
     //Add or update
     $("form#TenantCompany").off("submit").on("submit", function (e) {
+        debugger;
         e.preventDefault();
         // $("#icon-success").addClass("hide");
         //$("#VerifyIdDetailsLoader").removeClass("hide");
