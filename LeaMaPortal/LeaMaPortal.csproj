@@ -271,6 +271,7 @@
     <Compile Include="Models\PaymentViewModel.cs" />
     <Compile Include="Models\PropertyTypeViewModel.cs" />
     <Compile Include="Models\ReceiptViewModel.cs" />
+    <Compile Include="Models\PropertyViewModel.cs" />
     <Compile Include="Models\SlabViewModel.cs" />
     <Compile Include="PagingProperty.cs" />
     <Compile Include="Models\FacilityViewModel.cs" />
@@ -519,6 +520,7 @@
     <Content Include="Views\Receipts\Index.cshtml" />
     <Content Include="Views\Master\Caretaker\_List.cshtml" />
     <Content Include="Views\Master\Caretaker\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\PropertyMaster\_List.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
