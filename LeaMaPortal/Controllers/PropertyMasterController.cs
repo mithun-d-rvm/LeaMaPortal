@@ -3,6 +3,7 @@ using LeaMaPortal.Models.DBContext;
 using MvcPaging;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -45,6 +46,15 @@ namespace LeaMaPortal.Controllers
             model.Property_Usage_unitList = new SelectList("", "", "");
             model.Property_Type_unitList = new SelectList("", "", "");
             model.Caretaker_IDList = new SelectList("", "", "");
+            ViewBag.TitleDisplay = new SelectList(Common.Title, Common.DefaultTitle);
+            //var region = .Select(x => x.Region_Name);
+            
+            ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
+            ViewBag.Caretaker = new SelectList(db.tbl_caretaker.Where(x => x.Delmark != "*").OrderBy(x => x.Id), "Caretaker_id", "Caretaker_id");
+            //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
+            ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
+            ViewBag.Profession = new SelectList(Common.Profession);
+            ViewBag.PropertyId = db.tbl_propertiesmaster.OrderByDescending(x => x.Property_Id).FirstOrDefault()?.Property_Id + 1;
             return PartialView("../Master/PropertyMaster/_AddOrUpdate", model);
         }
         // GET: PropertyMaster/Details/5
@@ -60,7 +70,23 @@ namespace LeaMaPortal.Controllers
         // GET: PropertyMaster/Create
         public ActionResult Create()
         {
-            return View();
+            try
+            {
+                PropertyViewModel model = new PropertyViewModel();
+                //model.Title = Common.DefaultTitle;
+                ViewBag.TitleDisplay = new SelectList(Common.Title, Common.DefaultTitle);
+                //var region = .Select(x => x.Region_Name);
+                ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
+                //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
+                ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
+                ViewBag.Profession = new SelectList(Common.Profession);
+                ViewBag.PropertyId = db.tbl_propertiesmaster.OrderByDescending(x => x.Property_Id).FirstOrDefault()?.Property_Id + 1;
+                return PartialView("../Master/TenantIndividual/_AddOrUpdate", model);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
 
         // POST: PropertyMaster/Create
@@ -69,10 +95,13 @@ namespace LeaMaPortal.Controllers
         {
             try
             {
-                string PFlag = Common.INSERT;
-                if (model.Property_Id!=0)
-                    PFlag = Common.UPDATE;
-
+                string PFlag = Common.UPDATE;
+                if (model.Property_Id == 0)
+                {
+                    PFlag = Common.INSERT;
+                    var propertyMaster = await db.tbl_propertiesmaster.OrderByDescending(r => r.Property_Id).FirstOrDefaultAsync();
+                    model.Property_Id = propertyMaster != null ? propertyMaster.Property_Id + 1 : 1;
+                }
                 object[] param = Helper.GetMySqlParameters<PropertyViewModel>(model, PFlag, user);
 
                 var _result = await db.Database.SqlQuery<object>(@"CALL Usp_Properties_All(@PFlag,
@@ -166,6 +195,8 @@ namespace LeaMaPortal.Controllers
                 //                                Doc_Path = x.Doc_Path
                 //                            }).ToListAsync();
                 PropertyViewModel model = Map(properties);
+                ViewBag.Caretaker = new SelectList(db.tbl_caretaker.Where(x => x.Delmark != "*").OrderBy(x => x.Id), "Caretaker_id", "Caretaker_id",model.Caretaker_ID);
+                ViewBag.PropertyId = model.Property_Id;
                 model.Property_Usage_unitList = new SelectList("", "", "");
                 model.Property_Type_unitList = new SelectList("", "", "");
                 model.Caretaker_IDList = new SelectList("", "", "");
@@ -194,20 +225,89 @@ namespace LeaMaPortal.Controllers
         }
 
         // GET: PropertyMaster/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
         // POST: PropertyMaster/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public async Task<ActionResult> Delete(int Property_Id)
         {
             try
             {
-                // TODO: Add delete logic here
+                MessageResult result = new MessageResult();
+                try
+                {
+                    var model = await db.tbl_propertiesmaster.FirstOrDefaultAsync(r => r.Property_Id == Property_Id);
 
-                return RedirectToAction("Index");
+                    object[] param = Helper.GetMySqlParameters<PropertyViewModel>(Map(model), Common.DELETE, user);
+
+                    var _result = await db.Database.SqlQuery<object>(@"CALL Usp_Properties_All(@PFlag,
+@PProperty_Flag ,
+@PProperty_ID_Tawtheeq ,
+@PProperty_Id  ,
+@PProperty_Name , 
+@PCompound, 
+@PZone , 
+@Psector, 
+@Pplotno , 
+@Pownedbyregistrant  , 
+@PProperty_Usage , 
+@PProperty_Type , 
+@PCommercial_villa  , 
+@PStreet_Name , 
+@PExternalrefno , 
+@PNoofoffloors  , 
+@PNoofunits  , 
+@PBuiltarea  ,
+@PPlotarea  , 
+@PLeasablearea  , 
+@Pcommonarea  , 
+@Pcompletion_Date  , 
+@PAEDvalue  ,
+@PPurchased_date  , 
+@PValued_Date  , 
+@PStatus ,
+@PVacant_Start_Date  , 
+@PCaretaker_Name , 
+@PCaretaker_ID  , 
+@PRental_Rate_Month  ,
+@PComments  ,
+@PRef_unit_Property_ID_Tawtheeq , 
+@PRef_Unit_Property_ID,
+@PRef_Unit_Property_Name, 
+@PUnit_ID_Tawtheeq, 
+@PUnit_Property_Name , 
+@PExternalrefno_unit ,
+@PAEDvalue_unit  , 
+@PPurchased_date_unit  , 
+@PValued_Date_unit  , 
+@PStatus_unit ,
+@PVacant_Start_Date_Unit  ,
+@PRental_Rate_Month_unit  , 
+@PFloorno,
+@PFloorlevel , 
+@PProperty_Usage_unit , 
+@PProperty_Type_unit , 
+@PTotal_Area  , 
+@PUnit_Common_Area  , 
+@PCommon_Area  , 
+@PParkingno  , 
+@PUnitcomments,
+@PCreateduser , 
+@PCompany_occupied_Flag  , 
+@Ppropertiesdt,
+@Ppropertiesdt1
+
+                                    )", param).ToListAsync();
+
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
+                catch
+                {
+                    return Json(new MessageResult() { Errors = "Internal server error" }, JsonRequestBehavior.AllowGet);
+                }
             }
             catch
             {

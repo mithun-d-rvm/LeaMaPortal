@@ -443,7 +443,7 @@
             $.ajax(
                 {
                     url: "../PropertyMaster/Delete",
-                    type: "Get",
+                    type: "Post",
                     data: { Property_Id: propertyId},
                     success: function (response) {
                         GetPropertyMaster();

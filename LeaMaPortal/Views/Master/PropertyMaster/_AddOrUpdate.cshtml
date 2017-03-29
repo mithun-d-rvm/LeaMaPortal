@@ -10,7 +10,7 @@
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+    @Html.HiddenFor(model=>model.Property_Id, new { @id = "Id" })
     <div class="inner-block">
         <div class="blank">
             <div class="row">
@@ -46,7 +46,9 @@
                             Property ID:
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Property_Id, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.HiddenFor(model=>model.Property_Id)
+                            <input type="text" value="@ViewBag.PropertyId" disabled class="master-form-input" />
+                            @*@Html.EditorFor(model => model.Property_Id, new { htmlAttributes = new { @class = "master-form-input" } })*@
                             @Html.ValidationMessageFor(model => model.Property_Id, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -813,7 +815,7 @@
                                     <option> ID 2 </option>
                                     <option> ID 3 </option>
                                 </select>*@
-                            @Html.DropDownListFor(model => model.Caretaker_ID, Model.Caretaker_IDList, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
+                            @Html.DropDownList("Caretaker", null, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -975,3 +977,32 @@
         </div>
     </div>
                                 }
+<script>
+    $("#Caretaker").on('change', function (e) {
+        var region = $("#Caretaker").val();
+        if (region != "" && region != null) {
+            $.ajax(
+                {
+                    url: "../Caretaker/GetCaretakerName",
+                    // dataType: "jsonp",
+                    method: "GET",
+                    data: { Id: $("#Caretaker").val() }, //FormData(form.get(0)),
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        if (response != null) {
+                            $("#Caretaker_Name").val(response);
+                        }
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+        }
+    });
+</script>
