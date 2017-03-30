@@ -46,7 +46,7 @@
                                     Value = "Company"
                                 });
                             }*@
-                            @Html.DropDownList("TenantType", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
+                            @Html.DropDownList("TenantType", null, "--Select--", htmlAttributes: new { @class = "master-form-input",@required= "required" })
                             @*@Html.DropDownListFor(model => model.TenantType, TenantType, "-- Select --", htmlAttributes: new { @class = "master-form-input" })*@
 
 

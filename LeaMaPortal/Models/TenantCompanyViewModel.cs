@@ -18,7 +18,7 @@ namespace LeaMaPortal.Models
         [Required]
         public string TenantType { get; set; }
 
-        [Required]
+        
         public int TenantId { get; set; }
 
         public string CompanyName { get; set; }
