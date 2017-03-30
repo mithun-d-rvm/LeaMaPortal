@@ -46,14 +46,14 @@
                                     Value = "Company"
                                 });
                             }*@
-                            @Html.DropDownList("TenantType", null,"--Select--", htmlAttributes: new { @class = "master-form-input" })
+                            @Html.DropDownList("TenantType", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
                             @*@Html.DropDownListFor(model => model.TenantType, TenantType, "-- Select --", htmlAttributes: new { @class = "master-form-input" })*@
-                            
-                            
-                                    @*<select class="master-form-input">
-                        <option value="Government"> Government </option>
-                        <option value=""> Company </option>
-                    </select>*@
+
+
+                            @*<select class="master-form-input">
+                                <option value="Government"> Government </option>
+                                <option value=""> Company </option>
+                            </select>*@
 
                         </div>
                     </div>
@@ -263,8 +263,8 @@
                             Trade License issue Date:
                         </div>
                         <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.LicenseIssueDate, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @*<input type="text" class="master-form-input"  />*@
+                            @Html.EditorFor(model => model.LicenseIssueDate, new { htmlAttributes = new { @class = "master-form-input", @required = "required" } })
                             @Html.ValidationMessageFor(model => model.LicenseIssueDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -330,7 +330,7 @@
                             @Html.HiddenFor(model => model.TenantId)
                             <input type="text" value="@ViewBag.TenantId" disabled class="master-form-input" />
                             @*<input type="text" class="master-form-input" />*@
-                            
+
                             @Html.ValidationMessageFor(model => model.TenantId, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -468,7 +468,7 @@
                         </div>
                         <div class="col-md-8">
                             @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.LicenseExpiryDate, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.EditorFor(model => model.LicenseExpiryDate, new { htmlAttributes = new { @class = "master-form-input", @required = "required" } })
                             @Html.ValidationMessageFor(model => model.LicenseExpiryDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -562,61 +562,7 @@
                 <div class="row ht-5">
                     &nbsp;
                 </div>
-               @if (Model.CompanyExistDetails != null)
-               {
-                <div class="col-md-12">
-                    @if (Model.CompanyExistDetails.Count > 0)
-                    {<h3>Existing Documents</h3>}
-                    <table class="col-md-12" id="company-exist-file-list">
-                        @for (int i = 0; i < Model.CompanyExistDetails.Count; i++)
-                        {
-                            <tr class="col-md-12">
-                                <td >
-                                    @Html.TextBoxFor(m => m.CompanyExistDetails[i].Branch, new { @data_name = "Branch" })
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(m => m.CompanyExistDetails[i].City, new { @data_name = "City" })
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(m => m.CompanyExistDetails[i].BranchAddress, new { @data_name = "BranchAddress" })
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(m => m.CompanyExistDetails[i].BranchAddress1, new { @data_name = "BranchAddress1" })
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(m => m.CompanyExistDetails[i].BranchAddress1, new { @data_name = "BranchAddress1" })
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(m => m.CompanyExistDetails[i].State, new { @data_name = "State" })
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(m => m.CompanyExistDetails[i].Country, new { @data_name = "Country" })
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(m => m.CompanyExistDetails[i].Pincode, new { @data_name = "Pincode" })
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(m => m.CompanyExistDetails[i].Phoneno, new { @data_name = "Phoneno" })
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(m => m.CompanyExistDetails[i].Remarks, new { @data_name = "Remarks" })
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(m => m.CompanyExistDetails[i].EmailId, new { @data_name = "EmailId" })
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(m => m.CompanyExistDetails[i].FaxNo, new { @data_name = "FaxNo" })
-                                </td>
-                                <td class="col-md-4 text-left">
-                                    <button type="button" class="company-remove-exist-file" title="Remove this row">X </button>
-                                </td>
 
-                            </tr>
-                        }
-                    </table>
-                </div>
-                <div class="clearfix"><br /></div>
-               }
                 <div class="row" id="companyDetailsForm1">
                     <div id="Gridview" class="row document-row">
                         <div class="col-md-12">
@@ -671,15 +617,161 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
+
+                @if (Model.CompanyDetails != null)
+                {
+                    <input type="hidden" id="init-company-det-count" value="@Model.CompanyDetails.Count" />
+                }
+                else
+                {
+                    <input type="hidden" id="init-company-det-count" value="0" />
+                }
+
                 <table class="row" id="companyDetailsForm">
 
+
+                    @if (Model.CompanyDetails != null)
+                    {
+
+                        for (int i = 0; i < Model.CompanyDetails.Count; i++)
+                        {
+                            // <script>
+                            var html = "<div class='col-md-12 document-row' id='GridView" + @i + "'>";
+                            //html=html+"<div class='col-md-1'>";
+                            //html = html + count;
+                            //html=html+" </div>";
+                            html = html + "<div class='col-md-12'>";
+                            html = html + " <div class='col-md-2 form-group'> <label for='branch'>Branch</label> <input id='branch" + @i + "'  type='text' value='" + @Model.CompanyDetails[i].Branch + "' class='master-form-input' name='CompanyDetails[" + i + "].Branch' data-name='Branch' /></div>";
+                            html = html + "<div class='col-md-2 form-group'> <label for='City'>city</label><input id='city" + i + "' type='text'  value='" + @Model.CompanyDetails[i].City + "' class='master-form-input' name='CompanyDetails[" + i + "].City' data-name='City' /></div>";
+                            html = html + " <div class='col-md-2 form-group'> <label for='add01'>Address 01</label><input type='text' id='add01" + @i + "' class='master-form-input' name='CompanyDetails[" + i + "].BranchAddress' data-name='BranchAddress' value='" + @Model.CompanyDetails[i].BranchAddress + "'/></div>";
+                            html = html + " <div class='col-md-2 form-group'> <label for='add02'>Address 02</label><input type='text' id='add02" + @i + "'class='master-form-input' name='CompanyDetails[" + i + "].BranchAddress1' data-name='BranchAddress1' value='" + @Model.CompanyDetails[i].BranchAddress1 + "'/></div>";
+                            html = html + " <div class='col-md-2 form-group'> <label for='state'>State</label><input id='state" + @i + "'  type='text' value='" + @Model.CompanyDetails[i].State + "' class='master-form-input' name='CompanyDetails[" + i + "].State' data-name='State' /></div>";
+                            html = html + "<div class='col-md-2 form-group'> <label for='country'>Country</label> <input id='country" + @i + "' type='text'  value='" + @Model.CompanyDetails[i].Country + "' class='master-form-input' name='CompanyDetails[" + i + "].Country' data-name='Country' /></div>";
+                            html = html + "</div>";
+                            html = html + "<div class='col-md-12'>";
+                            html = html + " <div class='col-md-2 form-group'> <label for='pincode'>Pincode</label><input id='pincode" + @i + "'  type='text' value='" + @Model.CompanyDetails[i].Pincode + "' class='master-form-input' name='CompanyDetails[" + i + "].Pincode' data-name='Pincode' /></div>";
+                            html = html + "<div class='col-md-2 form-group'> <label for='Phno'>Phone Number</label><input id='phno" + i + "' type='text'  value='" + @Model.CompanyDetails[i].Phoneno + "' class='master-form-input' name='CompanyDetails[" + i + "].Phoneno' data-name='Phoneno' /></div>";
+                            html = html + " <div class='col-md-2 form-group'> <label for='remarks'>Remarks</label><input type='text' id='remarks" + i + "'class='master-form-input' name='CompanyDetails[" + i + "].Remarks' data-name='Remarks' value='" + @Model.CompanyDetails[i].Remarks + "' /></div>";
+                            html = html + "<div class='col-md-2 form-group'> <label for='emailid'>Email Id</label><input id='emailid" + i + "' type='text'  value='" + @Model.CompanyDetails[i].EmailId + "' class='master-form-input' name='CompanyDetails[" + i + "].EmailId' data-name='EmailId' /></div>";
+                            html = html + " <div class='col-md-2 form-group'> <label for='fax'>Fax</label><input id='fax" + i + "'  type='text' value='" + @Model.CompanyDetails[i].FaxNo + "' class='master-form-input' name='CompanyDetails[" + i + "].FaxNo' data-name='FaxNo' /></div>";
+                            //  html=html+ "<div class='col-md-2'><button class='document-btn'>Add</button> </div>";
+                            html = html + "<div class='col-md-1'><br />  <button class='document-btn removebutton' id='Delete" + @i + "'> X </button></div>";
+                            html = html + "</div>";
+                            html = html + "</div>";
+                            html = html + "<div class='row ht-5'> &nbsp;</div>";
+
+                    <tr>
+                        <td>
+                            @Html.Raw(html)
+                        </td>
+                    </tr>
+                        }
+                    }
                 </table>
-                    <div class="row ht-5">
-                        &nbsp;
-                    </div>
+
+                <div class="row ht-5">
+                    &nbsp;
                 </div>
+            </div>
+
+
+
+            @if (Model.CompanyContactDetails != null)
+            {
+                <input type="hidden" id="init-company-contact-det-count" value="@Model.CompanyContactDetails.Count" />
+            }
+            else
+            {
+                <input type="hidden" id="init-company-contact-det-count" value="0" />
+            }
+            <div class="row" id="companyContactDetailsForm1">
+                <div id="Gridview" class="row document-row">
+                    <div class="col-md-12">
+                        <div class="col-md-2 form-group">
+                            <label for="branch">Contact Person Name</label>
+                            <input type="text" class="master-form-input" id="ContactPersonName" />
+                        </div>
+                        <div class="col-md-1 form-group">
+                            <label for="city">Designation</label>
+                            <input type="text" class="master-form-input" id="Designation" />
+                        </div>
+                        <div class="col-md-1 form-group">
+                            <label for="add01">Department</label>
+                            <input id="Department" class="master-form-input" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="add02">Phone</label>
+                            <input type="text" id="Phone" class="master-form-input" />
+                        </div>
+                        <div class="col-md-1 form-group">
+                            <label for="state">Extension</label>
+                            <input type="text" class="master-form-input" id="Extension" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="country">MobileNo</label>
+                            <input type="text" class="master-form-input" id="MobileNo" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="country">Salutations</label>
+                            <input type="text" class="master-form-input" id="Salutations" />
+                        </div>
+                        <div class="col-md-1 btn-group">
+                            <br />
+                            <input type="button" class="document-btn" id="AddContact" value="Add" onclick='addcontact(this);' />
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+            <table class="row" id="companyContactDetailsForm">
+
+
+                @if (Model.CompanyContactDetails != null)
+                {
+
+                    for (int j = 0; j < Model.CompanyContactDetails.Count; j++)
+                    {
+                        // <script>
+                        var html = "<div class='col-md-12 document-row' id='GridViewCompanyContact" + @j + "'>";
+                        
+                        html = html + "<div class='col-md-12'>";
+                        html = html + " <div class='col-md-2 form-group'> <label for='branch'>Contact Person Name</label> <input id='branch" + @j + "'  type='text' value='" + @Model.CompanyContactDetails[j].ContactPersonName + "' class='master-form-input' name='CompanyContactDetails[" + j + "].ContactPersonName' data-name='ContactPersonName' /></div>";
+                        html = html + "<div class='col-md-1 form-group'> <label for='City'>Designation</label><input id='city" + j + "' type='text'  value='" + @Model.CompanyContactDetails[j].Designation + "' class='master-form-input' name='CompanyContactDetails[" + j + "].Designation' data-name='Designation' /></div>";
+                        html = html + " <div class='col-md-1 form-group'> <label for='add01'>Department</label><input type='text' id='add01" + @j + "' class='master-form-input' name='CompanyContactDetails[" + j + "].Department' data-name='Department' value='" + @Model.CompanyContactDetails[j].Department + "'/></div>";
+                        html = html + " <div class='col-md-2 form-group'> <label for='add02'>Phone</label><input type='text' id='add02" + @j + "'class='master-form-input' name='CompanyContactDetails[" + j + "].Phone' data-name='Phone' value='" + @Model.CompanyContactDetails[j].Phone + "'/></div>";
+                        html = html + " <div class='col-md-1 form-group'> <label for='state'>Extension</label><input id='state" + @j + "'  type='text' value='" + @Model.CompanyContactDetails[j].Extension + "' class='master-form-input' name='CompanyContactDetails[" + j + "].Extension' data-name='Extension' /></div>";
+                        html = html + "<div class='col-md-2 form-group'> <label for='country'>MobileNo</label> <input id='MobileNo" + @j + "' type='text'  value='" + @Model.CompanyContactDetails[j].MobileNo + "' class='master-form-input' name='CompanyContactDetails[" + j + "].MobileNo' data-name='MobileNo' /></div>";
+                        html = html + " <div class='col-md-2 form-group'> <label for='state'>Salutations</label><input id='state" + @j + "'  type='text' value='" + @Model.CompanyContactDetails[j].Salutations + "' class='master-form-input' name='CompanyContactDetails[" + j + "].State' data-name='Salutations' /></div>";
+                        html = html + "<div class='col-md-1' form-group></br>  <input type='button' class='document-btn removebutton' id='Delete" + @j + "' value=' X ' /></div>";
+                        html = html + "</div>";
+                       
+                        html = html + "</div>";
+                        html = html + "<div class='row ht-5'> &nbsp;</div>";
+
+                        <tr>
+                            <td>
+                                @Html.Raw(html)
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+
+            <div class="row ht-5">
+                &nbsp;
+            </div>
+        </div>
+
+
+
+
+
+
+
+
             
             <div class="col-md-12 form-input-padding">
             <div class="col-md-4">
@@ -694,14 +786,14 @@
             </div>
 
         </div>
-    </div>
+    
 }
 
 <script>
     $("#TitleDisplay").on('change', function (e) {
         $("#Title").val($("#TitleDisplay").val());
     });
-    var i = 0;
+    var i = parseInt($("#init-company-det-count").val());
     function Add(e) {
        
         var branch = document.getElementById("branch").value;
@@ -736,7 +828,7 @@
         html = html + "<div class='col-md-2 form-group'> <label for='emailid'>Email Id</label><input id='emailid" + i+ "' type='text'  value='" + emailid + "' class='master-form-input' name='CompanyDetails[" + i+ "].EmailId' data-name='EmailId' /></div>";
         html = html + " <div class='col-md-2 form-group'> <label for='fax'>Fax</label><input id='fax" + i+ "'  type='text' value='" + fax + "' class='master-form-input' name='CompanyDetails[" + i+ "].FaxNo' data-name='FaxNo' /></div>";
       //  html=html+ "<div class='col-md-2'><button class='document-btn'>Add</button> </div>";
-        html = html + "<div class='col-md-2'>  <button class='document-btn removebutton' id='Delete" + i+ "'>Delete</button></div>";
+        html = html + "<div class='col-md-1'><br />  <button class='document-btn removebutton' id='Delete" + i+ "'> X </button></div>";
         html = html + "</div>"
         html = html + "</div>";
         html=html+"<div class='row ht-5'> &nbsp;</div></td></tr>"
@@ -758,13 +850,7 @@
      
 
     }
-    function Delete(e) {
-        
-       // DeleteRow = e.parentNode.parentNode.parentNode.id;
-       // $('#' + DeleteRow).remove();
-
-        
-    }
+   
     $(document).on('click', 'button.removebutton', function () {
         $(this).closest('tr').remove();
         var existfilelist = document.getElementById('companyDetailsForm');
@@ -792,23 +878,62 @@
         i = newindex;
     });
 
+    var j = parseInt($("#init-company-contact-det-count").val());
+    function addcontact(e)
+    {
+        
+        var ContactPersonName = $("#ContactPersonName").val();
+        var Designation = $("#Designation").val();
+        var Department = $("#Department").val();
+        var Phone = $("#Phone").val();
+        var Extension = $("#Extension").val();
+        var MobileNo = $("#MobileNo").val();
+        var Salutations = $("#Salutations").val();
+        var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + j + "'>";                
+        html = html + "<div class='col-md-12'>";
+        html = html + " <div class='col-md-2 form-group'> <label for='branch'>Contact Person Name</label> <input id='ContactPersonName" + j + "'  type='text' value='" + ContactPersonName + "' class='master-form-input' name='CompanyContactDetails[" + j + "].ContactPersonName' data-name='ContactPersonName' /></div>";
+        html = html + "<div class='col-md-1 form-group'> <label for='City'>Designation</label><input id='Designation" + j + "' type='text'  value='" + Designation + "' class='master-form-input' name='CompanyContactDetails[" + j + "].Designation' data-name='Designation' /></div>";
+        html = html + " <div class='col-md-1 form-group'> <label for='add01'>Department</label><input type='text' id='Department" + j + "' class='master-form-input' name='CompanyContactDetails[" + j + "].Department' data-name='Department' value='" + Department + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='add02'>Phone</label><input type='text' id='add02" + j + "'class='master-form-input' name='CompanyContactDetails[" + j + "].Phone' data-name='Phone' value='" +Phone + "'/></div>";
+        html = html + " <div class='col-md-1 form-group'> <label for='state'>Extension</label><input id='state" + j + "'  type='text' value='" + Extension + "' class='master-form-input' name='CompanyContactDetails[" + j + "].Extension' data-name='Extension' /></div>";
+        html = html + "<div class='col-md-2 form-group'> <label for='country'>MobileNo</label> <input id='MobileNo" + j + "' type='text'  value='" + MobileNo + "' class='master-form-input' name='CompanyContactDetails[" + j + "].MobileNo' data-name='MobileNo' /></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='state'>Salutations</label><input id='state" + j + "'  type='text' value='" + Salutations + "' class='master-form-input' name='CompanyContactDetails[" + j + "].Salutations' data-name='Salutations' /></div>";
+        html = html + "<div class='col-md-1'></br>  <button class='document-btn remove-contact-button' id='Delete" + j + "'> X </button></div>";
+
+        html = html + "</div>";
+                       
+        html = html + "</div>";
+        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr>"
+        $('#companyContactDetailsForm').append(html);
+        j++;
+
+
+         $("#ContactPersonName").val('');
+        $("#Designation").val('');
+        $("#Department").val('');
+       $("#Phone").val('');
+        $("#Extension").val('');
+        $("#MobileNo").val('');
+        $("#Salutations").val('');
+        return false;
+    }
     //company-remove-exist-file
-    $(document).on('click', 'button.company-remove-exist-file', function () {
+    $(document).on('click', 'button.remove-contact-button', function () {
         $(this).closest('tr').remove();
-        var existfilelist = document.getElementById('company-exist-file-list');
+        var existfilelist = document.getElementById('companyContactDetailsForm');
         var newindex = 0;
         $(existfilelist).find('> tbody > tr').each(function () {
 
             $(this).find("input").each(function () {
                 var dataname = $(this).data("name");
-                alert(dataname + $(this).val() + '-' + newindex)
+                //alert(dataname + $(this).val() + '-' + newindex)
                 $(this).attr({
                     'id': function (_, id) {
                         return id + newindex
                     },
                     'name': function (_, name) {
                         //return name + iTenantDocument[0].Name
-                        return 'CompanyExistDetails[' + newindex + '].' + dataname
+                        return 'CompanyContactDetails[' + newindex + '].' + dataname
                     }
                 });
             });
@@ -816,6 +941,7 @@
             newindex++;
            
         });
+        j = newindex;
     });
 </script>
 
@@ -844,7 +970,7 @@
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
-                        debugger;
+                        
                         GetTenantCompany();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {

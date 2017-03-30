@@ -270,7 +270,7 @@ namespace LeaMaPortal.Controllers
                 TenantType = tenantCompany.Type,
                 Title = tenantCompany.Title,
                 TradelicenseNo = tenantCompany.TradelicenseNo,
-                CompanyContactExistDetails = db.tbl_tenant_companydt1.Where(y => y.Tenant_Id == tenantCompany.Tenant_Id).Select(z => new CompanyContactDetail()
+                CompanyContactDetails = db.tbl_tenant_companydt1.Where(y => y.Tenant_Id == tenantCompany.Tenant_Id).Select(z => new CompanyContactDetail()
                 {
                     ContactPersonName = z.Cper,
                     Department = z.Dept,
@@ -282,7 +282,7 @@ namespace LeaMaPortal.Controllers
                     Salutations = z.Salutations,
                     TenantId = z.Tenant_Id
                 }).ToList(),
-                CompanyExistDetails = db.tbl_tenant_companydt.Where(y => y.Tenant_Id == tenantCompany.Tenant_Id).Select(z => new CompanyDetail()
+                CompanyDetails = db.tbl_tenant_companydt.Where(y => y.Tenant_Id == tenantCompany.Tenant_Id).Select(z => new CompanyDetail()
                 {
                     Branch = z.Branch,
                     BranchAddress = z.BranchAdd,
@@ -322,26 +322,8 @@ namespace LeaMaPortal.Controllers
                     {
                         PFlag = "UPDATE";
                     }
+                    
                     string companyDet = "";
-                    if(model.CompanyExistDetails!=null)
-                    {
-                        foreach(var item in model.CompanyExistDetails)
-                        {
-                            
-                                if (string.IsNullOrWhiteSpace(companyDet))
-                                {
-                                    companyDet = "(" + model.TenantId + ",'" + item.Branch + "','" + item.BranchAddress +
-                                        "','" + item.BranchAddress1 + "','" + item.City + "','" + item.State + "','" + item.Country + "','" + item.Pincode
-                                        + "','" + item.Phoneno + "','" + item.EmailId + "','" + item.FaxNo + "','" + item.Remarks + "','" + DateTime.Now.Year + "')";
-                                }
-                                else
-                                {
-                                    companyDet += ",(" + model.TenantId + ",'" + item.Branch + "','" + item.BranchAddress +
-                                       "','" + item.BranchAddress1 + "','" + item.City + "','" + item.State + "','" + item.Country + "','" + item.Pincode
-                                       + "','" + item.Phoneno + "','" + item.EmailId + "','" + item.FaxNo + "','" + item.Remarks + "','" + DateTime.Now.Year + "')";
-                                }
-                        }
-                    }
                     if (model.CompanyDetails != null)
                     {
                         foreach (var item in model.CompanyDetails)
@@ -360,7 +342,26 @@ namespace LeaMaPortal.Controllers
                                 }
                         }
                     }
+                    string companyContactDetails = "";
+                    if (model.CompanyContactDetails != null)
+                    {
+                        foreach (var item in model.CompanyContactDetails)
+                        {
 
+                            if (string.IsNullOrWhiteSpace(companyContactDetails))
+                            {
+                                companyContactDetails = "(" + model.TenantId + ",'" + item.ContactPersonName + "','" + item.Designation +
+                                        "','" + item.Department + "','" + item.Phone + "','" + item.Extension + "','" + item.MobileNo +
+                                        "','" + item.Salutations + "','" + DateTime.Now.Year + "')";
+                            }
+                            else
+                            {
+                                companyContactDetails += ",(" + model.TenantId + ",'" + item.ContactPersonName + "','" + item.Designation +
+                                        "','" + item.Department + "','" + item.Phone + "','" + item.Extension + "','" + item.MobileNo +
+                                        "','" + item.Salutations + "','" + DateTime.Now.Year + "')";
+                            }
+                        }
+                    }
                     object[] parameters = {
                          new MySqlParameter("@PFlag", PFlag),
                          new MySqlParameter("@PTenant_Id", model.TenantId),
@@ -396,7 +397,7 @@ namespace LeaMaPortal.Controllers
                          new MySqlParameter("@PType", model.TenantType),
                          new MySqlParameter("@PCreateduser", System.Web.HttpContext.Current.User.Identity.Name),
                          new MySqlParameter("@Ptenant_companydt", companyDet),
-                         new MySqlParameter("@Ptenant_companydt1", null),
+                         new MySqlParameter("@Ptenant_companydt1", companyContactDetails),
                          new MySqlParameter("@Ptenant_companydoc", null)
 
                     };
@@ -407,7 +408,7 @@ namespace LeaMaPortal.Controllers
             }
             catch(Exception e)
             {
-                throw;
+                return RedirectToAction("../Master/Index", new { selected = 10 });
             }
 
 

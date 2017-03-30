@@ -70,18 +70,18 @@ namespace LeaMaPortal.Models
         public string Cocandindustryuid { get; set; }
 
         public string TradelicenseNo { get; set; }
-
+        [DataType(DataType.Date)]
         public DateTime? LicenseIssueDate { get; set; }
-
+        [DataType(DataType.Date)]
         public DateTime? LicenseExpiryDate { get; set; }
 
         public string Issuance_authority { get; set; }
 
         public string ADWEARegid { get; set; }
         public List<CompanyDetail> CompanyDetails { get; set; }
-        public List<CompanyDetail> CompanyExistDetails { get; set; }
+       
         public List<CompanyContactDetail> CompanyContactDetails { get; set; }
-        public List<CompanyContactDetail> CompanyContactExistDetails { get; set; }
+        
     }
     public class CompanyDetail
     {
