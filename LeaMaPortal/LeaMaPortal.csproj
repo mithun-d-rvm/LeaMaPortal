@@ -521,11 +521,12 @@
     <Content Include="Views\Master\Caretaker\_List.cshtml" />
     <Content Include="Views\Master\Caretaker\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\PropertyMaster\_List.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Documents\TenantCompany\" />
     <Folder Include="Documents\TenantIndividual\" />
-    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
