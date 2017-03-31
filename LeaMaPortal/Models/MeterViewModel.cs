@@ -22,7 +22,7 @@ namespace LeaMaPortal.Models
         [DisplayName("Unit Id")]
         public string unit_id { get; set; }
         [DisplayName("Due Day")]
-        public string Dueday { get; set; }
+        public int? Dueday { get; set; }
         [DisplayName("Property Id")]
         public string Property_id { get; set; }
 

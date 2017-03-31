@@ -12,13 +12,15 @@ namespace LeaMaPortal.Models
         {
             CompanyContactDetails = new List<CompanyContactDetail>();
             CompanyDetails = new List<CompanyDetail>();
+            CompanyNewDocuments = new List<CompanyNewDocuments>();
+            CompanyDocumentsExist = new List<CompanyDocuments>();
         }
         public int Id { get; set; }
 
         [Required]
         public string TenantType { get; set; }
 
-        [Required]
+        
         public int TenantId { get; set; }
 
         public string CompanyName { get; set; }
@@ -70,16 +72,19 @@ namespace LeaMaPortal.Models
         public string Cocandindustryuid { get; set; }
 
         public string TradelicenseNo { get; set; }
-
+        [DataType(DataType.Date)]
         public DateTime? LicenseIssueDate { get; set; }
-
+        [DataType(DataType.Date)]
         public DateTime? LicenseExpiryDate { get; set; }
 
         public string Issuance_authority { get; set; }
 
         public string ADWEARegid { get; set; }
-        public ICollection<CompanyDetail> CompanyDetails { get; set; }
-        public ICollection<CompanyContactDetail> CompanyContactDetails { get; set; }
+        public List<CompanyDetail> CompanyDetails { get; set; }
+       
+        public List<CompanyContactDetail> CompanyContactDetails { get; set; }
+        public List<CompanyDocuments> CompanyDocumentsExist { get; set; }
+        public List<CompanyNewDocuments> CompanyNewDocuments { get; set; }
     }
     public class CompanyDetail
     {
@@ -128,6 +133,23 @@ namespace LeaMaPortal.Models
         public string MobileNo { get; set; }
 
         public string Salutations { get; set; }
+
+    }
+
+    public class CompanyDocuments
+    {
+        public int Tenant_Id { get; set; }
+        public string Type { get; set; }
+        public string Doc_name { get; set; }
+        public string Doc_path { get; set; }
+
+    }
+    public class CompanyNewDocuments
+    {
+        public int Tenant_Id { get; set; }
+        public string Type { get; set; }
+        public string Name { get; set; }
+        public HttpPostedFileBase File { get; set; }
 
     }
 }

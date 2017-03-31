@@ -231,6 +231,20 @@ namespace LeaMaPortal.Controllers
         //    return RedirectToAction("Index");
         //}
 
+        [HttpGet]
+        public async Task<ActionResult> GetCaretakerName(int Id)
+        {
+            try
+            {
+                var tbl_caretaker = await db.tbl_caretaker.FirstOrDefaultAsync(x => x.Id == Id);
+                return Json(tbl_caretaker?.Caretaker_Name, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
