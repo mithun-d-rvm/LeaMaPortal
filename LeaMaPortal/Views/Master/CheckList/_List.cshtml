@@ -150,6 +150,7 @@
                         $("#CheckListId").val(result.Id);
                         $("#CheckList_Id").val(result.Checklist_id);
                         $("#CheckListName").val(result.Checklist_Name);
+                        $("#ChecklistType").val(result.Checklist_Type);
                     }
                     else {
                         alert(data.Errors);
@@ -159,6 +160,7 @@
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
+                    $("body").scrollTop(0);
                 }
             });
     });

@@ -1,0 +1,93 @@
+﻿
+@model LeaMaPortal.Models.PropertyTypeViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "PropertyType" }))
+{
+    @Html.HiddenFor(m => m.Id, new { @id = "PropertyTypeId" })
+    <div class="col-md-12 leama-fieldset leama-header-top">
+        <div class="row">
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.PropertyType, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.PropertyType, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "PropertyType" } })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Usage_name, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Usage_name, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "UsageName" } })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.PropertyCategory, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4 ">
+                    @Html.DropDownList("PropertyCategory", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "PropertyCategory" })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-12 pull-left">
+                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    //Add or update
+    $("form#PropertyType").off("submit").on("submit", function (e) {
+        e.preventDefault();
+        try {
+            var form = $("form#PropertyType");
+            $.ajax(
+                {
+                    url: "../PropertyType/AddOrUpdate",
+                    // dataType: "jsonp",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        GetPropertyType();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+
+                });
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+</script>

@@ -11,6 +11,7 @@ using LeaMaPortal.Models;
 using MvcPaging;
 using MySql.Data.MySqlClient;
 using System.Threading.Tasks;
+using LeaMaPortal.Helpers;
 
 namespace LeaMaPortal.Controllers
 {
@@ -34,7 +35,8 @@ namespace LeaMaPortal.Controllers
                     {
                         Id = x.Id,
                         Checklist_id = x.Checklist_id,
-                        Checklist_Name = x.Checklist_Name
+                        Checklist_Name = x.Checklist_Name,
+                        Checklist_Type = x.Check_type
                     }).ToPagedList(currentPageIndex, PageSize);
                 }
                 else
@@ -46,7 +48,8 @@ namespace LeaMaPortal.Controllers
                                   {
                                       Id = x.Id,
                                       Checklist_id = x.Checklist_id,
-                                      Checklist_Name = x.Checklist_Name
+                                      Checklist_Name = x.Checklist_Name,
+                                      Checklist_Type = x.Check_type
                                   }).ToPagedList(currentPageIndex, PageSize);
                 }
 
@@ -61,13 +64,14 @@ namespace LeaMaPortal.Controllers
         public PartialViewResult AddOrUpdate()
         {
             CheckListViewModel model = new CheckListViewModel();
+            ViewBag.Checklist_Type = new SelectList(StaticHelper.GetStaticData(StaticHelper.CHECKLIST_DROPDOWN), "Name", "Name");
             return PartialView("../Master/CheckList/_AddOrUpdate", model);
         }
         // POST: CheckList/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<ActionResult> AddOrUpdate([Bind(Include = "Checklist_id,Checklist_Name,Id")] CheckListViewModel model)
+        public async Task<ActionResult> AddOrUpdate([Bind(Include = "Checklist_id,Checklist_Name,Checklist_Type,Id")] CheckListViewModel model)
         {
             MessageResult result = new MessageResult();
             try
@@ -89,7 +93,7 @@ namespace LeaMaPortal.Controllers
                                            new MySqlParameter("@PId", model.Id),
                                            new MySqlParameter("@PChecklist_id",model.Checklist_id),
                                             new MySqlParameter("@PChecklist_Name",model.Checklist_Name),
-                                            new MySqlParameter("@Pcheck_type",""),
+                                            new MySqlParameter("@Pcheck_type",model.Checklist_Type),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
                     var RE = await db.Database.SqlQuery<object>("CALL Usp_Checklist_All(@PFlag,@PId,@PChecklist_id,@PChecklist_Name,@Pcheck_type,@PCreateduser)", param).ToListAsync();
@@ -121,6 +125,7 @@ namespace LeaMaPortal.Controllers
                     Id = tbl_checklist.Id,
                     Checklist_id = tbl_checklist.Checklist_id,
                     Checklist_Name = tbl_checklist.Checklist_Name,
+                    Checklist_Type = tbl_checklist.Check_type
                 };
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
@@ -148,7 +153,7 @@ namespace LeaMaPortal.Controllers
                                            new MySqlParameter("@PId", tbl_checklist.Id),
                                            new MySqlParameter("@PChecklist_id",tbl_checklist.Checklist_id),
                                            new MySqlParameter("@PChecklist_Name",tbl_checklist.Checklist_Name),
-                                           new MySqlParameter("@Pcheck_type",""),
+                                           new MySqlParameter("@Pcheck_type",tbl_checklist.Check_type),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
                 var spResult = await db.Database.SqlQuery<object>("Usp_Checklist_All(@PFlag,@PId,@PChecklist_id,@PChecklist_Name,@Pcheck_type,@PCreateduser)", param).ToListAsync();

@@ -1,0 +1,86 @@
+﻿
+
+@model LeaMaPortal.Models.ApprovalSettingsViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "ApprovalSettings" }))
+{
+    @Html.HiddenFor(m => m.Id, new { @id = "ApprovalSettingsId" })
+    <div class="col-md-12 leama-fieldset leama-header-top">
+        <div class="row">
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    Approval (Y/N)
+                </div>
+                <div class="col-sm-4">
+                    @Html.RadioButtonFor(model => model.Approval_flag, "Yes", new { @id = "Approval_flag_yes" }) Yes
+                    @Html.RadioButtonFor(model => model.Approval_flag, "No", new { @id = "Approval_flag_no" }) No
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Userid, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4 ">
+                    @Html.DropDownList("Userid", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Userid" })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-12 pull-left">
+                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    //Add or update
+    $("form#ApprovalSettings").off("submit").on("submit", function (e) {
+        e.preventDefault();
+        try {
+            var form = $("form#ApprovalSettings");
+            $.ajax(
+                {
+                    url: "../ApprovalSettings/AddOrUpdate",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        GetApprovalSettings();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+
+                });
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+</script>

@@ -233,3 +233,7 @@
     margin-right: 10px;
     text-transform: uppercase;
 }
+
+.label-default-remove {
+    font-weight: normal !important;
+}         

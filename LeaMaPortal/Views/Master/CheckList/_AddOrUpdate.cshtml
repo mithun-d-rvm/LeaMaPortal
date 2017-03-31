@@ -27,9 +27,14 @@
                 <div class="col-sm-4">
                     @Html.EditorFor(model => model.Checklist_Name, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "CheckListName" } })
                 </div>
-                @*<div class="col-md-4">
-                        <button type="submit" class="leama-btn">Submit</button>
-                    </div>*@
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Checklist_Type, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4 ">
+                    @Html.DropDownList("Checklist_Type", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "ChecklistType" })
+                </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-12 pull-left">
