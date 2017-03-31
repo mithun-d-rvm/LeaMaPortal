@@ -15,7 +15,7 @@ using LeaMaPortal.Helpers;
 
 namespace LeaMaPortal.Controllers
 {
-    public class ChecklistController : Controller
+    public class ApprovalSettingsController : Controller
     {
         private Entities db = new Entities();
 
@@ -28,32 +28,29 @@ namespace LeaMaPortal.Controllers
                 int currentPageIndex = page.HasValue ? page.Value : 1;
                 int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
                 ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, defaultPageSize);
-                IList<CheckListViewModel> list;
+                IList<ApprovalSettingsViewModel> list;
                 if (string.IsNullOrWhiteSpace(Search))
                 {
-                    list = db.tbl_checklistmaster.Where(x => x.Delmark != "*").OrderBy(x => x.Checklist_Name).Select(x => new CheckListViewModel()
+                    list = db.tbl_approvalconfig.Where(x => x.Delmark != "*").OrderBy(x => x.Userid).Select(x => new ApprovalSettingsViewModel()
                     {
                         Id = x.Id,
-                        Checklist_id = x.Checklist_id,
-                        Checklist_Name = x.Checklist_Name,
-                        Checklist_Type = x.Check_type
+                        Approval_flag = x.Approval_flag,
+                        Userid = x.Userid,
                     }).ToPagedList(currentPageIndex, PageSize);
                 }
                 else
                 {
-                    list = db.tbl_checklistmaster.Where(x => x.Delmark != "*"
-                                    && (x.Checklist_id.ToLower().Contains(Search.ToLower())
-                                    || x.Checklist_Name.ToLower().Contains(Search.ToLower())))
-                                  .OrderBy(x => x.Checklist_Name).Select(x => new CheckListViewModel()
+                    list = db.tbl_approvalconfig.Where(x => x.Delmark != "*"
+                                    && (x.Userid.ToLower().Contains(Search.ToLower())
+                                    || x.Approval_flag.ToLower().Contains(Search.ToLower())))
+                                  .OrderBy(x => x.Userid).Select(x => new ApprovalSettingsViewModel()
                                   {
                                       Id = x.Id,
-                                      Checklist_id = x.Checklist_id,
-                                      Checklist_Name = x.Checklist_Name,
-                                      Checklist_Type = x.Check_type
+                                      Approval_flag = x.Approval_flag,
+                                      Userid = x.Userid,
                                   }).ToPagedList(currentPageIndex, PageSize);
                 }
-
-                return PartialView("../Master/CheckList/_List", list);
+                return PartialView("../Master/ApprovalSettings/_List", list);
             }
             catch (Exception e)
             {
@@ -63,15 +60,15 @@ namespace LeaMaPortal.Controllers
         [HttpGet]
         public PartialViewResult AddOrUpdate()
         {
-            CheckListViewModel model = new CheckListViewModel();
-            ViewBag.Checklist_Type = new SelectList(StaticHelper.GetStaticData(StaticHelper.CHECKLIST_DROPDOWN), "Name", "Name");
-            return PartialView("../Master/CheckList/_AddOrUpdate", model);
+            ApprovalSettingsViewModel model = new ApprovalSettingsViewModel();
+            ViewBag.Userid = new SelectList(db.tbl_userrights.OrderBy(o => o.Userid).Distinct(), "Userid", "Userid");
+            return PartialView("../Master/ApprovalSettings/_AddOrUpdate", model);
         }
         // POST: CheckList/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<ActionResult> AddOrUpdate([Bind(Include = "Checklist_id,Checklist_Name,Checklist_Type,Id")] CheckListViewModel model)
+        public async Task<ActionResult> AddOrUpdate([Bind(Include = "Approval_flag,Userid,Id")] ApprovalSettingsViewModel model)
         {
             MessageResult result = new MessageResult();
             try
@@ -83,20 +80,25 @@ namespace LeaMaPortal.Controllers
 
                     if (model.Id == 0)
                     {
-                        
+
                     }
                     else
                     {
                         PFlag = "UPDATE";
                     }
+                    //tbl_approvalconfig tbl_approval = new tbl_approvalconfig();
+                    //tbl_approval.Userid = model.Userid;
+                    //tbl_approval.Approval_flag = model.Approval_flag;
+                    //tbl_approval.Createduser = System.Web.HttpContext.Current.User.Identity.Name;
+                    //tbl_approval.Createddatetime = DateTime.Now;
+                    //db.tbl_approvalconfig.Add(tbl_approval);
                     object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PId", model.Id),
-                                           new MySqlParameter("@PChecklist_id",model.Checklist_id),
-                                            new MySqlParameter("@PChecklist_Name",model.Checklist_Name),
-                                            new MySqlParameter("@Pcheck_type",model.Checklist_Type),
+                                           new MySqlParameter("@PApproval_flag",model.Approval_flag),
+                                            new MySqlParameter("@PUserid",model.Userid),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
-                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Checklist_All(@PFlag,@PId,@PChecklist_id,@PChecklist_Name,@Pcheck_type,@PCreateduser)", param).ToListAsync();
+                    var RE = await db.Database.SqlQuery<object>("CALL Usp_approvalconfig_All(@PFlag,@PId,@PApproval_flag,@PUserid,@PCreateduser)", param).ToListAsync();
                     await db.SaveChangesAsync();
 
                 }
@@ -107,25 +109,24 @@ namespace LeaMaPortal.Controllers
                 throw ex;
             }
         }
-        public async Task<ActionResult> Edit(string CheckListId, string CheckListName)
+        public async Task<ActionResult> Edit(int Id)
         {
             try
             {
-                if (CheckListId == null && CheckListName != null)
+                if (Id == 0 )
                 {
                     return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
                 }
-                tbl_checklistmaster tbl_checklist = await db.tbl_checklistmaster.FindAsync(CheckListId, CheckListName);
-                if (tbl_checklist == null)
+                tbl_approvalconfig tbl_approval = await db.tbl_approvalconfig.FindAsync(Id);
+                if (tbl_approval == null)
                 {
                     return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
                 }
-                CheckListViewModel model = new CheckListViewModel()
+                ApprovalSettingsViewModel model = new ApprovalSettingsViewModel()
                 {
-                    Id = tbl_checklist.Id,
-                    Checklist_id = tbl_checklist.Checklist_id,
-                    Checklist_Name = tbl_checklist.Checklist_Name,
-                    Checklist_Type = tbl_checklist.Check_type
+                    Id = tbl_approval.Id,
+                    Approval_flag = tbl_approval.Approval_flag,
+                    Userid = tbl_approval.Userid
                 };
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
@@ -135,28 +136,27 @@ namespace LeaMaPortal.Controllers
             }
         }
 
-        public async Task<ActionResult> Delete(string CheckListId, string CheckListName)
+        public async Task<ActionResult> Delete(int Id)
         {
             MessageResult result = new MessageResult();
             try
             {
-                if (CheckListId == null && CheckListName != null)
+                if (Id == 0)
                 {
                     return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
                 }
-                tbl_checklistmaster tbl_checklist = await db.tbl_checklistmaster.FindAsync(CheckListId, CheckListName);
-                if (tbl_checklist == null)
+                tbl_approvalconfig tbl_approval = await db.tbl_approvalconfig.FindAsync(Id);
+                if (tbl_approval == null)
                 {
                     return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
                 }
                 object[] param = { new MySqlParameter("@PFlag", "DELETE"),
-                                           new MySqlParameter("@PId", tbl_checklist.Id),
-                                           new MySqlParameter("@PChecklist_id",tbl_checklist.Checklist_id),
-                                           new MySqlParameter("@PChecklist_Name",tbl_checklist.Checklist_Name),
-                                           new MySqlParameter("@Pcheck_type",tbl_checklist.Check_type),
+                                           new MySqlParameter("@PId", tbl_approval.Id),
+                                           new MySqlParameter("@PApproval_flag",tbl_approval.Approval_flag),
+                                            new MySqlParameter("@PUserid",tbl_approval.Userid),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
-                var spResult = await db.Database.SqlQuery<object>("Usp_Checklist_All(@PFlag,@PId,@PChecklist_id,@PChecklist_Name,@Pcheck_type,@PCreateduser)", param).ToListAsync();
+                var spResult = await db.Database.SqlQuery<object>("Usp_approvalconfig_All(@PFlag,@PId,@PApproval_flag,@PUserid,@PCreateduser)", param).ToListAsync();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

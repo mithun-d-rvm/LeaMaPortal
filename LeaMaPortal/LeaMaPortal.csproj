@@ -170,6 +170,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ApprovalSettingsController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\CaretakerController.cs" />
     <Compile Include="Controllers\ChecklistController.cs" />
@@ -192,6 +193,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\StaticHelper.cs" />
+    <Compile Include="Models\ApprovalSettingsViewModel.cs" />
     <Compile Include="Models\CaretakerViewModel.cs" />
     <Compile Include="Models\CheckListViewModel.cs" />
     <Compile Include="Models\ContractApprovalSettingViewModel.cs" />
@@ -261,6 +264,7 @@
     <Compile Include="Models\DBContext\view_tenant.cs" />
     <Compile Include="Models\EmailTemplateViewModel.cs" />
     <Compile Include="Models\MasterViewModel.cs" />
+    <Compile Include="Models\OptionModel.cs" />
     <Compile Include="Models\PropertyTypeViewModel.cs" />
     <Compile Include="Models\SlabViewModel.cs" />
     <Compile Include="PagingProperty.cs" />
@@ -478,6 +482,14 @@
     <Content Include="Views\Master\CheckList\_List.cshtml" />
     <Content Include="Views\Master\EmailTemplate\_List.cshtml" />
     <Content Include="Views\Master\EmailTemplate\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\PropertyType\_List.cshtml" />
+    <Content Include="Views\Master\PropertyType\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\ApprovalSettings\_List.cshtml" />
+    <Content Include="Views\Master\ApprovalSettings\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\MeterMaster\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\MeterMaster\_List.cshtml" />
+    <Content Include="Views\Master\SlabMaster\_List.cshtml" />
+    <Content Include="Views\Master\SlabMaster\_AddOrUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

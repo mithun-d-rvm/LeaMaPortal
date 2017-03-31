@@ -1,7 +1,7 @@
 ﻿
-@*@model LeaMaPortal.Models.CheckListViewModel*@
+@*@model LeaMaPortal.Models.MeterViewModel*@
 @using MvcPaging
-@model IPagedList<LeaMaPortal.Models.CheckListViewModel>
+@model IPagedList<LeaMaPortal.Models.MeterViewModel>
 @{
     Layout = null;
 }
@@ -33,19 +33,25 @@
 
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
-                    <div class="divTableCell ">CheckList Id</div>
-                    <div class="divTableCell">CheckList Name</div>
+                    <div class="divTableCell ">Meter Number</div>
+                    <div class="divTableCell">Utility Name</div>
+                    <div class="divTableCell ">Account Number</div>
+                    <div class="divTableCell ">Property Id</div>
+                    <div class="divTableCell ">Unit Id</div>
                     <div class="divTableCell">Action</div>
 
                 </div>
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
-                        <div class="divTableCell">@item.Checklist_id</div>
-                        <div class="divTableCell">@item.Checklist_Name</div>
+                        <div class="divTableCell">@item.Meter_no</div>
+                        <div class="divTableCell">@item.Utility_Name</div>
+                        <div class="divTableCell">@item.Accno</div>
+                        <div class="divTableCell">@item.Property_id</div>
+                        <div class="divTableCell">@item.unit_id</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit checklist-edit", title = "Edit", @data_id = @item.Checklist_id + '-' + @item.Checklist_Name + '-' + @item.Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash checklist-delete", @style = "color:red", @title = "Delete", @data_id = @item.Checklist_id + '-' + @item.Checklist_Name + '-' + @item.Id })
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit meter-edit", title = "Edit", @data_id = @item.Meter_no + '-' + @item.Id })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash meter-delete", @style = "color:red", @title = "Delete", @data_id = @item.Meter_no + '-' + @item.Id })
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
                     </div>
@@ -136,21 +142,25 @@
 <script>
     //Edit get
 
-    $(".checklist-edit").click(function (e) {
+    $(".meter-edit").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
         var param = id.split('-');
         $.ajax(
             {
-                url: "../CheckList/Edit",
+                url: "../Meter/Edit",
                 type: "Get",
-                data: { CheckListId: param[0], CheckListName : param[1] },
+                data: { MeterId: param[1], MeterNumber : param[0] },
                 success: function (result) {
                     if (result.Errors == undefined || result.Errors == "") {
-                        $("#CheckListId").val(result.Id);
-                        $("#CheckList_Id").val(result.Checklist_id);
-                        $("#CheckListName").val(result.Checklist_Name);
-                        $("#ChecklistType").val(result.Checklist_Type);
+                        $("#MeterId").val(result.Id);
+                        $("#Meter_no").val(result.Meter_no);
+                        $("#Utility_id").val(result.Utility_id);
+                        $("#Utility_Name").val(result.Utility_Name);
+                        $("#Accno").val(result.Accno);
+                        //$("#unit_id").val(result.unit_id);
+                        $("#Property_id").val(result.Property_id);
+                        $("#Dueday").val(result.Dueday);
                     }
                     else {
                         alert(data.Errors);
@@ -165,7 +175,7 @@
     });
 
     // delete
-    $(".checklist-delete").click(function (e) {
+    $(".meter-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
         var param = id.split('-');
@@ -176,11 +186,11 @@
         else {
             $.ajax(
                 {
-                    url: "../CheckList/Delete",
+                    url: "../Meter/Delete",
                     type: "Get",
-                    data: { CheckListId: param[0], CheckListName: param[1] },
+                    data: { MeterId: param[1], MeterNumber: param[0] },
                     success: function (response) {
-                        GetCheckList();
+                        GetMeter();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");

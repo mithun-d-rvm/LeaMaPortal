@@ -13,5 +13,6 @@ namespace LeaMaPortal.Models
         public string Checklist_id { get; set; }
         [DisplayName("Checklist Name")]
         public string Checklist_Name { get; set; }
+        public string Checklist_Type { get; set; }
     }
 }

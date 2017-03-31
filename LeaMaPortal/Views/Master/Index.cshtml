@@ -27,15 +27,19 @@
             case 3:
                 break;
             case 4:
+                GetApprovalSettings();
                 break;
             case 5:
                 GetCountry();
                 break;
-            case 9:
-                GetPropertyMaster();
-    break;
             case 6:
                 GetRegion();
+                break;
+            case 8:
+                GetPropertyType();
+                break;
+            case 9:
+                GetPropertyMaster();
                 break;
             case 10:
                 GetTenantCompany();
@@ -51,6 +55,12 @@
                 break;
             case 14:
                 GetUtility();
+                break;
+            case 16:
+                GetSlab();
+                break;
+            case 17:
+                GetMeter();
                 break;
             case 18:
                 GetEmailTemplate();
@@ -385,6 +395,155 @@
         $.ajax(
         {
             url: "../EmailTemplate/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+
+    function GetPropertyType() {
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../PropertyType/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+        $.ajax(
+        {
+            url: "../PropertyType/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+    function GetApprovalSettings() {
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../ApprovalSettings/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+        $.ajax(
+        {
+            url: "../ApprovalSettings/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+    function GetMeter() {
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../Meter/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+        $.ajax(
+        {
+            url: "../Meter/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+    }
+    function GetSlab() {
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../Slab/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //   $("#VerifyIdDetailsLoader").addClass("hide");
+            }
+        });
+        $.ajax(
+        {
+            url: "../Slab/Index",
             type: "Get",
             data: {},
             contentType: "application/json",

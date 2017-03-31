@@ -1,5 +1,6 @@
 ﻿
-@model LeaMaPortal.Models.CheckListViewModel
+
+@model LeaMaPortal.Models.ApprovalSettingsViewModel
 
 @{
     Layout = null;
@@ -7,33 +8,26 @@
 
 <!DOCTYPE html>
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "CheckList" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "ApprovalSettings" }))
 {
-    @Html.HiddenFor(m => m.Id, new { @id = "CheckListId" })
+    @Html.HiddenFor(m => m.Id, new { @id = "ApprovalSettingsId" })
     <div class="col-md-12 leama-fieldset leama-header-top">
         <div class="row">
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-2 pull-left">
-                    @Html.LabelFor(model => model.Checklist_id, htmlAttributes: new { @class = "leama-field-name" })
+                    Approval (Y/N)
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Checklist_id, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "CheckList_Id" } })
+                    @Html.RadioButtonFor(model => model.Approval_flag, "Yes", new { @id = "Approval_flag_yes" }) Yes
+                    @Html.RadioButtonFor(model => model.Approval_flag, "No", new { @id = "Approval_flag_no" }) No
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-2 pull-left">
-                    @Html.LabelFor(model => model.Checklist_Name, htmlAttributes: new { @class = "leama-field-name" })
-                </div>
-                <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Checklist_Name, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "CheckListName" } })
-                </div>
-            </div>
-            <div class="col-md-12 leama-fieldset ">
-                <div class="col-md-2 pull-left">
-                    @Html.LabelFor(model => model.Checklist_Type, htmlAttributes: new { @class = "leama-field-name" })
+                    @Html.LabelFor(model => model.Userid, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4 ">
-                    @Html.DropDownList("Checklist_Type", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "ChecklistType" })
+                    @Html.DropDownList("Userid", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Userid" })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -46,20 +40,19 @@
 }
 <script>
     //Add or update
-    $("form#CheckList").off("submit").on("submit", function (e) {
+    $("form#ApprovalSettings").off("submit").on("submit", function (e) {
         e.preventDefault();
         try {
-            var form = $("form#CheckList");
+            var form = $("form#ApprovalSettings");
             $.ajax(
                 {
-                    url: "../CheckList/AddOrUpdate",
-                    // dataType: "jsonp",
+                    url: "../ApprovalSettings/AddOrUpdate",
                     method: "POST",
-                    data: JSON.stringify($(form).serializeObject()), 
+                    data: JSON.stringify($(form).serializeObject()),
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
-                        GetCheckList();
+                        GetApprovalSettings();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");

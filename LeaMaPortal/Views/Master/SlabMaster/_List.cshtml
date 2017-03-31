@@ -1,7 +1,7 @@
 ﻿
-@*@model LeaMaPortal.Models.CheckListViewModel*@
+@*@model LeaMaPortal.Models.SlabViewModel*@
 @using MvcPaging
-@model IPagedList<LeaMaPortal.Models.CheckListViewModel>
+@model IPagedList<LeaMaPortal.Models.SlabViewModel>
 @{
     Layout = null;
 }
@@ -33,19 +33,25 @@
 
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
-                    <div class="divTableCell ">CheckList Id</div>
-                    <div class="divTableCell">CheckList Name</div>
+                    <div class="divTableCell ">Slab Id</div>
+                    <div class="divTableCell">Utility Name</div>
+                    <div class="divTableCell ">Colour</div>                    
+                    <div class="divTableCell ">Rate</div>
+                    <div class="divTableCell ">Residence Type</div>
                     <div class="divTableCell">Action</div>
 
                 </div>
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
-                        <div class="divTableCell">@item.Checklist_id</div>
-                        <div class="divTableCell">@item.Checklist_Name</div>
+                        <div class="divTableCell">@item.SlabId</div>
+                        <div class="divTableCell">@item.Utility_Name</div>
+                        <div class="divTableCell">@item.Colour</div>
+                        <div class="divTableCell">@item.rate</div>
+                        <div class="divTableCell">@item.Residence_type</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit checklist-edit", title = "Edit", @data_id = @item.Checklist_id + '-' + @item.Checklist_Name + '-' + @item.Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash checklist-delete", @style = "color:red", @title = "Delete", @data_id = @item.Checklist_id + '-' + @item.Checklist_Name + '-' + @item.Id })
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit slab-edit", title = "Edit", @data_id = @item.Id })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash slab-delete", @style = "color:red", @title = "Delete", @data_id = @item.Id })
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
                     </div>
@@ -136,21 +142,24 @@
 <script>
     //Edit get
 
-    $(".checklist-edit").click(function (e) {
+    $(".slab-edit").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
-        var param = id.split('-');
         $.ajax(
             {
-                url: "../CheckList/Edit",
+                url: "../Slab/Edit",
                 type: "Get",
-                data: { CheckListId: param[0], CheckListName : param[1] },
+                data: { Id : id },
                 success: function (result) {
                     if (result.Errors == undefined || result.Errors == "") {
-                        $("#CheckListId").val(result.Id);
-                        $("#CheckList_Id").val(result.Checklist_id);
-                        $("#CheckListName").val(result.Checklist_Name);
-                        $("#ChecklistType").val(result.Checklist_Type);
+                        $("#MeterId").val(result.Id);
+                        $("#Meter_no").val(result.Meter_no);
+                        $("#Utility_id").val(result.Utility_id);
+                        $("#Utility_Name").val(result.Utility_Name);
+                        $("#Accno").val(result.Accno);
+                        //$("#unit_id").val(result.unit_id);
+                        $("#Property_id").val(result.Property_id);
+                        $("#Dueday").val(result.Dueday);
                     }
                     else {
                         alert(data.Errors);
@@ -165,10 +174,9 @@
     });
 
     // delete
-    $(".checklist-delete").click(function (e) {
+    $(".slab-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
-        var param = id.split('-');
         var r = confirm("Are you sure want to delete?");
         if (r == false) {
             return;
@@ -176,11 +184,11 @@
         else {
             $.ajax(
                 {
-                    url: "../CheckList/Delete",
+                    url: "../Slab/Delete",
                     type: "Get",
-                    data: { CheckListId: param[0], CheckListName: param[1] },
+                    data: { Id: id },
                     success: function (response) {
-                        GetCheckList();
+                        GetSlab();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");

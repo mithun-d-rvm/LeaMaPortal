@@ -1,7 +1,7 @@
 ﻿
-@*@model LeaMaPortal.Models.CheckListViewModel*@
+@*@model LeaMaPortal.Models.PropertyTypeViewModel*@
 @using MvcPaging
-@model IPagedList<LeaMaPortal.Models.CheckListViewModel>
+@model IPagedList<LeaMaPortal.Models.PropertyTypeViewModel>
 @{
     Layout = null;
 }
@@ -33,19 +33,21 @@
 
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
-                    <div class="divTableCell ">CheckList Id</div>
-                    <div class="divTableCell">CheckList Name</div>
+                    <div class="divTableCell ">Property Type Name</div>
+                    <div class="divTableCell">Property Category</div>
+                    <div class="divTableCell">Usage Name</div>
                     <div class="divTableCell">Action</div>
 
                 </div>
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
-                        <div class="divTableCell">@item.Checklist_id</div>
-                        <div class="divTableCell">@item.Checklist_Name</div>
+                        <div class="divTableCell">@item.PropertyType</div>
+                        <div class="divTableCell">@item.PropertyCategory</div>
+                        <div class="divTableCell">@item.Usage_name</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit checklist-edit", title = "Edit", @data_id = @item.Checklist_id + '-' + @item.Checklist_Name + '-' + @item.Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash checklist-delete", @style = "color:red", @title = "Delete", @data_id = @item.Checklist_id + '-' + @item.Checklist_Name + '-' + @item.Id })
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit propertytype-edit", title = "Edit", @data_id = @item.PropertyType + "-" + @item.PropertyCategory + "-" + @item.Usage_name})  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash propertytype-delete", @style = "color:red", @title = "Delete", @data_id = @item.PropertyType + "-" + @item.PropertyCategory + "-" + @item.Usage_name })
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
                     </div>
@@ -81,24 +83,24 @@
                     var defaultPageSize = $("#defaultPageSize").val();
                     var search = $("#Search").val();
                     //alert(page);
-                    getCheckListList(search,page,defaultPageSize)
+                    getPropertyTypeList(search,page,defaultPageSize)
                 });
                 $("#defaultPageSize").change(function () {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getCheckListList(search, 1, defaultPageSize)
+                    getPropertyTypeList(search, 1, defaultPageSize)
                 });
                 $("#btn-search").click(function (e) {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getCheckListList(search, 1, defaultPageSize)
+                    getPropertyTypeList(search, 1, defaultPageSize)
                 });
 
-                function getCheckListList(search, page, defaultPageSize)
+                function getPropertyTypeList(search, page, defaultPageSize)
                 {
                     $.ajax(
                        {
-                           url: "../CheckList/Index",
+                           url: "../PropertyType/Index",
                            type: "Get",
                            data: { Search: search, page: page, defaultPageSize: defaultPageSize },
                            success: function (html) {
@@ -136,21 +138,21 @@
 <script>
     //Edit get
 
-    $(".checklist-edit").click(function (e) {
+    $(".propertytype-edit").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
         var param = id.split('-');
         $.ajax(
             {
-                url: "../CheckList/Edit",
+                url: "../PropertyType/Edit",
                 type: "Get",
-                data: { CheckListId: param[0], CheckListName : param[1] },
+                data: { PropertyType: param[0], PropertyCategory: param[1], Usage_name: param[2] },
                 success: function (result) {
                     if (result.Errors == undefined || result.Errors == "") {
-                        $("#CheckListId").val(result.Id);
-                        $("#CheckList_Id").val(result.Checklist_id);
-                        $("#CheckListName").val(result.Checklist_Name);
-                        $("#ChecklistType").val(result.Checklist_Type);
+                        $("#PropertyTypeId").val(result.Id);
+                        $("#PropertyType").val(result.PropertyType);
+                        $("#UsageName").val(result.Usage_name);
+                        $("#PropertyCategory").val(result.PropertyCategory);
                     }
                     else {
                         alert(data.Errors);
@@ -165,7 +167,7 @@
     });
 
     // delete
-    $(".checklist-delete").click(function (e) {
+    $(".propertytype-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
         var param = id.split('-');
@@ -176,11 +178,11 @@
         else {
             $.ajax(
                 {
-                    url: "../CheckList/Delete",
+                    url: "../PropertyType/Delete",
                     type: "Get",
-                    data: { CheckListId: param[0], CheckListName: param[1] },
+                    data: { PropertyType: param[0], PropertyCategory: param[1], Usage_name: param[2] },
                     success: function (response) {
-                        GetCheckList();
+                        GetPropertyType();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
