@@ -170,6 +170,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="Controllers\ApprovalSettingsController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\CaretakerController.cs" />
@@ -307,6 +308,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\CloseCont.png" />
     <Content Include="Images\invoice.png" />
+    <Content Include="Images\Logo-Bitmap.png" />
+    <Content Include="Images\Logo-thumb.png" />
+    <Content Include="Images\Logo.png" />
     <Content Include="Images\loader.gif" />
     <Content Include="Images\Notification.png" />
     <Content Include="Images\Payments.png" />
