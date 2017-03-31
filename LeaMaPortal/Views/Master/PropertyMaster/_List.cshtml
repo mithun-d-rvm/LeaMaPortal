@@ -426,7 +426,7 @@
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
-                    // $("#").addClass("hide");
+                    $("body").scrollTop(0);
                 }
             });
     });
