@@ -10,18 +10,18 @@ namespace LeaMaPortal.Models
     {
         public int Id { get; set; }
         [DisplayName("Slab Id")]
-        public string SlabId { get; set; }
+        public int? SlabId { get; set; }
         [DisplayName("Utility_id ")]
         public string Utility_id { get; set; }
 
         [DisplayName("Utility Name")]
         public string Utility_Name { get; set; }
         [DisplayName("Unit From")]
-        public string Unit_From { get; set; }
+        public int? Unit_From { get; set; }
         [DisplayName("Unit To")]
-        public string Unit_to { get; set; }
+        public int? Unit_to { get; set; }
         [DisplayName("Rate Per Unit")]
-        public string rate { get; set; }
+        public float? rate { get; set; }
         [DisplayName("Colour Code")]
         public string Colour { get; set; }
         [DisplayName("Residence Type")]

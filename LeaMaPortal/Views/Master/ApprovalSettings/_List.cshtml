@@ -1,7 +1,7 @@
 ﻿
-@*@model LeaMaPortal.Models.CheckListViewModel*@
+@*@model LeaMaPortal.Models.ApprovalSettingsViewModel*@
 @using MvcPaging
-@model IPagedList<LeaMaPortal.Models.CheckListViewModel>
+@model IPagedList<LeaMaPortal.Models.ApprovalSettingsViewModel>
 @{
     Layout = null;
 }
@@ -33,19 +33,19 @@
 
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
-                    <div class="divTableCell ">CheckList Id</div>
-                    <div class="divTableCell">CheckList Name</div>
+                    <div class="divTableCell ">User Id</div>
+                    <div class="divTableCell">Approval Settings</div>
                     <div class="divTableCell">Action</div>
 
                 </div>
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
-                        <div class="divTableCell">@item.Checklist_id</div>
-                        <div class="divTableCell">@item.Checklist_Name</div>
+                        <div class="divTableCell">@item.Userid</div>
+                        <div class="divTableCell">@item.Approval_flag</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit checklist-edit", title = "Edit", @data_id = @item.Checklist_id + '-' + @item.Checklist_Name + '-' + @item.Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash checklist-delete", @style = "color:red", @title = "Delete", @data_id = @item.Checklist_id + '-' + @item.Checklist_Name + '-' + @item.Id })
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit approval-edit", title = "Edit", @data_id = @item.Id })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash approval-delete", @style = "color:red", @title = "Delete", @data_id = @item.Id })
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
                     </div>
@@ -81,24 +81,24 @@
                     var defaultPageSize = $("#defaultPageSize").val();
                     var search = $("#Search").val();
                     //alert(page);
-                    getCheckListList(search,page,defaultPageSize)
+                    getApprovalSettingsList(search,page,defaultPageSize)
                 });
                 $("#defaultPageSize").change(function () {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getCheckListList(search, 1, defaultPageSize)
+                    getApprovalSettingsList(search, 1, defaultPageSize)
                 });
                 $("#btn-search").click(function (e) {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getCheckListList(search, 1, defaultPageSize)
+                    getApprovalSettingsList(search, 1, defaultPageSize)
                 });
 
-                function getCheckListList(search, page, defaultPageSize)
+                function getApprovalSettingsList(search, page, defaultPageSize)
                 {
                     $.ajax(
                        {
-                           url: "../CheckList/Index",
+                           url: "../ApprovalSettings/Index",
                            type: "Get",
                            data: { Search: search, page: page, defaultPageSize: defaultPageSize },
                            success: function (html) {
@@ -136,21 +136,26 @@
 <script>
     //Edit get
 
-    $(".checklist-edit").click(function (e) {
+    $(".approval-edit").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
-        var param = id.split('-');
         $.ajax(
             {
-                url: "../CheckList/Edit",
+                url: "../ApprovalSettings/Edit",
                 type: "Get",
-                data: { CheckListId: param[0], CheckListName : param[1] },
+                data: { Id: id },
                 success: function (result) {
                     if (result.Errors == undefined || result.Errors == "") {
-                        $("#CheckListId").val(result.Id);
-                        $("#CheckList_Id").val(result.Checklist_id);
-                        $("#CheckListName").val(result.Checklist_Name);
-                        $("#ChecklistType").val(result.Checklist_Type);
+                        $("#ApprovalSettingsId").val(result.Id);
+                        $("#Userid").val(result.Userid);                        
+                        if (result.Approval_flag == "Yes")
+                        {
+                            $("#Approval_flag_yes").attr("checked", "checked");
+                        }
+                        else
+                        {
+                            $("#Approval_flag_no").attr("checked", "checked");
+                        }
                     }
                     else {
                         alert(data.Errors);
@@ -160,16 +165,14 @@
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
-                    $("body").scrollTop(0);
                 }
             });
     });
 
     // delete
-    $(".checklist-delete").click(function (e) {
+    $(".approval-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
-        var param = id.split('-');
         var r = confirm("Are you sure want to delete?");
         if (r == false) {
             return;
@@ -177,11 +180,11 @@
         else {
             $.ajax(
                 {
-                    url: "../CheckList/Delete",
+                    url: "../ApprovalSettings/Delete",
                     type: "Get",
-                    data: { CheckListId: param[0], CheckListName: param[1] },
+                    data: { Id: id },
                     success: function (response) {
-                        GetCheckList();
+                        GetApprovalSettings();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
