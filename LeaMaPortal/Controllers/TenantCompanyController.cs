@@ -297,7 +297,12 @@ namespace LeaMaPortal.Controllers
                     Remarks = z.Remarks,
                     State = z.State,
                     TenantId = z.Tenant_Id
+                }).ToList(),
+                CompanyDocumentsExist=db.tbl_tenant_company_government_doc.Where(r=>r.Tenant_Id==tenantCompany.Tenant_Id).Select(r=>new CompanyDocuments()
+                {
+                    Type=r.Type,Doc_name =r.Doc_name,Doc_path=r.Doc_Path,Tenant_Id= tenantCompany.Tenant_Id
                 }).ToList()
+
             };
             return PartialView("../Master/TenantCompany/_AddOrUpdate", tenantCompanyData);
         }
@@ -362,6 +367,47 @@ namespace LeaMaPortal.Controllers
                             }
                         }
                     }
+                    string companyDoc = "";
+                    if(model.CompanyDocumentsExist!=null)
+                    {
+                        foreach(var item in model.CompanyDocumentsExist)
+                        {
+                            companyDoc += !string.IsNullOrWhiteSpace(companyDoc) ?
+                                ",(" + model.TenantId + ",'" + item.Type + "','" + item.Doc_name + "','" + item.Doc_path + "')" :
+                                "(" + model.TenantId + ",'" + item.Type + "','" + item.Doc_name + "','" + item.Doc_path + "')";
+                        }
+                    }
+                    if(model.CompanyNewDocuments != null)
+                    {
+                        foreach (var item in model.CompanyNewDocuments)
+                        {
+                            //TenantCompany
+                            Guid guid = Guid.NewGuid();
+                            try
+                            {
+                                if (item.File != null)
+                                {
+                                    HttpPostedFileBase file = item.File; //Uploaded file
+                                    //int fileSize = file.ContentLength;
+                                    string fileName = file.FileName;
+                                    //string mimeType = file.ContentType;
+                                    //System.IO.Stream fileContent = file.InputStream;
+                                    fileName = guid + fileName;
+                                    //To save file, use SaveAs method
+                                    file.SaveAs(Server.MapPath("~/" + Common.TenantCompanyDocumentContainer) + fileName); //File will be saved in application root
+
+
+                                    companyDoc += !string.IsNullOrWhiteSpace(companyDoc) ?
+                                                ",(" + model.TenantId + ",'" + item.Type + "','" + item.Name + "','" + fileName + "')" :
+                                                "(" + model.TenantId + ",'" + item.Type + "','" + item.Name + "','" + fileName + "')";
+
+                                }
+                            }
+                            catch { }
+                            
+                        }
+                    }
+
                     object[] parameters = {
                          new MySqlParameter("@PFlag", PFlag),
                          new MySqlParameter("@PTenant_Id", model.TenantId),
@@ -398,7 +444,7 @@ namespace LeaMaPortal.Controllers
                          new MySqlParameter("@PCreateduser", System.Web.HttpContext.Current.User.Identity.Name),
                          new MySqlParameter("@Ptenant_companydt", companyDet),
                          new MySqlParameter("@Ptenant_companydt1", companyContactDetails),
-                         new MySqlParameter("@Ptenant_companydoc", null)
+                         new MySqlParameter("@Ptenant_companydoc", companyDoc)
 
                     };
                     var tenantCompany = await db.Database.SqlQuery<object>("CALL Usp_Tenant_Company_All(@PFlag, @PTenant_Id, @PCompanyName, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser, @Ptenant_companydt, @Ptenant_companydt1, @Ptenant_companydoc)", parameters).ToListAsync();

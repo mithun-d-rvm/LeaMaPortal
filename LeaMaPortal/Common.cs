@@ -21,5 +21,7 @@ namespace LeaMaPortal
         public static List<string> Emirate = new List<string>() { "Default" };
         public static List<string> ComapanyActivity = new List<string>() { "Activity1" };
         public static List<string> Issuance_authority = new List<string>() { "List-1" };
+        public const string TenantCompanyDocumentContainer = "Documents/TenantCompany/";
+
     }
 }

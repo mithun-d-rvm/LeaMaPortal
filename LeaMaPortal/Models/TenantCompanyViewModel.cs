@@ -12,6 +12,8 @@ namespace LeaMaPortal.Models
         {
             CompanyContactDetails = new List<CompanyContactDetail>();
             CompanyDetails = new List<CompanyDetail>();
+            CompanyNewDocuments = new List<CompanyNewDocuments>();
+            CompanyDocumentsExist = new List<CompanyDocuments>();
         }
         public int Id { get; set; }
 
@@ -81,7 +83,8 @@ namespace LeaMaPortal.Models
         public List<CompanyDetail> CompanyDetails { get; set; }
        
         public List<CompanyContactDetail> CompanyContactDetails { get; set; }
-        
+        public List<CompanyDocuments> CompanyDocumentsExist { get; set; }
+        public List<CompanyNewDocuments> CompanyNewDocuments { get; set; }
     }
     public class CompanyDetail
     {
@@ -130,6 +133,23 @@ namespace LeaMaPortal.Models
         public string MobileNo { get; set; }
 
         public string Salutations { get; set; }
+
+    }
+
+    public class CompanyDocuments
+    {
+        public int Tenant_Id { get; set; }
+        public string Type { get; set; }
+        public string Doc_name { get; set; }
+        public string Doc_path { get; set; }
+
+    }
+    public class CompanyNewDocuments
+    {
+        public int Tenant_Id { get; set; }
+        public string Type { get; set; }
+        public string Name { get; set; }
+        public HttpPostedFileBase File { get; set; }
 
     }
 }

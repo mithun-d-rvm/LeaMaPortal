@@ -14,7 +14,7 @@
 <link href="~/theme/css/leemastyle.css" rel="stylesheet" />
 <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
 <!DOCTYPE html>
-@using (Html.BeginForm("AddOrUpdate", "TenantCompany", FormMethod.Post, new { @id = "TenantCompany" }))
+@using (Html.BeginForm("AddOrUpdate", "TenantCompany", FormMethod.Post, new { @id = "TenantCompany", @enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(m => m.Id, new { @id = "Id" })
     <div class="inner-block">
@@ -264,7 +264,7 @@
                         </div>
                         <div class="col-md-8">
                             @*<input type="text" class="master-form-input"  />*@
-                            @Html.EditorFor(model => model.LicenseIssueDate, new { htmlAttributes = new { @class = "master-form-input", @required = "required" } })
+                            @Html.EditorFor(model => model.LicenseIssueDate, new { htmlAttributes = new { @class = "master-form-input" } })
                             @Html.ValidationMessageFor(model => model.LicenseIssueDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -468,7 +468,7 @@
                         </div>
                         <div class="col-md-8">
                             @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.LicenseExpiryDate, new { htmlAttributes = new { @class = "master-form-input", @required = "required" } })
+                            @Html.EditorFor(model => model.LicenseExpiryDate, new { htmlAttributes = new { @class = "master-form-input" } })
                             @Html.ValidationMessageFor(model => model.LicenseExpiryDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -520,7 +520,7 @@
             </div>
             <div class="row">
                 <div class="row p-b-25 p-t-17">
-                    <span> <strong> Company Details </strong> </span>
+                    <h3> Company Details</h3>
                 </div>
                 @*<div class="row">
                     <div class="col-md-12 document-row">
@@ -686,6 +686,7 @@
             {
                 <input type="hidden" id="init-company-contact-det-count" value="0" />
             }
+            <h3>Contact Details</h3>
             <div class="row" id="companyContactDetailsForm1">
                 <div id="Gridview" class="row document-row">
                     <div class="col-md-12">
@@ -745,7 +746,7 @@
                         html = html + " <div class='col-md-1 form-group'> <label for='state'>Extension</label><input id='state" + @j + "'  type='text' value='" + @Model.CompanyContactDetails[j].Extension + "' class='master-form-input' name='CompanyContactDetails[" + j + "].Extension' data-name='Extension' /></div>";
                         html = html + "<div class='col-md-2 form-group'> <label for='country'>MobileNo</label> <input id='MobileNo" + @j + "' type='text'  value='" + @Model.CompanyContactDetails[j].MobileNo + "' class='master-form-input' name='CompanyContactDetails[" + j + "].MobileNo' data-name='MobileNo' /></div>";
                         html = html + " <div class='col-md-2 form-group'> <label for='state'>Salutations</label><input id='state" + @j + "'  type='text' value='" + @Model.CompanyContactDetails[j].Salutations + "' class='master-form-input' name='CompanyContactDetails[" + j + "].State' data-name='Salutations' /></div>";
-                        html = html + "<div class='col-md-1' form-group></br>  <input type='button' class='document-btn removebutton' id='Delete" + @j + "' value=' X ' /></div>";
+                        html = html + "<div class='col-md-1' form-group></br>  <button class='document-btn removebutton' id='Delete" + @j + "'> X </button></div>";
                         html = html + "</div>";
                        
                         html = html + "</div>";
@@ -763,16 +764,76 @@
             <div class="row ht-5">
                 &nbsp;
             </div>
-        </div>
-
-
-
-
-
-
-
-
             
+
+                @if (Model.CompanyDocumentsExist != null)
+                {
+                    if (Model.CompanyDocumentsExist.Count > 0)
+                    { <h3>Exist documents</h3>}
+                    <table class="row" id="companyExistFileDetails">
+                        @for (int j = 0; j < Model.CompanyDocumentsExist.Count; j++)
+                        {
+                        <tr>
+                            <td>
+                                <div class='col-md-12 document-row' id="GridViewCompanyContact @j ">
+                                    <div class='col-md-12'>
+                                        <div class='col-md-4 form-group'> <label for='branch'>Type</label> <input id='branch" + @j + "' type='text' value='@Model.CompanyDocumentsExist[j].Type' class='master-form-input' name='CompanyDocumentsExist[@j].Type' data-name='Type' /></div>
+                                        <div class='col-md-4 form-group'> <label for='City'>Name</label><input id='city" + j + "' type='text' value='@Model.CompanyDocumentsExist[j].Doc_name' class='master-form-input' name='CompanyDocumentsExist[@j].Doc_name' data-name='Doc_name' /></div>
+                                        <div class='col-md-2 form-group'>
+                                            <label for='add01'>Document</label><input type='hidden' id='docpath' value='@Model.CompanyDocumentsExist[j].Doc_path' name='CompanyDocumentsExist[@j].Doc_path' data-name='Doc_path' />
+                                            <a href="~/Documents/TenantCompany/@Model.CompanyDocumentsExist[j].Doc_path" target='_blank'>Download</a>
+                                        </div>
+                                        <div class='col-md-2 form-group'><br />
+                                        
+                                            <button class="document-btn remove-document-exist-button" id="Delete"@j > X </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='row ht-5'> &nbsp;</div>
+
+
+
+                            </td>
+                        </tr>
+                        }
+                    </table>
+                }
+                   
+
+            <div class="row" id="companyFileDetailsForm1">
+                <div id="Gridview" class="row document-row">
+                    <div class="col-md-12">
+                        <div class="col-md-4 form-group">
+                            <h3>New Document(s)</h3>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <br />
+                            <input type="button" class="document-btn" id="AddFile" value="Add" onclick='addFile(this);' />
+                            @*<input type="text" class="master-form-input" id="FileName" />*@
+                        </div>
+                        <div class="col-md-2 form-group">
+                            
+                        </div>
+                       
+                        <div class="col-md-3 form-group">
+                            
+                            
+                        </div>
+                    </div>
+
+                </div>
+                
+            </div>
+            
+            <table class="row" id="companyNewFileDetails">
+
+            </table>
+
+            <div class="row ht-5">
+                &nbsp;
+            </div>
+
+        </div>
             <div class="col-md-12 form-input-padding">
             <div class="col-md-4">
                 &nbsp;
@@ -915,6 +976,7 @@
         $("#Extension").val('');
         $("#MobileNo").val('');
         $("#Salutations").val('');
+        
         return false;
     }
     //company-remove-exist-file
@@ -943,6 +1005,81 @@
         });
         j = newindex;
     });
+
+    var k = 0;
+    function addFile(e)
+    {
+        
+        var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + k + "'>";
+        html = html + "<div class='col-md-12'>";
+        html = html + " <div class='col-md-4 form-group'> <label for='branch'>Type</label> <input id='type" + k + "'  type='text' value='' class='master-form-input' name='CompanyNewDocuments[" + k + "].Type' data-name='Type' /></div>";
+        html = html + "<div class='col-md-4 form-group'> <label for='City'>Name</label><input id='Designation" + k + "' type='text'  value='' class='master-form-input' name='CompanyNewDocuments[" + k + "].Name' data-name='Name' /></div>";
+        html = html + " <div class='col-md-3 form-group'> <label for='add01'>Document</label><input type='file' id='File" + k + "' class='master-form-input' name='CompanyNewDocuments[" + k + "].File' data-name='File' value=''/></div>";
+        html = html + "<div class='col-md-1'></br>  <button class='document-btn remove-document-new-button' id='Delete" + k + "'> X </button></div>";
+
+        html = html + "</div>";
+
+        html = html + "</div>";
+        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr>"
+        $('#companyNewFileDetails').append(html);
+        k++;
+        return false;
+    }
+    //company-remove-new-file
+    $(document).on('click', 'button.remove-document-new-button', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('companyNewFileDetails');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'CompanyNewDocuments[' + newindex + '].' + dataname
+                    }
+                });
+            });
+           
+            newindex++;
+           
+        });
+        k = newindex;
+    });
+
+    $(document).on('click', 'button.remove-document-exist-button', function () {
+        
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('companyExistFileDetails');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'CompanyDocumentsExist[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+    });
+
+
+    
 </script>
 
 
