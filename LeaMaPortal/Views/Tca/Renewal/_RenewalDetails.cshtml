@@ -1,0 +1,289 @@
+﻿<!--
+  File Name      : _RenewalDetails.cshtml
+  Description    : Renewal Details partial view
+  Created Date   : 25-Mar-2017
+  Notes          : <Notes>
+-->
+
+
+<div class="modal-content">
+    @*<div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>*@
+    <div class="modal-body font-smaller">
+        <button type="button" class="close font-40" data-dismiss="modal">&times;</button>
+        <div class="text-uppercase popup-heading">
+            Contract Tenancy Agreement - Renewal
+        </div>
+        <div class="p-t-5-p"> &nbsp; </div>
+        <div class="row">
+            <div class="col-md-6 ht-50">
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-3 m-t-3">
+                        <span> Single Unit </span>
+                    </div>
+                    <div class="col-md-1">
+                        <input type="radio" class="input-checkbox">
+                    </div>
+                    <div class="col-md-3 m-t-3">
+                        <span> Multiple Unit </span>
+                    </div>
+                    <div class="col-md-1">
+                        <input type="radio" class="input-checkbox">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Existing Contract Agreement:
+                    </div>
+                    <div class="col-md-6">
+                        <select class="master-form-input form-control">
+                            <option> Agreement 1 </option>
+                            <option> Agreement 2 </option>
+                            <option> Agreement 3 </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Contract Agreement No:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Contract Agreement Date:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Contract Tenant Type:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Tenant ID:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Tenant Name:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Property ID:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Property Tawtheeq ID:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Property Name:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Unit Tawtheeq ID:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Unit Name:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-6">
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Property Available From:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Contract Agreement Start Date:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Contract Agreement End Date:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Contract Total Rental Amount:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Contract Perday Rental:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Total number of Payments:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Contract Security Deposit Amount:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Security Deposit Payment Mode:
+                    </div>
+                    <div class="col-md-6">
+                        <select class="master-form-input form-control">
+                            <option> Payment 1 </option>
+                            <option> Payment 2 </option>
+                            <option> Payment 3 </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Security Deposit Cheque/Ref No:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Security Cheque Date:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        Contract Notice Period Days:
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="master-form-input form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-6">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-4">
+                        <input type="button" class="btn master-form-btn" value="Submit" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-b-10-p">
+            &nbsp;
+        </div>
+        <!-- BEGIN AGREEMENT PDC -->
+        <div class="p-lr-20">
+            @Html.Partial("_AgreementPdc")
+        </div>
+        <!-- END AGREEMENT PDC -->
+        <div class="row ht-5">
+            &nbsp;
+        </div>
+        <!-- BEGIN AGREEMENT DOCUMENT -->
+        <div class="p-lr-20">
+            @Html.Partial("_AgreementDocument")
+        </div>
+        <!-- END AGREEMENT DOCUMENT -->
+        <div class="row ht-5">
+            &nbsp;
+        </div>
+        <!-- BEGIN AGREEMENT UTILITY -->
+        <div class="p-lr-20">
+            @Html.Partial("_AgreementUtility")
+        </div>
+        <!-- END AGREEMENT UTILITY -->
+        <div class="row ht-5">
+            &nbsp;
+        </div>
+        <!-- BEGIN AGREEMENT UNIT -->
+        <div class="p-lr-20">
+            @Html.Partial("_AgreementUnit")
+        </div>
+        <!-- END AGREEMENT UNIT -->
+        <div class="row ht-5">
+            &nbsp;
+        </div>
+        <!-- BEGIN AGREEMENT UNIT -->
+        <div class="p-lr-20">
+            @Html.Partial("_AgreementCheckList")
+        </div>
+        <!-- END AGREEMENT UNIT -->
+        <div class="p-b-10-p">
+            &nbsp;
+        </div>
+    </div>
+    @*<div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" id="test-modal">Test</button>
+        </div>*@
+</div>
+

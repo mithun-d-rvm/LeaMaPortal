@@ -1,0 +1,461 @@
+﻿
+@using MvcPaging
+@model IEnumerable<LeaMaPortal.Models.DBContext.tbl_propertiesmaster>
+@{
+    Layout = null;
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Property_Flag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Property_ID_Tawtheeq)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Property_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Compound)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Zone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sector)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plotno)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.ownedbyregistrant)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Property_Usage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Property_Type)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Commercial_villa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Street_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Region_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.State)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Externalrefno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Noofoffloors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Noofunits)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Builtarea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Plotarea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Leasablearea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.commonarea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.completion_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AEDvalue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Purchased_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valued_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vacant_Start_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rental_Rate_Month)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ref_unit_Property_ID_Tawtheeq)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ref_Unit_Property_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ref_Unit_Property_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unit_ID_Tawtheeq)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unit_Property_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Externalrefno_unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AEDvalue_unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Purchased_date_unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valued_Date_unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status_unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vacant_Start_Date_Unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rental_Rate_Month_unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Floorno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Floorlevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Property_Usage_unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Property_Type_unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total_Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unit_Common_Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Common_Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Parkingno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unitcomments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Caretaker_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Caretaker_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company_occupied_Flag)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Accyear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Createddatetime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Createduser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Delmark)
+            </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.propertiesdt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.propertiesdt1)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Property_Flag)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Property_ID_Tawtheeq)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Property_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Compound)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sector)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.plotno)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.ownedbyregistrant)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Property_Usage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Property_Type)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Commercial_villa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Street_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Region_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Externalrefno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Noofoffloors)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Noofunits)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Builtarea)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Plotarea)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Leasablearea)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.commonarea)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.completion_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AEDvalue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purchased_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valued_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vacant_Start_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rental_Rate_Month)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ref_unit_Property_ID_Tawtheeq)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ref_Unit_Property_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ref_Unit_Property_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit_ID_Tawtheeq)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit_Property_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Externalrefno_unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AEDvalue_unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purchased_date_unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valued_Date_unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status_unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vacant_Start_Date_Unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rental_Rate_Month_unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Floorno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Floorlevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Property_Usage_unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Property_Type_unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total_Area)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit_Common_Area)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Common_Area)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Parkingno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unitcomments)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Caretaker_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Caretaker_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company_occupied_Flag)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Accyear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Createddatetime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Createduser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Delmark)
+                </td>*@
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.propertiesdt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.propertiesdt1)
+                </td>*@
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.Property_Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Property_Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Property_Id })*@
+
+                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit property-edit", title = "Edit", @data_id = @item.Property_Id })  |
+                @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash property-delete", @style = "color:red", @title = "Delete", @data_id = @item.Property_Id })
+
+
+            </td>
+        </tr>
+    }
+
+</table>
+<script>
+    $(".property-edit").click(function (e) {
+        e.preventDefault();
+        var propertyId = $(this).data("id");
+        $.ajax(
+            {
+                url: "../PropertyMaster/Edit",
+                type: "Get",
+                data: { Property_Id: propertyId},
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    $("body").scrollTop(0);
+                }
+            });
+    });
+
+    $(".property-delete").click(function (e) {
+        e.preventDefault();
+        var propertyId = $(this).data("id");
+        
+        var r = confirm("Are you sure want to delete?");
+        if (r == false) {
+            return;
+        }
+        else {
+            $.ajax(
+                {
+                    url: "../PropertyMaster/Delete",
+                    type: "Post",
+                    data: { Property_Id: propertyId},
+                    success: function (response) {
+                        GetPropertyMaster();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+
+                    }
+                });
+        }
+    });
+
+</script>
