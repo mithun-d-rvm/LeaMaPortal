@@ -272,6 +272,7 @@
     <Compile Include="Models\PropertyTypeViewModel.cs" />
     <Compile Include="Models\ReceiptViewModel.cs" />
     <Compile Include="Models\SlabViewModel.cs" />
+    <Compile Include="Models\UserCreationViewModel.cs" />
     <Compile Include="PagingProperty.cs" />
     <Compile Include="Models\FacilityViewModel.cs" />
     <Compile Include="Models\MeterViewModel.cs" />
