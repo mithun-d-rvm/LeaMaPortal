@@ -9,7 +9,7 @@ namespace LeaMaPortal
     {
         public static List<string> Title = new List<string>() {"MR.", "MRS.","MS." };
         public static List<string> Role = new List<string>() { "Admin", "Management", "Caretaker" };
-        public const string DefaultTitle= "MR.";
+        public const string DefaultTitle= "Mr.";
         //public static List<string> City = new List<string>() { "Abudhabi", "Sharja" };
         public static List<string> Profession = new List<string>() { "Engineer", "Teacher", "Shop keeper","Doctor","Farmer" };
 
@@ -50,6 +50,6 @@ namespace LeaMaPortal
     public class FormMaster
     {
         public int Id { get; set; }
-public string MenuName { get; set; }
+        public string MenuName { get; set; }
     }
 }

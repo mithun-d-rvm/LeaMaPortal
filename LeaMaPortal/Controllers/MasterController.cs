@@ -36,7 +36,7 @@ namespace LeaMaPortal.Controllers
         {
             try
             {
-                ViewBag.FormMasterId = new SelectList(db.tbl_formmaster.OrderBy(x => x.MenuName), "Id", "MenuName", selected);
+                ViewBag.FormMasterId = new SelectList(Common.FormMasterList, "Id", "MenuName", selected);
                 return PartialView("_Filter");
             }
             catch
