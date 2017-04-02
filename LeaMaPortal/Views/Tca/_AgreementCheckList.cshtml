@@ -1,20 +1,25 @@
-﻿<div class="row p-b-25 text-uppercase">
+﻿
+
+@model LeaMaPortal.Models.AgreementCheckListViewModel
+
+<div class="row p-b-25 text-uppercase">
     <span> <strong> Agreement checklist </strong> </span>
 </div>
 
 <div class="row">
     <div class="col-md-12 document-row">
-        <div class="col-md-2">
+        @*<div class="col-md-2">
             Checklist ID
         </div>
         <div class="col-md-3">
             Checklist Name
-        </div>
+        </div>*@
         <div class="col-md-4">
-            Verified
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "label-default-remove" }) 
         </div>
+
         <div class="col-md-3">
-            Remarks
+            @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "label-default-remove" }) 
         </div>
     </div>
 </div>
@@ -24,14 +29,14 @@
 
 @Html.Partial("_AgreementCheckListDetails")
 
-<div class="row">
+@*<div class="row">
     <div class="col-md-1 w-md-10 pull-right">
         <button class="document-btn">Delete</button>
     </div>
     <div class="col-md-1 w-md-10 pull-right">
         <button class="document-btn">Add</button>
     </div>
-</div>
+</div>*@
 <div class="row ht-5">
     &nbsp;
 </div>
