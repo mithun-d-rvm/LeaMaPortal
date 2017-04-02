@@ -277,6 +277,7 @@
     <Compile Include="Models\ReceiptViewModel.cs" />
     <Compile Include="Models\PropertyViewModel.cs" />
     <Compile Include="Models\SlabViewModel.cs" />
+    <Compile Include="Models\UserCreationViewModel.cs" />
     <Compile Include="PagingProperty.cs" />
     <Compile Include="Models\FacilityViewModel.cs" />
     <Compile Include="Models\MeterViewModel.cs" />
@@ -327,6 +328,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Properties\PublishProfiles\leamaportal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -496,9 +498,6 @@
     <Content Include="Views\Master\CheckList\_List.cshtml" />
     <Content Include="Views\Master\EmailTemplate\_List.cshtml" />
     <Content Include="Views\Master\EmailTemplate\_AddOrUpdate.cshtml" />
-    <Content Include="Views\PropertyMaster\Index.cshtml" />
-    <Content Include="Views\PropertyMaster\_FecilityDetails.cshtml" />
-    <Content Include="Views\PropertyMaster\_UtilityDetails.cshtml" />
     <Content Include="Views\Tca\Index.cshtml" />
     <Content Include="Views\Tca\_AgreementPdc.cshtml" />
     <Content Include="Views\Tca\_AgreementPdcDetails.cshtml" />
@@ -537,6 +536,8 @@
     <Content Include="Views\Master\MeterMaster\_List.cshtml" />
     <Content Include="Views\Master\SlabMaster\_List.cshtml" />
     <Content Include="Views\Master\SlabMaster\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\UserCreation\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\UserCreation\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
