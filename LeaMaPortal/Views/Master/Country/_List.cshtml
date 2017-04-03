@@ -1,0 +1,220 @@
+﻿@*@model LeaMaPortal.Models.CountryViewModel*@
+@using MvcPaging
+@model IPagedList<LeaMaPortal.Models.CountryViewModel>
+@{
+  Layout = null;
+}
+<link href="~/content/bootstrap.css" rel="stylesheet" />
+<link href="~/theme/css/leemastyle.css" rel="stylesheet" />
+<link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
+<!DOCTYPE html>
+
+@*@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Country" }))
+{
+    @Html.HiddenFor(m=>m.Id,new { @id="CountryId"})
+    <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
+        <div class="row">
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "leama-field form-control",@required= "required",@id="CountryName" } })
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="leama-btn" >Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}*@
+    <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
+        <div class="row">
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="leama-field form-control" name="Search" id="Search" value="@ViewData["Search"]"/>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" id="btn-search" class="btn btn-info leama-search-btn col-md-4">Go</button>
+                </div>
+            </div>
+
+            <div class="col-md-12 leama-fieldset ">
+                &nbsp;
+            </div>
+
+            <div class="divTable leama-fieldset col-md-12">
+
+
+                <div class="divTableBody divFontBodyTable">
+                    <div class="divTableHeading">
+                        <div class="divTableCell">Country Name</div>
+                        <div class="divTableCell">Action</div>
+
+                    </div>
+                @foreach (var item in Model)
+                {
+                    <div class="divTableRow">
+                        <div class="divTableCell">@item.Country</div>
+                        <div class="divTableCell">
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit country-edit", title = "Edit", @data_id = @item.Country })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash country-delete", @style = "color:red", @title = "Delete", @data_id = @item.Country }) 
+                            
+                            @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
+                        </div>
+
+                    </div>
+                }
+                    
+
+                </div>
+                <div class="col-md-12">
+                    <br />
+                    @Html.HiddenFor(m=>m.PageNumber)
+                    <div class="col-md-2">
+                        @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="col-lg-10 text-right">
+                        @for (int i = 1; i <= Model.PageCount; i++)
+                        {
+                            if (i == Model.PageNumber)
+                            {
+                                <input type="button" style="background:green" data-id="@i" value="@i" class="" />
+                            }
+                            else
+                            {
+                                <input type="button" data-id="@i" value="@i" class="Page" />
+                            }
+
+                        }
+                    </div>
+                </div>
+            </div>
+            
+
+
+            <script type="text/javascript">
+                $(".Page").click(function(e)
+                {
+                    var page = parseInt($(this).data("id"));
+                    var defaultPageSize = $("#defaultPageSize").val();
+                    var search = $("#Search").val();
+                    //alert(page);
+                    getCountryList(search,page,defaultPageSize)
+                });
+                $("#defaultPageSize").change(function () {
+                    var search = $("#Search").val();
+                    var defaultPageSize = $("#defaultPageSize").val();
+                    getCountryList(search, 1, defaultPageSize)
+                });
+                $("#btn-search").click(function (e) {
+                    var search = $("#Search").val();
+                    var defaultPageSize = $("#defaultPageSize").val();
+                    getCountryList(search, 1, defaultPageSize)
+                });
+                
+                function getCountryList(search,page,defaultPageSize)
+                {
+                    $.ajax(
+                       {
+                           url: "../Country/Index",
+                           type: "Get",
+                           data: { Search: search, page: page, defaultPageSize: defaultPageSize },
+                           success: function (html) {
+                               $("#ContainerList").html(html);
+                           },
+                           error: function (jqXhr, textStatus, errorThrown) {
+                               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                           },
+                           complete: function () {
+                               //   $("#VerifyIdDetailsLoader").addClass("hide");
+                           }
+                       });
+                }
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+            </script>
+        </div>
+
+
+    </div>
+
+<script>
+   
+    //Edit get
+    
+    $(".country-edit").click(function (e) {
+        e.preventDefault();
+        var id = $(this).data("id");
+        $.ajax(
+            {
+                url: "../Country/Edit",
+                type: "Get",
+                data: { id: id },
+                success: function (result) {  
+                    if (result.Errors == undefined || result.Errors == "") {
+                        $("#CountryId").val(result.Id);
+                        $("#CountryName").val(result.Country);
+                    }
+                    else
+                    {
+                        alert(data.Errors);
+                    }
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    $("body").scrollTop(0);
+                }
+            });
+    });
+
+    $(".country-delete").click(function (e) {
+        e.preventDefault();
+        var id = $(this).data("id");
+        var r = confirm("Are you sure want to delete?");
+        if (r == false) {
+            return;
+        }
+        else {            
+            $.ajax(
+                {
+                    url: "../Country/Delete",
+                    type: "Get",
+                    
+                    data: { id: id },
+                    
+                    success: function (response) {
+                       
+                        GetCountry();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                       
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        //GetCountry();
+                        // $("#").addClass("hide");
+                    }
+                });
+        }
+    });
+    
+</script>

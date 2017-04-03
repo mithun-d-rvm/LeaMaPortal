@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -45,11 +45,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -80,11 +80,15 @@
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcPaging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MVC4.Paging.3.1.1\lib\net40\MvcPaging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
@@ -166,13 +170,43 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="Controllers\ApprovalSettingsController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\CaretakerController.cs" />
+    <Compile Include="Controllers\ChecklistController.cs" />
+    <Compile Include="Controllers\ContractApprovalSettingController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\EmailTemplateController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FacilityController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Controllers\MasterController.cs" />
+    <Compile Include="Controllers\MasterIndividualController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\PropertyMasterController.cs" />
+    <Compile Include="Controllers\MeterController.cs" />
+    <Compile Include="Controllers\PropertyTypeController.cs" />
+    <Compile Include="Controllers\ReceiptsController.cs" />
+    <Compile Include="Controllers\RegionController.cs" />
+    <Compile Include="Controllers\SlabController.cs" />
+    <Compile Include="Controllers\UtilityController.cs" />
+    <Compile Include="Controllers\TenantCompanyController.cs" />
+    <Compile Include="Controllers\TcaController.cs" />
+    <Compile Include="Controllers\UserCreationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\StaticHelper.cs" />
+    <Compile Include="Models\ApprovalSettingsViewModel.cs" />
+    <Compile Include="Models\CaretakerViewModel.cs" />
+    <Compile Include="Models\CheckListViewModel.cs" />
+    <Compile Include="Models\ContractApprovalSettingViewModel.cs" />
+    <Compile Include="Helpers\AuthenticationHelper.cs" />
+    <Compile Include="Models\AuthenticationModel.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Models\CountryViewModel.cs" />
     <Compile Include="Models\DBContext\Entities.cs" />
     <Compile Include="Models\DBContext\tbl_agreement.cs" />
@@ -234,18 +268,51 @@
     <Compile Include="Models\DBContext\view_invoice_agreement.cs" />
     <Compile Include="Models\DBContext\view_invoice_receipt_pending.cs" />
     <Compile Include="Models\DBContext\view_tenant.cs" />
+    <Compile Include="Models\EmailTemplateViewModel.cs" />
+    <Compile Include="Models\InvoiceViewModel.cs" />
+    <Compile Include="Models\MasterViewModel.cs" />
+    <Compile Include="Models\PaymentViewModel.cs" />
+    <Compile Include="Models\OptionModel.cs" />
+    <Compile Include="Models\PropertyTypeViewModel.cs" />
+    <Compile Include="Models\ReceiptViewModel.cs" />
+    <Compile Include="Models\PropertyViewModel.cs" />
+    <Compile Include="Models\SlabViewModel.cs" />
+    <Compile Include="Models\UserCreationViewModel.cs" />
+    <Compile Include="PagingProperty.cs" />
+    <Compile Include="Models\FacilityViewModel.cs" />
+    <Compile Include="Models\MeterViewModel.cs" />
+    <Compile Include="Models\RegionViewModel.cs" />
+    <Compile Include="Models\UtilityViewModel.cs" />
+    <Compile Include="Models\TenantCompanyViewModel.cs" />
+    <Compile Include="Models\TenantIndividualViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\ErrorMessage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorMessage.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\SuccessMessage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SuccessMessage.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom.css" />
+    <Content Include="Content\LeamaStyles.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\CloseCont.png" />
     <Content Include="Images\invoice.png" />
+    <Content Include="Images\Logo-Bitmap.png" />
+    <Content Include="Images\Logo-thumb.png" />
+    <Content Include="Images\Logo.png" />
+    <Content Include="Images\loader.gif" />
     <Content Include="Images\Notification.png" />
     <Content Include="Images\Payments.png" />
     <Content Include="Images\PropertyProf.png" />
@@ -256,14 +323,12 @@
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Properties\PublishProfiles\leamaportal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -391,18 +456,114 @@
     <Content Include="Views\Country\Details.cshtml" />
     <Content Include="Views\Country\Edit.cshtml" />
     <Content Include="Views\Country\Index.cshtml" />
+    <Content Include="Views\Master\Create.cshtml" />
+    <Content Include="Views\Master\Delete.cshtml" />
+    <Content Include="Views\Master\Details.cshtml" />
+    <Content Include="Views\Master\Edit.cshtml" />
+    <Content Include="Views\Master\Index.cshtml" />
+    <Content Include="Views\Master\Country\_List.cshtml" />
+    <Content Include="Views\Master\Country\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\_Filter.cshtml" />
+    <Content Include="Views\MasterIndividual\Index.cshtml" />
+    <Content Include="Views\Master\Index.cshtml" />
+    <Content Include="Views\Shared\_SubHeaderMenu.cshtml" />
+    <Content Include="Views\MasterIndividual\_DocumentDetailsRow.cshtml" />
+    <Content Include="Views\Master\PropertyMaster\Index.cshtml" />
+    <Content Include="Views\Master\PropertyMaster\_FecilityDetails.cshtml" />
+    <Content Include="Views\Master\PropertyMaster\_UtilityDetails.cshtml" />
+    <Content Include="Views\Region\Index.cshtml" />
+    <Content Include="Views\Facility\Index.cshtml" />
+    <Content Include="Views\Checklist\Index.cshtml" />
+    <Content Include="Views\Utility\Index.cshtml" />
+    <Content Include="Views\Meter\Index.cshtml" />
+    <Content Include="Views\ContractApprovalSetting\Index.cshtml" />
+    <Content Include="Views\Caretaker\Index.cshtml" />
+    <Content Include="Views\Master\TenantCompany\_List.cshtml" />
+    <Content Include="Views\EmailTemplate\Index.cshtml" />
+    <Content Include="Views\PropertyType\Index.cshtml" />
+    <Content Include="Views\Slab\Index.cshtml" />
+    <Content Include="Views\Master\TenantCompany\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\Region\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\Region\_List.cshtml" />
+    <Content Include="Views\MasterIndividual\Create.cshtml" />
+    <Content Include="Views\MasterIndividual\List.cshtml" />
+    <Content Include="Views\Master\TenantIndividual\Create.cshtml" />
+    <Content Include="Views\Master\TenantIndividual\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\PropertyMaster\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\Utility\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\Utility\_List.cshtml" />
+    <Content Include="Views\Master\Facility\_List.cshtml" />
+    <Content Include="Views\Master\Facility\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\CheckList\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\CheckList\_List.cshtml" />
+    <Content Include="Views\Master\EmailTemplate\_List.cshtml" />
+    <Content Include="Views\Master\EmailTemplate\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Tca\Index.cshtml" />
+    <Content Include="Views\Tca\_AgreementPdc.cshtml" />
+    <Content Include="Views\Tca\_AgreementPdcDetails.cshtml" />
+    <Content Include="Views\Tca\Closure\_ClosureDetails.cshtml" />
+    <Content Include="Views\Tca\_AgreementDocument.cshtml" />
+    <Content Include="Views\Tca\_AgreementDocumentDetails.cshtml" />
+    <Content Include="Views\UserCreation\Index.cshtml" />
+    <Content Include="Views\Tca\_AgreementUtility.cshtml" />
+    <Content Include="Views\Tca\_AgreementUtilityDetails.cshtml" />
+    <Content Include="Views\Tca\_AgreementUnitDetails.cshtml" />
+    <Content Include="Views\Tca\_AgreementUnit.cshtml" />
+    <Content Include="Views\Tca\_AgreementCheckList.cshtml" />
+    <Content Include="Views\Tca\_AgreementCheckListDetails.cshtml" />
+    <Content Include="Views\Tca\Renewal\_RenewalDetails.cshtml" />
+    <Content Include="Views\Tca\Status\_StatusDetails.cshtml" />
+    <Content Include="Views\Tca\Agreement\_AgreementForm.cshtml" />
+    <Content Include="Views\Master\TenantIndividual\_List.cshtml" />
+    <Content Include="Views\Invoice\_AddorUpdate.cshtml" />
+    <Content Include="Views\Invoice\_InvoiceDetails.cshtml" />
+    <Content Include="Views\Receipts\_AddorUpdate.cshtml" />
+    <Content Include="Views\Receipts\_ReceiptDetails.cshtml" />
+    <Content Include="Views\Payment\_AddorUpdate.cshtml" />
+    <Content Include="Views\Payment\_PaymentDetails.cshtml" />
+    <Content Include="Views\Invoice\Index.cshtml" />
+    <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\Receipts\Index.cshtml" />
+    <Content Include="Views\Master\Caretaker\_List.cshtml" />
+    <Content Include="Views\Master\Caretaker\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\PropertyMaster\_List.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Master\PropertyType\_List.cshtml" />
+    <Content Include="Views\Master\PropertyType\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\ApprovalSettings\_List.cshtml" />
+    <Content Include="Views\Master\ApprovalSettings\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\MeterMaster\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\MeterMaster\_List.cshtml" />
+    <Content Include="Views\Master\SlabMaster\_List.cshtml" />
+    <Content Include="Views\Master\SlabMaster\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\UserCreation\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\UserCreation\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Documents\TenantCompany\" />
+    <Folder Include="Documents\TenantIndividual\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ErrorMessage.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SuccessMessage.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SuccessMessage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -436,8 +597,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

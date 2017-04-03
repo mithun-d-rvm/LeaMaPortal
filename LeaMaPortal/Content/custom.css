@@ -1,0 +1,37 @@
+﻿/*
+  File Name      : custom.css
+  Description    : Leama Sytems custom styles
+  Created Date   : 12-Mar-2017
+  Notes          : <Notes>
+*/
+
+
+/* Theme styles custom css */
+
+.portlet-grid{
+    height:180px;
+}
+.panel-body{
+    padding:15px !important;
+}
+.inner-block{
+    min-height: 830px;
+}
+#menu li a:active{
+    background-color: #eb9a15;
+}
+
+/* Bootstrap styles */
+
+input[type="button"]:focus, input[type="button"]:active, button:focus
+{
+    outline:none !important;
+}
+.textarea.form-control{
+    resize:none !important;
+}
+
+
+label{
+    font-weight:normal !important;
+}

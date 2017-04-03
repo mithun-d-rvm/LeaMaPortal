@@ -1,0 +1,256 @@
+﻿@model LeaMaPortal.Models.CaretakerViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/content/bootstrap.css" rel="stylesheet" />
+<link href="~/theme/css/leemastyle.css" rel="stylesheet" />
+<link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
+<!DOCTYPE html>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Caretaker" }))
+{
+    @Html.HiddenFor(m => m.Id, new { @id = "CaretakerId" })
+    <div class="col-md-12 leama-fieldset leama-header-top">
+        <div class="row">
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Caretaker_id, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.HiddenFor(model => model.Caretaker_id)
+                    <input type="text" value="@ViewBag.CaretakerId" disabled class="master-form-input" />
+                    @*@Html.EditorFor(model => model.Caretaker_id, new { htmlAttributes = new { @class = "leama-field form-control" } })*@
+                </div>
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Caretaker_Name, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Caretaker_Name, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Dob, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Dob, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                </div>
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Doj, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Doj, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                </div>
+            </div>
+
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Address1, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.TextAreaFor(model => model.Address1, new { @class = "form-control", @rows = 4 })
+                </div>
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Address2, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.TextAreaFor(model => model.Address2, new { @class = "form-control", @rows = 4 })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+
+                @*<div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Address3, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.TextAreaFor(model => model.Address3, new { @class = "form-control", @rows = 4 })
+                </div>
+
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Area, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Area, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                </div> &nbsp;*@
+
+
+
+
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Pincode, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "leama-field form-control" } })
+
+                </div>
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Region_Name, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Region", null,"-Select-", htmlAttributes: new { @class = "form-control", @placeholder = "-Select-", })
+                    @*@Html.EditorFor(model => model.Region_Name, new { htmlAttributes = new { @class = "leama-field form-control" } })*@
+
+
+                </div>
+
+
+            </div>
+
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+
+                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "leama-field form-control" } })
+
+
+                </div>
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+
+                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "leama-field form-control" } })
+
+
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                </div>
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Phoneno, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Phoneno, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                </div>
+                <div class="col-md-2">
+                    
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                </div>
+            </div>
+            @*<div class="col-md-12 leama-fieldset ">
+                
+
+            </div>*@
+            @*<div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4 ">
+                    <select class="col-md-12 leama-field">
+                        <option value="Country">Country</option>
+                    </select>
+                </div>
+                @*<div class="col-md-4">
+                        <button type="submit" class="leama-btn">Submit</button>
+                    </div>*@
+        </div>
+        @*<div class="col-md-12 leama-fieldset ">
+            <div class="col-md-12">
+                <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+            </div>
+        </div>*@
+    </div>
+
+}
+<script>
+    //Add or update
+    $("form#Caretaker").off("submit").on("submit", function (e) {
+        e.preventDefault();
+        // $("#icon-success").addClass("hide");
+        //$("#VerifyIdDetailsLoader").removeClass("hide");
+        try {
+            var form = $("form#Caretaker");
+
+            // var form = $('"form#VerifyId')[0]; // You need to use standart javascript object here
+            //var formData = new FormData(form);
+            $.ajax(
+                {
+                    url: "../Caretaker/AddOrUpdate",
+                    // dataType: "jsonp",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        GetCaretaker();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+    $("#Region").on('change', function (e) {
+        var region = $("#Region").val();
+        if (region != "" && region != null) {
+            $.ajax(
+                {
+                    url: "../Region/GetCountry",
+                    // dataType: "jsonp",
+                    method: "GET",
+                    data: { region: $("#Region").val() }, //FormData(form.get(0)),
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        if (response != null) {
+                            $("#Country").val(response);
+                        }
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+        }
+       // $("#Title").val($("#TitleDisplay").val());
+    });
+
+</script>

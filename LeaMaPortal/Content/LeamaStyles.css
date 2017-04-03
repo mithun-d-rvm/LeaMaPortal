@@ -1,0 +1,239 @@
+﻿/*
+  File Name      : LeamaStyles.css
+  Description    : Leama Sytems styles
+  Created Date   : 12-Mar-2017
+  Notes          : <Notes>
+*/
+
+/* Common Styles */
+
+.p-t-17{
+    padding-top:17px;
+}
+.p-b-25{
+    padding-bottom: 25px;
+}
+.p-t-5-p{
+    padding-top:5%;
+}
+.m-t-3{
+    margin-top:3px;
+}
+.m-t-15{
+    margin-top:15px;
+}
+.m-t-6{
+    margin-top:6px;
+}
+.p-b-10{
+    padding-bottom:10px;
+}
+.p-b-7 {
+    padding-bottom: 7px;
+}
+.p-b-10-p {
+    padding-bottom: 10%;
+}
+.font-15{
+    font-size: 15px;
+}
+.full-width{
+    width:100% !important;
+}
+.width-60{
+    width:60% !important;
+}
+.ht-5{
+    height:5px;
+}
+.p-35{
+    padding: 35px;
+}
+.font-smaller{
+    font-size: smaller;
+}
+.font-x-large{
+    font-size:x-large;
+}
+.font-40{
+    font-size: 40px !important;
+}
+.ht-50{
+    height:50px !important;
+}
+.m-l-m-40{
+    margin-left: -40px;
+}
+
+/* Custom Width */
+
+.w-md-13 {
+    width: 13% !important;
+}
+.w-md-14 {
+    width: 14% !important;
+}
+.w-md-15 {
+    width: 15% !important;
+}
+.w-md-16 {
+    width: 16% !important;
+}
+.w-md-10{
+    width:10% !important;
+}
+
+/* Dashboard */
+
+.logo-thumb{
+    padding:21px;
+    background-color: #182730;
+    color:white;
+    margin-bottom: -7px;
+}
+.report-text{
+    color:#ac8fe9;
+}
+.report-text:hover{
+    border-radius: 15px !important;
+    padding: 5px;
+    /*width: 100% !important;*/
+    border: solid 1px #1a91eb; 
+    color:white;
+}
+
+/* Menu */
+.menu{
+    /*background-color: #000421;*/
+    background-image: linear-gradient(349deg, #252428, #111115);
+    color: white;
+}
+
+/* Sub Header Menu */
+.sub-header-main{
+    height: 100px; 
+    font-size: 12px;
+    margin-top: 95px;
+    border-bottom: 1px solid black;
+}
+.subheader-profile{
+    padding:6%;
+    font-size: 16px;
+}
+.subheader-select {
+    text-transform: uppercase;
+    height: 40px;
+    font-weight: bold;
+    font-size: 16px;
+}
+.subheader-select option{
+    padding:2px;
+}
+
+/* Sidebar Menu */
+.sidebar-btn {
+    border: 1px solid white;
+    color: black;
+    border-radius: 15px !important;
+    padding: 5px;
+    /*background-color: #ffb100;*/
+    text-decoration: none;
+    width: 80% !important;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+.sidebar-btn:hover, .sidebar-btn:active{
+    border-color:black;
+}
+
+/* Master Page */
+.master-form-input{
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #c7c6c6;
+    width:100%;
+}
+.form-input-padding{
+    padding:20px 25px 10px 15px;
+}
+.input-checkbox{
+    height: 20px;
+    width: 20px;
+}
+.master-form-btn {
+    background-color: #554289;
+    color: white;
+    border-radius: 15px !important;
+    width: 200px;
+    padding: 10px !important;
+}
+.report-form-row{
+    background-color: rgba(232, 232, 232, 0.73); 
+    padding: 15px 0px;
+}
+.report-checkbox-align{
+    margin-left:-10px; 
+    margin-top: -5px;
+}
+
+/* Master Individual Page */
+.document-btn {
+    border: 1px solid black;
+    color: black;
+    border-radius: 15px !important;
+    background-color: white;
+    padding: 5px;
+    width:100% !important;
+}
+.document-btn:hover{
+    background-color:#554289;
+    color:white;
+}
+.document-row{
+    padding: 15px 0px 20px 0px;
+    background-color: #f3f3f3;
+}
+
+/* Agreement Closure */
+.p-lr-20{
+    padding-left:20px;
+    padding-right:20px;
+}
+.popup-heading{
+    font-size:x-large;
+    padding-top:5%;
+}
+.tca-modal-md{
+    width: 1100px !important;
+    margin-right: 40px !important;
+}
+
+.search-btn{
+    height:41px !important;
+}
+
+/* Notification */
+.notification-modal-content{
+    margin-top: 11%;
+    margin-left: -4%;
+    width: 129%;
+    background-color: #3a3939 !important;
+    box-shadow: 0 16px 17px 0 rgba(0, 0, 0, 0.5) !important;
+}
+
+.notification-hr {
+    border-color: #797979 !important;
+}
+
+.notification-filter {
+    color: white;
+    padding: 2px 10px;
+    border-radius: 4px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-transform: uppercase;
+}
+
+.label-default-remove {
+    font-weight: normal !important;
+}         

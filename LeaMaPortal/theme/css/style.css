@@ -24,9 +24,9 @@ a:hover {
   text-decoration:none;
 }
 .fixed{
-	position: fixed;
+	position: absolute;
 	top: 0;
-	 width:87%;
+	 width:86%;
     margin: 0 auto;
 	z-index: 1;
 	background:#fff;
@@ -130,7 +130,7 @@ a:hover {
   top: 0px;
   left:0px;
   bottom: 0;
-  background-color:#202121;
+  background-color:#252428;
   color: #aaabae;
   z-index: 999;
 }
@@ -138,6 +138,7 @@ a:hover {
   list-style: none;
   margin: 0;
   padding: 0;
+  margin-top: 3px;
   /*margin-bottom: 20px;*/
 }
 #menu li {
@@ -165,7 +166,7 @@ a:hover {
 #menu li a:hover {
   /*color:#fdbb30;*/
   transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
-  background-color:#6d32a5;
+  background-color:#eb9a15;
 }
 #menu li.active > a {
   background-color: #2b303a;
@@ -247,7 +248,8 @@ a:hover {
 }
 /*--nav strip start here--*/
 .header-main {
-    background:#000421;
+    /*background:#384a69;*/
+    background-image: linear-gradient(274deg, #384a69, #182730);
     padding: 1.4em 2em;
     box-shadow: 0 1px 3px rgba(0,0,0,0.15);
     color: white;
@@ -814,8 +816,8 @@ ul.dropdown-menu.drp-mnu li {
 /*--header strip end here-*/
 /*inner-block--*/
 .inner-block {
-    padding: 3em 2em 4em 2em;
-    background: #fafafa;
+    padding: 1.3em 2em 4em 2em;
+    /*background: #fafafa;*/
 }
 /*.market-update-block {
     padding: 2em 2em;
@@ -1533,9 +1535,12 @@ background-color:#000;
 }
 /*--copyrights start here--*/
 .copyrights {
-    padding: 1.5em 1em;
-    text-align: center;
-    /*box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.15);*/
+    padding: 2em 1.5em 2.8em 1.5em;
+    /* text-align: center; */
+    /* box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.15); */
+    background-color: #eff3f6;
+    /*bottom: 0px;
+    position: fixed;*/
 }
 .copyrights p {
     font-size: 1em;
@@ -1547,6 +1552,14 @@ background-color:#000;
 .copyrights p a:hover{
     color:#68AE00;
 }
+.copyrights-text{
+    color: #cfcfcf;
+}
+.copyrights-layer{
+    background-color: #182730;
+    margin-left: -5px;
+}
+
 /*--grids start here--*/
 .cols-grids h2 {
     font-size: 2em;
@@ -4728,13 +4741,4 @@ ul.dropdown-menu {
 .b_tooltip {
     padding: 4px 7px 7px 7px;
 }
-}
-.p-t-17{
-    padding-top:17px;
-}
-.logo-thumb{
-    padding:25px;
-    background-color: #000421;
-    color:white;
-    margin-bottom: -7px;
 }

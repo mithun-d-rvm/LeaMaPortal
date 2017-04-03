@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Web;
+
+namespace LeaMaPortal.Models
+{
+    public class PropertyTypeViewModel
+    {
+        public int Id { get; set; }
+        [DisplayName("Property Type")]
+        public string PropertyType { get; set; }
+        [DisplayName("Property Category")]
+        public string PropertyCategory { get; set; }
+        [DisplayName("Usage")]
+        public string Usage_name { get; set; }
+    }
+}

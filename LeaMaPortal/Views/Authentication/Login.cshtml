@@ -5,7 +5,7 @@
   Notes          : <Notes>
 -------------------------------------------------->
 
-
+@model LeaMaPortal.Models.LoginModel
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_PublicLayout.cshtml";
@@ -18,34 +18,46 @@
             <h1>Login</h1>
         </div>
         <div class="login-block">
-            <form>
-                <input type="text" name="email" placeholder="Email" required="">
-                <input type="password" name="password" class="lock" placeholder="Password">
-                <div class="forgot-top-grids">
-                    <div class="forgot-grid">
-                        <ul>
-                            <li>
-                                <input type="checkbox" id="brand1" value="">
-                                <label for="brand1"><span></span>Remember me</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="forgot">
-                        <a href="#">Forgot password?</a>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-                <input type="submit" name="Sign In" value="Login">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                if (ViewBag.ErrorMessage != null)
+                {
+                    <div>@ViewBag.ErrorMessage</div><br />
+                }
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { placeholder = "User name", @class = "lock" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+
+                <input type="password" name="Password" id="Password" placeholder="Password" autocomplete="off" class="lock" />
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                @*<input type="password" name="password" class="lock" placeholder="Password">*@
+                @*<div class="forgot-top-grids">
+                        <div class="forgot-grid">
+                            <ul>
+                                <li>
+                                    <input type="checkbox" id="brand1" value="">
+                                    <label for="brand1"><span></span>Remember me</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="forgot">
+                            <a href="#">Forgot password?</a>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>*@
+                <input type="submit" class="btn btn-default btn-lg" name="Sign In" value="Login">
                 @*<h3>Not a member?<a href="signup.html"> Sign up now</a></h3>
-                <h2>or login with</h2>
-                <div class="login-icons">
-                    <ul>
-                        <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
-                    </ul>
-                </div>*@
-            </form>
+                    <h2>or login with</h2>
+                    <div class="login-icons">
+                        <ul>
+                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>*@
+            }
         </div>
     </div>
 </div>
