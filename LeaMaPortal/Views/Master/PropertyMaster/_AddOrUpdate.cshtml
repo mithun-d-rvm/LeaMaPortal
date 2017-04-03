@@ -5,12 +5,12 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("Create","PropertyMaster",FormMethod.Post))
+@using (Html.BeginForm("Create", "PropertyMaster", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model=>model.Property_Id, new { @id = "Id" })
+    @Html.HiddenFor(model => model.Property_Id, new { @id = "Id" })
     <div class="inner-block">
         <div class="blank">
             <div class="row">
@@ -37,21 +37,29 @@
                                         <span> Unit </span>
                                     </div>
                                 </div>*@
-                            @Html.RadioButtonFor(model => model.Property_Flag, "Property") Property
-                            @Html.RadioButtonFor(model => model.Property_Flag, "Unit") Unit
+                            @Html.RadioButtonFor(model => model.Property_Flag, "Property", new { @Name = "PropertyType" }) Property
+                            @Html.RadioButtonFor(model => model.Property_Flag, "Unit", new { @Name = "PropertyType" }) Unit
                         </div>
                     </div>
+                </div>
+                <div class="col-md-6">
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
                             Property ID:
                         </div>
                         <div class="col-md-8">
-                            @Html.HiddenFor(model=>model.Property_Id)
+                            @Html.HiddenFor(model => model.Property_Id)
                             <input type="text" value="@ViewBag.PropertyId" disabled class="master-form-input" />
                             @*@Html.EditorFor(model => model.Property_Id, new { htmlAttributes = new { @class = "master-form-input" } })*@
                             @Html.ValidationMessageFor(model => model.Property_Id, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                </div>
+
+
+                <div class="col-md-6" id="TypeProperty">
+
+
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
                             Property Thwtheeq ID:
@@ -317,32 +325,7 @@
                             Region:
                         </div>
                         <div class="col-md-8">
-                            @*<select class="master-form-input">
-                                    <option> Region 1 </option>
-                                    <option> Region 2 </option>
-                                    <option> Region 3 </option>
-                                </select>*@
-                            @{
-                                List<SelectListItem> Region = new List<SelectListItem>();
-                                Region.Add(new SelectListItem
-                                {
-                                    Text = "Manly",
-                                    Value = "Manly"
-                                });
-                                Region.Add(new SelectListItem
-                                {
-                                    Text = "Chennai",
-                                    Value = "Chennai",
-                                    Selected = true
-                                });
-                                Region.Add(new SelectListItem
-                                {
-                                    Text = "London",
-                                    Value = "London"
-                                });
-                            }
-
-                            @Html.DropDownListFor(model => model.Region_Name, Region, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
+                            @Html.DropDownList("Region", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-Select-" })
 
 
                         </div>
@@ -504,7 +487,7 @@
                 </div>
 
 
-                <div class="col-md-6">
+                <div class="col-md-6" id="TypeUnit">
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
                             Main Property Tawtheeq ID:
@@ -796,6 +779,10 @@
                             @Html.ValidationMessageFor(model => model.Unitcomments, "", new { @class = "text-danger" })
                         </div>
                     </div>
+
+
+                </div>
+                <div class="col-md-6">
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
                             Car Taker Name:
@@ -840,15 +827,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            &nbsp;
-                        </div>
-                        <div class="col-md-4">
-                            <button class="btn master-form-btn">Submit</button>
-                        </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn master-form-btn">Submit</button>
                     </div>
                 </div>
+
             </div>
             @*
                 <div class="row p-b-25">
@@ -1004,5 +992,44 @@
 
                 });
         }
+    });
+    $('input[type=radio][name=PropertyType]').change(function () {
+        if (this.value == 'Property') {
+            $("#TypeProperty").show();
+            $("#TypeUnit").hide();
+        }
+        else {
+            $("#TypeProperty").hide();
+            $("#TypeUnit").show();
+        }
+    });
+    $("#Region").on('change', function (e) {
+        debugger;
+        var region = $("#Region").val();
+        if (region != "" && region != null) {
+            $.ajax(
+                {
+                    url: "../Region/GetCountry",
+                    // dataType: "jsonp",
+                    method: "GET",
+                    data: { region: $("#Region").val() }, //FormData(form.get(0)),
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        if (response != null) {
+                            $("#Country").val(response);
+                        }
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+        }
+        // $("#Title").val($("#TitleDisplay").val());
     });
 </script>

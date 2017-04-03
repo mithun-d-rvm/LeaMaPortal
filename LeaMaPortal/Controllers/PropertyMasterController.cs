@@ -43,12 +43,14 @@ namespace LeaMaPortal.Controllers
         public PartialViewResult AddOrUpdate()
         {
             PropertyViewModel model = new PropertyViewModel();
+            ViewBag.TitleDisplay = new SelectList(Common.Title, Common.DefaultTitle);
+            //var region = .Select(x => x.Region_Name);
+
             model.Property_Usage_unitList = new SelectList("", "", "");
             model.Property_Type_unitList = new SelectList("", "", "");
             model.Caretaker_IDList = new SelectList("", "", "");
-            ViewBag.TitleDisplay = new SelectList(Common.Title, Common.DefaultTitle);
-            //var region = .Select(x => x.Region_Name);
-            
+
+            ViewBag.Region = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
             ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
             ViewBag.Caretaker = new SelectList(db.tbl_caretaker.Where(x => x.Delmark != "*").OrderBy(x => x.Id), "Caretaker_id", "Caretaker_id");
             //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
@@ -195,11 +197,12 @@ namespace LeaMaPortal.Controllers
                 //                                Doc_Path = x.Doc_Path
                 //                            }).ToListAsync();
                 PropertyViewModel model = Map(properties);
-                ViewBag.Caretaker = new SelectList(db.tbl_caretaker.Where(x => x.Delmark != "*").OrderBy(x => x.Id), "Caretaker_id", "Caretaker_id",model.Caretaker_ID);
+                ViewBag.Caretaker = new SelectList(db.tbl_caretaker.Where(x => x.Delmark != "*").OrderBy(x => x.Id), "Caretaker_id", "Caretaker_id", model.Caretaker_ID);
                 ViewBag.PropertyId = model.Property_Id;
                 model.Property_Usage_unitList = new SelectList("", "", "");
                 model.Property_Type_unitList = new SelectList("", "", "");
                 model.Caretaker_IDList = new SelectList("", "", "");
+                ViewBag.Region = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name", model.Region_Name);
                 return PartialView("../Master/PropertyMaster/_AddOrUpdate", model);
             }
             catch
