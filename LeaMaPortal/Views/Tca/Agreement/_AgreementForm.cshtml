@@ -314,18 +314,19 @@
                     success: function (response) {
                         debugger;
                         if (response != null) {
-                            $("TenantId").empty();
-                            $("TenantName").empty();
                             for (var i = 0; i < response.TenantId.length; i++) {
                                 var option = $("<option/>");
                                 option.attr("value", response.TenantId[i].Value).text(response.TenantId[i].Text);
                                 $("#TenantId").append(option);
+                                var optionTenantName = $("<option/>");
+                                optionTenantName.attr("value", response.TenantId[i].Text).text(response.TenantId[i].Value);
+                                $("#TenentName").append(optionTenantName);
                             }
-                            for (var i = 0; i < response.TenantName.length; i++) {
-                                var option = $("<option/>");
-                                option.attr("value", response.TenantName[i].Value).text(response.TenantName[i].Text);
-                                $("#TenantName").append(option);
-                            }
+                            //for (var i = 0; i < response.TenantName.length; i++) {
+                            //    var option = $("<option/>");
+                            //    option.attr("value", response.TenantName[i].Value).text(response.TenantName[i].Text);
+                            //    $("#TenantName").append(option);
+                            //}
                             //$("#TenentId").val(response.TenentId);
                             //$("#TenentName").val(response.TenentName);
                         }
@@ -341,5 +342,12 @@
         }
     });
 
-
+    $("#TenantId").change(function () {
+        $("#TenantName").val($("#TenantId option:selected").text());
+        return;
+    });
+    $("#TenantName").change(function () {
+        $("#TenantId").val($("#TenantName option:selected").text());
+        return;
+    });
 </script>

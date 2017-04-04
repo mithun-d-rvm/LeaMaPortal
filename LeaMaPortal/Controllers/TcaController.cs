@@ -48,14 +48,14 @@ namespace LeaMaPortal.Controllers
                 if (Type == "Company")
                 {
                     var query = db.tbl_tenant_company.Where(x => x.Delmark != "*" && x.Type == "company");
-                    model.TenantId = new SelectList(query.OrderBy(r => r.Tenant_Id).ToList(), "Tenant_Id", "Tenant_Id");
-                    model.TenantName = new SelectList(query.OrderBy(r => r.First_Name).ToList(), "First_Name", "First_Name");
+                    model.TenantId = new SelectList(query.OrderBy(r => r.Tenant_Id).ToList(), "Tenant_Id", "First_Name");
+                    //model.TenantName = new SelectList(query.OrderBy(r => r.First_Name).ToList(), "First_Name", "First_Name");
                 }
                 else
                 {
                     var query = db.tbl_tenant_individual.Where(x => x.Delmark != "*" && x.Type == Type);
-                    model.TenantId = new SelectList(query.OrderBy(r => r.Tenant_Id), "Tenant_Id", "Tenant_Id");
-                    model.TenantName = new SelectList(query.OrderBy(r => r.First_Name), "First_Name", "First_Name");
+                    model.TenantId = new SelectList(query.OrderBy(r => r.Tenant_Id), "Tenant_Id", "First_Name");
+                    //model.TenantName = new SelectList(query.OrderBy(r => r.First_Name), "First_Name", "First_Name");
                 }
                 //var tbl_caretaker = await db.tbl_tenant_company.FirstOrDefaultAsync(x => x.Id == Id);
                 return Json(model, JsonRequestBehavior.AllowGet);
