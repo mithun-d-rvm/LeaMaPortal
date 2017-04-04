@@ -24,22 +24,27 @@
 
                 break;
             case 2:
+                GetUserCreation();
                 break;
             case 3:
                 break;
             case 4:
+                GetApprovalSettings();
                 break;
             case 5:
                 GetCountry();
                 break;
+            case 6:
+                GetRegion();
+                break;
             case 7:
                 GetCaretaker();
                 break;
+            case 8:
+                GetPropertyType();
+                break;
             case 9:
                 GetPropertyMaster();
-                break;
-            case 6:
-                GetRegion();
                 break;
             case 10:
                 GetTenantCompany();
@@ -55,6 +60,12 @@
                 break;
             case 14:
                 GetUtility();
+                break;
+            case 16:
+                GetSlab();
+                break;
+            case 17:
+                GetMeter();
                 break;
             case 18:
                 GetEmailTemplate();
@@ -85,6 +96,7 @@
     function GetCountry() {
         $("#img-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
         $.ajax(
         {
             url: "../Country/AddOrUpdate",
@@ -203,7 +215,7 @@
     }
 
     function GetCaretaker() {
-
+        $("#img-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
         $.ajax(
@@ -220,9 +232,10 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
+        $("#img-loader").removeClass("hide");
         $.ajax(
         {
             url: "../Caretaker/Index",
@@ -237,17 +250,14 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
     }
-
-</script>
-<!-- Region Section -->
-<script>
     function GetRegion() {
         $("#img-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
         $.ajax(
         {
             url: "../Region/AddOrUpdate",
@@ -285,15 +295,15 @@
         });
     }
 
-    function GetPropertyMaster()
-    {
+    function GetPropertyMaster() {
         $("#img-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
         $.ajax(
         {
             url: "../PropertyMaster/AddOrUpdate",
             type: "Get",
-            data: { Search :""},
+            data: { Search: "" },
             success: function (html) {
                 $("#ContainerAddOrUpdate").html(html);
             },
@@ -325,7 +335,9 @@
     }
 
     function GetCheckList() {
+        $("#img-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
         $.ajax(
         {
             url: "../CheckList/AddOrUpdate",
@@ -340,9 +352,10 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
+        $("#img-loader").removeClass("hide");
         $.ajax(
         {
             url: "../CheckList/Index",
@@ -357,13 +370,15 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
     }
 
     function GetFacility() {
+        $("#img-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
         $.ajax(
         {
             url: "../Facility/AddOrUpdate",
@@ -378,9 +393,10 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
+        $("#img-loader").removeClass("hide");
         $.ajax(
         {
             url: "../Facility/Index",
@@ -395,13 +411,15 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
     }
 
     function GetUtility() {
+        $("#img-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
         $.ajax(
         {
             url: "../Utility/AddOrUpdate",
@@ -416,9 +434,10 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
+        $("#img-loader").removeClass("hide");
         $.ajax(
         {
             url: "../Utility/Index",
@@ -433,12 +452,14 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
     }
     function GetEmailTemplate() {
+        $("#img-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
         $.ajax(
         {
             url: "../EmailTemplate/AddOrUpdate",
@@ -453,9 +474,10 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
             }
         });
+        $("#img-loader").removeClass("hide");
         $.ajax(
         {
             url: "../EmailTemplate/Index",
@@ -470,7 +492,208 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function GetUserCreation() {
+        $("#img-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
+        $.ajax(
+        {
+            url: "../UserCreation/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../UserCreation/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+
+    function GetPropertyType() {
+        $("#img-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
+        $.ajax(
+        {
+            url: "../PropertyType/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../PropertyType/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function GetApprovalSettings() {
+        $("#img-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
+        $.ajax(
+        {
+            url: "../ApprovalSettings/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../ApprovalSettings/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function GetMeter() {
+        $("#img-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
+        $.ajax(
+        {
+            url: "../Meter/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Meter/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function GetSlab() {
+        $("#img-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
+        $.ajax(
+        {
+            url: "../Slab/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Slab/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
             }
         });
     }

@@ -1,7 +1,7 @@
 ﻿
-@*@model LeaMaPortal.Models.CheckListViewModel*@
+@*@model LeaMaPortal.Models.CountryViewModel*@
 @using MvcPaging
-@model IPagedList<LeaMaPortal.Models.CheckListViewModel>
+@model IPagedList<LeaMaPortal.Models.UserCreationViewModel>
 @{
     Layout = null;
 }
@@ -10,6 +10,25 @@
 <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
 <!DOCTYPE html>
 
+@*@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Country" }))
+    {
+        @Html.HiddenFor(m=>m.Id,new { @id="CountryId"})
+        <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
+            <div class="row">
+                <div class="col-md-12 leama-fieldset ">
+                    <div class="col-md-2 pull-left">
+                        @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "leama-field-name" })
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "leama-field form-control",@required= "required",@id="CountryName" } })
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="leama-btn" >Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }*@
 <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
     <div class="row">
         <div class="col-md-12 leama-fieldset ">
@@ -33,23 +52,34 @@
 
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
-                    <div class="divTableCell ">CheckList Id</div>
-                    <div class="divTableCell">CheckList Name</div>
+                    <div class="divTableCell">Name</div>
+                    <div class="divTableCell">Login ID</div>
+                    <div class="divTableCell">Role</div>
+                    <div class="divTableCell">Email ID</div>
+                    <div class="divTableCell">Contact Number</div>
+                    <div class="divTableCell">Active</div>
                     <div class="divTableCell">Action</div>
 
                 </div>
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
-                        <div class="divTableCell">@item.Checklist_id</div>
-                        <div class="divTableCell">@item.Checklist_Name</div>
+                        <div class="divTableCell">@item.Name</div>
+                        <div class="divTableCell">@item.Userid</div>
+                        <div class="divTableCell">@item.Category</div>
+                        <div class="divTableCell">@item.Email</div>
+                        <div class="divTableCell">@item.Phoneno</div>
+                        <div class="divTableCell">@item.Active</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit checklist-edit", title = "Edit", @data_id = @item.Checklist_id + '-' + @item.Checklist_Name + '-' + @item.Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash checklist-delete", @style = "color:red", @title = "Delete", @data_id = @item.Checklist_id + '-' + @item.Checklist_Name + '-' + @item.Id })
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit user-creation-edit", title = "Edit", @data_id = @item.id })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash user-creation-delete", @style = "color:red", @title = "Delete", @data_id = @item.id })
+
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
+
                     </div>
                 }
+
 
             </div>
             <div class="col-md-12">
@@ -69,36 +99,37 @@
                         {
                             <input type="button" data-id="@i" value="@i" class="Page" />
                         }
+
                     }
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <script type="text/javascript">
+<script type="text/javascript">
                 $(".Page").click(function(e)
                 {
                     var page = parseInt($(this).data("id"));
                     var defaultPageSize = $("#defaultPageSize").val();
                     var search = $("#Search").val();
                     //alert(page);
-                    getCheckListList(search,page,defaultPageSize)
+                    getUserCreationList(search, page, defaultPageSize)
                 });
                 $("#defaultPageSize").change(function () {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getCheckListList(search, 1, defaultPageSize)
+                    getUserCreationList(search, 1, defaultPageSize)
                 });
                 $("#btn-search").click(function (e) {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getCheckListList(search, 1, defaultPageSize)
+                    getUserCreationList(search, 1, defaultPageSize)
                 });
-
-                function getCheckListList(search, page, defaultPageSize)
-                {
+                function getUserCreationList(search, page, defaultPageSize) {
                     $.ajax(
                        {
-                           url: "../CheckList/Index",
+                           url: "../UserCreation/Index",
                            type: "Get",
                            data: { Search: search, page: page, defaultPageSize: defaultPageSize },
                            success: function (html) {
@@ -127,32 +158,27 @@
         alert("Could not retrieve list.");
     }
 
-        </script>
-    </div>
-
-
-</div>
+</script>
 
 <script>
+
     //Edit get
 
-    $(".checklist-edit").click(function (e) {
+    $(".user-creation-edit").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
-        var param = id.split('-');
         $.ajax(
             {
-                url: "../CheckList/Edit",
+                url: "../UserCreation/Edit",
                 type: "Get",
-                data: { CheckListId: param[0], CheckListName : param[1] },
+                data: { id: id },
                 success: function (result) {
                     if (result.Errors == undefined || result.Errors == "") {
-                        $("#CheckListId").val(result.Id);
-                        $("#CheckList_Id").val(result.Checklist_id);
-                        $("#CheckListName").val(result.Checklist_Name);
-                        $("#ChecklistType").val(result.Checklist_Type);
+                        $("#ContainerAddOrUpdate").empty();
+                        $("#ContainerAddOrUpdate").html(result);
                     }
-                    else {
+                    else
+                    {
                         alert(data.Errors);
                     }
                 },
@@ -160,16 +186,13 @@
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
-                    $("body").scrollTop(0);
                 }
             });
     });
 
-    // delete
-    $(".checklist-delete").click(function (e) {
+    $(".user-creation-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
-        var param = id.split('-');
         var r = confirm("Are you sure want to delete?");
         if (r == false) {
             return;
@@ -177,16 +200,22 @@
         else {
             $.ajax(
                 {
-                    url: "../CheckList/Delete",
+                    url: "../UserCreation/Delete",
                     type: "Get",
-                    data: { CheckListId: param[0], CheckListName: param[1] },
+
+                    data: { id: id },
+
                     success: function (response) {
-                        GetCheckList();
+
+                        GetUserCreation();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
+
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                     },
                     complete: function () {
+                        //GetCountry();
+                        // $("#").addClass("hide");
                     }
                 });
         }

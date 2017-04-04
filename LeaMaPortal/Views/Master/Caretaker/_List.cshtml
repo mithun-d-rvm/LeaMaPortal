@@ -65,11 +65,11 @@
                         <div class="divTableCell">@item.Caretaker_id</div>
                         <div class="divTableCell">@item.Caretaker_Name</div>
                         <div class="divTableCell">@item.Email</div>
-                        <div class="divTableCell">@item.Phoneno/</div>
-                        <div class="divTableCell">@item.Doj/</div>
+                        <div class="divTableCell">@item.Phoneno</div>
+                        <div class="divTableCell">@item.Doj</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit cartaker-edit", title = "Edit", @data_id = @item.Caretaker_id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash cartaker-delete", @style = "color:red", @title = "Delete", @data_id = @item.Caretaker_id })
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit caretaker-edit", title = "Edit", @data_id = @item.Id })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash caretaker-delete", @style = "color:red", @title = "Delete", @data_id = @item.Id })
 
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
@@ -110,20 +110,20 @@
                     var defaultPageSize = $("#defaultPageSize").val();
                     var search = $("#Search").val();
                     //alert(page);
-                    getCountryList(search,page,defaultPageSize)
+                    getCaretakerList(search,page,defaultPageSize)
                 });
                 $("#defaultPageSize").change(function () {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getCountryList(search, 1, defaultPageSize)
+                    getCaretakerList(search, 1, defaultPageSize)
                 });
                 $("#btn-search").click(function (e) {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getCountryList(search, 1, defaultPageSize)
+                    getCaretakerList(search, 1, defaultPageSize)
                 });
 
-                function getCountryList(search,page,defaultPageSize)
+                function getCaretakerList(search, page, defaultPageSize)
                 {
                     $.ajax(
                        {
@@ -166,7 +166,7 @@
 
     //Edit get
 
-    $(".cartaker-edit").click(function (e) {
+    $(".caretaker-edit").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
         $.ajax(
@@ -178,8 +178,8 @@
                   
                     //var data=jQuery.parseJSON(result);
                     if (result.Errors == undefined || result.Errors == "") {
-                        $("#CountryId").val(result.Id);
-                        $("#CountryName").val(result.Country);
+                        $("#ContainerAddOrUpdate").empty();
+                        $("#ContainerAddOrUpdate").html(result);
                     }
                     else
                     {
@@ -195,7 +195,7 @@
             });
     });
 
-    $(".cartaker-delete").click(function (e) {
+    $(".caretaker-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
         var r = confirm("Are you sure want to delete?");
@@ -212,7 +212,7 @@
 
                     success: function (response) {
 
-                        GetCountry();
+                        GetCaretaker();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
 
