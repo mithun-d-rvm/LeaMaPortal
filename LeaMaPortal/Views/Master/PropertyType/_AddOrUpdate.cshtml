@@ -17,7 +17,7 @@
                     @Html.LabelFor(model => model.PropertyType, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.PropertyType, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "PropertyType" } })
+                    @Html.DropDownList("PropertyType", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "PropertyType" })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">

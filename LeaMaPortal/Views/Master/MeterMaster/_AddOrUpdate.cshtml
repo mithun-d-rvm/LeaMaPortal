@@ -45,14 +45,14 @@
                     @Html.EditorFor(model => model.Accno, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Accno" } })
                 </div>
             </div>
-            @*<div class="col-md-12 leama-fieldset ">
+            <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-2 pull-left">
                     @Html.LabelFor(model => model.unit_id, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4 ">
                     @Html.DropDownList("unit_id", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "unit_id" })
                 </div>
-            </div>*@
+            </div>
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-2 pull-left">
                     @Html.LabelFor(model => model.Property_id, htmlAttributes: new { @class = "leama-field-name" })
@@ -78,24 +78,56 @@
     </div>
 }
 <script>
-    $("#Utility_Name").change(function () {
+    function getUtilityId() {
         var UtilityName = $("#Utility_Name").val();
+        if (UtilityName != null) {
+            $.ajax(
+                    {
+                        url: "../Meter/GetUtilityId",
+                        method: "POST",
+                        async: false,
+                        data: { UtilityName: UtilityName },
+                        success: function (response) {
+                            $("#Utility_id").val(response);
+                        },
+                        error: function (jqXhr, textStatus, errorThrown) {
+                            alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        },
+                        complete: function () {
+                        }
+
+                    });
+        }
+    }
+    $("#Utility_Name").change(function () { getUtilityId() });
+    getUtilityId();
+
+    function getUnitId() {
+        var PropertyId = $("#Property_id").val();
         $.ajax(
                 {
-                    url: "../Meter/GetUtilityId",
-                    method: "GET",
-                    data: { UtilityName : UtilityName },
+                    url: "../Meter/GetUnitId",
+                    method: "POST",
+                    async: false,
+                    data: { PropertyId: PropertyId },
                     success: function (response) {
-                        $("#Utility_id").val(response);
+                        $("#unit_id").empty();
+                        var options = '';
+                        $.each(response, function (index, data) {
+                            options += '<option value="' + data.Value + '">' + data.Value + '</option>' ;
+                        });
+                        $('#unit_id').append(options);
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                     },
                     complete: function () {
                     }
-
                 });
-    });
+    }
+    $("#Property_id").change(function () { getUnitId() });
+    getUnitId();
+
     //Add or update
     $("form#Meter").off("submit").on("submit", function (e) {
         e.preventDefault();

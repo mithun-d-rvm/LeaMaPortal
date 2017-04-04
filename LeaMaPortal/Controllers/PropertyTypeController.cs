@@ -65,6 +65,7 @@ namespace LeaMaPortal.Controllers
         {
             PropertyTypeViewModel model = new PropertyTypeViewModel();
             ViewBag.PropertyCategory = new SelectList(StaticHelper.GetStaticData(StaticHelper.PROPERTYTYPE_DROPDOWN), "Name", "Name");
+            ViewBag.PropertyCategory = new SelectList(StaticHelper.GetStaticData(StaticHelper.PROPERTYCATEGORY_DROPDOWN), "Name", "Name");
             return PartialView("../Master/PropertyType/_AddOrUpdate", model);
         }
         [HttpPost]

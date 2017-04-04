@@ -19,7 +19,7 @@
                     @Html.LabelFor(model => model.SlabId, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.SlabId, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "SlabId" } })
+                    @Html.EditorFor(model => model.SlabId, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "SlabId", @readonly = "readonly" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -27,7 +27,7 @@
                     @Html.LabelFor(model => model.Utility_id, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Utility_id, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Utility_id" } })
+                    @Html.EditorFor(model => model.Utility_id, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Utility_id", @readonly = "readonly" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -94,6 +94,7 @@
                 {
                     url: "../Meter/GetUtilityId",
                     method: "GET",
+                    async : false,
                     data: { UtilityName: UtilityName },
                     success: function (response) {
                         $("#Utility_id").val(response);
