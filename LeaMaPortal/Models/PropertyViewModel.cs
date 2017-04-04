@@ -12,8 +12,10 @@ namespace LeaMaPortal.Models
 {
     public class PropertyViewModel 
     {
-        public PropertyViewModel()
+       public PropertyViewModel()
         {
+            PropertiesdtList = new List<Propertiesdt>();
+            Propertiesdt1List = new List<Propertiesdt1>();
             this.Status = "vacant";
             this.Status_unit = "vacant";
         }
@@ -274,5 +276,34 @@ namespace LeaMaPortal.Models
 
         public string propertiesdt { get; set; }
         public string propertiesdt1 { get; set; }
+        public List<Propertiesdt> PropertiesdtList { get; set; }
+        public List<Propertiesdt1> Propertiesdt1List { get; set; }
     }
+    public class Propertiesdt
+    {
+        public int Property_Id { get; set; }
+        [StringLength(100)]
+        public string Property_ID_Tawtheeq { get; set; }
+        [StringLength(100)]
+        public string Unit_ID_Tawtheeq { get; set; }
+        [StringLength(150)]
+        public string Facility_id { get; set; }
+        [StringLength(150)]
+        public string Facility_Name { get; set; }
+        public int Numbers_available { get; set; }
+    }
+
+    public class Propertiesdt1
+    {
+        public int Property_Id { get; set; }
+        [StringLength(100)]
+        public string Property_ID_Tawtheeq { get; set; }
+        [StringLength(100)]
+        public string Unit_ID_Tawtheeq { get; set; }
+        [StringLength(100)]
+        public int Utility_id { get; set; }
+        [StringLength(150)]
+        public string Utility_Name{ get; set; }
+    }
+
 }
