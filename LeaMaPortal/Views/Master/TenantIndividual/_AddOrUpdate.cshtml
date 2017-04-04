@@ -17,7 +17,7 @@
 
     @*<div class="form-horizontal">*@
 
-    <hr />
+    
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="row">
@@ -31,7 +31,7 @@
                 <div class="col-md-8">
                    
                         @Html.HiddenFor(model => model.Title)
-                        @Html.DropDownList("TitleDisplay",null, new { @class = "master-form-input" })
+                        @Html.DropDownList("TitleDisplay",null, new { @class = "form-control master-form-input" })
                     
                 </div >
             </div >
@@ -41,9 +41,9 @@
                     @*Middle Name:*@
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Middle_Name, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Middle_Name, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.Middle_Name, "", new { @class = "text-danger" })
-                    @*<input type="text" class="master-form-input" />*@
+                    @*<input type="text" class="form-control master-form-input" />*@
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -52,9 +52,9 @@
                     @Html.LabelFor(model => model.Company_Educational, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Company_Educational, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Company_Educational, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.Company_Educational, "", new { @class = "text-danger" })
-                    @*<input type="text" class="master-form-input" />*@
+                    @*<input type="text" class="form-control master-form-input" />*@
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -74,7 +74,7 @@
                     @Html.LabelFor(model => model.address1, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.TextAreaFor(model => model.address1, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.TextAreaFor(model => model.address1, new { @class = "form-control master-form-input", @rows = "4" })
                     @Html.ValidationMessageFor(model => model.address1, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="col-md-8">
                   
-                    @Html.DropDownList("City", null,htmlAttributes: new { @class = "master-form-input" })
+                    @Html.DropDownList("City", null,htmlAttributes: new { @class = "form-control master-form-input" })
 
 
 
@@ -97,7 +97,7 @@
                     @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -108,17 +108,17 @@
                 </div>
                 <div class="col-md-8">
                     <div class="col-md-3" style="margin-left: -15px;">
-                        @Html.EditorFor(model => model.Landline_Countrycode, new { htmlAttributes = new { @class = "master-form-input" } })
+                        @Html.EditorFor(model => model.Landline_Countrycode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                         @Html.ValidationMessageFor(model => model.Landline_Countrycode, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-3" style="margin-left: -15px;">
-                        @Html.EditorFor(model => model.Landline_Areacode, new { htmlAttributes = new { @class = "master-form-input" } })
+                        @Html.EditorFor(model => model.Landline_Areacode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                         @Html.ValidationMessageFor(model => model.Landline_Areacode, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6" style="margin-left: 32%;
                 width: 64%;
                 position: absolute;">
-                        @Html.EditorFor(model => model.Landline_No, new { htmlAttributes = new { @class = "master-form-input" } })
+                        @Html.EditorFor(model => model.Landline_No, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                         @Html.ValidationMessageFor(model => model.Landline_No, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -131,7 +131,7 @@
                 <div class="col-md-8">
                    
 
-                    @Html.DropDownList("Nationality",null, htmlAttributes: new { @class = "master-form-input" })
+                    @Html.DropDownList("Nationality",null, htmlAttributes: new { @class = "form-control master-form-input" })
 
                     
                 </div>
@@ -143,7 +143,7 @@
                 </div>
                 <div class="col-md-8">
                     <!--Need to change as Datetime field-->
-                    @Html.EditorFor(model => model.Emirate_issuedate, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Emirate_issuedate, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.Emirate_issuedate, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -153,7 +153,7 @@
                     @Html.LabelFor(model => model.Passportno, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Passportno, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Passportno, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.Passportno, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -163,7 +163,7 @@
                     @Html.LabelFor(model => model.Passport_Issuedate, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Passport_Issuedate, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Passport_Issuedate, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.Passport_Issuedate, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -173,7 +173,7 @@
                     @Html.LabelFor(model => model.VisaType, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.VisaType, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.VisaType, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.VisaType, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -183,7 +183,7 @@
                     @Html.LabelFor(model => model.Visa_ExpiryDate, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Visa_ExpiryDate, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Visa_ExpiryDate, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.Visa_ExpiryDate, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -193,7 +193,7 @@
                     @Html.LabelFor(model => model.Familyno, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Familyno, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Familyno, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.Familyno, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -203,7 +203,7 @@
                     @Html.LabelFor(model => model.ADWEA_Regid, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.ADWEA_Regid, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.ADWEA_Regid, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.ADWEA_Regid, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -217,8 +217,8 @@
                 </div>
                 <div class="col-md-8">
                     @Html.HiddenFor(model => model.Tenant_Id)
-                    <input type="text" value="@ViewBag.Tenant_Id" class="master-form-input" />
-                    @*@Html.EditorFor(model => model.Tenant_Id, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                    <input type="text" value="@ViewBag.Tenant_Id" class="form-control master-form-input" />
+                    @*@Html.EditorFor(model => model.Tenant_Id, new { htmlAttributes = new { @class = "form-control master-form-input" } })*@
                     @Html.ValidationMessageFor(model => model.Tenant_Id, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -228,7 +228,7 @@
                     @Html.LabelFor(model => model.First_Name, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.First_Name, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.First_Name, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.First_Name, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -238,7 +238,7 @@
                     @Html.LabelFor(model => model.Last_Name, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Last_Name, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Last_Name, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -248,7 +248,7 @@
                     @Html.LabelFor(model => model.Profession, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.DropDownList("Profession",null, htmlAttributes: new { @class = "master-form-input" })
+                    @Html.DropDownList("Profession",null, htmlAttributes: new { @class = "form-control master-form-input" })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -257,7 +257,7 @@
                     @Html.LabelFor(model => model.address, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.TextAreaFor(model => model.address, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.TextAreaFor(model => model.address, new { @class = "form-control master-form-input", @rows = "4" })
                     @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -267,7 +267,7 @@
                     @Html.LabelFor(model => model.Emirate, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    <select class="master-form-input">
+                    <select class="form-control master-form-input">
                         <option> Default </option>
                     </select>
                 </div>
@@ -278,7 +278,7 @@
                     @Html.LabelFor(model => model.PostboxNo, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.PostboxNo, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.PostboxNo, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.PostboxNo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -289,17 +289,17 @@
                 </div>
                 <div class="col-md-8">
                     <div class="col-md-3" style="margin-left: -15px;">
-                        @Html.EditorFor(model => model.Mobile_Countrycode, new { htmlAttributes = new { @class = "master-form-input" } })
+                        @Html.EditorFor(model => model.Mobile_Countrycode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                         @Html.ValidationMessageFor(model => model.Mobile_Countrycode, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-3" style="margin-left: -15px;">
-                        @Html.EditorFor(model => model.Mobile_Areacode, new { htmlAttributes = new { @class = "master-form-input" } })
+                        @Html.EditorFor(model => model.Mobile_Areacode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                         @Html.ValidationMessageFor(model => model.Mobile_Areacode, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6" style="margin-left: 32%;
                 width: 64%;
                 position: absolute;">
-                        @Html.EditorFor(model => model.Mobile_No, new { htmlAttributes = new { @class = "master-form-input" } })
+                        @Html.EditorFor(model => model.Mobile_No, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                         @Html.ValidationMessageFor(model => model.Mobile_No, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -311,17 +311,17 @@
                 </div>
                 <div class="col-md-8">
                     <div class="col-md-3" style="margin-left: -15px;">
-                        @Html.EditorFor(model => model.Fax_Countrycode, new { htmlAttributes = new { @class = "master-form-input" } })
+                        @Html.EditorFor(model => model.Fax_Countrycode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                         @Html.ValidationMessageFor(model => model.Fax_Countrycode, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-3" style="margin-left: -15px;">
-                        @Html.EditorFor(model => model.Fax_Areacode, new { htmlAttributes = new { @class = "master-form-input" } })
+                        @Html.EditorFor(model => model.Fax_Areacode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                         @Html.ValidationMessageFor(model => model.Fax_Areacode, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6" style="margin-left: 32%;
                 width: 64%;
                 position: absolute;">
-                        @Html.EditorFor(model => model.Fax_No, new { htmlAttributes = new { @class = "master-form-input" } })
+                        @Html.EditorFor(model => model.Fax_No, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                         @Html.ValidationMessageFor(model => model.Fax_No, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -332,7 +332,7 @@
                     @Html.LabelFor(model => model.Emiratesid, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Emiratesid, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Emiratesid, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.Emiratesid, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -342,7 +342,7 @@
                     @Html.LabelFor(model => model.Emirate_expirydate, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Emirate_expirydate, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Emirate_expirydate, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.Emirate_expirydate, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -352,7 +352,7 @@
                     @Html.LabelFor(model => model.Placeofissuance, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Placeofissuance, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Placeofissuance, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.Placeofissuance, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -362,7 +362,7 @@
                     @Html.LabelFor(model => model.Passport_Expirydate, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Passport_Expirydate, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Passport_Expirydate, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.Passport_Expirydate, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -372,7 +372,7 @@
                     @Html.LabelFor(model => model.Visa_IssueDate, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Visa_IssueDate, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Visa_IssueDate, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.Visa_IssueDate, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -382,7 +382,7 @@
                     @Html.LabelFor(model => model.Dob, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Dob, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Dob, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.Dob, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -392,18 +392,18 @@
                     @Html.LabelFor(model => model.Familybookcity, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Familybookcity, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Familybookcity, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                     @Html.ValidationMessageFor(model => model.Familybookcity, "", new { @class = "text-danger" })
                 </div>
             </div>
 
 
         </div>
-        <div class="col-md-10 document-row" id="GridView">
+        <div class="m-t-5-p col-md-10 document-row" id="GridView">
          
             @if (Model.TenantDocumentList != null)
                 {
-                <div class="col-md-12">
+                <div class="">
                     @if (Model.TenantDocumentList.Count > 0)
                     {<h3>Existing Documents</h3>}
                     <table class="col-md-12" id="exist-file-list">
@@ -427,12 +427,11 @@
                 </div>
                 <div class="clearfix"><br /></div>
             }
+            
             <div class="col-md-12">
                 <div class="col-md-4 text-left">Content Name</div>
-                <div class="col-md-4 text-left">Content Det</div>
-                <div class="col-md-4 text-left"><input type="button" id="addbutton" value="Add" /></div>
-
-
+                <div class="col-md-4 text-left">Document</div>
+                <div class="col-md-2 text-left"><input type="button" id="addbutton" class="document-btn" value="Add" /></div>
             </div>
             <div class="clearfix"><br /><br /></div>
                
@@ -441,17 +440,16 @@
                         <table id="tblcontent" class="col-md-12">
                             <tr>
 
-                                <td class="col-md-4">
+                                <td class="col-md-4 p-t-25">
                                     <input type="text" id="txtTitle" name="TenantDocument[0].Name" data-name="Name">
                                 </td>
-                                <td class="col-md-4">
+                                <td class="col-md-4 p-t-25">
                                     <input type="file" id="txtLink" name="TenantDocument[0].File" data-name="File">
                                 </td>
-                                <td class="col-md-4">
-                                    <button type="button" class="removebutton" title="Remove this row"> X </button>
+                                <td class="col-md-2 p-t-25">
+                                    <button type="button" class="removebutton document-btn" title="Remove this row"> Delete </button>
                                 </td>
                             </tr>
-
                         </table>
 
                     </div>

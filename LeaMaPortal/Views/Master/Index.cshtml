@@ -4,10 +4,13 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div id="ContainerAddOrUpdate"></div>
-<div id="ContainerList"></div>
-<input type="hidden" id="FormMasterSelected" value="@ViewBag.FormMasterSelected" />
+<div class="inner-block p-t-5-p">
+    <div class="blank">
+        <div id="ContainerAddOrUpdate"></div>
+        <div class="row" id="ContainerList"></div>
+        <input type="hidden" id="FormMasterSelected" value="@ViewBag.FormMasterSelected" />
+    </div>
+</div>
 <script>
     $(function () {
         $("#TopNavBarFilter").empty();
@@ -77,7 +80,7 @@
            url: "../Master/Filter",
            type: "Get",
            data: { selected: FormMasterSelected },
-           
+
            success: function (html) {
                $("#TopNavBarFilter").html(html);
            },
@@ -292,15 +295,14 @@
         });
     }
 
-    function GetPropertyMaster()
-    {
+    function GetPropertyMaster() {
         $("#img-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $.ajax(
         {
             url: "../PropertyMaster/AddOrUpdate",
             type: "Get",
-            data: { Search :""},
+            data: { Search: "" },
             success: function (html) {
                 $("#ContainerAddOrUpdate").html(html);
             },

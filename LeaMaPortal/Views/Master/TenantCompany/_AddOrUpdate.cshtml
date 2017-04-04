@@ -892,15 +892,15 @@
         //html=html+"<div class='col-md-1'>";
         //html = html + count;
         //html=html+" </div>";
-        html = html + "<div class='col-md-12'>"
+        //html = html + "<div class='col-md-12'>"
         html = html + " <div class='col-md-2 form-group'> <label for='branch'>Branch</label> <input id='branch" + i + "'  type='text' value='" + branch + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].Branch' data-name='Branch' /></div>";
         html = html + "<div class='col-md-2 form-group'> <label for='City'>city</label><input id='city" + i + "' type='text'  value='" + city + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].City' data-name='City' /></div>";
         html = html + " <div class='col-md-2 form-group'> <label for='add01'>Address 01</label><input type='text' id='add01" + i + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].BranchAddress' data-name='BranchAddress' value='"+ add01 +"'/></div>";
         html = html + " <div class='col-md-2 form-group'> <label for='add02'>Address 02</label><input type='text' id='add02" + i + "'class='form-control master-form-input' name='CompanyDetails[" + i + "].BranchAddress1' data-name='BranchAddress1' value='" + add02 + "'/></div>";
         html = html + " <div class='col-md-2 form-group'> <label for='state'>State</label><input id='state" + i + "'  type='text' value='" + state + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].State' data-name='State' /></div>";
         html = html + "<div class='col-md-2 form-group'> <label for='country'>Country</label> <input id='country" + i + "' type='text'  value='" + country + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].Country' data-name='Country' /></div>";
-        html = html + "</div>"
-        html = html + "<div class='col-md-12'>"
+        //html = html + "</div>"
+        //html = html + "<div class='col-md-12'>"
         html = html + " <div class='col-md-2 form-group'> <label for='pincode'>Pincode</label><input id='pincode" + i + "'  type='text' value='" + pincode + "' class='form-control master-form-input' name='CompanyDetails[" + i+ "].Pincode' data-name='Pincode' /></div>";
         html = html + "<div class='col-md-2 form-group'> <label for='Phno'>Phone Number</label><input id='phno" + i+ "' type='text'  value='" + phno + "' class='form-control master-form-input' name='CompanyDetails[" + i+ "].Phoneno' data-name='Phoneno' /></div>";
         html = html + " <div class='col-md-2 form-group'> <label for='remarks'>Remarks</label><input type='text' id='remarks" + i+ "'class='form-control master-form-input' name='CompanyDetails[" + i+ "].Remarks' data-name='Remarks' value='" + remarks + "' /></div>";
@@ -908,9 +908,9 @@
         html = html + " <div class='col-md-2 form-group'> <label for='fax'>Fax</label><input id='fax" + i+ "'  type='text' value='" + fax + "' class='form-control master-form-input' name='CompanyDetails[" + i+ "].FaxNo' data-name='FaxNo' /></div>";
       //  html=html+ "<div class='col-md-2'><button class='document-btn'>Add</button> </div>";
         html = html + "<div class='col-md-1'><br />  <button class='document-btn removebutton' id='Delete" + i+ "'> X </button></div>";
-        html = html + "</div>"
+        //html = html + "</div>"
         html = html + "</div>";
-        html=html+"<div class='row ht-5'> &nbsp;</div></td></tr>"
+        html=html+"<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
         $('#companyDetailsForm').append(html);
         i++;
 
@@ -969,7 +969,7 @@
         var MobileNo = $("#MobileNo").val();
         var Salutations = $("#Salutations").val();
         var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + j + "'>";                
-        html = html + "<div class='col-md-12'>";
+        //html = html + "<div class='col-md-12'>";
         html = html + " <div class='col-md-2 form-group'> <label for='branch'>Contact Person Name</label> <input id='ContactPersonName" + j + "'  type='text' value='" + ContactPersonName + "' class='form-control master-form-input' name='CompanyContactDetails[" + j + "].ContactPersonName' data-name='ContactPersonName' /></div>";
         html = html + "<div class='col-md-1 form-group'> <label for='City'>Designation</label><input id='Designation" + j + "' type='text'  value='" + Designation + "' class='form-control master-form-input' name='CompanyContactDetails[" + j + "].Designation' data-name='Designation' /></div>";
         html = html + " <div class='col-md-1 form-group'> <label for='add01'>Department</label><input type='text' id='Department" + j + "' class='form-control master-form-input' name='CompanyContactDetails[" + j + "].Department' data-name='Department' value='" + Department + "'/></div>";
@@ -979,10 +979,10 @@
         html = html + " <div class='col-md-2 form-group'> <label for='state'>Salutations</label><input id='state" + j + "'  type='text' value='" + Salutations + "' class='form-control master-form-input' name='CompanyContactDetails[" + j + "].Salutations' data-name='Salutations' /></div>";
         html = html + "<div class='col-md-1'></br>  <button class='document-btn remove-contact-button' id='Delete" + j + "'> X </button></div>";
 
-        html = html + "</div>";
+        //html = html + "</div>";
                        
         html = html + "</div>";
-        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr>"
+        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
         $('#companyContactDetailsForm').append(html);
         j++;
 
@@ -1029,16 +1029,16 @@
     {
         
         var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + k + "'>";
-        html = html + "<div class='col-md-12'>";
+        //html = html + "<div class='col-md-12'>";
         html = html + " <div class='col-md-4 form-group'> <label for='branch'>Type</label> <input id='type" + k + "'  type='text' value='' class='form-control master-form-input' name='CompanyNewDocuments[" + k + "].Type' data-name='Type' /></div>";
         html = html + "<div class='col-md-4 form-group'> <label for='City'>Name</label><input id='Designation" + k + "' type='text'  value='' class='form-control master-form-input' name='CompanyNewDocuments[" + k + "].Name' data-name='Name' /></div>";
         html = html + " <div class='col-md-3 form-group'> <label for='add01'>Document</label><input type='file' id='File" + k + "' class='form-control master-form-input' name='CompanyNewDocuments[" + k + "].File' data-name='File' value=''/></div>";
         html = html + "<div class='col-md-1'></br>  <button class='document-btn remove-document-new-button' id='Delete" + k + "'> X </button></div>";
 
-        html = html + "</div>";
+        //html = html + "</div>";
 
         html = html + "</div>";
-        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr>"
+        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
         $('#companyNewFileDetails').append(html);
         k++;
         return false;
