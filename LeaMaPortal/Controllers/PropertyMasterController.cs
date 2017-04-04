@@ -14,7 +14,7 @@ namespace LeaMaPortal.Controllers
     public class PropertyMasterController : Controller
     {
         private Entities db = new Entities();
-        private string user = "rmv";
+        //private string user = "rmv";
         // GET: PropertyMaster
         public ActionResult Index(string Search, int? page, int? defaultPageSize)
         {
@@ -50,9 +50,24 @@ namespace LeaMaPortal.Controllers
             model.Property_Type_unitList = new SelectList("", "", "");
             model.Caretaker_IDList = new SelectList("", "", "");
 
-            ViewBag.Region = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
+            var propertyTypeData = db.tbl_propertytypemaster.Where(x => x.Type_Flag == "Property").Select(x => new PropertyTypeModel { PropertyCategory = x.Type_name, Usage_name = x.Usage_name }).ToList();
+            ViewBag.Property_Usage = new SelectList(propertyTypeData.Select(x => x.Usage_name));
+            ViewBag.Property_Type = new SelectList(propertyTypeData.Select(x => x.PropertyCategory));
+
+
+            propertyTypeData = db.tbl_propertytypemaster.Where(x => x.Type_Flag == "Unit").Select(x => new PropertyTypeModel { PropertyCategory = x.Type_name, Usage_name = x.Usage_name }).ToList();
+            ViewBag.Property_Usage_unit = new SelectList(propertyTypeData.Select(x => x.Usage_name));
+            ViewBag.Property_Type_unit = new SelectList(propertyTypeData.Select(x => x.PropertyCategory));
+
+            var propertyMaster = db.tbl_propertiesmaster.Where(x => x.Noofunits > 0 &&  x.Status != "Avail" && x.Delmark != "*" &&  x.Company_occupied_Flag != 1).ToList();
+            ViewBag.Ref_unit_Property_ID_Tawtheeq = new SelectList(propertyMaster.Select(x => x.Property_ID_Tawtheeq));
+            ViewBag.Ref_Unit_Property_ID = new SelectList(propertyMaster.Select(x => x.Property_Id));
+            ViewBag.Ref_Unit_Property_Name = new SelectList(propertyMaster.Select(x => x.Property_Name));
+
+
+            ViewBag.Region_Name = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
             ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
-            ViewBag.Caretaker = new SelectList(db.tbl_caretaker.Where(x => x.Delmark != "*").OrderBy(x => x.Id), "Caretaker_id", "Caretaker_id");
+            ViewBag.Caretaker_ID = new SelectList(db.tbl_caretaker.Where(x => x.Delmark != "*").OrderBy(x => x.Id), "Caretaker_id", "Caretaker_id");
             //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
             ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
             ViewBag.Profession = new SelectList(Common.Profession);
@@ -104,7 +119,7 @@ namespace LeaMaPortal.Controllers
                     var propertyMaster = await db.tbl_propertiesmaster.OrderByDescending(r => r.Property_Id).FirstOrDefaultAsync();
                     model.Property_Id = propertyMaster != null ? propertyMaster.Property_Id + 1 : 1;
                 }
-                object[] param = Helper.GetMySqlParameters<PropertyViewModel>(model, PFlag, user);
+                object[] param = Helper.GetMySqlParameters<PropertyViewModel>(model, PFlag, System.Web.HttpContext.Current.User.Identity.Name);
 
                 var _result = await db.Database.SqlQuery<object>(@"CALL Usp_Properties_All(@PFlag,
 @PProperty_Flag ,
@@ -170,7 +185,7 @@ namespace LeaMaPortal.Controllers
             }
             catch (Exception e)
             {
-                return View();
+                throw;
             }
         }
 
@@ -197,12 +212,27 @@ namespace LeaMaPortal.Controllers
                 //                                Doc_Path = x.Doc_Path
                 //                            }).ToListAsync();
                 PropertyViewModel model = Map(properties);
-                ViewBag.Caretaker = new SelectList(db.tbl_caretaker.Where(x => x.Delmark != "*").OrderBy(x => x.Id), "Caretaker_id", "Caretaker_id", model.Caretaker_ID);
+                ViewBag.Caretaker_ID = new SelectList(db.tbl_caretaker.Where(x => x.Delmark != "*").OrderBy(x => x.Id), "Caretaker_id", "Caretaker_id", model.Caretaker_ID);
                 ViewBag.PropertyId = model.Property_Id;
                 model.Property_Usage_unitList = new SelectList("", "", "");
                 model.Property_Type_unitList = new SelectList("", "", "");
                 model.Caretaker_IDList = new SelectList("", "", "");
-                ViewBag.Region = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name", model.Region_Name);
+
+                var propertyTypeData = db.tbl_propertytypemaster.Where(x => x.Type_Flag == "Property").Select(x => new PropertyTypeModel { PropertyCategory = x.Type_name, Usage_name = x.Usage_name }).ToList();
+                ViewBag.Property_Usage = new SelectList(propertyTypeData.Select(x => x.Usage_name), model.Property_Usage);
+                ViewBag.Property_Type = new SelectList(propertyTypeData.Select(x => x.PropertyCategory),model.Property_Type);
+
+
+                propertyTypeData = db.tbl_propertytypemaster.Where(x => x.Type_Flag == "Unit").Select(x => new PropertyTypeModel { PropertyCategory = x.Type_name, Usage_name = x.Usage_name }).ToList();
+                ViewBag.Property_Usage_unit = new SelectList(propertyTypeData.Select(x => x.Usage_name), model.Property_Usage_unit);
+                ViewBag.Property_Type_unit = new SelectList(propertyTypeData.Select(x => x.PropertyCategory), model.Property_Type_unit);
+
+                var propertyMaster = db.tbl_propertiesmaster.Where(x => x.Noofunits > 0 && x.Status != "Avail" && x.Delmark != "*" && x.Company_occupied_Flag != 1).ToList();
+                ViewBag.Ref_unit_Property_ID_Tawtheeq = new SelectList(propertyMaster.Select(x => x.Ref_unit_Property_ID_Tawtheeq), model.Ref_unit_Property_ID_Tawtheeq);
+                ViewBag.Ref_Unit_Property_ID = new SelectList(propertyMaster.Select(x => x.Ref_Unit_Property_ID), model.Ref_Unit_Property_ID);
+                ViewBag.Ref_Unit_Property_Name = new SelectList(propertyMaster.Select(x => x.Ref_Unit_Property_Name), model.Ref_Unit_Property_Name);
+
+                ViewBag.Region_Name = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name", model.Region_Name);
                 return PartialView("../Master/PropertyMaster/_AddOrUpdate", model);
             }
             catch
@@ -244,7 +274,7 @@ namespace LeaMaPortal.Controllers
                 {
                     var model = await db.tbl_propertiesmaster.FirstOrDefaultAsync(r => r.Property_Id == Property_Id);
 
-                    object[] param = Helper.GetMySqlParameters<PropertyViewModel>(Map(model), Common.DELETE, user);
+                    object[] param = Helper.GetMySqlParameters<PropertyViewModel>(Map(model), Common.DELETE, System.Web.HttpContext.Current.User.Identity.Name);
 
                     var _result = await db.Database.SqlQuery<object>(@"CALL Usp_Properties_All(@PFlag,
 @PProperty_Flag ,
@@ -335,7 +365,7 @@ namespace LeaMaPortal.Controllers
                 Commercial_villa = propertyMaster.Commercial_villa,
                 commonarea = propertyMaster.commonarea,
                 Company_occupied_Flag = propertyMaster.Company_occupied_Flag,
-                completion_Date = propertyMaster.completion_Date,
+                completion_Date = propertyMaster.completion_Date.Value,
                 Compound = propertyMaster.Compound,
                 Country = propertyMaster.Country,
                 Createddatetime = propertyMaster.Createddatetime,

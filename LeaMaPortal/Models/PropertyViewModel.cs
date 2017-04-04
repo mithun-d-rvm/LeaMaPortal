@@ -12,6 +12,11 @@ namespace LeaMaPortal.Models
 {
     public class PropertyViewModel 
     {
+        public PropertyViewModel()
+        {
+            this.Status = "vacant";
+            this.Status_unit = "vacant";
+        }
         [StringLength(100)]
         [DisplayName("Property Type:")]
         public string Property_Flag { get; set; }
@@ -116,6 +121,8 @@ namespace LeaMaPortal.Models
         [DisplayName("Common Area:")]
         public float? commonarea { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Completion Date:")]
         public DateTime? completion_Date { get; set; }
 
@@ -125,13 +132,18 @@ namespace LeaMaPortal.Models
         [NotMapped]
         public SelectList AEDvalueList { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Purchased Date:")]
         public DateTime? Purchased_date { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Property Valued Date:")]
         public DateTime? Valued_Date { get; set; }
 
-
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Available From:")]
         public DateTime? Vacant_Start_Date { get; set; }
 
@@ -171,9 +183,13 @@ namespace LeaMaPortal.Models
         [DisplayName("Property Value (in AED):")]
         public float? AEDvalue_unit { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Purchased Date:")]
         public DateTime? Purchased_date_unit { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Property Value Date:")]
         public DateTime? Valued_Date_unit { get; set; }
 
@@ -181,6 +197,8 @@ namespace LeaMaPortal.Models
         [DisplayName("Occupancy Status (Unit):")]
         public string Status_unit { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Available From (Unit):")]
         public DateTime? Vacant_Start_Date_Unit { get; set; }
 
@@ -230,10 +248,10 @@ namespace LeaMaPortal.Models
         public string Status { get; set; }
 
         [StringLength(100)]
-        [DisplayName("Car Taker Name:")]
+        [DisplayName("Caretaker Name:")]
         public string Caretaker_Name { get; set; }
 
-        [DisplayName("Car Taker ID:")]
+        [DisplayName("Caretaker ID:")]
         public int? Caretaker_ID { get; set; }
 
         [NotMapped]
@@ -244,6 +262,8 @@ namespace LeaMaPortal.Models
 
         public int? Accyear { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? Createddatetime { get; set; }
 
         [StringLength(50)]
