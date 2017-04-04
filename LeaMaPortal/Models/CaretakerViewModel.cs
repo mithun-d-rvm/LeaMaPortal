@@ -27,7 +27,7 @@ namespace LeaMaPortal.Models
         public string Region_Name { get; set; }
         [DisplayName("Country")]
         public string Country { get; set; }
-        [DisplayName("Region Name")]
+        [DisplayName("City")]
         public string City { get; set; }
         [DisplayName("State")]
         public string State { get; set; }

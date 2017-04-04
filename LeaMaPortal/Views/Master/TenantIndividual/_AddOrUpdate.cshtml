@@ -74,7 +74,7 @@
                     @Html.LabelFor(model => model.address1, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.TextAreaFor(model => model.address1, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.TextAreaFor(model => model.address1,  new { @class = "master-form-input" })
                     @Html.ValidationMessageFor(model => model.address1, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -173,7 +173,7 @@
                     @Html.LabelFor(model => model.VisaType, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.VisaType, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.DropDownList("VisaType", null, "-Select-", htmlAttributes: new { @class = "form-control", @placeholder = "-Select-", })
                     @Html.ValidationMessageFor(model => model.VisaType, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -217,7 +217,7 @@
                 </div>
                 <div class="col-md-8">
                     @Html.HiddenFor(model => model.Tenant_Id)
-                    <input type="text" value="@ViewBag.Tenant_Id" class="master-form-input" />
+                    <input type="text" disabled value="@ViewBag.Tenant_Id" class="master-form-input" />
                     @*@Html.EditorFor(model => model.Tenant_Id, new { htmlAttributes = new { @class = "master-form-input" } })*@
                     @Html.ValidationMessageFor(model => model.Tenant_Id, "", new { @class = "text-danger" })
                 </div>
@@ -257,7 +257,7 @@
                     @Html.LabelFor(model => model.address, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.TextAreaFor(model => model.address, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.TextAreaFor(model => model.address, new { @class = "master-form-input" })
                     @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -267,9 +267,7 @@
                     @Html.LabelFor(model => model.Emirate, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    <select class="master-form-input">
-                        <option> Default </option>
-                    </select>
+                    @Html.DropDownList("Emirate", null, "-Select-", htmlAttributes: new { @class = "form-control", @placeholder = "-Select-", })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
