@@ -1,6 +1,7 @@
-﻿@*@model LeaMaPortal.Models.CountryViewModel*@
+﻿
+@*@model LeaMaPortal.Models.CountryViewModel*@
 @using MvcPaging
-@model IPagedList<LeaMaPortal.Models.CaretakerViewModel>
+@model IPagedList<LeaMaPortal.Models.UserCreationViewModel>
 @{
     Layout = null;
 }
@@ -51,83 +52,84 @@
 
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
-                    <div class="divTableCell">Caretaker Id</div>
-                    <div class="divTableCell">Caretaker Name</div>
-                    <div class="divTableCell">Email</div>
-                    <div class="divTableCell">Phone number</div>
-                    <div class="divTableCell">Date of Joining</div>
+                    <div class="divTableCell">Name</div>
+                    <div class="divTableCell">Login ID</div>
+                    <div class="divTableCell">Role</div>
+                    <div class="divTableCell">Email ID</div>
+                    <div class="divTableCell">Contact Number</div>
+                    <div class="divTableCell">Active</div>
                     <div class="divTableCell">Action</div>
 
                 </div>
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
-                        <div class="divTableCell">@item.Caretaker_id</div>
-                        <div class="divTableCell">@item.Caretaker_Name</div>
+                        <div class="divTableCell">@item.Name</div>
+                        <div class="divTableCell">@item.Userid</div>
+                        <div class="divTableCell">@item.Category</div>
                         <div class="divTableCell">@item.Email</div>
                         <div class="divTableCell">@item.Phoneno</div>
-                        <div class="divTableCell">@item.Doj</div>
+                        <div class="divTableCell">@item.Active</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit caretaker-edit", title = "Edit", @data_id = @item.Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash caretaker-delete", @style = "color:red", @title = "Delete", @data_id = @item.Id })
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit user-creation-edit", title = "Edit", @data_id = @item.id })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash user-creation-delete", @style = "color:red", @title = "Delete", @data_id = @item.id })
 
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
 
                     </div>
                 }
+
+
+            </div>
+            <div class="col-md-12">
+                <br />
+                @Html.HiddenFor(m => m.PageNumber)
+                <div class="col-md-2">
+                    @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+                <div class="col-lg-10 text-right">
+                    @for (int i = 1; i <= Model.PageCount; i++)
+                    {
+                        if (i == Model.PageNumber)
+                        {
+                            <input type="button" style="background:green" data-id="@i" value="@i" class="" />
+                        }
+                        else
+                        {
+                            <input type="button" data-id="@i" value="@i" class="Page" />
+                        }
+
+                    }
+                </div>
             </div>
         </div>
-        <div class="col-md-12">
-            @Html.HiddenFor(m => m.PageNumber)
-            <div class="col-md-2">
-                @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
-            </div>
-            <div class="col-lg-10 text-right">
-                @for (int i = 1; i <= Model.PageCount; i++)
-                {
-                    if (i == Model.PageNumber)
-                    {
-                        <input type="button" style="background:green" data-id="@i" value="@i" class="" />
-                    }
-                    else
-                    {
-                        <input type="button" data-id="@i" value="@i" class="Page" />
-                    }
+    </div>
+</div>
 
-                }
-            </div>
-        </div>
-
-
-
-
-
-        <script type="text/javascript">
+<script type="text/javascript">
                 $(".Page").click(function(e)
                 {
                     var page = parseInt($(this).data("id"));
                     var defaultPageSize = $("#defaultPageSize").val();
                     var search = $("#Search").val();
                     //alert(page);
-                    getCaretakerList(search,page,defaultPageSize)
+                    getUserCreationList(search, page, defaultPageSize)
                 });
                 $("#defaultPageSize").change(function () {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getCaretakerList(search, 1, defaultPageSize)
+                    getUserCreationList(search, 1, defaultPageSize)
                 });
                 $("#btn-search").click(function (e) {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getCaretakerList(search, 1, defaultPageSize)
+                    getUserCreationList(search, 1, defaultPageSize)
                 });
-
-                function getCaretakerList(search, page, defaultPageSize)
-                {
+                function getUserCreationList(search, page, defaultPageSize) {
                     $.ajax(
                        {
-                           url: "../Caretaker/Index",
+                           url: "../UserCreation/Index",
                            type: "Get",
                            data: { Search: search, page: page, defaultPageSize: defaultPageSize },
                            success: function (html) {
@@ -156,27 +158,21 @@
         alert("Could not retrieve list.");
     }
 
-        </script>
-    </div>
-
-
-</div>
+</script>
 
 <script>
 
     //Edit get
 
-    $(".caretaker-edit").click(function (e) {
+    $(".user-creation-edit").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
         $.ajax(
             {
-                url: "../Caretaker/Edit",
+                url: "../UserCreation/Edit",
                 type: "Get",
                 data: { id: id },
                 success: function (result) {
-                  
-                    //var data=jQuery.parseJSON(result);
                     if (result.Errors == undefined || result.Errors == "") {
                         $("#ContainerAddOrUpdate").empty();
                         $("#ContainerAddOrUpdate").html(result);
@@ -190,12 +186,11 @@
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
-                    $("body").scrollTop(0);
                 }
             });
     });
 
-    $(".caretaker-delete").click(function (e) {
+    $(".user-creation-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
         var r = confirm("Are you sure want to delete?");
@@ -205,14 +200,14 @@
         else {
             $.ajax(
                 {
-                    url: "../Caretaker/Delete",
+                    url: "../UserCreation/Delete",
                     type: "Get",
 
                     data: { id: id },
 
                     success: function (response) {
 
-                        GetCaretaker();
+                        GetUserCreation();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
 

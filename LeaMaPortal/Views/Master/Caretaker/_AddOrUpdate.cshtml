@@ -11,7 +11,7 @@
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Caretaker" }))
 {
-
+    @Html.HiddenFor(m => m.Id, new { @id = "CaretakerId" })
     <div class="col-md-12 leama-fieldset leama-header-top">
         <div class="row">
             <div class="col-md-12 leama-fieldset ">
@@ -19,7 +19,9 @@
                     @Html.LabelFor(model => model.Caretaker_id, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Caretaker_id, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                    @Html.HiddenFor(model => model.Caretaker_id)
+                    <input type="text" value="@ViewBag.CaretakerId" disabled class="master-form-input" />
+                    @*@Html.EditorFor(model => model.Caretaker_id, new { htmlAttributes = new { @class = "leama-field form-control" } })*@
                 </div>
                 <div class="col-md-2 pull-left">
                     @Html.LabelFor(model => model.Caretaker_Name, htmlAttributes: new { @class = "leama-field-name" })
@@ -87,8 +89,8 @@
                     @Html.LabelFor(model => model.Region_Name, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-
-                    @Html.EditorFor(model => model.Region_Name, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                    @Html.DropDownList("Region", null,"-Select-", htmlAttributes: new { @class = "form-control", @placeholder = "-Select-", })
+                    @*@Html.EditorFor(model => model.Region_Name, new { htmlAttributes = new { @class = "leama-field form-control" } })*@
 
 
                 </div>
@@ -119,10 +121,10 @@
             <div class="col-md-12 leama-fieldset ">
                 
                 <div class="col-md-2 pull-left">
-                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "leama-field-name" })
+                    @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "leama-field form-control" } })
                 </div>
                 <div class="col-md-2 pull-left">
                     @Html.LabelFor(model => model.Phoneno, htmlAttributes: new { @class = "leama-field-name" })
@@ -132,8 +134,18 @@
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
-                
-
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                </div>
+                <div class="col-md-2">
+                    
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                </div>
             </div>
             @*<div class="col-md-12 leama-fieldset ">
                 
@@ -152,11 +164,11 @@
                         <button type="submit" class="leama-btn">Submit</button>
                     </div>*@
         </div>
-        <div class="col-md-12 leama-fieldset ">
+        @*<div class="col-md-12 leama-fieldset ">
             <div class="col-md-12">
                 <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
             </div>
-        </div>
+        </div>*@
     </div>
 
 }
@@ -212,5 +224,33 @@
         });
         return o;
     };
+    $("#Region").on('change', function (e) {
+        var region = $("#Region").val();
+        if (region != "" && region != null) {
+            $.ajax(
+                {
+                    url: "../Region/GetCountry",
+                    // dataType: "jsonp",
+                    method: "GET",
+                    data: { region: $("#Region").val() }, //FormData(form.get(0)),
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        if (response != null) {
+                            $("#Country").val(response);
+                        }
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+        }
+       // $("#Title").val($("#TitleDisplay").val());
+    });
 
 </script>

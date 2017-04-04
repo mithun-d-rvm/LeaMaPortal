@@ -60,7 +60,15 @@ namespace LeaMaPortal.Controllers
             {
                 TenantIndividualViewModel model = new TenantIndividualViewModel();
                 model.Title = Common.DefaultTitle;
-                ViewBag.TitleDisplay = new SelectList(Common.Title,Common.DefaultTitle);
+                var _titleResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
+                ViewBag.TitleDisplay = new SelectList(_titleResult, Common.DefaultTitle);
+
+                var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
+                ViewBag.Emirate = new SelectList(_emirateResult);
+
+                var _visaTypeResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','VisaType','!#',null)").ToList();
+                ViewBag.VisaType = new SelectList(_visaTypeResult);
+
                 //var region = .Select(x => x.Region_Name);
                 ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
                 //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
@@ -180,7 +188,15 @@ namespace LeaMaPortal.Controllers
             {
                 var tenant =await db.tbl_tenant_individual.FindAsync(tenantId, type);
                 TenantIndividualViewModel model = Map(tenant);
-                ViewBag.TitleDisplay = new SelectList(Common.Title,tenant.Title);
+                var _result = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
+                ViewBag.TitleDisplay = new SelectList(_result, tenant.Title);
+
+                var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
+                ViewBag.Emirate = new SelectList(_emirateResult,tenant.Emirate);
+
+                var _visaTypeResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','VisaType','!#',null)").ToList();
+                ViewBag.VisaType = new SelectList(_visaTypeResult, tenant.VisaType);
+
                 //var region = .Select(x => x.Region_Name);
                 ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name",tenant.City);
                 //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);

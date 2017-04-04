@@ -55,7 +55,7 @@ namespace LeaMaPortal.Controllers
             {
                 throw;
             }
-        }       
+        }
 
         [HttpGet]
         public PartialViewResult AddOrUpdate()
@@ -63,6 +63,22 @@ namespace LeaMaPortal.Controllers
             RegionViewModel model = new RegionViewModel();
             ViewBag.Country = new SelectList(db.tbl_country.OrderBy(x => x.Country_name), "Country_name", "Country_name");
             return PartialView("../Master/Region/_AddOrUpdate", model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetCountry(string region)
+        {
+            try
+            {
+                tbl_region tbl_region = await db.tbl_region.FirstOrDefaultAsync(x => x.Region_Name == region);
+                return Json(tbl_region?.Country,JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception e)
+            {
+                throw;
+            }
+            
+            
         }
 
         // POST: Region/AddOrUpdate

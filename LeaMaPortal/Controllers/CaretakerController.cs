@@ -32,6 +32,7 @@ namespace LeaMaPortal.Controllers
                 {
                     caretakers = caretakers.Where(x => x.Caretaker_Name.Contains(Search));
                 }
+
                 return PartialView("../Master/Caretaker/_List", caretakers.OrderBy(x => x.Id).Select(x => new CaretakerViewModel()
                 {
                     Address1 = x.Address1,
@@ -59,6 +60,8 @@ namespace LeaMaPortal.Controllers
         [HttpGet]
         public PartialViewResult AddOrUpdate()
         {
+            ViewBag.Region = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
+            ViewBag.CaretakerId = db.tbl_caretaker.OrderByDescending(x => x.Caretaker_id).FirstOrDefault().Caretaker_id + 1;
             return PartialView("../Master/Caretaker/_AddOrUpdate", new CaretakerViewModel());
         }
 
@@ -83,7 +86,7 @@ namespace LeaMaPortal.Controllers
                     object[] parameters = {
                          new MySqlParameter("@PFlag", PFlag),
                          new MySqlParameter("@PId", model.Id),
-                         new MySqlParameter("@PPCaretaker_id",model.Caretaker_id),
+                         new MySqlParameter("@PCaretaker_id",model.Caretaker_id),
                          new MySqlParameter("@PCaretaker_name", model.Caretaker_Name),
                          new MySqlParameter("@PDob", model.Dob),
                          new MySqlParameter("@PAddress1", model.Address1),
@@ -109,106 +112,124 @@ namespace LeaMaPortal.Controllers
 
 
         }
-
+        public PartialViewResult Edit(int? id)
+        {
+            try
+            {
+                tbl_caretaker caretaker = db.tbl_caretaker.FirstOrDefault(x =>x.Delmark != "*" && x.Id == id);
+                if (caretaker == null)
+                {
+                    return PartialView("../Master/Caretaker/_AddOrUpdate", new CaretakerViewModel());
+                    //return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
+                }
+                ViewBag.Region = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name",caretaker.Region_Name);
+                ViewBag.CaretakerId = caretaker.Caretaker_id;
+                CaretakerViewModel model = new CaretakerViewModel()
+                {
+                    Id = caretaker.Id,
+                    Caretaker_id = caretaker.Caretaker_id,
+                    Address1 = caretaker.Address1,
+                    Address2 = caretaker.Address2,
+                    Caretaker_Name = caretaker.Caretaker_Name,
+                    City = caretaker.City,
+                    Dob = caretaker.Dob,
+                    Doj = caretaker.Doj,
+                    Email = caretaker.Email,
+                    Phoneno = caretaker.Phoneno,
+                    Pincode = caretaker.Pincode,
+                    Region_Name = caretaker.Region_Name,
+                    State = caretaker.State,
+                    Country = caretaker.Country
+                };
+                return PartialView("../Master/Caretaker/_AddOrUpdate", model);
+            }
+            catch
+            {
+                return PartialView("../Master/Caretaker/_AddOrUpdate", new CaretakerViewModel());
+            }
+        }
 
         // GET: Caretaker/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbl_agreement_closure_checklist tbl_agreement_closure_checklist = db.tbl_agreement_closure_checklist.Find(id);
-            if (tbl_agreement_closure_checklist == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbl_agreement_closure_checklist);
-        }
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    tbl_agreement_closure_checklist tbl_agreement_closure_checklist = db.tbl_agreement_closure_checklist.Find(id);
+        //    if (tbl_agreement_closure_checklist == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(tbl_agreement_closure_checklist);
+        //}
 
         // GET: Caretaker/Create
-        public ActionResult Create()
-        {
-            ViewBag.Agreement_No = new SelectList(db.tbl_agreement_closure, "Agreement_No", "Advance_Security_Amount_Paid");
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    ViewBag.Agreement_No = new SelectList(db.tbl_agreement_closure, "Agreement_No", "Advance_Security_Amount_Paid");
+        //    return View();
+        //}
 
         // POST: Caretaker/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Agreement_No,Checklist_id,Checklist_Name,Status,Remarks,Delmark")] tbl_agreement_closure_checklist tbl_agreement_closure_checklist)
-        {
-            if (ModelState.IsValid)
-            {
-                db.tbl_agreement_closure_checklist.Add(tbl_agreement_closure_checklist);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "id,Agreement_No,Checklist_id,Checklist_Name,Status,Remarks,Delmark")] tbl_agreement_closure_checklist tbl_agreement_closure_checklist)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.tbl_agreement_closure_checklist.Add(tbl_agreement_closure_checklist);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.Agreement_No = new SelectList(db.tbl_agreement_closure, "Agreement_No", "Advance_Security_Amount_Paid", tbl_agreement_closure_checklist.Agreement_No);
-            return View(tbl_agreement_closure_checklist);
-        }
+        //    ViewBag.Agreement_No = new SelectList(db.tbl_agreement_closure, "Agreement_No", "Advance_Security_Amount_Paid", tbl_agreement_closure_checklist.Agreement_No);
+        //    return View(tbl_agreement_closure_checklist);
+        //}
 
-        // GET: Caretaker/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbl_agreement_closure_checklist tbl_agreement_closure_checklist = db.tbl_agreement_closure_checklist.Find(id);
-            if (tbl_agreement_closure_checklist == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Agreement_No = new SelectList(db.tbl_agreement_closure, "Agreement_No", "Advance_Security_Amount_Paid", tbl_agreement_closure_checklist.Agreement_No);
-            return View(tbl_agreement_closure_checklist);
-        }
-
-        // POST: Caretaker/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Agreement_No,Checklist_id,Checklist_Name,Status,Remarks,Delmark")] tbl_agreement_closure_checklist tbl_agreement_closure_checklist)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tbl_agreement_closure_checklist).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Agreement_No = new SelectList(db.tbl_agreement_closure, "Agreement_No", "Advance_Security_Amount_Paid", tbl_agreement_closure_checklist.Agreement_No);
-            return View(tbl_agreement_closure_checklist);
-        }
 
         // GET: Caretaker/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
+            MessageResult result = new MessageResult();
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
             }
-            tbl_agreement_closure_checklist tbl_agreement_closure_checklist = db.tbl_agreement_closure_checklist.Find(id);
-            if (tbl_agreement_closure_checklist == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbl_agreement_closure_checklist);
+            object[] parameters = {
+                         new MySqlParameter("@PFlag", "DELETE"),
+                         new MySqlParameter("@PId", id),
+                         new MySqlParameter("@PCaretaker_id",0),
+                         new MySqlParameter("@PCaretaker_name", ""),
+                         new MySqlParameter("@PDob", "01-01-0001"),
+                         new MySqlParameter("@PAddress1", ""),
+                         new MySqlParameter("@PAddress2", ""),
+                         new MySqlParameter("@PRegion_name", ""),
+                         new MySqlParameter("@PCountry", ""),
+                         new MySqlParameter("@PCity", ""),
+                         new MySqlParameter("@PState", ""),
+                         new MySqlParameter("@PPincode", ""),
+                         new MySqlParameter("@PPhoneno", ""),
+                         new MySqlParameter("@PEmail", ""),
+                         new MySqlParameter("@PDoj", "01-01-0001"),
+                         new MySqlParameter("@PCreatedUser",System.Web.HttpContext.Current.User.Identity.Name)
+                    };
+            var spresult = await db.Database.SqlQuery<object>("call leama.Usp_Caretaker_All(@PFlag, @PId, @PCaretaker_id, @PCaretaker_Name, @PDob, @PAddress1, @PAddress2, @PRegion_Name, @PCountry, @PCity, @PState, @PPincode, @PPhoneno, @PEmail, @PDoj, @PCreateduser)", parameters).ToListAsync();
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Caretaker/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbl_agreement_closure_checklist tbl_agreement_closure_checklist = db.tbl_agreement_closure_checklist.Find(id);
-            db.tbl_agreement_closure_checklist.Remove(tbl_agreement_closure_checklist);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    tbl_agreement_closure_checklist tbl_agreement_closure_checklist = db.tbl_agreement_closure_checklist.Find(id);
+        //    db.tbl_agreement_closure_checklist.Remove(tbl_agreement_closure_checklist);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         [HttpGet]
         public async Task<ActionResult> GetCaretakerName(int Id)
