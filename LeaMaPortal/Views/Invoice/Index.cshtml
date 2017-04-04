@@ -14,9 +14,7 @@
                     </div>
                     <div class="col-md-8">
                        
-                        <select class="col-md-12 leama-field">
-                            <option value="InvType">InvType</option>
-                        </select>
+                        @*@Html.DropDownList("InvType", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "InvType" })*@
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -75,9 +73,7 @@
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Property_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="Property_ID">Property No</option>
-                        </select>
+                        @Html.DropDownList("Property_Id", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Property_Id" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -86,9 +82,7 @@
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="Property_Name">Property Name</option>
-                        </select>
+                        @Html.DropDownList("Property_Name", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Property_Name" })
                     </div>
                 </div>
 
@@ -101,9 +95,7 @@
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Unit_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="Unit_ID">Unit ID</option>
-                        </select>
+                        @Html.DropDownList("Unit_Id", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Unit_Id" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -112,9 +104,7 @@
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.unit_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="unit_Name">Unit Name</option>
-                        </select>
+                        @Html.DropDownList("unit_Name", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "unit_Name" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -123,7 +113,7 @@
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.month, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownListFor(model => model.month, new SelectList(ViewBag.Month, "Text", "Value"), htmlAttributes: new { @class = "master-form-input" })
+                        @Html.DropDownList("Month", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Month" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">

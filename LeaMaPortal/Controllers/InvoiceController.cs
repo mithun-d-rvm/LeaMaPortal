@@ -81,28 +81,34 @@ namespace LeaMaPortal.Controllers
                 Text = "12",
                 Value = "12"
             });
-            List<SelectListItem> InvType = new List<SelectListItem>
-                                      ();
+            //List<SelectListItem> InvType = new List<SelectListItem>
+            //                          ();
 
-            InvType.Add(new SelectListItem
-            {
-                Text = "Rental",
-                Value = "1"
-            });
-            InvType.Add(new SelectListItem
-            {
-                Text = "Others",
-                Value = "1"
-            });
-            ViewBag.Tenant_Id = new SelectList(db.tbl_tenant_individual.OrderBy(x => x.Tenant_Id), "Tenant_Id", "Tenant_Id");
-            ViewBag.Tenant_Name = new SelectList(db.tbl_tenant_individual.OrderBy(x => x.First_Name), "Tenant_Name", "Tenant_Name");
+            //InvType.Add(new SelectListItem
+            //{
+            //    Text = "Rental",
+            //    Value = "1"
+            //});
+            //InvType.Add(new SelectListItem
+            //{
+            //    Text = "Others",
+            //    Value = "1"
+            //});
+            //var InvType = db.Database.SqlQuery<string>(@"call usp_split('Invoice','invtype',',',null);").ToList();
+            //ViewBag.InvType = new SelectList(InvType);
+            //var Month = db.Database.SqlQuery<string>(@"call usp_split('Invoice','Month',',',null)").ToList();
+            //ViewBag.InvType = new SelectList(Month);
+
+
+            //ViewBag.Tenant_Id = new SelectList(db.tbl_tenant_individual.OrderBy(x => x.Tenant_Id), "Tenant_Id", "Tenant_Id");
+            //ViewBag.Tenant_Name = new SelectList(db.tbl_tenant_individual.OrderBy(x => x.First_Name), "Tenant_Name", "Tenant_Name");
             ViewBag.Property_Id = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Property_Id), "Property_Id", "Property_Id");
-            ViewBag.Property_Name = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Property_Name), "Property_Name", "Property_Name");
-            //ViewBag.Unit_Id = new SelectList(db.tbl_utilitiesmaster.OrderBy(x => x.u), "Property_Id", "Property_Id");
-            //ViewBag.unit_Name = new SelectList(db.tbl_agreement_unit_inner.OrderBy(x => x.Property_Name), "Property_Name", "Property_Name");
+            ViewBag.Property_Name = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Property_Name), "Property_Id", "Property_Name");
+           ViewBag.Unit_Id = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Unit_ID_Tawtheeq), "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
+          ViewBag.unit_Name = new SelectList(db.tbl_agreement_unit_inner.OrderBy(x => x.Unit_Property_Name), "Unit_Property_Name", "Unit_Property_Name");
+           
 
-
-            ViewBag.InvType = InvType;
+           // ViewBag.InvType = InvType;
             ViewBag.Month = Month;
            
             return PartialView("../Invoice/Index");
