@@ -268,7 +268,7 @@
                             @Html.ValidationMessageFor(model => model.LicenseIssueDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 form-input-padding" style="display: none;" id="ADWEARegisterId">
                         <div class="col-md-4">
                             ADWEA registration Id:
                         </div>
@@ -518,8 +518,8 @@
                     </div>*@
                 </div>
             </div>
-            @*<div class="row">*@
-                <div class="p-b-25 p-t-17">
+            <div class="row" style="display: none;" id="companyDetails">
+                <div class="row p-b-25 p-t-17">
                     <h3> Company Details</h3>
                 </div>
                 @*<div class="row">
@@ -679,11 +679,10 @@
                 <div class="row ht-5">
                     &nbsp;
                 </div>
-            @*</div>*@
+            </div>
 
-
-
-            @if (Model.CompanyContactDetails != null)
+            <div class="row" style="display: none;" id="contactDetails">
+                @if (Model.CompanyContactDetails != null)
             {
                 <input type="hidden" id="init-company-contact-det-count" value="@Model.CompanyContactDetails.Count" />
             }
@@ -777,6 +776,9 @@
             <div class="row ht-5">
                 &nbsp;
             </div>
+            </div>
+
+            
             
 
                 @if (Model.CompanyDocumentsExist != null)
@@ -1158,5 +1160,18 @@
         });
         return o;
     };
-
+    $("#TenantType").on('change', function (e) {
+        var tenantType = $("#TenantType").val();
+        if (tenantType == "Company") {
+            $("#ADWEARegisterId").show();
+            $("#contactDetails").show();
+            $("#companyDetails").show();
+        }
+        else {
+            $("#ADWEARegisterId").hide();
+            $("#contactDetails").hide();
+            $("#companyDetails").hide();
+        }
+        // $("#Title").val($("#TitleDisplay").val());
+    });
 </script>
