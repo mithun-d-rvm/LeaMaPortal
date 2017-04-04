@@ -15,35 +15,37 @@
     <div class="row">
         <div class="col-md-6 ht-50">
             <div class="col-md-12 p-b-7">
-                <div class="col-md-3 m-t-3">
-                    <span> Single Unit </span>
-                </div>
-                <div class="col-md-1">
-                    <input type="radio" class="input-checkbox" name="Unit">
-                </div>
-                <div class="col-md-4 m-t-3">
-                    <span> Multiple Unit </span>
-                </div>
-                <div class="col-md-1 m-l-m-40">
-                    <input type="radio" class="input-checkbox" name="Unit">
-                </div>
+                @*<div class="col-md-3 m-t-3">
+                        <span> Single Unit </span>
+                    </div>
+                    <div class="col-md-1">
+                        <input type="radio" class="input-checkbox" name="Unit">
+                    </div>
+                    <div class="col-md-4 m-t-3">
+                        <span> Multiple Unit </span>
+                    </div>
+                    <div class="col-md-1 m-l-m-40">
+                        <input type="radio" class="input-checkbox" name="Unit">
+                    </div>*@
+                @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Single") Single Unit
+                @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Multiple") Multiple Unit
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
             @*<div class="col-md-12 p-b-7">
-                <div class="col-md-6">
-                    Existing Contract Agreement:
-                </div>
-                <div class="col-md-6">
-                    <select class="master-form-input form-control">
-                        <option> Agreement 1 </option>
-                        <option> Agreement 2 </option>
-                        <option> Agreement 3 </option>
-                    </select>
-                </div>
-            </div>*@
+                    <div class="col-md-6">
+                        Existing Contract Agreement:
+                    </div>
+                    <div class="col-md-6">
+                        <select class="master-form-input form-control">
+                            <option> Agreement 1 </option>
+                            <option> Agreement 2 </option>
+                            <option> Agreement 3 </option>
+                        </select>
+                    </div>
+                </div>*@
             <div class="col-md-12 p-b-7">
                 <div class="col-md-6">
                     @Html.LabelFor(model => model.Agreement_No, htmlAttributes: new { @class = "label-default-remove" })
@@ -54,10 +56,12 @@
             </div>
             <div class="col-md-12 p-b-7">
                 <div class="col-md-6">
-                   @Html.LabelFor(model => model.Agreement_Date, htmlAttributes: new { @class = "label-default-remove" })
+                    @Html.LabelFor(model => model.Agreement_Date, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-6">
-                  @Html.EditorFor(model => model.Agreement_Date, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @*@Html.EditorFor(model => model.Agreement_Date, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                    @Html.EditorFor(model => model.Agreement_Date, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Agreement_Date, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -65,7 +69,7 @@
                     @Html.LabelFor(model => model.Tenant_Type, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.Tenant_Type, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.DropDownList("TenentType", null, new { htmlAttributes = new { @class = "master-form-input" } })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -73,7 +77,8 @@
                     @Html.LabelFor(model => model.Ag_Tenant_id, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-6">
-                    <input type="text" class="master-form-input form-control" />
+                    @*<input type="text" class="master-form-input form-control" />*@
+                    @Html.DropDownList("TenentId", null, new { htmlAttributes = new { @class = "master-form-input" } })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -81,7 +86,8 @@
                     @Html.LabelFor(model => model.Ag_Tenant_Name, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-6">
-                    <input type="text" class="master-form-input form-control" />
+                    @*<input type="text" class="master-form-input form-control" />*@
+                    @Html.DropDownList("TenentName", null, new { htmlAttributes = new { @class = "master-form-input" } })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -89,15 +95,17 @@
                     @Html.LabelFor(model => model.property_id, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-6">
-                    <input type="text" class="master-form-input form-control" />
+                    @*<input type="text" class="master-form-input form-control" />*@
+                    @Html.DropDownList("TcaPropertyId", null, new { htmlAttributes = new { @class = "master-form-input" } })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
                 <div class="col-md-6">
-                   @Html.LabelFor(model => model.Property_ID_Tawtheeq, htmlAttributes: new { @class = "label-default-remove" })
+                    @Html.LabelFor(model => model.Property_ID_Tawtheeq, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-6">
-                    <input type="text" class="master-form-input form-control" />
+                    @*<input type="text" class="master-form-input form-control" />*@
+                    @Html.DropDownList("TcaPropertyIDTawtheeq", null, new { htmlAttributes = new { @class = "master-form-input" } })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -105,7 +113,8 @@
                     @Html.LabelFor(model => model.Properties_Name, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-6">
-                    <input type="text" class="master-form-input form-control" />
+                    @*<input type="text" class="master-form-input form-control" />*@
+                    @Html.DropDownList("TcaPropertyName", null, new { htmlAttributes = new { @class = "master-form-input" } })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -113,7 +122,8 @@
                     @Html.LabelFor(model => model.Unit_ID_Tawtheeq, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-6">
-                    <input type="text" class="master-form-input form-control" />
+                    @*<input type="text" class="master-form-input form-control" />*@
+                    @Html.DropDownList("UnitIDTawtheeq", null, new { htmlAttributes = new { @class = "master-form-input" } })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -121,7 +131,8 @@
                     @Html.LabelFor(model => model.Unit_Property_Name, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-6">
-                    <input type="text" class="master-form-input form-control" />
+                    @*<input type="text" class="master-form-input form-control" />*@
+                    @Html.DropDownList("UnitPropertyName", null, new { htmlAttributes = new { @class = "master-form-input" } })
                 </div>
             </div>
         </div>
@@ -179,7 +190,7 @@
             </div>
             <div class="col-md-12 p-b-7">
                 <div class="col-md-6">
-                   @Html.LabelFor(model => model.Advance_Security_Amount, htmlAttributes: new { @class = "label-default-remove" })
+                    @Html.LabelFor(model => model.Advance_Security_Amount, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-6">
                     @Html.EditorFor(model => model.Advance_Security_Amount, new { htmlAttributes = new { @class = "master-form-input" } })
@@ -270,7 +281,7 @@
     <div class="p-lr-20">
         @Html.Partial("_AgreementCheckList")
     </div>
-    <!-- END AGREEMENT UNIT -->
+    END AGREEMENT UNIT
     <div class="p-b-10">
         &nbsp;
     </div>
