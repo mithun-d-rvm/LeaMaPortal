@@ -850,33 +850,93 @@
                     </div>
                 </div>
             </div>
-            @*
-                <div class="row p-b-25">
-                    <span> <strong> Fecility Details </strong> </span>
-                </div>
+            
 
-                <div class="row">
-                    <div class="col-md-12 document-row">
-                        <div class="col-md-1">
-                            ID
-                        </div>
-                        <div class="col-md-2">
-                            Fecility ID
-                        </div>
-                        <div class="col-md-2">
-                            Fecility Name
-                        </div>
-                        <div class="col-md-3">
-                            Numbers Available
-                        </div>
+            <div class="row p-b-25">
+                <span> <strong> Fecility Details </strong> </span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 document-row">
+
+                    <div class="col-md-3">
+                        Fecility ID
+                        @Html.DropDownList("Facility_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input", @required = "required" })
+                    </div>
+                    <div class="col-md-4">
+                        Fecility Name
+                        @Html.DropDownList("Facility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input", @required = "required" })
+                    </div>
+                    <div class="col-md-3">
+                        Numbers Available
+                        <input type="number" step="1" id="Numbers_available" class="form-control" />
+                    </div>
+                    <div class="col-md-1">
+                        <br />
+                        <button type="button" id="add_utility" onclick="addPropertiesdt(event);" value="Add">Add</button>
                     </div>
                 </div>
+
+
+                <div class="row ">
+                    @if (Model.PropertiesdtList != null)
+                    {
+                        <input type="hidden" id="propertiesdt-list-count" value="@Model.PropertiesdtList.Count" />
+                    }
+                    else
+                    {
+                        <input type="hidden" id="propertiesdt-list-count" value="0" />
+                    }
+                    <table id="facility-details-list" class="col-md-12 document-row">
+                        @if (Model.PropertiesdtList != null)
+                        {
+
+                            for (int i = 0; i < Model.PropertiesdtList.Count; i++)
+                            {
+
+                                <tr class="col-md-12 document-row">
+                                    <td>
+                                        <div class="col-md-3">
+                                            @Html.HiddenFor(m => m.PropertiesdtList[i].Facility_id, new { @data_name = "Facility_id" })
+                                            @Html.HiddenFor(m => m.PropertiesdtList[i].Facility_Name, new { @data_name = "Facility_Name" })
+                                            @Html.HiddenFor(m => m.PropertiesdtList[i].Numbers_available, new { @data_name = "Numbers_available" })
+                                            @Model.PropertiesdtList[i].Facility_id
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Model.PropertiesdtList[i].Facility_Name
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Model.PropertiesdtList[i].Numbers_available
+                                        </div>
+                                        <div class="col-md-1">
+                                           
+                                            <button class='document-btn remove-propertiesdtlist-button' id='Delete" + @i + "'> X </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
                 <div class="row ht-5">
                     &nbsp;
                 </div>
 
                 <!-- Begin Dynamic row -->
-                @Html.Partial("_FecilityDetails")
+                @*@Html.Partial("_FecilityDetails")*@
                         <!-- End Dynamic row -->
 
                         <div class="row p-b-25 p-t-17">
@@ -885,15 +945,58 @@
 
                         <div class="row">
                             <div class="col-md-12 document-row">
-                                <div class="col-md-1">
-                                    ID
-                                </div>
+                               
                                 <div class="col-md-3">
                                     Utility ID
+                                    @Html.DropDownList("Utility_ID", null, "--Select--", htmlAttributes: new { @class = "master-form-input", @required = "required" })
                                 </div>
                                 <div class="col-md-4">
                                     Utility Name
+                                    @Html.DropDownList("Utility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input", @required = "required" })
                                 </div>
+                                <div class="col-md-1">
+                                    <br />
+                                   <button type="button" id="add_utility" onclick="addPropertiesdt1(event);" value="Add">Add</button>
+                                </div>
+                            </div>
+
+
+                            <div class="row " >
+                                @if (Model.Propertiesdt1List != null)
+                                {
+                                <input type="hidden" id="propertiesdt1-list-count" value="@Model.Propertiesdt1List.Count" />
+                                }
+                                else
+                                {
+                                    <input type="hidden" id="propertiesdt1-list-count" value="0" />
+                                }
+                                <table  id="utility-details-list" class="col-md-12 document-row">
+                                    @if (Model.Propertiesdt1List != null)
+                                    {
+                                        
+                                        for (int i = 0; i < Model.Propertiesdt1List.Count; i++)
+                                        {
+
+                                            <tr class="col-md-12 document-row">
+                                                <td>
+                                                    <div class="col-md-3">
+                                                        @Html.HiddenFor(m => m.Propertiesdt1List[i].Utility_id, new { @data_name = "Utility_id" })
+                                                        @Html.HiddenFor(m => m.Propertiesdt1List[i].Utility_Name, new { @data_name = "Utility_Name" })
+                                                        @Model.Propertiesdt1List[i].Utility_id
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        @Model.Propertiesdt1List[i].Utility_Name
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <br />
+                                                        <button class='document-btn remove-propertiesdt1list-button' id='Delete" + @i + "'> X </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                 </table>
+                                   
                             </div>
                         </div>
                         <div class="row ht-5">
@@ -901,83 +1004,136 @@
                         </div>
 
                         <!-- Begin Dynamic row -->
-                        @Html.Partial("_UtilityDetails")
+                        @*@Html.Partial("_UtilityDetails")*@
                         <!-- End Dynamic row -->
                         <!-- Begin Grid view -->
                         <div class="row">
                             &nbsp;
                         </div>
-                        <div class="row leama-fieldset leama-header-top" style="background-color:white;">
-                            <div class="col-md-12">
-                                <div class="col-md-12 leama-fieldset ">
-                                    <div class="col-md-2 pull-left">
-                                        @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="text" class="leama-field form-control" />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button type="submit" class="btn btn-info leama-search-btn col-md-4">Go</button>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12 leama-fieldset ">
-                                    &nbsp;
-                                </div>
-
-                                <div class="divTable leama-fieldset col-md-12">
-
-
-                                    <div class="divTableBody divFontBodyTable">
-                                        <div class="divTableHeading">
-                                            <div class="divTableCell">Country Name</div>
-                                            <div class="divTableCell">Action</div>
-
-                                        </div>
-                                        <div class="divTableRow">
-                                            <div class="divTableCell">Chennai</div>
-                                            <div class="divTableCell">
-                                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
-                                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
-                                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
-                                            </div>
-
-                                        </div>
-                                        <div class="divTableRow divFontBodyTable">
-                                            <div class="divTableCell">Coimbatore</div>
-                                            <div class="divTableCell">
-                                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
-                                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
-                                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="col-sm-6">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <ul class="pagination pull-right">
-                                            <li><a href="#">1</a></li>
-                                            <li class="active"><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <!-- End Grid view -->
-            *@
+            
         </div>
     </div>
                                 }
 <script>
+
+    $("#Utility_ID").change(function () {
+        $("#Utility_Name").val($("#Utility_ID option:selected").text());
+        return;
+    });
+    $("#Utility_Name").change(function () {
+        $("#Utility_ID").val($("#Utility_Name option:selected").text());
+        return;
+    });
+    var i = parseInt($("#propertiesdt1-list-count").val());
+    function addPropertiesdt1(e)
+    {
+        var Utility_id=$("#Utility_ID option:selected").text();
+        var Utility_Name=$("#Utility_ID").val();
+        var html = "<tr class=''> <td class=''>" +
+ "<div class='col-md-3'>" +
+                                                    "<input type='hidden' name='Propertiesdt1List[" + i + "].Utility_id' value='" + Utility_id + "' data-name='Utility_id' />" +
+                                                    "<input type='hidden' name='Propertiesdt1List[" + i + "].Utility_Name' value='" + Utility_Name + "' data-name='Utility_Name' />" +
+                                                  "" + Utility_id + "</div>" +
+                                                    "<div class='col-md-4'>" +
+                                                        Utility_Name +
+                                                    "</div>" +
+                                                   " <div class='col-md-1'>" +
+                                                   "<button class='document-btn remove-propertiesdt1list-button' id='Delete" + i + "'> X </button>" +
+                                                    "</div></td></tr>";
+        $("#utility-details-list").append(html);
+        i++;
+        return;
+    }
+    //remove-row
+    $(document).on('click', 'button.remove-propertiesdt1list-button', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('utility-details-list');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'Propertiesdt1List[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+        i = newindex;
+    });
+
+    var j = parseInt($("#propertiesdt-list-count").val());
+    $("#Facility_id").change(function () {
+        $("#Facility_Name").val($("#Facility_id option:selected").text());
+        return;
+    });
+    $("#Facility_Name").change(function () {
+        $("#Facility_id").val($("#Facility_Name option:selected").text());
+        return;
+    });
+
+    function addPropertiesdt(e) {
+        var Facility_id =$("#Facility_Name").val();
+        var Facility_Name = $("#Facility_id option:selected").text();
+        var Numbers_available = $("#Numbers_available").val();
+        var html = "<tr class=''> <td class=''>" +
+ "<div class='col-md-3'>" +
+                                                    "<input type='hidden' name='PropertiesdtList[" + j + "].Facility_id' value='" + Facility_id + "' data-name='Facility_id' />" +
+                                                    "<input type='hidden' name='PropertiesdtList[" + j + "].Facility_Name' value='" + Facility_Name + "' data-name='Facility_Name' />" +
+                                                    "<input type='hidden' name='PropertiesdtList[" + j + "].Numbers_available' value='" + Numbers_available + "' data-name='Numbers_available' />" +
+                                                  "" + Facility_id + "</div>" +
+                                                    "<div class='col-md-4'>" +
+                                                        Facility_Name +
+                                                    "</div>" +
+                                                    "<div class='col-md-4'>" +
+                                                        Numbers_available +
+                                                    "</div>" +
+                                                   " <div class='col-md-1'>" +
+                                                   "<button class='document-btn remove-propertiesdtlist-button' id='Delete" + j + "'> X </button>" +
+                                                    "</div></td></tr>";
+        $("#facility-details-list").append(html);
+        j++;
+        return;
+    }
+    //remove-row
+    $(document).on('click', 'button.remove-propertiesdtlist-button', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('facility-details-list');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'PropertiesdtList[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+        j = newindex;
+    });
+
+
     $("#Caretaker").on('change', function (e) {
         var region = $("#Caretaker").val();
         if (region != "" && region != null) {
