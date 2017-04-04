@@ -8,7 +8,7 @@ namespace LeaMaPortal
     public static class Common
     {
         public static List<string> Title = new List<string>() { "MR.", "MRS.", "MS." };
-        public static List<string> TenentType = new List<string>() { "Company", "Individual" };
+        public static List<string> TcaTenantType = new List<string>() { "Company", "Individual" };
         public const string DefaultTitle = "MR.";
         public static List<string> Role = new List<string>() { "Admin", "Management", "Caretaker" };
         //public static List<string> City = new List<string>() { "Abudhabi", "Sharja" };

@@ -2,7 +2,9 @@
 using LeaMaPortal.Models.DBContext;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,24 +19,51 @@ namespace LeaMaPortal.Controllers
             try
             {
                 AgreementFormViewModel model = new AgreementFormViewModel();
-                ViewBag.TenentType = new SelectList(Common.TenentType);
-                ViewBag.TenentId = new SelectList("", "");
-                ViewBag.TenentName = new SelectList("", "");
+                ViewBag.TenantType = new SelectList(Common.TcaTenantType);
+                ViewBag.TenantId = new SelectList("", "");
+                ViewBag.TenantName = new SelectList("", "");
                 ViewBag.TcaPropertyId = new SelectList("", "");
                 ViewBag.TcaPropertyIDTawtheeq = new SelectList("", "");
                 ViewBag.TcaPropertyName = new SelectList("", "");
                 ViewBag.UnitIDTawtheeq = new SelectList("", "");
                 ViewBag.UnitPropertyName = new SelectList("", "");
 
-                ViewBag.Profession = new SelectList(Common.Profession);
-                ViewBag.PropertyId = db.tbl_propertiesmaster.OrderByDescending(x => x.Property_Id).FirstOrDefault()?.Property_Id + 1;
+                ViewBag.Agreement_No = db.tbl_agreement.OrderByDescending(x => x.Agreement_No).FirstOrDefault()?.Agreement_No + 1;
                 //return PartialView("../Tca/Agreement/_AgreementForm");
             }
             catch (Exception e)
             {
                 throw;
             }
-             return View();
+            return View();
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> GetTenentDetails(string Type)
+        {
+            try
+            {
+                DdlTenentDetailsViewModel model = new DdlTenentDetailsViewModel();
+                if (Type == "Company")
+                {
+                    var query = db.tbl_tenant_company.Where(x => x.Delmark != "*" && x.Type == "company");
+                    model.TenantId = new SelectList(query.OrderBy(r => r.Tenant_Id).ToList(), "Tenant_Id", "Tenant_Id");
+                    model.TenantName = new SelectList(query.OrderBy(r => r.First_Name).ToList(), "First_Name", "First_Name");
+                }
+                else
+                {
+                    var query = db.tbl_tenant_individual.Where(x => x.Delmark != "*" && x.Type == Type);
+                    model.TenantId = new SelectList(query.OrderBy(r => r.Tenant_Id), "Tenant_Id", "Tenant_Id");
+                    model.TenantName = new SelectList(query.OrderBy(r => r.First_Name), "First_Name", "First_Name");
+                }
+                //var tbl_caretaker = await db.tbl_tenant_company.FirstOrDefaultAsync(x => x.Id == Id);
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
 
         // GET: Tca/Details/5

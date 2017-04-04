@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace LeaMaPortal.Models
 {
     public class AgreementFormViewModel
     {
+        public AgreementFormViewModel()
+        {
+
+        }
         public int Id { get; set; }
         [DisplayName("Single Unit or Multiple Unit")]
         public string Single_Multiple_Flag { get; set; }
@@ -56,5 +61,11 @@ namespace LeaMaPortal.Models
         [DisplayName("Contract Notice Period Days")]
         public int Notice_Period { get; set; }
 
+    }
+
+    public class DdlTenentDetailsViewModel
+    {
+        public SelectList TenantId { get; set; }
+        public SelectList TenantName { get; set; }
     }
 }
