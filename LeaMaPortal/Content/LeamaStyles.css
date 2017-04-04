@@ -19,6 +19,9 @@
 .p-b-25{
     padding-bottom: 25px;
 }
+.p-t-25{
+    padding-top:25px;
+}
 .p-t-5-p{
     padding-top:5%;
 }
@@ -72,6 +75,9 @@
 }
 .m-l-m-40{
     margin-left: -40px;
+}
+.m-t-20{
+    margin-top:20px;
 }
 .color-f5a623{
     color:#f5a623;
