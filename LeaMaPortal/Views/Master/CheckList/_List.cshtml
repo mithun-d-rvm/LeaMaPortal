@@ -46,8 +46,8 @@
                         <div class="divTableCell">@item.Checklist_Name</div>
                         <div class="divTableCell">@item.Checklist_Type</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit checklist-edit", title = "Edit", @data_id = @item.Checklist_id + '-' + @item.Checklist_Name + '-' + @item.Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash checklist-delete", @style = "color:red", @title = "Delete", @data_id = @item.Checklist_id + '-' + @item.Checklist_Name + '-' + @item.Id })
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit checklist-edit", title = "Edit", @data_id = @item.Checklist_id + '`' + @item.Checklist_Name + '`' + @item.Id })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash checklist-delete", @style = "color:red", @title = "Delete", @data_id = @item.Checklist_id + '`' + @item.Checklist_Name + '`' + @item.Id })
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
                     </div>
@@ -141,7 +141,7 @@
     $(".checklist-edit").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
-        var param = id.split('-');
+        var param = id.split('`');
         $.ajax(
             {
                 url: "../CheckList/Edit",
@@ -171,7 +171,7 @@
     $(".checklist-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
-        var param = id.split('-');
+        var param = id.split('`');
         var r = confirm("Are you sure want to delete?");
         if (r == false) {
             return;

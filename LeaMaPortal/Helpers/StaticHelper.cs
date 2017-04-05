@@ -41,6 +41,10 @@ namespace LeaMaPortal.Helpers
         public const string UNIT_RESIDENTIAL = "residential";
         public const string UNIT_COMMERCIAL = "commercial";
 
+        public const string PROPERTYCATEGORY_CATEGORY_1 = "category 1";
+        public const string PROPERTYCATEGORY_CATEGORY_2 = "category 2";
+        public const string PROPERTYCATEGORY_CATEGORY_3 = "category 3";
+
         private static List<OptionModel> GetCheckListDropdown()
         {
             List<OptionModel> options = new List<OptionModel>();
@@ -64,6 +68,14 @@ namespace LeaMaPortal.Helpers
             options.Add(new OptionModel { Name = PROPERTY_INDUSTRIAL });
             options.Add(new OptionModel { Name = PROPERTY_RESIDENTIAL_COMMERCIAL });
             options.Add(new OptionModel { Name = PROPERTY_INDUSTRIAL_COMMERCIAL });
+            return options;
+        }
+        private static List<OptionModel> GetPropertyCategoryDropdown()
+        {
+            List<OptionModel> options = new List<OptionModel>();
+            options.Add(new OptionModel { Name = PROPERTYCATEGORY_CATEGORY_1 });
+            options.Add(new OptionModel { Name = PROPERTYCATEGORY_CATEGORY_2 });
+            options.Add(new OptionModel { Name = PROPERTYCATEGORY_CATEGORY_3 });
             return options;
         }
         private static List<OptionModel> GetUnitDropdown()
@@ -116,7 +128,7 @@ namespace LeaMaPortal.Helpers
                 case UNIT:
                     return GetUnitDropdown();
                 case PROPERTYCATEGORY_DROPDOWN:
-                    return GetUnitDropdown();
+                    return GetPropertyCategoryDropdown();
                 default:
                     return new List<OptionModel>();
             }

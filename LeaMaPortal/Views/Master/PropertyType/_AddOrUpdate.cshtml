@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "PropertyType" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "PropertyTypeMaster" }))
 {
     @Html.HiddenFor(m => m.Id, new { @id = "PropertyTypeId" })
     <div class="col-md-12 leama-fieldset leama-header-top">
@@ -17,7 +17,7 @@
                     @Html.LabelFor(model => model.PropertyType, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.DropDownList("PropertyType", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "PropertyType" })
+                    @Html.DropDownList("PropertyType", null, htmlAttributes: new { @class = "master-form-input subheader-select class-property-type", @required = "required" })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -25,7 +25,7 @@
                     @Html.LabelFor(model => model.Usage_name, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Usage_name, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "UsageName" } })
+                    @Html.DropDownList("Usage_name", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "UsageName" })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -45,11 +45,41 @@
     </div>
 }
 <script>
+    function getUsage() {
+        debugger;
+        var PropertyType = $("#PropertyType").val();
+        if (PropertyType != null) {
+            $.ajax(
+                    {
+                        url: "../PropertyType/GetUsage",
+                        method: "POST",
+                        async: false,
+                        data: { PropertyType: PropertyType },
+                        success: function (response) {
+                            debugger;
+                            $("#UsageName").empty();
+                            var options = '';
+                            $.each(response, function (index, data) {
+                                options += '<option value="' + data.Value + '">' + data.Value + '</option>';
+                            });
+                            debugger;
+                            $('#UsageName').append(options);
+                        },
+                        error: function (jqXhr, textStatus, errorThrown) {
+                            alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        },
+                        complete: function () {
+                        }
+                    });
+        }
+    }
+    $("#PropertyType").change(function () { getUsage() });
+    getUsage();
     //Add or update
-    $("form#PropertyType").off("submit").on("submit", function (e) {
+    $("form#PropertyTypeMaster").off("submit").on("submit", function (e) {
         e.preventDefault();
         try {
-            var form = $("form#PropertyType");
+            var form = $("form#PropertyTypeMaster");
             $.ajax(
                 {
                     url: "../PropertyType/AddOrUpdate",

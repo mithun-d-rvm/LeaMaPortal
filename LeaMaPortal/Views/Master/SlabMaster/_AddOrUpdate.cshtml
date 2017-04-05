@@ -92,8 +92,8 @@
         var UtilityName = $("#Utility_Name").val();
         $.ajax(
                 {
-                    url: "../Meter/GetUtilityId",
-                    method: "GET",
+                    url: "../Slab/GetUtilityId",
+                    method: "POST",
                     async : false,
                     data: { UtilityName: UtilityName },
                     success: function (response) {
@@ -104,10 +104,9 @@
                     },
                     complete: function () {
                     }
-
                 });
     }
-    $("#Utility_Name").change(getUtilityId());
+    $("#Utility_Name").change(function () { getUtilityId() });
     getUtilityId();
     //Add or update
     $("form#Slab").off("submit").on("submit", function (e) {
@@ -129,9 +128,7 @@
                     },
                     complete: function () {
                     }
-
                 });
-
         }
         catch (ex) {
             alert(ex);

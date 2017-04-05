@@ -64,8 +64,9 @@ namespace LeaMaPortal.Controllers
         public PartialViewResult AddOrUpdate()
         {
             PropertyTypeViewModel model = new PropertyTypeViewModel();
-            ViewBag.PropertyCategory = new SelectList(StaticHelper.GetStaticData(StaticHelper.PROPERTYTYPE_DROPDOWN), "Name", "Name");
+            ViewBag.PropertyType = new SelectList(StaticHelper.GetStaticData(StaticHelper.PROPERTYTYPE_DROPDOWN), "Name", "Name");
             ViewBag.PropertyCategory = new SelectList(StaticHelper.GetStaticData(StaticHelper.PROPERTYCATEGORY_DROPDOWN), "Name", "Name");
+            ViewBag.Usage_name = new SelectList(new List<OptionModel>());
             return PartialView("../Master/PropertyType/_AddOrUpdate", model);
         }
         [HttpPost]
@@ -160,6 +161,25 @@ namespace LeaMaPortal.Controllers
             catch (Exception ex)
             {
                 return Json(new MessageResult() { Errors = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public async Task<JsonResult> GetUsage(string PropertyType)
+        {
+            try
+            {
+                List<OptionModel> model = new List<OptionModel>();
+                if (PropertyType.ToLower() == StaticHelper.PROPERTYTYPE_PROPERTY.ToLower())
+                {
+                    return Json(new SelectList(StaticHelper.GetStaticData(StaticHelper.PROPERTY), "Name", "Name"));
+                }
+                else
+                {
+                    return Json(new SelectList(StaticHelper.GetStaticData(StaticHelper.UNIT), "Name", "Name"));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
         protected override void Dispose(bool disposing)

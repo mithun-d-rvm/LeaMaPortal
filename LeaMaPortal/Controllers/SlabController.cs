@@ -191,7 +191,7 @@ namespace LeaMaPortal.Controllers
                 return Json(new MessageResult() { Errors = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
-        [HttpGet]
+        //[HttpGet]
         public async Task<string> GetUtilityId(string UtilityName)
         {
             try
