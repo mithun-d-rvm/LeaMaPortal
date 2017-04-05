@@ -33,7 +33,7 @@ namespace LeaMaPortal.Models
         public int month { get; set; }
         [DisplayName("Year")]
         public int year { get; set; }
-        [DisplayName("Subtotal")]
+        [DisplayName("Total Amount")]
         public decimal totalamt { get; set; }
         [DisplayName("Due Date")]
         public DateTime duedate { get; set; }

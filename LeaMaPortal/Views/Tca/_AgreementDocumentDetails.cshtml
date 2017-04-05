@@ -1,4 +1,6 @@
-﻿<div class="row">
+﻿@model LeaMaPortal.Models.AgreementDocumentViewModel
+
+<div class="row">
     <div class="col-md-12 document-row">
         <div class="col-md-2">
             <select class="form-control master-form-input">
@@ -15,7 +17,7 @@
             </select>
         </div>
         <div class="col-md-2">
-            <input type="text" class="master-form-input form-control" />
+            @Html.EditorFor(model => model.Numbers_available, new { htmlAttributes = new { @class = "master-form-input" } })
         </div>
         
     </div>

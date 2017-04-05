@@ -46,11 +46,11 @@
                                     Value = "Company"
                                 });
                             }*@
-                            @Html.DropDownList("TenantType", null, "--Select--", htmlAttributes: new { @class = "master-form-input",@required= "required" })
-                            @*@Html.DropDownListFor(model => model.TenantType, TenantType, "-- Select --", htmlAttributes: new { @class = "master-form-input" })*@
+                            @Html.DropDownList("TenantType", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input",@required= "required" })
+                            @*@Html.DropDownListFor(model => model.TenantType, TenantType, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })*@
 
 
-                            @*<select class="master-form-input">
+                            @*<select class="form-control master-form-input">
                                 <option value="Government"> Government </option>
                                 <option value=""> Company </option>
                             </select>*@
@@ -62,7 +62,7 @@
                             Title:
                         </div>
                         <div class="col-md-8">
-                            @*<select class="master-form-input">
+                            @*<select class="form-control master-form-input">
                                 <option> MR. </option>
                                 <option> MRS. </option>
                                 <option> MS. </option>
@@ -87,10 +87,10 @@
                                 });
                             }*@
                             @Html.HiddenFor(model => model.Title)
-                            @Html.DropDownList("TitleDisplay", null, "--Select--", new { @class = "master-form-input" })
+                            @Html.DropDownList("TitleDisplay", null, "--Select--", new { @class = "form-control master-form-input" })
 
 
-                            @*@Html.DropDownListFor(model => model.Title, Title, "-- Select --", htmlAttributes: new { @class = "master-form-input" })*@
+                            @*@Html.DropDownListFor(model => model.Title, Title, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })*@
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -98,8 +98,8 @@
                             Middle Name:
                         </div>
                         <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @*<input type="text" class="form-control master-form-input" />*@
+                            @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                             @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -108,8 +108,8 @@
                             Company Name:
                         </div>
                         <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @*<input type="text" class="form-control master-form-input" />*@
+                            @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                             @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -143,8 +143,8 @@
                             Address 01:
                         </div>
                         <div class="col-md-8">
-                            @*<textarea class="master-form-input"></textarea>*@
-                            @Html.TextAreaFor(model => model.Address1, new { @class = "master-form-input" })
+                            @*<textarea class="form-control master-form-input"></textarea>*@
+                            @Html.TextAreaFor(model => model.Address1, new { @class = "form-control master-form-input", @rows = "4" })
                             @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -153,7 +153,7 @@
                             City:
                         </div>
                         <div class="col-md-8">
-                            @*<select class="master-form-input">
+                            @*<select class="form-control master-form-input">
                                 <option> Manly </option>
                             </select>*@
                             @*@{
@@ -176,8 +176,8 @@
                                 });
                             }*@
 
-                            @*@Html.DropDownListFor(model => model.City, City, "-- Select --", htmlAttributes: new { @class = "master-form-input" })*@
-                            @Html.DropDownList("City", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
+                            @*@Html.DropDownListFor(model => model.City, City, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })*@
+                            @Html.DropDownList("City", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -185,8 +185,8 @@
                             Email:
                         </div>
                         <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @*<input type="text" class="form-control master-form-input" />*@
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -196,20 +196,20 @@
                         </div>
                         <div class="col-md-8">
                             <div class="col-md-3" style="margin-left: -15px;">
-                                @*<input type="text" class="master-form-input">*@
-                                @Html.EditorFor(model => model.LandlineCountryCode, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @*<input type="text" class="form-control master-form-input">*@
+                                @Html.EditorFor(model => model.LandlineCountryCode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                                 @Html.ValidationMessageFor(model => model.LandlineCountryCode, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-3" style="margin-left: -15px;">
-                                @*<input type="text" class="master-form-input">*@
+                                @*<input type="text" class="form-control master-form-input">*@
 
-                                @Html.EditorFor(model => model.LandlineAreaCode, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @Html.EditorFor(model => model.LandlineAreaCode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                                 @Html.ValidationMessageFor(model => model.LandlineAreaCode, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-6" style="margin-left: 32%;width: 64%;position: absolute;">
-                                @*<input type="text" class="master-form-input">*@
+                                @*<input type="text" class="form-control master-form-input">*@
 
-                                @Html.EditorFor(model => model.LandlineNo, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @Html.EditorFor(model => model.LandlineNo, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                                 @Html.ValidationMessageFor(model => model.LandlineNo, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -219,7 +219,7 @@
                             Nationality:
                         </div>
                         <div class="col-md-8">
-                            @*<select class="master-form-input">
+                            @*<select class="form-control master-form-input">
                                 <option> Australia </option>
                             </select>*@
 
@@ -243,8 +243,8 @@
                                 });
                             }
 
-                            @Html.DropDownListFor(model => model.Nationality, Nationality, "-- Select --", htmlAttributes: new { @class = "master-form-input" })*@
-                            @Html.DropDownList("Nationality", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
+                            @Html.DropDownListFor(model => model.Nationality, Nationality, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })*@
+                            @Html.DropDownList("Nationality", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -252,9 +252,9 @@
                             Chamber of Commerce & Industry Unified ID:
                         </div>
                         <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
+                            @*<input type="text" class="form-control master-form-input" />*@
 
-                            @Html.EditorFor(model => model.Cocandindustryuid, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.EditorFor(model => model.Cocandindustryuid, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                             @Html.ValidationMessageFor(model => model.Cocandindustryuid, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -263,8 +263,8 @@
                             Trade License issue Date:
                         </div>
                         <div class="col-md-8">
-                            @*<input type="text" class="master-form-input"  />*@
-                            @Html.EditorFor(model => model.LicenseIssueDate, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @*<input type="text" class="form-control master-form-input"  />*@
+                            @Html.EditorFor(model => model.LicenseIssueDate, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                             @Html.ValidationMessageFor(model => model.LicenseIssueDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -273,9 +273,9 @@
                             ADWEA registration Id:
                         </div>
                         <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
+                            @*<input type="text" class="form-control master-form-input" />*@
 
-                            @Html.EditorFor(model => model.ADWEARegid, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.EditorFor(model => model.ADWEARegid, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                             @Html.ValidationMessageFor(model => model.ADWEARegid, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -284,7 +284,7 @@
                             Visa Type:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            <input type="text" class="form-control master-form-input" />
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -292,7 +292,7 @@
                             Visa Expiry Date:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            <input type="text" class="form-control master-form-input" />
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -300,7 +300,7 @@
                             Family Number:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            <input type="text" class="form-control master-form-input" />
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -308,7 +308,7 @@
                             ADWEA Resigtration Id:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            <input type="text" class="form-control master-form-input" />
                         </div>
                     </div>*@
                     @*<div class="col-md-12 form-input-padding">
@@ -328,8 +328,8 @@
                         </div>
                         <div class="col-md-8">
                             @Html.HiddenFor(model => model.TenantId)
-                            <input type="text" value="@ViewBag.TenantId" disabled class="master-form-input" />
-                            @*<input type="text" class="master-form-input" />*@
+                            <input type="text" value="@ViewBag.TenantId" disabled class="form-control master-form-input" />
+                            @*<input type="text" class="form-control master-form-input" />*@
 
                             @Html.ValidationMessageFor(model => model.TenantId, "", new { @class = "text-danger" })
                         </div>
@@ -339,8 +339,8 @@
                             First Name:
                         </div>
                         <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @*<input type="text" class="form-control master-form-input" />*@
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                             @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -349,8 +349,8 @@
                             Last Name:
                         </div>
                         <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @*<input type="text" class="form-control master-form-input" />*@
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                             @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -359,7 +359,7 @@
                             Profession:
                         </div>
                         <div class="col-md-8">
-                            <select class="master-form-input">
+                            <select class="form-control master-form-input">
                                 <option> Farmer </option>
                                 <option> Engineer </option>
                                 <option> Doctor </option>
@@ -371,8 +371,8 @@
                             Address:
                         </div>
                         <div class="col-md-8">
-                            @*<textarea class="master-form-input"></textarea>*@
-                            @Html.TextAreaFor(model => model.Address, new { @class = "master-form-input" })
+                            @*<textarea class="form-control master-form-input"></textarea>*@
+                            @Html.TextAreaFor(model => model.Address, new { @class = "form-control master-form-input", @rows = "4" })
                             @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -381,10 +381,10 @@
                             Emirate:
                         </div>
                         <div class="col-md-8">
-                            @*<select class="master-form-input">
+                            @*<select class="form-control master-form-input">
                                 <option value="Default"> Default </option>
                             </select>*@
-                            @Html.DropDownList("Emirate", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
+                            @Html.DropDownList("Emirate", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -392,8 +392,8 @@
                             Post Box:
                         </div>
                         <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.PostboxNo, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @*<input type="text" class="form-control master-form-input" />*@
+                            @Html.EditorFor(model => model.PostboxNo, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                             @Html.ValidationMessageFor(model => model.PostboxNo, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -403,18 +403,18 @@
                         </div>
                         <div class="col-md-8">
                             <div class="col-md-3" style="margin-left: -15px;">
-                                @*<input type="text" class="master-form-input">*@
-                                @Html.EditorFor(model => model.MobileCountryCode, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @*<input type="text" class="form-control master-form-input">*@
+                                @Html.EditorFor(model => model.MobileCountryCode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                                 @Html.ValidationMessageFor(model => model.MobileCountryCode, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-3" style="margin-left: -15px;">
-                                @*<input type="text" class="master-form-input">*@
-                                @Html.EditorFor(model => model.MobileAreaCode, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @*<input type="text" class="form-control master-form-input">*@
+                                @Html.EditorFor(model => model.MobileAreaCode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                                 @Html.ValidationMessageFor(model => model.MobileAreaCode, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-6" style="margin-left: 32%;width: 64%;position: absolute;">
-                                @*<input type="text" class="master-form-input">*@
-                                @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @*<input type="text" class="form-control master-form-input">*@
+                                @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                                 @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -425,18 +425,18 @@
                         </div>
                         <div class="col-md-8">
                             <div class="col-md-3" style="margin-left: -15px;">
-                                @*<input type="text" class="master-form-input">*@
-                                @Html.EditorFor(model => model.FaxCountryCode, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @*<input type="text" class="form-control master-form-input">*@
+                                @Html.EditorFor(model => model.FaxCountryCode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                                 @Html.ValidationMessageFor(model => model.FaxCountryCode, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-3" style="margin-left: -15px;">
-                                @*<input type="text" class="master-form-input">*@
-                                @Html.EditorFor(model => model.FaxAreaCode, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @*<input type="text" class="form-control master-form-input">*@
+                                @Html.EditorFor(model => model.FaxAreaCode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                                 @Html.ValidationMessageFor(model => model.FaxAreaCode, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-6" style="margin-left: 32%;width: 64%;position: absolute;">
-                                @*<input type="text" class="master-form-input">*@
-                                @Html.EditorFor(model => model.FaxNo, new { htmlAttributes = new { @class = "master-form-input" } })
+                                @*<input type="text" class="form-control master-form-input">*@
+                                @Html.EditorFor(model => model.FaxNo, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                                 @Html.ValidationMessageFor(model => model.FaxNo, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -446,8 +446,8 @@
                             Company Activity:
                         </div>
                         <div class="col-md-8">
-                            @Html.DropDownList("ComapanyActivity", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
-                            @*<select class="master-form-input">
+                            @Html.DropDownList("ComapanyActivity", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input" })
+                            @*<select class="form-control master-form-input">
                                 <option value="Activity1"> Activity1 </option>
                             </select>*@
                         </div>
@@ -457,8 +457,8 @@
                             Trade License Number:
                         </div>
                         <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.TradelicenseNo, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @*<input type="text" class="form-control master-form-input" />*@
+                            @Html.EditorFor(model => model.TradelicenseNo, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                             @Html.ValidationMessageFor(model => model.TradelicenseNo, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -467,8 +467,8 @@
                             Trade License Expiry Date:
                         </div>
                         <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.LicenseExpiryDate, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @*<input type="text" class="form-control master-form-input" />*@
+                            @Html.EditorFor(model => model.LicenseExpiryDate, new { htmlAttributes = new { @class = "form-control master-form-input" } })
                             @Html.ValidationMessageFor(model => model.LicenseExpiryDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -477,8 +477,8 @@
                             Issuance authority:
                         </div>
                         <div class="col-md-8">
-                            @Html.DropDownList("Issuance_authority", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
-                            @*<select class="master-form-input">
+                            @Html.DropDownList("Issuance_authority", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input" })
+                            @*<select class="form-control master-form-input">
                                 <option value="Authority1"> Authority1 </option>
                             </select>*@
                         </div>
@@ -489,7 +489,7 @@
                             Visa Issue Date:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            <input type="text" class="form-control master-form-input" />
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -497,7 +497,7 @@
                             Date of Birth:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            <input type="text" class="form-control master-form-input" />
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -505,7 +505,7 @@
                             Family Book City:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="master-form-input" />
+                            <input type="text" class="form-control master-form-input" />
                         </div>
                     </div>*@
                     @*<div class="col-md-12 form-input-padding">
@@ -563,56 +563,56 @@
                     &nbsp;
                 </div>
 
-                <div class="row" id="companyDetailsForm1">
+                <div class="" id="companyDetailsForm1">
                     <div id="Gridview" class="row document-row">
                         <div class="col-md-12">
                             <div class="col-md-2 form-group">
                                 <label for="branch">Branch</label>
-                                <input type="text" class="master-form-input" id="branch" />
+                                <input type="text" class="form-control master-form-input" id="branch" />
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="city">City</label>
-                                <input type="text" class="master-form-input" id="city" />
+                                <input type="text" class="form-control master-form-input" id="city" />
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="add01">Address 01</label>
-                                <textarea id="add01" class="master-form-input"></textarea>
+                                <textarea id="add01" class="form-control master-form-input"></textarea>
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="add02">Address 02</label>
-                                <textarea id="add02" class="master-form-input"></textarea>
+                                <textarea id="add02" class="form-control master-form-input"></textarea>
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="state">State</label>
-                                <input type="text" class="master-form-input" id="state" />
+                                <input type="text" class="form-control master-form-input" id="state" />
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="country">Country</label>
-                                <input type="text" class="master-form-input" id="country" />
+                                <input type="text" class="form-control master-form-input" id="country" />
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="col-md-2 form-group">
                                 <label for="pincode">Pincode</label>
-                                <input type="text" class="master-form-input" id="pincode" />
+                                <input type="text" class="form-control master-form-input" id="pincode" />
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="phno">Phone Number</label>
-                                <input type="text" class="master-form-input" id="phno" />
+                                <input type="text" class="form-control master-form-input" id="phno" />
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="remarks">Remarks</label>
-                                <textarea id="remarks" class="master-form-input"></textarea>
+                                <textarea id="remarks" class="form-control master-form-input"></textarea>
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="emailid">Email id</label>
-                                <input type="text" class="master-form-input" id="emailid" />
+                                <input type="text" class="form-control master-form-input" id="emailid" />
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="fax">Fax</label>
-                                <input type="text" class="master-form-input" id="fax" />
+                                <input type="text" class="form-control master-form-input" id="fax" />
                             </div>
-                            <div class="col-md-2 btn-group">
+                            <div class="col-md-2 btn-group p-t-25">
                                 <input type="button" class="document-btn" id="add" value="Add" onclick="Add(this)">
                             </div>
                         </div>
@@ -629,7 +629,7 @@
                     <input type="hidden" id="init-company-det-count" value="0" />
                 }
 
-                <table class="row" id="companyDetailsForm">
+                <table class="row m-t-20" id="companyDetailsForm">
 
 
                     @if (Model.CompanyDetails != null)
@@ -642,29 +642,34 @@
                             //html=html+"<div class='col-md-1'>";
                             //html = html + count;
                             //html=html+" </div>";
-                            html = html + "<div class='col-md-12'>";
-                            html = html + " <div class='col-md-2 form-group'> <label for='branch'>Branch</label> <input id='branch" + @i + "'  type='text' value='" + @Model.CompanyDetails[i].Branch + "' class='master-form-input' name='CompanyDetails[" + i + "].Branch' data-name='Branch' /></div>";
-                            html = html + "<div class='col-md-2 form-group'> <label for='City'>city</label><input id='city" + i + "' type='text'  value='" + @Model.CompanyDetails[i].City + "' class='master-form-input' name='CompanyDetails[" + i + "].City' data-name='City' /></div>";
-                            html = html + " <div class='col-md-2 form-group'> <label for='add01'>Address 01</label><input type='text' id='add01" + @i + "' class='master-form-input' name='CompanyDetails[" + i + "].BranchAddress' data-name='BranchAddress' value='" + @Model.CompanyDetails[i].BranchAddress + "'/></div>";
-                            html = html + " <div class='col-md-2 form-group'> <label for='add02'>Address 02</label><input type='text' id='add02" + @i + "'class='master-form-input' name='CompanyDetails[" + i + "].BranchAddress1' data-name='BranchAddress1' value='" + @Model.CompanyDetails[i].BranchAddress1 + "'/></div>";
-                            html = html + " <div class='col-md-2 form-group'> <label for='state'>State</label><input id='state" + @i + "'  type='text' value='" + @Model.CompanyDetails[i].State + "' class='master-form-input' name='CompanyDetails[" + i + "].State' data-name='State' /></div>";
-                            html = html + "<div class='col-md-2 form-group'> <label for='country'>Country</label> <input id='country" + @i + "' type='text'  value='" + @Model.CompanyDetails[i].Country + "' class='master-form-input' name='CompanyDetails[" + i + "].Country' data-name='Country' /></div>";
-                            html = html + "</div>";
-                            html = html + "<div class='col-md-12'>";
-                            html = html + " <div class='col-md-2 form-group'> <label for='pincode'>Pincode</label><input id='pincode" + @i + "'  type='text' value='" + @Model.CompanyDetails[i].Pincode + "' class='master-form-input' name='CompanyDetails[" + i + "].Pincode' data-name='Pincode' /></div>";
-                            html = html + "<div class='col-md-2 form-group'> <label for='Phno'>Phone Number</label><input id='phno" + i + "' type='text'  value='" + @Model.CompanyDetails[i].Phoneno + "' class='master-form-input' name='CompanyDetails[" + i + "].Phoneno' data-name='Phoneno' /></div>";
-                            html = html + " <div class='col-md-2 form-group'> <label for='remarks'>Remarks</label><input type='text' id='remarks" + i + "'class='master-form-input' name='CompanyDetails[" + i + "].Remarks' data-name='Remarks' value='" + @Model.CompanyDetails[i].Remarks + "' /></div>";
-                            html = html + "<div class='col-md-2 form-group'> <label for='emailid'>Email Id</label><input id='emailid" + i + "' type='text'  value='" + @Model.CompanyDetails[i].EmailId + "' class='master-form-input' name='CompanyDetails[" + i + "].EmailId' data-name='EmailId' /></div>";
-                            html = html + " <div class='col-md-2 form-group'> <label for='fax'>Fax</label><input id='fax" + i + "'  type='text' value='" + @Model.CompanyDetails[i].FaxNo + "' class='master-form-input' name='CompanyDetails[" + i + "].FaxNo' data-name='FaxNo' /></div>";
+                            //html = html + "<div class=''>";
+                            html = html + " <div class='col-md-2 form-group'> <label for='branch'>Branch</label> <input id='branch" + @i + "'  type='text' value='" + @Model.CompanyDetails[i].Branch + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].Branch' data-name='Branch' /></div>";
+                            html = html + "<div class='col-md-2 form-group'> <label for='City'>city</label><input id='city" + i + "' type='text'  value='" + @Model.CompanyDetails[i].City + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].City' data-name='City' /></div>";
+                            html = html + " <div class='col-md-2 form-group'> <label for='add01'>Address 01</label><textarea id='add01" + @i + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].BranchAddress' data-name='BranchAddress' value='" + @Model.CompanyDetails[i].BranchAddress + "'></textarea></div>";
+                            html = html + " <div class='col-md-2 form-group'> <label for='add02'>Address 02</label><textarea id='add02" + @i + "'class='form-control master-form-input' name='CompanyDetails[" + i + "].BranchAddress1' data-name='BranchAddress1' value='" + @Model.CompanyDetails[i].BranchAddress1 + "'></textarea></div>";
+                            html = html + " <div class='col-md-2 form-group'> <label for='state'>State</label><input id='state" + @i + "'  type='text' value='" + @Model.CompanyDetails[i].State + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].State' data-name='State' /></div>";
+                            html = html + "<div class='col-md-2 form-group'> <label for='country'>Country</label> <input id='country" + @i + "' type='text'  value='" + @Model.CompanyDetails[i].Country + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].Country' data-name='Country' /></div>";
+                            //html = html + "</div>";
+                            //html = html + "<div class=''>";
+                            html = html + " <div class='col-md-2 form-group'> <label for='pincode'>Pincode</label><input id='pincode" + @i + "'  type='text' value='" + @Model.CompanyDetails[i].Pincode + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].Pincode' data-name='Pincode' /></div>";
+                            html = html + "<div class='col-md-2 form-group'> <label for='Phno'>Phone Number</label><input id='phno" + i + "' type='text'  value='" + @Model.CompanyDetails[i].Phoneno + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].Phoneno' data-name='Phoneno' /></div>";
+                            html = html + " <div class='col-md-2 form-group'> <label for='remarks'>Remarks</label><textarea id='remarks" + i + "'class='form-control master-form-input' name='CompanyDetails[" + i + "].Remarks' data-name='Remarks' value='" + @Model.CompanyDetails[i].Remarks + "' ></textarea></div>";
+                            html = html + "<div class='col-md-2 form-group'> <label for='emailid'>Email Id</label><input id='emailid" + i + "' type='text'  value='" + @Model.CompanyDetails[i].EmailId + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].EmailId' data-name='EmailId' /></div>";
+                            html = html + " <div class='col-md-2 form-group'> <label for='fax'>Fax</label><input id='fax" + i + "'  type='text' value='" + @Model.CompanyDetails[i].FaxNo + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].FaxNo' data-name='FaxNo' /></div>";
                             //  html=html+ "<div class='col-md-2'><button class='document-btn'>Add</button> </div>";
                             html = html + "<div class='col-md-1'><br />  <button class='document-btn removebutton' id='Delete" + @i + "'> X </button></div>";
-                            html = html + "</div>";
+                            //html = html + "</div>";
                             html = html + "</div>";
                             html = html + "<div class='row ht-5'> &nbsp;</div>";
 
                     <tr>
                         <td>
                             @Html.Raw(html)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
                         </td>
                     </tr>
                         }
@@ -685,37 +690,40 @@
             {
                 <input type="hidden" id="init-company-contact-det-count" value="0" />
             }
-            <h3>Contact Details</h3>
-            <div class="row" id="companyContactDetailsForm1">
+            
+            <div class="p-b-25">
+                <h3>Contact Details</h3>
+            </div>
+            <div class="" id="companyContactDetailsForm1">
                 <div id="Gridview" class="row document-row">
                     <div class="col-md-12">
                         <div class="col-md-2 form-group">
                             <label for="branch">Contact Person Name</label>
-                            <input type="text" class="master-form-input" id="ContactPersonName" />
+                            <input type="text" class="form-control master-form-input" id="ContactPersonName" />
                         </div>
                         <div class="col-md-1 form-group">
                             <label for="city">Designation</label>
-                            <input type="text" class="master-form-input" id="Designation" />
+                            <input type="text" class="form-control master-form-input" id="Designation" />
                         </div>
                         <div class="col-md-1 form-group">
                             <label for="add01">Department</label>
-                            <input id="Department" class="master-form-input" />
+                            <input id="Department" class="form-control master-form-input" />
                         </div>
                         <div class="col-md-2 form-group">
                             <label for="add02">Phone</label>
-                            <input type="text" id="Phone" class="master-form-input" />
+                            <input type="text" id="Phone" class="form-control master-form-input" />
                         </div>
                         <div class="col-md-1 form-group">
                             <label for="state">Extension</label>
-                            <input type="text" class="master-form-input" id="Extension" />
+                            <input type="text" class="form-control master-form-input" id="Extension" />
                         </div>
                         <div class="col-md-2 form-group">
                             <label for="country">MobileNo</label>
-                            <input type="text" class="master-form-input" id="MobileNo" />
+                            <input type="text" class="form-control master-form-input" id="MobileNo" />
                         </div>
                         <div class="col-md-2 form-group">
                             <label for="country">Salutations</label>
-                            <input type="text" class="master-form-input" id="Salutations" />
+                            <input type="text" class="form-control master-form-input" id="Salutations" />
                         </div>
                         <div class="col-md-1 btn-group">
                             <br />
@@ -726,7 +734,7 @@
                 </div>
 
             </div>
-            <table class="row" id="companyContactDetailsForm">
+            <table class="row m-t-20" id="companyContactDetailsForm">
 
 
                 @if (Model.CompanyContactDetails != null)
@@ -737,16 +745,16 @@
                         // <script>
                         var html = "<div class='col-md-12 document-row' id='GridViewCompanyContact" + @j + "'>";
                         
-                        html = html + "<div class='col-md-12'>";
-                        html = html + " <div class='col-md-2 form-group'> <label for='branch'>Contact Person Name</label> <input id='branch" + @j + "'  type='text' value='" + @Model.CompanyContactDetails[j].ContactPersonName + "' class='master-form-input' name='CompanyContactDetails[" + j + "].ContactPersonName' data-name='ContactPersonName' /></div>";
-                        html = html + "<div class='col-md-1 form-group'> <label for='City'>Designation</label><input id='city" + j + "' type='text'  value='" + @Model.CompanyContactDetails[j].Designation + "' class='master-form-input' name='CompanyContactDetails[" + j + "].Designation' data-name='Designation' /></div>";
-                        html = html + " <div class='col-md-1 form-group'> <label for='add01'>Department</label><input type='text' id='add01" + @j + "' class='master-form-input' name='CompanyContactDetails[" + j + "].Department' data-name='Department' value='" + @Model.CompanyContactDetails[j].Department + "'/></div>";
-                        html = html + " <div class='col-md-2 form-group'> <label for='add02'>Phone</label><input type='text' id='add02" + @j + "'class='master-form-input' name='CompanyContactDetails[" + j + "].Phone' data-name='Phone' value='" + @Model.CompanyContactDetails[j].Phone + "'/></div>";
-                        html = html + " <div class='col-md-1 form-group'> <label for='state'>Extension</label><input id='state" + @j + "'  type='text' value='" + @Model.CompanyContactDetails[j].Extension + "' class='master-form-input' name='CompanyContactDetails[" + j + "].Extension' data-name='Extension' /></div>";
-                        html = html + "<div class='col-md-2 form-group'> <label for='country'>MobileNo</label> <input id='MobileNo" + @j + "' type='text'  value='" + @Model.CompanyContactDetails[j].MobileNo + "' class='master-form-input' name='CompanyContactDetails[" + j + "].MobileNo' data-name='MobileNo' /></div>";
-                        html = html + " <div class='col-md-2 form-group'> <label for='state'>Salutations</label><input id='state" + @j + "'  type='text' value='" + @Model.CompanyContactDetails[j].Salutations + "' class='master-form-input' name='CompanyContactDetails[" + j + "].State' data-name='Salutations' /></div>";
+                        //html = html + "<div class='col-md-12'>";
+                        html = html + " <div class='col-md-2 form-group'> <label for='branch'>Contact Person Name</label> <input id='branch" + @j + "'  type='text' value='" + @Model.CompanyContactDetails[j].ContactPersonName + "' class='form-control master-form-input' name='CompanyContactDetails[" + j + "].ContactPersonName' data-name='ContactPersonName' /></div>";
+                        html = html + "<div class='col-md-1 form-group'> <label for='City'>Designation</label><input id='city" + j + "' type='text'  value='" + @Model.CompanyContactDetails[j].Designation + "' class='form-control master-form-input' name='CompanyContactDetails[" + j + "].Designation' data-name='Designation' /></div>";
+                        html = html + " <div class='col-md-1 form-group'> <label for='add01'>Department</label><input type='text' id='add01" + @j + "' class='form-control master-form-input' name='CompanyContactDetails[" + j + "].Department' data-name='Department' value='" + @Model.CompanyContactDetails[j].Department + "'/></div>";
+                        html = html + " <div class='col-md-2 form-group'> <label for='add02'>Phone</label><input type='text' id='add02" + @j + "'class='form-control master-form-input' name='CompanyContactDetails[" + j + "].Phone' data-name='Phone' value='" + @Model.CompanyContactDetails[j].Phone + "'/></div>";
+                        html = html + " <div class='col-md-1 form-group'> <label for='state'>Extension</label><input id='state" + @j + "'  type='text' value='" + @Model.CompanyContactDetails[j].Extension + "' class='form-control master-form-input' name='CompanyContactDetails[" + j + "].Extension' data-name='Extension' /></div>";
+                        html = html + "<div class='col-md-2 form-group'> <label for='country'>MobileNo</label> <input id='MobileNo" + @j + "' type='text'  value='" + @Model.CompanyContactDetails[j].MobileNo + "' class='form-control master-form-input' name='CompanyContactDetails[" + j + "].MobileNo' data-name='MobileNo' /></div>";
+                        html = html + " <div class='col-md-2 form-group'> <label for='state'>Salutations</label><input id='state" + @j + "'  type='text' value='" + @Model.CompanyContactDetails[j].Salutations + "' class='form-control master-form-input' name='CompanyContactDetails[" + j + "].State' data-name='Salutations' /></div>";
                         html = html + "<div class='col-md-1' form-group></br>  <button class='document-btn removebutton' id='Delete" + @j + "'> X </button></div>";
-                        html = html + "</div>";
+                        //html = html + "</div>";
                        
                         html = html + "</div>";
                         html = html + "<div class='row ht-5'> &nbsp;</div>";
@@ -754,6 +762,11 @@
                         <tr>
                             <td>
                                 @Html.Raw(html)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;
                             </td>
                         </tr>
                     }
@@ -779,8 +792,8 @@
                             <td>
                                 <div class='col-md-12 document-row' id="GridViewCompanyContact @j ">
                                     <div class='col-md-12'>
-                                        <div class='col-md-4 form-group'> <label for='branch'>Type</label> <input id='branch" + @j + "' type='text' value='@Model.CompanyDocumentsExist[j].Type' class='master-form-input' name='CompanyDocumentsExist[@j].Type' data-name='Type' /></div>
-                                        <div class='col-md-4 form-group'> <label for='City'>Name</label><input id='city" + j + "' type='text' value='@Model.CompanyDocumentsExist[j].Doc_name' class='master-form-input' name='CompanyDocumentsExist[@j].Doc_name' data-name='Doc_name' /></div>
+                                        <div class='col-md-4 form-group'> <label for='branch'>Type</label> <input id='branch" + @j + "' type='text' value='@Model.CompanyDocumentsExist[j].Type' class='form-control master-form-input' name='CompanyDocumentsExist[@j].Type' data-name='Type' /></div>
+                                        <div class='col-md-4 form-group'> <label for='City'>Name</label><input id='city" + j + "' type='text' value='@Model.CompanyDocumentsExist[j].Doc_name' class='form-control master-form-input' name='CompanyDocumentsExist[@j].Doc_name' data-name='Doc_name' /></div>
                                         <div class='col-md-2 form-group'>
                                             <label for='add01'>Document</label><input type='hidden' id='docpath' value='@Model.CompanyDocumentsExist[j].Doc_path' name='CompanyDocumentsExist[@j].Doc_path' data-name='Doc_path' />
                                             <a href="~/Documents/TenantCompany/@Model.CompanyDocumentsExist[j].Doc_path" target='_blank'>Download</a>
@@ -792,9 +805,11 @@
                                     </div>
                                 </div>
                                 <div class='row ht-5'> &nbsp;</div>
-
-
-
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;
                             </td>
                         </tr>
                         }
@@ -802,16 +817,19 @@
                 }
                    
 
-            <div class="row" id="companyFileDetailsForm1">
+            <div class="p-b-25 p-t-17">
+                <h3>New Document(s)</h3>
+            </div>
+            <div class="" id="companyFileDetailsForm1">
                 <div id="Gridview" class="row document-row">
                     <div class="col-md-12">
                         <div class="col-md-4 form-group">
-                            <h3>New Document(s)</h3>
+                            <h3> Add new files here</h3>
                         </div>
                         <div class="col-md-3 form-group">
                             <br />
                             <input type="button" class="document-btn" id="AddFile" value="Add" onclick='addFile(this);' />
-                            @*<input type="text" class="master-form-input" id="FileName" />*@
+                            @*<input type="text" class="form-control master-form-input" id="FileName" />*@
                         </div>
                         <div class="col-md-2 form-group">
                             
@@ -827,9 +845,9 @@
                 
             </div>
             
-            <table class="row" id="companyNewFileDetails">
-
-            </table>
+            <div class="row">
+                <table class="col-md-12 m-t-20" id="companyNewFileDetails"></table>
+            </div>
 
             <div class="row ht-5">
                 &nbsp;
@@ -876,25 +894,25 @@
         //html=html+"<div class='col-md-1'>";
         //html = html + count;
         //html=html+" </div>";
-        html = html + "<div class='col-md-12'>"
-        html = html + " <div class='col-md-2 form-group'> <label for='branch'>Branch</label> <input id='branch" + i + "'  type='text' value='" + branch + "' class='master-form-input' name='CompanyDetails[" + i + "].Branch' data-name='Branch' /></div>";
-        html = html + "<div class='col-md-2 form-group'> <label for='City'>city</label><input id='city" + i + "' type='text'  value='" + city + "' class='master-form-input' name='CompanyDetails[" + i + "].City' data-name='City' /></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='add01'>Address 01</label><input type='text' id='add01" + i + "' class='master-form-input' name='CompanyDetails[" + i + "].BranchAddress' data-name='BranchAddress' value='"+ add01 +"'/></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='add02'>Address 02</label><input type='text' id='add02" + i + "'class='master-form-input' name='CompanyDetails[" + i + "].BranchAddress1' data-name='BranchAddress1' value='" + add02 + "'/></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='state'>State</label><input id='state" + i + "'  type='text' value='" + state + "' class='master-form-input' name='CompanyDetails[" + i + "].State' data-name='State' /></div>";
-        html = html + "<div class='col-md-2 form-group'> <label for='country'>Country</label> <input id='country" + i + "' type='text'  value='" + country + "' class='master-form-input' name='CompanyDetails[" + i + "].Country' data-name='Country' /></div>";
-        html = html + "</div>"
-        html = html + "<div class='col-md-12'>"
-        html = html + " <div class='col-md-2 form-group'> <label for='pincode'>Pincode</label><input id='pincode" + i + "'  type='text' value='" + pincode + "' class='master-form-input' name='CompanyDetails[" + i+ "].Pincode' data-name='Pincode' /></div>";
-        html = html + "<div class='col-md-2 form-group'> <label for='Phno'>Phone Number</label><input id='phno" + i+ "' type='text'  value='" + phno + "' class='master-form-input' name='CompanyDetails[" + i+ "].Phoneno' data-name='Phoneno' /></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='remarks'>Remarks</label><input type='text' id='remarks" + i+ "'class='master-form-input' name='CompanyDetails[" + i+ "].Remarks' data-name='Remarks' value='" + remarks + "' /></div>";
-        html = html + "<div class='col-md-2 form-group'> <label for='emailid'>Email Id</label><input id='emailid" + i+ "' type='text'  value='" + emailid + "' class='master-form-input' name='CompanyDetails[" + i+ "].EmailId' data-name='EmailId' /></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='fax'>Fax</label><input id='fax" + i+ "'  type='text' value='" + fax + "' class='master-form-input' name='CompanyDetails[" + i+ "].FaxNo' data-name='FaxNo' /></div>";
+        //html = html + "<div class='col-md-12'>"
+        html = html + " <div class='col-md-2 form-group'> <label for='branch'>Branch</label> <input id='branch" + i + "'  type='text' value='" + branch + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].Branch' data-name='Branch' /></div>";
+        html = html + "<div class='col-md-2 form-group'> <label for='City'>city</label><input id='city" + i + "' type='text'  value='" + city + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].City' data-name='City' /></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='add01'>Address 01</label><input type='text' id='add01" + i + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].BranchAddress' data-name='BranchAddress' value='"+ add01 +"'/></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='add02'>Address 02</label><input type='text' id='add02" + i + "'class='form-control master-form-input' name='CompanyDetails[" + i + "].BranchAddress1' data-name='BranchAddress1' value='" + add02 + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='state'>State</label><input id='state" + i + "'  type='text' value='" + state + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].State' data-name='State' /></div>";
+        html = html + "<div class='col-md-2 form-group'> <label for='country'>Country</label> <input id='country" + i + "' type='text'  value='" + country + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].Country' data-name='Country' /></div>";
+        //html = html + "</div>"
+        //html = html + "<div class='col-md-12'>"
+        html = html + " <div class='col-md-2 form-group'> <label for='pincode'>Pincode</label><input id='pincode" + i + "'  type='text' value='" + pincode + "' class='form-control master-form-input' name='CompanyDetails[" + i+ "].Pincode' data-name='Pincode' /></div>";
+        html = html + "<div class='col-md-2 form-group'> <label for='Phno'>Phone Number</label><input id='phno" + i+ "' type='text'  value='" + phno + "' class='form-control master-form-input' name='CompanyDetails[" + i+ "].Phoneno' data-name='Phoneno' /></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='remarks'>Remarks</label><input type='text' id='remarks" + i+ "'class='form-control master-form-input' name='CompanyDetails[" + i+ "].Remarks' data-name='Remarks' value='" + remarks + "' /></div>";
+        html = html + "<div class='col-md-2 form-group'> <label for='emailid'>Email Id</label><input id='emailid" + i+ "' type='text'  value='" + emailid + "' class='form-control master-form-input' name='CompanyDetails[" + i+ "].EmailId' data-name='EmailId' /></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='fax'>Fax</label><input id='fax" + i+ "'  type='text' value='" + fax + "' class='form-control master-form-input' name='CompanyDetails[" + i+ "].FaxNo' data-name='FaxNo' /></div>";
       //  html=html+ "<div class='col-md-2'><button class='document-btn'>Add</button> </div>";
         html = html + "<div class='col-md-1'><br />  <button class='document-btn removebutton' id='Delete" + i+ "'> X </button></div>";
-        html = html + "</div>"
+        //html = html + "</div>"
         html = html + "</div>";
-        html=html+"<div class='row ht-5'> &nbsp;</div></td></tr>"
+        html=html+"<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
         $('#companyDetailsForm').append(html);
         i++;
 
@@ -953,20 +971,20 @@
         var MobileNo = $("#MobileNo").val();
         var Salutations = $("#Salutations").val();
         var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + j + "'>";                
-        html = html + "<div class='col-md-12'>";
-        html = html + " <div class='col-md-2 form-group'> <label for='branch'>Contact Person Name</label> <input id='ContactPersonName" + j + "'  type='text' value='" + ContactPersonName + "' class='master-form-input' name='CompanyContactDetails[" + j + "].ContactPersonName' data-name='ContactPersonName' /></div>";
-        html = html + "<div class='col-md-1 form-group'> <label for='City'>Designation</label><input id='Designation" + j + "' type='text'  value='" + Designation + "' class='master-form-input' name='CompanyContactDetails[" + j + "].Designation' data-name='Designation' /></div>";
-        html = html + " <div class='col-md-1 form-group'> <label for='add01'>Department</label><input type='text' id='Department" + j + "' class='master-form-input' name='CompanyContactDetails[" + j + "].Department' data-name='Department' value='" + Department + "'/></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='add02'>Phone</label><input type='text' id='add02" + j + "'class='master-form-input' name='CompanyContactDetails[" + j + "].Phone' data-name='Phone' value='" +Phone + "'/></div>";
-        html = html + " <div class='col-md-1 form-group'> <label for='state'>Extension</label><input id='state" + j + "'  type='text' value='" + Extension + "' class='master-form-input' name='CompanyContactDetails[" + j + "].Extension' data-name='Extension' /></div>";
-        html = html + "<div class='col-md-2 form-group'> <label for='country'>MobileNo</label> <input id='MobileNo" + j + "' type='text'  value='" + MobileNo + "' class='master-form-input' name='CompanyContactDetails[" + j + "].MobileNo' data-name='MobileNo' /></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='state'>Salutations</label><input id='state" + j + "'  type='text' value='" + Salutations + "' class='master-form-input' name='CompanyContactDetails[" + j + "].Salutations' data-name='Salutations' /></div>";
+        //html = html + "<div class='col-md-12'>";
+        html = html + " <div class='col-md-2 form-group'> <label for='branch'>Contact Person Name</label> <input id='ContactPersonName" + j + "'  type='text' value='" + ContactPersonName + "' class='form-control master-form-input' name='CompanyContactDetails[" + j + "].ContactPersonName' data-name='ContactPersonName' /></div>";
+        html = html + "<div class='col-md-1 form-group'> <label for='City'>Designation</label><input id='Designation" + j + "' type='text'  value='" + Designation + "' class='form-control master-form-input' name='CompanyContactDetails[" + j + "].Designation' data-name='Designation' /></div>";
+        html = html + " <div class='col-md-1 form-group'> <label for='add01'>Department</label><input type='text' id='Department" + j + "' class='form-control master-form-input' name='CompanyContactDetails[" + j + "].Department' data-name='Department' value='" + Department + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='add02'>Phone</label><input type='text' id='add02" + j + "'class='form-control master-form-input' name='CompanyContactDetails[" + j + "].Phone' data-name='Phone' value='" +Phone + "'/></div>";
+        html = html + " <div class='col-md-1 form-group'> <label for='state'>Extension</label><input id='state" + j + "'  type='text' value='" + Extension + "' class='form-control master-form-input' name='CompanyContactDetails[" + j + "].Extension' data-name='Extension' /></div>";
+        html = html + "<div class='col-md-2 form-group'> <label for='country'>MobileNo</label> <input id='MobileNo" + j + "' type='text'  value='" + MobileNo + "' class='form-control master-form-input' name='CompanyContactDetails[" + j + "].MobileNo' data-name='MobileNo' /></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='state'>Salutations</label><input id='state" + j + "'  type='text' value='" + Salutations + "' class='form-control master-form-input' name='CompanyContactDetails[" + j + "].Salutations' data-name='Salutations' /></div>";
         html = html + "<div class='col-md-1'></br>  <button class='document-btn remove-contact-button' id='Delete" + j + "'> X </button></div>";
 
-        html = html + "</div>";
+        //html = html + "</div>";
                        
         html = html + "</div>";
-        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr>"
+        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
         $('#companyContactDetailsForm').append(html);
         j++;
 
@@ -1013,16 +1031,16 @@
     {
         
         var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + k + "'>";
-        html = html + "<div class='col-md-12'>";
-        html = html + " <div class='col-md-4 form-group'> <label for='branch'>Type</label> <input id='type" + k + "'  type='text' value='' class='master-form-input' name='CompanyNewDocuments[" + k + "].Type' data-name='Type' /></div>";
-        html = html + "<div class='col-md-4 form-group'> <label for='City'>Name</label><input id='Designation" + k + "' type='text'  value='' class='master-form-input' name='CompanyNewDocuments[" + k + "].Name' data-name='Name' /></div>";
-        html = html + " <div class='col-md-3 form-group'> <label for='add01'>Document</label><input type='file' id='File" + k + "' class='master-form-input' name='CompanyNewDocuments[" + k + "].File' data-name='File' value=''/></div>";
+        //html = html + "<div class='col-md-12'>";
+        html = html + " <div class='col-md-4 form-group'> <label for='branch'>Type</label> <input id='type" + k + "'  type='text' value='' class='form-control master-form-input' name='CompanyNewDocuments[" + k + "].Type' data-name='Type' /></div>";
+        html = html + "<div class='col-md-4 form-group'> <label for='City'>Name</label><input id='Designation" + k + "' type='text'  value='' class='form-control master-form-input' name='CompanyNewDocuments[" + k + "].Name' data-name='Name' /></div>";
+        html = html + " <div class='col-md-3 form-group'> <label for='add01'>Document</label><input type='file' id='File" + k + "' class='form-control master-form-input' name='CompanyNewDocuments[" + k + "].File' data-name='File' value=''/></div>";
         html = html + "<div class='col-md-1'></br>  <button class='document-btn remove-document-new-button' id='Delete" + k + "'> X </button></div>";
 
-        html = html + "</div>";
+        //html = html + "</div>";
 
         html = html + "</div>";
-        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr>"
+        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
         $('#companyNewFileDetails').append(html);
         k++;
         return false;

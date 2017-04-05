@@ -79,6 +79,7 @@ namespace LeaMaPortal.Controllers
             ViewBag.Colour = new SelectList(StaticHelper.GetStaticData(StaticHelper.SLAB_COLOUR_DROPDOWN), "Name", "Name");
             //ViewBag.Unit_id = new SelectList(db.tbl_propertiesmaster.OrderBy(o => o.Unit_Property_Name).Distinct(), "Unit_Property_Name", "Unit_Property_Name");
             ViewBag.Residence_type = new SelectList(StaticHelper.GetStaticData(StaticHelper.SLAB_RESIDENCE_DROPDOWN), "Name", "Name");
+            model.SlabId = db.tbl_slabmaster.OrderByDescending(o => o.id).Select(s => s.slabid).FirstOrDefault()+1;
             return PartialView("../Master/SlabMaster/_AddOrUpdate", model);
         }
         // POST: CheckList/Create
@@ -190,7 +191,7 @@ namespace LeaMaPortal.Controllers
                 return Json(new MessageResult() { Errors = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
-        [HttpGet]
+        //[HttpGet]
         public async Task<string> GetUtilityId(string UtilityName)
         {
             try
