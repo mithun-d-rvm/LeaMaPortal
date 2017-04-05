@@ -79,7 +79,8 @@ namespace LeaMaPortal.Controllers
             ViewBag.Colour = new SelectList(StaticHelper.GetStaticData(StaticHelper.SLAB_COLOUR_DROPDOWN), "Name", "Name");
             //ViewBag.Unit_id = new SelectList(db.tbl_propertiesmaster.OrderBy(o => o.Unit_Property_Name).Distinct(), "Unit_Property_Name", "Unit_Property_Name");
             ViewBag.Residence_type = new SelectList(StaticHelper.GetStaticData(StaticHelper.SLAB_RESIDENCE_DROPDOWN), "Name", "Name");
-            model.SlabId = db.tbl_slabmaster.OrderByDescending(o => o.id).Select(s => s.slabid).FirstOrDefault()+1;
+            model.SlabId = db.tbl_slabmaster.OrderByDescending(o => o.id).Select(s => s.slabid).FirstOrDefault();
+            model.SlabId = Convert.ToInt32(model.SlabId) + 1;
             return PartialView("../Master/SlabMaster/_AddOrUpdate", model);
         }
         // POST: CheckList/Create
@@ -104,6 +105,16 @@ namespace LeaMaPortal.Controllers
                     {
                         PFlag = "UPDATE";
                     }
+                    //tbl_slabmaster slab = new tbl_slabmaster();
+                    //slab.slabid = model.SlabId;
+                    //slab.Unit_From = model.Unit_From;
+                    //slab.Unitto = model.Unit_to;
+                    //slab.Utility_id = model.Utility_id;
+                    //slab.Utility_Name = model.Utility_Name;
+                    //slab.rate = model.rate;
+                    //slab.Colour = model.Colour;
+                    //slab.Residence_type = model.Residence_type;
+                    //db.tbl_slabmaster.Add(slab);
                     object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PUtility_id",model.Utility_id),
                                             new MySqlParameter("@PUtility_Name",model.Utility_Name),
