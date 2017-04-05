@@ -71,8 +71,10 @@ namespace LeaMaPortal.Controllers
 
                 //var region = .Select(x => x.Region_Name);
                 ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
+
                 //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
-                ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
+                ViewBag.Nationality = new SelectList(Common.Nationality);
+               // ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
                 ViewBag.Profession = new SelectList(Common.Profession);
                 var tenant = db.tbl_tenant_individual.OrderByDescending(x => x.Tenant_Id).FirstOrDefault();
                 ViewBag.Tenant_Id = tenant != null ? tenant.Tenant_Id + 1 : 1;
@@ -200,7 +202,8 @@ namespace LeaMaPortal.Controllers
                 //var region = .Select(x => x.Region_Name);
                 ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name",tenant.City);
                 //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
-                ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name",tenant.Nationality);
+               // ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name",tenant.Nationality);
+                ViewBag.Nationality = new SelectList(Common.Nationality, tenant.Nationality);
                 ViewBag.Profession = new SelectList(Common.Profession,tenant.Profession);
                 ViewBag.Tenant_Id = tenantId;
                 model.TenantDocumentList =await db.tbl_tenant_individual_doc.Where(x => x.Tenant_Id == tenantId)

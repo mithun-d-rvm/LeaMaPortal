@@ -147,7 +147,7 @@
                     @Html.ValidationMessageFor(model => model.Emirate_issuedate, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding other-nationality">
                 <div class="col-md-4">
                     @*Passport Number:*@
                     @Html.LabelFor(model => model.Passportno, htmlAttributes: new { @class = "control-label" })
@@ -157,7 +157,7 @@
                     @Html.ValidationMessageFor(model => model.Passportno, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding other-nationality">
                 <div class="col-md-4">
                     @*Passport Issue Date:*@
                     @Html.LabelFor(model => model.Passport_Issuedate, htmlAttributes: new { @class = "control-label" })
@@ -167,7 +167,7 @@
                     @Html.ValidationMessageFor(model => model.Passport_Issuedate, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding other-nationality">
                 <div class="col-md-4">
                     @*Visa Type:*@
                     @Html.LabelFor(model => model.VisaType, htmlAttributes: new { @class = "control-label" })
@@ -177,7 +177,7 @@
                     @Html.ValidationMessageFor(model => model.VisaType, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding other-nationality">
                 <div class="col-md-4">
                     @*Visa Expiry Date:*@
                     @Html.LabelFor(model => model.Visa_ExpiryDate, htmlAttributes: new { @class = "control-label" })
@@ -344,7 +344,7 @@
                     @Html.ValidationMessageFor(model => model.Emirate_expirydate, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding other-nationality">
                 <div class="col-md-4">
                     @*Place of Insurance:*@
                     @Html.LabelFor(model => model.Placeofissuance, htmlAttributes: new { @class = "control-label" })
@@ -354,7 +354,7 @@
                     @Html.ValidationMessageFor(model => model.Placeofissuance, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding  other-nationality">
                 <div class="col-md-4">
                     @*Passport Expiry Date:*@
                     @Html.LabelFor(model => model.Passport_Expirydate, htmlAttributes: new { @class = "control-label" })
@@ -364,7 +364,7 @@
                     @Html.ValidationMessageFor(model => model.Passport_Expirydate, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding other-nationality">
                 <div class="col-md-4">
                     @*Visa Issue Date:*@
                     @Html.LabelFor(model => model.Visa_IssueDate, htmlAttributes: new { @class = "control-label" })
@@ -427,29 +427,14 @@
             }
             <div class="col-md-12">
                 <div class="col-md-4 text-left">Content Name</div>
-                <div class="col-md-4 text-left">Content Det</div>
-                <div class="col-md-4 text-left"><input type="button" id="addbutton" value="Add" /></div>
+                <div class="col-md-3 text-left">Content Det</div>
+                <div class="col-md-1 text-left"><input type="button" class="btn btn-default" id="addbutton" value="Add" /></div>
 
 
             </div>
             <div class="clearfix"><br /><br /></div>
-               
-
-
+              
                         <table id="tblcontent" class="col-md-12">
-                            <tr>
-
-                                <td class="col-md-4">
-                                    <input type="text" id="txtTitle" name="TenantDocument[0].Name" data-name="Name">
-                                </td>
-                                <td class="col-md-4">
-                                    <input type="file" id="txtLink" name="TenantDocument[0].File" data-name="File">
-                                </td>
-                                <td class="col-md-4">
-                                    <button type="button" class="removebutton" title="Remove this row"> X </button>
-                                </td>
-                            </tr>
-
                         </table>
 
                     </div>
@@ -471,56 +456,91 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 <script>
-   
-    var i = 1;
-
-    $("#addbutton").click(function () {
-        var j = 0;
-        $("table#tblcontent tr:first").clone().find("input").each(function () {
-            if (j == 0)
-            {
-                $(this).val('').attr({
-                    'id': function (_, id) {
-                        return id + i
-                    },
-                    'name': function (_, name) {
-                        //return name + i
-                        return 'TenantDocument[' + i + '].Name'
-                    },
-                    'value': ''
-                });
-            }
-            else if (j == 1)
-            {
-                $(this).val('').attr({
-                    'id': function (_, id) {
-                        return id + i
-                    },
-                    'name': function (_, name) {
-                        //return name + i
-                        return 'TenantDocument[' + i + '].File'
-                    },
-                    'value': ''
-                });
-            }
-            else
-            {
-                $(this).val('').attr({
-                    'id': function (_, id) {
-                        return id + i
-                    },
-                    'name': function (_, name) {
-                        return name + i
-                        //return 'doc[' + i + '].Filename'
-                    },
-                    'value': ''
-                });
-            }
-           
-            j++;
-        }).end().appendTo("#tblcontent");
-        i++;
+    $("#Nationality").on('change', function (e) {
+        nationalityShowOrHide();
     });
+    nationalityShowOrHide();
+    function nationalityShowOrHide()
+    {
+        var nationality = $("#Nationality").val();
+        if(nationality=="UAE")
+        {
+            $(".other-nationality").hide();
+        }
+        else
+        {
+            $(".other-nationality").show();
+        }
+    }
+    
+    var i = 0;
+
+    $("#addbutton").click(function (e) {
+        addFile(e)
+        //var j = 0;
+        //$("table#tblcontent tr:first").clone().find("input").each(function () {
+        //    if (j == 0)
+        //    {
+        //        $(this).val('').attr({
+        //            'id': function (_, id) {
+        //                return id + i
+        //            },
+        //            'name': function (_, name) {
+        //                //return name + i
+        //                return 'TenantDocument[' + i + '].Name'
+        //            },
+        //            'value': ''
+        //        });
+        //    }
+        //    else if (j == 1)
+        //    {
+        //        $(this).val('').attr({
+        //            'id': function (_, id) {
+        //                return id + i
+        //            },
+        //            'name': function (_, name) {
+        //                //return name + i
+        //                return 'TenantDocument[' + i + '].File'
+        //            },
+        //            'value': ''
+        //        });
+        //    }
+        //    else
+        //    {
+        //        $(this).val('').attr({
+        //            'id': function (_, id) {
+        //                return id + i
+        //            },
+        //            'name': function (_, name) {
+        //                return name + i
+        //                //return 'doc[' + i + '].Filename'
+        //            },
+        //            'value': ''
+        //        });
+        //    }
+           
+        //    j++;
+        //}).end().appendTo("#tblcontent");
+        //i++;
+    });
+
+
+    function addFile(e) {
+
+        var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + i + "'>";
+        html = html + "<div class='col-md-12'>";
+        html = html + "<div class='col-md-4 form-group'> <input id='Designation" + i + "' type='text'  value='' class='master-form-input' name='TenantDocument[" + i + "].Name' data-name='Name' /></div>";
+        html = html + " <div class='col-md-3 form-group'> <input type='file' id='File" + i + "' class='master-form-input' name='TenantDocument[" + i + "].File' data-name='File' value=''/></div>";
+        html = html + "<div class='col-md-1'><button class='document-btn removebutton' id='Delete" + i + "'> X </button></div>";
+
+        html = html + "</div>";
+
+        html = html + "</div>";
+        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr>"
+        $('#tblcontent').append(html);
+        i++;
+        return false;
+    }
 
     $(document).on('click', 'button.removebutton', function () {
         $(this).closest('tr').remove();
