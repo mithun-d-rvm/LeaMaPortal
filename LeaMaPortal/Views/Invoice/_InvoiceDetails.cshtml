@@ -14,10 +14,10 @@
 
 
   
-    <div class="row">
+    <div class="row" id="invoice-details">
         <div class="col-md-12 document-row" id="GridView">
             <div class="col-md-1">
-                1.
+               
             </div>
             <div class="col-md-2">
                 @Html.EditorFor(model => model.item, new { htmlAttributes = new { @class = "master-form-input" } })
@@ -31,15 +31,47 @@
             <div class="col-md-2">
                 @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "master-form-input" } })
             </div>
-            <div class="col-md-1">
-                <button class="document-btn">Add</button>
+            <div class="col-md-2">
+                <button class="document-btn" onclick="Add()">Add</button>
             </div>
-            <div class="col-md-1">
+            @*<div class="col-md-1">
                 <button class="document-btn">Delete</button>
-            </div>
+            </div>*@
         </div>
     </div>
     <div class="row ht-5">
         &nbsp;
     </div>
 
+<script>
+    var count = 1;
+    function Add() {
+
+        var item = document.getElementById("item").value;
+        var description = document.getElementById("description").value;
+        var qty = document.getElementById("qty").value;
+        var amount = document.getElementById("amount").value;
+
+        var html = " <div class='col-md-12 document-row' id='GridView"+count+"'>";
+        html=html+" <div class='col-md-1'>"+count+"</div>";
+        html = html + " <div class='col-md-2'> <input id='item-id_" +count+"'  type='text' value='" +item+ "' class='master-form-input' /></div>";
+        html = html + " <div class='col-md-2'> <input id='description_" + count + "' type='text'  value='" + description + "' class='master-form-input' /></div>";
+        html = html + " <div class='col-md-2'> <input id='qty_" + count + "'  type='text' value='" + qty + "' class='master-form-input' /></div>";
+        html = html + " <div class='col-md-2'> <input id='amount_" + count + "' type='text'  value='" + amount + "' class='master-form-input' /></div>";
+      //  html=html+ "<div class='col-md-2'><button class='document-btn'>Add</button> </div>";
+        html = html + " <div class='col-md-2'>  <button class='document-btn' id='Delete"+count+"' onclick='Delete(this)'>Delete</button></div>";
+        html=html+" </div>";
+        $('#invoice-details').append(html);
+
+        document.getElementById("item").value = "";
+        document.getElementById("description").value = "";
+        document.getElementById("qty").value = "";
+        document.getElementById("amount").value = ""
+       count = count + 1;
+
+    }
+    function Delete(e) {
+        DeleteRow = e.parentNode.parentNode.id;
+        $('#' + DeleteRow).remove();
+    }
+</script>
