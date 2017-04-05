@@ -239,6 +239,13 @@ namespace LeaMaPortal.Controllers
                 ViewBag.Ref_Unit_Property_Name = new SelectList(propertyMaster.Select(x => x.Ref_Unit_Property_Name), model.Ref_Unit_Property_Name);
 
                 ViewBag.Region_Name = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name", model.Region_Name);
+
+                ViewBag.Utility_Name = new SelectList(db.tbl_utilitiesmaster.Where(x => x.Delmark != "*").OrderBy(x => x.Utility_id), "Utility_id", "Utility_Name");
+                ViewBag.Utility_ID = new SelectList(db.tbl_utilitiesmaster.Where(x => x.Delmark != "*").OrderBy(x => x.Utility_id), "Utility_Name", "Utility_id");
+
+                ViewBag.Facility_Name = new SelectList(db.tbl_facilitymaster.Where(x => x.Delmark != "*").OrderBy(x => x.Facility_id), "Facility_id", "Facility_Name");
+                ViewBag.Facility_id = new SelectList(db.tbl_facilitymaster.Where(x => x.Delmark != "*").OrderBy(x => x.Facility_id), "Facility_Name", "Facility_id");
+
                 return PartialView("../Master/PropertyMaster/_AddOrUpdate", model);
             }
             catch
