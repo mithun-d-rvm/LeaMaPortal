@@ -65,6 +65,8 @@ namespace LeaMaPortal.Controllers
         {
             CheckListViewModel model = new CheckListViewModel();
             ViewBag.Checklist_Type = new SelectList(StaticHelper.GetStaticData(StaticHelper.CHECKLIST_DROPDOWN), "Name", "Name");
+            model.Checklist_id = db.tbl_checklistmaster.OrderByDescending(o => o.Id).Select(s => s.Checklist_id).FirstOrDefault();
+            model.Checklist_id = (Convert.ToInt32(model.Checklist_id) + 1).ToString();
             return PartialView("../Master/CheckList/_AddOrUpdate", model);
         }
         // POST: CheckList/Create

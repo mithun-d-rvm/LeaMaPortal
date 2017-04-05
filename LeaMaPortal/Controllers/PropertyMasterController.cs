@@ -55,6 +55,11 @@ namespace LeaMaPortal.Controllers
             ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
             ViewBag.Profession = new SelectList(Common.Profession);
             ViewBag.PropertyId = db.tbl_propertiesmaster.OrderByDescending(x => x.Property_Id).FirstOrDefault()?.Property_Id + 1;
+            ViewBag.Utility_Name = new SelectList(db.tbl_utilitiesmaster.Where(x => x.Delmark != "*").OrderBy(x => x.Utility_id), "Utility_id", "Utility_Name");
+            ViewBag.Utility_ID  = new SelectList(db.tbl_utilitiesmaster.Where(x => x.Delmark != "*").OrderBy(x => x.Utility_id), "Utility_Name", "Utility_id");
+
+            ViewBag.Facility_Name = new SelectList(db.tbl_facilitymaster.Where(x => x.Delmark != "*").OrderBy(x => x.Facility_id), "Facility_id", "Facility_Name");
+            ViewBag.Facility_id = new SelectList(db.tbl_facilitymaster.Where(x => x.Delmark != "*").OrderBy(x => x.Facility_id), "Facility_Name","Facility_id");
             return PartialView("../Master/PropertyMaster/_AddOrUpdate", model);
         }
         // GET: PropertyMaster/Details/5
@@ -81,6 +86,7 @@ namespace LeaMaPortal.Controllers
                 ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
                 ViewBag.Profession = new SelectList(Common.Profession);
                 ViewBag.PropertyId = db.tbl_propertiesmaster.OrderByDescending(x => x.Property_Id).FirstOrDefault()?.Property_Id + 1;
+                
                 return PartialView("../Master/TenantIndividual/_AddOrUpdate", model);
             }
             catch (Exception e)
