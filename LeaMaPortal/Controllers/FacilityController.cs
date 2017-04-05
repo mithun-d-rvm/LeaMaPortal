@@ -61,6 +61,8 @@ namespace LeaMaPortal.Controllers
         public PartialViewResult AddOrUpdate()
         {
             FacilityViewModel model = new FacilityViewModel();
+            model.Facility_id = db.tbl_facilitymaster.OrderByDescending(o => o.Id).Select(s => s.Facility_id).FirstOrDefault();
+            model.Facility_id = (Convert.ToInt32(model.Facility_id) + 1).ToString();
             return PartialView("../Master/Facility/_AddOrUpdate", model);
         }
         // POST: Facility/Create

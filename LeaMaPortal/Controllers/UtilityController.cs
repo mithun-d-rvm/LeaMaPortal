@@ -61,6 +61,8 @@ namespace LeaMaPortal.Controllers
         public PartialViewResult AddOrUpdate()
         {
             UtilityViewModel model = new UtilityViewModel();
+            model.Utility_id = db.tbl_utilitiesmaster.OrderByDescending(o => o.id).Select(s => s.Utility_id).FirstOrDefault();
+            model.Utility_id = (Convert.ToInt32(model.Utility_id) + 1).ToString();
             return PartialView("../Master/Utility/_AddOrUpdate", model);
         }
         // POST: Utility/Create

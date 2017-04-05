@@ -50,8 +50,8 @@
                         <div class="divTableCell">@item.Property_id</div>
                         <div class="divTableCell">@item.unit_id</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit meter-edit", title = "Edit", @data_id = @item.Meter_no + '-' + @item.Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash meter-delete", @style = "color:red", @title = "Delete", @data_id = @item.Meter_no + '-' + @item.Id })
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit meter-edit", title = "Edit", @data_id = @item.Meter_no + '`' + @item.Id })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash meter-delete", @style = "color:red", @title = "Delete", @data_id = @item.Meter_no + '`' + @item.Id })
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
                     </div>
@@ -145,7 +145,7 @@
     $(".meter-edit").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
-        var param = id.split('-');
+        var param = id.split('`');
         $.ajax(
             {
                 url: "../Meter/Edit",
@@ -158,7 +158,7 @@
                         $("#Utility_id").val(result.Utility_id);
                         $("#Utility_Name").val(result.Utility_Name);
                         $("#Accno").val(result.Accno);
-                        //$("#unit_id").val(result.unit_id);
+                        $("#unit_id").val(result.unit_id);
                         $("#Property_id").val(result.Property_id);
                         $("#Dueday").val(result.Dueday);
                     }
@@ -178,7 +178,7 @@
     $(".meter-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
-        var param = id.split('-');
+        var param = id.split('`');
         var r = confirm("Are you sure want to delete?");
         if (r == false) {
             return;
