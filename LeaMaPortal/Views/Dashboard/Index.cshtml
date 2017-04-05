@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">                            
+                        <div class="col-md-6">
                             <div style="font-size: 30px;
                     color: #52ce6f;
                     padding-bottom: 18px;">
@@ -45,7 +45,15 @@
     padding: 6px;
     border-radius: 20px;
     color: #52ce6f;"></i>
+                                <span style="color: white;
+    font-size: 16px;">
+                                    JAN 2017
+                                </span>
                             </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <canvas id="barChart" height="300" width="470" style="width: 168px; height: 120px;margin-left: -15px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -285,3 +293,29 @@
     </div>
 </div>
 
+<script>
+
+    var data = {
+        labels: ["REVENUE", "LOSS"],
+        datasets: [
+            {
+                fillColor: "#529ace",
+                data: [95, 67]
+            }
+        ]
+    }
+
+    var options = {
+        animation: true,
+        scaleFontColor: "#FFFFFF"
+    };
+
+    //Get the context of the canvas element we want to select
+    var c = $('#barChart');
+    var ct = c.get(0).getContext('2d');
+    var ctx = document.getElementById("barChart").getContext("2d");
+    /*********************/
+    window.homeBarChart = new Chart(ctx).Bar(data, options);
+    homeBarChart.datasets[0].bars[0].fillColor = "#529ace"; //bar1
+    homeBarChart.datasets[0].bars[1].fillColor = "#d04242"; //bar 2
+</script>
