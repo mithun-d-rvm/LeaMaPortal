@@ -105,10 +105,12 @@ namespace LeaMaPortal.Controllers
             ViewBag.Property_Id = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Property_Id), "Property_Id", "Property_Id");
             ViewBag.Property_Name = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Property_Name), "Property_Id", "Property_Name");
            ViewBag.Unit_Id = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Unit_ID_Tawtheeq), "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
-          ViewBag.unit_Name = new SelectList(db.tbl_agreement_unit_inner.OrderBy(x => x.Unit_Property_Name), "Unit_Property_Name", "Unit_Property_Name");
-           
+          ViewBag.unit_Name = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Unit_Property_Name), "Unit_Property_Name", "Unit_Property_Name");
+            ViewBag.Agreement_No = new SelectList(db.tbl_agreement.OrderBy(x => x.Agreement_No), "id", "Agreement_No");
 
-           // ViewBag.InvType = InvType;
+
+
+            // ViewBag.InvType = InvType;
             ViewBag.Month = Month;
            
             return PartialView("../Invoice/Index");

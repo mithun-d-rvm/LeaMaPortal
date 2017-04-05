@@ -62,9 +62,7 @@
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Agreement_No, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="Agreement_No">Agreement No</option>
-                        </select>
+                        @Html.DropDownList("Agreement_No", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Agreement_No" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
