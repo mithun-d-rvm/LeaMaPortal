@@ -10,7 +10,7 @@
 <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
 <!DOCTYPE html>
 
-<div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
+<div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
     <div class="row">
         <div class="col-md-12 leama-fieldset ">
             <div class="col-md-2 pull-left">
@@ -65,7 +65,7 @@
                     {
                         if (i == Model.PageNumber)
                         {
-                            <input type="button" style="background:green" data-id="@i" value="@i" class="" />
+                            <input type="button" data-id="@i" value="@i" class="pagination-btn" />
                         }
                         else
                         {
