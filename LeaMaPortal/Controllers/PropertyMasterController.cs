@@ -125,66 +125,34 @@ namespace LeaMaPortal.Controllers
                     var propertyMaster = await db.tbl_propertiesmaster.OrderByDescending(r => r.Property_Id).FirstOrDefaultAsync();
                     model.Property_Id = propertyMaster != null ? propertyMaster.Property_Id + 1 : 1;
                 }
+                string facility = null, utility = null;
+                foreach(var propertiesdt in model.PropertiesdtList)
+                {
+                    if (string.IsNullOrWhiteSpace(facility))
+                    {
+                        facility = "(" + model.Property_Id + ",'" + model.Property_ID_Tawtheeq + "','" + model.Unit_ID_Tawtheeq + "','" + propertiesdt.Facility_id + "','" + propertiesdt.Facility_Name + "','" + propertiesdt.Numbers_available + "'," + DateTime.Now.Year + ")";
+                    }
+                    else
+                    {
+                        facility = facility + ",(" + model.Property_Id + ",'" + model.Property_ID_Tawtheeq + "','" + model.Unit_ID_Tawtheeq + "','" + propertiesdt.Facility_id + "','" + propertiesdt.Facility_Name + "','" + propertiesdt.Numbers_available + "'," + DateTime.Now.Year + ")";
+                    }
+                }
+                model.propertiesdt = facility;
+                foreach (var propertiesdt1 in model.Propertiesdt1List)
+                {
+                    if (string.IsNullOrWhiteSpace(utility))
+                    {
+                        utility = "(" + model.Property_Id + ",'" + model.Property_ID_Tawtheeq + "','" + model.Unit_ID_Tawtheeq + "','" + propertiesdt1.Utility_id + "','" + propertiesdt1.Utility_Name + "'," + DateTime.Now.Year + ")";
+                    }
+                    else
+                    {
+                        utility = utility + ",(" + model.Property_Id + ",'" + model.Property_ID_Tawtheeq + "','" + model.Unit_ID_Tawtheeq + "','" + propertiesdt1.Utility_id + "','" + propertiesdt1.Utility_Name + "'," + DateTime.Now.Year + ")";
+                    }
+                }
+                model.propertiesdt1 = utility;
                 object[] param = Helper.GetMySqlParameters<PropertyViewModel>(model, PFlag, System.Web.HttpContext.Current.User.Identity.Name);
 
-                var _result = await db.Database.SqlQuery<object>(@"CALL Usp_Properties_All(@PFlag,
-@PProperty_Flag ,
-@PProperty_ID_Tawtheeq ,
-@PProperty_Id  ,
-@PProperty_Name , 
-@PCompound, 
-@PZone , 
-@Psector, 
-@Pplotno , 
-@Pownedbyregistrant  , 
-@PProperty_Usage , 
-@PProperty_Type , 
-@PCommercial_villa  , 
-@PStreet_Name , 
-@PExternalrefno , 
-@PNoofoffloors  , 
-@PNoofunits  , 
-@PBuiltarea  ,
-@PPlotarea  , 
-@PLeasablearea  , 
-@Pcommonarea  , 
-@Pcompletion_Date  , 
-@PAEDvalue  ,
-@PPurchased_date  , 
-@PValued_Date  , 
-@PStatus ,
-@PVacant_Start_Date  , 
-@PCaretaker_Name , 
-@PCaretaker_ID  , 
-@PRental_Rate_Month  ,
-@PComments  ,
-@PRef_unit_Property_ID_Tawtheeq , 
-@PRef_Unit_Property_ID,
-@PRef_Unit_Property_Name, 
-@PUnit_ID_Tawtheeq, 
-@PUnit_Property_Name , 
-@PExternalrefno_unit ,
-@PAEDvalue_unit  , 
-@PPurchased_date_unit  , 
-@PValued_Date_unit  , 
-@PStatus_unit ,
-@PVacant_Start_Date_Unit  ,
-@PRental_Rate_Month_unit  , 
-@PFloorno,
-@PFloorlevel , 
-@PProperty_Usage_unit , 
-@PProperty_Type_unit , 
-@PTotal_Area  , 
-@PUnit_Common_Area  , 
-@PCommon_Area  , 
-@PParkingno  , 
-@PUnitcomments,
-@PCreateduser , 
-@PCompany_occupied_Flag  , 
-@Ppropertiesdt,
-@Ppropertiesdt1
-
-                                    )", param).ToListAsync();
+                var _result = await db.Database.SqlQuery<object>(@"call leama.Usp_Properties_All(@PFlag, @PProperty_Flag, @PProperty_ID_Tawtheeq, @PProperty_Id, @PProperty_Name, @PCompound, @PZone, @Psector, @Pplotno, @Pownedbyregistrant, @PProperty_Usage, @PProperty_Type, @PCommercial_villa, @PStreet_Name, @PAddress1, @PAddress2, @PAddress3, @PRegion_Name, @PCountry, @PCity, @PState, @PExternalrefno, @PNoofoffloors, @PNoofunits, @PBuiltarea, @PPlotarea, @PLeasablearea, @Pcommonarea, @Pcompletion_Date, @PAEDvalue, @PPurchased_date, @PValued_Date, @PStatus, @PVacant_Start_Date, @PCaretaker_Name, @PCaretaker_ID, @PRental_Rate_Month, @PComments, @PRef_unit_Property_ID_Tawtheeq, @PRef_Unit_Property_ID, @PRef_Unit_Property_Name, @PUnit_ID_Tawtheeq, @PUnit_Property_Name, @PExternalrefno_unit, @PAEDvalue_unit, @PPurchased_date_unit, @PValued_Date_unit, @PStatus_unit, @PVacant_Start_Date_Unit, @PRental_Rate_Month_unit, @PFloorno, @PFloorlevel, @PProperty_Usage_unit, @PProperty_Type_unit, @PTotal_Area, @PUnit_Common_Area, @PCommon_Area, @PParkingno, @PUnitcomments, @PCreateduser, @PCompany_occupied_Flag, @Ppropertiesdt, @Ppropertiesdt1)", param).ToListAsync();
 
                 return RedirectToAction("../Master/Index", new { selected = 9 });
 
@@ -220,6 +188,26 @@ namespace LeaMaPortal.Controllers
                 PropertyViewModel model = Map(properties);
                 ViewBag.Caretaker_ID = new SelectList(db.tbl_caretaker.Where(x => x.Delmark != "*").OrderBy(x => x.Id), "Caretaker_id", "Caretaker_id", model.Caretaker_ID);
                 ViewBag.PropertyId = model.Property_Id;
+
+                model.PropertiesdtList = db.tbl_propertiesdt.Where(x => x.Property_Id == model.Property_Id).Select(x => new Propertiesdt()
+                {
+                    Facility_id = x.Facility_id,
+                    Facility_Name = x.Facility_Name,
+                    Numbers_available = x.Numbers_available,
+                    Property_Id = x.Property_Id.HasValue ? x.Property_Id.Value : 0,
+                    Property_ID_Tawtheeq = x.Property_ID_Tawtheeq,
+                    Unit_ID_Tawtheeq = x.Unit_ID_Tawtheeq
+                }).ToList();
+
+                model.Propertiesdt1List = db.tbl_propertiesdt1.Where(x => x.Property_Id == model.Property_Id).Select(x => new Propertiesdt1()
+                {
+                    Property_Id = x.Property_Id.HasValue ? x.Property_Id.Value : 0,
+                    Property_ID_Tawtheeq = x.Property_ID_Tawtheeq,
+                    Unit_ID_Tawtheeq = x.Unit_ID_Tawtheeq,
+                    Utility_id = x.Utility_id,
+                    Utility_Name = x.Utility_Name
+                }).ToList();
+
                 model.Property_Usage_unitList = new SelectList("", "", "");
                 model.Property_Type_unitList = new SelectList("", "", "");
                 model.Caretaker_IDList = new SelectList("", "", "");
@@ -303,6 +291,13 @@ namespace LeaMaPortal.Controllers
 @PProperty_Type , 
 @PCommercial_villa  , 
 @PStreet_Name , 
+@PAddress1,
+@PAddress2,
+@PAddress3,
+@PRegion_Name,
+@PCountry,
+@PCity,
+@PState
 @PExternalrefno , 
 @PNoofoffloors  , 
 @PNoofunits  , 
@@ -350,12 +345,12 @@ namespace LeaMaPortal.Controllers
 
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
-                catch
+                catch(Exception ex)
                 {
                     return Json(new MessageResult() { Errors = "Internal server error" }, JsonRequestBehavior.AllowGet);
                 }
             }
-            catch
+            catch(Exception e)
             {
                 return View();
             }

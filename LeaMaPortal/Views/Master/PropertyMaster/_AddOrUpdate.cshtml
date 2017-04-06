@@ -939,11 +939,11 @@
                                
                                 <div class="col-md-3">
                                     Utility ID
-                                    @Html.DropDownList("Utility_ID", null, "--Select--", htmlAttributes: new { @class = "master-form-input", @required = "required" })
+                                    @Html.DropDownList("Utility_ID", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
                                 </div>
                                 <div class="col-md-4">
                                     Utility Name
-                                    @Html.DropDownList("Utility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input", @required = "required" })
+                                    @Html.DropDownList("Utility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
                                 </div>
                                 <div class="col-md-1">
                                     <br />
@@ -1075,8 +1075,15 @@
     });
 
     function addPropertiesdt(e) {
-        var Facility_id =$("#Facility_Name").val();
-        var Facility_Name = $("#Facility_id option:selected").text();
+        debugger;
+        //var Utility_id = $("#Utility_ID option:selected").text();
+        //var Utility_Name = $("#Utility_ID").val();
+
+        //var fid = $("#Facility_id option:selected").text();
+        //var fname = $("#Facility_id").val();
+
+        var Facility_id = $("#Facility_id option:selected").text();
+        var Facility_Name = $("#Facility_id").val();
         var Numbers_available = $("#Numbers_available").val();
         var html = "<tr class=''> <td class=''>" +
  "<div class='col-md-3'>" +
