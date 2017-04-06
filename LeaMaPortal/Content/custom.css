@@ -30,7 +30,9 @@ input[type="button"]:focus, input[type="button"]:active, button:focus
 .textarea.form-control{
     resize:none !important;
 }
-
+ul.dropdown-menu.drp-mnu li:hover{
+background-color: #eff3f6;
+}
 
 label{
     font-weight:normal !important;
