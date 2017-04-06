@@ -124,7 +124,7 @@
                 </div>
                 <div class="col-md-6">
                     @*<input type="text" class="master-form-input form-control" />*@
-                    @Html.DropDownList("UnitIDTawtheeq", null, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.DropDownList("UnitIDTawtheeq", null, new { htmlAttributes = new { @class = "master-form-input", @Name = "UnitIDTawtheeq" } })
                 </div>
             </div>
             <div class="col-md-12 p-b-7" id="UnitPropertyName">
@@ -133,7 +133,7 @@
                 </div>
                 <div class="col-md-6">
                     @*<input type="text" class="master-form-input form-control" />*@
-                    @Html.DropDownList("UnitPropertyName", null, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.DropDownList("UnitPropertyName", null, new { htmlAttributes = new { @class = "master-form-input", @Name = "UnitPropertyName" } })
                 </div>
             </div>
         </div>
@@ -202,11 +202,12 @@
                     @Html.LabelFor(model => model.Security_Flag, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-6">
-                    <select class="master-form-input form-control">
-                        <option> Payment 1 </option>
-                        <option> Payment 2 </option>
-                        <option> Payment 3 </option>
-                    </select>
+                    @*<select class="master-form-input form-control">
+                            <option> Payment 1 </option>
+                            <option> Payment 2 </option>
+                            <option> Payment 3 </option>
+                        </select>*@
+                    @Html.DropDownList("SecurityFlag", null, new { htmlAttributes = new { @class = "master-form-input", @Name = "SecurityFlag" } })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -214,7 +215,7 @@
                     @Html.LabelFor(model => model.Security_chequeno, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.Security_chequeno, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Security_chequeno, new { htmlAttributes = new { @class = "master-form-input", @Name = "SecurityChequeno", disabled = "disabled" } })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -222,7 +223,7 @@
                     @Html.LabelFor(model => model.Security_chequedate, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.Security_chequedate, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Security_chequedate, new { htmlAttributes = new { @class = "master-form-input", @Name = "SecurityChequedate", disabled = "disabled" } })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -290,13 +291,52 @@
 <script>
     $('input[type=radio][name=SingleMultipleFlag]').change(function () {
         if (this.value == 'Multiple') {
-            $("#UnitPropertyId").hide();
-            $("#UnitPropertyName").hide();
+            $('#UnitIDTawtheeq').attr('disabled', 'disabled');
+            $('#UnitPropertyName').attr('disabled', 'disabled');
+            //$("#UnitPropertyId").hide();
+            //$("#UnitPropertyName").hide();
         }
         else {
-            $("#UnitPropertyId").show();
-            $("#UnitPropertyName").show();
+            $('#UnitIDTawtheeq').removeAttr('disabled');
+            $('#UnitPropertyName').removeAttr('disabled');
+            //$("#UnitPropertyId").show();
+            //$("#UnitPropertyName").show();
         }
+        //$.ajax(
+        //       {
+        //           url: "../Tca/GetPropertyDetails",
+        //           // dataType: "jsonp",
+        //           method: "GET",
+        //           data: { Type: this.value }, //FormData(form.get(0)),
+        //           contentType: "application/json",
+
+        //           success: function (response) {
+        //               debugger;
+        //               if (response != null) {
+        //                   $("#TenantId").empty();
+        //                   $("#TenantName").empty();
+        //                   for (var i = 0; i < response.TenantId.length; i++) {
+        //                       var option = $("<option/>");
+        //                       option.attr("value", response.TenantId[i].Value).text(response.TenantId[i].Text);
+        //                       $("#TenantId").append(option);
+        //                   }
+        //                   for (var i = 0; i < response.TenantName.length; i++) {
+        //                       var option = $("<option/>");
+        //                       option.attr("value", response.TenantName[i].Value).text(response.TenantName[i].Text);
+        //                       $("#TenantName").append(option);
+        //                   }
+        //                   //$("#TenentId").val(response.TenentId);
+        //                   //$("#TenentName").val(response.TenentName);
+        //               }
+        //           },
+        //           error: function (jqXhr, textStatus, errorThrown) {
+        //               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+        //           },
+        //           complete: function () {
+        //               // $("#").addClass("hide");
+        //           }
+
+        //       });
     });
 
     $("#TenantType").on('change', function (e) {
@@ -314,19 +354,18 @@
                     success: function (response) {
                         debugger;
                         if (response != null) {
+                            $("#TenantId").empty();
+                            $("#TenantName").empty();
                             for (var i = 0; i < response.TenantId.length; i++) {
                                 var option = $("<option/>");
                                 option.attr("value", response.TenantId[i].Value).text(response.TenantId[i].Text);
                                 $("#TenantId").append(option);
-                                var optionTenantName = $("<option/>");
-                                optionTenantName.attr("value", response.TenantId[i].Text).text(response.TenantId[i].Value);
-                                $("#TenentName").append(optionTenantName);
                             }
-                            //for (var i = 0; i < response.TenantName.length; i++) {
-                            //    var option = $("<option/>");
-                            //    option.attr("value", response.TenantName[i].Value).text(response.TenantName[i].Text);
-                            //    $("#TenantName").append(option);
-                            //}
+                            for (var i = 0; i < response.TenantName.length; i++) {
+                                var option = $("<option/>");
+                                option.attr("value", response.TenantName[i].Value).text(response.TenantName[i].Text);
+                                $("#TenantName").append(option);
+                            }
                             //$("#TenentId").val(response.TenentId);
                             //$("#TenentName").val(response.TenentName);
                         }
@@ -340,6 +379,22 @@
 
                 });
         }
+    });
+
+    $("#SecurityFlag").change(function () {
+        debugger;
+        var SecurityFlag = $("#SecurityFlag").val();
+        if (SecurityFlag != undefined && (SecurityFlag == "Cheque" || SecurityFlag == "Online" || SecurityFlag == "Cheque without date")) {
+            $('#Security_chequeno').removeAttr('disabled');
+            $('#Security_chequedate').removeAttr('disabled');
+            //$("SecurityChequeno").prop("disabled", false);
+            //$("SecurityChequedate").prop("disabled", false);
+        }
+        else {
+            $('#Security_chequeno').attr('disabled', true);
+            $('#Security_chequedate').attr('disabled', true);
+        }
+        return;
     });
 
     $("#TenantId").change(function () {
