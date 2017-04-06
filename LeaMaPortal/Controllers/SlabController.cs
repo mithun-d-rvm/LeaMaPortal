@@ -116,9 +116,9 @@ namespace LeaMaPortal.Controllers
                     //slab.Residence_type = model.Residence_type;
                     //db.tbl_slabmaster.Add(slab);
                     object[] param = { new MySqlParameter("@PFlag", PFlag),
-                                           new MySqlParameter("@PUtility_id",model.Utility_id),
-                                            new MySqlParameter("@PUtility_Name",model.Utility_Name),
                                             new MySqlParameter("@Pslabid",model.SlabId),
+                                            new MySqlParameter("@PUtility_id",model.Utility_id),
+                                            new MySqlParameter("@PUtility_Name",model.Utility_Name),                                            
                                             new MySqlParameter("@PUnit_From",model.Unit_From),
                                             new MySqlParameter("@PUnitto",model.Unit_to),
                                             new MySqlParameter("@Prate",model.rate),
@@ -126,7 +126,7 @@ namespace LeaMaPortal.Controllers
                                             new MySqlParameter("@PResidence_type",model.Residence_type),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
-                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Slabmaster_All(@PFlag,@PUtility_id,@PUtility_Name,@Pslabid,@PUnit_From,@PUnitto,@Prate,@PColour,@PResidence_type,@PCreateduser)", param).ToListAsync();
+                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Slabmaster_All(@PFlag,@Pslabid,@PUtility_id,@PUtility_Name,@PUnit_From,@PUnitto,@Prate,@PColour,@PResidence_type,@PCreateduser)", param).ToListAsync();
                     await db.SaveChangesAsync();
                 }
                 return Json(result, JsonRequestBehavior.AllowGet);
