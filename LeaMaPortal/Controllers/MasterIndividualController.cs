@@ -59,6 +59,7 @@ namespace LeaMaPortal.Controllers
             try
             {
                 TenantIndividualViewModel model = new TenantIndividualViewModel();
+                model.Marital_Status = Common.DefaultMaridalStatus;
                 model.Title = Common.DefaultTitle;
                 var _titleResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
                 ViewBag.TitleDisplay = new SelectList(_titleResult, Common.DefaultTitle);

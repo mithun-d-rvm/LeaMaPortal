@@ -48,6 +48,7 @@ namespace LeaMaPortal
         public const string TenantCompanyDocumentContainer = "Documents/TenantCompany/";
         public static List<string> Nationality = new List<string>() { "UAE", "Non-UAE"};
         public static string DefaultNationality="UAE";
+        public static string DefaultMaridalStatus = "Family";
     }
     public class FormMaster
     {
