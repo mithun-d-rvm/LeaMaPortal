@@ -95,7 +95,6 @@
                                 {
                                     Text = "Compound 2",
                                     Value = "Compound 2",
-                                    Selected = true
                                 });
                                 Compound.Add(new SelectListItem
                                 {
@@ -130,7 +129,6 @@
                                 {
                                     Text = "Zone 2",
                                     Value = "Zone 2",
-                                    Selected = true
                                 });
                                 Zone.Add(new SelectListItem
                                 {
@@ -649,8 +647,8 @@
                         </div>
                         <div class="col-md-8">
                             @*<input type="text" class="form-control master-form-input" />*@
-                            @Html.EditorFor(model => model.Purchased_date, new { htmlAttributes = new { @class = "form-control master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Purchased_date, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Purchased_date_unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Purchased_date_unit, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -659,8 +657,8 @@
                         </div>
                         <div class="col-md-8">
                             @*<input type="text" class="form-control master-form-input" />*@
-                            @Html.EditorFor(model => model.Valued_Date, new { htmlAttributes = new { @class = "form-control master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Valued_Date, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Valued_Date_unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Valued_Date_unit, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -678,8 +676,8 @@
                             Available From:
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Vacant_Start_Date, new { htmlAttributes = new { @class = "form-control master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Vacant_Start_Date, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Vacant_Start_Date_Unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Vacant_Start_Date_Unit, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -759,8 +757,8 @@
                             Common Area:
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.commonarea, new { htmlAttributes = new { @class = "form-control master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.commonarea, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Common_Area, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Common_Area, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -831,15 +829,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        &nbsp;
-                    </div>
-                    <div class="col-md-4">
-                        <button class="btn master-form-btn">Submit</button>
-                    </div>
-                </div>
-
+                
             </div>
             
 
@@ -852,11 +842,11 @@
 
                     <div class="col-md-3">
                         Fecility ID
-                        @Html.DropDownList("Facility_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input", @required = "required" })
+                        @Html.DropDownList("Facility_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
                     </div>
                     <div class="col-md-4">
                         Fecility Name
-                        @Html.DropDownList("Facility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input", @required = "required" })
+                        @Html.DropDownList("Facility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
                     </div>
                     <div class="col-md-3">
                         Numbers Available
@@ -1006,8 +996,34 @@
             
         @*</div>
     </div>*@
+                                <div class="col-md-12 form-input-padding">
+                                    <div class="col-md-4">
+                                        &nbsp;
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn master-form-btn">Submit</button>
+                                    </div>
+                                </div>
                                 }
 <script>
+
+    $("#Ref_unit_Property_ID_Tawtheeq").change(function () {
+        debugger;
+        $("#Ref_Unit_Property_ID").val($("#Ref_unit_Property_ID_Tawtheeq option:selected").val());
+        $("#Ref_Unit_Property_Name").val($("#Ref_unit_Property_ID_Tawtheeq option:selected").val());
+        return;
+    });
+    $("#Ref_Unit_Property_ID").change(function () {
+        $("#Ref_unit_Property_ID_Tawtheeq").val($("#Ref_Unit_Property_ID option:selected").val());
+        $("#Ref_Unit_Property_Name").val($("#Ref_Unit_Property_ID option:selected").val());
+        return;
+    });
+    $("#Ref_Unit_Property_Name").change(function () {
+        $("#Ref_Unit_Property_ID").val($("#Ref_Unit_Property_Name option:selected").val());
+        $("#Ref_unit_Property_ID_Tawtheeq").val($("#Ref_Unit_Property_Name option:selected").val());
+        return;
+    });
+
 
     $("#Utility_ID").change(function () {
         $("#Utility_Name").val($("#Utility_ID option:selected").text());
@@ -1186,10 +1202,12 @@
     });
     $('input[type=radio][name=Property_Flag]').change(function () {
         if (this.value == 'Property') {
+           // $("select option").prop("selected", false);
             $("#TypeProperty").show();
             $("#TypeUnit").hide();
         }
         else {
+           // $("select option").prop("selected", false);
             $("#TypeProperty").hide();
             $("#TypeUnit").show();
         }
@@ -1224,13 +1242,16 @@
         // $("#Title").val($("#TitleDisplay").val());
     });
     $(document).ready(function () {
+        debugger;
         $('#Status_unit').attr('disabled', 'disabled');
         $('#Status').attr('disabled', 'disabled');
         if ($("#unit")[0].checked) {
             $("#unit").prop('checked', true).change();
+            //$("select option").prop("selected", false);
         }
         else {
             $("#property").prop('checked', true).change();
+           //$("select option").prop("selected", false);
         }
         //$("#property").prop('checked', true).change();
     });

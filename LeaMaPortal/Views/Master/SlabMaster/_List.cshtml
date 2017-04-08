@@ -169,6 +169,7 @@
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
+                    $("body").scrollTop(0);
                 }
             });
     });
