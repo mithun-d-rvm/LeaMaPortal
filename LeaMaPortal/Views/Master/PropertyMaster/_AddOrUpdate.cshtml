@@ -5,7 +5,7 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("Create","PropertyMaster",FormMethod.Post))
+@using (Html.BeginForm("Create", "PropertyMaster", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -37,10 +37,12 @@
                                         <span> Unit </span>
                                     </div>
                                 </div>*@
-                            @Html.RadioButtonFor(model => model.Property_Flag, "Property") Property
-                            @Html.RadioButtonFor(model => model.Property_Flag, "Unit") Unit
+                            @Html.RadioButtonFor(model => model.Property_Flag, "Property",new { @id = "property" }) Property
+                            @Html.RadioButtonFor(model => model.Property_Flag, "Unit", new { @id = "unit" }) Unit
                         </div>
                     </div>
+                </div>
+                <div class="col-md-6">
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
                             Property ID:
@@ -52,6 +54,12 @@
                             @Html.ValidationMessageFor(model => model.Property_Id, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                </div>
+
+
+                <div class="col-md-6" id="TypeProperty">
+
+
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
                             Property Thwtheeq ID:
@@ -80,19 +88,18 @@
                                 List<SelectListItem> Compound = new List<SelectListItem>();
                                 Compound.Add(new SelectListItem
                                 {
-                                    Text = "Manly",
-                                    Value = "Manly"
+                                    Text = "Compound 1",
+                                    Value = "Compound 1"
                                 });
                                 Compound.Add(new SelectListItem
                                 {
-                                    Text = "Chennai",
-                                    Value = "Chennai",
-                                    Selected = true
+                                    Text = "Compound 2",
+                                    Value = "Compound 2",
                                 });
                                 Compound.Add(new SelectListItem
                                 {
-                                    Text = "London",
-                                    Value = "London"
+                                    Text = "Compound 3",
+                                    Value = "Compound 3"
                                 });
                             }
 
@@ -122,7 +129,6 @@
                                 {
                                     Text = "Zone 2",
                                     Value = "Zone 2",
-                                    Selected = true
                                 });
                                 Zone.Add(new SelectListItem
                                 {
@@ -187,7 +193,8 @@
                         <div class="col-md-8">
                             <div class="col-md-6" style="margin-left: -20px;">
                                 <div class="col-md-1">
-                                    <input type="checkbox" class="input-checkbox">
+                                    @Html.HiddenFor(model => model.ownedbyregistrant, new { @id = "hdnOwnedByRegistrant" })
+                                    @Html.CheckBoxFor(model => model.ownedbyregistrant.HasValue, new { @id = "chkOwnedByRegistrant",@class= "input-checkbox" })
                                 </div>
                             </div>
                         </div>
@@ -202,7 +209,7 @@
                                     <option> 1 Year old </option>
                                     <option> More than 1 year </option>
                                 </select>*@
-                            @{
+                            @*@{
                                 List<SelectListItem> PropertyUsage = new List<SelectListItem>();
                                 PropertyUsage.Add(new SelectListItem
                                 {
@@ -222,8 +229,8 @@
                                 });
                             }
 
-                            @Html.DropDownListFor(model => model.Property_Usage, PropertyUsage, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })
-
+                            @Html.DropDownListFor(model => model.Property_Usage, PropertyUsage, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })*@
+                            @Html.DropDownList("Property_Usage", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-Select-" })
 
                         </div>
                     </div>
@@ -237,7 +244,7 @@
                                     <option> Category 2 </option>
                                     <option> Category 3 </option>
                                 </select>*@
-                            @{
+                            @*@{
                                 List<SelectListItem> PropertyCategory = new List<SelectListItem>();
                                 PropertyCategory.Add(new SelectListItem
                                 {
@@ -257,8 +264,8 @@
                                 });
                             }
 
-                            @Html.DropDownListFor(model => model.Property_Type, PropertyCategory, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })
-
+                            @Html.DropDownListFor(model => model.Property_Type, PropertyCategory, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })*@
+                            @Html.DropDownList("Property_Type", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-Select-" })
 
                         </div>
                     </div>
@@ -269,7 +276,8 @@
                         <div class="col-md-8">
                             <div class="col-md-6" style="margin-left: -20px;">
                                 <div class="col-md-1">
-                                    <input type="checkbox" class="input-checkbox">
+                                    @Html.HiddenFor(model => model.Commercial_villa, new { @id = "hdnCommercial_villa" })
+                                    @Html.CheckBoxFor(model => model.Commercial_villa.HasValue, new { @id = "chkCommercial_villa", @class = "input-checkbox" })
                                 </div>
                             </div>
                         </div>
@@ -317,32 +325,7 @@
                             Region:
                         </div>
                         <div class="col-md-8">
-                            @*<select class="form-control master-form-input">
-                                    <option> Region 1 </option>
-                                    <option> Region 2 </option>
-                                    <option> Region 3 </option>
-                                </select>*@
-                            @{
-                                List<SelectListItem> Region = new List<SelectListItem>();
-                                Region.Add(new SelectListItem
-                                {
-                                    Text = "Manly",
-                                    Value = "Manly"
-                                });
-                                Region.Add(new SelectListItem
-                                {
-                                    Text = "Chennai",
-                                    Value = "Chennai",
-                                    Selected = true
-                                });
-                                Region.Add(new SelectListItem
-                                {
-                                    Text = "London",
-                                    Value = "London"
-                                });
-                            }
-
-                            @Html.DropDownListFor(model => model.Region_Name, Region, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })
+                            @Html.DropDownList("Region_Name", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-Select-" })
 
 
                         </div>
@@ -504,7 +487,7 @@
                 </div>
 
 
-                <div class="col-md-6">
+                <div class="col-md-6" id="TypeUnit">
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
                             Main Property Tawtheeq ID:
@@ -515,7 +498,7 @@
                                     <option> ID 2 </option>
                                     <option> ID 3 </option>
                                 </select>*@
-                            @{
+                            @*@{
                                 List<SelectListItem> Taqtheeq = new List<SelectListItem>();
                                 Taqtheeq.Add(new SelectListItem
                                 {
@@ -532,9 +515,9 @@
                                     Text = "ID 3",
                                     Value = "ID 3"
                                 });
-                            }
+                            }*@
 
-                            @Html.DropDownListFor(model => model.Ref_unit_Property_ID_Tawtheeq, Taqtheeq, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })
+                            @Html.DropDownList("Ref_unit_Property_ID_Tawtheeq", null, "-- Select --", htmlAttributes: new { @class = "master-form-input",@placeholder= "-- Select --" })
 
 
                         </div>
@@ -549,7 +532,7 @@
                                     <option> ID 2 </option>
                                     <option> ID 3 </option>
                                 </select>*@
-                            @{
+                            @*@{
                                 List<SelectListItem> MainProperty = new List<SelectListItem>();
                                 MainProperty.Add(new SelectListItem
                                 {
@@ -566,9 +549,9 @@
                                     Text = "ID 3",
                                     Value = "ID 3"
                                 });
-                            }
+                            }*@
 
-                            @Html.DropDownListFor(model => model.Ref_Unit_Property_ID, MainProperty, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })
+                            @Html.DropDownList("Ref_Unit_Property_ID", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-- Select --" })
 
 
                         </div>
@@ -583,7 +566,7 @@
                                     <option> Real Estate </option>
                                     <option> Bunglow </option>
                                 </select>*@
-                            @{
+                            @*@{
                                 List<SelectListItem> MainPropertyName = new List<SelectListItem>();
                                 MainPropertyName.Add(new SelectListItem
                                 {
@@ -600,9 +583,9 @@
                                     Text = "Bunglow",
                                     Value = "Bunglow"
                                 });
-                            }
+                            }*@
 
-                            @Html.DropDownListFor(model => model.Ref_Unit_Property_Name, MainPropertyName, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })
+                            @Html.DropDownList("Ref_Unit_Property_Name", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-- Select --" })
 
 
                         </div>
@@ -664,8 +647,8 @@
                         </div>
                         <div class="col-md-8">
                             @*<input type="text" class="form-control master-form-input" />*@
-                            @Html.EditorFor(model => model.Purchased_date, new { htmlAttributes = new { @class = "form-control master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Purchased_date, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Purchased_date_unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Purchased_date_unit, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -674,18 +657,18 @@
                         </div>
                         <div class="col-md-8">
                             @*<input type="text" class="form-control master-form-input" />*@
-                            @Html.EditorFor(model => model.Valued_Date, new { htmlAttributes = new { @class = "form-control master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Valued_Date, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Valued_Date_unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Valued_Date_unit, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
-                            Occupancy Status:
+                            Occupancy Status (Unit):
                         </div>
                         <div class="col-md-8">
-                            @*<input type="text" class="form-control master-form-input" />*@
-                            @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.Status_unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Status_unit, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -693,8 +676,8 @@
                             Available From:
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Vacant_Start_Date, new { htmlAttributes = new { @class = "form-control master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Vacant_Start_Date, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Vacant_Start_Date_Unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Vacant_Start_Date_Unit, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -735,7 +718,7 @@
                                     <option> ID 2 </option>
                                     <option> ID 3 </option>
                                 </select>*@
-                            @Html.DropDownListFor(model => model.Property_Usage_unit, Model.Property_Usage_unitList, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })
+                            @Html.DropDownList("Property_Usage_unit", null, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input", @placeholder = "-Select-" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -748,7 +731,7 @@
                                     <option> ID 2 </option>
                                     <option> ID 3 </option>
                                 </select>*@
-                            @Html.DropDownListFor(model => model.Property_Type_unit, Model.Property_Type_unitList, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })
+                            @Html.DropDownList("Property_Type_unit", null, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input", @placeholder = "-Select-" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -774,8 +757,8 @@
                             Common Area:
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.commonarea, new { htmlAttributes = new { @class = "form-control master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.commonarea, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Common_Area, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Common_Area, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -796,9 +779,13 @@
                             @Html.ValidationMessageFor(model => model.Unitcomments, "", new { @class = "text-danger" })
                         </div>
                     </div>
+
+
+                </div>
+                <div class="col-md-6">
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
-                            Car Taker Name:
+                            Caretaker Name:
                         </div>
                         <div class="col-md-8">
                             @Html.EditorFor(model => model.Caretaker_Name, new { htmlAttributes = new { @class = "form-control master-form-input" } })
@@ -807,7 +794,7 @@
                     </div>
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
-                            Car Taker ID:
+                            Caretaker ID:
                         </div>
                         <div class="col-md-8">
                             @*<select class="form-control master-form-input">
@@ -815,17 +802,17 @@
                                     <option> ID 2 </option>
                                     <option> ID 3 </option>
                                 </select>*@
-                            @Html.DropDownList("Caretaker", null, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })
+                            @Html.DropDownList("Caretaker_ID", null, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
-                            Occupancy Status (Unit):
+                            Occupancy Status:
                         </div>
                         <div class="col-md-8">
-                            @*<input type="text" class="form-control master-form-input" />*@
-                            @Html.EditorFor(model => model.Status_unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Status_unit, "", new { @class = "text-danger" })
+                            @*<input type="text" class="master-form-input" />*@
+                            @Html.EditorFor(model => model.Status, new { disabled = "disabled", htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -835,20 +822,14 @@
                         <div class="col-md-8">
                             <div class="col-md-6" style="margin-left: -20px;">
                                 <div class="col-md-1">
-                                    <input type="checkbox" class="input-checkbox">
+                                    @Html.HiddenFor(model => model.Company_occupied_Flag, new { @id = "hdnCompany_occupied_Flag" })
+                                    @Html.CheckBoxFor(model => model.Company_occupied_Flag.HasValue, new { @id = "ChkCompany_occupied_Flag", @class = "input-checkbox" })
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            &nbsp;
-                        </div>
-                        <div class="col-md-4">
-                            <button class="btn master-form-btn">Submit</button>
-                        </div>
-                    </div>
                 </div>
+                
             </div>
             
 
@@ -861,11 +842,11 @@
 
                     <div class="col-md-3">
                         Fecility ID
-                        @Html.DropDownList("Facility_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input", @required = "required" })
+                        @Html.DropDownList("Facility_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
                     </div>
                     <div class="col-md-4">
                         Fecility Name
-                        @Html.DropDownList("Facility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input", @required = "required" })
+                        @Html.DropDownList("Facility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
                     </div>
                     <div class="col-md-3">
                         Numbers Available
@@ -948,11 +929,11 @@
                                
                                 <div class="col-md-3">
                                     Utility ID
-                                    @Html.DropDownList("Utility_ID", null, "--Select--", htmlAttributes: new { @class = "master-form-input", @required = "required" })
+                                    @Html.DropDownList("Utility_ID", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
                                 </div>
                                 <div class="col-md-4">
                                     Utility Name
-                                    @Html.DropDownList("Utility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input", @required = "required" })
+                                    @Html.DropDownList("Utility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
                                 </div>
                                 <div class="col-md-1">
                                     <br />
@@ -1015,8 +996,34 @@
             
         @*</div>
     </div>*@
+                                <div class="col-md-12 form-input-padding">
+                                    <div class="col-md-4">
+                                        &nbsp;
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn master-form-btn">Submit</button>
+                                    </div>
+                                </div>
                                 }
 <script>
+
+    $("#Ref_unit_Property_ID_Tawtheeq").change(function () {
+        debugger;
+        $("#Ref_Unit_Property_ID").val($("#Ref_unit_Property_ID_Tawtheeq option:selected").val());
+        $("#Ref_Unit_Property_Name").val($("#Ref_unit_Property_ID_Tawtheeq option:selected").val());
+        return;
+    });
+    $("#Ref_Unit_Property_ID").change(function () {
+        $("#Ref_unit_Property_ID_Tawtheeq").val($("#Ref_Unit_Property_ID option:selected").val());
+        $("#Ref_Unit_Property_Name").val($("#Ref_Unit_Property_ID option:selected").val());
+        return;
+    });
+    $("#Ref_Unit_Property_Name").change(function () {
+        $("#Ref_Unit_Property_ID").val($("#Ref_Unit_Property_Name option:selected").val());
+        $("#Ref_unit_Property_ID_Tawtheeq").val($("#Ref_Unit_Property_Name option:selected").val());
+        return;
+    });
+
 
     $("#Utility_ID").change(function () {
         $("#Utility_Name").val($("#Utility_ID option:selected").text());
@@ -1084,8 +1091,15 @@
     });
 
     function addPropertiesdt(e) {
-        var Facility_id =$("#Facility_Name").val();
-        var Facility_Name = $("#Facility_id option:selected").text();
+        debugger;
+        //var Utility_id = $("#Utility_ID option:selected").text();
+        //var Utility_Name = $("#Utility_ID").val();
+
+        //var fid = $("#Facility_id option:selected").text();
+        //var fname = $("#Facility_id").val();
+
+        var Facility_id = $("#Facility_id option:selected").text();
+        var Facility_Name = $("#Facility_id").val();
         var Numbers_available = $("#Numbers_available").val();
         var html = "<tr class=''> <td class=''>" +
  "<div class='col-md-3'>" +
@@ -1134,15 +1148,15 @@
     });
 
 
-    $("#Caretaker").on('change', function (e) {
-        var region = $("#Caretaker").val();
-        if (region != "" && region != null) {
+    $("#Caretaker_ID").on('change', function (e) {
+        var caretaker = $("#Caretaker_ID").val();
+        if (caretaker != "" && caretaker != null) {
             $.ajax(
                 {
                     url: "../Caretaker/GetCaretakerName",
                     // dataType: "jsonp",
                     method: "GET",
-                    data: { Id: $("#Caretaker").val() }, //FormData(form.get(0)),
+                    data: { Id: $("#Caretaker_ID").val() }, //FormData(form.get(0)),
                     contentType: "application/json",
 
                     success: function (response) {
@@ -1160,5 +1174,85 @@
 
                 });
         }
+    });
+    $('input[type=checkbox][id=ChkCompany_occupied_Flag]').change(function () {
+        debugger;
+        if (this.checked) {
+            $("#hdnCompany_occupied_Flag").val(1);
+        }
+        else {
+            $("#hdnCompany_occupied_Flag").val(null);
+        }
+    });
+    $('input[type=checkbox][id=chkCommercial_villa]').change(function () {
+        if (this.checked) {
+            $("#hdnCommercial_villa").val(1);
+        }
+        else {
+            $("#hdnCommercial_villa").val(null);
+        }
+    });
+    $('input[type=checkbox][id=chkOwnedByRegistrant]').change(function () {
+        if (this.checked) {
+            $("#hdnOwnedByRegistrant").val(1);
+        }
+        else {
+            $("#hdnOwnedByRegistrant").val(null);
+        }
+    });
+    $('input[type=radio][name=Property_Flag]').change(function () {
+        if (this.value == 'Property') {
+           // $("select option").prop("selected", false);
+            $("#TypeProperty").show();
+            $("#TypeUnit").hide();
+        }
+        else {
+           // $("select option").prop("selected", false);
+            $("#TypeProperty").hide();
+            $("#TypeUnit").show();
+        }
+    });
+    $("#Region_Name").on('change', function (e) {
+        debugger;
+        var region = $("#Region_Name").val();
+        if (region != "" && region != null) {
+            $.ajax(
+                {
+                    url: "../Region/GetCountry",
+                    // dataType: "jsonp",
+                    method: "GET",
+                    data: { region: $("#Region_Name").val() }, //FormData(form.get(0)),
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        if (response != null) {
+                            $("#Country").val(response);
+                        }
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+        }
+        // $("#Title").val($("#TitleDisplay").val());
+    });
+    $(document).ready(function () {
+        debugger;
+        $('#Status_unit').attr('disabled', 'disabled');
+        $('#Status').attr('disabled', 'disabled');
+        if ($("#unit")[0].checked) {
+            $("#unit").prop('checked', true).change();
+            //$("select option").prop("selected", false);
+        }
+        else {
+            $("#property").prop('checked', true).change();
+           //$("select option").prop("selected", false);
+        }
+        //$("#property").prop('checked', true).change();
     });
 </script>
