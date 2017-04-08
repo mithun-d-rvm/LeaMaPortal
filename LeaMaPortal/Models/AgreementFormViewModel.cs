@@ -12,7 +12,10 @@ namespace LeaMaPortal.Models
     {
         public AgreementFormViewModel()
         {
-
+            AgreementUtility = new AgreementUtilityViewModel();
+            AgreementUtilityList = new List<AgreementUtilityViewModel>();
+            AgreementPd = new AgreementPdcViewModel();
+            AgreementPdcList = new List<AgreementPdcViewModel>();
         }
         public int Id { get; set; }
         [DisplayName("Single Unit or Multiple Unit")]
@@ -72,7 +75,10 @@ namespace LeaMaPortal.Models
         public DateTime Security_chequedate { get; set; }
         [DisplayName("Contract Notice Period Days")]
         public int Notice_Period { get; set; }
-
+        public AgreementPdcViewModel AgreementPd { get; set; }
+        public AgreementUtilityViewModel AgreementUtility { get; set; }
+        public List<AgreementUtilityViewModel> AgreementUtilityList { get; set; }
+        public List<AgreementPdcViewModel> AgreementPdcList { get; set; }
     }
 
     public class DdlTenentDetailsViewModel

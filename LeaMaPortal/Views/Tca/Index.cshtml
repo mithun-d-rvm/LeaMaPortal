@@ -11,10 +11,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <div class="inner-block p-t-5-p">
     <div class="blank">
-       @Html.Partial("Agreement/_AgreementForm")
+        <div id="AgreementForm">
+        </div>
+        <div id="AgreementPdc">
+        </div>
+        <div id="AgreementDocument">
+        </div>
+        <div id="AgreementUtility">
+        </div>
+        <div id="AgreementUnit">
+        </div>
+        <div id="AgreementCheckList">
+        </div>
+        @*@Html.Partial("Agreement/_AgreementForm")*@
 
         <!-- Begin Grid view -->
         <div class="row">
@@ -96,53 +107,15 @@
             </div>
         </div>
         <!-- End Grid view -->
-
         <!-- Trigger the modal with a button -->
         @*<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#closureModal">Closure Modal</button>
 
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#renewalModal">Renewal Modal</button>
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#renewalModal">Renewal Modal</button>
 
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#statusModal">Status Modal</button>*@
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#statusModal">Status Modal</button>*@
 
         <!-- Modal -->
-        <div id="closureModal" class="modal fade" role="dialog">
-            <div class="modal-dialog tca-modal-md">
-
-                <!-- Modal content-->
-                @Html.Partial("Closure/_ClosureDetails")
-                @*<div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Some text in the modal.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" id="test-modal">Test</button>
-                    </div>
-                </div>*@
-
-            </div>
-        </div>
-
-        <div id="renewalModal" class="modal fade" role="dialog">
-            <div class="modal-dialog tca-modal-md">
-                <!-- Modal content-->
-                @Html.Partial("Renewal/_RenewalDetails")
-            </div>
-        </div>
-
-        <div id="statusModal" class="modal fade" role="dialog">
-            <div class="modal-dialog tca-modal-md">
-                <!-- Modal content-->
-                @Html.Partial("Status/_StatusDetails")
-            </div>
-        </div>
-
+      s
     </div>
 </div>
 
@@ -150,7 +123,7 @@
     $("#test-modal").click(function (e) {
         $('#myModal').modal('hide');
     });
-    
+
 </script>
 
 
@@ -220,3 +193,144 @@
 
 
     </script>*@
+
+<script>
+    CreateAgreement();
+    //AgreementPdc();
+    //AgreementDocument();
+    //AgreementUtility();
+    //AgreementUnit();
+    //AgreementCheckList();
+    function CreateAgreement() {
+        debugger;
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Tca/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#AgreementForm").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                debugger;
+                $("#img-loader").addClass("hide");
+                var AgreementNo = $("#Agreement_No").val();
+                alert(AgreementNo);
+                AgreementPdc(AgreementNo);
+                AgreementDocument(AgreementNo);
+                AgreementUtility(AgreementNo);
+                AgreementUnit(AgreementNo);
+                AgreementCheckList(AgreementNo);
+            }
+        });
+    }
+    function AgreementPdc(AgreementNo) {
+        debugger;
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Tca/AgreementPdc",
+            type: "Get",
+            data: { AgreementNo: AgreementNo },
+           // contentType: "application/json",
+           // processData: false,
+            success: function (html) {
+                $("#AgreementPdc").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function AgreementDocument(AgreementNo) {
+        debugger;
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Tca/AgreementDocument",
+            type: "Get",
+            data: { AgreementNo: AgreementNo },
+            //contentType: "application/json",
+            //processData: false,
+            success: function (html) {
+                $("#AgreementDocument").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function AgreementUtility(AgreementNo) {
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Tca/AgreementUtility",
+            type: "Get",
+            data: { AgreementNo: AgreementNo },
+            //contentType: "application/json",
+            //processData: false,
+            success: function (html) {
+                $("#AgreementUtility").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function AgreementUnit(AgreementNo) {
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Tca/AgreementUnit",
+            type: "Get",
+            data: { AgreementNo: AgreementNo },
+            //contentType: "application/json",
+            //processData: false,
+            success: function (html) {
+                $("#AgreementUnit").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function AgreementCheckList(AgreementNo) {
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Tca/AgreementCheckList",
+            type: "Get",
+            data: { AgreementNo: AgreementNo },
+            //contentType: "application/json",
+            //processData: false,
+            success: function (html) {
+                $("#AgreementCheckList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+
+</script>

@@ -1,4 +1,5 @@
-﻿@model LeaMaPortal.Models.AgreementUtilityViewModel
+﻿@*@model LeaMaPortal.Models.AgreementUtilityViewModel*@
+@model LeaMaPortal.Models.AgreementFormViewModel
 <div class="row p-b-25 text-uppercase">
     <span> <strong> Agreement utility </strong> </span>
 </div>
@@ -6,36 +7,117 @@
 <div class="row">
     <div class="col-md-12 document-row">
         <div class="col-md-2">
-            @Html.LabelFor(model => model.Utility_id, htmlAttributes: new { @class = "label-default-remove" })
+            @Html.LabelFor(model => model.AgreementUtility.Utility_id, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-3">
-            @Html.LabelFor(model => model.Utility_Name, htmlAttributes: new { @class = "label-default-remove" })
+            @Html.LabelFor(model => model.AgreementUtility.Utility_Name, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-2">
-            @Html.LabelFor(model => model.Payable, htmlAttributes: new { @class = "label-default-remove" })
+            @Html.LabelFor(model => model.AgreementUtility.Payable, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-2">
-            @Html.LabelFor(model => model.Amount_Type, htmlAttributes: new { @class = "label-default-remove" })
+            @Html.LabelFor(model => model.AgreementUtility.Amount_Type, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-2">
-            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "label-default-remove" })
+            @Html.LabelFor(model => model.AgreementUtility.Amount, htmlAttributes: new { @class = "label-default-remove" })
+        </div>
+        <div class="col-md-1 w-md-10 pull-right">
+            <button class="document-btn" onclick="addAgreementUtilityDetails(event);">Add</button>
         </div>
     </div>
 </div>
 <div class="row ht-5">
     &nbsp;
 </div>
-
+<input type="hidden" id="AgreementUtilityListCount" value="@Model.AgreementUtilityList.Count" />
 @Html.Partial("_AgreementUtilityDetails")
 
 <div class="row">
-    <div class="col-md-1 w-md-10 pull-right">
-        <button class="document-btn">Delete</button>
-    </div>
-    <div class="col-md-1 w-md-10 pull-right">
-        <button class="document-btn">Add</button>
-    </div>
+    @*<div class="col-md-1 w-md-10 pull-right">
+            <button class="document-btn">Delete</button>
+        </div>*@
+    @*<div class="col-md-1 w-md-10 pull-right">
+            <button class="document-btn">Add</button>
+        </div>*@
 </div>
 <div class="row ht-5">
     &nbsp;
 </div>
+<script>
+    var AgreementUtilityCount = parseInt($("#AgreementUtilityListCount").val());
+
+    function addAgreementUtilityDetails(event) {
+        debugger;
+        var Month = $("#AgreementUtility_Utility_id").val();
+        var Year = $("#AgreementUtility_Utility_Name").val();
+        var Payment_Mode = $("#AgreementUtility_Payable").val();
+        var BankName = $("#AgreementUtility_Amount_Type").val();
+        var Cheque_No = $("#AgreementUtility_Amount").val();
+
+        var html = "<tr><td>" +
+                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Utility_id' id='AgreementUtilityList[" + AgreementUtilityCount + "].Utility_id' value='" + Utility_id + "' data-name='Utility_id' />" +
+                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Utility_Name' id='AgreementUtilityList[" + AgreementUtilityCount + "].Utility_Name' value='" + Utility_Name + "' data-name='Utility_Name' />" +
+                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Payable' id='AgreementUtilityList[" + AgreementUtilityCount + "].Payable' value='" + Payable + "' data-name='Payable' />" +
+                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Amount_Type' id='AgreementUtilityList[" + AgreementUtilityCount + "].Amount_Type' value='" + Amount_Type + "' data-name='Amount_Type' />" +
+                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Amount' id='AgreementUtilityList[" + AgreementUtilityCount + "].Amount' value='" + Amount + "' data-name='Amount' />" +
+
+
+                      "<div class='col-md-12 document-row'>" +
+                          "<div class='col-md-1 col-md-1 w-md-13'>" + Utility_id + "</div>" +
+
+
+                          "<div class='col-md-1 w-md-14'>" +
+
+                          Utility_Name +
+
+        "</div>" +
+        "<div class='col-md-1 w-md-16'>" +
+        Payable +
+        "</div>" +
+        "<div class='col-md-1 w-md-15'>" +
+
+        Amount_Type +
+
+        "</div>" +
+        "<div class='col-md-1 w-md-14'>" +
+            Amount +
+        "</div>" +
+        "<div class='col-md-1 w-md-14'>" +
+           "<button class='btn agreementpdclist-remove' onclick='removeAgreementUtilityDetails(event);'>X</button>" +
+        "</div>" +
+    "</div>" +
+"</td>" +
+"</tr>";
+        alert(html);
+
+        $("#AgreementUtilityDetailsList").append(html);
+        AgreementUtilityCount++;
+    }
+
+    function removeAgreementUtilityDetails() {
+        debugger;
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('AgreementUtilityDetailsList');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'AgreementUtilityDetailsList[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+        k = newindex;
+    };
+</script>

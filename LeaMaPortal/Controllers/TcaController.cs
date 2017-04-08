@@ -16,6 +16,31 @@ namespace LeaMaPortal.Controllers
         // GET: Tca
         public ActionResult Index()
         {
+            //try
+            //{
+            //    AgreementFormViewModel model = new AgreementFormViewModel();
+            //    ViewBag.TenantType = new SelectList(Common.TcaTenantType);
+            //    ViewBag.TenantId = new SelectList("", "");
+            //    ViewBag.TenantName = new SelectList("", "");
+            //    ViewBag.TcaPropertyId = new SelectList("", "");
+            //    ViewBag.TcaPropertyIDTawtheeq = new SelectList("", "");
+            //    ViewBag.TcaPropertyName = new SelectList("", "");
+            //    ViewBag.UnitIDTawtheeq = new SelectList("", "");
+            //    ViewBag.UnitPropertyName = new SelectList("", "");
+            //    ViewBag.SecurityFlag = new SelectList(Common.SecurityFlag);
+            //    ViewBag.Agreement_No = db.tbl_agreement.OrderByDescending(x => x.Agreement_No).FirstOrDefault()?.Agreement_No + 1;
+            //    model.AgreementPd = new AgreementPdcViewModel();
+            //    return PartialView("../Tca/Agreement/_AgreementForm", model);
+            //}
+            //catch (Exception e)
+            //{
+            //    throw;
+            //}
+            return View();
+        }
+
+        public PartialViewResult AddOrUpdate()
+        {
             try
             {
                 AgreementFormViewModel model = new AgreementFormViewModel();
@@ -29,13 +54,41 @@ namespace LeaMaPortal.Controllers
                 ViewBag.UnitPropertyName = new SelectList("", "");
                 ViewBag.SecurityFlag = new SelectList(Common.SecurityFlag);
                 ViewBag.Agreement_No = db.tbl_agreement.OrderByDescending(x => x.Agreement_No).FirstOrDefault()?.Agreement_No + 1;
-                //return PartialView("../Tca/Agreement/_AgreementForm");
+                model.AgreementPd = new AgreementPdcViewModel();
+                return PartialView("../Tca/Agreement/_AgreementForm", model);
             }
             catch (Exception e)
             {
                 throw;
             }
-            return View();
+        }
+
+        public PartialViewResult AgreementPdc(int AgreementNo)
+        {
+            //AgreementPdcViewModel model = new AgreementPdcViewModel();
+            AgreementFormViewModel model = new AgreementFormViewModel();
+            return PartialView("../Tca/_AgreementPdc", model);
+        }
+        public PartialViewResult AgreementDocument(int AgreementNo)
+        {
+            AgreementDocumentViewModel model = new AgreementDocumentViewModel();
+            return PartialView("../Tca/_AgreementDocument", model);
+        }
+        public PartialViewResult AgreementUtility(int AgreementNo)
+        {
+            //AgreementUtilityViewModel model = new AgreementUtilityViewModel();
+            AgreementFormViewModel model = new AgreementFormViewModel();
+            return PartialView("../Tca/_AgreementUtility", model);
+        }
+        public PartialViewResult AgreementUnit(int AgreementNo)
+        {
+            AgreementUnitViewModel model = new AgreementUnitViewModel();
+            return PartialView("../Tca/_AgreementUnit", model);
+        }
+        public PartialViewResult AgreementCheckList(int AgreementNo)
+        {
+            AgreementCheckListViewModel model = new AgreementCheckListViewModel();
+            return PartialView("../Tca/_AgreementCheckList", model);
         }
 
 

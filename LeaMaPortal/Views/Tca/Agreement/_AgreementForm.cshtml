@@ -51,6 +51,7 @@
                     @Html.LabelFor(model => model.Agreement_No, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-6">
+                    @Html.HiddenFor(model => model.Agreement_No)
                     <input type="text" value="@ViewBag.Agreement_No" disabled class="master-form-input" />
                     @*@Html.EditorFor(model => model.Agreement_No, new { htmlAttributes = new { @class = "master-form-input" } })*@
                 </div>
@@ -70,7 +71,7 @@
                     @Html.LabelFor(model => model.Tenant_Type, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-6">
-                    @Html.DropDownList("TenantType", null, "-- Select --", new { htmlAttributes = new { @class = "master-form-input", @Name = "TenantType" } })
+                    @Html.DropDownList("TenantType", null, "-- Select --", new { @class = "master-form-input form-control", @Name = "TenantType" })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -79,7 +80,7 @@
                 </div>
                 <div class="col-md-6">
                     @*<input type="text" class="master-form-input form-control" />*@
-                    @Html.DropDownList("TenantId", null, new { htmlAttributes = new { @class = "master-form-input", @Name = "TenentId" } })
+                    @Html.DropDownList("TenantId", null, new { @class = "master-form-input form-control", @Name = "TenentId" })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -88,7 +89,7 @@
                 </div>
                 <div class="col-md-6">
                     @*<input type="text" class="master-form-input form-control" />*@
-                    @Html.DropDownList("TenantName", null, new { htmlAttributes = new { @class = "master-form-input", @Name = "TenentName" } })
+                    @Html.DropDownList("TenantName", null, new { @class = "master-form-input", @Name = "TenentName" })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -97,7 +98,7 @@
                 </div>
                 <div class="col-md-6">
                     @*<input type="text" class="master-form-input form-control" />*@
-                    @Html.DropDownList("TcaPropertyId", null, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.DropDownList("TcaPropertyId", null, new { @class = "master-form-input" })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -106,7 +107,7 @@
                 </div>
                 <div class="col-md-6">
                     @*<input type="text" class="master-form-input form-control" />*@
-                    @Html.DropDownList("TcaPropertyIDTawtheeq", null, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.DropDownList("TcaPropertyIDTawtheeq", null, new { @class = "master-form-input" })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -115,7 +116,7 @@
                 </div>
                 <div class="col-md-6">
                     @*<input type="text" class="master-form-input form-control" />*@
-                    @Html.DropDownList("TcaPropertyName", null, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.DropDownList("TcaPropertyName", null, new { @class = "master-form-input" })
                 </div>
             </div>
             <div class="col-md-12 p-b-7" id="UnitPropertyId">
@@ -124,7 +125,7 @@
                 </div>
                 <div class="col-md-6">
                     @*<input type="text" class="master-form-input form-control" />*@
-                    @Html.DropDownList("UnitIDTawtheeq", null, new { htmlAttributes = new { @class = "master-form-input", @Name = "UnitIDTawtheeq" } })
+                    @Html.DropDownList("UnitIDTawtheeq", null, new { @class = "master-form-input", @Name = "UnitIDTawtheeq" })
                 </div>
             </div>
             <div class="col-md-12 p-b-7" id="UnitPropertyName">
@@ -133,7 +134,7 @@
                 </div>
                 <div class="col-md-6">
                     @*<input type="text" class="master-form-input form-control" />*@
-                    @Html.DropDownList("UnitPropertyName", null, new { htmlAttributes = new { @class = "master-form-input", @Name = "UnitPropertyName" } })
+                    @Html.DropDownList("UnitPropertyName", null, new { @class = "master-form-input", @Name = "UnitPropertyName" })
                 </div>
             </div>
         </div>
@@ -207,7 +208,7 @@
                             <option> Payment 2 </option>
                             <option> Payment 3 </option>
                         </select>*@
-                    @Html.DropDownList("SecurityFlag", null, new { htmlAttributes = new { @class = "master-form-input", @Name = "SecurityFlag" } })
+                    @Html.DropDownList("SecurityFlag", null, new { @class = "master-form-input", @Name = "SecurityFlag" })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -234,73 +235,75 @@
                     @Html.EditorFor(model => model.Notice_Period, new { htmlAttributes = new { @class = "master-form-input" } })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
-                <div class="col-md-6">
-                    &nbsp;
-                </div>
-                <div class="col-md-4">
-                    <input type="button" class="btn master-form-btn" value="Submit" />
-                </div>
-            </div>
+         
         </div>
     </div>
     <div class="p-t-5-p">
         &nbsp;
     </div>
     <!-- BEGIN AGREEMENT PDC -->
-    <div class="p-lr-20">
-        @Html.Partial("_AgreementPdc")
+    <div class="p-lr-20" id="AgreementPdc">
+        @*@Html.Partial("_AgreementPdc")*@
     </div>
     <!-- END AGREEMENT PDC -->
     <div class="row ht-5">
         &nbsp;
     </div>
     <!-- BEGIN AGREEMENT DOCUMENT -->
-    <div class="p-lr-20">
-        @Html.Partial("_AgreementDocument")
+    <div class="p-lr-20" id="AgreementDocument">
+        @*@Html.Partial("_AgreementDocument")*@
     </div>
     <!-- END AGREEMENT DOCUMENT -->
     <div class="row ht-5">
         &nbsp;
     </div>
     <!-- BEGIN AGREEMENT UTILITY -->
-    <div class="p-lr-20">
-        @Html.Partial("_AgreementUtility")
+    <div class="p-lr-20" id="AgreementUtility">
+        @*@Html.Partial("_AgreementUtility")*@
     </div>
     <!-- END AGREEMENT UTILITY -->
     <div class="row ht-5">
         &nbsp;
     </div>
     <!-- BEGIN AGREEMENT UNIT -->
-    <div class="p-lr-20">
-        @Html.Partial("_AgreementUnit")
+    <div class="p-lr-20" id="AgreementUnit">
+        @*@Html.Partial("_AgreementUnit")*@
     </div>
     <!-- END AGREEMENT UNIT -->
     <div class="row ht-5">
         &nbsp;
     </div>
     <!-- BEGIN AGREEMENT UNIT -->
-    <div class="p-lr-20">
-        @Html.Partial("_AgreementCheckList")
+    <div class="p-lr-20" id="AgreementCheckList">
+        @*@Html.Partial("_AgreementCheckList")*@
     </div>
-    END AGREEMENT UNIT
+    @*END AGREEMENT UNIT*@
     <div class="p-b-10">
         &nbsp;
+    </div>
+    <div class="col-md-12 form-input-padding">
+        <div class="col-md-6">
+            &nbsp;
+        </div>
+        <div class="col-md-4">
+            <input type="button" class="btn master-form-btn" value="Submit" />
+        </div>
     </div>
 </div>
 <script>
     $('input[type=radio][name=SingleMultipleFlag]').change(function () {
+        debugger;
         if (this.value == 'Multiple') {
-            $('#UnitIDTawtheeq').attr('disabled', 'disabled');
-            $('#UnitPropertyName').attr('disabled', 'disabled');
-            //$("#UnitPropertyId").hide();
-            //$("#UnitPropertyName").hide();
+            //$('#UnitIDTawtheeq').attr('disabled', true);
+            //$('#UnitPropertyName').attr('disabled', true);
+            $("#UnitPropertyId").hide();
+            $("#UnitPropertyName").hide();
         }
         else {
-            $('#UnitIDTawtheeq').removeAttr('disabled');
-            $('#UnitPropertyName').removeAttr('disabled');
-            //$("#UnitPropertyId").show();
-            //$("#UnitPropertyName").show();
+            //$('#UnitIDTawtheeq').removeAttr('disabled');
+            //$('#UnitPropertyName').removeAttr('disabled');
+            $("#UnitPropertyId").show();
+            $("#UnitPropertyName").show();
         }
         //$.ajax(
         //       {

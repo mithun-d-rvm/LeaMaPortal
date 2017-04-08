@@ -23,7 +23,5 @@ namespace LeaMaPortal.Models
         public string Cheque_Date { get; set; }
         [DisplayName("Amount")]
         public decimal Cheque_Amount { get; set; }
-
-
     }
 }

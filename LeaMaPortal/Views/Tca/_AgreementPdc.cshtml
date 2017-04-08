@@ -1,6 +1,6 @@
 ﻿
 
-@model LeaMaPortal.Models.AgreementPdcViewModel
+@model LeaMaPortal.Models.AgreementFormViewModel
 <div class="row p-b-25 text-uppercase">
     <span> <strong> Agreement PDC </strong> </span>
 </div>
@@ -8,42 +8,132 @@
 <div class="row">
     <div class="col-md-12 document-row">
         <div class="col-md-1 w-md-13">
-            @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "label-default-remove" })
+            @Html.EditorFor(model => model.AgreementPd.Month, new { @class = "label-default-remove AgreementPdMonth" })
         </div>
         <div class="col-md-1 w-md-14">
-           @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "label-default-remove" })
+            @Html.EditorFor(model => model.AgreementPd.Year, new { @class = "label-default-remove AgreementPdYear" })
         </div>
         <div class="col-md-1 w-md-16">
-           @Html.LabelFor(model => model.Payment_Mode, htmlAttributes: new { @class = "label-default-remove" })
+            @Html.EditorFor(model => model.AgreementPd.Payment_Mode, new { @class = "label-default-remove AgreementPdPaymentMode" })
         </div>
         <div class="col-md-1 w-md-15">
-            @Html.LabelFor(model => model.BankName, htmlAttributes: new { @class = "label-default-remove" })
+            @Html.EditorFor(model => model.AgreementPd.BankName, new { @class = "label-default-remove AgreementPdBankName" })
         </div>
         <div class="col-md-1 w-md-14">
-            @Html.LabelFor(model => model.Cheque_No, htmlAttributes: new { @class = "label-default-remove" })
+            @Html.EditorFor(model => model.AgreementPd.Cheque_No, new { @class = "label-default-remove AgreementPdChequeNo" })
         </div>
         <div class="col-md-1 w-md-14">
-            @Html.LabelFor(model => model.Cheque_Date, htmlAttributes: new { @class = "label-default-remove" })
+            @Html.EditorFor(model => model.AgreementPd.Cheque_Date, new { @class = "label-default-remove AgreementPdChequeNo" })
         </div>
         <div class="col-md-1 w-md-14">
-            @Html.LabelFor(model => model.Cheque_Amount, htmlAttributes: new { @class = "label-default-remove" })
+            @Html.EditorFor(model => model.AgreementPd.Cheque_Amount, new { @class = "label-default-remove AgreementPdChequeAmount" })
+        </div>
+        <div class="col-md-1 w-md-10 pull-right">
+            <button class="document-btn" onclick="addAgreementPdcDetails(event);">Add</button>
         </div>
     </div>
 </div>
 <div class="row ht-5">
     &nbsp;
 </div>
-
-@Html.Partial("_AgreementPdcDetails")
+<input type="hidden" id="AgreementPdcListCount" value="@Model.AgreementPdcList.Count" />
+@Html.Partial("_AgreementPdcDetails", Model)
 
 <div class="row">
-    <div class="col-md-1 w-md-10 pull-right">
-        <button class="document-btn">Delete</button>
-    </div>
-    <div class="col-md-1 w-md-10 pull-right">
-        <button class="document-btn">Add</button>
-    </div>
+    @*<div class="col-md-1 w-md-10 pull-right">
+            <button class="document-btn">Delete</button>
+        </div>*@
+
 </div>
 <div class="row ht-5">
     &nbsp;
 </div>
+<script>
+    var AgreementPdCount = parseInt($("#AgreementPdcListCount").val());
+
+    function addAgreementPdcDetails(event) {
+        debugger;
+        var Month = $("#AgreementPd_Month").val();
+        var Year = $("#AgreementPd_Year").val();
+        var Payment_Mode = $("#AgreementPd_Payment_Mode").val();
+        var BankName = $("#AgreementPd_BankName").val();
+        var Cheque_No = $("#AgreementPd_Cheque_No").val();
+        var Cheque_Date = $("#AgreementPd_Cheque_Date").val();
+        var Cheque_Amount = $("#AgreementPd_Cheque_Amount").val();
+
+        var html = "<tr><td>" +
+                      "<input type='hidden' name='AgreementPdcList[" + AgreementPdCount + "].Month' id='AgreementPdcList[" + AgreementPdCount + "].Month' value='" + Month + "' data-name='Month' />" +
+                      "<input type='hidden' name='AgreementPdcList[" + AgreementPdCount + "].Year' id='AgreementPdcList[" + AgreementPdCount + "].Year' value='" + Year + "' data-name='Year' />" +
+                      "<input type='hidden' name='AgreementPdcList[" + AgreementPdCount + "].Payment_Mode' id='AgreementPdcList[" + AgreementPdCount + "].Payment_Mode' value='" + Payment_Mode + "' data-name='Payment_Mode' />" +
+                      "<input type='hidden' name='AgreementPdcList[" + AgreementPdCount + "].BankName' id='AgreementPdcList[" + AgreementPdCount + "].BankName' value='" + BankName + "' data-name='BankName' />" +
+                      "<input type='hidden' name='AgreementPdcList[" + AgreementPdCount + "].Cheque_No' id='AgreementPdcList[" + AgreementPdCount + "].Cheque_No' value='" + Cheque_No + "' data-name='Cheque_No' />" +
+                      "<input type='hidden' name='AgreementPdcList[" + AgreementPdCount + "].Cheque_Date' id='AgreementPdcList[" + AgreementPdCount + "].Cheque_Date' value='" + Cheque_Date + "' data-name='Cheque_Date' />" +
+                      "<input type='hidden' name='AgreementPdcList[" + AgreementPdCount + "].Cheque_Amount' id='AgreementPdcList[" + AgreementPdCount + "].Cheque_Amount' value='" + Cheque_Amount + "' data-name='Cheque_Amount' />" +
+
+                      "<div class='col-md-12 document-row'>" +
+                          "<div class='col-md-1 col-md-1 w-md-13'>" + Month + "</div>" +
+
+
+                          "<div class='col-md-1 w-md-14'>" +
+
+                          Year +
+
+        "</div>" +
+        "<div class='col-md-1 w-md-16'>" +
+        Payment_Mode +
+        "</div>" +
+        "<div class='col-md-1 w-md-15'>" +
+
+        BankName +
+
+        "</div>" +
+        "<div class='col-md-1 w-md-14'>" +
+            Cheque_No +
+        "</div>" +
+        "<div class='col-md-1 w-md-14'>" +
+
+            Cheque_Date +
+        "</div>" +
+        "<div class='col-md-1 w-md-14'>" +
+            Cheque_Amount +
+
+        "</div>" +
+        "<div class='col-md-1 w-md-14'>" +
+           "<button class='btn agreementpdclist-remove' onclick='removeAgreementPdcDetails(event);'>X</button>" +
+        "</div>" +
+    "</div>" +
+"</td>" +
+"</tr>";
+        alert(html);
+
+        $("#AgreementPdcDetailsList").append(html);
+        AgreementPdCount++;
+    }
+
+    function removeAgreementPdcDetails() {
+        debugger;
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('AgreementPdcDetailsList');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'AgreementPdcDetailsList[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+        k = newindex;
+    };
+</script>
