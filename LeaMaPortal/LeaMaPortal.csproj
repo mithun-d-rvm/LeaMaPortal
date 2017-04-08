@@ -178,6 +178,7 @@
     <Compile Include="Controllers\ContractApprovalSettingController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Models\DdlTenentDetailsViewModel.cs" />
     <Compile Include="Controllers\EmailTemplateController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FacilityController.cs" />
