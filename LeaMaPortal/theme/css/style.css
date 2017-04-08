@@ -788,18 +788,22 @@ ul.dropdown-menu {
     font-size: 1.6em;
 }
 .profile_details ul li ul.dropdown-menu.drp-mnu {
-    padding: 1em;
+    /* padding: 1em; */
     min-width: 190px;
     top: 122%;
-    left:0%;
+    left: 0%;
+    margin-top: 65px;
+    margin-left: 25px;
 }
 ul.dropdown-menu.drp-mnu li {
     list-style-type: none;
-    padding: 3px 0;
+    /*padding: 3px 0;*/
+    padding:5px;
 }
 .user-name p{
 	font-size:1em;
-	color:#FC8213;
+	/*color:#FC8213;*/
+    color:#1a91eb;
 	line-height:1em;
 	font-weight:700;
 }

@@ -18,7 +18,7 @@
         @Html.HiddenFor(m => m.id, new { @id = "UserId" })
         <div class="blank">
             <div class="row font-15">
-                <div class="col-md-5">
+                <div class="col-md-10">
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "leama-field-name" })
@@ -129,30 +129,30 @@
                         <div class="col-md-4">
                             &nbsp;
                         </div>
-                        <div class="col-md-8">
-                            <div class="col-md-6">
+                        <div class="">
+                            <div class="col-md-2">
                                 <div class="col-md-1">
                                     @Html.HiddenFor(m => m.AddConfig, new { @id = "hdnAddConfig" })
-                                    @Html.CheckBoxFor(m => m.AddConfig.HasValue, new { @id = "chkAddConfig" })
+                                    @Html.CheckBoxFor(m => m.AddConfig.HasValue, new { @id = "chkAddConfig", @class = "input-checkbox" })
                                 </div>
                                 <div class="col-md-8 m-t-3">
                                     <span> @Html.LabelFor(model => model.AddConfig, htmlAttributes: new { @class = "leama-field-name" }) </span>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 <div class="col-md-1">
                                     @Html.HiddenFor(m => m.EditConfig, new { @id = "hdnEditConfig" })
-                                    @Html.CheckBoxFor(m => m.EditConfig.HasValue, new { @id = "chkEditConfig" })
+                                    @Html.CheckBoxFor(m => m.EditConfig.HasValue, new { @id = "chkEditConfig", @class = "input-checkbox" })
                                     @*<input type="checkbox" class="input-checkbox">*@
                                 </div>
                                 <div class="col-md-8 m-t-3">
                                     <span> @Html.LabelFor(model => model.EditConfig, htmlAttributes: new { @class = "leama-field-name" }) </span>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 <div class="col-md-1">
                                     @Html.HiddenFor(m => m.DeleteConfig, new { @id = "hdnDeleteConfig" })
-                                    @Html.CheckBoxFor(m => m.DeleteConfig.HasValue, new { @id = "chkDeleteConfig" })
+                                    @Html.CheckBoxFor(m => m.DeleteConfig.HasValue, new { @id = "chkDeleteConfig", @class = "input-checkbox" })
                                     @*<input type="checkbox" class="input-checkbox">*@
                                 </div>
                                 <div class="col-md-8 m-t-3">
@@ -161,19 +161,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            &nbsp;
-                        </div>
-                        <div class="col-md-4">
-                            <button class="btn master-form-btn">Submit</button>
-                        </div>
-                    </div>
+                    
                 </div>
-                <div class="col-md-7">
-                    <div class="col-md-6">
-                        <h5 class="p-b-25"> Menu Names </h5>
-                    </div>
+                <div class="col-md-12">
+                    @*<div class="col-md-6">*@
+                        <h5 class="p-b-25 text-uppercase"> Menu Names </h5>
+                    @*</div>*@
                     @*<div class="col-md-6">
                         <h5 class="p-b-25"> REPORT DATA </h5>
                     </div>*@
@@ -189,16 +182,25 @@
                     //{
 
                     //}
-                    <div class="col-md-7 p-b-10">
-                        <div class="col-md-6">
+                    @*<div class="col-md-7 p-b-10">*@
+                        <div class="col-md-4 p-b-10">
                             <div class="col-md-12 report-form-row">
                                 <div class="col-md-1">@menuItem.Id</div>
                                 <div class="col-md-9 text-center">@menuItem.MenuName</div>
                                 <div class="col-md-1 report-checkbox-align"> <input type="checkbox" checked="@menuItem.IsChecked" name="@menuItem.Id" class="input-checkbox menurights" /> </div>
                             </div>
                         </div>
-                    </div>
+                    @*</div>*@
                 }
+
+                <div class="col-md-12 form-input-padding p-b-10">
+                    <div class="col-md-4">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn master-form-btn">Submit</button>
+                    </div>
+                </div>
             </div>
         </div>
     }
