@@ -16,4 +16,9 @@ namespace LeaMaPortal.Models
         [DisplayName("Usage")]
         public string Usage_name { get; set; }
     }
+    public class PropertyTypeModel
+    {
+        public string PropertyCategory { get; set; }
+        public string Usage_name { get; set; }
+    }
 }

@@ -72,9 +72,13 @@ namespace LeaMaPortal.Models
         public string Cocandindustryuid { get; set; }
 
         public string TradelicenseNo { get; set; }
+
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? LicenseIssueDate { get; set; }
+
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? LicenseExpiryDate { get; set; }
 
         public string Issuance_authority { get; set; }
