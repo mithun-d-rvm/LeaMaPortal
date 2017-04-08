@@ -7,6 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.Models;
+using MvcPaging;
+using LeaMaPortal.Helpers;
+using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
 namespace LeaMaPortal.Controllers
 {
@@ -15,119 +20,168 @@ namespace LeaMaPortal.Controllers
         private Entities db = new Entities();
 
         // GET: PropertyType
-        public ActionResult Index()
+        public PartialViewResult Index(string Search, int? page, int? defaultPageSize)
         {
-          
-            return View();
-        }
-
-        // GET: PropertyType/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewData["Search"] = Search;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+                int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
+                ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, defaultPageSize);
+                IList<PropertyTypeViewModel> list;
+                if (string.IsNullOrWhiteSpace(Search))
+                {
+                    list = db.tbl_propertytypemaster.Where(x => x.Delmark != "*").OrderBy(x => x.Type_name).Select(x => new PropertyTypeViewModel()
+                    {
+                        Id = x.Id,
+                        PropertyType = x.Type_name,
+                        PropertyCategory = x.Type_Flag,
+                        Usage_name = x.Usage_name
+                    }).ToPagedList(currentPageIndex, PageSize);
+                }
+                else
+                {
+                    list = db.tbl_propertytypemaster.Where(x => x.Delmark != "*"
+                                    && (x.Type_name.ToLower().Contains(Search.ToLower())
+                                    || x.Usage_name.ToLower().Contains(Search.ToLower())))
+                                  .OrderBy(x => x.Type_name).Select(x => new PropertyTypeViewModel()
+                                  {
+                                      Id = x.Id,
+                                      PropertyType = x.Type_name,
+                                      PropertyCategory = x.Type_Flag,
+                                      Usage_name = x.Usage_name
+                                  }).ToPagedList(currentPageIndex, PageSize);
+                }
+
+                return PartialView("../Master/PropertyType/_List", list);
             }
-            tbl_agreement tbl_agreement = db.tbl_agreement.Find(id);
-            if (tbl_agreement == null)
+            catch (Exception e)
             {
-                return HttpNotFound();
+                throw;
             }
-            return View(tbl_agreement);
         }
-
-        // GET: PropertyType/Create
-        public ActionResult Create()
+        [HttpGet]
+        public PartialViewResult AddOrUpdate()
         {
-            ViewBag.Agreement_No = new SelectList(db.tbl_agreement_status, "Agreement_No", "Ag_Tenant_Name");
-            ViewBag.Caretaker_id = new SelectList(db.tbl_caretaker, "Caretaker_id", "Address1");
-            ViewBag.property_id = new SelectList(db.tbl_propertiesmaster, "Property_Id", "Property_Flag");
-            return View();
+            PropertyTypeViewModel model = new PropertyTypeViewModel();
+            ViewBag.PropertyType = new SelectList(StaticHelper.GetStaticData(StaticHelper.PROPERTYTYPE_DROPDOWN), "Name", "Name");
+            ViewBag.PropertyCategory = new SelectList(StaticHelper.GetStaticData(StaticHelper.PROPERTYCATEGORY_DROPDOWN), "Name", "Name");
+            ViewBag.Usage_name = new SelectList(new List<OptionModel>());
+            return PartialView("../Master/PropertyType/_AddOrUpdate", model);
         }
-
-        // POST: PropertyType/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Agreement_No,id,Single_Multiple_Flag,Agreement_Refno,New_Renewal_flag,Agreement_Date,Ag_Tenant_id,Ag_Tenant_Name,property_id,Property_ID_Tawtheeq,Properties_Name,Unit_ID_Tawtheeq,Unit_Property_Name,Caretaker_id,Caretaker_Name,Vacantstartdate,Agreement_Start_Date,Agreement_End_Date,Total_Rental_amount,Perday_Rental,Advance_Security_Amount,Security_Flag,Security_chequeno,Security_chequedate,Notice_Period,nofopayments,Approval_Flag,Approved_By,Approved_Date,Tenant_Type,Status,Accyear,Createddatetime,Createduser,Delmark")] tbl_agreement tbl_agreement)
+        public async Task<ActionResult> AddOrUpdate([Bind(Include = "PropertyType,Usage_name,PropertyCategory,Id")] PropertyTypeViewModel model)
         {
-            if (ModelState.IsValid)
+            MessageResult result = new MessageResult();
+            try
             {
-                db.tbl_agreement.Add(tbl_agreement);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    MySqlParameter pa = new MySqlParameter();
+                    string PFlag = "INSERT";
 
-            ViewBag.Agreement_No = new SelectList(db.tbl_agreement_status, "Agreement_No", "Ag_Tenant_Name", tbl_agreement.Agreement_No);
-            ViewBag.Caretaker_id = new SelectList(db.tbl_caretaker, "Caretaker_id", "Address1", tbl_agreement.Caretaker_id);
-            ViewBag.property_id = new SelectList(db.tbl_propertiesmaster, "Property_Id", "Property_Flag", tbl_agreement.property_id);
-            return View(tbl_agreement);
+                    if (model.Id == 0)
+                    {
+
+                    }
+                    else
+                    {
+                        PFlag = "UPDATE";
+                    }
+                    object[] param = { new MySqlParameter("@PFlag", PFlag),
+                                           new MySqlParameter("@PId", model.Id),
+                                           new MySqlParameter("@PType_name",model.PropertyType),
+                                            new MySqlParameter("@PType_Flag",model.PropertyCategory),
+                                            new MySqlParameter("@PUsage_name",model.Usage_name),
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                         };
+                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Propertytype_All(@PFlag,@PId,@PType_name,@PType_Flag,@PUsage_name,@PCreateduser)", param).ToListAsync();
+                    await db.SaveChangesAsync();
+
+                }
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task<ActionResult> Edit(string PropertyType, string PropertyCategory, string Usage_name)
+        {
+            try
+            {
+                if (PropertyType == null && PropertyCategory != null && Usage_name != null)
+                {
+                    return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
+                }
+                tbl_propertytypemaster tbl_propertytype = await db.tbl_propertytypemaster.FindAsync(PropertyType, PropertyCategory, Usage_name);
+                if (tbl_propertytype == null)
+                {
+                    return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
+                }
+                PropertyTypeViewModel model = new PropertyTypeViewModel()
+                {
+                    Id = tbl_propertytype.Id,
+                    PropertyType = tbl_propertytype.Type_name,
+                    PropertyCategory = tbl_propertytype.Type_Flag,
+                    Usage_name = tbl_propertytype.Usage_name
+                };
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new MessageResult() { Errors = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
 
-        // GET: PropertyType/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Delete(string PropertyType, string PropertyCategory, string Usage_name)
         {
-            if (id == null)
+            MessageResult result = new MessageResult();
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (PropertyType == null && PropertyCategory != null && Usage_name != null)
+                {
+                    return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
+                }
+                tbl_propertytypemaster tbl_propertytype = await db.tbl_propertytypemaster.FindAsync(PropertyType, PropertyCategory, Usage_name);
+                if (tbl_propertytype == null)
+                {
+                    return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
+                }
+                object[] param = { new MySqlParameter("@PFlag", "DELETE"),
+                                           new MySqlParameter("@PId", tbl_propertytype.Id),
+                                           new MySqlParameter("@PType_name",tbl_propertytype.Type_name),
+                                            new MySqlParameter("@PType_Flag",tbl_propertytype.Type_Flag),
+                                            new MySqlParameter("@PUsage_name",tbl_propertytype.Usage_name),
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                         };
+                var spResult = await db.Database.SqlQuery<object>("Usp_Propertytype_All(@PFlag,@PId,@PType_name,@PType_Flag,@PUsage_name,@PCreateduser)", param).ToListAsync();
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
-            tbl_agreement tbl_agreement = db.tbl_agreement.Find(id);
-            if (tbl_agreement == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return Json(new MessageResult() { Errors = ex.Message }, JsonRequestBehavior.AllowGet);
             }
-            ViewBag.Agreement_No = new SelectList(db.tbl_agreement_status, "Agreement_No", "Ag_Tenant_Name", tbl_agreement.Agreement_No);
-            ViewBag.Caretaker_id = new SelectList(db.tbl_caretaker, "Caretaker_id", "Address1", tbl_agreement.Caretaker_id);
-            ViewBag.property_id = new SelectList(db.tbl_propertiesmaster, "Property_Id", "Property_Flag", tbl_agreement.property_id);
-            return View(tbl_agreement);
         }
-
-        // POST: PropertyType/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Agreement_No,id,Single_Multiple_Flag,Agreement_Refno,New_Renewal_flag,Agreement_Date,Ag_Tenant_id,Ag_Tenant_Name,property_id,Property_ID_Tawtheeq,Properties_Name,Unit_ID_Tawtheeq,Unit_Property_Name,Caretaker_id,Caretaker_Name,Vacantstartdate,Agreement_Start_Date,Agreement_End_Date,Total_Rental_amount,Perday_Rental,Advance_Security_Amount,Security_Flag,Security_chequeno,Security_chequedate,Notice_Period,nofopayments,Approval_Flag,Approved_By,Approved_Date,Tenant_Type,Status,Accyear,Createddatetime,Createduser,Delmark")] tbl_agreement tbl_agreement)
+        public async Task<JsonResult> GetUsage(string PropertyType)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(tbl_agreement).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                List<OptionModel> model = new List<OptionModel>();
+                if (PropertyType.ToLower() == StaticHelper.PROPERTYTYPE_PROPERTY.ToLower())
+                {
+                    return Json(new SelectList(StaticHelper.GetStaticData(StaticHelper.PROPERTY), "Name", "Name"));
+                }
+                else
+                {
+                    return Json(new SelectList(StaticHelper.GetStaticData(StaticHelper.UNIT), "Name", "Name"));
+                }
             }
-            ViewBag.Agreement_No = new SelectList(db.tbl_agreement_status, "Agreement_No", "Ag_Tenant_Name", tbl_agreement.Agreement_No);
-            ViewBag.Caretaker_id = new SelectList(db.tbl_caretaker, "Caretaker_id", "Address1", tbl_agreement.Caretaker_id);
-            ViewBag.property_id = new SelectList(db.tbl_propertiesmaster, "Property_Id", "Property_Flag", tbl_agreement.property_id);
-            return View(tbl_agreement);
-        }
-
-        // GET: PropertyType/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
+            catch (Exception ex)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw ex;
             }
-            tbl_agreement tbl_agreement = db.tbl_agreement.Find(id);
-            if (tbl_agreement == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbl_agreement);
         }
-
-        // POST: PropertyType/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbl_agreement tbl_agreement = db.tbl_agreement.Find(id);
-            db.tbl_agreement.Remove(tbl_agreement);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -130,7 +130,7 @@ a:hover {
   top: 0px;
   left:0px;
   bottom: 0;
-  background-color:#000421;
+  background-color:#252428;
   color: #aaabae;
   z-index: 999;
 }
@@ -138,6 +138,7 @@ a:hover {
   list-style: none;
   margin: 0;
   padding: 0;
+  margin-top: 3px;
   /*margin-bottom: 20px;*/
 }
 #menu li {
@@ -165,7 +166,7 @@ a:hover {
 #menu li a:hover {
   /*color:#fdbb30;*/
   transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
-  background-color:#6d32a5;
+  background-color:#eb9a15;
 }
 #menu li.active > a {
   background-color: #2b303a;
@@ -247,7 +248,8 @@ a:hover {
 }
 /*--nav strip start here--*/
 .header-main {
-    background:#000421;
+    /*background:#384a69;*/
+    background-image: linear-gradient(274deg, #384a69, #182730);
     padding: 1.4em 2em;
     box-shadow: 0 1px 3px rgba(0,0,0,0.15);
     color: white;
@@ -786,18 +788,22 @@ ul.dropdown-menu {
     font-size: 1.6em;
 }
 .profile_details ul li ul.dropdown-menu.drp-mnu {
-    padding: 1em;
+    /* padding: 1em; */
     min-width: 190px;
     top: 122%;
-    left:0%;
+    left: 0%;
+    margin-top: 65px;
+    margin-left: 25px;
 }
 ul.dropdown-menu.drp-mnu li {
     list-style-type: none;
-    padding: 3px 0;
+    /*padding: 3px 0;*/
+    padding:5px;
 }
 .user-name p{
 	font-size:1em;
-	color:#FC8213;
+	/*color:#FC8213;*/
+    color:#1a91eb;
 	line-height:1em;
 	font-weight:700;
 }
@@ -1533,11 +1539,12 @@ background-color:#000;
 }
 /*--copyrights start here--*/
 .copyrights {
-    padding: 1.5em 1em;
-    text-align: center;
+    padding: 2em 1.5em 2.8em 1.5em;
+    /* text-align: center; */
+    /* box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.15); */
+    background-color: #eff3f6;
     /*bottom: 0px;
     position: fixed;*/
-    box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.15);
 }
 .copyrights p {
     font-size: 1em;
@@ -1549,6 +1556,14 @@ background-color:#000;
 .copyrights p a:hover{
     color:#68AE00;
 }
+.copyrights-text{
+    color: #cfcfcf;
+}
+.copyrights-layer{
+    background-color: #182730;
+    margin-left: -5px;
+}
+
 /*--grids start here--*/
 .cols-grids h2 {
     font-size: 2em;

@@ -4,44 +4,56 @@
   Created Date   : 03-Mar-2017
   Notes          : <Notes>
 -->
-
 <!--header start here-->
 @{
     var user = LeaMaPortal.Helpers.AuthenticationHelper.GetLoggedinUserDetails().GetAwaiter().GetResult();
 }
 <div class="header-main">
-    <div class="header-left">
-        <h3>LeaMa System</h3>
+    <div class="header-left m-t-15">
+        <img src="~/Images/Logo.png" />
         <div class="clearfix"> </div>
     </div>
     <div class="header-right">
         <div class="profile_details">
-            <h3>LeaMa System</h3>
+            <img src="~/Images/Logo-Bitmap.png" />
         </div>
         <div class="clearfix"> </div>
     </div>
     <div class="clearfix"> </div>
 </div>
 
-<div class="sub-header-main" style="height: 100px; font-size: 12px;">
-    <div class="col-md-7 pull-left" style="padding: 35px;" id="TopNavBarFilter">
+<div class="sub-header-main">
+    <div class="col-md-6 pull-left" style="padding: 35px;" id="TopNavBarFilter">
         <span> <i class="fa fa-filter"></i> FILTER PERFORMANCE BY :  </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span> By Month <i class="fa fa-calendar"></i> </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span> By Region <i class="fa fa-angle-down"></i> </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span> By Property <i class="fa fa-angle-down"></i> </span>
         <div class="clearfix"> </div>
     </div>
+    <div class="col-md-1 pull-left"><br /><br /> <img src="~/Images/loader.gif" class="fa hide" id="img-loader" /></div>
     <div class="col-md-5 pull-right">
         <div class="profile_details" style="padding:6%;font-size: 16px;">
-            <div class="user-name">
-                <p>Logged in as:</p>
-            </div>
-            <div class="user-name">
-                <p>@user.Name</p>
-                <span>@user.Category</span>
-                <i class="fa fa-angle-down"></i>
-            </div>
-            
+            <ul>
+                <li class="dropdown profile_details_drop">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <div class="user-name">
+                            <p>Logged in as:</p>
+                        </div>
+                        <div class="user-name">
+                            <p>@user.Name</p>
+                            <span>@user.Category</span>
+                            <label class="width-35">
+                                <i class="fa fa-angle-down"></i>
+                                <i class="fa fa-angle-up"></i>
+                            </label>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu drp-mnu">
+                        <li> <a href="#"><i class="fa fa-cog"></i> Change Password</a> </li>
+                        <li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
         <div class="clearfix"> </div>
     </div>

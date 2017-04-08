@@ -1,0 +1,45 @@
+﻿<!--
+  File Name      : _AgreementPdcForm.cshtml
+  Description    : Agreement Details partial view
+  Created Date   : 25-Mar-2017
+  Notes          : <Notes>
+-->
+
+@model LeaMaPortal.Models.AgreementPdcViewModel
+
+<div class="row">
+    <div class="col-md-12 document-row">
+        <div class="col-md-1 col-md-1 w-md-13">
+            <select class="form-control master-form-input">
+                <option> Jan </option>
+                <option> Feb </option>
+                <option> March </option>
+            </select>
+        </div>
+        <div class="col-md-1 w-md-14">
+            @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input" } })
+        </div>
+        <div class="col-md-1 w-md-16">
+            <select class="form-control master-form-input">
+                <option> Cash </option>
+                <option> Cheque </option>
+                <option> Card </option>
+            </select>
+        </div>
+        <div class="col-md-1 w-md-15">
+           @Html.EditorFor(model => model.BankName, new { htmlAttributes = new { @class = "master-form-input" } })
+        </div>
+        <div class="col-md-1 w-md-14">
+            @Html.EditorFor(model => model.Cheque_No, new { htmlAttributes = new { @class = "master-form-input" } })
+        </div>
+        <div class="col-md-1 w-md-14">
+           @Html.EditorFor(model => model.Cheque_Date, new { htmlAttributes = new { @class = "master-form-input" } })
+        </div>
+        <div class="col-md-1 w-md-14">
+            @Html.EditorFor(model => model.Cheque_Amount, new { htmlAttributes = new { @class = "master-form-input" } })
+        </div>
+    </div>
+</div>
+<div class="row ht-5">
+    &nbsp;
+</div>

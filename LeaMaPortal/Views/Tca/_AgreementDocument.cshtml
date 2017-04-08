@@ -1,0 +1,36 @@
+﻿@model LeaMaPortal.Models.AgreementDocumentViewModel
+
+<div class="row p-b-25 text-uppercase">
+    <span> <strong> Agreement Document </strong> </span>
+</div>
+
+<div class="row">
+    <div class="col-md-12 document-row">
+        <div class="col-md-2">
+           @Html.LabelFor(model => model.Facility_id, htmlAttributes: new { @class = "label-default-remove" })
+        </div>
+        <div class="col-md-4">
+         @Html.LabelFor(model => model.Facility_Name, htmlAttributes: new { @class = "label-default-remove" })
+        </div>
+        <div class="col-md-2">
+           @Html.LabelFor(model => model.Numbers_available, htmlAttributes: new { @class = "label-default-remove" })
+        </div>
+    </div>
+</div>
+<div class="row ht-5">
+    &nbsp;
+</div>
+
+@Html.Partial("_AgreementDocumentDetails")
+
+<div class="row">
+    <div class="col-md-1 w-md-10 pull-right">
+        <button class="document-btn">Delete</button>
+    </div>
+    <div class="col-md-1 w-md-10 pull-right">
+        <button class="document-btn">Add</button>
+    </div>
+</div>
+<div class="row ht-5">
+    &nbsp;
+</div>

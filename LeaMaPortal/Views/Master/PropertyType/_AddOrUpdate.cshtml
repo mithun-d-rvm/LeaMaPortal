@@ -1,0 +1,123 @@
+﻿
+@model LeaMaPortal.Models.PropertyTypeViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "PropertyTypeMaster" }))
+{
+    @Html.HiddenFor(m => m.Id, new { @id = "PropertyTypeId" })
+    <div class="col-md-12 leama-fieldset leama-header-top">
+        <div class="row">
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.PropertyType, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.DropDownList("PropertyType", null, htmlAttributes: new { @class = "master-form-input subheader-select class-property-type", @required = "required" })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Usage_name, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Usage_name", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "UsageName" })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.PropertyCategory, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4 ">
+                    @Html.DropDownList("PropertyCategory", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "PropertyCategory" })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-12 pull-left">
+                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    function getUsage() {
+        debugger;
+        var PropertyType = $("#PropertyType").val();
+        if (PropertyType != null) {
+            $.ajax(
+                    {
+                        url: "../PropertyType/GetUsage",
+                        method: "POST",
+                        async: false,
+                        data: { PropertyType: PropertyType },
+                        success: function (response) {
+                            debugger;
+                            $("#UsageName").empty();
+                            var options = '';
+                            $.each(response, function (index, data) {
+                                options += '<option value="' + data.Value + '">' + data.Value + '</option>';
+                            });
+                            debugger;
+                            $('#UsageName').append(options);
+                        },
+                        error: function (jqXhr, textStatus, errorThrown) {
+                            alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        },
+                        complete: function () {
+                        }
+                    });
+        }
+    }
+    $("#PropertyType").change(function () { getUsage() });
+    getUsage();
+    //Add or update
+    $("form#PropertyTypeMaster").off("submit").on("submit", function (e) {
+        e.preventDefault();
+        try {
+            var form = $("form#PropertyTypeMaster");
+            $.ajax(
+                {
+                    url: "../PropertyType/AddOrUpdate",
+                    // dataType: "jsonp",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        GetPropertyType();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+
+                });
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+</script>

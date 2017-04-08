@@ -1,0 +1,175 @@
+﻿
+
+@model LeaMaPortal.Models.MeterViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Meter" }))
+{
+    @Html.HiddenFor(m => m.Id, new { @id = "MeterId" })
+    <div class="col-md-12 leama-fieldset leama-header-top">
+        <div class="row">
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Meter_no, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Meter_no, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Meter_no" } })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Utility_id, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Utility_id, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Utility_id" } })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Utility_Name, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4 ">
+                    @Html.DropDownList("Utility_Name", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Utility_Name" })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Accno, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.Accno, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Accno" } })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.unit_id, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4 ">
+                    @Html.DropDownList("unit_id", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "unit_id" })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Property_id, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4 ">
+                    @Html.DropDownList("Property_id", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Property_id" })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Dueday, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4 ">
+                    @Html.DropDownList("Dueday", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Dueday" })
+                </div>
+            </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-12 pull-left">
+                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    function getUtilityId() {
+        var UtilityName = $("#Utility_Name").val();
+        if (UtilityName != null) {
+            $.ajax(
+                    {
+                        url: "../Meter/GetUtilityId",
+                        method: "POST",
+                        async: false,
+                        data: { UtilityName: UtilityName },
+                        success: function (response) {
+                            $("#Utility_id").val(response);
+                        },
+                        error: function (jqXhr, textStatus, errorThrown) {
+                            alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        },
+                        complete: function () {
+                        }
+
+                    });
+        }
+    }
+    $("#Utility_Name").change(function () { getUtilityId() });
+    getUtilityId();
+
+    function getUnitId() {
+        var PropertyId = $("#Property_id").val();
+        $.ajax(
+                {
+                    url: "../Meter/GetUnitId",
+                    method: "POST",
+                    async: false,
+                    data: { PropertyId: PropertyId },
+                    success: function (response) {
+                        $("#unit_id").empty();
+                        var options = '';
+                        $.each(response, function (index, data) {
+                            options += '<option value="' + data.Value + '">' + data.Value + '</option>' ;
+                        });
+                        $('#unit_id').append(options);
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+                });
+    }
+    $("#Property_id").change(function () { getUnitId() });
+    getUnitId();
+
+    //Add or update
+    $("form#Meter").off("submit").on("submit", function (e) {
+        e.preventDefault();
+        try {
+            var form = $("form#Meter");
+            $.ajax(
+                {
+                    url: "../Meter/AddOrUpdate",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        GetMeter();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+
+                });
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+</script>

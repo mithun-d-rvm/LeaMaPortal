@@ -1,0 +1,43 @@
+﻿
+@model LeaMaPortal.Models.AgreementUnitViewModel
+
+<div class="row p-b-25 text-uppercase">
+    <span> <strong> Agreement unit inner - only for multiple units </strong> </span>
+</div>
+
+<div class="row">
+    <div class="col-md-12 document-row">
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.Property_ID, htmlAttributes: new { @class = "label-default-remove" })
+        </div>
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.Property_ID_Tawtheeq, htmlAttributes: new { @class = "label-default-remove" })
+        </div>
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.Property_ID_Tawtheeq, htmlAttributes: new { @class = "label-default-remove" })
+        </div>
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.Unit_ID_Tawtheeq, htmlAttributes: new { @class = "label-default-remove" })
+        </div>
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.Unit_Property_Name, htmlAttributes: new { @class = "label-default-remove" })
+        </div>        
+    </div>
+</div>
+<div class="row ht-5">
+    &nbsp;
+</div>
+
+@Html.Partial("_AgreementUnitDetails")
+
+<div class="row">
+    <div class="col-md-1 w-md-10 pull-right">
+        <button class="document-btn">Delete</button>
+    </div>
+    <div class="col-md-1 w-md-10 pull-right">
+        <button class="document-btn">Add</button>
+    </div>
+</div>
+<div class="row ht-5">
+    &nbsp;
+</div>

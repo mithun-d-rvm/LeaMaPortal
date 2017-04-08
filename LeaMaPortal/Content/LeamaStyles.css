@@ -5,6 +5,12 @@
   Notes          : <Notes>
 */
 
+/* Bootstrap Modal */
+.modal-white.modal-backdrop {
+  background-color: #ffffff !important;
+}
+
+
 /* Common Styles */
 
 .p-t-17{
@@ -13,17 +19,38 @@
 .p-b-25{
     padding-bottom: 25px;
 }
+.p-t-25{
+    padding-top:25px;
+}
 .p-t-5-p{
     padding-top:5%;
+}
+.m-t-5-p{
+    margin-top:5%;
 }
 .m-t-3{
     margin-top:3px;
 }
+.m-t-15{
+    margin-top:15px;
+}
 .m-t-6{
     margin-top:6px;
 }
+.m-l-m-40{
+    margin-left: -40px;
+}
+.m-t-20{
+    margin-top:20px;
+}
 .p-b-10{
     padding-bottom:10px;
+}
+.p-b-7 {
+    padding-bottom: 7px;
+}
+.p-b-10-p {
+    padding-bottom: 10%;
 }
 .font-15{
     font-size: 15px;
@@ -34,17 +61,54 @@
 .width-60{
     width:60% !important;
 }
+.width-35{
+    width:35px !important;
+}
 .ht-5{
     height:5px;
 }
 .p-35{
     padding: 35px;
 }
+.font-smaller{
+    font-size: smaller;
+}
+.font-x-large{
+    font-size:x-large;
+}
+.font-40{
+    font-size: 40px !important;
+}
+.ht-50{
+    height:50px !important;
+}
+.color-f5a623{
+    color:#f5a623;
+}
+
+/* Custom Width */
+
+.w-md-13 {
+    width: 13% !important;
+}
+.w-md-14 {
+    width: 14% !important;
+}
+.w-md-15 {
+    width: 15% !important;
+}
+.w-md-16 {
+    width: 16% !important;
+}
+.w-md-10{
+    width:10% !important;
+}
+
 /* Dashboard */
 
 .logo-thumb{
-    padding:25px;
-    background-color: #000421;
+    padding:21px;
+    background-color: #182730;
     color:white;
     margin-bottom: -7px;
 }
@@ -61,7 +125,8 @@
 
 /* Menu */
 .menu{
-    background-color: #000421;
+    /*background-color: #000421;*/
+    background-image: linear-gradient(349deg, #252428, #111115);
     color: white;
 }
 
@@ -69,7 +134,7 @@
 .sub-header-main{
     height: 100px; 
     font-size: 12px;
-    margin-top: 71px;
+    margin-top: 95px;
     border-bottom: 1px solid black;
 }
 .subheader-profile{
@@ -88,15 +153,18 @@
 
 /* Sidebar Menu */
 .sidebar-btn {
-    border: 1px solid black;
+    border: 1px solid white;
     color: black;
     border-radius: 15px !important;
     padding: 5px;
-    background-color: #ffb100;
+    /*background-color: #ffb100;*/
     text-decoration: none;
     width: 80% !important;
     margin-left: 20px;
     margin-top: 15px;
+}
+.sidebar-btn:hover, .sidebar-btn:active{
+    border-color:black;
 }
 
 /* Master Page */
@@ -146,6 +214,109 @@
     padding: 15px 0px 20px 0px;
     background-color: #f3f3f3;
 }
+
+/* Agreement Closure */
+.p-lr-20{
+    padding-left:20px;
+    padding-right:20px;
+}
+.popup-heading{
+    font-size:x-large;
+    padding-top:5%;
+}
+.tca-modal-md{
+    width: 1100px !important;
+    margin-right: 40px !important;
+}
+
 .search-btn{
     height:41px !important;
+}
+
+/* Notification */
+.notification-modal-content{
+    margin-top: 11%;
+    margin-left: -4%;
+    width: 129%;
+    background-color: #3a3939 !important;
+    box-shadow: 0 16px 17px 0 rgba(0, 0, 0, 0.5) !important;
+}
+
+.notification-hr {
+    border-color: #797979 !important;
+}
+.label-default-remove {
+    font-weight: normal !important;
+}.notification-tab-1{
+    text-align: center;
+    font-family: Abel;
+}
+.notification-text{
+    font-size: 25px;
+    color: #f5a623;
+    text-transform: uppercase;
+    padding-top: 15px;
+}
+.notification-number{
+    font-size: 75px;
+    color: #f5a623;
+    text-transform: uppercase;    
+    padding-top: 35px;
+}
+.notification-down-arrow{
+    color:white;
+    font-size: 50px;
+}
+.notification-filter-line{
+    border-left: 1px solid white;
+}
+.notification-filter-div{
+    color: #8a93a3;
+    font-size: 13px;
+    font-family: Abel;
+    border-left: 1px solid #797979;    
+}
+.notification-filter {
+    color: white;
+    padding: 2px 10px;
+    border-radius: 4px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-transform: uppercase;
+    cursor:pointer;
+}
+.notification-filter.active{
+    background-color: #52ce6f;
+}
+.notification-vr-1{
+    padding-right: 10px;
+    border-right: 1px solid #385d8c;
+}
+.notification-vr-2{
+    padding-right: 10px;
+    padding-left: 10px;
+    border-right: 1px solid #385d8c;
+}
+.notification-vr-3{
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.notification-approve{
+    background-color: #f6a623;
+    color: white;
+    padding: 2px 10px;
+    border-radius: 3px;
+}
+.notification-reject{
+    background-color: #d35847;
+    color: white;
+    padding: 2px 10px;
+    border-radius: 3px;
+}
+
+/* Pagination */
+.pagination-btn {
+    background: #554289;
+    color: white;
+    border: 1px solid;
 }

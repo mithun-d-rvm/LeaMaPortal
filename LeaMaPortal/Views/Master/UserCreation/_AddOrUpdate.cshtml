@@ -1,0 +1,315 @@
+﻿
+@model LeaMaPortal.Models.UserCreationViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/content/bootstrap.css" rel="stylesheet" />
+<link href="~/theme/css/leemastyle.css" rel="stylesheet" />
+<link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
+<!DOCTYPE html>
+
+
+
+<div class="inner-block">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "UserCreation" }))
+    {
+        @Html.HiddenFor(m => m.id, new { @id = "UserId" })
+        <div class="blank">
+            <div class="row font-15">
+                <div class="col-md-10">
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "leama-field-name" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                        </div>
+                        @*<div class="col-md-4">
+                            Name:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="master-form-input" />
+                        </div>*@
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Userid, htmlAttributes: new { @class = "leama-field-name" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Userid, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                        </div>
+                        @*<div class="col-md-4">
+                            User ID:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="master-form-input" />
+                        </div>*@
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Pwd, htmlAttributes: new { @class = "leama-field-name" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.PasswordFor(model => model.Pwd,  new { @class = "leama-field form-control" } )
+                        </div>
+                        @*<div class="col-md-4">
+                            Password:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="master-form-input" />
+                        </div>*@
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Cnfpwd, htmlAttributes: new { @class = "leama-field-name" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.PasswordFor(model => model.Cnfpwd, new { @class = "leama-field form-control" })
+                        </div>
+                        @*<div class="col-md-4">
+                            Confirm Password:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="master-form-input" />
+                        </div>*@
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "leama-field-name" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownList("Category", null, "-Select-", htmlAttributes: new { @class = "form-control", @placeholder = "-Select-", })
+                        </div>
+                        @*<div class="col-md-4">
+                            Confirm Password:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="master-form-input" />
+                        </div>*@
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "leama-field-name" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                        </div>
+                        @*<div class="col-md-4">
+                            Confirm Password:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="master-form-input" />
+                        </div>*@
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Phoneno, htmlAttributes: new { @class = "leama-field-name" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Phoneno, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                        </div>
+                        @*<div class="col-md-4">
+                            Confirm Password:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="master-form-input" />
+                        </div>*@
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "leama-field-name" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Active, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            &nbsp;
+                        </div>
+                        <div class="">
+                            <div class="col-md-2">
+                                <div class="col-md-1">
+                                    @Html.HiddenFor(m => m.AddConfig, new { @id = "hdnAddConfig" })
+                                    @Html.CheckBoxFor(m => m.AddConfig.HasValue, new { @id = "chkAddConfig", @class = "input-checkbox" })
+                                </div>
+                                <div class="col-md-8 m-t-3">
+                                    <span> @Html.LabelFor(model => model.AddConfig, htmlAttributes: new { @class = "leama-field-name" }) </span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="col-md-1">
+                                    @Html.HiddenFor(m => m.EditConfig, new { @id = "hdnEditConfig" })
+                                    @Html.CheckBoxFor(m => m.EditConfig.HasValue, new { @id = "chkEditConfig", @class = "input-checkbox" })
+                                    @*<input type="checkbox" class="input-checkbox">*@
+                                </div>
+                                <div class="col-md-8 m-t-3">
+                                    <span> @Html.LabelFor(model => model.EditConfig, htmlAttributes: new { @class = "leama-field-name" }) </span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="col-md-1">
+                                    @Html.HiddenFor(m => m.DeleteConfig, new { @id = "hdnDeleteConfig" })
+                                    @Html.CheckBoxFor(m => m.DeleteConfig.HasValue, new { @id = "chkDeleteConfig", @class = "input-checkbox" })
+                                    @*<input type="checkbox" class="input-checkbox">*@
+                                </div>
+                                <div class="col-md-8 m-t-3">
+                                    <span> @Html.LabelFor(model => model.DeleteConfig, htmlAttributes: new { @class = "leama-field-name" }) </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-12">
+                    @*<div class="col-md-6">*@
+                        <h5 class="p-b-25 text-uppercase"> Menu Names </h5>
+                    @*</div>*@
+                    @*<div class="col-md-6">
+                        <h5 class="p-b-25"> REPORT DATA </h5>
+                    </div>*@
+                </div>
+                @Html.HiddenFor(m => m.MenuConfig, new { @id = "MenuConfig" })
+                @foreach (var menuItem in ViewBag.MenuRights)
+                {
+                    //if (menuItem.Id % 2 != 0)
+                    //{
+
+                    //}
+                    //else
+                    //{
+
+                    //}
+                    @*<div class="col-md-7 p-b-10">*@
+                        <div class="col-md-4 p-b-10">
+                            <div class="col-md-12 report-form-row">
+                                <div class="col-md-1">@menuItem.Id</div>
+                                <div class="col-md-9 text-center">@menuItem.MenuName</div>
+                                <div class="col-md-1 report-checkbox-align"> <input type="checkbox" checked="@menuItem.IsChecked" name="@menuItem.Id" class="input-checkbox menurights" /> </div>
+                            </div>
+                        </div>
+                    @*</div>*@
+                }
+
+                <div class="col-md-12 form-input-padding p-b-10">
+                    <div class="col-md-4">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn master-form-btn">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<script>
+    //Add or update
+    $("form#UserCreation").off("submit").on("submit", function (e) {
+        e.preventDefault();
+        // $("#icon-success").addClass("hide");
+        //$("#VerifyIdDetailsLoader").removeClass("hide");
+        try {
+            var form = $("form#UserCreation");
+            var menuCheckBoxes = $(".menurights");
+            var menuIds = "";
+            debugger;
+            $('input.menurights:checkbox:checked').each(function () {
+                menuIds = menuIds == "" ? $(this.name).selector : menuIds + "," + $(this.name).selector;
+            });
+            //for (var i = 0; i < menuCheckBoxes.length; i++) {
+            //    if (menuCheckBoxes[i].checked) {
+            //        menuIds = menuIds == "" ? menuCheckBoxes[i].name : menuIds + "," + menuCheckBoxes[i].name;
+            //        //alert(menuCheckBoxes[i].name);
+            //    }
+            //}
+            $("#MenuConfig").val(menuIds);
+
+            if ($("#chkAddConfig")[0].checked) {
+                $("#hdnAddConfig").val(1);
+            }
+            if ($("#chkEditConfig")[0].checked) {
+                $("#hdnEditConfig").val(1);
+            }
+            if ($("#chkDeleteConfig")[0].checked) {
+                $("#hdnDeleteConfig").val(1);
+            }
+
+             //var form = $('"form#VerifyId')[0]; // You need to use standart javascript object here
+            var formData = new FormData(form);
+            $.ajax(
+                {
+                    url: "../UserCreation/AddOrUpdate",
+                    // dataType: "jsonp",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        GetUserCreation();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+    //$("#Region").on('change', function (e) {
+    //    var region = $("#Region").val();
+    //    if (region != "" && region != null) {
+    //        $.ajax(
+    //            {
+    //                url: "../Region/GetCountry",
+    //                // dataType: "jsonp",
+    //                method: "GET",
+    //                data: { region: $("#Region").val() }, //FormData(form.get(0)),
+    //                contentType: "application/json",
+
+    //                success: function (response) {
+    //                    debugger;
+    //                    if (response != null) {
+    //                        $("#Country").val(response);
+    //                    }
+    //                },
+    //                error: function (jqXhr, textStatus, errorThrown) {
+    //                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+    //                },
+    //                complete: function () {
+    //                    // $("#").addClass("hide");
+    //                }
+
+    //            });
+    //    }
+    //   // $("#Title").val($("#TitleDisplay").val());
+    //});
+
+</script>
+

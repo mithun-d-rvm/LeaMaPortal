@@ -18,7 +18,7 @@ namespace LeaMaPortal.Controllers
         private Entities db = new Entities();
 
         // GET: Region
-        public async Task<PartialViewResult> Index(string Search, int? page, int? defaultPageSize)
+        public PartialViewResult Index(string Search, int? page, int? defaultPageSize)
         {
             try
             {
@@ -39,8 +39,8 @@ namespace LeaMaPortal.Controllers
                 else
                 {
                     list = db.tbl_region.Where(x => x.Delmark != "*" 
-                                    && x.Country.ToLower().Contains(Search.ToLower())
-                                    && x.Country.ToLower().Contains(Search.ToLower()) )
+                                    && (x.Country.ToLower().Contains(Search.ToLower())
+                                    || x.Region_Name.ToLower().Contains(Search.ToLower())) )
                                   .OrderBy(x => x.Region_Name).Select(x => new RegionViewModel()
                                   {
                                       Id = x.Id,
@@ -57,42 +57,6 @@ namespace LeaMaPortal.Controllers
             }
         }
 
-        public PartialViewResult Region()
-        {
-            try
-            {
-                RegionViewModel model = new RegionViewModel();
-                ViewBag.Country = new SelectList(db.tbl_country.OrderBy(x => x.Country_name), "Country_name", "Country_name");
-                return PartialView("../Master/Region/_AddOrUpdate", model);
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
-        // GET: Region/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbl_region tbl_region = db.tbl_region.Find(id);
-            if (tbl_region == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbl_region);
-        }
-
-        // GET: Region/Create
-        public ActionResult Create()
-        {
-            ViewBag.Country = new SelectList(db.tbl_country, "Country_name", "Createduser");
-            return View();
-        }
-
         [HttpGet]
         public PartialViewResult AddOrUpdate()
         {
@@ -101,11 +65,27 @@ namespace LeaMaPortal.Controllers
             return PartialView("../Master/Region/_AddOrUpdate", model);
         }
 
-        // POST: Region/Create
+        [HttpGet]
+        public async Task<ActionResult> GetCountry(string region)
+        {
+            try
+            {
+                tbl_region tbl_region = await db.tbl_region.FirstOrDefaultAsync(x => x.Region_Name == region);
+                return Json(tbl_region?.Country,JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception e)
+            {
+                throw;
+            }
+            
+            
+        }
+
+        // POST: Region/AddOrUpdate
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<ActionResult> AddOrUpdate([Bind(Include = "Region_Name,Country,Id")] RegionViewModel model)
+        public async Task<ActionResult> AddOrUpdate([Bind(Include = "Region_Name,Country,Id,Region_Name_PK,Country_PK")] RegionViewModel model)
         {
             MessageResult result = new MessageResult();
             try
@@ -114,27 +94,18 @@ namespace LeaMaPortal.Controllers
                 {
                     MySqlParameter pa = new MySqlParameter();
                     string PFlag = "INSERT";
-
-                    //Accyear,Createddatetime,Createduser,Delmark
-                    //tbl_country tbl_country = new tbl_country();
-                    //tbl_country.Country_name = model.Country;
                     if (model.Id == 0)
                     {
-                        tbl_region tbl_region = await db.tbl_region.FindAsync(model.Region_Name, model.Country);
+                        tbl_region tbl_region = await db.tbl_region.FindAsync(model.Region_Name_PK, model.Country_PK);
                         if (tbl_region != null)
                         {
                             PFlag = "UPDATE";
                             model.Id = tbl_region.Id;
                         }
-                        //tbl_country.Createddatetime = DateTime.Now;
-                        //tbl_country.Accyear = DateTime.Now.Year;
-                        //tbl_country.Createduser = "arul";
-                        //db.tbl_country.Add(tbl_country);
                     }
                     else
                     {
                         PFlag = "UPDATE";
-                        // db.Entry(tbl_country).State = EntityState.Modified;
                     }
                     object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PId", model.Id),
@@ -183,23 +154,6 @@ namespace LeaMaPortal.Controllers
             }
         }
 
-        // POST: Region/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Region_Name,Country,Id,Accyear,Createddatetime,Createduser,Delmark")] tbl_region tbl_region)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tbl_region).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Country = new SelectList(db.tbl_country, "Country_name", "Createduser", tbl_region.Country);
-            return View(tbl_region);
-        }
-
         // GET: Region/Delete/5
         public async Task<ActionResult> Delete(string RegionName, string CountryName)
         {
@@ -228,17 +182,6 @@ namespace LeaMaPortal.Controllers
             {
                 return Json(new MessageResult() { Errors = ex.Message }, JsonRequestBehavior.AllowGet);
             }
-        }
-
-        // POST: Region/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            tbl_region tbl_region = db.tbl_region.Find(id);
-            db.tbl_region.Remove(tbl_region);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

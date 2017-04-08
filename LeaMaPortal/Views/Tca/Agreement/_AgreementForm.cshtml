@@ -1,0 +1,277 @@
+﻿<!--
+  File Name      : _AgreementForm.cshtml
+  Description    : Agreement Details partial view
+  Created Date   : 25-Mar-2017
+  Notes          : <Notes>
+-->
+
+@model LeaMaPortal.Models.AgreementFormViewModel
+
+<div class="font-smaller">
+    <div class="text-uppercase font-x-large">
+        <strong> Agreement </strong>
+    </div>
+    <div class="p-b-25"> &nbsp; </div>
+    <div class="row">
+        <div class="col-md-6 ht-50">
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-3 m-t-3">
+                    <span> Single Unit </span>
+                </div>
+                <div class="col-md-1">
+                    <input type="radio" class="input-checkbox" name="Unit">
+                </div>
+                <div class="col-md-4 m-t-3">
+                    <span> Multiple Unit </span>
+                </div>
+                <div class="col-md-1 m-l-m-40">
+                    <input type="radio" class="input-checkbox" name="Unit">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            @*<div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    Existing Contract Agreement:
+                </div>
+                <div class="col-md-6">
+                    <select class="master-form-input form-control">
+                        <option> Agreement 1 </option>
+                        <option> Agreement 2 </option>
+                        <option> Agreement 3 </option>
+                    </select>
+                </div>
+            </div>*@
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Agreement_No, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Agreement_No, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                   @Html.LabelFor(model => model.Agreement_Date, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                  @Html.EditorFor(model => model.Agreement_Date, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Tenant_Type, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Tenant_Type, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Ag_Tenant_id, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="master-form-input form-control" />
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Ag_Tenant_Name, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="master-form-input form-control" />
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.property_id, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="master-form-input form-control" />
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                   @Html.LabelFor(model => model.Property_ID_Tawtheeq, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="master-form-input form-control" />
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Properties_Name, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="master-form-input form-control" />
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Unit_ID_Tawtheeq, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="master-form-input form-control" />
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Unit_Property_Name, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="master-form-input form-control" />
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-6">
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Vacantstartdate, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Vacantstartdate, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Agreement_Start_Date, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Agreement_Start_Date, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Agreement_End_Date, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Agreement_End_Date, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Total_Rental_amount, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Total_Rental_amount, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Perday_Rental, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Perday_Rental, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.nofopayments, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                   @Html.LabelFor(model => model.Advance_Security_Amount, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Advance_Security_Amount, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Security_Flag, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    <select class="master-form-input form-control">
+                        <option> Payment 1 </option>
+                        <option> Payment 2 </option>
+                        <option> Payment 3 </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Security_chequeno, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Security_chequeno, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Security_chequedate, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Security_chequedate, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Notice_Period, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Notice_Period, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-6">
+                    &nbsp;
+                </div>
+                <div class="col-md-4">
+                    <input type="button" class="btn master-form-btn" value="Submit" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-t-5-p">
+        &nbsp;
+    </div>
+    <!-- BEGIN AGREEMENT PDC -->
+    <div class="p-lr-20">
+        @Html.Partial("_AgreementPdc")
+    </div>
+    <!-- END AGREEMENT PDC -->
+    <div class="row ht-5">
+        &nbsp;
+    </div>
+    <!-- BEGIN AGREEMENT DOCUMENT -->
+    <div class="p-lr-20">
+        @Html.Partial("_AgreementDocument")
+    </div>
+    <!-- END AGREEMENT DOCUMENT -->
+    <div class="row ht-5">
+        &nbsp;
+    </div>
+    <!-- BEGIN AGREEMENT UTILITY -->
+    <div class="p-lr-20">
+        @Html.Partial("_AgreementUtility")
+    </div>
+    <!-- END AGREEMENT UTILITY -->
+    <div class="row ht-5">
+        &nbsp;
+    </div>
+    <!-- BEGIN AGREEMENT UNIT -->
+    <div class="p-lr-20">
+        @Html.Partial("_AgreementUnit")
+    </div>
+    <!-- END AGREEMENT UNIT -->
+    <div class="row ht-5">
+        &nbsp;
+    </div>
+    <!-- BEGIN AGREEMENT UNIT -->
+    <div class="p-lr-20">
+        @Html.Partial("_AgreementCheckList")
+    </div>
+    <!-- END AGREEMENT UNIT -->
+    <div class="p-b-10">
+        &nbsp;
+    </div>
+</div>

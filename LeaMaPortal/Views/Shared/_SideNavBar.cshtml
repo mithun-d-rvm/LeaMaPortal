@@ -9,9 +9,11 @@
 
 <div class="sidebar-menu">
     <div class="menu">
-        <div class="logo-thumb text-center">
-            LEAMA
-        </div>
+        <a href="~/Dashboard/Index">
+            <div class="logo-thumb text-center">
+                <img src="~/Images/Logo-thumb.png" />
+            </div>
+        </a>
         <ul id="menu">
             @*<li id="menu-home">
                 <div class="header-right">
@@ -23,57 +25,56 @@
                     </a>
                 </div>
             </li>*@
-            <li id="menu-home"><a href="index.html">
-                                   <i class="fa fa-bell" style="color:white;"></i>
-                @*<i class="fa fa-tachometer"></i>*@
-                @*<img src="~/Images/PropertyProf.png" />*@ <br />
-                <div class="p-t-17">NOTIFICATION</div></a>
-            </li>
-            <li id="menu-home">
-                <a href="index.html">
-                    @*<i class="fa fa-tachometer"></i>*@
-                    <img src="~/Images/PropertyProf.png" /> <br />
-                    <div class="p-t-17">PROPERTY PROFILING</div>
+            <li id="menu-home" data-toggle="modal" data-target="#myModal">
+                <a href="#">
+                    <i class="fa fa-bell" style="color:white;"></i> <br />
+                    <div class="p-t-17">NOTIFICATION</div>
                 </a>
             </li>
             <li id="menu-home">
-                <a href="index.html">
-                    @*<i class="fa fa-tachometer"></i>*@
+                <a href="~/Tca/Index">
+                    <img src="~/Images/PropertyProf.png" /><br />
+                    <div class="p-t-17">TCA</div>
+                </a>
+            </li>
+            <li id="menu-home">
+                <a href="~/Invoice/Index">
                     <img src="~/Images/invoice.png" /><br />
-                    <div class="p-t-17">INVOICING</div>
+                    <div class="p-t-17">
+                      INVOICE
+                    </div>
                 </a>
-            </li>
+            </li>            
             <li id="menu-home">
-                <a href="index.html">
-                    @*<i class="fa fa-tachometer"></i>*@
+                <a href="~/Payment/Index">
                     <img src="~/Images/Payments.png" /><br />
-                    <div class="p-t-17">PAYMENTS</div>
+                    <div class="p-t-17">
+                        PAYMENTS
+                    </div>
                 </a>
             </li>
             <li id="menu-home">
-                <a href="index.html">
-                    @*<i class="fa fa-tachometer"></i>*@
+                <a href="~/Receipts/Index">
                     <img src="~/Images/Reciepts.png" /><br />
-                    <div class="p-t-17">RECEIPTS</div>
+                    <div class="p-t-17">
+                        RECEIPTS
+                    </div>
                 </a>
             </li>
-            <li id="menu-home">
+            @*<li id="menu-home">
                 <a href="index.html">
-                    @*<i class="fa fa-tachometer"></i>*@
                     <img src="~/Images/RenewContract.png" /><br />
                     <div class="p-t-17">RENEW CONTRACT</div>
                 </a>
             </li>
             <li id="menu-home">
                 <a href="index.html">
-                    @*<i class="fa fa-tachometer"></i>*@
                     <img src="~/Images/CloseCont.png" /><br />
                     <div class="p-t-17">CLOSE CONTRACT</div>
                 </a>
-            </li>
+            </li>*@
             <li id="menu-home">
-                <a href="index.html">
-                    @*<i class="fa fa-tachometer"></i>*@
+                <a href="#">
                     <img src="~/Images/REPORTING.png" /><br />
                     <div class="p-t-17">REPORTING</div>
                 </a>
@@ -87,3 +88,95 @@
     </div>
 </div>
 <div class="clearfix"> </div>
+
+
+<div id="myModal" class="modal modal-white" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content notification-modal-content">
+            @*<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>*@
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-3 notification-tab-1">
+                        <div class="notification-text">
+                            Notifications
+                        </div>
+                        <div class="notification-number">
+                            46
+                        </div>
+                        <div class="notification-down-arrow">
+                            <i class="fa fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-9 notification-filter-div">
+                        <div class="p-b-25">
+                            <span class="color-f5a623">Filter notifications by</span>
+                            <span class="notification-filter"> All </span>
+                            <span class="notification-filter-line"> &nbsp; </span>
+                            <span class="notification-filter active"> Pdc </span>
+                            <span class="notification-filter-line"> &nbsp; </span>
+                            <span class="notification-filter"> Renewals </span>
+                            <span class="notification-filter-line"> &nbsp; </span>
+                            <span class="notification-filter"> Expiring </span>
+                            <span class="pull-right"> Expand to page </span>
+                        </div>
+                        <div>
+                            <span class="notification-vr-1"> Lease expiring for Palms Apartments Block 3A/124 </span>
+                            <span class="notification-vr-2">Mr.Ananth Karthik</span>
+                            <span class="notification-vr-3">Last date:30-03-2017</span>
+                        </div>
+                        <hr class="notification-hr" />
+                        <div>
+                            <span>Approve New Caretaker request from Mr.Salman Amin</span>
+                            <span class="pull-right">
+                                <a href="#">
+                                    <span class="notification-approve">Approve</span>
+                                </a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="#">
+                                    <span class="notification-reject">Reject</span>
+                                </a>
+                            </span>
+                        </div>
+                        <hr class="notification-hr" />
+                        <div>
+                            <span class="notification-vr-1">Lease renewal for Palms Apartments Block 3A/124 post due date has been requested</span>
+                            <span class="notification-vr-2">Mr.Sam Karthik</span>
+                            <span class="notification-vr-3">Assigned date:30-03-2017</span>
+                        </div>
+                        <hr class="notification-hr" />
+                        <div>
+                            <span class="notification-vr-1">Rent overdue timeline extended for Finsand Storage Facility on request</span>
+                            <span class="notification-vr-2">Mechano Corp LLC</span>
+                            <span class="notification-vr-3">Assigned date:30-03-2017</span>
+                        </div>
+                        <hr class="notification-hr" />
+                        <div>
+                            <span class="notification-vr-1">Lease renewed for Sunbay Apartments Block 45/33A</span>
+                            <span class="notification-vr-2">Mr.Ananth</span>
+                            <span class="notification-vr-3">Completed on:30-03-2017</span>
+                        </div>
+                        <hr class="notification-hr" />
+                    </div>
+                </div>
+            </div>
+            @*<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>*@
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $('.modal-white').on('show.bs.modal', function () {
+        setTimeout(function () {
+            $('.modal-backdrop').css('background', 'white');
+            $('.modal-backdrop').css('opacity', 0);
+        }, 10);
+    });
+</script>
