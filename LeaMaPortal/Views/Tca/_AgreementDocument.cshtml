@@ -1,17 +1,19 @@
-﻿<div class="row p-b-25 text-uppercase">
+﻿@model LeaMaPortal.Models.AgreementDocumentViewModel
+
+<div class="row p-b-25 text-uppercase">
     <span> <strong> Agreement Document </strong> </span>
 </div>
 
 <div class="row">
     <div class="col-md-12 document-row">
         <div class="col-md-2">
-            Facility ID
+           @Html.LabelFor(model => model.Facility_id, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-4">
-            Facility Name
+         @Html.LabelFor(model => model.Facility_Name, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-2">
-            Numbers Available
+           @Html.LabelFor(model => model.Numbers_available, htmlAttributes: new { @class = "label-default-remove" })
         </div>
     </div>
 </div>

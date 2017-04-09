@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -15,8 +16,11 @@ namespace LeaMaPortal.Models
         public string Caretaker_Name { get; set; }
         //[DisplayName("Father Name")]
         //public string Father_Name { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Date of Birth")]
         public DateTime? Dob { get; set; }
+
         [DisplayName("Address1")]
         public string Address1 { get; set; }
         [DisplayName("Address2")]
@@ -39,6 +43,9 @@ namespace LeaMaPortal.Models
         public string Phoneno { get; set; }
         [DisplayName("Email ID")]
         public string Email { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Date of Joining")]
         public DateTime? Doj { get; set; }
        
