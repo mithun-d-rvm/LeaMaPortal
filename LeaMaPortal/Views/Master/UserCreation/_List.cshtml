@@ -29,7 +29,7 @@
             </div>
         </div>
     }*@
-<div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
+<div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
     <div class="row">
         <div class="col-md-12 leama-fieldset ">
             <div class="col-md-2 pull-left">
@@ -48,8 +48,6 @@
         </div>
 
         <div class="divTable leama-fieldset col-md-12">
-
-
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
                     <div class="divTableCell">Name</div>
@@ -82,6 +80,7 @@
 
 
             </div>
+        </div>
             <div class="col-md-12">
                 <br />
                 @Html.HiddenFor(m => m.PageNumber)
@@ -93,7 +92,7 @@
                     {
                         if (i == Model.PageNumber)
                         {
-                            <input type="button" style="background:green" data-id="@i" value="@i" class="" />
+                            <input type="button" data-id="@i" value="@i" class="pagination-btn" />
                         }
                         else
                         {
@@ -103,6 +102,8 @@
                     }
                 </div>
             </div>
+        <div class="col-md-12 leama-fieldset ">
+            &nbsp;
         </div>
     </div>
 </div>
