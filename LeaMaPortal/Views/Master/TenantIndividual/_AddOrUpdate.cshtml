@@ -397,40 +397,54 @@
 
 
         </div>
-        <div class="m-t-5-p col-md-10 document-row" id="GridView">
-         
+        
+
             @if (Model.TenantDocumentList != null)
                 {
-                <div class="">
-                    @if (Model.TenantDocumentList.Count > 0)
-                    {<h3>Existing Documents</h3>}
-                    <table class="col-md-12" id="exist-file-list">
-                        @for (int i = 0; i < Model.TenantDocumentList.Count; i++)
+                <div class="m-t-5-p col-md-10 document-row" id="GridView">
+                    <div class="">
+                        @if (Model.TenantDocumentList.Count > 0)
+                    {<span style="text-transform: uppercase;font-weight: bold;">Existing Documents</span>}
+                        <table class="col-md-12" id="exist-file-list">
+                            @for (int i = 0; i < Model.TenantDocumentList.Count; i++)
                         {
-                            <tr class="col-md-12">
-                                <td class="col-md-4 text-left">
+                            <tr>
+                                <td class="col-md-4 p-t-25">
                                     @Html.HiddenFor(m => m.TenantDocumentList[i].id,new {@data_name= "id" })
                                     @Html.HiddenFor(m => m.TenantDocumentList[i].Doc_Path, new { @data_name = "Doc_Path" })
                                     @Html.HiddenFor(m => m.TenantDocumentList[i].Doc_name, new { @data_name = "Doc_name" })
                                     @Model.TenantDocumentList[i].Doc_name
                                 </td>
-                                <td class="col-md-4 text-left"><a href="~/Documents/TenantIndividual/@Model.TenantDocumentList[i].Doc_Path" target="_blank">Download</a></td>
-                                <td class="col-md-4 text-left">
-                                    <button type="button" class="remove-exist-file" title="Remove this row">X </button>
+                                <td class="col-md-4 p-t-25"><a href="~/Documents/TenantIndividual/@Model.TenantDocumentList[i].Doc_Path" target="_blank">Download</a></td>
+                                <td class="col-md-2 p-t-25">
+                                    <button type="button" class="remove-exist-file document-btn" title="Remove this row"> Delete </button>
                                 </td>
-
                             </tr>
                         }
-                    </table>
+                        </table>
+                    </div>
+                    <div class="clearfix"><br /></div>
                 </div>
-                <div class="clearfix"><br /></div>
+                    <div class="row ht-5">
+                        &nbsp;
+                    </div>
             }
-            
-            <div class="col-md-12">
+
+                
+            <div class="m-t-5-p col-md-10 document-row" id="GridView">
+
+            <table class="col-md-12">
+                <tr>
+                    <td class="col-md-4" style="text-transform: uppercase;font-weight: bold;"> Content Name </td>
+                    <td class="col-md-4" style="text-transform: uppercase;font-weight: bold;"> Document </td>
+                    <td class="col-md-2"> <input type="button" id="addbutton" class="document-btn" value="Add" /> </td>
+                </tr>
+            </table>
+            @*<div class="col-md-12">
                 <div class="col-md-4 text-left">Content Name</div>
                 <div class="col-md-4 text-left">Document</div>
                 <div class="col-md-2 text-left"><input type="button" id="addbutton" class="document-btn" value="Add" /></div>
-            </div>
+            </div>*@
             <div class="clearfix"><br /><br /></div>
                
 
