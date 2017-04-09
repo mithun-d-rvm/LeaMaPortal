@@ -8,7 +8,8 @@
 <div class="row">
     <div class="col-md-12 document-row">
         <div class="col-md-1 w-md-13">
-            @Html.EditorFor(model => model.AgreementPd.Month, new { @class = "label-default-remove AgreementPdMonth" })
+            @*@Html.EditorFor(model => model.AgreementPd.Month, new { @class = "label-default-remove AgreementPdMonth" })*@
+            @Html.DropDownList("AgreementPd.Month", null, new { @class = "label-default-remove AgreementPdMonth" })
         </div>
         <div class="col-md-1 w-md-14">
             @Html.EditorFor(model => model.AgreementPd.Year, new { @class = "label-default-remove AgreementPdYear" })
@@ -52,6 +53,7 @@
     var AgreementPdCount = parseInt($("#AgreementPdcListCount").val());
 
     function addAgreementPdcDetails(event) {
+        event.preventDefault();
         debugger;
         var Month = $("#AgreementPd_Month").val();
         var Year = $("#AgreementPd_Year").val();
@@ -99,7 +101,7 @@
 
         "</div>" +
         "<div class='col-md-1 w-md-14'>" +
-           "<button class='btn agreementpdclist-remove' onclick='removeAgreementPdcDetails(event);'>X</button>" +
+           "<button class='btn agreementpdclist-remove'>X</button>" +
         "</div>" +
     "</div>" +
 "</td>" +
@@ -136,4 +138,33 @@
         });
         k = newindex;
     };
+
+
+
+
+    $(document).on('click', 'button.agreementpdclist-remove', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('AgreementPdcDetailsList');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'AgreementPdcDetailsList[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+        AgreementPdCount = newindex;
+    });
 </script>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace LeaMaPortal.Models
 {
@@ -10,7 +11,7 @@ namespace LeaMaPortal.Models
     {
         public int Id { get; set; }
         [DisplayName("Month")]
-        public string Month { get; set; }
+        public SelectList Month { get; set; }
         [DisplayName("Year")]
         public string Year { get; set; }
         [DisplayName("Payment Mode")]

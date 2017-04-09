@@ -67,6 +67,8 @@ namespace LeaMaPortal.Controllers
         {
             //AgreementPdcViewModel model = new AgreementPdcViewModel();
             AgreementFormViewModel model = new AgreementFormViewModel();
+            model.AgreementPd.Month = new SelectList(Common.Months);
+            ViewBag.AgreementPd = model.AgreementPd;
             return PartialView("../Tca/_AgreementPdc", model);
         }
         public PartialViewResult AgreementDocument(int AgreementNo)
@@ -90,7 +92,12 @@ namespace LeaMaPortal.Controllers
             AgreementCheckListViewModel model = new AgreementCheckListViewModel();
             return PartialView("../Tca/_AgreementCheckList", model);
         }
+        [HttpPost]
+        public async Task<ActionResult> AddOrUpdate(AgreementFormViewModel model)
+        {
 
+            return RedirectToAction("Index");
+        }
 
         [HttpGet]
         public async Task<ActionResult> GetTenentDetails(string Type)

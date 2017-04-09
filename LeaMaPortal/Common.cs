@@ -10,6 +10,9 @@ namespace LeaMaPortal
         public static List<string> Title = new List<string>() { "MR.", "MRS.", "MS." };
         public static List<string> TcaTenantType = new List<string>() { "Company", "Individual" };
         public static List<string> SecurityFlag = new List<string>() { "Cash", "Cheque", "Online", "Cheque without date", "DD" };
+
+        public static List<string> Months= new List<string>() { "Jan", "Feb", "Mar", "April", "May","June","July","Aug","Sep","Oct","Nov","Dec" };
+
         public const string DefaultTitle = "MR.";
         public static List<string> Role = new List<string>() { "Admin", "Management", "Caretaker" };
         //public static List<string> City = new List<string>() { "Abudhabi", "Sharja" };
