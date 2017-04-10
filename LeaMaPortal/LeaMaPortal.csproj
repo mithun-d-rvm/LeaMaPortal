@@ -201,6 +201,14 @@
     </Compile>
     <Compile Include="Helpers\StaticHelper.cs" />
     <Compile Include="Models\ApprovalSettingsViewModel.cs" />
+    <Compile Include="Models\AgreementCheckListViewModel.cs" />
+    <Compile Include="Models\AgreementClosureViewModel.cs" />
+    <Compile Include="Models\AgreementDocumentViewModel.cs" />
+    <Compile Include="Models\AgreementPdcViewModel.cs" />
+    <Compile Include="Models\AgreementFormViewModel.cs" />
+    <Compile Include="Models\AgreementRenewalViewModel.cs" />
+    <Compile Include="Models\AgreementUnitViewModel.cs" />
+    <Compile Include="Models\AgreementUtilityViewModel.cs" />
     <Compile Include="Models\CaretakerViewModel.cs" />
     <Compile Include="Models\CheckListViewModel.cs" />
     <Compile Include="Models\ContractApprovalSettingViewModel.cs" />

@@ -1,18 +1,21 @@
-﻿<div class="row">
+﻿
+@model LeaMaPortal.Models.AgreementCheckListViewModel
+
+<div class="row">
     <div class="col-md-12 document-row">
-        <div class="col-md-2">
+        @*<div class="col-md-2">
             <input type="text" class="master-form-input form-control" />
         </div>
         <div class="col-md-3">
             <input type="text" class="master-form-input form-control" />
-        </div>
+        </div>*@
         <div class="col-md-3" style="margin-left: -27px;">
             <div class="col-md-5">
                 <div class="col-md-4 m-t-3">
                     <span> Yes </span>
                 </div>
                 <div class="col-md-1">
-                    <input type="radio" class="input-checkbox">
+                    <input type="radio" class="input-checkbox" name="verified">
                 </div>                
             </div>
             <div class="col-md-5">
@@ -20,12 +23,12 @@
                     <span> No </span>
                 </div>
                 <div class="col-md-1">
-                    <input type="radio" class="input-checkbox">
+                    <input type="radio" class="input-checkbox"  name="verified">
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <input type="text" class="master-form-input form-control" />
+            @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "master-form-input" } })
         </div>   
     </div>
 </div>

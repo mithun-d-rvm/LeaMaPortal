@@ -44,8 +44,8 @@
                         <div class="divTableCell">@item.Facility_id</div>
                         <div class="divTableCell">@item.Facility_Name</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit facility-edit", title = "Edit", @data_id = @item.Facility_id + '-' + @item.Facility_Name + '-' + @item.Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash facility-delete", @style = "color:red", @title = "Delete", @data_id = @item.Facility_id + '-' + @item.Facility_Name + '-' + @item.Id })
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit facility-edit", title = "Edit", @data_id = @item.Facility_id + '`' + @item.Facility_Name + '`' + @item.Id })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash facility-delete", @style = "color:red", @title = "Delete", @data_id = @item.Facility_id + '`' + @item.Facility_Name + '`' + @item.Id })
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
                     </div>
@@ -139,7 +139,7 @@
     $(".facility-edit").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
-        var param = id.split('-');
+        var param = id.split('`');
         $.ajax(
             {
                 url: "../Facility/Edit",
@@ -168,7 +168,7 @@
     $(".facility-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
-        var param = id.split('-');
+        var param = id.split('`');
         var r = confirm("Are you sure want to delete?");
         if (r == false) {
             return;

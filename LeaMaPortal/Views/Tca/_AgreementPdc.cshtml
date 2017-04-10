@@ -1,29 +1,32 @@
-﻿<div class="row p-b-25 text-uppercase">
+﻿
+
+@model LeaMaPortal.Models.AgreementPdcViewModel
+<div class="row p-b-25 text-uppercase">
     <span> <strong> Agreement PDC </strong> </span>
 </div>
 
 <div class="row">
     <div class="col-md-12 document-row">
         <div class="col-md-1 w-md-13">
-            Month
+            @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-1 w-md-14">
-            Year
+           @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-1 w-md-16">
-            Payment Mode
+           @Html.LabelFor(model => model.Payment_Mode, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-1 w-md-15">
-            Bank Name
+            @Html.LabelFor(model => model.BankName, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-1 w-md-14">
-            Cheque No
+            @Html.LabelFor(model => model.Cheque_No, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-1 w-md-14">
-            Cheque Date
+            @Html.LabelFor(model => model.Cheque_Date, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-1 w-md-14">
-            Amount
+            @Html.LabelFor(model => model.Cheque_Amount, htmlAttributes: new { @class = "label-default-remove" })
         </div>
     </div>
 </div>

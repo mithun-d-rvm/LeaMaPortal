@@ -1,23 +1,24 @@
-﻿<div class="row p-b-25 text-uppercase">
+﻿@model LeaMaPortal.Models.AgreementUtilityViewModel
+<div class="row p-b-25 text-uppercase">
     <span> <strong> Agreement utility </strong> </span>
 </div>
 
 <div class="row">
     <div class="col-md-12 document-row">
         <div class="col-md-2">
-            Utility ID
+            @Html.LabelFor(model => model.Utility_id, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-3">
-            Utility Name
+            @Html.LabelFor(model => model.Utility_Name, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-2">
-            Payable by
+            @Html.LabelFor(model => model.Payable, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-2">
-            Amount Type
+            @Html.LabelFor(model => model.Amount_Type, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-2">
-            Amount
+            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "label-default-remove" })
         </div>
     </div>
 </div>

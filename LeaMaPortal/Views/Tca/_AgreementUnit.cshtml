@@ -1,23 +1,26 @@
-﻿<div class="row p-b-25 text-uppercase">
+﻿
+@model LeaMaPortal.Models.AgreementUnitViewModel
+
+<div class="row p-b-25 text-uppercase">
     <span> <strong> Agreement unit inner - only for multiple units </strong> </span>
 </div>
 
 <div class="row">
     <div class="col-md-12 document-row">
         <div class="col-md-2">
-            Property ID
+            @Html.LabelFor(model => model.Property_ID, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-3">
-            Property Tawtheeq ID
+            @Html.LabelFor(model => model.Property_ID_Tawtheeq, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-2">
-            Property Name
+            @Html.LabelFor(model => model.Property_ID_Tawtheeq, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-2">
-            Unit Tawtheeq ID
+            @Html.LabelFor(model => model.Unit_ID_Tawtheeq, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-2">
-            Unit Name
+            @Html.LabelFor(model => model.Unit_Property_Name, htmlAttributes: new { @class = "label-default-remove" })
         </div>        
     </div>
 </div>
