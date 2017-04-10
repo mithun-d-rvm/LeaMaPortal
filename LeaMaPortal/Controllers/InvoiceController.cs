@@ -16,11 +16,17 @@ namespace LeaMaPortal.Controllers
         private Entities db = new Entities();
 
         // GET: Invoice
-        public PartialViewResult Index()
+        public ActionResult Index()
         {
-           
-            return PartialView("../Invoice/_InvoiceDetails");
+
+            return View();
         }
+        public PartialViewResult List()
+        {
+
+            return PartialView("../Invoice/_List");
+        }
+
         [HttpGet]
         public PartialViewResult AddorUpdate()
         {
