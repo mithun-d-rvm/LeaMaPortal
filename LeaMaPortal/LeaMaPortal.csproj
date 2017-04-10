@@ -192,6 +192,7 @@
     <Compile Include="Controllers\ReceiptsController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\SlabController.cs" />
+    <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\UtilityController.cs" />
     <Compile Include="Controllers\TenantCompanyController.cs" />
     <Compile Include="Controllers\TcaController.cs" />
@@ -285,6 +286,7 @@
     <Compile Include="Models\ReceiptViewModel.cs" />
     <Compile Include="Models\PropertyViewModel.cs" />
     <Compile Include="Models\SlabViewModel.cs" />
+    <Compile Include="Models\SupplierViewModel.cs" />
     <Compile Include="Models\UserCreationViewModel.cs" />
     <Compile Include="PagingProperty.cs" />
     <Compile Include="Models\FacilityViewModel.cs" />
@@ -548,11 +550,14 @@
     <Content Include="Views\Master\UserCreation\_List.cshtml" />
     <Content Include="Views\Master\Payment\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\Payment\_List.cshtml" />
+    <Content Include="Views\Master\Supplier\_AddOrUpdate.cshtml" />
+    <Content Include="Views\Master\Supplier\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Documents\TenantCompany\" />
     <Folder Include="Documents\TenantIndividual\" />
+    <Folder Include="Views\Supplier\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

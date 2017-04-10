@@ -46,7 +46,7 @@
 .leama-header-top{
     padding-top: 15px;
       background-color:white; 
-    box-shadow: 7px 7px 7px #c5c2c7;
+    /*box-shadow: 7px 7px 7px #c5c2c7;*/
 }
 .leama-inner-block{
     padding: 1em 2em 4em 2em;

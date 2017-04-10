@@ -1,7 +1,7 @@
 ﻿
-@*@model LeaMaPortal.Models.CheckListViewModel*@
+
 @using MvcPaging
-@model IPagedList<LeaMaPortal.Models.CheckListViewModel>
+@model IPagedList<LeaMaPortal.Models.SupplierViewModel>
 @{
     Layout = null;
 }
@@ -9,8 +9,7 @@
 <link href="~/theme/css/leemastyle.css" rel="stylesheet" />
 <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
 <!DOCTYPE html>
-
-<div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
+<div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
     <div class="row">
         <div class="col-md-12 leama-fieldset ">
             <div class="col-md-2 pull-left">
@@ -33,49 +32,61 @@
 
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
-                    <div class="divTableCell ">CheckList Id</div>
-                    <div class="divTableCell">CheckList Name</div>
-                    <div class="divTableCell">CheckList Type</div>
+                    <div class="divTableCell">Supplier Id</div>
+                    <div class="divTableCell">Supplier Name</div>
+                    <div class="divTableCell">First Name</div>
+                    <div class="divTableCell">Email</div>
+                    <div class="divTableCell">Address</div>
                     <div class="divTableCell">Action</div>
 
                 </div>
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
-                        <div class="divTableCell">@item.Checklist_id</div>
-                        <div class="divTableCell">@item.Checklist_Name</div>
-                        <div class="divTableCell">@item.Checklist_Type</div>
+                        <div class="divTableCell">@item.Supplier_Id</div>
+                        <div class="divTableCell">@item.Supplier_Name</div>
+                        <div class="divTableCell">@item.First_Name</div>
+                        <div class="divTableCell">@item.Email</div>
+                        <div class="divTableCell">@item.address</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit checklist-edit", title = "Edit", @data_id = @item.Checklist_id + '`' + @item.Checklist_Name + '`' + @item.Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash checklist-delete", @style = "color:red", @title = "Delete", @data_id = @item.Checklist_id + '`' + @item.Checklist_Name + '`' + @item.Id })
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit supplier-edit", title = "Edit", @data_id = @item.Supplier_Id })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash supplier-delete", @style = "color:red", @title = "Delete", @data_id = @item.Supplier_Id })
+
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
+
                     </div>
                 }
 
+
+            </div>
+
+        </div>
+
+        <div class="col-md-12">
+            @Html.HiddenFor(m => m.PageNumber)
+            <div class="col-md-2">
+                @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="col-lg-10 text-right">
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    if (i == Model.PageNumber)
+                    {
+                        <input type="button" data-id="@i" value="@i" class="pagination-btn" />
+                    }
+                    else
+                    {
+                        <input type="button" data-id="@i" value="@i" class="Page" />
+                    }
+
+                }
             </div>
         </div>
-            <div class="col-md-12">
-                <br />
-                @Html.HiddenFor(m => m.PageNumber)
-                <div class="col-md-2">
-                    @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="col-lg-10 text-right">
-                    @for (int i = 1; i <= Model.PageCount; i++)
-                    {
-                        if (i == Model.PageNumber)
-                        {
-                            <input type="button" data-id="@i" value="@i" class="pagination-btn" />
-                        }
-                        else
-                        {
-                            <input type="button" data-id="@i" value="@i" class="Page" />
-                        }
-                    }
-                </div>
-            </div>
-        
+
+        <div class="col-md-12 leama-fieldset ">
+            &nbsp;
+        </div>
 
         <script type="text/javascript">
                 $(".Page").click(function(e)
@@ -84,24 +95,24 @@
                     var defaultPageSize = $("#defaultPageSize").val();
                     var search = $("#Search").val();
                     //alert(page);
-                    getCheckListList(search,page,defaultPageSize)
+                    getCountryList(search,page,defaultPageSize)
                 });
                 $("#defaultPageSize").change(function () {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getCheckListList(search, 1, defaultPageSize)
+                    getCountryList(search, 1, defaultPageSize)
                 });
                 $("#btn-search").click(function (e) {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getCheckListList(search, 1, defaultPageSize)
+                    getCountryList(search, 1, defaultPageSize)
                 });
 
-                function getCheckListList(search, page, defaultPageSize)
+                function getCountryList(search,page,defaultPageSize)
                 {
                     $.ajax(
                        {
-                           url: "../CheckList/Index",
+                           url: "../Supplier/Index",
                            type: "Get",
                            data: { Search: search, page: page, defaultPageSize: defaultPageSize },
                            success: function (html) {
@@ -131,37 +142,21 @@
     }
 
         </script>
-
-        <div class="col-md-12 leama-fieldset ">
-            &nbsp;
-        </div>
     </div>
 
 
 </div>
-
 <script>
-    //Edit get
-
-    $(".checklist-edit").click(function (e) {
+    $(".supplier-edit").click(function (e) {
         e.preventDefault();
-        var id = $(this).data("id");
-        var param = id.split('`');
+        var supplierId = $(this).data("id");
         $.ajax(
             {
-                url: "../CheckList/Edit",
+                url: "../Supplier/Edit",
                 type: "Get",
-                data: { CheckListId: param[0], CheckListName : param[1] },
-                success: function (result) {
-                    if (result.Errors == undefined || result.Errors == "") {
-                        $("#CheckListId").val(result.Id);
-                        $("#CheckList_Id").val(result.Checklist_id);
-                        $("#CheckListName").val(result.Checklist_Name);
-                        $("#ChecklistType").val(result.Checklist_Type);
-                    }
-                    else {
-                        alert(data.Errors);
-                    }
+                data: { Supplier_Id: supplierId },
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -172,11 +167,11 @@
             });
     });
 
-    // delete
-    $(".checklist-delete").click(function (e) {
+    $(".supplier-delete").click(function (e) {
+        debugger;
         e.preventDefault();
-        var id = $(this).data("id");
-        var param = id.split('`');
+        var supplierId = $(this).data("id");
+
         var r = confirm("Are you sure want to delete?");
         if (r == false) {
             return;
@@ -184,16 +179,17 @@
         else {
             $.ajax(
                 {
-                    url: "../CheckList/Delete",
-                    type: "Get",
-                    data: { CheckListId: param[0], CheckListName: param[1] },
+                    url: "../Supplier/Delete",
+                    type: "Post",
+                    data: { Supplier_Id: supplierId },
                     success: function (response) {
-                        GetCheckList();
+                        GetSupplier();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                     },
                     complete: function () {
+
                     }
                 });
         }
