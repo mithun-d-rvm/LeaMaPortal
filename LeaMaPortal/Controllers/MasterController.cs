@@ -11,6 +11,7 @@ using LeaMaPortal.Models.DBContext;
 using LeaMaPortal.Models;
 namespace LeaMaPortal.Controllers
 {
+    [Authorize]
     public class MasterController : Controller
     {
         private Entities db = new Entities();

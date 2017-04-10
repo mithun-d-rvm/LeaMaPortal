@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -11,16 +12,24 @@ namespace LeaMaPortal.Models
         public int Id { get; set; }
         [DisplayName("Receipt No")]
         public int ReceiptNo { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Receipt Date")]
         public DateTime ReceiptDate { get; set; }
+
         [DisplayName("Receipt Mode")]
         public string RecpType { get; set; }
         [DisplayName("Receipt Type")]
         public string Reccategory { get; set; }
         [DisplayName("Advance Receipt Number")]
         public string AdvAcCode { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Contract Agreement Date")]
         public DateTime ContracAgreementDate { get; set; }
+
         [DisplayName("Contract Agreement Number")]
         public int agreement_no { get; set; }
         [DisplayName("Tenant ID")]
@@ -43,8 +52,12 @@ namespace LeaMaPortal.Models
         public string PDCstatus { get; set; }
         [DisplayName("DD/Cheque Number")]
         public string DDChequeNo { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("DD/Cheque Date")]
         public DateTime DDChequeDate { get; set; }
+
         [DisplayName("Bank Account Number")]
         public string BankAcCode { get; set; }
         [DisplayName("Bank Account Name")]
@@ -61,8 +74,12 @@ namespace LeaMaPortal.Models
         public string Invtype { get; set; }
         [DisplayName("Invoice Number")]
         public string Invno { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Invoice Date")]
         public DateTime InvoiceDate { get; set; }
+
         [DisplayName("Invoice Description")]
         public string Description { get; set; }
         [DisplayName("Invoice Amount")]

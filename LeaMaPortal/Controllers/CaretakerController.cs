@@ -236,7 +236,7 @@ namespace LeaMaPortal.Controllers
         {
             try
             {
-                var tbl_caretaker = await db.tbl_caretaker.FirstOrDefaultAsync(x => x.Id == Id);
+                var tbl_caretaker = await db.tbl_caretaker.FirstOrDefaultAsync(x => x.Caretaker_id == Id);
                 return Json(tbl_caretaker?.Caretaker_Name, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)

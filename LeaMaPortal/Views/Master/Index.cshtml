@@ -64,6 +64,9 @@
             case 14:
                 GetUtility();
                 break;
+            case 15:
+                GetSupplier();
+                break;
             case 16:
                 GetSlab();
                 break;
@@ -685,6 +688,47 @@
         $.ajax(
         {
             url: "../Slab/Index",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+
+    function GetSupplier() {
+        $("#img-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
+        $.ajax(
+        {
+            url: "../Supplier/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Supplier/Index",
             type: "Get",
             data: {},
             contentType: "application/json",
