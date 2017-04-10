@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LeaMaPortal.Models.DBContext;
+using System.Threading.Tasks;
+using LeaMaPortal.Models;
 
 namespace LeaMaPortal.Controllers
 {
@@ -14,8 +16,14 @@ namespace LeaMaPortal.Controllers
     {
         private Entities db = new Entities();
 
-        // GET: Payments
-        public ActionResult Index()
+        [HttpGet]
+        public async Task<PartialViewResult> List(string Search, int? page, int? defaultPageSize)
+        {
+            return PartialView("../Payment/_List");
+        }
+
+        [HttpGet]
+        public async Task<PartialViewResult> AddOrUpdate()
         {
             List<SelectListItem> PaymentType = new List<SelectListItem>
                                      ();
@@ -96,7 +104,13 @@ namespace LeaMaPortal.Controllers
             ViewBag.PaymentType = PaymentType;
             ViewBag.PaymentMode = PaymentMode;
             ViewBag.PDCStatus = PDCStatus;
-            return PartialView("../Payment/Index");
+            return PartialView("../Payment/_AddOrUpdate", new PaymentViewModel());
+        }
+
+        // GET: Payments
+        public ActionResult Index()
+        {
+            return View();
         }
 
         // GET: Payments/Details/5
