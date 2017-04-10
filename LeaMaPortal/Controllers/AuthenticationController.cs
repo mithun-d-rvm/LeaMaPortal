@@ -46,6 +46,15 @@ namespace LeaMaPortal.Controllers
                 return View(LoginModel);
             }
         }
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            HttpCookie cookie1 = new HttpCookie(FormsAuthentication.FormsCookieName, "");
+            cookie1.Expires = DateTime.Now.AddYears(-1);
+            Response.Cookies.Add(cookie1);
+            //Session.Abandon();
+            return RedirectToAction("Login");
+        }
 
         // GET: Authentication/Details/5
         public ActionResult Details(int id)
