@@ -10,7 +10,7 @@
 <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
 <!DOCTYPE html>
 
-<div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
+<div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
     <div class="row">
         <div class="col-md-12 leama-fieldset ">
             <div class="col-md-2 pull-left">
@@ -35,7 +35,7 @@
                 <div class="divTableHeading">
                     <div class="divTableCell ">Slab Id</div>
                     <div class="divTableCell">Utility Name</div>
-                    <div class="divTableCell ">Colour</div>                    
+                    <div class="divTableCell ">Colour</div>
                     <div class="divTableCell ">Rate</div>
                     <div class="divTableCell ">Residence Type</div>
                     <div class="divTableCell">Action</div>
@@ -58,6 +58,8 @@
                 }
 
             </div>
+
+        </div>
             <div class="col-md-12">
                 <br />
                 @Html.HiddenFor(m => m.PageNumber)
@@ -69,7 +71,7 @@
                     {
                         if (i == Model.PageNumber)
                         {
-                            <input type="button" style="background:green" data-id="@i" value="@i" class="" />
+                            <input type="button" data-id="@i" value="@i" class="pagination-btn" />
                         }
                         else
                         {
@@ -78,7 +80,7 @@
                     }
                 </div>
             </div>
-        </div>
+       
 
         <script type="text/javascript">
                 $(".Page").click(function(e)
@@ -134,6 +136,10 @@
     }
 
         </script>
+
+        <div class="col-md-12 leama-fieldset ">
+            &nbsp;
+        </div>
     </div>
 
 
