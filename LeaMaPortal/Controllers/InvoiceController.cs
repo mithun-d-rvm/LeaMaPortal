@@ -18,8 +18,14 @@ namespace LeaMaPortal.Controllers
         // GET: Invoice
         public PartialViewResult Index()
         {
+           
+            return PartialView("../Invoice/_InvoiceDetails");
+        }
+        [HttpGet]
+        public PartialViewResult AddorUpdate()
+        {
             List<SelectListItem> Month = new List<SelectListItem>
-                                      ();
+                                     ();
             Month.Add(new SelectListItem
             {
                 Text = "1",
@@ -104,21 +110,16 @@ namespace LeaMaPortal.Controllers
             //ViewBag.Tenant_Name = new SelectList(db.tbl_tenant_individual.OrderBy(x => x.First_Name), "Tenant_Name", "Tenant_Name");
             ViewBag.Property_Id = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Property_Id), "Property_Id", "Property_Id");
             ViewBag.Property_Name = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Property_Name), "Property_Id", "Property_Name");
-           ViewBag.Unit_Id = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Unit_ID_Tawtheeq), "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
-          ViewBag.unit_Name = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Unit_Property_Name), "Unit_Property_Name", "Unit_Property_Name");
+            ViewBag.Unit_Id = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Unit_ID_Tawtheeq), "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
+            ViewBag.unit_Name = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Unit_Property_Name), "Unit_Property_Name", "Unit_Property_Name");
             ViewBag.Agreement_No = new SelectList(db.tbl_agreement.OrderBy(x => x.Agreement_No), "id", "Agreement_No");
 
 
 
             // ViewBag.InvType = InvType;
             ViewBag.Month = Month;
-           
-            return PartialView("../Invoice/Index");
-        }
-        [HttpGet]
-        public PartialViewResult AddorUpdate()
-        {
-            return PartialView("../Master/Invoice/_AddorUpdate", new InvoiceViewModel());
+
+            return PartialView("../Invoice/_AddorUpdate", new InvoiceViewModel());
         }
 
         // GET: Invoice/Details/5

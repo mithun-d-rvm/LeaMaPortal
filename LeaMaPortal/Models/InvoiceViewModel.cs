@@ -41,7 +41,8 @@ namespace LeaMaPortal.Models
         public string bank_details { get; set; }
         [DisplayName("Remarks")]
         public string remarks { get; set; }
-      
+        public List<InvoiceDetailsViewModel> InvoiceDetails { get; set; }
+
     }
 
     public class InvoiceDetailsViewModel

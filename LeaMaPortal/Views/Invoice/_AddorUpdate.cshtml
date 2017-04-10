@@ -1,1 +1,232 @@
 ﻿
+@model LeaMaPortal.Models.InvoiceViewModel
+@{
+
+Layout = null;
+}
+<div class="inner-block">
+    <div class="blank">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.invtype, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+
+                        @*@Html.DropDownList("InvType", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "InvType" })*@
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.invno, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.invno, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Tenant_id, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.Tenant_id, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        <select class="col-md-12 leama-field">
+                            <option value="Tenant_id">Tenant id</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Tenant_Name, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.Tenant_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        <select class="col-md-12 leama-field">
+                            <option value="Tenant_Name">Tenant Name</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Agreement_No, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.Agreement_No, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        @Html.DropDownList("Agreement_No", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Agreement_No" })
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Property_ID, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.Property_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        @Html.DropDownList("Property_Id", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Property_Id" })
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Property_Name, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        @Html.DropDownList("Property_Name", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Property_Name" })
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Unit_ID, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.Unit_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        @Html.DropDownList("Unit_Id", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Unit_Id" })
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.unit_Name, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.unit_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        @Html.DropDownList("unit_Name", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "unit_Name" })
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.month, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.month, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        @Html.DropDownList("Month", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Month" })
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.year, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.year, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                </div>
+
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.totalamt, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.totalamt, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.duedate, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.duedate, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.bank_details, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.bank_details, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.remarks, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.remarks, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn master-form-btn">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12 document-row">
+                <div class="col-md-1">
+                    ID
+                </div>
+                <div class="col-md-2">
+                    Item Type
+                </div>
+                <div class="col-md-2">
+                    Item Description
+                </div>
+                <div class="col-md-2">
+                    Quantity
+                </div>
+                <div class="col-md-2">
+                    Amount
+                </div>
+            </div>
+        </div>
+        <div class="row ht-5">
+            &nbsp;
+        </div>
+
+        <!-- Begin Dynamic row -->
+        @Html.Partial("_InvoiceDetails")
+        <!-- End Dynamic row -->
+
+    </div>
+</div>
+
+
+<script>
+    var count = 1;
+    function Add() {
+
+        var item = document.getElementById("item").value;
+        var description = document.getElementById("description").value;
+        var qty = document.getElementById("qty").value;
+        var amount = document.getElementById("amount").value;
+
+        var html = " <div class='col-md-12 document-row' id='GridView"+count+"'>";
+        html=html+" <div class='col-md-1'>"+count+"</div>";
+        html = html + " <div class='col-md-2'> <input id='item-id_" +count+"'  type='text' value='" +item+ "' class='master-form-input' /></div>";
+        html = html + " <div class='col-md-2'> <input id='description_" + count + "' type='text'  value='" + description + "' class='master-form-input' /></div>";
+        html = html + " <div class='col-md-2'> <input id='qty_" + count + "'  type='text' value='" + qty + "' class='master-form-input' /></div>";
+        html = html + " <div class='col-md-2'> <input id='amount_" + count + "' type='text'  value='" + amount + "' class='master-form-input' /></div>";
+      //  html=html+ "<div class='col-md-2'><button class='document-btn'>Add</button> </div>";
+        html = html + " <div class='col-md-2'>  <button class='document-btn' id='Delete"+count+"' onclick='Delete(this)'>Delete</button></div>";
+        html=html+" </div>";
+        $('#invoice-details').append(html);
+
+        document.getElementById("item").value = "";
+        document.getElementById("description").value = "";
+        document.getElementById("qty").value = "";
+        document.getElementById("amount").value = ""
+       count = count + 1;
+
+    }
+    function Delete(e) {
+        DeleteRow = e.parentNode.parentNode.id;
+        $('#' + DeleteRow).remove();
+    }
+</script>
+
