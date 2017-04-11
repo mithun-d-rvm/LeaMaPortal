@@ -49,6 +49,9 @@ namespace LeaMaPortal
         public static List<string> Nationality = new List<string>() { "UAE", "Non-UAE"};
         public static string DefaultNationality="UAE";
         public static string DefaultMaridalStatus = "Family";
+
+        public static List<string> Reccategory = new List<string>() { "advance","against", "invoice","others","security","deposit" };
+        public static List<string> ReceiptMode= new List<string>() { "cheque","cash","online","Pdc","advance adjustment" };
     }
     public class FormMaster
     {

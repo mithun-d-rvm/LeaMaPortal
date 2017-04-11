@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.Models;
+using System.Threading.Tasks;
 
 namespace LeaMaPortal.Controllers
 {
@@ -35,7 +37,7 @@ namespace LeaMaPortal.Controllers
                 Text = "Others",
                 Value = "3"
             });
-            
+
             List<SelectListItem> ReceiptMode = new List<SelectListItem>
                                     ();
             ReceiptMode.Add(new SelectListItem
@@ -101,7 +103,20 @@ namespace LeaMaPortal.Controllers
             //var Pdc = db.Database.SqlQuery<string>(@"call usp_split('Receipts','PDCstatus',',',null)").ToList();
             //ViewBag.PDCStatus = new SelectList(Pdc);
             ViewBag.PDCStatus = new SelectList("");
-            return PartialView("../Receipts/Index");
+
+            ReceiptViewModel model = new ReceiptViewModel();
+
+            var receipts = db.tbl_receipthd.OrderByDescending(x => x.id).FirstOrDefault();
+            model.ReceiptNo = receipts != null ? receipts.id + 1 : 1;
+
+            model.ReceiptDate = DateTime.Today;
+            ViewBag.Reccategory = new SelectList(Common.Reccategory);
+            ViewBag.ReceiptMode = new SelectList(Common.ReceiptMode);
+
+
+
+
+            return PartialView("../Receipts/Index", model);
         }
 
         // GET: Receipts/Details/5
@@ -207,5 +222,114 @@ namespace LeaMaPortal.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [HttpGet]
+        public PartialViewResult AddOrUpdate()
+        {
+            List<SelectListItem> ReceiptType = new List<SelectListItem>
+                                     ();
+            ReceiptType.Add(new SelectListItem
+            {
+                Text = "Advance",
+                Value = "1"
+            });
+            ReceiptType.Add(new SelectListItem
+            {
+                Text = "Against Invoice",
+                Value = "2",
+                Selected = true
+            });
+            ReceiptType.Add(new SelectListItem
+            {
+                Text = "Others",
+                Value = "3"
+            });
+
+            List<SelectListItem> ReceiptMode = new List<SelectListItem>
+                                    ();
+            ReceiptMode.Add(new SelectListItem
+            {
+                Text = "Cash",
+                Value = "1"
+            });
+            ReceiptMode.Add(new SelectListItem
+            {
+                Text = "Cheque",
+                Value = "2",
+                Selected = true
+            });
+            ReceiptMode.Add(new SelectListItem
+            {
+                Text = "Online",
+                Value = "3"
+            });
+            ReceiptMode.Add(new SelectListItem
+            {
+                Text = "Cash",
+                Value = "4"
+            });
+            ReceiptMode.Add(new SelectListItem
+            {
+                Text = "Pdc",
+                Value = "5",
+                Selected = true
+            });
+            ReceiptMode.Add(new SelectListItem
+            {
+                Text = "Advance Ajustment",
+                Value = "3"
+            });
+            List<SelectListItem> PDCStatus = new List<SelectListItem>
+                               ();
+            PDCStatus.Add(new SelectListItem
+            {
+                Text = "Received",
+                Value = "1"
+            });
+            PDCStatus.Add(new SelectListItem
+            {
+                Text = "Cleared",
+                Value = "2",
+                Selected = true
+            });
+            PDCStatus.Add(new SelectListItem
+            {
+                Text = "Bounced",
+                Value = "3"
+            });
+            PDCStatus.Add(new SelectListItem
+            {
+                Text = "Cancelled",
+                Value = "4"
+            });
+            ViewBag.ReceiptType = ReceiptType;
+            ViewBag.ReceiptMode = ReceiptMode;
+            //ViewBag.PDCStatus = PDCStatus;
+
+
+            //var Pdc = db.Database.SqlQuery<string>(@"call usp_split('Receipts','PDCstatus',',',null)").ToList();
+            //ViewBag.PDCStatus = new SelectList(Pdc);
+            ViewBag.PDCStatus = new SelectList("");
+
+            ReceiptViewModel model = new ReceiptViewModel();
+
+            var receipts = db.tbl_receipthd.OrderByDescending(x => x.id).FirstOrDefault();
+            model.ReceiptNo = receipts != null ? receipts.id + 1 : 1;
+
+            model.ReceiptDate = DateTime.Today;
+            ViewBag.Reccategory = new SelectList(Common.Reccategory);
+            ViewBag.ReceiptMode = new SelectList(Common.ReceiptMode);
+
+
+
+
+            return PartialView("../Receipts/Index", model);
+        }
+
+        //[HttpPost]
+        //public async Task<ActionResult> AddOrUpdate()
+        //{
+
+        //}
     }
 }
