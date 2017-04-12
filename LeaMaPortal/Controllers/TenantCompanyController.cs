@@ -203,6 +203,7 @@ namespace LeaMaPortal.Controllers
             //    TenantId = 0
             //});
             TenantCompanyViewModel model = new TenantCompanyViewModel();
+            model.MaritalStatus = Common.DefaultMaridalStatus;
             var tenantId = db.tbl_tenant_company.OrderByDescending(x => x.Id).FirstOrDefault();
             ViewBag.TenantId = tenantId!=null? tenantId.Tenant_Id+1: 1;
             ViewBag.TenantType= new SelectList(Common.TenantType);
