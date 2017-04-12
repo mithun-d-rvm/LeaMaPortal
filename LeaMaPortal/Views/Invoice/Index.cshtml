@@ -16,10 +16,12 @@
     //    GetInvoice();
     //});
     $(document).ready(function () {
+        debugger;
         GetInvoice();
     });
  
     function GetInvoice() {
+        debugger;
         $("#img-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
@@ -43,7 +45,7 @@
         $("#img-loader").removeClass("hide");
         $.ajax(
         {
-            url: "../Invoice/Index",
+            url: "../Invoice/List",
             type: "Get",
             data: {},
             contentType: "application/json",

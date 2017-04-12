@@ -16,104 +16,17 @@ namespace LeaMaPortal.Controllers
         private Entities db = new Entities();
 
         // GET: Invoice
-        public PartialViewResult Index()
+        public ActionResult Index()
         {
-            List<SelectListItem> Month = new List<SelectListItem>
-                                   ();
-            Month.Add(new SelectListItem
-            {
-                Text = "1",
-                Value = "1"
-            });
-            Month.Add(new SelectListItem
-            {
-                Text = "2",
-                Value = "2",
-                Selected = true
-            });
-            Month.Add(new SelectListItem
-            {
-                Text = "3",
-                Value = "3"
-            });
-            Month.Add(new SelectListItem
-            {
-                Text = "4",
-                Value = "4"
-            });
-            Month.Add(new SelectListItem
-            {
-                Text = "5",
-                Value = "5"
-            });
-            Month.Add(new SelectListItem
-            {
-                Text = "6",
-                Value = "6"
-            });
-            Month.Add(new SelectListItem
-            {
-                Text = "7",
-                Value = "7"
-            });
-            Month.Add(new SelectListItem
-            {
-                Text = "8",
-                Value = "8"
-            });
-            Month.Add(new SelectListItem
-            {
-                Text = "9",
-                Value = "9"
-            });
-            Month.Add(new SelectListItem
-            {
-                Text = "10",
-                Value = "10"
-            });
-            Month.Add(new SelectListItem
-            {
-                Text = "11",
-                Value = "11"
-            });
-            Month.Add(new SelectListItem
-            {
-                Text = "12",
-                Value = "12"
-            });
-            //List<SelectListItem> InvType = new List<SelectListItem>
-            //                          ();
 
-            //InvType.Add(new SelectListItem
-            //{
-            //    Text = "Rental",
-            //    Value = "1"
-            //});
-            //InvType.Add(new SelectListItem
-            //{
-            //    Text = "Others",
-            //    Value = "1"
-            //});
-            //var InvType = db.Database.SqlQuery<string>(@"call usp_split('Invoice','invtype',',',null);").ToList();
-            //ViewBag.InvType = new SelectList(InvType);
-            //var Month = db.Database.SqlQuery<string>(@"call usp_split('Invoice','Month',',',null)").ToList();
-            //ViewBag.InvType = new SelectList(Month);
-
-
-            //ViewBag.Tenant_Id = new SelectList(db.tbl_tenant_individual.OrderBy(x => x.Tenant_Id), "Tenant_Id", "Tenant_Id");
-            //ViewBag.Tenant_Name = new SelectList(db.tbl_tenant_individual.OrderBy(x => x.First_Name), "Tenant_Name", "Tenant_Name");
-            ViewBag.Property_Id = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Property_Id), "Property_Id", "Property_Id");
-            ViewBag.Property_Name = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Property_Name), "Property_Id", "Property_Name");
-            ViewBag.Unit_Id = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Unit_ID_Tawtheeq), "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
-            ViewBag.unit_Name = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Unit_Property_Name), "Unit_Property_Name", "Unit_Property_Name");
-            ViewBag.Agreement_No = new SelectList(db.tbl_agreement.OrderBy(x => x.Agreement_No), "id", "Agreement_No");
-
-            // ViewBag.InvType = InvType;
-            ViewBag.Month = Month;
-
-
-            return PartialView("../Invoice/_AddorUpdate");
+            return View();
         }
+        public PartialViewResult List()
+        {
+
+            return PartialView("../Invoice/_List");
+        }
+
         [HttpGet]
         public PartialViewResult AddorUpdate()
         {
@@ -206,6 +119,8 @@ namespace LeaMaPortal.Controllers
             ViewBag.Unit_Id = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Unit_ID_Tawtheeq), "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
             ViewBag.unit_Name = new SelectList(db.tbl_propertiesmaster.OrderBy(x => x.Unit_Property_Name), "Unit_Property_Name", "Unit_Property_Name");
             ViewBag.Agreement_No = new SelectList(db.tbl_agreement.OrderBy(x => x.Agreement_No), "id", "Agreement_No");
+
+
 
             // ViewBag.InvType = InvType;
             ViewBag.Month = Month;

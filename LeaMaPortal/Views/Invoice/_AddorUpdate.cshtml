@@ -159,74 +159,203 @@ Layout = null;
                     <div class="col-md-4">
                         &nbsp;
                     </div>
-                    <div class="col-md-4">
-                        <button class="btn master-form-btn">Submit</button>
-                    </div>
                 </div>
             </div>
 
         </div>
-        <div class="row">
-            <div class="col-md-12 document-row">
-                <div class="col-md-1">
-                    ID
-                </div>
-                <div class="col-md-2">
-                    Item Type
-                </div>
-                <div class="col-md-2">
-                    Item Description
-                </div>
-                <div class="col-md-2">
-                    Quantity
-                </div>
-                <div class="col-md-2">
-                    Amount
-                </div>
+
+        <div class="row" id="invoice">
+            @if (Model.InvoiceDetails != null)
+            {
+                <input type="hidden" id="init-company-contact-det-count" value="@Model.InvoiceDetails.Count" />
+            }
+            else
+            {
+                <input type="hidden" id="init-company-contact-det-count" value="0" />
+            }
+
+            <div class="p-b-25">
+                <h3>Invoice Details</h3>
             </div>
+            <div class="" id="invoice-details">
+                <div id="Gridview" class="row document-row">
+                    <div class="col-md-12">
+                        <div class="col-md-2 form-group">
+                            <label for="itemtype">Item Type</label>
+                            <input type="text" class="form-control master-form-input" id="item" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="description">Item Description</label>
+                            <input type="text" class="form-control master-form-input" id="description" />
+                        </div>
+                        <div class="col-md-1 form-group">
+                            <label for="quantity">Quantity</label>
+                            <input type="text" class="form-control master-form-input" id="qty" />
+                        </div>
+                        <div class="col-md-1 form-group">
+                            <label for="amount">Amount</label>
+                            <input id="amount" class="form-control master-form-input" />
+                        </div>
+                        <div class="col-md-1 btn-group">
+                            <br />
+                            <input type="button" class="document-btn" id="AddInvoice" value="Add" onclick='add(this);' />
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            @*<div class="row">
+                    <div class="col-md-12 document-row">
+                        <div class="col-md-1">
+                            ID
+                        </div>
+                        <div class="col-md-2">
+                            Item Type
+                        </div>
+                        <div class="col-md-2">
+                            Item Description
+                        </div>
+                        <div class="col-md-2">
+                            Quantity
+                        </div>
+                        <div class="col-md-2">
+                            Amount
+                        </div>
+                    </div>
+                </div>*@
+            <div class="row ht-5">
+                &nbsp;
+            </div>
+
+            <!-- Begin Dynamic row -->
+            @*@Html.Partial("_InvoiceDetails")*@
+            <!-- End Dynamic row -->
+
         </div>
+
+        <table class="row m-t-20" id="invoiceDetailsForms">
+
+
+            @if (Model.InvoiceDetails != null)
+            {
+
+                for (int j = 0; j < Model.InvoiceDetails.Count; j++)
+                {
+                    // <script>
+                    var html = "<div class='col-md-12 document-row' id='GridViewCompanyContact" + @j + "'>";
+
+                    //html = html + "<div class='col-md-12'>";
+                    html = html + " <div class='col-md-2 form-group'> <label for='item'>Item Type</label><input id='item" + @j + "'  type='text' value='" + @Model.InvoiceDetails[j].item + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].item' data-name='Item Type' /></div>";
+                    html = html + " <div class='col-md-2 form-group'> <label for='branch'>Item Description</label> <input id='description" + @j + "'  type='text' value='" + @Model.InvoiceDetails[j].description + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].description' data-name='description' /></div>";
+                    html = html + "<div class='col-md-1 form-group'> <label for='quantity'>Quantity</label><input id='qty" + j + "' type='text'  value='" + @Model.InvoiceDetails[j].qty + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].qty' data-name='qty' /></div>";
+                    html = html + " <div class='col-md-1 form-group'> <label for='amount'>Amount</label><input type='text' id='amount" + @j + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].amount' data-name='amount' value='" + @Model.InvoiceDetails[j].amount + "'/></div>";
+                    html = html + "<div class='col-md-1' form-group></br>  <button class='document-btn removebutton' id='Delete" + @j + "'> Delete </button></div>";
+                    //html = html + "</div>";
+
+                    html = html + "</div>";
+                    html = html + "<div class='row ht-5'> &nbsp;</div>";
+
+                    <tr>
+                        <td>
+                            @Html.Raw(html)
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>
+                                &nbsp;
+                            </td>
+                        </tr>
+                }
+            }
+        </table>
+
         <div class="row ht-5">
             &nbsp;
         </div>
-
-        <!-- Begin Dynamic row -->
-        @Html.Partial("_InvoiceDetails")
-        <!-- End Dynamic row -->
-
+        <div class="col-md-4">
+            <button class="btn master-form-btn">Submit</button>
+        </div>
     </div>
+
 </div>
 
 
 <script>
-    var count = 1;
-    function Add() {
+    var i = 1;
+    function add() {
 
         var item = document.getElementById("item").value;
         var description = document.getElementById("description").value;
         var qty = document.getElementById("qty").value;
         var amount = document.getElementById("amount").value;
 
-        var html = " <div class='col-md-12 document-row' id='GridView"+count+"'>";
-        html=html+" <div class='col-md-1'>"+count+"</div>";
-        html = html + " <div class='col-md-2'> <input id='item-id_" +count+"'  type='text' value='" +item+ "' class='master-form-input' /></div>";
-        html = html + " <div class='col-md-2'> <input id='description_" + count + "' type='text'  value='" + description + "' class='master-form-input' /></div>";
-        html = html + " <div class='col-md-2'> <input id='qty_" + count + "'  type='text' value='" + qty + "' class='master-form-input' /></div>";
-        html = html + " <div class='col-md-2'> <input id='amount_" + count + "' type='text'  value='" + amount + "' class='master-form-input' /></div>";
-      //  html=html+ "<div class='col-md-2'><button class='document-btn'>Add</button> </div>";
-        html = html + " <div class='col-md-2'>  <button class='document-btn' id='Delete"+count+"' onclick='Delete(this)'>Delete</button></div>";
-        html=html+" </div>";
-        $('#invoice-details').append(html);
 
-        document.getElementById("item").value = "";
-        document.getElementById("description").value = "";
-        document.getElementById("qty").value = "";
-        document.getElementById("amount").value = ""
-       count = count + 1;
+        var html = "<tr><td><div class='col-md-12 document-row' id='GridViewCompanyContact" + i + "'>";
+
+        //html = html + "<div class='col-md-12'>";
+        html = html + " <div class='col-md-2 form-group'> <label for='item'>Item Type</label><input id='item" + i + "'  type='text' value='" + item + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].item' data-name='Item Type' /></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='branch'>Item Description</label> <input id='description" +i + "'  type='text' value='" + description + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].description' data-name='description' /></div>";
+        html = html + "<div class='col-md-1 form-group'> <label for='quantity'>Quantity</label><input id='qty" + i + "' type='text'  value='" + qty + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].qty' data-name='qty' /></div>";
+        html = html + " <div class='col-md-1 form-group'> <label for='amount'>Amount</label><input type='text' id='amount" + i + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].amount' data-name='amount' value='" + amount + "'/></div>";
+        html = html + "<div class='col-md-1' form-group></br>  <button class='document-btn removebutton' id='Delete" + i + "'> Delete </button></div>";
+        //html = html + "</div>";
+
+        html = html + "</div>";
+        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
+        $('#invoiceDetailsForms').append(html);
+        i++;
+
+
+      //  var html = " <div class='col-md-12 document-row' id='GridView"+count+"'>";
+      //  html=html+" <div class='col-md-1'>"+count+"</div>";
+      //  html = html + " <div class='col-md-2'> <input id='item-id_" +count+"'  type='text' value='" +item+ "' class='master-form-input' /></div>";
+      //  html = html + " <div class='col-md-2'> <input id='description_" + count + "' type='text'  value='" + description + "' class='master-form-input' /></div>";
+      //  html = html + " <div class='col-md-2'> <input id='qty_" + count + "'  type='text' value='" + qty + "' class='master-form-input' /></div>";
+      //  html = html + " <div class='col-md-2'> <input id='amount_" + count + "' type='text'  value='" + amount + "' class='master-form-input' /></div>";
+      ////  html=html+ "<div class='col-md-2'><button class='document-btn'>Add</button> </div>";
+      //  html = html + " <div class='col-md-2'>  <button class='document-btn' id='Delete"+count+"' onclick='Delete(this)'>Delete</button></div>";
+      //  html=html+" </div>";
+      //  $('#invoice-details').append(html);
+
+      //  document.getElementById("item").value = "";
+      //  document.getElementById("description").value = "";
+      //  document.getElementById("qty").value = "";
+      //  document.getElementById("amount").value = ""
+      // count = count + 1;
 
     }
-    function Delete(e) {
-        DeleteRow = e.parentNode.parentNode.id;
-        $('#' + DeleteRow).remove();
-    }
+    $(document).on('click', 'button.removebutton', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('invoiceDetailsForms');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                // alert(dataname + $(this) .val()+ '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'InvoiceDetails[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+
+        i = newindex;
+    });
+
+    //function Delete(e) {
+    //    DeleteRow = e.parentNode.parentNode.id;
+    //    $('#' + DeleteRow).remove();
+    //}
 </script>
 
