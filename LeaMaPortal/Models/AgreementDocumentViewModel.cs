@@ -8,6 +8,10 @@ namespace LeaMaPortal.Models
 {
     public class AgreementDocumentViewModel
     {
+        public AgreementDocumentViewModel()
+        {
+            agreementDocumentList = new List<AgreementDocumentViewModel>();
+        }
         public int Id { get; set; }
         [DisplayName("Facility ID")]
         public string Facility_id { get; set; }
@@ -15,6 +19,7 @@ namespace LeaMaPortal.Models
         public string Facility_Name { get; set; }
         [DisplayName("Numbers available")]
         public int Numbers_available { get; set; }
+        public List<AgreementDocumentViewModel> agreementDocumentList { get; set; }
 
     }
 }

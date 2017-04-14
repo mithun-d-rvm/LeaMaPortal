@@ -51,6 +51,9 @@ namespace LeaMaPortal
         public static List<string> ComapanyActivity = new List<string>() { "Activity1" };
         public static List<string> Issuance_authority = new List<string>() { "List-1" };
         public const string TenantCompanyDocumentContainer = "Documents/TenantCompany/";
+
+
+        public static List<string> PaymentMode = new List<string>() { "Cash", "Cheque", "Online", "Cheque without date", "DD" };
     }
     public class FormMaster
     {

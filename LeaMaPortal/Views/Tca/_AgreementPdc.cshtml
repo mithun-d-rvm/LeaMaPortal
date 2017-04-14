@@ -9,25 +9,50 @@
     <div class="col-md-12 document-row">
         <div class="col-md-1 w-md-13">
             @*@Html.EditorFor(model => model.AgreementPd.Month, new { @class = "label-default-remove AgreementPdMonth" })*@
-            @Html.DropDownList("AgreementPd.Month", null, new { @class = "label-default-remove AgreementPdMonth" })
+            @Html.LabelFor(m=>m.AgreementPd.Month, new { @class = "label-default-remove " })
         </div>
         <div class="col-md-1 w-md-14">
-            @Html.EditorFor(model => model.AgreementPd.Year, new { @class = "label-default-remove AgreementPdYear" })
+            @Html.LabelFor(model => model.AgreementPd.Year, new { @class = "label-default-remove " })
         </div>
         <div class="col-md-1 w-md-16">
-            @Html.EditorFor(model => model.AgreementPd.Payment_Mode, new { @class = "label-default-remove AgreementPdPaymentMode" })
+            @Html.LabelFor(model => model.AgreementPd.Payment_Mode, new { @class = "label-default-remove " })
         </div>
         <div class="col-md-1 w-md-15">
-            @Html.EditorFor(model => model.AgreementPd.BankName, new { @class = "label-default-remove AgreementPdBankName" })
+            @Html.LabelFor(model => model.AgreementPd.BankName, new { @class = "label-default-remove " })
         </div>
         <div class="col-md-1 w-md-14">
-            @Html.EditorFor(model => model.AgreementPd.Cheque_No, new { @class = "label-default-remove AgreementPdChequeNo" })
+            @Html.LabelFor(model => model.AgreementPd.Cheque_No, new { @class = "label-default-remove " })
         </div>
         <div class="col-md-1 w-md-14">
-            @Html.EditorFor(model => model.AgreementPd.Cheque_Date, new { @class = "label-default-remove AgreementPdChequeNo" })
+            @Html.LabelFor(model => model.AgreementPd.Cheque_Date, new { @class = "label-default-remove " })
         </div>
         <div class="col-md-1 w-md-14">
-            @Html.EditorFor(model => model.AgreementPd.Cheque_Amount, new { @class = "label-default-remove AgreementPdChequeAmount" })
+            @Html.LabelFor(model => model.AgreementPd.Cheque_Amount, new { @class = "label-default-remove" })
+        </div>
+       
+    </div>
+    <div class="col-md-12 document-row">
+        <div class="col-md-1 w-md-13">
+            @*@Html.EditorFor(model => model.AgreementPd.Month, new { @class = "label-default-remove AgreementPdMonth" })*@
+            @Html.DropDownList("AgreementPd.Month", null, new { @class = "form-control master-form-input AgreementPdMonth" })
+        </div>
+        <div class="col-md-1 w-md-14">
+            @Html.EditorFor(model => model.AgreementPd.Year, new { htmlAttributes = new { @class = "master-form-input" } })
+        </div>
+        <div class="col-md-1 w-md-16">
+            @Html.DropDownList("AgreementPd.Payment_Mode", null, new { @class = "form-control master-form-input AgreementPdPaymentMode" })
+        </div>
+        <div class="col-md-1 w-md-15">
+            @Html.EditorFor(model => model.AgreementPd.BankName, new { htmlAttributes = new { @class = "master-form-input" } })
+        </div>
+        <div class="col-md-1 w-md-14">
+            @Html.EditorFor(model => model.AgreementPd.Cheque_No, new { htmlAttributes = new { @class = "master-form-input" } })
+        </div>
+        <div class="col-md-2 w-md-14">
+            @Html.EditorFor(model => model.AgreementPd.Cheque_Date, new { htmlAttributes = new { @class = "master-form-input" } })
+        </div>
+        <div class="col-md-1 w-md-14">
+            @Html.EditorFor(model => model.AgreementPd.Cheque_Amount, new { htmlAttributes = new { @class = "master-form-input" } })
         </div>
         <div class="col-md-1 w-md-10 pull-right">
             <button class="document-btn" onclick="addAgreementPdcDetails(event);">Add</button>
@@ -54,7 +79,7 @@
 
     function addAgreementPdcDetails(event) {
         event.preventDefault();
-        debugger;
+        
         var Month = $("#AgreementPd_Month").val();
         var Year = $("#AgreementPd_Year").val();
         var Payment_Mode = $("#AgreementPd_Payment_Mode").val();
@@ -81,7 +106,7 @@
                           Year +
 
         "</div>" +
-        "<div class='col-md-1 w-md-16'>" +
+        "<div class='col-md-1'>" +
         Payment_Mode +
         "</div>" +
         "<div class='col-md-1 w-md-15'>" +
@@ -96,17 +121,17 @@
 
             Cheque_Date +
         "</div>" +
-        "<div class='col-md-1 w-md-14'>" +
+        "<div class='col-md-1'>" +
             Cheque_Amount +
 
         "</div>" +
-        "<div class='col-md-1 w-md-14'>" +
+        "<div class='col-md-1'>" +
            "<button class='btn agreementpdclist-remove'>X</button>" +
         "</div>" +
     "</div>" +
 "</td>" +
 "</tr>";
-        alert(html);
+      
 
         $("#AgreementPdcDetailsList").append(html);
         AgreementPdCount++;
@@ -167,4 +192,6 @@
         });
         AgreementPdCount = newindex;
     });
+
+    
 </script>

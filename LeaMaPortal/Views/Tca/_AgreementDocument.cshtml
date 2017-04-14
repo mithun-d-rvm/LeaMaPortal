@@ -15,22 +15,146 @@
         <div class="col-md-2">
            @Html.LabelFor(model => model.Numbers_available, htmlAttributes: new { @class = "label-default-remove" })
         </div>
-    </div>
+        <div class="col-md-12 document-row">
+            <div class="col-md-2">
+                @Html.DropDownList("Facility_id", null, new { @class = "form-control master-form-input" })
+            </div>
+            <div class="col-md-4">
+                @Html.DropDownList("Facility_Name", null, new { @class = "form-control master-form-input" })
+            </div>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Numbers_available, new { htmlAttributes = new { @class = "master-form-input" } })
+            </div>
+            <div class="col-md-1">
+               &nbsp;
+            </div>
+            <div class="col-md-1 w-md-10 ">
+                <button type="button" class="document-btn agreementdoc" onclick="agreementdoc(event);" id="addagreementdocumentdetails">Add doc</button>
+            </div>
+        </div>
 </div>
+    </div>
 <div class="row ht-5">
     &nbsp;
 </div>
 
-@Html.Partial("_AgreementDocumentDetails")
-
+@*@Html.Partial("_AgreementDocumentDetails")*@
+<input type="hidden"  value="@Model.agreementDocumentList.Count" id="agreementDocumentListCount" />
 <div class="row">
-    @*<div class="col-md-1 w-md-10 pull-right">
-        <button class="document-btn">Delete</button>
-    </div>*@
-    <div class="col-md-1 w-md-10 pull-right">
-        <button class="document-btn">Add</button>
-    </div>
+    
+
+        <table id="AgreementDetailsList" class="col-md-12 document-row" >
+
+            @for (int i = 0; i < Model.agreementDocumentList.Count; i++)
+            {
+
+                <tr class="col-md-12 document-row">
+                    <td>
+                        <input type="hidden" name="agreementDocumentList[@i].Facility_id" id="agreementDocumentList[@i].Facility_id" value="@Model.agreementDocumentList[i].Facility_id" data-name="Facility_id" />
+                        <input type="hidden" name="agreementDocumentList[@i].Facility_Name" id="agreementDocumentList[@i].Facility_Name" value="@Model.agreementDocumentList[i].Facility_Name" data-name="Facility_Name" />
+                        <input type="hidden" name="agreementDocumentList[@i].Numbers_available" id="agreementDocumentList[@i].Numbers_available" value="@Model.agreementDocumentList[i].Numbers_available" data-name="Numbers_available" />
+
+                        <input type="hidden" name="agreementDocumentList[@i].Id" id="agreementDocumentList[@i].Id" value="@Model.agreementDocumentList[i].Id" data-name="Id" />
+                        
+                        <div class="col-md-12 document-row">
+                            <div class="col-md-2 col-md-1 w-md-13">
+                                @Model.agreementDocumentList[i].Facility_id
+                            </div>
+                            <div class="col-md-4 w-md-14">
+                                @Model.agreementDocumentList[i].Facility_Name
+                                @*@Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                            </div>
+                            <div class="col-md-2 w-md-16">
+                                @Model.agreementDocumentList[i].Numbers_available
+                               
+                            </div>
+                            
+                            <div class="col-md-1 w-md-14">
+                                <button class="btn agreementdocumentlist-remove">X</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    
 </div>
+
+
 <div class="row ht-5">
     &nbsp;
 </div>
+
+<script>
+    var aDocListCount = parseInt($("#agreementDocumentListCount").val());
+    function agreementdoc(e) {
+        
+
+        e.preventDefault();
+        addagreementdocumentdetails(e)
+        return false;
+    }
+    function addagreementdocumentdetails(event) {       
+        var Facility_id = $("#Facility_Name").val();
+        var Facility_Name = $("#Facility_id").val();
+        var Numbers_available = $("#Numbers_available").val();
+        alert(Facility_id + Facility_Name + Numbers_available);
+        var html="<tr><td>"+
+        "<input type='hidden' name='agreementDocumentList["+aDocListCount+"].Facility_id' id='agreementDocumentList["+aDocListCount+"].Facility_id'"+
+        "value='"+Facility_id+"' data-name='Facility_id' />" +
+        "<input type='hidden' name='agreementDocumentList["+aDocListCount+"].Facility_Name' id='agreementDocumentList["+aDocListCount+"].Facility_Name'"+
+        "value='"+Facility_Name+"' data-name='Facility_Name' />"+
+        " <input type='hidden' name='agreementDocumentList["+aDocListCount+"].Numbers_available' id='agreementDocumentList["+aDocListCount+"].Numbers_available'"+
+        "value='"+Numbers_available+"' data-name='Numbers_available' />"+
+
+        "<input type='hidden' name='agreementDocumentList["+aDocListCount+"].Id' id='agreementDocumentList["+aDocListCount+"].Id' value='0' data-name='Id' />"+
+
+        "<div class='col-md-12 document-row'>"+
+        " <div class='col-md-2 col-md-1 w-md-13'>"+
+                                   Facility_id +
+        "</div>"+
+        "<div class='col-md-4 w-md-14'>"+
+                                   Facility_Name +
+
+        "</div>"+
+                                "<div class='col-md-2 w-md-16'>"+
+                                   Numbers_available+
+
+        "</div>"+
+
+        "<div class='col-md-1 w-md-14'>"+
+                                 "<button class='btn agreementdocumentlist-remove'>X</button>"+
+                                 "</div></div></td></tr>";
+        $("#AgreementDetailsList").append(html);
+       
+        aDocListCount++;
+    }
+
+    $(document).on('click', 'button.agreementdocumentlist-remove', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('AgreementDetailsList');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'agreementDocumentList[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+        aDocListCount = newindex;
+    });
+</script>

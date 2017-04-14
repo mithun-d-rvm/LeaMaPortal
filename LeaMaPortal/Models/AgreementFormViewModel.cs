@@ -16,6 +16,7 @@ namespace LeaMaPortal.Models
             AgreementUtilityList = new List<AgreementUtilityViewModel>();
             AgreementPd = new AgreementPdcViewModel();
             AgreementPdcList = new List<AgreementPdcViewModel>();
+            agreementDocumentList = new List<AgreementDocumentViewModel>();
         }
         public int Id { get; set; }
         [DisplayName("Single Unit or Multiple Unit")]
@@ -79,6 +80,7 @@ namespace LeaMaPortal.Models
         public AgreementUtilityViewModel AgreementUtility { get; set; }
         public List<AgreementUtilityViewModel> AgreementUtilityList { get; set; }
         public List<AgreementPdcViewModel> AgreementPdcList { get; set; }
+        public List<AgreementDocumentViewModel> agreementDocumentList { get; set; }
     }
 
     public class DdlTenentDetailsViewModel

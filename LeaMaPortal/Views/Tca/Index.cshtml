@@ -218,15 +218,15 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                debugger;
-                $("#img-loader").addClass("hide");
+                
+               
                 var AgreementNo = $("#Agreement_No").val();
-                alert(AgreementNo);
                 AgreementPdc(AgreementNo);
                 AgreementDocument(AgreementNo);
                 AgreementUtility(AgreementNo);
                 AgreementUnit(AgreementNo);
                 AgreementCheckList(AgreementNo);
+                $("#img-loader").addClass("hide");
             }
         });
     }

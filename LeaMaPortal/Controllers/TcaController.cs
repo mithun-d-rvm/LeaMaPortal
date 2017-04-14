@@ -68,12 +68,26 @@ namespace LeaMaPortal.Controllers
             //AgreementPdcViewModel model = new AgreementPdcViewModel();
             AgreementFormViewModel model = new AgreementFormViewModel();
             model.AgreementPd.Month = new SelectList(Common.Months);
+            model.AgreementPd.Payment_Mode = new SelectList(Common.PaymentMode);
             ViewBag.AgreementPd = model.AgreementPd;
             return PartialView("../Tca/_AgreementPdc", model);
         }
         public PartialViewResult AgreementDocument(int AgreementNo)
         {
             AgreementDocumentViewModel model = new AgreementDocumentViewModel();
+            ViewBag.Facility_id = new SelectList(db.tbl_facilitymaster.Where(x => x.Delmark != "*"), "Facility_Name", "Facility_id");
+            ViewBag.Facility_Name = new SelectList(db.tbl_facilitymaster.Where(x => x.Delmark != "*"), "Facility_id", "Facility_Name");
+            if (AgreementNo!=0)
+            {
+                model.agreementDocumentList = db.tbl_agreement_facility.Where(x => x.Agreement_No == AgreementNo)
+                .Select(x => new AgreementDocumentViewModel()
+                {
+                    Id = x.id,
+                    Facility_id=x.Facility_id,
+                    Facility_Name=x.Facility_Name,
+                    Numbers_available=x.Numbers_available.HasValue? x.Numbers_available.Value:0
+                }).ToList();
+            }
             return PartialView("../Tca/_AgreementDocument", model);
         }
         public PartialViewResult AgreementUtility(int AgreementNo)
