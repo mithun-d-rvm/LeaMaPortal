@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="inner-block p-t-5-p">
+    <div class="blank">
+        <div id="ReportArea"></div>
+        <input type="hidden" id="ReportSelected" value="@ViewBag.ReportSelected" />
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#TopNavBarFilter").empty();
+        GetReportFilter();
+    });
+    $("#Reports").change(function () {
+        var type = parseInt($("#Reports").val());
+        getReport(type);
+    });
+    //$("#FormMasterId").change(function () {
+    //    var type = parseInt($("#FormMasterId").val());
+    //    formMaster(type);
+    //});
+    function GetReportFilter() {
+        $("#TopNavBarFilter").empty();
+        var ReportSelected = $("#ReportSelected").val();
+        $.ajax(
+       {
+           url: "../Report/Filter",
+           type: "Get",
+           data: { selected: ReportSelected },
+
+           success: function (html) {
+               $("#TopNavBarFilter").html(html);
+           },
+           error: function (jqXhr, textStatus, errorThrown) {
+               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+           },
+           complete: function () {
+               //   $("#VerifyIdDetailsLoader").addClass("hide");
+           }
+       });
+    }
+    function getReport(type) {
+        switch (type) {
+            case 1:
+                GetVacancyReport();
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+        }
+    }
+    function GetVacancyReport() {
+        $("#img-loader").removeClass("hide");
+        $("#ReportArea").empty();
+        $.ajax(
+        {
+            url: "../VacancyReport/GetVacancyReport",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ReportArea").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+</script>

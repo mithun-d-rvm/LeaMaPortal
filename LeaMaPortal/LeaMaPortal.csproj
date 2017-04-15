@@ -85,6 +85,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="MvcPaging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MVC4.Paging.3.1.1\lib\net40\MvcPaging.dll</HintPath>
       <Private>True</Private>
@@ -191,12 +192,14 @@
     <Compile Include="Controllers\PropertyTypeController.cs" />
     <Compile Include="Controllers\ReceiptsController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SlabController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\UtilityController.cs" />
     <Compile Include="Controllers\TenantCompanyController.cs" />
     <Compile Include="Controllers\TcaController.cs" />
     <Compile Include="Controllers\UserCreationController.cs" />
+    <Compile Include="Controllers\VacancyReportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -285,6 +288,7 @@
     <Compile Include="Models\PropertyTypeViewModel.cs" />
     <Compile Include="Models\ReceiptViewModel.cs" />
     <Compile Include="Models\PropertyViewModel.cs" />
+    <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\SlabViewModel.cs" />
     <Compile Include="Models\SupplierViewModel.cs" />
     <Compile Include="Models\UserCreationViewModel.cs" />
@@ -305,6 +309,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SuccessMessage.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportASPX\VacancyReport\VacancyReportView.aspx.cs">
+      <DependentUpon>VacancyReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportASPX\VacancyReport\VacancyReportView.aspx.designer.cs">
+      <DependentUpon>VacancyReportView.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -425,6 +436,7 @@
     <Content Include="theme\signup.html" />
     <Content Include="theme\typography.html" />
     <Content Include="Views\Dashboard\blank.html" />
+    <Content Include="ReportASPX\VacancyReport\VacancyReportView.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -552,6 +564,9 @@
     <Content Include="Views\Master\Payment\_List.cshtml" />
     <Content Include="Views\Master\Supplier\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\Supplier\_List.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Report\_Filter.cshtml" />
+    <Content Include="Views\Report\VacancyReport\_VacancyReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -579,6 +594,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SuccessMessage.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportRDLC\vacancyprop.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

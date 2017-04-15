@@ -40,6 +40,17 @@ namespace LeaMaPortal
            //new FormMaster() {Id=20,FormName="" }
 
         };
+        public const int DefaultReport = 1;
+        public static List<ReportListModel> ReportList = new List<ReportListModel>()
+        {
+           new ReportListModel() {Id=1,ReportName="Vacancy Report" },
+           new ReportListModel() {Id=2,ReportName="Tenancy Contract Report" },
+           new ReportListModel() {Id=3,ReportName="Outstanding Report" },
+           new ReportListModel() {Id=4,ReportName="Utility Outstanding Payments Report" },
+           new ReportListModel() {Id=5,ReportName="PDC Report" },
+           new ReportListModel() {Id=6,ReportName="Collection Report Summary" },
+           new ReportListModel() {Id=7,ReportName="Summary Ebwater Report" },
+        };
         //tenant company
         public static List<string> TenantType = new List<string>() { "Government", "Person", "Company" };
         public static List<string> Emirate = new List<string>() { "Default" };
@@ -49,10 +60,19 @@ namespace LeaMaPortal
         public static List<string> Nationality = new List<string>() { "UAE", "Non-UAE"};
         public static string DefaultNationality="UAE";
         public static string DefaultMaridalStatus = "Family";
+
+        public static List<string> ReportGroup = new List<string>() { "Property", "Region", "Caretaker" };
+        public static List<string> AgingDaysFilter = new List<string>() { "All", "Others" };
+        public static List<string> RentalAmountFilter = new List<string>() { "All", "Others" };
     }
     public class FormMaster
     {
         public int Id { get; set; }
         public string MenuName { get; set; }
+    }
+    public class ReportListModel
+    {
+        public int Id { get; set; }
+        public string ReportName { get; set; }
     }
 }
