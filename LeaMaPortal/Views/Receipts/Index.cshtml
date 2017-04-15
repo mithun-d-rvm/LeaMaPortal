@@ -6,10 +6,10 @@
 }
 <div class="inner-block">
     <div class="blank">
-        <div id="ContainerAddOrUpdate"></div>
-        <div id="ContainerList"></div>
+        @*<div id="ContainerAddOrUpdate"></div>
+        <div id="ContainerList"></div>*@
 
-        @*<div class="row">
+        <div class="row">
                 <div class="col-md-6">
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
@@ -78,7 +78,7 @@
                             @Html.LabelFor(model => model.Tenant_id, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Property_ID, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.EditorFor(model => model.Tenant_id, new { htmlAttributes = new { @class = "master-form-input" } })
                             <select class="col-md-12 leama-field">
                                 <option value="Tenant_id">Tenant No</option>
                             </select>
@@ -101,7 +101,7 @@
                             @Html.LabelFor(model => model.Property_id, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Property_ID, new { htmlAttributes = new { @class = "master-form-input" } })
+                            @Html.EditorFor(model => model.Property_id, new { htmlAttributes = new { @class = "master-form-input" } })
                             <select class="col-md-12 leama-field">
                                 <option value="Property_ID">Property No</option>
                             </select>
@@ -248,7 +248,7 @@
             </div>
             <div class="row ht-5">
                 &nbsp;
-            </div>*@
+            </div>
 
         <!-- Begin Dynamic row -->
         @*@Html.Partial("_ReceiptDetails")*@
@@ -260,28 +260,31 @@
 </div>
 
 <script>
-    AddOrUpdate();
+   // AddOrUpdate();
     function AddOrUpdate() {
+        debugger;
         $("#img-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
+        //$("#ContainerAddOrUpdate").empty();
+        //$("#ContainerList").empty();
         $.ajax(
         {
             url: "../Receipts/AddOrUpdate",
             type: "Get",
             data: {},
-            contentType: "application/json",
-            processData: false,
+            //contentType: "application/json",
+            //processData: false,
             success: function (html) {
                 $("#ContainerAddOrUpdate").html(html);
+                return;
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
+                return;
             }
         });
-    }
+    };
 </script>
 
