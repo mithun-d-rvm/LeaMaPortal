@@ -1,4 +1,4 @@
-﻿using LeaMaPortal.Models.DBContext;
+﻿using LeaMaPortal.DBContext;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
