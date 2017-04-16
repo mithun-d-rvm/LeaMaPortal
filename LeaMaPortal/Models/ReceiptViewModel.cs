@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace LeaMaPortal.Models
 {
@@ -92,7 +93,33 @@ namespace LeaMaPortal.Models
         public decimal Balance { get; set; }
         [DisplayName("Remarks")]
         public string Remarks { get; set; }
-   
 
+
+    }
+
+    public class AdvancePendingViewModel
+    {
+        public string ReceiptNo { get; set; }
+        public string agreement_no { get; set; }
+        public string Property_id { get; set; }
+        public string Property_Name { get; set; }
+        public string Unit_ID { get; set; }
+        public string unit_Name { get; set; }
+        public string Tenant_id { get; set; }
+        public string Tenant_Name { get; set; }
+        public string TotalAmount { get; set; }
+    }
+
+    public class AdvancePendingSelectList
+    {
+        public SelectList ReceiptNo { get; set; }
+        public SelectList Agreement_No { get; set; }
+        public SelectList Property_Id { get; set; }
+        public SelectList Property_Name { get; set; }
+        public SelectList Unit_Id { get; set; }
+        public SelectList Unit_Name { get; set; }
+        public SelectList Tenant_Id { get; set; }
+        public SelectList Tenant_Name { get; set; }
+        public SelectList TotalAmount { get; set; }
     }
 }

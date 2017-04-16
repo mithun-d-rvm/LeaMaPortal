@@ -1,15 +1,15 @@
 ﻿
-@model LeaMaPortal.Models.ReceiptViewModel
+
 @{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="inner-block">
     <div class="blank">
-        @*<div id="ContainerAddOrUpdate"></div>
-        <div id="ContainerList"></div>*@
+        <div id="ContainerAddOrUpdate"></div>
+        <div id="ContainerList"></div>
 
-        <div class="row">
+        @*<div class="row">
                 <div class="col-md-6">
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
@@ -248,7 +248,7 @@
             </div>
             <div class="row ht-5">
                 &nbsp;
-            </div>
+            </div>*@
 
         <!-- Begin Dynamic row -->
         @*@Html.Partial("_ReceiptDetails")*@
@@ -260,7 +260,7 @@
 </div>
 
 <script>
-   // AddOrUpdate();
+    AddOrUpdate();
     function AddOrUpdate() {
         debugger;
         $("#img-loader").removeClass("hide");
@@ -275,14 +275,12 @@
             //processData: false,
             success: function (html) {
                 $("#ContainerAddOrUpdate").html(html);
-                return;
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
-                return;
             }
         });
     };
