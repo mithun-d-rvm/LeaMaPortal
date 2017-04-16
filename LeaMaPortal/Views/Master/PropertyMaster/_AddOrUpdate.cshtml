@@ -843,11 +843,11 @@
                     <td>
                         <div class="col-md-3">
                             Fecility ID
-                            @Html.DropDownList("Facility_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
+                            @Html.DropDownList("Facility_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                         </div>
                         <div class="col-md-4">
                             Fecility Name
-                            @Html.DropDownList("Facility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
+                            @Html.DropDownList("Facility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                         </div>
                         <div class="col-md-3">
                             Numbers Available
@@ -872,14 +872,14 @@
                     {
                     <input type="hidden" id="propertiesdt-list-count" value="0" />
                     }
-                <table id="facility-details-list" class="col-md-12 document-row">
+                <table id="facility-details-list" class="col-md-12 document-row m-l-5">
                     @if (Model.PropertiesdtList != null)
                         {
 
                             for (int i = 0; i < Model.PropertiesdtList.Count; i++)
                             {
 
-                        <tr class="col-md-12 document-row">
+                        <tr class="document-row">
                             <td class="p-t-25">
                                 <div class="col-md-3">
                                     @Html.HiddenFor(m => m.PropertiesdtList[i].Facility_id, new { @data_name = "Facility_id" })
@@ -894,7 +894,6 @@
                                     @Model.PropertiesdtList[i].Numbers_available
                                 </div>
                                 <div class="col-md-2">
-
                                     <button class='document-btn remove-propertiesdtlist-button' id='Delete" + @i + "'> Delete </button>
                                 </div>
                             </td>
@@ -926,11 +925,11 @@
                             <td>
                                 <div class="col-md-5">
                                     Utility ID
-                                    @Html.DropDownList("Utility_ID", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
+                                    @Html.DropDownList("Utility_ID", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                                 </div>
                                 <div class="col-md-5">
                                     Utility Name
-                                    @Html.DropDownList("Utility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input" })
+                                    @Html.DropDownList("Utility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                                 </div>
                                 <div class="col-md-2">
                                     <br />
@@ -949,14 +948,14 @@
                                 {
                                 <input type="hidden" id="propertiesdt1-list-count" value="0" />
                                 }
-                        <table id="utility-details-list" class="col-md-12 document-row">
+                        <table id="utility-details-list" class="col-md-12 document-row m-l-5">
                             @if (Model.Propertiesdt1List != null)
                                     {
 
                                         for (int i = 0; i < Model.Propertiesdt1List.Count; i++)
                                         {
 
-                                    <tr class="col-md-12 document-row">
+                                    <tr class="document-row">
                                         <td class="p-t-25">
                                             <div class="col-md-5">
                                                 @Html.HiddenFor(m => m.Propertiesdt1List[i].Utility_id, new { @data_name = "Utility_id" })
@@ -967,7 +966,6 @@
                                                 @Model.Propertiesdt1List[i].Utility_Name
                                             </div>
                                             <div class="col-md-2">
-                                                <br />
                                                 <button class='document-btn remove-propertiesdt1list-button' id='Delete" + @i + "'> Delete </button>
                                             </div>
                                         </td>

@@ -37,6 +37,9 @@
 .m-t-6{
     margin-top:6px;
 }
+.m-l-5 {
+    margin-left: 5px;
+}
 .m-l-m-40{
     margin-left: -40px;
 }
@@ -81,6 +84,9 @@
 }
 .ht-50{
     height:50px !important;
+}
+.border-btm {
+    border-bottom: 1px solid;
 }
 .color-f5a623{
     color:#f5a623;

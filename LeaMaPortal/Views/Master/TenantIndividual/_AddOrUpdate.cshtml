@@ -29,12 +29,12 @@
                     @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                   
-                        @Html.HiddenFor(model => model.Title)
-                        @Html.DropDownList("TitleDisplay",null, new { @class = "form-control master-form-input" })
-                    
-                </div >
-            </div >
+
+                    @Html.HiddenFor(model => model.Title)
+                    @Html.DropDownList("TitleDisplay", null, new { @class = "form-control master-form-input" })
+
+                </div>
+            </div>
             <div class="col-md-12 form-input-padding">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.Middle_Name, htmlAttributes: new { @class = "control-label" })
@@ -84,8 +84,8 @@
                     @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                  
-                    @Html.DropDownList("City", null,htmlAttributes: new { @class = "form-control master-form-input" })
+
+                    @Html.DropDownList("City", null, htmlAttributes: new { @class = "form-control master-form-input" })
 
 
 
@@ -129,11 +129,11 @@
                     @Html.LabelFor(model => model.Nationality, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                   
 
-                    @Html.DropDownList("Nationality",null, htmlAttributes: new { @class = "form-control master-form-input" })
 
-                    
+                    @Html.DropDownList("Nationality", null, htmlAttributes: new { @class = "form-control master-form-input" })
+
+
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -248,7 +248,7 @@
                     @Html.LabelFor(model => model.Profession, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.DropDownList("Profession",null, htmlAttributes: new { @class = "form-control master-form-input" })
+                    @Html.DropDownList("Profession", null, htmlAttributes: new { @class = "form-control master-form-input" })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -397,20 +397,20 @@
 
 
         </div>
-        
 
-            @if (Model.TenantDocumentList != null)
+
+        @if (Model.TenantDocumentList != null)
                 {
-                <div class="m-t-5-p col-md-10 document-row" id="GridView">
-                    <div class="">
-                        @if (Model.TenantDocumentList.Count > 0)
+            <div class="m-t-5-p col-md-10 document-row" id="GridView">
+                <div class="">
+                    @if (Model.TenantDocumentList.Count > 0)
                     {<span style="text-transform: uppercase;font-weight: bold;">Existing Documents</span>}
-                        <table class="col-md-12" id="exist-file-list">
-                            @for (int i = 0; i < Model.TenantDocumentList.Count; i++)
+                    <table class="col-md-12" id="exist-file-list">
+                        @for (int i = 0; i < Model.TenantDocumentList.Count; i++)
                         {
                             <tr>
                                 <td class="col-md-4 p-t-25">
-                                    @Html.HiddenFor(m => m.TenantDocumentList[i].id,new {@data_name= "id" })
+                                    @Html.HiddenFor(m => m.TenantDocumentList[i].id, new { @data_name = "id" })
                                     @Html.HiddenFor(m => m.TenantDocumentList[i].Doc_Path, new { @data_name = "Doc_Path" })
                                     @Html.HiddenFor(m => m.TenantDocumentList[i].Doc_name, new { @data_name = "Doc_name" })
                                     @Model.TenantDocumentList[i].Doc_name
@@ -421,28 +421,34 @@
                                 </td>
                             </tr>
                         }
-                        </table>
-                    </div>
-                    <div class="clearfix"><br /></div>
+                    </table>
                 </div>
-                    <div class="row ht-5">
-                        &nbsp;
-                    </div>
-            }
-            
-            <div class="col-md-12">
-                <div class="col-md-4 text-left">Content Name</div>
-                <div class="col-md-3 text-left">Content Det</div>
-                <div class="col-md-1 text-left"><input type="button" class="btn btn-default" id="addbutton" value="Add" /></div>
-
-
+                <div class="clearfix"><br /></div>
             </div>
-            <div class="clearfix"><br /><br /></div>
-              
-                        <table id="tblcontent" class="col-md-12">
-                        </table>
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+        }
 
-                    </div>
+        <div class="m-t-5-p col-md-10 document-row" id="GridView">
+            <table class="col-md-12">
+                <tr>
+                    <td class="col-md-4" style="text-transform: uppercase;font-weight: bold;"> Content Name </td>
+                    <td class="col-md-4" style="text-transform: uppercase;font-weight: bold;"> Document </td>
+                    <td class="col-md-2"> <input type="button" id="addbutton" class="document-btn" value="Add" /> </td>
+                </tr>
+            </table>
+
+            @*<div class="col-md-12">
+                    <div class="col-md-4 text-left">Content Name</div>
+                    <div class="col-md-3 text-left">Document</div>
+                    <div class="col-md-1 text-left"><input type="button" class="btn btn-default" id="addbutton" value="Add" /></div>
+                </div>*@
+            <div class="clearfix"><br /><br /></div>
+
+            <table id="tblcontent" class="col-md-12"></table>
+
+        </div>
 
         <div class="col-md-12 form-input-padding">
             <div class="col-md-4">
@@ -453,8 +459,8 @@
                 <div class="col-md-1 pull-left"><br /><br /> <img src="~/Images/loader.gif" class="fa hide" id="img-add-or-update-loader" /></div>
             </div>
         </div>
-
-                        }
+    </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -531,16 +537,17 @@
 
     function addFile(e) {
 
-        var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + i + "'>";
-        html = html + "<div class='col-md-12'>";
-        html = html + "<div class='col-md-4 form-group'> <input id='Designation" + i + "' type='text'  value='' class='master-form-input' name='TenantDocument[" + i + "].Name' data-name='Name' /></div>";
-        html = html + " <div class='col-md-3 form-group'> <input type='file' id='File" + i + "' class='master-form-input' name='TenantDocument[" + i + "].File' data-name='File' value=''/></div>";
-        html = html + "<div class='col-md-1'><button class='document-btn removebutton' id='Delete" + i + "'> X </button></div>";
+        var html = "<tr class='document-row' id='GridView" + i + "'>";
+        //html = html + "<div class=''>";
+        html = html + "<td class='col-md-4 p-t-25 form-group'> <input id='Designation" + i + "' type='text'  value='' class='master-form-input form-control' name='TenantDocument[" + i + "].Name' data-name='Name' /></td>";
+        html = html + " <td class='col-md-4 p-t-25 form-group'> <input type='file' id='File" + i + "' class='master-form-input form-control' name='TenantDocument[" + i + "].File' data-name='File' value=''/></td>";
+        html = html + "<td class='col-md-2 p-t-25'><button class='document-btn removebutton' id='Delete" + i + "'> Delete </button></td>";
 
-        html = html + "</div>";
+        //html = html + "</div>";
 
-        html = html + "</div>";
-        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr>"
+        //html = html + "</div>";
+        //html = html + "<div class='row ht-5'> &nbsp;</div></td></tr>"
+        html = html + "</tr>"
         $('#tblcontent').append(html);
         i++;
         return false;

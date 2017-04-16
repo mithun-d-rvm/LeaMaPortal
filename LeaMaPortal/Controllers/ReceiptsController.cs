@@ -14,7 +14,7 @@ namespace LeaMaPortal.Controllers
 {
     public class ReceiptsController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
 
         // GET: Receipts
         public PartialViewResult Index()
