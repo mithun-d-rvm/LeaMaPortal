@@ -4,6 +4,17 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<style>
+    #master-loader {
+    background: url("../Images/loader.gif") no-repeat scroll center center #FFF;
+    position: absolute;
+    height: 30%;
+    width: 3%;
+}
+</style>
+<div id="master-loader" class="fa hide">
+</div>
 <div class="inner-block p-t-5-p">
     <div class="blank">
         <div id="ContainerAddOrUpdate"></div>
@@ -100,7 +111,8 @@
        });
     }
     function GetCountry() {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
         $.ajax(
@@ -117,10 +129,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $.ajax(
         {
             url: "../Country/Index",
@@ -135,12 +149,14 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
     }
     function GetTenantCompany() {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
         $.ajax(
@@ -157,10 +173,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $.ajax(
         {
             url: "../TenantCompany/Index",
@@ -175,12 +193,14 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
     }
     function GetTenantIndividual() {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $.ajax(
         {
@@ -196,10 +216,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerList").empty();
         $.ajax(
        {
@@ -215,13 +237,15 @@
                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
            },
            complete: function () {
-               $("#img-loader").addClass("hide");
+               //$("#img-loader").addClass("hide");
+               $("#master-loader").addClass("hide");
            }
        });
     }
 
     function GetCaretaker() {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
         $.ajax(
@@ -238,10 +262,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $.ajax(
         {
             url: "../Caretaker/Index",
@@ -256,12 +282,14 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
     }
     function GetRegion() {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
         $.ajax(
@@ -278,10 +306,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $.ajax(
         {
             url: "../Region/Index",
@@ -296,13 +326,15 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
     }
 
     function GetPropertyMaster() {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
         $.ajax(
@@ -317,10 +349,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $.ajax(
         {
             url: "../PropertyMaster/Index",
@@ -335,13 +369,15 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
     }
 
     function GetCheckList() {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
         $.ajax(
@@ -358,10 +394,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $.ajax(
         {
             url: "../CheckList/Index",
@@ -376,13 +414,15 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
     }
 
     function GetFacility() {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
         $.ajax(
@@ -399,10 +439,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $.ajax(
         {
             url: "../Facility/Index",
@@ -417,13 +459,15 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
     }
 
     function GetUtility() {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
         $.ajax(
@@ -440,10 +484,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $.ajax(
         {
             url: "../Utility/Index",
@@ -458,12 +504,14 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
     }
     function GetEmailTemplate() {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
         $.ajax(
@@ -480,10 +528,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $.ajax(
         {
             url: "../EmailTemplate/Index",
@@ -498,12 +548,14 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
     }
     function GetUserCreation() {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
         $.ajax(
@@ -520,10 +572,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $.ajax(
         {
             url: "../UserCreation/Index",
@@ -538,13 +592,15 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
     }
 
     function GetPropertyType() {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
         $.ajax(
@@ -561,10 +617,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $.ajax(
         {
             url: "../PropertyType/Index",
@@ -579,12 +637,14 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
     }
     function GetApprovalSettings() {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
         $.ajax(
@@ -601,10 +661,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $.ajax(
         {
             url: "../ApprovalSettings/Index",
@@ -619,12 +681,14 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
     }
     function GetMeter() {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
         $.ajax(
@@ -641,10 +705,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $.ajax(
         {
             url: "../Meter/Index",
@@ -659,12 +725,14 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
     }
     function GetSlab() {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
         $.ajax(
@@ -681,10 +749,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $.ajax(
         {
             url: "../Slab/Index",
@@ -699,13 +769,15 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
     }
 
     function GetSupplier() {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
         $("#ContainerList").empty();
         $.ajax(
@@ -722,10 +794,12 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
         $.ajax(
         {
             url: "../Supplier/Index",
@@ -740,7 +814,8 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
     }
