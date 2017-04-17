@@ -197,6 +197,243 @@
     <Compile Include="Controllers\TenantCompanyController.cs" />
     <Compile Include="Controllers\TcaController.cs" />
     <Compile Include="Controllers\UserCreationController.cs" />
+    <Compile Include="DBContext\collection_summary.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\dashboard_rental.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\dashboard_utility.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\dashboard_vacancy.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\ebwater_report.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\email_newagreement.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\eventtest.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\LeamaDBContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LeamaDBContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\LeamaDBContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\LeamaDBContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LeamaDBContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\outstanding_report.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\pdc_report.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\renewal_report.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\summarycollection_report.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\summaryebwater_report.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_aging_range.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_agreement.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_agreement_checklist.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_agreement_closure.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_agreement_closure_checklist.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_agreement_closure_facility.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_agreement_closure_pdc.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_agreement_closure_utility.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_agreement_doc.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_agreement_facility.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_agreement_pdc.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_agreement_status.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_agreement_unit_inner.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_agreement_utility.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_approvalconfig.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_caretaker.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_checklistmaster.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_combo_master.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_country.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_eb_water_billentrydt.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_eb_water_billentryhd.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_eb_water_paymentdt.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_eb_water_paymenthd.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_emailconfigurationmaster.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_emailtemplate.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_errorlog.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_facilitymaster.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_formmaster.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_invoicedt.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_invoicehd.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_log.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_metermaster.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_paymentdt.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_paymenthd.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_propertiesdt.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_propertiesdt1.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_propertiesmaster.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_propertytypemaster.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_receiptdt.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_receipthd.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_region.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_slabmaster.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_supplierdt.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_supplierdt1.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_suppliermaster.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_tenant_company.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_tenant_companydt.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_tenant_companydt1.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_tenant_company_government_doc.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_tenant_individual.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_tenant_individual_doc.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_userrights.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\tbl_utilitiesmaster.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\test_report1.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\test_report2.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\vacancy_caretaker_report.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\vacancy_report.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\view_auto_receipt.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\view_find_pdcstatus.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\view_invoice_agreement.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\view_invoice_receipt_pending.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\view_tenant.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -217,66 +454,6 @@
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Models\CountryViewModel.cs" />
-    <Compile Include="Models\DBContext\Entities.cs" />
-    <Compile Include="Models\DBContext\tbl_agreement.cs" />
-    <Compile Include="Models\DBContext\tbl_agreement_checklist.cs" />
-    <Compile Include="Models\DBContext\tbl_agreement_closure.cs" />
-    <Compile Include="Models\DBContext\tbl_agreement_closure_checklist.cs" />
-    <Compile Include="Models\DBContext\tbl_agreement_closure_facility.cs" />
-    <Compile Include="Models\DBContext\tbl_agreement_closure_pdc.cs" />
-    <Compile Include="Models\DBContext\tbl_agreement_closure_utility.cs" />
-    <Compile Include="Models\DBContext\tbl_agreement_doc.cs" />
-    <Compile Include="Models\DBContext\tbl_agreement_facility.cs" />
-    <Compile Include="Models\DBContext\tbl_agreement_pdc.cs" />
-    <Compile Include="Models\DBContext\tbl_agreement_status.cs" />
-    <Compile Include="Models\DBContext\tbl_agreement_unit_inner.cs" />
-    <Compile Include="Models\DBContext\tbl_agreement_utility.cs" />
-    <Compile Include="Models\DBContext\tbl_approvalconfig.cs" />
-    <Compile Include="Models\DBContext\tbl_caretaker.cs" />
-    <Compile Include="Models\DBContext\tbl_checklistmaster.cs" />
-    <Compile Include="Models\DBContext\tbl_combo_master.cs" />
-    <Compile Include="Models\DBContext\tbl_country.cs" />
-    <Compile Include="Models\DBContext\tbl_eb_water_billentrydt.cs" />
-    <Compile Include="Models\DBContext\tbl_eb_water_billentryhd.cs" />
-    <Compile Include="Models\DBContext\tbl_eb_water_paymentdt.cs" />
-    <Compile Include="Models\DBContext\tbl_eb_water_paymenthd.cs" />
-    <Compile Include="Models\DBContext\tbl_emailconfigurationmaster.cs" />
-    <Compile Include="Models\DBContext\tbl_emailtemplate.cs" />
-    <Compile Include="Models\DBContext\tbl_errorlog.cs" />
-    <Compile Include="Models\DBContext\tbl_facilitymaster.cs" />
-    <Compile Include="Models\DBContext\tbl_formmaster.cs" />
-    <Compile Include="Models\DBContext\tbl_invoicedt.cs" />
-    <Compile Include="Models\DBContext\tbl_invoicehd.cs" />
-    <Compile Include="Models\DBContext\tbl_log.cs" />
-    <Compile Include="Models\DBContext\tbl_metermaster.cs" />
-    <Compile Include="Models\DBContext\tbl_paymentdt.cs" />
-    <Compile Include="Models\DBContext\tbl_paymenthd.cs" />
-    <Compile Include="Models\DBContext\tbl_propertiesdt.cs" />
-    <Compile Include="Models\DBContext\tbl_propertiesdt1.cs" />
-    <Compile Include="Models\DBContext\tbl_propertiesmaster.cs" />
-    <Compile Include="Models\DBContext\tbl_propertytypemaster.cs" />
-    <Compile Include="Models\DBContext\tbl_receiptdt.cs" />
-    <Compile Include="Models\DBContext\tbl_receipthd.cs" />
-    <Compile Include="Models\DBContext\tbl_region.cs" />
-    <Compile Include="Models\DBContext\tbl_slabmaster.cs" />
-    <Compile Include="Models\DBContext\tbl_supplierdt.cs" />
-    <Compile Include="Models\DBContext\tbl_supplierdt1.cs" />
-    <Compile Include="Models\DBContext\tbl_suppliermaster.cs" />
-    <Compile Include="Models\DBContext\tbl_tenant_company.cs" />
-    <Compile Include="Models\DBContext\tbl_tenant_companydt.cs" />
-    <Compile Include="Models\DBContext\tbl_tenant_companydt1.cs" />
-    <Compile Include="Models\DBContext\tbl_tenant_company_government_doc.cs" />
-    <Compile Include="Models\DBContext\tbl_tenant_individual.cs" />
-    <Compile Include="Models\DBContext\tbl_tenant_individual_doc.cs" />
-    <Compile Include="Models\DBContext\tbl_userrights.cs" />
-    <Compile Include="Models\DBContext\tbl_utilitiesmaster.cs" />
-    <Compile Include="Models\DBContext\test_report1.cs" />
-    <Compile Include="Models\DBContext\test_report2.cs" />
-    <Compile Include="Models\DBContext\view_auto_receipt.cs" />
-    <Compile Include="Models\DBContext\view_find_pdcstatus.cs" />
-    <Compile Include="Models\DBContext\view_invoice_agreement.cs" />
-    <Compile Include="Models\DBContext\view_invoice_receipt_pending.cs" />
-    <Compile Include="Models\DBContext\view_tenant.cs" />
     <Compile Include="Models\EmailTemplateViewModel.cs" />
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\MasterViewModel.cs" />
@@ -314,6 +491,16 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom.css" />
     <Content Include="Content\LeamaStyles.css" />
+    <Content Include="DBContext\LeamaDBContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LeamaDBContext.edmx</DependentUpon>
+      <LastGenOutput>LeamaDBContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DBContext\LeamaDBContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LeamaDBContext.edmx</DependentUpon>
+      <LastGenOutput>LeamaDBContext.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -338,6 +525,13 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <EntityDeploy Include="DBContext\LeamaDBContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LeamaDBContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DBContext\LeamaDBContext.edmx.diagram">
+      <DependentUpon>LeamaDBContext.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\leamaportal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -579,6 +773,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SuccessMessage.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

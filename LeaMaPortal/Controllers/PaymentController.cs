@@ -6,13 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 
 namespace LeaMaPortal.Controllers
 {
     public class PaymentController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
 
         // GET: Payments
         public ActionResult Index()

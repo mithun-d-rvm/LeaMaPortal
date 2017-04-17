@@ -1,5 +1,5 @@
 ﻿using LeaMaPortal.Models;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using MvcPaging;
 using MySql.Data.MySqlClient;
 using System;
@@ -15,8 +15,7 @@ namespace LeaMaPortal.Controllers
 {
     public class MasterIndividualController : Controller
     {
-        private Entities db = new Entities();
-        private string user = "rmv";
+        private LeamaEntities db = new LeamaEntities();
         // GET: MasterIndividual
         public ActionResult Index(string Search, int? page, int? defaultPageSize)
         {
@@ -152,7 +151,7 @@ namespace LeaMaPortal.Controllers
                 }
                 catch { }
                 model.tenantdocdetails = tenantDoc;
-                object[] param = Helper.GetMySqlParameters<TenantIndividualViewModel>(model, PFlag, user);
+                object[] param = Helper.GetMySqlParameters<TenantIndividualViewModel>(model, PFlag, System.Web.HttpContext.Current.User.Identity.Name);
 
                 var _result = await db.Database.SqlQuery<object>(@"CALL Usp_Tenant_Individual_All(@PFlag,@PTenant_Id,@PTitle  ,@PFirst_Name  ,@PMiddle_Name  ,@PLast_Name  ,@PCompany_Educational   ,@PProfession  ,@PMarital_Status  ,@Paddress  ,@Paddress1  ,@PEmirate  ,@PCity  ,@PPostboxNo  ,@PEmail  ,@PMobile_Countrycode  ,@PMobile_Areacode  ,@PMobile_No  ,@PLandline_Countrycode  ,@PLandline_Areacode  ,@PLandline_No  ,@PFax_Countrycode  ,@PFax_Areacode  ,@PFax_No  ,@PNationality  ,@PEmiratesid  ,@PEmirate_issuedate  ,@PEmirate_expirydate  ,@PPassportno  
                 ,@PPlaceofissuance  
@@ -278,7 +277,7 @@ namespace LeaMaPortal.Controllers
             {
                 var model =await db.tbl_tenant_individual.FindAsync(tenantId, type);
 
-                object[] param = Helper.GetMySqlParameters<TenantIndividualViewModel>(Map(model), Common.DELETE, user);
+                object[] param = Helper.GetMySqlParameters<TenantIndividualViewModel>(Map(model), Common.DELETE, System.Web.HttpContext.Current.User.Identity.Name);
 
                 var _result = await db.Database.SqlQuery<object>(@"CALL Usp_Tenant_Individual_All(@PFlag,@PTenant_Id,@PTitle  ,@PFirst_Name  ,@PMiddle_Name  ,@PLast_Name  ,@PCompany_Educational   ,@PProfession  ,@PMarital_Status  ,@Paddress  ,@Paddress1  ,@PEmirate  ,@PCity  ,@PPostboxNo  ,@PEmail  ,@PMobile_Countrycode  ,@PMobile_Areacode  ,@PMobile_No  ,@PLandline_Countrycode  ,@PLandline_Areacode  ,@PLandline_No  ,@PFax_Countrycode  ,@PFax_Areacode  ,@PFax_No  ,@PNationality  ,@PEmiratesid  ,@PEmirate_issuedate  ,@PEmirate_expirydate  ,@PPassportno  
                 ,@PPlaceofissuance  

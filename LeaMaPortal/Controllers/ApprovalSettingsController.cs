@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using LeaMaPortal.Models;
 using MvcPaging;
 using MySql.Data.MySqlClient;
@@ -17,7 +17,7 @@ namespace LeaMaPortal.Controllers
 {
     public class ApprovalSettingsController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
 
         // GET: Checklist
         public PartialViewResult Index(string Search, int? page, int? defaultPageSize)

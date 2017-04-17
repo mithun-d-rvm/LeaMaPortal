@@ -1,5 +1,5 @@
 ﻿using LeaMaPortal.Models;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using MvcPaging;
 using MySql.Data.MySqlClient;
 using System;
@@ -14,7 +14,7 @@ namespace LeaMaPortal.Controllers
 {
     public class TenantCompanyController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
         // GET: TenantCompany
         public async Task<PartialViewResult> Index(string Search, int? page, int? defaultPageSize)
         {

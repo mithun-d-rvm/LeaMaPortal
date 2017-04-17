@@ -1,5 +1,5 @@
 ﻿using LeaMaPortal.Models;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using MvcPaging;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace LeaMaPortal.Controllers
 {
     public class PropertyMasterController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
         //private string user = "rmv";
         // GET: PropertyMaster
         public async Task<ActionResult> Index(string Search, int? page, int? defaultPageSize)
