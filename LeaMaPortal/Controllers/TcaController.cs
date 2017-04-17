@@ -39,7 +39,7 @@ namespace LeaMaPortal.Controllers
             return View();
         }
 
-        public PartialViewResult AddOrUpdate()
+        public async Task<PartialViewResult> AddOrUpdate()
         {
             try
             {
@@ -47,14 +47,16 @@ namespace LeaMaPortal.Controllers
                 ViewBag.TenantType = new SelectList(Common.TcaTenantType);
                 ViewBag.TenantId = new SelectList("", "");
                 ViewBag.TenantName = new SelectList("", "");
-                ViewBag.TcaPropertyId = new SelectList("", "");
-                ViewBag.TcaPropertyIDTawtheeq = new SelectList("", "");
-                ViewBag.TcaPropertyName = new SelectList("", "");
-                ViewBag.UnitIDTawtheeq = new SelectList("", "");
-                ViewBag.UnitPropertyName = new SelectList("", "");
+                var property = await db.tbl_propertiesmaster.Where(x => x.Delmark != "*").ToListAsync();
+                ViewBag.TcaPropertyId = new SelectList(property, "Property_Id", "Property_Id");
+                ViewBag.TcaPropertyIDTawtheeq = new SelectList(property,"Property_Id", "Property_ID_Tawtheeq");
+                ViewBag.TcaPropertyName = new SelectList(property,"Property_Id", "Property_Name");
+                //var unit = property.Where(x => x.Property_Flag == "Unit").ToList();
+                ViewBag.UnitIDTawtheeq = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
+                ViewBag.UnitPropertyName = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_Property_Name");
                 ViewBag.SecurityFlag = new SelectList(Common.SecurityFlag);
                 ViewBag.Agreement_No = db.tbl_agreement.OrderByDescending(x => x.Agreement_No).FirstOrDefault()?.Agreement_No + 1;
-                model.AgreementPd = new AgreementPdcViewModel();
+                //model.AgreementPd = new AgreementPdcViewModel();
                 return PartialView("../Tca/Agreement/_AgreementForm", model);
             }
             catch (Exception e)
@@ -65,46 +67,106 @@ namespace LeaMaPortal.Controllers
 
         public PartialViewResult AgreementPdc(int AgreementNo)
         {
-            //AgreementPdcViewModel model = new AgreementPdcViewModel();
-            AgreementFormViewModel model = new AgreementFormViewModel();
-            model.AgreementPd.Month = new SelectList(Common.Months);
-            model.AgreementPd.Payment_Mode = new SelectList(Common.PaymentMode);
-            ViewBag.AgreementPd = model.AgreementPd;
+            AgreementPdcViewModel model = new AgreementPdcViewModel();
+            //AgreementFormViewModel model = new AgreementFormViewModel();
+            ViewBag.Month = new SelectList(Common.Months);
+            ViewBag.Payment_Mode = new SelectList(Common.PaymentMode);
+            //ViewBag.AgreementPd = model.AgreementPd;
             return PartialView("../Tca/_AgreementPdc", model);
         }
-        public PartialViewResult AgreementDocument(int AgreementNo)
+        public async Task<PartialViewResult> AgreementDocument(int AgreementNo)
         {
             AgreementDocumentViewModel model = new AgreementDocumentViewModel();
-            ViewBag.Facility_id = new SelectList(db.tbl_facilitymaster.Where(x => x.Delmark != "*"), "Facility_Name", "Facility_id");
-            ViewBag.Facility_Name = new SelectList(db.tbl_facilitymaster.Where(x => x.Delmark != "*"), "Facility_id", "Facility_Name");
-            if (AgreementNo!=0)
+            try
             {
-                model.agreementDocumentList = db.tbl_agreement_facility.Where(x => x.Agreement_No == AgreementNo)
-                .Select(x => new AgreementDocumentViewModel()
+                var facility = await db.tbl_facilitymaster.Where(x => x.Delmark != "*").ToListAsync();
+                ViewBag.Facility_id = new SelectList(facility, "Facility_Name", "Facility_id");
+                ViewBag.Facility_Name = new SelectList(facility, "Facility_id", "Facility_Name");
+                if (AgreementNo != 0)
                 {
-                    Id = x.id,
-                    Facility_id=x.Facility_id,
-                    Facility_Name=x.Facility_Name,
-                    Numbers_available=x.Numbers_available.HasValue? x.Numbers_available.Value:0
-                }).ToList();
+                    model.agreementDocumentList = db.tbl_agreement_facility.Where(x => x.Agreement_No == AgreementNo)
+                    .Select(x => new AgreementDocumentViewModel()
+                    {
+                        Id = x.id,
+                        Facility_id = x.Facility_id,
+                        Facility_Name = x.Facility_Name,
+                        Numbers_available = x.Numbers_available.HasValue ? x.Numbers_available.Value : 0
+                    }).ToList();
+                }
+                return PartialView("../Tca/_AgreementDocument", model);
             }
-            return PartialView("../Tca/_AgreementDocument", model);
+            catch
+            {
+                throw;
+            }
         }
-        public PartialViewResult AgreementUtility(int AgreementNo)
+        public async Task<PartialViewResult> AgreementUtility(int AgreementNo)
         {
-            //AgreementUtilityViewModel model = new AgreementUtilityViewModel();
-            AgreementFormViewModel model = new AgreementFormViewModel();
-            return PartialView("../Tca/_AgreementUtility", model);
+            AgreementUtilityViewModel model = new AgreementUtilityViewModel();
+            try
+            {
+                var utility =await db.tbl_utilitiesmaster.Where(x => x.Delmark != "*").ToListAsync();
+                ViewBag.Utility_id = new SelectList(utility, "Utility_Name", "Utility_id");
+                ViewBag.Utility_Name = new SelectList(utility, "Utility_id", "Utility_Name");
+                ViewBag.Amount_Type = new SelectList(Common.PaymentMode);
+                List<PaybleName> payable = new List<PaybleName>();
+
+                var tenantCompany =await db.tbl_tenant_company.Where(x => x.Delmark != "*").Select(x => new PaybleName() {Name=x.First_Name }).ToListAsync();
+                var tenant =await db.tbl_tenant_individual.Where(x => x.Delmark != "*").Select(x => new PaybleName() { Name = x.First_Name  }).ToListAsync();
+                payable.AddRange(tenantCompany);
+                payable.AddRange(tenant);
+                payable= payable.OrderBy(x => x.Name).ToList();
+                ViewBag.Payable = new SelectList(payable,"Name", "Name");
+                if(AgreementNo!=0)
+                {
+                    model.AgreementUtilityList =await db.tbl_agreement_utility.Where(x => x.Agreement_No == AgreementNo && x.Delmark != "*").
+                                                Select(x => new AgreementUtilityViewModel() {
+                                                    Id=x.id,
+                                                    Utility_id=x.Utility_id,
+                                                    Utility_Name=x.Utility_Name,
+                                                    Payable=x.Payable,
+                                                    Amount_Type=x.Amount_Type,
+                                                    Amount=x.Amount.HasValue?decimal.Parse(x.Amount.ToString()):0
+                                                }).ToListAsync();
+                }
+                return PartialView("../Tca/_AgreementUtility", model);
+            }
+            catch
+            {
+                throw;
+            }
+            //AgreementFormViewModel model = new AgreementFormViewModel();
+           
         }
+    public class PaybleName
+    {
+        public string Name { get; set; }
+    }
         public PartialViewResult AgreementUnit(int AgreementNo)
         {
             AgreementUnitViewModel model = new AgreementUnitViewModel();
             return PartialView("../Tca/_AgreementUnit", model);
         }
-        public PartialViewResult AgreementCheckList(int AgreementNo)
+        public async Task<PartialViewResult> AgreementCheckList(int AgreementNo)
         {
             AgreementCheckListViewModel model = new AgreementCheckListViewModel();
-            return PartialView("../Tca/_AgreementCheckList", model);
+            try
+            {
+                if (AgreementNo != 0)
+                {
+                    var checkList = await db.tbl_agreement_checklist.FirstOrDefaultAsync(x => x.Agreement_No == AgreementNo && x.Delmark != "*");
+                    if (checkList != null)
+                    {
+                        model.Status = checkList.Status.HasValue ? checkList.Status.Value : 0;
+                        model.Remarks = checkList.Remarks;
+                    }
+                }
+                return PartialView("../Tca/_AgreementCheckList", model);
+            }
+            catch
+            {
+                throw;
+            }
         }
         [HttpPost]
         public async Task<ActionResult> AddOrUpdate(AgreementFormViewModel model)

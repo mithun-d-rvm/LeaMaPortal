@@ -88,19 +88,23 @@
 </div>
 
 <script>
+    $("#Facility_Name").change(function () {
+       // alert($("#Facility_Name option:selected").val());
+       // $("#Facility_id option:selected").select($("#Facility_Name option:selected").val());
+        return;
+    });
+    $("#Facility_id").change(function () {
+      //  $("#Facility_Name option:selected").val($("#Facility_id").val());
+       
+        return;
+    });
     var aDocListCount = parseInt($("#agreementDocumentListCount").val());
     function agreementdoc(e) {
-        
-
         e.preventDefault();
-        addagreementdocumentdetails(e)
-        return false;
-    }
-    function addagreementdocumentdetails(event) {       
         var Facility_id = $("#Facility_Name").val();
         var Facility_Name = $("#Facility_id").val();
         var Numbers_available = $("#Numbers_available").val();
-        alert(Facility_id + Facility_Name + Numbers_available);
+        
         var html="<tr><td>"+
         "<input type='hidden' name='agreementDocumentList["+aDocListCount+"].Facility_id' id='agreementDocumentList["+aDocListCount+"].Facility_id'"+
         "value='"+Facility_id+"' data-name='Facility_id' />" +
@@ -130,6 +134,7 @@
         $("#AgreementDetailsList").append(html);
        
         aDocListCount++;
+        return;
     }
 
     $(document).on('click', 'button.agreementdocumentlist-remove', function () {

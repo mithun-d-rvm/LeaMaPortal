@@ -10,6 +10,10 @@ namespace LeaMaPortal.Models
 {
     public class AgreementPdcViewModel
     {
+        public AgreementPdcViewModel()
+        {
+            AgreementPdcList = new List<AgreementPdcViewModel>();
+        }
         public int Id { get; set; }
         [DisplayName("Month")]
         public SelectList Month { get; set; }
@@ -26,5 +30,6 @@ namespace LeaMaPortal.Models
         public DateTime Cheque_Date { get; set; }
         [DisplayName("Amount")]
         public decimal Cheque_Amount { get; set; }
+        public List<AgreementPdcViewModel> AgreementPdcList  { get; set; }
     }
 }

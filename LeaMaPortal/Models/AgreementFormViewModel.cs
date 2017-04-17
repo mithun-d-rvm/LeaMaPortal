@@ -12,9 +12,9 @@ namespace LeaMaPortal.Models
     {
         public AgreementFormViewModel()
         {
-            AgreementUtility = new AgreementUtilityViewModel();
+            //AgreementUtility = new AgreementUtilityViewModel();
             AgreementUtilityList = new List<AgreementUtilityViewModel>();
-            AgreementPd = new AgreementPdcViewModel();
+            //AgreementPd = new AgreementPdcViewModel();
             AgreementPdcList = new List<AgreementPdcViewModel>();
             agreementDocumentList = new List<AgreementDocumentViewModel>();
         }
@@ -27,7 +27,7 @@ namespace LeaMaPortal.Models
         public int Agreement_No { get; set; }
         [DisplayName("Contract Agreement Date")]
 
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime Agreement_Date { get; set; }
         [DisplayName("Contract Tenant Type")]
@@ -47,15 +47,15 @@ namespace LeaMaPortal.Models
         [DisplayName("Unit Name")]
         public string Unit_Property_Name { get; set; }
         [DisplayName("Property Available From")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime Vacantstartdate { get; set; }
         [DisplayName("Contract Agreement Start Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime Agreement_Start_Date { get; set; }
         [DisplayName("Contract Agreement End Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime Agreement_End_Date { get; set; }
         [DisplayName("Contract Total Rental amount")]
@@ -71,16 +71,17 @@ namespace LeaMaPortal.Models
         [DisplayName("Security Deposit cheque/Ref no")]
         public string Security_chequeno { get; set; }
         [DisplayName("Security Cheque date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+       // [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime Security_chequedate { get; set; }
         [DisplayName("Contract Notice Period Days")]
         public int Notice_Period { get; set; }
-        public AgreementPdcViewModel AgreementPd { get; set; }
-        public AgreementUtilityViewModel AgreementUtility { get; set; }
+      //  public AgreementPdcViewModel AgreementPd { get; set; }
+       // public AgreementUtilityViewModel AgreementUtility { get; set; }
         public List<AgreementUtilityViewModel> AgreementUtilityList { get; set; }
         public List<AgreementPdcViewModel> AgreementPdcList { get; set; }
         public List<AgreementDocumentViewModel> agreementDocumentList { get; set; }
+        
     }
 
     public class DdlTenentDetailsViewModel

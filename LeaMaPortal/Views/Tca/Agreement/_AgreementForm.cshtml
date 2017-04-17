@@ -17,20 +17,18 @@
         <div class="row">
             <div class="col-md-6 ht-50">
                 <div class="col-md-12 p-b-7">
-                    @*<div class="col-md-3 m-t-3">
-                            <span> Single Unit </span>
-                        </div>
-                        <div class="col-md-1">
-                            <input type="radio" class="input-checkbox" name="Unit">
-                        </div>
-                        <div class="col-md-4 m-t-3">
-                            <span> Multiple Unit </span>
-                        </div>
-                        <div class="col-md-1 m-l-m-40">
-                            <input type="radio" class="input-checkbox" name="Unit">
-                        </div>*@
-                    @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Single", new { @Name = "SingleMultipleFlag" }) Single Unit
-                    @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Multiple", new { @Name = "SingleMultipleFlag" }) Multiple Unit
+                    <div class="col-md-3 m-t-3">
+                        <span> Single Unit </span>
+                    </div>
+                    <div class="col-md-1">
+                        @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Single", new { @Name = "SingleMultipleFlag", @class = "input-checkbox" })
+                    </div>
+                    <div class="col-md-4 m-t-3">
+                        <span> Multiple Unit </span>
+                    </div>
+                    <div class="col-md-1 m-l-m-40">
+                        @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Multiple", new { @Name = "SingleMultipleFlag", @class = "input-checkbox" })
+                    </div>
                 </div>
             </div>
         </div>
