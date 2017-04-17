@@ -44,9 +44,7 @@
                         @Html.LabelFor(model => model.Supplier_id, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        <select class="col-md-12 leama-field">
-                            <option value="Supplier_id">Supplier_id</option>
-                        </select>
+                        @Html.DropDownListFor(model => model.Supplier_id, new SelectList(ViewBag.Supplier_id, "Value", "Text"), htmlAttributes: new { @class = "master-form-input" })
                     </div>
                 </div>
 
@@ -55,9 +53,7 @@
                         @Html.LabelFor(model => model.agreement_no, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        <select class="col-md-12 leama-field">
-                            <option value="Agreement_No">Agreement No</option>
-                        </select>
+                        @Html.DropDownList("agreement_no", null, htmlAttributes: new { @class = "master-form-input", @id = "agreement_number" })                        
                     </div>
                 </div>
 
@@ -69,9 +65,7 @@
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Property_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="Property_ID">Property No</option>
-                        </select>
+                        @Html.DropDownList("Property_id", null, htmlAttributes: new { @class = "master-form-input", @id = "property_id" })                        
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -80,9 +74,7 @@
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="Property_Name">Property Name</option>
-                        </select>
+                        @Html.DropDownList("Property_Name", null, htmlAttributes: new { @class = "master-form-input",@id = "property_name" })                        
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -91,9 +83,7 @@
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Unit_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="Unit_ID">Unit ID</option>
-                        </select>
+                        @Html.DropDownList("Unit_ID", null, htmlAttributes: new { @class = "master-form-input", @id = "unit_id" })                        
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -102,9 +92,7 @@
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.unit_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="unit_Name">Unit Name</option>
-                        </select>
+                        @Html.DropDownList("unit_Name", null, htmlAttributes: new { @class = "master-form-input", @id = "unit_name" })                        
                     </div>
                 </div>
 
@@ -137,7 +125,6 @@
                         @Html.LabelFor(model => model.AdvAcCode, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.AdvAcCode, new { htmlAttributes = new { @class = "master-form-input" } })*@
                         <select class="col-md-12 leama-field">
                             <option value="unit_Name">AdvacedAccno</option>
                         </select>
@@ -240,3 +227,116 @@
 
     </div>
 </div>
+<script>
+    function getUnitId() {
+    var PropertyId = $("#property_id").val();
+    var PropertyName = $("#property_name").val();
+        $.ajax(
+                {
+                    url: "../Payment/GetUnitId",
+                    method: "POST",
+                    async: false,
+                    data: { PropertyId: PropertyId, PropertyName : PropertyName },
+                    success: function (response) {
+                        $("#unit_id").empty();
+                        $("#unit_name").empty();
+                        $("#agreement_no").empty();
+                        var unit_id_options = '';
+                        var unit_name_options = '';
+                        var agreement_options = '';
+                        $.each(response.UnitId, function (index, data) {
+                            unit_id_options += '<option value="' + data.Value + '">' + data.Value + '</option>';                            
+                        });
+                        $.each(response.UnitName, function (index, data) {
+                            unit_name_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
+                        });
+                        $.each(response.AgreementNo, function (index, data) {
+                            agreement_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
+                        });
+                        
+                        $('#unit_id').append(unit_id_options);
+                        $('#unit_name').append(unit_name_options);
+                        $('#agreement_number').append(agreement_options);
+                        $("#property_id").val(response.PropertyId);
+                        $("#property_name").val(response.PropertyName);
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+                });
+    }
+$("#property_id").change(function () { getUnitId() });
+$("#property_name").change(function () { getUnitId() });
+getUnitId();
+function getProperty() {
+    var UnitId = $("#unit_id").val();
+    var UnitName = $("#unit_name").val();
+    $.ajax(
+            {
+                url: "../Payment/GetProperty",
+                method: "POST",
+                async: false,
+                data: { UnitId: UnitId, UnitName: UnitName },
+                success: function (response) {
+                    $("#property_id").empty();
+                    $("#property_name").empty();
+                    $("#agreement_no").empty();                    
+                    $('#property_id').append('<option value="' + response.PropertyId + '">' + response.PropertyId + '</option>');
+                    $('#property_name').append('<option value="' + response.PropertyName + '">' + response.PropertyName + '</option>');
+                    $('#agreement_number').append('<option value="' + response.AgreementNo + '">' + response.AgreementNo + '</option>');
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                }
+            });
+}
+$("#unit_id").change(function () { getProperty() });
+$("#unit_name").change(function () { getProperty() });
+function getAgreementDetails() {
+    var AgreementNo = $("#agreement_number").val();
+    $.ajax(
+            {
+                url: "../Payment/GetAgreementDetails",
+                method: "POST",
+                async: false,
+                data: { AgreementNo: AgreementNo },
+                success: function (response) {
+                    $("#property_id").empty();
+                    $("#property_name").empty();
+                    $("#unit_id").empty();
+                    $("#unit_name").empty();
+                    var unit_id_options = '';
+                    var unit_name_options = '';
+                    var property_id_options = '';
+                    var property_name_options = '';
+                    $.each(response.UnitId, function (index, data) {
+                        unit_id_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
+                    });
+                    $.each(response.UnitName, function (index, data) {
+                        unit_name_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
+                    });
+                    $.each(response.PropertyId, function (index, data) {
+                        property_id_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
+                    });
+                    $.each(response.PropertyName, function (index, data) {
+                        property_name_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
+                    });
+                    $('#unit_id').append(unit_id_options);
+                    $('#unit_name').append(unit_name_options);
+                    $('#property_id').append(property_id_options);
+                    $('#property_name').append(property_name_options);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                }
+            });
+}
+$("#agreement_number").change(function () { getAgreementDetails() });
+
+</script>

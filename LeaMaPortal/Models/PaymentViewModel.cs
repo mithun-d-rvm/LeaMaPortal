@@ -49,6 +49,7 @@ namespace LeaMaPortal.Models
         public string Narration { get; set; }
         [DisplayName("Advance Payment Number")]
         public string AdvAcCode { get; set; }
+        public List<PaymentDetailsViewModel> PaymentDetailsViewModel { get; set; }
 
     }
     public class PaymentDetailsViewModel
