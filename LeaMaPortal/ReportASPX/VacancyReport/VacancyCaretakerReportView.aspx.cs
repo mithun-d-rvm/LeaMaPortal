@@ -6,9 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.Reporting.WebForms;
 
-namespace LeaMaPortal.Views.Report.VacancyReport
+namespace LeaMaPortal.ReportASPX.VacancyReport
 {
-    public partial class VacancyReport : System.Web.UI.Page
+    public partial class VacancyCaretakerReportView : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -17,7 +17,7 @@ namespace LeaMaPortal.Views.Report.VacancyReport
                 var reportDataSource = new ReportDataSource
                 {
                     // Must match the DataSource in the RDLC
-                    Name = "Dataset1",
+                    Name = "DataSet1",
                     Value = Session["ReportData"]
                 };
                 ReportViewer1.LocalReport.DataSources.Add(reportDataSource);

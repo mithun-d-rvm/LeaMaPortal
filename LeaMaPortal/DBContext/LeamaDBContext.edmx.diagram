@@ -113,6 +113,7 @@
         <EntityTypeShape EntityType="LeamaModel.vacancy_report" Width="1.5" PointX="20.375" PointY="28.75" />
         <EntityTypeShape EntityType="LeamaModel.collection_summary" Width="1.5" PointX="22.375" PointY="28.75" />
         <EntityTypeShape EntityType="LeamaModel.vacancy_caretaker_report" Width="1.5" PointX="27.375" PointY="28.75" />
+        <EntityTypeShape EntityType="LeamaModel.vacancy_region_report" Width="1.5" PointX="29.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

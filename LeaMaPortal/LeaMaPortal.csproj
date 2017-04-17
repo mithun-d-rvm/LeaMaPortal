@@ -416,7 +416,13 @@
     <Compile Include="DBContext\test_report2.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBContext\Usp_Vacant_Report_all_Result.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBContext\vacancy_caretaker_report.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\vacancy_region_report.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="DBContext\vacancy_report.cs">
@@ -477,6 +483,20 @@
     <Compile Include="Models\TenantCompanyViewModel.cs" />
     <Compile Include="Models\TenantIndividualViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportASPX\VacancyReport\VacancyCaretakerReportView.aspx.cs">
+      <DependentUpon>VacancyCaretakerReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportASPX\VacancyReport\VacancyCaretakerReportView.aspx.designer.cs">
+      <DependentUpon>VacancyCaretakerReportView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportASPX\VacancyReport\VacancyRegionReportView.aspx.cs">
+      <DependentUpon>VacancyRegionReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportASPX\VacancyReport\VacancyRegionReportView.aspx.designer.cs">
+      <DependentUpon>VacancyRegionReportView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\ErrorMessage.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -487,11 +507,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SuccessMessage.resx</DependentUpon>
     </Compile>
-    <Compile Include="ReportASPX\VacancyReport\VacancyReportView.aspx.cs">
+    <Compile Include="ReportASPX\VacancyReport\VacancyPropertyReportView.aspx.cs">
+      <DependentUpon>VacancyPropertyReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportASPX\VacancyReport\VacancyPropertyReportView.aspx.designer.cs">
+      <DependentUpon>VacancyPropertyReportView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\VacancyReport\VacancyReportView.aspx.cs">
       <DependentUpon>VacancyReportView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ReportASPX\VacancyReport\VacancyReportView.aspx.designer.cs">
+    <Compile Include="Views\Report\VacancyReport\VacancyReportView.aspx.designer.cs">
       <DependentUpon>VacancyReportView.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -527,6 +554,8 @@
     <Content Include="Images\Reciepts.png" />
     <Content Include="Images\RenewContract.png" />
     <Content Include="Images\REPORTING.png" />
+    <Content Include="ReportASPX\VacancyReport\VacancyCaretakerReportView.aspx" />
+    <Content Include="ReportASPX\VacancyReport\VacancyRegionReportView.aspx" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -630,7 +659,8 @@
     <Content Include="theme\signup.html" />
     <Content Include="theme\typography.html" />
     <Content Include="Views\Dashboard\blank.html" />
-    <Content Include="ReportASPX\VacancyReport\VacancyReportView.aspx" />
+    <Content Include="ReportASPX\VacancyReport\VacancyPropertyReportView.aspx" />
+    <Content Include="Views\Report\VacancyReport\VacancyReportView.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -780,6 +810,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ReportRDLC\Vacancy\vacancycaretaker.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\Vacancy\vacancyregion.rdlc" />
     <EmbeddedResource Include="Resources\ErrorMessage.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessage.Designer.cs</LastGenOutput>
@@ -788,7 +820,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SuccessMessage.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportRDLC\vacancyprop.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\Vacancy\vacancyprop.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
