@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -13,8 +15,12 @@ namespace LeaMaPortal.Models
         public string invtype { get; set; }
         [DisplayName("Invoice Number")]
         public string invno { get; set; }
+
         [DisplayName("Invoice Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? date { get; set; }
+
         [DisplayName("Tenant Id")]
         public int? Tenant_id { get; set; }
         [DisplayName("Tenant Name")]
@@ -22,7 +28,7 @@ namespace LeaMaPortal.Models
         [DisplayName("Agreement No")]
         public int? Agreement_No { get; set; }
         [DisplayName("Property ID")]
-        public int Property_ID { get; set; }
+        public string Property_ID { get; set; }
         [DisplayName("Property Name")]
         public string Property_Name { get; set; }
         [DisplayName("Unit ID")]
@@ -36,11 +42,14 @@ namespace LeaMaPortal.Models
         [DisplayName("Total Amount")]
         public float? totalamt { get; set; }
         [DisplayName("Due Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? duedate { get; set; }
         [DisplayName("Bank Details")]
         public string bank_details { get; set; }
         [DisplayName("Remarks")]
         public string remarks { get; set; }
+        public int? incno { get; set; }
         public List<InvoiceDetailsViewModel> InvoiceDetails { get; set; }
 
     }
