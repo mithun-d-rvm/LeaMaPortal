@@ -186,7 +186,7 @@ namespace LeaMaPortal.Models
         public HttpPostedFileBase File { get; set; }
     }
 
-    public partial class tbl_tenant_individual_doc
+    public partial class tbl_tenant_individual_doc_model
     {
         public int id { get; set; }
 
