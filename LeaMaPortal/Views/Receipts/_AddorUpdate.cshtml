@@ -262,6 +262,19 @@
 
     $("#Reccategory").on('change', function () {
         debugger;
+        //var type = $("#Reccategory").val(); // type
+        //var mode = $("#RecpType").val();
+
+        //if (type == 'against' && mode == 'advance adjustment') {
+        //    $("#advaccode").show();
+        //    GetReceiptNumber();
+        //}
+        //if (mode == 'Pdc') {
+        //    $("#PDCStatus").show();
+        //}
+        ddlChange();
+    });
+    function ddlChange() {
         var type = $("#Reccategory").val(); // type
         var mode = $("#RecpType").val();
 
@@ -269,23 +282,33 @@
             $("#advaccode").show();
             GetReceiptNumber();
         }
+        if (type == 'advance' && mode == 'Pdc') {
+            GetAgreementNoByAdvance();
+        }
+        if (type == 'against' && mode != 'advance adjustment') {
+            GetAgreementNoByInvoice();
+        }
+        if (type == 'security') {
+            GetAgreementNoBySecurity();
+        }
         if (mode == 'Pdc') {
             $("#PDCStatus").show();
         }
-    });
 
+    }
     $("#RecpType").on('change', function () {
         debugger;
-        var type = $("#Reccategory").val(); // type
-        var mode = $("#RecpType").val();
+        //var type = $("#Reccategory").val(); // type
+        //var mode = $("#RecpType").val();
 
-        if (type == 'against' && mode == 'advance adjustment') {
-            $("#advaccode").show();
-            GetReceiptNumber();
-        }
-        if (mode == 'Pdc') {
-            $("#PDCStatus").show();
-        }
+        //if (type == 'against' && mode == 'advance adjustment') {
+        //    $("#advaccode").show();
+        //    GetReceiptNumber();
+        //}
+        //if (mode == 'Pdc') {
+        //    $("#PDCStatus").show();
+        //}
+        ddlChange();
     });
     $("#TotalAmount").on('change', function () {
         debugger;
