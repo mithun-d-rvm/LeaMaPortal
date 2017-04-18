@@ -14,15 +14,15 @@ namespace LeaMaPortal.Models
         [DisplayName("Invoice Number")]
         public string invno { get; set; }
         [DisplayName("Invoice Date")]
-        public DateTime date { get; set; }
+        public DateTime? date { get; set; }
         [DisplayName("Tenant Id")]
-        public int Tenant_id { get; set; }
+        public int? Tenant_id { get; set; }
         [DisplayName("Tenant Name")]
         public string Tenant_Name { get; set; }
         [DisplayName("Agreement No")]
-        public int Agreement_No { get; set; }
+        public int? Agreement_No { get; set; }
         [DisplayName("Property ID")]
-        public string Property_ID { get; set; }
+        public int Property_ID { get; set; }
         [DisplayName("Property Name")]
         public string Property_Name { get; set; }
         [DisplayName("Unit ID")]
@@ -30,13 +30,13 @@ namespace LeaMaPortal.Models
         [DisplayName("Unit Name")]
         public string unit_Name { get; set; }
         [DisplayName("Month")]
-        public int month { get; set; }
+        public int? month { get; set; }
         [DisplayName("Year")]
-        public int year { get; set; }
+        public int? year { get; set; }
         [DisplayName("Total Amount")]
-        public decimal totalamt { get; set; }
+        public float? totalamt { get; set; }
         [DisplayName("Due Date")]
-        public DateTime duedate { get; set; }
+        public DateTime? duedate { get; set; }
         [DisplayName("Bank Details")]
         public string bank_details { get; set; }
         [DisplayName("Remarks")]
@@ -53,9 +53,9 @@ namespace LeaMaPortal.Models
         [DisplayName("Item Description")]
         public string description { get; set; }
         [DisplayName("Quantity")]
-        public DateTime qty { get; set; }
+        public float? qty { get; set; }
         [DisplayName("Amount")]
-        public int amount { get; set; }
+        public float? amount { get; set; }
         
     }
 }

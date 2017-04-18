@@ -4,6 +4,62 @@
 
 Layout = null;
 }
+<link href="~/theme/css/model.css" rel="stylesheet" />
+@using (Html.BeginForm("AddOrUpdate", "Invoice", FormMethod.Post, new { @id = "Invoice", @enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.Id, new { @id = "Id" })
+  
+   <select id="dropDownId">
+        <option value="1">Property Name</option>
+        <option value="2">Property Id</option>
+        <option value="3">Tenant Id</option>
+        <option value="4">Tenant Name</option>
+       <option value="5">Unit Id</option>
+       <option value="6">Unit Name</option>
+    </select>
+    <input type="text" name="chkvalue" />
+    <button onclick="myFunction()">Search</button>
+    if (ViewBag.AgreementList!=null)
+    {
+        <script>
+         $(function(){
+             $("#myModal").modal('show');
+         });
+        </script>
+    }
+    if (ViewBag.AgreementList != null)
+    {
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close" id="model-close">&times;</span>
+            <div class="divTableBody divFontBodyTable">
+                <div class="divTableHeading">
+                    <div class="divTableCell">Property Id</div>
+                    <div class="divTableCell">Property Name</div>
+                    <div class="divTableCell">Unit Id</div>
+                    <div class="divTableCell">Unit Name</div>
+                    <div class="divTableCell">Tenant Id</div>
+                    <div class="divTableCell">Tenant Name</div>
+                </div>
+                @foreach (var item in ViewBag.AgreementList)
+                {
+                <div class="divTableRow">
+                    <div class="divTableCell">@item.Tenant_id</div>
+                    <div class="divTableCell">@item.Tenant_Name</div>
+                    <div class="divTableCell">@item.Property_ID</div>
+                    <div class="divTableCell">@item.Property_Name</div>
+                    <div class="divTableCell">@item.Unit_ID</div>
+                    <div class="divTableCell">@item.unit_Name</div>
+                </div>
+                }
+            </div>
+
+    </div>
+        </div>
+
+    }
 <div class="inner-block">
     <div class="blank">
         <div class="row">
@@ -249,7 +305,7 @@ Layout = null;
                     //html = html + "<div class='col-md-12'>";
                     html = html + " <div class='col-md-2 form-group'> <label for='item'>Item Type</label><input id='item" + @j + "'  type='text' value='" + @Model.InvoiceDetails[j].item + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].item' data-name='Item Type' /></div>";
                     html = html + " <div class='col-md-2 form-group'> <label for='branch'>Item Description</label> <input id='description" + @j + "'  type='text' value='" + @Model.InvoiceDetails[j].description + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].description' data-name='description' /></div>";
-                    html = html + "<div class='col-md-1 form-group'> <label for='quantity'>Quantity</label><input id='qty" + j + "' type='text'  value='" + @Model.InvoiceDetails[j].qty + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].qty' data-name='qty' /></div>";
+                    html = html + " <div class='col-md-1 form-group'> <label for='qty'>Quantity</label><input type='text' id='qty" + @j + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].qty' data-name='qty' value='" + @Model.InvoiceDetails[j].qty + "'/></div>";
                     html = html + " <div class='col-md-1 form-group'> <label for='amount'>Amount</label><input type='text' id='amount" + @j + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].amount' data-name='amount' value='" + @Model.InvoiceDetails[j].amount + "'/></div>";
                     html = html + "<div class='col-md-1' form-group></br>  <button class='document-btn removebutton' id='Delete" + @j + "'> Delete </button></div>";
                     //html = html + "</div>";
@@ -280,10 +336,41 @@ Layout = null;
     </div>
 
 </div>
-
+}
 
 <script>
-    var i = 1;
+    function myFunction() {
+        var val = $("#dropDownId option:selected").val();
+        alert(val);
+
+        $.ajax(
+       {
+           url: "../Invoice/AddOrUpdate/?DropDownValue=1",
+           type: "Get",
+           data: {},
+           contentType: "application/json",
+           processData: false,
+           success: function (html) {
+               $("#ContainerAddOrUpdate").html(html);
+           },
+           error: function (jqXhr, textStatus, errorThrown) {
+               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+           },
+           complete: function () {
+               $("#img-loader").addClass("hide");
+           }
+       });
+
+    }
+    $('#dropDownId').change(function () {
+        var val = $("#dropDownId option:selected").val();
+        alert(val);
+        
+    });
+    $('#model-close').click(function () {
+        $("#myModal").modal('hide');
+    });
+    var i = 0;
     function add() {
 
         var item = document.getElementById("item").value;
@@ -292,12 +379,12 @@ Layout = null;
         var amount = document.getElementById("amount").value;
 
 
-        var html = "<tr><td><div class='col-md-12 document-row' id='GridViewCompanyContact" + i + "'>";
+        var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + i + "'>";
 
         //html = html + "<div class='col-md-12'>";
         html = html + " <div class='col-md-2 form-group'> <label for='item'>Item Type</label><input id='item" + i + "'  type='text' value='" + item + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].item' data-name='Item Type' /></div>";
         html = html + " <div class='col-md-2 form-group'> <label for='branch'>Item Description</label> <input id='description" +i + "'  type='text' value='" + description + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].description' data-name='description' /></div>";
-        html = html + "<div class='col-md-1 form-group'> <label for='quantity'>Quantity</label><input id='qty" + i + "' type='text'  value='" + qty + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].qty' data-name='qty' /></div>";
+        html = html + " <div class='col-md-1 form-group'> <label for='qty'>Quantity</label><input type='text' id='qty" + i + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].qty' data-name='qty' value='" + qty + "'/></div>";
         html = html + " <div class='col-md-1 form-group'> <label for='amount'>Amount</label><input type='text' id='amount" + i + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].amount' data-name='amount' value='" + amount + "'/></div>";
         html = html + "<div class='col-md-1' form-group></br>  <button class='document-btn removebutton' id='Delete" + i + "'> Delete </button></div>";
         //html = html + "</div>";
@@ -307,7 +394,7 @@ Layout = null;
         $('#invoiceDetailsForms').append(html);
         i++;
 
-
+        return false;
       //  var html = " <div class='col-md-12 document-row' id='GridView"+count+"'>";
       //  html=html+" <div class='col-md-1'>"+count+"</div>";
       //  html = html + " <div class='col-md-2'> <input id='item-id_" +count+"'  type='text' value='" +item+ "' class='master-form-input' /></div>";

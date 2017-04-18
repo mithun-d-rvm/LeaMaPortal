@@ -364,6 +364,7 @@
     <Content Include="theme\css\LeameTableStyle.css" />
     <Content Include="theme\css\LeemaStyle.css" />
     <Content Include="theme\css\magnific-popup.css" />
+    <Content Include="theme\css\Model.css" />
     <Content Include="theme\css\style.css" />
     <Content Include="theme\grids.html" />
     <Content Include="theme\icons.html" />
