@@ -159,7 +159,7 @@ Layout = null;
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.month, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("Month", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("month", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -228,23 +228,23 @@ Layout = null;
             <div class="" id="invoice-details">
                 <div id="Gridview" class="row document-row">
                     <div class="col-md-12">
-                        <div class="col-md-2 form-group">
+                        <div class="col-md-3 form-group">
                             <label for="itemtype">Item Type</label>
                             <input type="text" class="form-control master-form-input" id="item" />
                         </div>
-                        <div class="col-md-2 form-group">
+                        <div class="col-md-3 form-group">
                             <label for="description">Item Description</label>
                             <input type="text" class="form-control master-form-input" id="description" />
                         </div>
-                        <div class="col-md-1 form-group">
+                        <div class="col-md-2 form-group">
                             <label for="quantity">Quantity</label>
                             <input type="text" class="form-control master-form-input" id="qty" />
                         </div>
-                        <div class="col-md-1 form-group">
+                        <div class="col-md-2 form-group">
                             <label for="amount">Amount</label>
                             <input id="amount" class="form-control master-form-input" />
                         </div>
-                        <div class="col-md-1 btn-group">
+                        <div class="col-md-2 btn-group">
                             <br />
                             <input type="button" class="document-btn" id="AddInvoice" value="Add" onclick='add(this);' />
                         </div>
@@ -294,13 +294,13 @@ Layout = null;
                     // <script>
                     var html = "<div class='col-md-12 document-row' id='GridViewCompanyContact" + @j + "'>";
 
-                    //html = html + "<div class='col-md-12'>";
-                    html = html + " <div class='col-md-2 form-group'> <label for='item'>Item Type</label><input id='item" + @j + "'  type='text' value='" + @Model.InvoiceDetails[j].item + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].item' data-name='Item Type' /></div>";
-                    html = html + " <div class='col-md-2 form-group'> <label for='branch'>Item Description</label> <input id='description" + @j + "'  type='text' value='" + @Model.InvoiceDetails[j].description + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].description' data-name='description' /></div>";
-                    html = html + " <div class='col-md-1 form-group'> <label for='qty'>Quantity</label><input type='text' id='qty" + @j + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].qty' data-name='qty' value='" + @Model.InvoiceDetails[j].qty + "'/></div>";
-                    html = html + " <div class='col-md-1 form-group'> <label for='amount'>Amount</label><input type='text' id='amount" + @j + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].amount' data-name='amount' value='" + @Model.InvoiceDetails[j].amount + "'/></div>";
-                    html = html + "<div class='col-md-1' form-group></br>  <button class='document-btn removebutton' id='Delete" + @j + "'> Delete </button></div>";
-                    //html = html + "</div>";
+                    html = html + "<div class='col-md-12'>";
+                    html = html + " <div class='col-md-3 form-group'> <label for='item'>Item Type</label><input id='item" + @j + "'  type='text' value='" + @Model.InvoiceDetails[j].item + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].item' data-name='Item Type' /></div>";
+                    html = html + " <div class='col-md-3 form-group'> <label for='branch'>Item Description</label> <input id='description" + @j + "'  type='text' value='" + @Model.InvoiceDetails[j].description + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].description' data-name='description' /></div>";
+                    html = html + " <div class='col-md-2 form-group'> <label for='qty'>Quantity</label><input type='text' id='qty" + @j + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].qty' data-name='qty' value='" + @Model.InvoiceDetails[j].qty + "'/></div>";
+                    html = html + " <div class='col-md-2 form-group'> <label for='amount'>Amount</label><input type='text' id='amount" + @j + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].amount' data-name='amount' value='" + @Model.InvoiceDetails[j].amount + "'/></div>";
+                    html = html + "<div class='col-md-2 form-group'></br>  <button class='document-btn removebutton' id='Delete" + @j + "'> Delete </button></div>";
+                    html = html + "</div>";
 
                     html = html + "</div>";
                     html = html + "<div class='row ht-5'> &nbsp;</div>";
@@ -322,8 +322,13 @@ Layout = null;
         <div class="row ht-5">
             &nbsp;
         </div>
-        <div class="col-md-4">
-            <button class="btn master-form-btn">Submit</button>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+            <div class="col-md-4">
+                <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
+            </div>
         </div>
     </div>
 
@@ -373,19 +378,23 @@ Layout = null;
 
         var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + i + "'>";
 
-        //html = html + "<div class='col-md-12'>";
-        html = html + " <div class='col-md-2 form-group'> <label for='item'>Item Type</label><input id='item" + i + "'  type='text' value='" + item + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].item' data-name='Item Type' /></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='branch'>Item Description</label> <input id='description" +i + "'  type='text' value='" + description + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].description' data-name='description' /></div>";
-        html = html + " <div class='col-md-1 form-group'> <label for='qty'>Quantity</label><input type='text' id='qty" + i + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].qty' data-name='qty' value='" + qty + "'/></div>";
-        html = html + " <div class='col-md-1 form-group'> <label for='amount'>Amount</label><input type='text' id='amount" + i + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].amount' data-name='amount' value='" + amount + "'/></div>";
-        html = html + "<div class='col-md-1' form-group></br>  <button class='document-btn removebutton' id='Delete" + i + "'> Delete </button></div>";
-        //html = html + "</div>";
+        html = html + "<div class='col-md-12'>";
+        html = html + " <div class='col-md-3 form-group'> <label for='item'>Item Type</label><input id='item" + i + "'  type='text' value='" + item + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].item' data-name='Item Type' /></div>";
+        html = html + " <div class='col-md-3 form-group'> <label for='branch'>Item Description</label> <input id='description" +i + "'  type='text' value='" + description + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].description' data-name='description' /></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='qty'>Quantity</label><input type='text' id='qty" + i + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].qty' data-name='qty' value='" + qty + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='amount'>Amount</label><input type='text' id='amount" + i + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].amount' data-name='amount' value='" + amount + "'/></div>";
+        html = html + "<div class='col-md-2 form-group'></br>  <button class='document-btn removebutton' id='Delete" + i + "'> Delete </button></div>";
+        html = html + "</div>";
 
         html = html + "</div>";
         html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
         $('#invoiceDetailsForms').append(html);
         i++;
 
+        $("#item").val('');
+        $("#description").val('');
+        $("#qty").val('');
+        $("#amount").val('');
         return false;
       //  var html = " <div class='col-md-12 document-row' id='GridView"+count+"'>";
       //  html=html+" <div class='col-md-1'>"+count+"</div>";
