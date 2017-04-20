@@ -97,7 +97,7 @@ namespace LeaMaPortal.Models
 
     }
 
-    public class AdvancePendingViewModel
+    public class ReceiptsDDLChangeViewModel
     {
         public string ReceiptNo { get; set; }
         public string agreement_no { get; set; }
@@ -108,6 +108,17 @@ namespace LeaMaPortal.Models
         public string Tenant_id { get; set; }
         public string Tenant_Name { get; set; }
         public string TotalAmount { get; set; }
+        public string pdc_Amount { get; set; }
+        public string DDChequeNo { get; set; }
+        public string invno { get; set; }
+        public string month { get; set; }
+        public string year { get; set; }
+        public string date { get; set; }
+        public string incno { get; set; }
+        public string invtype { get; set; }
+        public string totalamt { get; set; }
+        public string InvoiceAmount { get; set; }
+
     }
 
     public class AdvancePendingSelectList
@@ -121,5 +132,15 @@ namespace LeaMaPortal.Models
         public SelectList Tenant_Id { get; set; }
         public SelectList Tenant_Name { get; set; }
         public SelectList TotalAmount { get; set; }
+        public SelectList pdc_Amount { get; set; }
+        public SelectList DDChequeNo { get; set; }
+        public SelectList invno { get; set; }
+        public SelectList month { get; set; }
+        public SelectList year { get; set; }
+        public SelectList date { get; set; }
+        public SelectList incno { get; set; }
+        public SelectList invtype { get; set; }
+        public SelectList totalamt { get; set; }
+        public SelectList InvoiceAmount { get; set; }
     }
 }

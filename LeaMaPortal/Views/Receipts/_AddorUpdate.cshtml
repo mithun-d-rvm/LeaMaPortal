@@ -283,7 +283,7 @@
             GetReceiptNumber();
         }
         if (type == 'advance' && mode == 'Pdc') {
-            GetAgreementNoByAdvance();
+            GetAgreementNoByPdc();
         }
         if (type == 'against' && mode != 'advance adjustment') {
             GetAgreementNoByInvoice();
@@ -348,6 +348,165 @@
                     AdvAcCode += '<option value="' + data.Text + '">' + data.Text + '</option>';
                 });
                 $('#AdvAcCode').append(AdvAcCode);
+
+                $("#agreement_no").empty();
+                var Agreement_No = '';
+                $.each(response.Agreement_No, function (index, data) {
+                    Agreement_No += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#agreement_no').append(Agreement_No);
+
+                $("#Property_id").empty();
+                var Property_Id = '';
+                $.each(response.Property_Id, function (index, data) {
+                    Property_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Property_id').append(Property_Id);
+
+                $("#Property_Name").empty();
+                var Property_Name = '';
+                $.each(response.Property_Name, function (index, data) {
+                    Property_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Property_Name').append(Property_Name);
+
+                $("#Tenant_id").empty();
+                var Tenant_Id = '';
+                $.each(response.Tenant_Id, function (index, data) {
+                    Tenant_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Tenant_id').append(Tenant_Id);
+
+                $("#Tenant_Name").empty();
+                var Tenant_Name = '';
+                $.each(response.Tenant_Name, function (index, data) {
+                    Tenant_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Tenant_Name').append(Tenant_Name);
+
+                $("#Unit_ID").empty();
+                var Unit_Id = '';
+                $.each(response.Unit_Id, function (index, data) {
+                    Unit_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Unit_ID').append(Unit_Id);
+
+                $("#unit_Name").empty();
+                var Unit_Name = '';
+                $.each(response.Unit_Name, function (index, data) {
+                    Unit_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#unit_Name').append(Unit_Name);
+
+                $('#TotalAmount').val(response.TotalAmount[0].Text);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+
+    function GetAgreementNoByPdc() {
+        $.ajax(
+        {
+            url: "../Receipts/GetAgreementNoByPdc",
+            type: "Get",
+            data: {},
+            //contentType: "application/json",
+            //processData: false,
+            success: function (response) {
+                debugger;
+                //$("#AdvAcCode").empty();
+                //var AdvAcCode = '';
+                //$.each(response.ReceiptNo, function (index, data) {
+                //    AdvAcCode += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                //});
+                //$('#AdvAcCode').append(AdvAcCode);
+
+                $("#agreement_no").empty();
+                var Agreement_No = '';
+                $.each(response.Agreement_No, function (index, data) {
+                    Agreement_No += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#agreement_no').append(Agreement_No);
+
+                $("#Property_id").empty();
+                var Property_Id = '';
+                $.each(response.Property_Id, function (index, data) {
+                    Property_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Property_id').append(Property_Id);
+
+                $("#Property_Name").empty();
+                var Property_Name = '';
+                $.each(response.Property_Name, function (index, data) {
+                    Property_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Property_Name').append(Property_Name);
+
+                $("#Tenant_id").empty();
+                var Tenant_Id = '';
+                $.each(response.Tenant_Id, function (index, data) {
+                    Tenant_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Tenant_id').append(Tenant_Id);
+
+                $("#Tenant_Name").empty();
+                var Tenant_Name = '';
+                $.each(response.Tenant_Name, function (index, data) {
+                    Tenant_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Tenant_Name').append(Tenant_Name);
+
+                $("#Unit_ID").empty();
+                var Unit_Id = '';
+                $.each(response.Unit_Id, function (index, data) {
+                    Unit_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Unit_ID').append(Unit_Id);
+
+                $("#unit_Name").empty();
+                var Unit_Name = '';
+                $.each(response.Unit_Name, function (index, data) {
+                    Unit_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#unit_Name').append(Unit_Name);
+
+                //$('#TotalAmount').val(response.TotalAmount[0].Text);
+
+                $('#TotalAmount').val(response.pdc_Amount[0].Text);
+
+                $('#DDChequeNo').val(response.DDChequeNo[0].Text);
+                
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+
+    function GetAgreementNoByInvoice() {
+        $.ajax(
+        {
+            url: "../Receipts/GetAgreementNoByInvoice",
+            type: "Get",
+            data: {},
+            //contentType: "application/json",
+            //processData: false,
+            success: function (response) {
+                debugger;
+                //$("#AdvAcCode").empty();
+                //var AdvAcCode = '';
+                //$.each(response.ReceiptNo, function (index, data) {
+                //    AdvAcCode += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                //});
+                //$('#AdvAcCode').append(AdvAcCode);
 
                 $("#agreement_no").empty();
                 var Agreement_No = '';

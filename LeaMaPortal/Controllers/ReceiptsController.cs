@@ -302,7 +302,67 @@ namespace LeaMaPortal.Controllers
         [HttpGet]
         public async Task<JsonResult> GetReceiptNumber()
         {
-            List<AdvancePendingViewModel> result = await db.Database.SqlQuery<AdvancePendingViewModel>("select * from view_advance_pending").ToListAsync();
+            List<ReceiptsDDLChangeViewModel> result = await db.Database.SqlQuery<ReceiptsDDLChangeViewModel>("select * from view_advance_pending").ToListAsync();
+            AdvancePendingSelectList list = new AdvancePendingSelectList();
+            list.ReceiptNo = new SelectList(result.Select(r => r.ReceiptNo));
+            list.Agreement_No = new SelectList(result.Select(r => r.agreement_no));
+            list.Property_Id = new SelectList(result.Select(r => r.Property_id));
+            list.Property_Name = new SelectList(result.Select(r => r.Property_Name));
+            list.Tenant_Id = new SelectList(result.Select(r => r.Tenant_id));
+            list.Tenant_Name = new SelectList(result.Select(r => r.Tenant_Name));
+            list.Unit_Id = new SelectList(result.Select(r => r.Unit_ID));
+            list.Unit_Name = new SelectList(result.Select(r => r.unit_Name));
+            list.TotalAmount = new SelectList(result.Select(r => r.TotalAmount));
+            return Json(list, JsonRequestBehavior.AllowGet);
+            //return View();
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetAgreementNoByPdc()
+        {
+            List<ReceiptsDDLChangeViewModel> result = await db.Database.SqlQuery<ReceiptsDDLChangeViewModel>("select * from view_pdc_pending").ToListAsync();
+            AdvancePendingSelectList list = new AdvancePendingSelectList();
+            //list.ReceiptNo = new SelectList(result.Select(r => r.ReceiptNo));
+            list.Agreement_No = new SelectList(result.Select(r => r.agreement_no));
+            list.Property_Id = new SelectList(result.Select(r => r.Property_id));
+            list.Property_Name = new SelectList(result.Select(r => r.Property_Name));
+            list.Tenant_Id = new SelectList(result.Select(r => r.Tenant_id));
+            list.Tenant_Name = new SelectList(result.Select(r => r.Tenant_Name));
+            list.Unit_Id = new SelectList(result.Select(r => r.Unit_ID));
+            list.Unit_Name = new SelectList(result.Select(r => r.unit_Name));
+            list.TotalAmount = new SelectList(result.Select(r => r.TotalAmount));
+            list.pdc_Amount = new SelectList(result.Select(r => r.pdc_Amount));
+            list.DDChequeNo = new SelectList(result.Select(r => r.DDChequeNo));
+            return Json(list, JsonRequestBehavior.AllowGet);
+            //return View();
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetAgreementNoByInvoice()
+        {
+            List<ReceiptsDDLChangeViewModel> result = await db.Database.SqlQuery<ReceiptsDDLChangeViewModel>("select * from view_invoice_receipt_pending order by incno").ToListAsync();
+            AdvancePendingSelectList list = new AdvancePendingSelectList();
+            //list.ReceiptNo = new SelectList(result.Select(r => r.ReceiptNo));
+            list.Agreement_No = new SelectList(result.Select(r => r.agreement_no));
+            list.Property_Id = new SelectList(result.Select(r => r.Property_id));
+            list.Property_Name = new SelectList(result.Select(r => r.Property_Name));
+            list.Tenant_Id = new SelectList(result.Select(r => r.Tenant_id));
+            list.Tenant_Name = new SelectList(result.Select(r => r.Tenant_Name));
+            list.Unit_Id = new SelectList(result.Select(r => r.Unit_ID));
+            list.Unit_Name = new SelectList(result.Select(r => r.unit_Name));
+            //list.TotalAmount = new SelectList(result.Select(r => r.TotalAmount));
+            list.totalamt = new SelectList(result.Select(r => r.totalamt));
+            list.month = new SelectList(result.Select(r => r.month));
+            list.year = new SelectList(result.Select(r => r.year));
+            list.date = new SelectList(result.Select(r => r.date));
+            list.incno = new SelectList(result.Select(r => r.incno));
+            list.invtype = new SelectList(result.Select(r => r.invtype));
+            list.InvoiceAmount = new SelectList(result.Select(r => r.InvoiceAmount));
+            return Json(list, JsonRequestBehavior.AllowGet);
+            //return View();
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetAgreementNoBySecurity()
+        {
+            List<ReceiptsDDLChangeViewModel> result = await db.Database.SqlQuery<ReceiptsDDLChangeViewModel>("select * from tbl_agreement where ifnull(Advance_Security_Amount,0)>0 and Agreement_No=1  and ifnull(status,'')='' and ifnull(delmark,'')<>'*';").ToListAsync();
             AdvancePendingSelectList list = new AdvancePendingSelectList();
             list.ReceiptNo = new SelectList(result.Select(r => r.ReceiptNo));
             list.Agreement_No = new SelectList(result.Select(r => r.agreement_no));
