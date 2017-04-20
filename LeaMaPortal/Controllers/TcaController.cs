@@ -13,6 +13,7 @@ namespace LeaMaPortal.Controllers
     public class TcaController : Controller
     {
         private Entities db = new Entities();
+        private string user = "rmv";
         // GET: Tca
         public ActionResult Index()
         {
@@ -142,9 +143,17 @@ namespace LeaMaPortal.Controllers
     {
         public string Name { get; set; }
     }
-        public PartialViewResult AgreementUnit(int AgreementNo)
+        public async  Task<PartialViewResult> AgreementUnit(int AgreementNo)
         {
             AgreementUnitViewModel model = new AgreementUnitViewModel();
+            var property =await db.tbl_propertiesmaster.Where(x => x.Delmark != "*").ToListAsync();
+            
+            ViewBag.Property_ID = new SelectList(property, "Property_ID", "Property_ID");
+            ViewBag.Properties_Name = new SelectList(property, "Property_Name", "Property_Name");
+            ViewBag.Property_ID_Tawtheeq = new SelectList(property, "Property_ID_Tawtheeq", "Property_ID_Tawtheeq");
+            ViewBag.Unit_ID_Tawtheeq = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
+            ViewBag.Unit_Property_Name = new SelectList(property, "Unit_Property_Name", "Unit_Property_Name");
+
             return PartialView("../Tca/_AgreementUnit", model);
         }
         public async Task<PartialViewResult> AgreementCheckList(int AgreementNo)
@@ -169,10 +178,67 @@ namespace LeaMaPortal.Controllers
             }
         }
         [HttpPost]
-        public async Task<ActionResult> AddOrUpdate(AgreementFormViewModel model)
+        public async Task<ActionResult> AddOrUpdate(AgreementFormViewModel model,FormCollection FC)
         {
+            try
+            {
+                string PFlag = Common.UPDATE;
+                if (model.Agreement_No == 0)
+                {
+                    PFlag = Common.INSERT;
+                    var Agreement = await db.tbl_agreement.OrderByDescending(r => r.Agreement_No).FirstOrDefaultAsync();
+                    model.Agreement_No = Agreement != null ? Agreement.Agreement_No + 1 : 1;
+                }
+                object[] param = Helper.GetMySqlParameters<AgreementFormViewModel>(model, PFlag, user);
+//                PFlag VARCHAR(10)
+//, PSingle_Multiple_Flag varchar(20)
+//, PAgreement_Refno  int
+//, PNew_Renewal_flag  varchar(20)
+//, PAgreement_No  int(11)
+//, PAgreement_Date  datetime
+//, PAg_Tenant_id  int
+//, PAg_Tenant_Name  varchar(100)
+//, Pproperty_id int
+//, PProperty_ID_Tawtheeq  varchar(100)
+//, PProperties_Name  varchar(100)
+//, PUnit_ID_Tawtheeq  varchar(100)
+//, PUnit_Property_Name varchar(100)
+//, PCaretaker_id  int
+//, PCaretaker_Name  varchar(100)
+//, Ptenant_source  varchar(100)
+//, PAgent_id  int
+//, PAgent_name  varchar(100)
+//, PEmp_id  int
+//, PEmp_name  varchar(100)
+//, PVacantstartdate  datetime
+//, PAgreement_Start_Date  datetime
+//, PAgreement_End_Date  datetime
+//, PTotal_Rental_amount  float
+//, PPerday_Rental  float
+//, PAdvance_Security_Amount  float
+//, PSecurity_Flag  varchar(20)
+//, PSecurity_chequeno  varchar(50)
+//, PSecurity_chequedate  datetime
+//, PNotice_Period  int(11)
+//, Pnofopayments  int(11)
+//, PApproval_Flag  int(11)
+//, PApproved_By  varchar(75)
+//, PApproved_Date  datetime
+//, PTenant_Type varchar(25)
+//, PCreateduser  varchar(150)
+//, PAgpdc longtext
+//, pAgdoc longtext
+//, pAgfac longtext
+//, pAguti longtext
+//, pAgchk longtext
+//, pAgunit longtext
 
-            return RedirectToAction("Index");
+            }
+            catch
+            {
+
+            }
+            return View("Index");
         }
 
         [HttpGet]

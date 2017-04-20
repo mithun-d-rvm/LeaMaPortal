@@ -80,13 +80,13 @@
     function addAgreementPdcDetails(event) {
         event.preventDefault();
         
-        var Month = $("#AgreementPd #Month").val();
-        var Year = $("#AgreementPd #Year").val();
+        var Month =$("#AgreementPd #Month").val();
+        var Year =parseInt($("#AgreementPd #Year").val());
         var Payment_Mode = $("#AgreementPd #Payment_Mode").val();
         var BankName = $("#AgreementPd #BankName").val();
         var Cheque_No = $("#AgreementPd #Cheque_No").val();
         var Cheque_Date = $("#AgreementPd #Cheque_Date").val();
-        var Cheque_Amount = $("#AgreementPd #Cheque_Amount").val();
+        var Cheque_Amount =parseFloat($("#AgreementPd #Cheque_Amount").val());
 
         var html = "<tr><td>" +
                       "<input type='hidden' name='AgreementPdcList[" + AgreementPdCount + "].Month' id='AgreementPdcList[" + AgreementPdCount + "].Month' value='" + Month + "' data-name='Month' />" +

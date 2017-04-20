@@ -16,11 +16,11 @@ namespace LeaMaPortal.Models
         }
         public int Id { get; set; }
         [DisplayName("Month")]
-        public SelectList Month { get; set; }
+        public string Month { get; set; }
         [DisplayName("Year")]
         public string Year { get; set; }
         [DisplayName("Payment Mode")]
-        public SelectList Payment_Mode { get; set; }
+        public string Payment_Mode { get; set; }
         [DisplayName("Bank Name")]
         public string BankName { get; set; }
         [DisplayName("Cheque No")]
