@@ -1,5 +1,5 @@
 ﻿using LeaMaPortal.Models;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace LeaMaPortal.Helpers
         {
             try
             {
-                Entities db = new Entities();
+                LeamaEntities db = new LeamaEntities();
                 //object[] parameters = {
                 //         new MySqlParameter("@PFlag", "SELECT"),
                 //         new MySqlParameter("@Pid", 0),

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using LeaMaPortal.Models;
 using MySql.Data.MySqlClient;
 using MvcPaging;
@@ -15,7 +15,7 @@ namespace LeaMaPortal.Controllers
 {
     public class RegionController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
 
         // GET: Region
         public PartialViewResult Index(string Search, int? page, int? defaultPageSize)

@@ -10,12 +10,13 @@ using LeaMaPortal.Models.DBContext;
 using System.Threading.Tasks;
 using LeaMaPortal.Models;
 using MySql.Data.MySqlClient;
+using LeaMaPortal.DBContext;
 
 namespace LeaMaPortal.Controllers
 {
     public class PaymentController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
 
         [HttpGet]
         public async Task<PartialViewResult> List(string Search, int? page, int? defaultPageSize)

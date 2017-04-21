@@ -29,12 +29,12 @@
                     @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                   
-                        @Html.HiddenFor(model => model.Title)
-                        @Html.DropDownList("TitleDisplay",null, new { @class = "form-control master-form-input" })
-                    
-                </div >
-            </div >
+
+                    @Html.HiddenFor(model => model.Title)
+                    @Html.DropDownList("TitleDisplay", null, new { @class = "form-control master-form-input" })
+
+                </div>
+            </div>
             <div class="col-md-12 form-input-padding">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.Middle_Name, htmlAttributes: new { @class = "control-label" })
@@ -84,8 +84,8 @@
                     @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                  
-                    @Html.DropDownList("City", null,htmlAttributes: new { @class = "form-control master-form-input" })
+
+                    @Html.DropDownList("City", null, htmlAttributes: new { @class = "form-control master-form-input" })
 
 
 
@@ -129,11 +129,11 @@
                     @Html.LabelFor(model => model.Nationality, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                   
 
-                    @Html.DropDownList("Nationality",null, htmlAttributes: new { @class = "form-control master-form-input" })
 
-                    
+                    @Html.DropDownList("Nationality", null, htmlAttributes: new { @class = "form-control master-form-input" })
+
+
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -147,7 +147,7 @@
                     @Html.ValidationMessageFor(model => model.Emirate_issuedate, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding other-nationality">
                 <div class="col-md-4">
                     @*Passport Number:*@
                     @Html.LabelFor(model => model.Passportno, htmlAttributes: new { @class = "control-label" })
@@ -157,7 +157,7 @@
                     @Html.ValidationMessageFor(model => model.Passportno, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding other-nationality">
                 <div class="col-md-4">
                     @*Passport Issue Date:*@
                     @Html.LabelFor(model => model.Passport_Issuedate, htmlAttributes: new { @class = "control-label" })
@@ -167,7 +167,7 @@
                     @Html.ValidationMessageFor(model => model.Passport_Issuedate, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding other-nationality">
                 <div class="col-md-4">
                     @*Visa Type:*@
                     @Html.LabelFor(model => model.VisaType, htmlAttributes: new { @class = "control-label" })
@@ -177,7 +177,7 @@
                     @Html.ValidationMessageFor(model => model.VisaType, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding other-nationality">
                 <div class="col-md-4">
                     @*Visa Expiry Date:*@
                     @Html.LabelFor(model => model.Visa_ExpiryDate, htmlAttributes: new { @class = "control-label" })
@@ -248,7 +248,7 @@
                     @Html.LabelFor(model => model.Profession, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div class="col-md-8">
-                    @Html.DropDownList("Profession",null, htmlAttributes: new { @class = "form-control master-form-input" })
+                    @Html.DropDownList("Profession", null, htmlAttributes: new { @class = "form-control master-form-input" })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -344,7 +344,7 @@
                     @Html.ValidationMessageFor(model => model.Emirate_expirydate, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding other-nationality">
                 <div class="col-md-4">
                     @*Place of Insurance:*@
                     @Html.LabelFor(model => model.Placeofissuance, htmlAttributes: new { @class = "control-label" })
@@ -354,7 +354,7 @@
                     @Html.ValidationMessageFor(model => model.Placeofissuance, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding  other-nationality">
                 <div class="col-md-4">
                     @*Passport Expiry Date:*@
                     @Html.LabelFor(model => model.Passport_Expirydate, htmlAttributes: new { @class = "control-label" })
@@ -364,7 +364,7 @@
                     @Html.ValidationMessageFor(model => model.Passport_Expirydate, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding other-nationality">
                 <div class="col-md-4">
                     @*Visa Issue Date:*@
                     @Html.LabelFor(model => model.Visa_IssueDate, htmlAttributes: new { @class = "control-label" })
@@ -397,20 +397,20 @@
 
 
         </div>
-        
 
-            @if (Model.TenantDocumentList != null)
+
+        @if (Model.TenantDocumentList != null)
                 {
-                <div class="m-t-5-p col-md-10 document-row" id="GridView">
-                    <div class="">
-                        @if (Model.TenantDocumentList.Count > 0)
+            <div class="m-t-5-p col-md-10 document-row" id="GridView">
+                <div class="">
+                    @if (Model.TenantDocumentList.Count > 0)
                     {<span style="text-transform: uppercase;font-weight: bold;">Existing Documents</span>}
-                        <table class="col-md-12" id="exist-file-list">
-                            @for (int i = 0; i < Model.TenantDocumentList.Count; i++)
+                    <table class="col-md-12" id="exist-file-list">
+                        @for (int i = 0; i < Model.TenantDocumentList.Count; i++)
                         {
                             <tr>
                                 <td class="col-md-4 p-t-25">
-                                    @Html.HiddenFor(m => m.TenantDocumentList[i].id,new {@data_name= "id" })
+                                    @Html.HiddenFor(m => m.TenantDocumentList[i].id, new { @data_name = "id" })
                                     @Html.HiddenFor(m => m.TenantDocumentList[i].Doc_Path, new { @data_name = "Doc_Path" })
                                     @Html.HiddenFor(m => m.TenantDocumentList[i].Doc_name, new { @data_name = "Doc_name" })
                                     @Model.TenantDocumentList[i].Doc_name
@@ -421,18 +421,16 @@
                                 </td>
                             </tr>
                         }
-                        </table>
-                    </div>
-                    <div class="clearfix"><br /></div>
+                    </table>
                 </div>
-                    <div class="row ht-5">
-                        &nbsp;
-                    </div>
-            }
+                <div class="clearfix"><br /></div>
+            </div>
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+        }
 
-                
-            <div class="m-t-5-p col-md-10 document-row" id="GridView">
-
+        <div class="m-t-5-p col-md-10 document-row" id="GridView">
             <table class="col-md-12">
                 <tr>
                     <td class="col-md-4" style="text-transform: uppercase;font-weight: bold;"> Content Name </td>
@@ -440,31 +438,17 @@
                     <td class="col-md-2"> <input type="button" id="addbutton" class="document-btn" value="Add" /> </td>
                 </tr>
             </table>
+
             @*<div class="col-md-12">
-                <div class="col-md-4 text-left">Content Name</div>
-                <div class="col-md-4 text-left">Document</div>
-                <div class="col-md-2 text-left"><input type="button" id="addbutton" class="document-btn" value="Add" /></div>
-            </div>*@
+                    <div class="col-md-4 text-left">Content Name</div>
+                    <div class="col-md-3 text-left">Document</div>
+                    <div class="col-md-1 text-left"><input type="button" class="btn btn-default" id="addbutton" value="Add" /></div>
+                </div>*@
             <div class="clearfix"><br /><br /></div>
-               
 
+            <table id="tblcontent" class="col-md-12"></table>
 
-                        <table id="tblcontent" class="col-md-12">
-                            <tr>
-
-                                <td class="col-md-4 p-t-25">
-                                    <input type="text" id="txtTitle" name="TenantDocument[0].Name" data-name="Name">
-                                </td>
-                                <td class="col-md-4 p-t-25">
-                                    <input type="file" id="txtLink" name="TenantDocument[0].File" data-name="File">
-                                </td>
-                                <td class="col-md-2 p-t-25">
-                                    <button type="button" class="removebutton document-btn" title="Remove this row"> Delete </button>
-                                </td>
-                            </tr>
-                        </table>
-
-                    </div>
+        </div>
 
         <div class="col-md-12 form-input-padding">
             <div class="col-md-4">
@@ -475,64 +459,99 @@
                 <div class="col-md-1 pull-left"><br /><br /> <img src="~/Images/loader.gif" class="fa hide" id="img-add-or-update-loader" /></div>
             </div>
         </div>
-
     </div>
-                        }
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
 <script>
-   
-    var i = 1;
-
-    $("#addbutton").click(function () {
-        var j = 0;
-        $("table#tblcontent tr:first").clone().find("input").each(function () {
-            if (j == 0)
-            {
-                $(this).val('').attr({
-                    'id': function (_, id) {
-                        return id + i
-                    },
-                    'name': function (_, name) {
-                        //return name + i
-                        return 'TenantDocument[' + i + '].Name'
-                    },
-                    'value': ''
-                });
-            }
-            else if (j == 1)
-            {
-                $(this).val('').attr({
-                    'id': function (_, id) {
-                        return id + i
-                    },
-                    'name': function (_, name) {
-                        //return name + i
-                        return 'TenantDocument[' + i + '].File'
-                    },
-                    'value': ''
-                });
-            }
-            else
-            {
-                $(this).val('').attr({
-                    'id': function (_, id) {
-                        return id + i
-                    },
-                    'name': function (_, name) {
-                        return name + i
-                        //return 'doc[' + i + '].Filename'
-                    },
-                    'value': ''
-                });
-            }
-           
-            j++;
-        }).end().appendTo("#tblcontent");
-        i++;
+    $("#Nationality").on('change', function (e) {
+        nationalityShowOrHide();
     });
+    nationalityShowOrHide();
+    function nationalityShowOrHide()
+    {
+        var nationality = $("#Nationality").val();
+        if(nationality=="UAE")
+        {
+            $(".other-nationality").hide();
+        }
+        else
+        {
+            $(".other-nationality").show();
+        }
+    }
+    
+    var i = 0;
+
+    $("#addbutton").click(function (e) {
+        addFile(e)
+        //var j = 0;
+        //$("table#tblcontent tr:first").clone().find("input").each(function () {
+        //    if (j == 0)
+        //    {
+        //        $(this).val('').attr({
+        //            'id': function (_, id) {
+        //                return id + i
+        //            },
+        //            'name': function (_, name) {
+        //                //return name + i
+        //                return 'TenantDocument[' + i + '].Name'
+        //            },
+        //            'value': ''
+        //        });
+        //    }
+        //    else if (j == 1)
+        //    {
+        //        $(this).val('').attr({
+        //            'id': function (_, id) {
+        //                return id + i
+        //            },
+        //            'name': function (_, name) {
+        //                //return name + i
+        //                return 'TenantDocument[' + i + '].File'
+        //            },
+        //            'value': ''
+        //        });
+        //    }
+        //    else
+        //    {
+        //        $(this).val('').attr({
+        //            'id': function (_, id) {
+        //                return id + i
+        //            },
+        //            'name': function (_, name) {
+        //                return name + i
+        //                //return 'doc[' + i + '].Filename'
+        //            },
+        //            'value': ''
+        //        });
+        //    }
+           
+        //    j++;
+        //}).end().appendTo("#tblcontent");
+        //i++;
+    });
+
+
+    function addFile(e) {
+
+        var html = "<tr class='document-row' id='GridView" + i + "'>";
+        //html = html + "<div class=''>";
+        html = html + "<td class='col-md-4 p-t-25 form-group'> <input id='Designation" + i + "' type='text'  value='' class='master-form-input form-control' name='TenantDocument[" + i + "].Name' data-name='Name' /></td>";
+        html = html + " <td class='col-md-4 p-t-25 form-group'> <input type='file' id='File" + i + "' class='master-form-input form-control' name='TenantDocument[" + i + "].File' data-name='File' value=''/></td>";
+        html = html + "<td class='col-md-2 p-t-25'><button class='document-btn removebutton' id='Delete" + i + "'> Delete </button></td>";
+
+        //html = html + "</div>";
+
+        //html = html + "</div>";
+        //html = html + "<div class='row ht-5'> &nbsp;</div></td></tr>"
+        html = html + "</tr>"
+        $('#tblcontent').append(html);
+        i++;
+        return false;
+    }
 
     $(document).on('click', 'button.removebutton', function () {
         $(this).closest('tr').remove();

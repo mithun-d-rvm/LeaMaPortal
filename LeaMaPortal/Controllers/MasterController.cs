@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using LeaMaPortal.Models;
 namespace LeaMaPortal.Controllers
 {
     [Authorize]
     public class MasterController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
 
         // GET: Master
         public async Task<ActionResult> Index(int selected = 0)
