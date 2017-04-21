@@ -14,6 +14,7 @@ Layout = null;
     @Html.HiddenFor(model => model.Property_Name)
     @Html.HiddenFor(model => model.Unit_ID)
     @Html.HiddenFor(model => model.unit_Name)
+    @Html.HiddenFor(model => model.incno)
    @*<select id="dropDownId">
         <option value="1">Property Name</option>
         <option value="2">Property Id</option>
@@ -81,7 +82,7 @@ Layout = null;
                         @Html.LabelFor(model => model.invno, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.invno, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.invno, new { htmlAttributes = new { @class = "master-form-input form-control",@readonly="readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -197,7 +198,7 @@ Layout = null;
                         @Html.LabelFor(model => model.bank_details, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="@ViewBag.bank_details" disabled class="form-control master-form-input" />
+                        @Html.EditorFor(model => model.bank_details, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -235,7 +236,7 @@ Layout = null;
                     <div class="col-md-12">
                         <div class="col-md-3 form-group">
                             <label for="itemtype">Item Type</label>
-                            <input type="text" class="form-control master-form-input" id="item" />
+                            <input type="text" readonly class="form-control master-form-input" id="item" />
                         </div>
                         <div class="col-md-3 form-group">
                             <label for="description">Item Description</label>
@@ -300,7 +301,7 @@ Layout = null;
                     var html = "<div class='col-md-12 document-row' id='GridViewCompanyContact" + @j + "'>";
 
                     html = html + "<div class='col-md-12'>";
-                    html = html + " <div class='col-md-3 form-group'> <label for='item'>Item Type</label><input id='item" + @j + "'  type='text' value='" + @Model.InvoiceDetails[j].item + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].item' data-name='Item Type' /></div>";
+                    html = html + " <div class='col-md-3 form-group'> <label for='item'>Item Type</label><input id='item" + @j + "'  type='text' value='" + @Model.InvoiceDetails[j].item + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].item' data-name='Item Type' readonly /></div>";
                     html = html + " <div class='col-md-3 form-group'> <label for='branch'>Item Description</label> <input id='description" + @j + "'  type='text' value='" + @Model.InvoiceDetails[j].description + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].description' data-name='description' /></div>";
                     html = html + " <div class='col-md-2 form-group'> <label for='qty'>Quantity</label><input type='text' id='qty" + @j + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].qty' data-name='qty' value='" + @Model.InvoiceDetails[j].qty + "'/></div>";
                     html = html + " <div class='col-md-2 form-group'> <label for='amount'>Amount</label><input type='text' id='amount" + @j + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].amount' data-name='amount' value='" + @Model.InvoiceDetails[j].amount + "'/></div>";
@@ -384,7 +385,7 @@ Layout = null;
         var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + i + "'>";
 
         html = html + "<div class='col-md-12'>";
-        html = html + " <div class='col-md-3 form-group'> <label for='item'>Item Type</label><input id='item" + i + "'  type='text' value='" + item + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].item' data-name='Item Type' /></div>";
+        html = html + " <div class='col-md-3 form-group'> <label for='item'>Item Type</label><input id='item" + i + "'  type='text' value='" + item + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].item' data-name='Item Type' readonly /></div>";
         html = html + " <div class='col-md-3 form-group'> <label for='branch'>Item Description</label> <input id='description" +i + "'  type='text' value='" + description + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].description' data-name='description' /></div>";
         html = html + " <div class='col-md-2 form-group'> <label for='qty'>Quantity</label><input type='text' id='qty" + i + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].qty' data-name='qty' value='" + qty + "'/></div>";
         html = html + " <div class='col-md-2 form-group'> <label for='amount'>Amount</label><input type='text' id='amount" + i + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].amount' data-name='amount' value='" + amount + "'/></div>";
@@ -396,7 +397,7 @@ Layout = null;
         $('#invoiceDetailsForms').append(html);
         i++;
 
-        $("#item").val('');
+        //$("#item").val('');
         $("#description").val('');
         $("#qty").val('');
         $("#amount").val('');
@@ -449,7 +450,8 @@ Layout = null;
         debugger;
         var tenantid = $("#Tenantid").val();
         $("#TenantName").val($("#Tenantid option:selected").val());
-        $("#Tenant_id").val($("#Tenantid option:selected").text() == "--Select--" ? null : $("#Tenantid option:selected").text());
+        //$("#Tenant_id").val($("#Tenantid option:selected").text() == "--Select--" ? null : $("#Tenantid option:selected").text());
+        //$("#Tenant_Name").val($("#TenantName option:selected").text() == "--Select--" ? null : $("#TenantName option:selected").text());
         
         //$("#TenantName").prop('selected', true).change();
     });
@@ -457,8 +459,8 @@ Layout = null;
         debugger;
         var tenantid = $("#TenantName").val();
         $("#Tenantid").val($("#TenantName option:selected").val());
-        $("#Tenant_Name").val($("#TenantName option:selected").text() == "--Select--" ? null : $("#TenantName option:selected").text());
-
+        //$("#Tenant_Name").val($("#TenantName option:selected").text() == "--Select--" ? null : $("#TenantName option:selected").text());
+        //$("#Tenant_id").val($("#Tenantid option:selected").text() == "--Select--" ? null : $("#Tenantid option:selected").text());
     });
 
     $("#PropertyId").on('change', function (e) {
@@ -466,7 +468,13 @@ Layout = null;
         var propertyid = $("#PropertyId").val();
         $("#PropertyName").val($("#PropertyId option:selected").val());
 
-        $("#Property_Id").val($("#PropertyId option:selected").text() == "--Select--" ? null : $("#PropertyId option:selected").text());
+        //document.getElementById("#Property_Id").value = propertyid;
+
+        //$('#Property_Id').attr("value", $("#PropertyId option:selected").text() == "--Select--" ? null : $("#PropertyId option:selected").text());
+        //$('#Property_Name').attr("value", $("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
+
+        $("input#Property_ID").val(propertyid);
+        $("#Property_Name").val($("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
         
         var id = $("#PropertyId option:selected").text() == "--Select--" ? null : propertyid;
         getunits(id);
@@ -476,8 +484,9 @@ Layout = null;
         debugger;
         var propertyid = $("#PropertyName").val();
         $("#PropertyId").val($("#PropertyName option:selected").val());
-        $("#Property_Name").val($("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
-
+        //$("#Property_Name").val($("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
+        //$("#Property_Id").val($("#PropertyId option:selected").text() == "--Select--" ? null : $("#PropertyId option:selected").text());
+        //$("input#Property_ID").val(propertyid);
         var id = $("#PropertyName option:selected").text() == "--Select--" ? null : propertyid;
         getunits(id);
     });
@@ -487,7 +496,9 @@ Layout = null;
         debugger;
         var unitid = $("#UnitId").val();
         $("#unitName").val($("#UnitId option:selected").val());
-        $("#Unit_Id").val($("#UnitId option:selected").text() == "--Select--" ? null : $("#UnitId option:selected").text());
+        //$("#Unit_Id").val($("#UnitId option:selected").text() == "--Select--" ? null : $("#UnitId option:selected").text());
+        //$("input#Unit_Id").val(unitid);
+        //$("#unit_Name").val($("#unitName option:selected").text() == "--Select--" ? null : $("#unitName option:selected").text());
         
         var id = $("#UnitId option:selected").text() == "--Select--" ? null : unitid;
         getproperty(id);
@@ -497,10 +508,46 @@ Layout = null;
         debugger;
         var unitid = $("#unitName").val();
         $("#UnitId").val($("#unitName option:selected").val());
-        $("#unit_Name").val($("#unitName option:selected").text() == "--Select--" ? null : $("#unitName option:selected").text());
+        //$("#unit_Name").val($("#unitName option:selected").text() == "--Select--" ? null : $("#unitName option:selected").text());
+        //$("input#Unit_Id").val(unitid);
+        //$("#Unit_Id").val($("#UnitId option:selected").text() == "--Select--" ? null : $("#UnitId option:selected").text());
         var id = $("#unitName option:selected").text() == "--Select--" ? null : unitid;
         getproperty(id);
     });
+
+    $("#invtype").on('change', function (e) {
+        debugger;
+        var invoiceType = $("#invtype option:selected").val();
+        $("#item").val(invoiceType);
+
+        var existfilelist = document.getElementById('invoiceDetailsForms');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+            //$(this).find("input#item"+index).val(invoiceType);
+            $(this).find("input").each(function (index) {
+                $("#item" + index).val(invoiceType);
+                // alert(dataname + $(this) .val()+ '-' + newindex)
+                //$(this).attr({
+                //    'id': function (_, id) {
+                //        return id + newindex
+                //    },
+                //    'name': function (_, name) {
+                //        //return name + iTenantDocument[0].Name
+                //        return 'InvoiceDetails[' + newindex + '].' + dataname
+                //    }
+                //});
+            });
+
+            //newindex++;
+
+        });
+
+        //$("#Tenant_id").val($("#Tenantid option:selected").text() == "--Select--" ? null : $("#Tenantid option:selected").text());
+        //$("#Tenant_Name").val($("#TenantName option:selected").text() == "--Select--" ? null : $("#TenantName option:selected").text());
+
+        //$("#TenantName").prop('selected', true).change();
+    });
+
     function getunits(id) {
         var propertyid = $("#PropertyId").val();
         var propertyname = $("#Property_Name option:selected").text();
@@ -744,10 +791,10 @@ Layout = null;
             $("#Tenant_id").val($("#Tenantid option:selected").text() == "--Select--" ? null : $("#Tenantid option:selected").text());
             $("#Tenant_Name").val($("#TenantName option:selected").text() == "--Select--" ? null : $("#TenantName option:selected").text());
 
-            $("#Property_Id").val($("#PropertyId option:selected").text() == "--Select--" ? null : $("#PropertyId option:selected").text());
+            $("#Property_ID").val($("#PropertyId option:selected").text() == "--Select--" ? null : $("#PropertyId option:selected").text());
             $("#Property_Name").val($("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
 
-            $("#Unit_Id").val($("#UnitId option:selected").text() == "--Select--" ? null : $("#UnitId option:selected").text());
+            $("#Unit_ID").val($("#UnitId option:selected").text() == "--Select--" ? null : $("#UnitId option:selected").text());
             $("#unit_Name").val($("#unitName option:selected").text() == "--Select--" ? null : $("#unitName option:selected").text());
             // var form = $('"form#VerifyId')[0]; // You need to use standart javascript object here
             //var formData = new FormData(form);
@@ -793,5 +840,11 @@ Layout = null;
         });
         return o;
     };
+    $(document).ready(function () {
+        debugger;
+        if ($("#invtype").val() != null && $("#invtype").val() != "") {
+            $("#item").val($("#invtype").val());
+        }
+    });
 </script>
 

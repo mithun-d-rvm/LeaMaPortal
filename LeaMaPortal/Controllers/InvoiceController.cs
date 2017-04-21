@@ -89,13 +89,15 @@ namespace LeaMaPortal.Controllers
             ViewBag.Agreement_No = new SelectList(db.tbl_agreement.Where(x => x.Delmark != "*").OrderBy(x => x.Agreement_No).Select(x=>x.Agreement_No));
             ViewBag.invtype = new SelectList(Common.InvoiceType);
             ViewBag.month = new SelectList(Common.Month, "Value", "Text");
-            var invoice = db.tbl_invoicehd.OrderByDescending(x => x.incno).FirstOrDefault();
-            model.invno = DateTime.Now.Year.ToString() + (invoice != null ? invoice.incno + 1 : 1);
-            model.incno = invoice != null ? invoice.incno + 1 : 1;
+            var invoice = db.tbl_invoicehd.Max(x => x.incno);
+            model.invno = (invoice != 0 ? invoice + 1 : 1) + DateTime.Now.Year.ToString();
+            model.incno = invoice != null ? invoice + 1 : 1;
+            model.bank_details = Common.Bank_number;
+            model.year = DateTime.Now.Year;
             var tenant = db.view_tenant.Select(x => new { TenantId = x.Tenant_id, TenantName = x.First_Name, Type = x.type, GroupedValue = x.Tenant_id + ":" + x.First_Name + ":" + x.type });
             ViewBag.Tenantid = new SelectList(items: tenant, dataValueField: "TenantId", dataTextField: "TenantId", selectedValue: null);
             ViewBag.TenantName = new SelectList(items: tenant, dataValueField: "TenantId", dataTextField: "TenantName", selectedValue: null);
-            ViewBag.bank_details = Common.Bank_number;
+            //ViewBag.bank_details = Common.Bank_number;
             switch (DropDownValue)
             {
                 case 1:
@@ -141,19 +143,19 @@ namespace LeaMaPortal.Controllers
 
                 if (model.Id == 0)
                 {
-                    var invoiceId = db.tbl_invoicehd.OrderByDescending(x => x.incno).FirstOrDefault();
-                    if (invoiceId == null)
-                    {
-                        model.Id = 1;
-                        model.invno = model.Id.ToString();
-                        model.incno = 1;
-                    }
-                    else
-                    {
-                        model.Id = invoiceId.id + 1;
-                        model.incno = invoiceId.incno + 1;
-                        model.invno = model.incno.ToString() + DateTime.Now.Year;
-                    }
+                    //var invoiceId = db.tbl_invoicehd.OrderByDescending(x => x.incno).FirstOrDefault();
+                    //if (invoiceId == null)
+                    //{
+                    //    model.Id = 1;
+                    //    model.invno = model.Id.ToString();
+                    //    model.incno = 1;
+                    //}
+                    //else
+                    //{
+                    //    model.Id = invoiceId.id + 1;
+                    //    model.incno = invoiceId.incno + 1;
+                    //    model.invno = model.incno.ToString() + DateTime.Now.Year;
+                    //}
                     PFlag = "INSERT";
                 }
                 else
@@ -265,21 +267,59 @@ namespace LeaMaPortal.Controllers
                         qty = x.qty
                     }).ToList()
                 };
-                var properties = db.tbl_propertiesmaster.Where(x => x.Delmark != "*" && x.Property_Flag == "Property").OrderBy(x => x.Property_Id).Select(x => new { PropertyId = x.Property_Id, PropertyName = x.Property_Name, GroupedValue = x.Property_Id + ":" + x.Property_Name, PropertyIdTawtheeq = x.Property_ID_Tawtheeq });
-                ViewBag.PropertyId = new SelectList(properties, "PropertyIdTawtheeq", "PropertyIdTawtheeq", model.Property_ID);
-                ViewBag.PropertyName = new SelectList(properties, "PropertyIdTawtheeq", "PropertyName", model.Property_ID);
+                var agreement = db.tbl_agreement.Where(x => x.Delmark != "*").OrderBy(x => x.Agreement_No);
+                ViewBag.Agreement_No = new SelectList(agreement.Select(x => x.Agreement_No), model.Agreement_No);
+                if (model.Agreement_No==null || model.Agreement_No == 0)
+                {
+                    var properties = db.tbl_propertiesmaster.Where(x => x.Delmark != "*" && x.Property_Flag == "Property").OrderBy(x => x.Property_Id).Select(x => new { PropertyId = x.Property_Id, PropertyName = x.Property_Name, GroupedValue = x.Property_Id + ":" + x.Property_Name, PropertyIdTawtheeq = x.Property_ID_Tawtheeq });
+                    ViewBag.PropertyId = new SelectList(properties, "PropertyIdTawtheeq", "PropertyIdTawtheeq", model.Property_ID);
+                    ViewBag.PropertyName = new SelectList(properties, "PropertyIdTawtheeq", "PropertyName", model.Property_ID);
 
-                var units = db.tbl_propertiesmaster.Where(x => x.Delmark != "*" && x.Property_Flag == "Unit").OrderBy(x => x.Unit_ID_Tawtheeq).Select(x => new { UnitId = x.Unit_ID_Tawtheeq, UnitName = x.Unit_Property_Name, GroupedValue = x.Unit_ID_Tawtheeq + ":" + x.Unit_Property_Name });
-                ViewBag.UnitId = new SelectList(units, "UnitId", "UnitId", model.Unit_ID);
-                ViewBag.unitName = new SelectList(units, "UnitId", "UnitName", model.Unit_ID);
-                ViewBag.Agreement_No = new SelectList(db.tbl_agreement.Where(x => x.Delmark != "*").OrderBy(x => x.Agreement_No).Select(x => x.Agreement_No),model.Agreement_No);
+                    var units = db.tbl_propertiesmaster.Where(x => x.Delmark != "*" && x.Property_Flag == "Unit").OrderBy(x => x.Unit_ID_Tawtheeq).Select(x => new { UnitId = x.Unit_ID_Tawtheeq, UnitName = x.Unit_Property_Name, GroupedValue = x.Unit_ID_Tawtheeq + ":" + x.Unit_Property_Name });
+                    ViewBag.UnitId = new SelectList(units, "UnitId", "UnitId", model.Unit_ID);
+                    ViewBag.unitName = new SelectList(units, "UnitId", "UnitName", model.Unit_ID);
+
+                    var tenant = db.view_tenant.Select(x => new { TenantId = x.Tenant_id, TenantName = x.First_Name, Type = x.type, GroupedValue = x.Tenant_id + ":" + x.First_Name + ":" + x.type });
+                    ViewBag.Tenantid = new SelectList(items: tenant, dataValueField: "TenantId", dataTextField: "TenantId", selectedValue: model.Tenant_id);
+                    ViewBag.TenantName = new SelectList(items: tenant, dataValueField: "TenantId", dataTextField: "TenantName", selectedValue: model.Tenant_id);
+                }
+                else
+                {
+                    var agreementDetails = await agreement.FirstOrDefaultAsync(x => x.Agreement_No == model.Agreement_No);
+                    List<UnitDropdown> unitsDropdown = new List<UnitDropdown>();
+                    unitsDropdown.Add(new UnitDropdown()
+                    {
+                        Unitid = agreementDetails.Unit_ID_Tawtheeq,
+                        unitName = agreementDetails.Unit_Property_Name
+                    });
+                    ViewBag.UnitId = new SelectList(unitsDropdown, "Unitid", "Unitid", model.Unit_ID);
+                    ViewBag.unitName = new SelectList(unitsDropdown, "Unitid", "unitName", model.Unit_ID);
+
+                    List<PropertyDropdown> propertyDropdown = new List<PropertyDropdown>();
+                    propertyDropdown.Add(new PropertyDropdown()
+                    {
+                        Propertyid = agreementDetails.Property_ID_Tawtheeq,
+                        PropertyName = agreementDetails.Properties_Name
+                    });
+                    ViewBag.PropertyId = new SelectList(propertyDropdown, "Propertyid", "Propertyid", model.Property_ID);
+                    ViewBag.PropertyName = new SelectList(propertyDropdown, "Propertyid", "PropertyName", model.Property_ID);
+
+                    List<TenantDropdown> tenantDropdown = new List<TenantDropdown>();
+                    tenantDropdown.Add(new TenantDropdown()
+                    {
+                        Tenantid = agreementDetails.Ag_Tenant_id,
+                        TenantName = agreementDetails.Ag_Tenant_Name,
+                    });
+
+                    ViewBag.Tenantid = new SelectList(tenantDropdown, "Tenantid", "Tenantid", model.Tenant_id);
+                    ViewBag.TenantName = new SelectList(tenantDropdown, "Tenantid", "TenantName", model.Tenant_id);
+                }
+                
                 ViewBag.invtype = new SelectList(Common.InvoiceType, model.invtype);
                 ViewBag.Month = new SelectList(Common.Month, "Value", "Text", model.month);
                 //ViewBag.invno = model.invno;
-                var tenant = db.view_tenant.Select(x => new { TenantId = x.Tenant_id, TenantName = x.First_Name, Type = x.type, GroupedValue = x.Tenant_id + ":" + x.First_Name + ":" + x.type });
-                ViewBag.Tenantid = new SelectList(items: tenant, dataValueField: "TenantId", dataTextField: "TenantId", selectedValue: model.Tenant_id);
-                ViewBag.TenantName = new SelectList(items: tenant, dataValueField: "TenantId", dataTextField: "TenantName", selectedValue: model.Tenant_id);
-                ViewBag.bank_details = model.bank_details;
+                
+                //ViewBag.bank_details = model.bank_details;
                 return PartialView("../Invoice/_AddorUpdate", model);
             }
             catch (Exception e)
@@ -495,12 +535,12 @@ namespace LeaMaPortal.Controllers
                 };
                 object[] parameters = {
                          new MySqlParameter("@PFlag", "DELETE"),
-                         new MySqlParameter("@PTenant_Id", 1),
-                         new MySqlParameter("@PTenant_Name","Muniasamy G"),
+                         new MySqlParameter("@PTenant_Id", model.Tenant_id),
+                         new MySqlParameter("@PTenant_Name",model.Tenant_Name),
                          new MySqlParameter("@PId", model.Id),
-                         new MySqlParameter("@Pinvno", model.Id),
+                         new MySqlParameter("@Pinvno", model.invno),
                          new MySqlParameter("@Pdate", model.date),
-                         new MySqlParameter("@Pinvtype", "Rental"),
+                         new MySqlParameter("@Pinvtype", model.invtype),
                          new MySqlParameter("@PAgreement_No", model.Agreement_No),
                          new MySqlParameter("@PProperty_ID", model.Property_ID),
                          new MySqlParameter("@PProperty_Name", model.Property_Name),
@@ -513,7 +553,7 @@ namespace LeaMaPortal.Controllers
                          new MySqlParameter("@Pbank_details", model.bank_details),
                          new MySqlParameter("@Pinvoicedt", null),
                          new MySqlParameter("@Premarks", model.remarks),
-                         new MySqlParameter("@Pincno", 0),
+                         new MySqlParameter("@Pincno", model.incno),
                          new MySqlParameter("@PCreateduser", System.Web.HttpContext.Current.User.Identity.Name)
                     };
                 var sp_result = await db.Database.SqlQuery<object>("CALL Usp_Invoice_All(@PFlag, @PId, @Pinvno, @Pdate, @PTenant_id, @PTenant_Name, @Pinvtype, @PAgreement_No, @PProperty_ID, @PProperty_Name, @PUnit_ID, @Punit_Name, @Pmonth, @Pyear, @Ptotalamt, @Pduedate, @Pbank_details, @Premarks, @Pincno, @PCreateduser, @Pinvoicedt)", parameters).ToListAsync();
