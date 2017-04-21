@@ -5,10 +5,15 @@
 Layout = null;
 }
 <link href="~/theme/css/model.css" rel="stylesheet" />
-@using (Html.BeginForm("AddOrUpdate", "Invoice", FormMethod.Post, new { @id = "Invoice", @enctype = "multipart/form-data" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Invoice" }))
 {
-    @Html.HiddenFor(model => model.Id, new { @id = "Id" })
-  
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Tenant_id)
+    @Html.HiddenFor(model => model.Tenant_Name)
+    @Html.HiddenFor(model => model.Property_ID)
+    @Html.HiddenFor(model => model.Property_Name)
+    @Html.HiddenFor(model => model.Unit_ID)
+    @Html.HiddenFor(model => model.unit_Name)
    @*<select id="dropDownId">
         <option value="1">Property Name</option>
         <option value="2">Property Id</option>
@@ -76,7 +81,7 @@ Layout = null;
                         @Html.LabelFor(model => model.invno, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        <input type="text" value="@ViewBag.invno" disabled class="form-control master-form-input" />
+                        @Html.EditorFor(model => model.invno, new { htmlAttributes = new { @class = "master-form-input form-control" } })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -92,7 +97,7 @@ Layout = null;
                         @Html.LabelFor(model => model.Tenant_id, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                       @Html.DropDownList("Tenant_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                       @Html.DropDownList("Tenantid", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                     </div>
                 </div>
 
@@ -101,7 +106,7 @@ Layout = null;
                         @Html.LabelFor(model => model.Tenant_Name, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.DropDownList("Tenant_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("TenantName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -119,7 +124,7 @@ Layout = null;
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Property_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("Property_Id", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("PropertyId", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -128,7 +133,7 @@ Layout = null;
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("Property_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("PropertyName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                     </div>
                 </div>
 
@@ -141,7 +146,7 @@ Layout = null;
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Unit_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("Unit_Id", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("UnitId", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -150,7 +155,7 @@ Layout = null;
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.unit_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("unit_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("unitName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -440,10 +445,353 @@ Layout = null;
 
         i = newindex;
     });
+    $("#Tenantid").on('change', function (e) {
+        debugger;
+        var tenantid = $("#Tenantid").val();
+        $("#TenantName").val($("#Tenantid option:selected").val());
+        $("#Tenant_id").val($("#Tenantid option:selected").text() == "--Select--" ? null : $("#Tenantid option:selected").text());
+        
+        //$("#TenantName").prop('selected', true).change();
+    });
+    $("#TenantName").on('change', function (e) {
+        debugger;
+        var tenantid = $("#TenantName").val();
+        $("#Tenantid").val($("#TenantName option:selected").val());
+        $("#Tenant_Name").val($("#TenantName option:selected").text() == "--Select--" ? null : $("#TenantName option:selected").text());
 
-    //function Delete(e) {
-    //    DeleteRow = e.parentNode.parentNode.id;
-    //    $('#' + DeleteRow).remove();
-    //}
+    });
+
+    $("#PropertyId").on('change', function (e) {
+        debugger;
+        var propertyid = $("#PropertyId").val();
+        $("#PropertyName").val($("#PropertyId option:selected").val());
+
+        $("#Property_Id").val($("#PropertyId option:selected").text() == "--Select--" ? null : $("#PropertyId option:selected").text());
+        
+        var id = $("#PropertyId option:selected").text() == "--Select--" ? null : propertyid;
+        getunits(id);
+        //$("#TenantName").prop('selected', true).change();
+    });
+    $("#PropertyName").on('change', function (e) {
+        debugger;
+        var propertyid = $("#PropertyName").val();
+        $("#PropertyId").val($("#PropertyName option:selected").val());
+        $("#Property_Name").val($("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
+
+        var id = $("#PropertyName option:selected").text() == "--Select--" ? null : propertyid;
+        getunits(id);
+    });
+
+
+    $("#UnitId").on('change', function (e) {
+        debugger;
+        var unitid = $("#UnitId").val();
+        $("#unitName").val($("#UnitId option:selected").val());
+        $("#Unit_Id").val($("#UnitId option:selected").text() == "--Select--" ? null : $("#UnitId option:selected").text());
+        
+        var id = $("#UnitId option:selected").text() == "--Select--" ? null : unitid;
+        getproperty(id);
+        //$("#TenantName").prop('selected', true).change();
+    });
+    $("#unitName").on('change', function (e) {
+        debugger;
+        var unitid = $("#unitName").val();
+        $("#UnitId").val($("#unitName option:selected").val());
+        $("#unit_Name").val($("#unitName option:selected").text() == "--Select--" ? null : $("#unitName option:selected").text());
+        var id = $("#unitName option:selected").text() == "--Select--" ? null : unitid;
+        getproperty(id);
+    });
+    function getunits(id) {
+        var propertyid = $("#PropertyId").val();
+        var propertyname = $("#Property_Name option:selected").text();
+        var data = id == null ? {} : { propertyid: id };
+        $.ajax(
+                {
+                    url: "../Invoice/GetPropertyUnits",
+                    // dataType: "jsonp",
+                    method: "GET",
+                    data: data, //FormData(form.get(0)),
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        var options = '<option value="" selected>--Select--</option>';
+                        //if (id==null) {
+                        //    options = '<option value="" selected>--Select--</option>';
+                        //}
+                        $("#UnitId").empty();
+
+                        $.each(response, function (index, data) {
+                            options += '<option value="' + data.Unitid + '">' + data.Unitid + '</option>';
+                        });
+                        $('#UnitId').append(options);
+
+                        $("#unitName").empty();
+                        var options = '<option value="" selected>--Select--</option>';
+                        $.each(response, function (index, data) {
+                            options += '<option value="' + data.Unitid + '">' + data.unitName + '</option>';
+                        });
+                        $('#unitName').append(options);
+
+
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+    }
+
+    function getproperty(id) {
+        var unitid = $("#UnitId").val();
+        var unitname = $("#unitName option:selected").text();
+        if (id == null) {
+            $('#PropertyId').val('')
+            $("#PropertyId").prop('selected', false).change();
+        }
+        else {
+            $.ajax(
+                {
+                    url: "../Invoice/GetUnitProperty",
+                    // dataType: "jsonp",
+                    method: "GET",
+                    data: { unitid: id }, //FormData(form.get(0)),
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        $("#PropertyId").val(response);
+                        $("#PropertyName").val(response);
+                        //var options = '';
+                        //if (id == null) {
+                        //    options = '<option value="" selected>--Select--</option>';
+                        //}
+                        //$("#PropertyId").empty();
+
+                        //$.each(response, function (index, data) {
+                        //    options += '<option value="' + data.Propertyid + '">' + data.Propertyid + '</option>';
+                        //});
+                        //$('#PropertyId').append(options);
+
+                        //$("#PropertyName").empty();
+                        //var options = '';
+                        //$.each(response, function (index, data) {
+                        //    options += '<option value="' + data.Propertyid + '">' + data.PropertyName + '</option>';
+                        //});
+                        //$('#PropertyName').append(options);
+
+
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+        }
+        
+    }
+
+    $("#Agreement_No").on('change', function (e) {
+        debugger;
+        var agreement_selected_text = $("#Agreement_No option:selected").text();
+        var agreement_no = $("#Agreement_No").val();
+        if (agreement_selected_text != "--Select--") {
+            $.ajax(
+                {
+                    url: "../Invoice/GetAgreementDetails",
+                    // dataType: "jsonp",
+                    method: "GET",
+                    data: { agreement_no: agreement_no }, //FormData(form.get(0)),
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        $("#Tenantid").empty();
+                        var options = '';
+                        $.each(response.Tenants, function (index, data) {
+                            options += '<option value="' + data.Tenantid + '">' + data.Tenantid + '</option>';
+                        });
+                        $('#Tenantid').append(options);
+
+                        $("#TenantName").empty();
+                        var options = '';
+                        $.each(response.Tenants, function (index, data) {
+                            options += '<option value="' + data.Tenantid + '">' + data.TenantName + '</option>';
+                        });
+                        $('#TenantName').append(options);
+
+                        $("#PropertyId").empty();
+                        var options = '';
+                        $.each(response.Properties, function (index, data) {
+                            options += '<option value="' + data.Propertyid + '">' + data.Propertyid + '</option>';
+                        });
+                        $('#PropertyId').append(options);
+
+                        $("#PropertyName").empty();
+                        var options = '';
+                        $.each(response.Properties, function (index, data) {
+                            options += '<option value="' + data.Propertyid + '">' + data.PropertyName + '</option>';
+                        });
+                        $('#PropertyName').append(options);
+
+                        $("#UnitId").empty();
+                        var options = '';
+                        $.each(response.Units, function (index, data) {
+                            options += '<option value="' + data.Unitid + '">' + data.Unitid + '</option>';
+                        });
+                        $('#UnitId').append(options);
+
+                        $("#unitName").empty();
+                        var options = '';
+                        $.each(response.Units, function (index, data) {
+                            options += '<option value="' + data.Unitid + '">' + data.unitName + '</option>';
+                        });
+                        $('#unitName').append(options);
+
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+        }
+        else {
+            $.ajax(
+                {
+                    url: "../Invoice/GetDropdownValues",
+                    // dataType: "jsonp",
+                    method: "GET",
+                    data: {}, //FormData(form.get(0)),
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        $("#Tenantid").empty();
+                        var options ='<option value="" selected>--Select--</option>';
+                        $.each(response.Tenants, function (index, data) {
+                            options += '<option value="' + data.Tenantid + '">' + data.Tenantid + '</option>';
+                        });
+                        $('#Tenantid').append(options);
+
+                        $("#TenantName").empty();
+                        var options = '<option value="" selected>--Select--</option>';
+                        $.each(response.Tenants, function (index, data) {
+                            options += '<option value="' + data.Tenantid + '">' + data.TenantName + '</option>';
+                        });
+                        $('#TenantName').append(options);
+
+                        $("#PropertyId").empty();
+                        var options = '<option value="" selected>--Select--</option>';
+                        $.each(response.Properties, function (index, data) {
+                            options += '<option value="' + data.Propertyid + '">' + data.Propertyid + '</option>';
+                        });
+                        $('#PropertyId').append(options);
+
+                        $("#PropertyName").empty();
+                        var options = '<option value="" selected>--Select--</option>';
+                        $.each(response.Properties, function (index, data) {
+                            options += '<option value="' + data.Propertyid + '">' + data.PropertyName + '</option>';
+                        });
+                        $('#PropertyName').append(options);
+
+                        $("#UnitId").empty();
+                        var options = '<option value="" selected>--Select--</option>';
+                        $.each(response.Units, function (index, data) {
+                            options += '<option value="' + data.Unitid + '">' + data.Unitid + '</option>';
+                        });
+                        $('#UnitId').append(options);
+
+                        $("#unitName").empty();
+                        var options = '<option value="" selected>--Select--</option>';
+                        $.each(response.Units, function (index, data) {
+                            options += '<option value="' + data.Unitid + '">' + data.unitName + '</option>';
+                        });
+                        $('#unitName').append(options);
+
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+        }
+        
+        //$("#UnitId").val($("#unitName option:selected").val());
+    });
+
+
+    //Add or update
+    $("form#Invoice").off("submit").on("submit", function (e) {
+        //return;
+        e.preventDefault();
+        // $("#icon-success").addClass("hide");
+        //$("#VerifyIdDetailsLoader").removeClass("hide");
+        debugger;
+        try {
+            var form = $("form#Invoice");
+            $("#Tenant_id").val($("#Tenantid option:selected").text() == "--Select--" ? null : $("#Tenantid option:selected").text());
+            $("#Tenant_Name").val($("#TenantName option:selected").text() == "--Select--" ? null : $("#TenantName option:selected").text());
+
+            $("#Property_Id").val($("#PropertyId option:selected").text() == "--Select--" ? null : $("#PropertyId option:selected").text());
+            $("#Property_Name").val($("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
+
+            $("#Unit_Id").val($("#UnitId option:selected").text() == "--Select--" ? null : $("#UnitId option:selected").text());
+            $("#unit_Name").val($("#unitName option:selected").text() == "--Select--" ? null : $("#unitName option:selected").text());
+            // var form = $('"form#VerifyId')[0]; // You need to use standart javascript object here
+            //var formData = new FormData(form);
+            $.ajax(
+                {
+                    url: "../Invoice/AddOrUpdate",
+                    // dataType: "jsonp",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+
+                        GetInvoice();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
 </script>
 

@@ -67,4 +67,31 @@ namespace LeaMaPortal.Models
         public float? amount { get; set; }
         
     }
+    public class TenantDropdown
+    {
+        public int Tenantid { get; set; }
+        public string TenantName { get; set; }
+    }
+    public class PropertyDropdown
+    {
+        public string Propertyid { get; set; }
+        public string PropertyName { get; set; }
+    }
+    public class UnitDropdown
+    {
+        public string Unitid { get; set; }
+        public string unitName { get; set; }
+    }
+    public class InvoiceDropdown
+    {
+        public InvoiceDropdown()
+        {
+            Tenants = new List<TenantDropdown>();
+            Units = new List<UnitDropdown>();
+            Properties = new List<PropertyDropdown>();
+        }
+        public List<TenantDropdown> Tenants { get; set; }
+        public List<UnitDropdown> Units { get; set; }
+        public List<PropertyDropdown> Properties { get; set; }
+    }
 }
