@@ -10,6 +10,10 @@ namespace LeaMaPortal.Models
 {
     public class ReceiptViewModel
     {
+        public ReceiptViewModel()
+        {
+            ReceiptDetailsList = new List<ReceiptDetailsViewModel>();
+        }
         public int Id { get; set; }
         [DisplayName("Receipt No")]
         public int ReceiptNo { get; set; }
@@ -70,6 +74,7 @@ namespace LeaMaPortal.Models
         public string Createduser { get; set; }
         public string Receiptdt { get; set; }
         
+        public List<ReceiptDetailsViewModel> ReceiptDetailsList { get; set; }
     }
 
     public class ReceiptDetailsViewModel

@@ -234,23 +234,107 @@
 
     </div>
     <div class="row">
-        <div class="col-md-12 document-row">
-            <div class="col-md-1">
-                ID
-            </div>
-            <div class="col-md-2">
-                Invoice Type
-            </div>
-            <div class="col-md-2">
-                Invoice Number
-            </div>
-            <div class="col-md-2">
-                Invoice Date
-            </div>
-            <div class="col-md-2">
-                Invoice Description
-            </div>
-        </div>
+        @*<div class="col-md-12 document-row">
+                <div class="col-md-1">
+                    ID
+                </div>
+                <div class="col-md-2">
+                    Invoice Type
+                </div>
+                <div class="col-md-2">
+                    Invoice Number
+                </div>
+                <div class="col-md-2">
+                    Invoice Date
+                </div>
+                <div class="col-md-2">
+                    Invoice Description
+                </div>
+            </div>*@
+        <!-- Begin Dynamic row -->
+        @*@Html.Partial("ReceiptDetails1");*@
+        <!-- End Dynamic row -->
+
+        <table class="table">
+            <tr>
+                <td>
+                    <div class="col-md-2">
+                        Invoice Type
+                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                    <div class="col-md-2">
+                        Invoice Number
+                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                    <div class="col-md-2">
+                        Invoice Date
+                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                    <div class="col-md-2">
+                        Invoice Description
+                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                    <div class="col-md-2">
+                        Invoice Amount
+                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                    <div class="col-md-2">
+                        Credit Amount
+                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                    <div class="col-md-2">
+                        Received Amount
+                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                    <div class="col-md-2">
+                        Balance Amount
+                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                    <div class="col-md-2">
+                        Remarks
+                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn master-form-btn">Add</button>
+                    </div>
+                </td>
+            </tr>
+
+            @foreach (var item in Model.ReceiptDetailsList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Invtype)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Invno)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InvoiceDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InvoiceAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreditAmt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReceivedAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Balance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Remarks)
+                    </td>
+
+                </tr>
+            }
+
+        </table>
     </div>
     <div class="row ht-5">
         &nbsp;
@@ -480,7 +564,7 @@
                 $('#TotalAmount').val(response.pdc_Amount[0].Text);
 
                 $('#DDChequeNo').val(response.DDChequeNo[0].Text);
-                
+
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
