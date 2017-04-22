@@ -100,8 +100,8 @@ namespace LeaMaPortal.Controllers
             ViewBag.ReceiptMode = ReceiptMode;
             //ViewBag.PDCStatus = PDCStatus;
 
-
-            //var Pdc = db.Database.SqlQuery<string>(@"call usp_split('Receipts','PDCstatus',',',null)").ToList();
+           
+            //var Pdc = db.Database.SqlQuery<object>(@"call usp_split('Receipts','PDCstatus',',',null)").ToList();
             //ViewBag.PDCStatus = new SelectList(Pdc);
             ViewBag.PDCStatus = new SelectList("");
 

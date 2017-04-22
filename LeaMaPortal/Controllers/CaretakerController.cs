@@ -61,7 +61,16 @@ namespace LeaMaPortal.Controllers
         public PartialViewResult AddOrUpdate()
         {
             ViewBag.Region = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
-            ViewBag.CaretakerId = db.tbl_caretaker.OrderByDescending(x => x.Caretaker_id).FirstOrDefault().Caretaker_id + 1;
+            var caretaker = db.tbl_caretaker.OrderByDescending(x => x.Caretaker_id).FirstOrDefault();
+            if (caretaker != null)
+            {
+                ViewBag.CaretakerId = caretaker.Caretaker_id + 1;
+            }
+            else
+            {
+                ViewBag.CaretakerId = 1;
+            }
+            
             return PartialView("../Master/Caretaker/_AddOrUpdate", new CaretakerViewModel());
         }
 

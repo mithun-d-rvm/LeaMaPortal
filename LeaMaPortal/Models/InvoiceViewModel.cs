@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -13,14 +15,18 @@ namespace LeaMaPortal.Models
         public string invtype { get; set; }
         [DisplayName("Invoice Number")]
         public string invno { get; set; }
+
         [DisplayName("Invoice Date")]
-        public DateTime date { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? date { get; set; }
+
         [DisplayName("Tenant Id")]
-        public int Tenant_id { get; set; }
+        public int? Tenant_id { get; set; }
         [DisplayName("Tenant Name")]
         public string Tenant_Name { get; set; }
         [DisplayName("Agreement No")]
-        public int Agreement_No { get; set; }
+        public int? Agreement_No { get; set; }
         [DisplayName("Property ID")]
         public string Property_ID { get; set; }
         [DisplayName("Property Name")]
@@ -30,18 +36,22 @@ namespace LeaMaPortal.Models
         [DisplayName("Unit Name")]
         public string unit_Name { get; set; }
         [DisplayName("Month")]
-        public int month { get; set; }
+        public int? month { get; set; }
         [DisplayName("Year")]
-        public int year { get; set; }
+        public int? year { get; set; }
         [DisplayName("Total Amount")]
-        public decimal totalamt { get; set; }
+        public float? totalamt { get; set; }
         [DisplayName("Due Date")]
-        public DateTime duedate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? duedate { get; set; }
         [DisplayName("Bank Details")]
         public string bank_details { get; set; }
         [DisplayName("Remarks")]
         public string remarks { get; set; }
-      
+        public int? incno { get; set; }
+        public List<InvoiceDetailsViewModel> InvoiceDetails { get; set; }
+
     }
 
     public class InvoiceDetailsViewModel
@@ -52,9 +62,36 @@ namespace LeaMaPortal.Models
         [DisplayName("Item Description")]
         public string description { get; set; }
         [DisplayName("Quantity")]
-        public DateTime qty { get; set; }
+        public float? qty { get; set; }
         [DisplayName("Amount")]
-        public int amount { get; set; }
+        public float? amount { get; set; }
         
+    }
+    public class TenantDropdown
+    {
+        public int Tenantid { get; set; }
+        public string TenantName { get; set; }
+    }
+    public class PropertyDropdown
+    {
+        public string Propertyid { get; set; }
+        public string PropertyName { get; set; }
+    }
+    public class UnitDropdown
+    {
+        public string Unitid { get; set; }
+        public string unitName { get; set; }
+    }
+    public class InvoiceDropdown
+    {
+        public InvoiceDropdown()
+        {
+            Tenants = new List<TenantDropdown>();
+            Units = new List<UnitDropdown>();
+            Properties = new List<PropertyDropdown>();
+        }
+        public List<TenantDropdown> Tenants { get; set; }
+        public List<UnitDropdown> Units { get; set; }
+        public List<PropertyDropdown> Properties { get; set; }
     }
 }
