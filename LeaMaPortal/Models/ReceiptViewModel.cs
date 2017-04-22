@@ -66,6 +66,10 @@ namespace LeaMaPortal.Models
         [DisplayName("Narration")]
         public string Narration { get; set; }
 
+        [StringLength(50)]
+        public string Createduser { get; set; }
+        public string Receiptdt { get; set; }
+        
     }
 
     public class ReceiptDetailsViewModel

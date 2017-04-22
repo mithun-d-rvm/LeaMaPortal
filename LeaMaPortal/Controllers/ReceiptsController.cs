@@ -284,9 +284,6 @@ namespace LeaMaPortal.Controllers
 , @PBankAcName
 , @PAdvAcCode 
 , @PDDChequeDate 
-, @PCurrentBls 
-, @PTotBls 
-, @PAdjustment 
 , @PNarration 
 , @PCreateduser 
 , @PReceiptdt )", param).ToListAsync();
