@@ -2,6 +2,13 @@
 @{
     Layout = null;
 }
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Payment" }))
+{
+    @*@Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+    @Html.HiddenFor(model => model.Id, new { @id = "Id" })
 <div class="inner-block">
     <div class="blank">
         <div class="row">
@@ -28,7 +35,7 @@
                         @Html.LabelFor(model => model.PaymentType, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.DropDownListFor(model => model.PaymentType, new SelectList(ViewBag.PaymentType, "Value", "Text"), htmlAttributes: new { @class = "master-form-input" })
+                        @Html.DropDownListFor(model => model.PaymentType, new SelectList(ViewBag.PaymentType, "Text", "Text"), htmlAttributes: new { @class = "master-form-input", @id = "paymentType" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -36,7 +43,7 @@
                         @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.DropDownListFor(model => model.PaymentMode, new SelectList(ViewBag.PaymentMode, "Value", "Text"), htmlAttributes: new { @class = "master-form-input" })
+                        @Html.DropDownListFor(model => model.PaymentMode, new SelectList(ViewBag.PaymentMode, "Text", "Text"), htmlAttributes: new { @class = "master-form-input" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -45,6 +52,14 @@
                     </div>
                     <div class="col-md-8">
                         @Html.DropDownListFor(model => model.Supplier_id, new SelectList(ViewBag.Supplier_id, "Value", "Text"), htmlAttributes: new { @class = "master-form-input" })
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Supplier_Name, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.Supplier_Name, new SelectList(ViewBag.Supplier_Name, "Value", "Text"), htmlAttributes: new { @class = "master-form-input" })
                     </div>
                 </div>
 
@@ -74,7 +89,7 @@
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("Property_Name", null, htmlAttributes: new { @class = "master-form-input",@id = "property_name" })                        
+                        @Html.DropDownList("Property_Name", null, htmlAttributes: new { @class = "master-form-input", @id = "property_name" })                        
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -125,9 +140,7 @@
                         @Html.LabelFor(model => model.AdvAcCode, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        <select class="col-md-12 leama-field">
-                            <option value="unit_Name">AdvacedAccno</option>
-                        </select>
+                        @Html.DropDownListFor(model => model.AdvAcCode, new SelectList(ViewBag.Adv_Payment_Number, "Value", "Text"), htmlAttributes: new { @class = "master-form-input" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -135,7 +148,7 @@
                         @Html.LabelFor(model => model.PDCstatus, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.DropDownListFor(model => model.PDCstatus, new SelectList(ViewBag.PDCStatus, "Value", "Text"), htmlAttributes: new { @class = "master-form-input" })
+                        @Html.DropDownListFor(model => model.PDCstatus, new SelectList(ViewBag.PDCStatus, "Text", "Text"), htmlAttributes: new { @class = "master-form-input" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -159,10 +172,7 @@
                         @Html.LabelFor(model => model.BankAcCode, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.BankAcCode, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="BankAcCode">Bank Account Code</option>
-                        </select>
+                        @Html.DropDownListFor(model => model.BankAcCode, new SelectList(ViewBag.AccountNumber, "Text", "Text"), htmlAttributes: new { @class = "master-form-input" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -170,10 +180,7 @@
                         @Html.LabelFor(model => model.BankAcName, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.BankAcName, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="Bank Account Name">Bank Account Name</option>
-                        </select>
+                        @Html.DropDownListFor(model => model.BankAcName, new SelectList(ViewBag.AccountName, "Text", "Text"), htmlAttributes: new { @class = "master-form-input" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -189,63 +196,228 @@
                         &nbsp;
                     </div>
                     <div class="col-md-4">
-                        <button class="btn master-form-btn">Submit</button>
+                        <button class="btn master-form-btn" >Submit</button>
                     </div>
                 </div>
             </div>
 
         </div>
-
-        @*<div class="row">
-            <div class="col-md-12 document-row">
-                <div class="col-md-1">
-                    ID
-                </div>
-                <div class="col-md-2">
-                    Invoice Type
-                </div>
-                <div class="col-md-2">
-                    Invoice Number
-                </div>
-                <div class="col-md-2">
-                    Invoice Date
-                </div>
-                <div class="col-md-2">
-                    Invoice Description
-                </div>
+        <div class="row" id="paymentDetail">
+            <div class="p-b-25">
+                <h3>Invoice Details</h3>
             </div>
-        </div>
-        <div class="row ht-5">
-            &nbsp;
-        </div>*@
+                <div class="row">
+                    <div class="col-md-12 document-row" id="GridView">
+                        <div class="col-md-1">
+                            ID
+                        </div>
+                        <div class="col-md-2">
+                            Invoice Type
+                        </div>
+                        <div class="col-md-2">
+                            Invoice Number
+                        </div>
+                        <div class="col-md-2">
+                            Invoice Date
+                        </div>
+                        <div class="col-md-2">
+                            Invoice Description
+                        </div>
+                    </div>
+                </div>
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-12 document-row" id="GridView">
+                        <div class="col-md-1">
 
-        <!-- Begin Dynamic row -->
-        @*@Html.Partial("_PaymentDetails")*@
-        <!-- End Dynamic row -->
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="Invtype" />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="Invno" />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="InvoiceDate" />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="Description" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 document-row" id="GridView">
+                        <div class="col-md-1">
+                            ID
+                        </div>
+                        <div class="col-md-2">
+                            Invoice Amount
+                        </div>
+                        <div class="col-md-2">
+                            Debit Amount
+                        </div>
+                        <div class="col-md-2">
+                            Paid Amount
+                        </div>
+                        <div class="col-md-2">
+                            Balance Amount
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-12 document-row" id="GridView">
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="InvoiceAmount" />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="DebitAmount" />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="PaidAmount" />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="Balance" />
+                        </div>
+                    </div>
+                    <div class="col-md-12 document-row" id="GridView">
+                        <div class="col-md-1">
+                            ID
+                        </div>
+                        <div class="col-md-2">
+                            Remarks
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+                <div class="row">
+
+                    <div class="col-md-12 document-row" id="GridView">
+                        <div class="col-md-1">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="Remarks" />
+                        </div>
+                        <div class="col-md-2 col-md-offset-2">
+                            <button type="button" class="document-btn" onclick="Add()">Add</button>
+                        </div>
+                        <div class="col-md-2">
+                            @*<button class="document-btn">Delete</button>*@
+                        </div>
+                    </div>
+                </div>
+            <table class="row m-t-20" id="PaymentDetailsForm">
+                @if (Model.PaymentDetailsViewModel != null)
+                {
+                    for (int j = 0; j < Model.PaymentDetailsViewModel.Count - 1; j++)
+                    {
+                        var html = "<div class='row'><div class='col-md-12 document-row' id='GridView" + @j + "'>";
+                        html += "<div class='col-md-1'>ID</div>";
+                        html += "<div class='col-md-2'>Invoice Type</div>";
+                        html += "<div class='col-md-2'>Invoice Number</div>";
+                        html += "<div class='col-md-2'>Invoice Date</div>";
+                        html += "<div class='col-md-2'>Invoice Description</div>";
+                        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+
+                        html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+                        html += "<div class='col-md-1'></div>";
+                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Invtype + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invtype' data-name='Inv type' id='Invtype" + @j + "' /></div>";
+                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Invno + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invno' data-name='Inv no' id='Invno" + @j + "' /></div>";
+                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].InvoiceDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceDate' data-name='Invoice Date' id='InvoiceDate" + @j + "' /></div>";
+                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Description + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Description' data-name='Description' id='Description" + @j + "' /></div>";
+                        html += "</div><div class='col-md-12 document-row' id='GridView'>";
+                        html += "<div class='col-md-1'>ID</div>";
+                        html += "<div class='col-md-2'>Invoice Amount</div>";
+                        html += "<div class='col-md-2'>Debit Amount</div>";
+                        html += "<div class='col-md-2'>Paid Amount</div>";
+                        html += "<div class='col-md-2'>Balance Amount</div>";
+                        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+
+                        html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+                        html += "<div class='col-md-1'></div>";
+                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].InvoiceAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceAmount' data-name='Invoice Amount' id='InvoiceAmount" + @j + "' /></div>";
+                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].DebitAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].DebitAmount' data-name='Debit Amount' id='DebitAmount" + @j + "' /></div>";
+                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].PaidAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PaidAmount' data-name='Paid Amount' id='PaidAmount" + @j + "' /></div>";
+                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Balance + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Balance' data-name='Balance' id='Balance" + @j + "' /></div>";
+                        html += "</div><div class='col-md-12 document-row' id='GridView'>";
+                        html += "<div class='col-md-1'>ID</div>";
+                        html += "<div class='col-md-2'>Remarks</div>";
+                        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+
+                        html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+                        html += "<div class='col-md-1'></div>";
+                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Remarks + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Remarks' data-name='Remarks' id='Remarks" + @j + "' /></div>";
+                        html += "<div class='col-md-2'><button type='button' id='Deleter" + @j + "' class='document-btn removebutton'>Delete</button></div>";
+                        html += "</div></div>";
+                        <tr>
+                            <td>
+                                @Html.Raw(html)
+                            </td>
+                        </tr>
+                                <tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                </tr>                        
+                    }
+                }
+            </table>
 
 
+                </div>
 
-    </div>
 </div>
+</div>
+}
 <script>
-    function getUnitId() {
-    var PropertyId = $("#property_id").val();
-    var PropertyName = $("#property_name").val();
+    function showHideSubForm(paymentType)
+    {
+        if (paymentType != "against invoice") {
+            document.getElementById('paymentDetail').style.display = "none";
+        }
+        else
+        {
+            document.getElementById('paymentDetail').style.display = "block";
+        }
+    }
+    $("#paymentType").change(function () { showHideSubForm($("#paymentType").val()) });
+    showHideSubForm($("#paymentType").val());
+
+    function getUnitId(flag) {
+        var PropertyId = null;
+        if (flag == 1) {
+            PropertyId = $("#property_id").val();
+        }
+        else if (flag == 2) {
+            PropertyId = $("#property_name").val();
+        }
+    }
+
         $.ajax(
                 {
                     url: "../Payment/GetUnitId",
                     method: "POST",
                     async: false,
-                    data: { PropertyId: PropertyId, PropertyName : PropertyName },
+                    data: { PropertyId: PropertyId },
                     success: function (response) {
                         $("#unit_id").empty();
                         $("#unit_name").empty();
-                        $("#agreement_no").empty();
+                        $("#agreement_number").empty();
                         var unit_id_options = '';
                         var unit_name_options = '';
                         var agreement_options = '';
                         $.each(response.UnitId, function (index, data) {
-                            unit_id_options += '<option value="' + data.Value + '">' + data.Value + '</option>';                            
+                            unit_id_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
                         });
                         $.each(response.UnitName, function (index, data) {
                             unit_name_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
@@ -253,12 +425,43 @@
                         $.each(response.AgreementNo, function (index, data) {
                             agreement_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
                         });
-                        
+
                         $('#unit_id').append(unit_id_options);
                         $('#unit_name').append(unit_name_options);
                         $('#agreement_number').append(agreement_options);
-                        $("#property_id").val(response.PropertyId);
-                        $("#property_name").val(response.PropertyName);
+                        $("#property_id").val(PropertyId);
+                        $("#property_name").val(PropertyId);
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+                });
+    $("#property_id").change(function () { getUnitId(1) });
+    $("#property_name").change(function () { getUnitId(2) });
+    getUnitId(0);
+    function getProperty(flag) {
+        var UnitId = null;
+        if (flag == 1) {
+            UnitId = $("#unit_id").val();
+        }
+        else if (flag == 2) {
+            UnitId = $("#unit_name").val();
+        }
+        $.ajax(
+                {
+                    url: "../Payment/GetProperty",
+                    method: "POST",
+                    async: false,
+                    data: { UnitId: UnitId },
+                    success: function (response) {
+                        $("#property_id").empty();
+                        $("#property_name").empty();
+                        $("#agreement_number").empty();
+                        $('#property_id').append('<option value="' + response.PropertyId + '">' + response.PropertyId + '</option>');
+                        $('#property_name').append('<option value="' + response.PropertyName + '">' + response.PropertyName + '</option>');
+                        $('#agreement_number').append('<option value="' + response.AgreementNo + '">' + response.AgreementNo + '</option>');
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -267,76 +470,177 @@
                     }
                 });
     }
-$("#property_id").change(function () { getUnitId() });
-$("#property_name").change(function () { getUnitId() });
-getUnitId();
-function getProperty() {
-    var UnitId = $("#unit_id").val();
-    var UnitName = $("#unit_name").val();
-    $.ajax(
-            {
-                url: "../Payment/GetProperty",
-                method: "POST",
-                async: false,
-                data: { UnitId: UnitId, UnitName: UnitName },
-                success: function (response) {
-                    $("#property_id").empty();
-                    $("#property_name").empty();
-                    $("#agreement_no").empty();                    
-                    $('#property_id').append('<option value="' + response.PropertyId + '">' + response.PropertyId + '</option>');
-                    $('#property_name').append('<option value="' + response.PropertyName + '">' + response.PropertyName + '</option>');
-                    $('#agreement_number').append('<option value="' + response.AgreementNo + '">' + response.AgreementNo + '</option>');
-                },
-                error: function (jqXhr, textStatus, errorThrown) {
-                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                },
-                complete: function () {
-                }
-            });
-}
-$("#unit_id").change(function () { getProperty() });
-$("#unit_name").change(function () { getProperty() });
-function getAgreementDetails() {
-    var AgreementNo = $("#agreement_number").val();
-    $.ajax(
-            {
-                url: "../Payment/GetAgreementDetails",
-                method: "POST",
-                async: false,
-                data: { AgreementNo: AgreementNo },
-                success: function (response) {
-                    $("#property_id").empty();
-                    $("#property_name").empty();
-                    $("#unit_id").empty();
-                    $("#unit_name").empty();
-                    var unit_id_options = '';
-                    var unit_name_options = '';
-                    var property_id_options = '';
-                    var property_name_options = '';
-                    $.each(response.UnitId, function (index, data) {
-                        unit_id_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
-                    });
-                    $.each(response.UnitName, function (index, data) {
-                        unit_name_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
-                    });
-                    $.each(response.PropertyId, function (index, data) {
-                        property_id_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
-                    });
-                    $.each(response.PropertyName, function (index, data) {
-                        property_name_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
-                    });
-                    $('#unit_id').append(unit_id_options);
-                    $('#unit_name').append(unit_name_options);
-                    $('#property_id').append(property_id_options);
-                    $('#property_name').append(property_name_options);
-                },
-                error: function (jqXhr, textStatus, errorThrown) {
-                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                },
-                complete: function () {
-                }
-            });
-}
-$("#agreement_number").change(function () { getAgreementDetails() });
+    $("#unit_id").change(function () { getProperty(1) });
+    $("#unit_name").change(function () { getProperty(2) });
+    function getAgreementDetails() {
+        var AgreementNo = $("#agreement_number").val();
+        $.ajax(
+                {
+                    url: "../Payment/GetAgreementDetails",
+                    method: "POST",
+                    async: false,
+                    data: { AgreementNo: AgreementNo },
+                    success: function (response) {
+                        $("#property_id").empty();
+                        $("#property_name").empty();
+                        $("#unit_id").empty();
+                        $("#unit_name").empty();
+                        var unit_id_options = '';
+                        var unit_name_options = '';
+                        var property_id_options = '';
+                        var property_name_options = '';
+                        $.each(response.UnitId, function (index, data) {
+                            unit_id_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
+                        });
+                        $.each(response.UnitName, function (index, data) {
+                            unit_name_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
+                        });
+                        $.each(response.PropertyId, function (index, data) {
+                            property_id_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
+                        });
+                        $.each(response.PropertyName, function (index, data) {
+                            property_name_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
+                        });
+                        $('#unit_id').append(unit_id_options);
+                        $('#unit_name').append(unit_name_options);
+                        $('#property_id').append(property_id_options);
+                        $('#property_name').append(property_name_options);
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+                });
+    }
+    $("#agreement_number").change(function () { getAgreementDetails() });
+    var j = 0;
+    function Add() {
+        debugger;
+        var Invtype = document.getElementById("Invtype").value;
+        var Invno = document.getElementById("Invno").value;
+        var InvoiceDate = document.getElementById("InvoiceDate").value;
+        var Description = document.getElementById("Description").value;
+        var InvoiceAmount = document.getElementById("InvoiceAmount").value;
+        var DebitAmount = document.getElementById("DebitAmount").value;
+        var PaidAmount = document.getElementById("PaidAmount").value;
+        var Balance = document.getElementById("Balance").value;
+        var Remarks = document.getElementById("Remarks").value;
 
+        var html = "<tr><td><div class='row'><div class='col-md-12 document-row' id='GridView" + j + "'>";
+        html += "<div class='col-md-1'>ID</div>";
+        html += "<div class='col-md-2'>Invoice Type</div>";
+        html += "<div class='col-md-2'>Invoice Number</div>";
+        html += "<div class='col-md-2'>Invoice Date</div>";
+        html += "<div class='col-md-2'>Invoice Description</div>";
+        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+
+        html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+        html += "<div class='col-md-1'></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + Invtype + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invtype' data-name='Inv type' id='Invtype" + j + "' /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + Invno + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invno' data-name='Inv no' id='Invno" + j + "' /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + InvoiceDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceDate' data-name='Invoice Date' id='InvoiceDate" + j + "' /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + Description + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Description' data-name='Description' id='Description" + j + "' /></div>";
+        html += "</div><div class='col-md-12 document-row' id='GridView'>";
+        html += "<div class='col-md-1'>ID</div>";
+        html += "<div class='col-md-2'>Invoice Amount</div>";
+        html += "<div class='col-md-2'>Debit Amount</div>";
+        html += "<div class='col-md-2'>Paid Amount</div>";
+        html += "<div class='col-md-2'>Balance Amount</div>";
+        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+
+        html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+        html += "<div class='col-md-1'></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + InvoiceAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceAmount' data-name='Invoice Amount' id='InvoiceAmount" + j + "' /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + DebitAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].DebitAmount' data-name='Debit Amount' id='DebitAmount" + j + "' /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + PaidAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PaidAmount' data-name='Paid Amount' id='PaidAmount" + j + "' /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + Balance + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Balance' data-name='Balance' id='Balance" + j + "' /></div>";
+        html += "</div><div class='col-md-12 document-row' id='GridView'>";
+        html += "<div class='col-md-1'>ID</div>";
+        html += "<div class='col-md-2'>Remarks</div>";
+        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+
+        html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+        html += "<div class='col-md-1'></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + Remarks + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Remarks' data-name='Remarks' id='Remarks" + j + "' /></div>";
+        html += "<div class='col-md-2'><button type='button' id='Delete" + j + "' class='document-btn removebutton'>Delete</button></div>";
+        html += "</div></div>";
+        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
+        j++;
+        $("#PaymentDetailsForm").append(html);
+        document.getElementById("Invtype").value = "";
+        document.getElementById("Invno").value = "";
+        document.getElementById("InvoiceDate").value = "";
+        document.getElementById("Description").value = "";
+        document.getElementById("InvoiceAmount").value = "";
+        document.getElementById("DebitAmount").value = "";
+        document.getElementById("PaidAmount").value = "";
+        document.getElementById("Balance").value = "";
+        document.getElementById("Remarks").value = "";
+    }
+
+    $(document).on('click', 'button.removebutton', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('PaymentDetailsForm');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                // alert(dataname + $(this) .val()+ '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'PaymentDetailsViewModel[' + newindex + '].' + dataname
+                    }
+                });
+            });
+            newindex++;
+        });
+        j = newindex;
+    });
+    $("form#Payment").off("submit").on("submit", function (e) {
+        e.preventDefault();
+        try {
+            var form = $("form#Payment");
+            $.ajax(
+                {
+                    url: "../Payment/AddOrUpdate",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        GetPayment();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+                });
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
 </script>

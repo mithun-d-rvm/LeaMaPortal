@@ -754,6 +754,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Documents\TenantCompany\" />
     <Folder Include="Documents\TenantIndividual\" />
+    <Folder Include="Models\DBContext\" />
     <Folder Include="Views\Supplier\" />
   </ItemGroup>
   <ItemGroup>

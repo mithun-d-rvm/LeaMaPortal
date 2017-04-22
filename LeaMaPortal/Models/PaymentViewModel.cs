@@ -12,27 +12,27 @@ namespace LeaMaPortal.Models
         [DisplayName("Payment Number")]
         public int PaymentNo { get; set; }
         [DisplayName("Payment Date")]
-        public DateTime PaymentDate { get; set; }
+        public DateTime? PaymentDate { get; set; }
         [DisplayName("PaymentType")]
         public string PaymentType { get; set; }
         [DisplayName("Payment Mode")]
         public string PaymentMode { get; set; }
         [DisplayName("Supplier ID")]
-        public DateTime Supplier_id { get; set; }
+        public int? Supplier_id { get; set; }
         [DisplayName("Supplier Name")]
-        public int Supplier_Name { get; set; }
+        public string Supplier_Name { get; set; }
         [DisplayName("Contract Agreeement Number")]
-        public int agreement_no { get; set; }
+        public int? agreement_no { get; set; }
         [DisplayName("Property ID")]
         public string Property_id { get; set; }
         [DisplayName("Property Name")]
         public string Property_Name { get; set; }
         [DisplayName("Unit ID")]
-        public decimal Unit_ID { get; set; }
+        public string Unit_ID { get; set; }
         [DisplayName("Unit Name")]
         public string unit_Name { get; set; }
         [DisplayName("Total Amount")]
-        public string TotalAmount { get; set; }
+        public float? TotalAmount { get; set; }
         [DisplayName("Amount in words")]
         public string AmtInWords { get; set; }
         [DisplayName("PDC Status")]
@@ -40,7 +40,7 @@ namespace LeaMaPortal.Models
         [DisplayName("DD/Cheque Number")]
         public string DDChequeNo { get; set; }
         [DisplayName("DD/Cheque Date")]
-        public DateTime DDChequeDate { get; set; }
+        public DateTime? DDChequeDate { get; set; }
         [DisplayName("Bank Account Number")]
         public string BankAcCode { get; set; }
         [DisplayName("Bank Account Name")]
@@ -60,17 +60,17 @@ namespace LeaMaPortal.Models
         [DisplayName("Invoice Number")]
         public string Invno { get; set; }
         [DisplayName("Invoice Date")]
-        public DateTime InvoiceDate { get; set; }
+        public DateTime? InvoiceDate { get; set; }
         [DisplayName("Invoice Description")]
         public string Description { get; set; }
         [DisplayName("Invoice Amount")]
-        public decimal InvoiceAmount { get; set; }
+        public float? InvoiceAmount { get; set; }
         [DisplayName("Debit Amount")]
-        public decimal DebitAmount { get; set; }
+        public float? DebitAmount { get; set; }
         [DisplayName("Paid Amount")]
-        public decimal PaidAmount { get; set; }
+        public float? PaidAmount { get; set; }
         [DisplayName("Balance Amount")]
-        public decimal Balance { get; set; }
+        public float? Balance { get; set; }
         [DisplayName("Remarks")]
         public string Remarks { get; set; }
 
