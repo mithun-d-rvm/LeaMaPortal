@@ -8,6 +8,69 @@
 @{
     var user = LeaMaPortal.Helpers.AuthenticationHelper.GetLoggedinUserDetails().GetAwaiter().GetResult();
 }
+
+<!-- Include Bootstrap Datepicker -->
+
+<link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-datepicker3.min.css" rel="stylesheet" />
+
+<script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+
+<style>
+    .regionDropBtn, .propDropBtn {
+        /*background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;*/
+        cursor: pointer;
+    }
+
+        /*.regionDropBtn:hover, .regionDropBtn:focus {
+            background-color: #3e8e41;
+        }*/
+
+    #regionInput, #propInput {
+        border-box: box-sizing;
+        background-image: url('searchicon.png');
+        background-position: 14px 12px;
+        background-repeat: no-repeat;
+        font-size: 16px;
+        padding: 14px 20px 12px 45px;
+        border: none;
+    }
+
+    .regionDropdown, .propDropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .region-dropdown-content, .prop-dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f6f6f6;
+        min-width: 230px;
+        overflow: auto;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .region-dropdown-content a, .prop-dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+    .regionDropdown a:hover, .propDropdown a:hover {
+        background-color: #ddd;
+    }
+
+    .show {
+        display: block;
+    }
+</style>
+
 <div class="header-main">
     <div class="header-left m-t-15">
         <img src="~/Images/Logo.png" />
@@ -25,9 +88,47 @@
 <div class="sub-header-main">
     <div class="col-md-6 pull-left" style="padding: 35px;" id="TopNavBarFilter">
         <span> <i class="fa fa-filter"></i> FILTER PERFORMANCE BY :  </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span> By Month <i class="fa fa-calendar"></i> </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span> By Region <i class="fa fa-angle-down"></i> </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span> By Property <i class="fa fa-angle-down"></i> </span>
+        <span>
+            By Month
+            <span class="input-group input-append date" id="datePicker" style="width: 1px;
+    position: absolute;
+    margin-top: -23px;
+    margin-left: 44%;">
+                <input type="hidden" class="form-control" name="date" />
+                <span class="input-group-addon add-on" style="background: transparent;
+    border: none;"><span class="fa fa-calendar"></span></span>
+            </span>
+        </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="regionDropdown"> By Region <i class="fa fa-angle-down regionDropBtn" onclick="showRegionList()"></i>
+            
+                <span id="dropDownRegion" class="region-dropdown-content">
+                    <input type="text" placeholder="Search.." id="regionInput" onkeyup="filterRegion()">
+                    <a href="#about">About</a>
+                    <a href="#base">Base</a>
+                    <a href="#blog">Blog</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#custom">Custom</a>
+                    <a href="#support">Support</a>
+                    <a href="#tools">Tools</a>
+                </span>
+
+        </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="propDropdown"> By Property <i class="fa fa-angle-down propDropBtn" onclick="showPropList()"></i> 
+        
+            <span id="dropDownProp" class="prop-dropdown-content">
+                <input type="text" placeholder="Search.." id="propInput" onkeyup="filterProp()">
+                <a href="#about">Prop 1</a>
+                <a href="#base">Prop 2</a>
+                <a href="#blog">Blog</a>
+                <a href="#contact">Contact</a>
+                <a href="#custom">Custom</a>
+                <a href="#support">Support</a>
+                <a href="#tools">Tools</a>
+            </span>
+        
+        </span>
+
         <div class="clearfix"> </div>
     </div>
     <div class="col-md-1 pull-left"><br /><br /> <img src="~/Images/loader.gif" class="fa hide" id="img-loader" /></div>
@@ -60,3 +161,76 @@
     <div class="clearfix"> </div>
 </div>
 <!--heder end here-->
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#datePicker')
+            .datepicker({
+                format: 'mm/dd/yyyy'
+            })
+    });
+
+    function showRegionList() {
+        document.getElementById("dropDownRegion").classList.toggle("show");
+    }
+
+    function filterRegion() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("regionInput");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("dropDownRegion");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+
+    function showPropList() {
+        document.getElementById("dropDownProp").classList.toggle("show");
+    }
+
+    function filterProp() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("propInput");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("dropDownProp");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+
+    window.onclick = function (event) {
+        if (!event.target.matches('.regiondropbtn')) {
+
+            var dropdowns = document.getelementsbyclassname("region-dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var opendropdown = dropdowns[i];
+                if (opendropdown.classlist.contains('show')) {
+                    opendropdown.classlist.remove('show');
+                }
+            }
+        }
+        if (!event.target.matches('.propdropbtn')) {
+
+            var dropdowns = document.getelementsbyclassname("prop-dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var opendropdown = dropdowns[i];
+                if (opendropdown.classlist.contains('show')) {
+                    opendropdown.classlist.remove('show');
+                }
+            }
+        }
+    }
+</script>
