@@ -18,7 +18,9 @@ namespace LeaMaPortal.Models
             AgreementPdcList = new List<AgreementPdcViewModel>();
             agreementDocumentList = new List<AgreementDocumentViewModel>();
             AgreementUnitList = new List<AgreementUnitViewModel>();
-        }
+            agreementFacilityList = new List<AgreementFacilityViewModel>();
+            agreementDocumentExistList = new List<AgreementDocumentExist>();
+    }
         public int Id { get; set; }
         [DisplayName("Single Unit or Multiple Unit")]
         public string Single_Multiple_Flag { get; set; }
@@ -32,7 +34,7 @@ namespace LeaMaPortal.Models
         [DataType(DataType.Date)]
         public DateTime Agreement_Date { get; set; }
         [DisplayName("Contract Tenant Type")]
-        public string Tenant_Type { get; set; }
+        public string Tenant_Type { get; set; } //not in sp
         [DisplayName("Tenant ID")]
         public int Ag_Tenant_id { get; set; }
         [DisplayName("Tenant Name")]
@@ -64,7 +66,7 @@ namespace LeaMaPortal.Models
         [DisplayName("Contract Perday Rental")]
         public decimal Perday_Rental { get; set; }
         [DisplayName("Total Number of Payments")]
-        public int nofopayments { get; set; }
+        public int nofopayments { get; set; }   
         [DisplayName("Contract Security Deposit Amount")]
         public decimal Advance_Security_Amount { get; set; }
         [DisplayName("Security Deposit Payment Mode")]
@@ -77,11 +79,41 @@ namespace LeaMaPortal.Models
         public DateTime Security_chequedate { get; set; }
         [DisplayName("Contract Notice Period Days")]
         public int Notice_Period { get; set; }
-      //  public AgreementPdcViewModel AgreementPd { get; set; }
-       // public AgreementUtilityViewModel AgreementUtility { get; set; }
+
+
+        //newly  added fields
+        [StringLength(20)]
+        public string New_Renewal_flag { get; set; }
+        public int Caretaker_id { get; set; }
+        [StringLength(100)]
+        public string Caretaker_Name { get; set; }
+        [StringLength(100)]
+        public string tenant_source { get; set; }
+        public int Agent_id { get; set; }
+        [StringLength(100)]
+        public string Agent_name { get; set; }
+        public int Emp_id { get; set; }
+        [StringLength(100)]
+        public string Emp_name { get; set; }
+        public int Approval_Flag { get; set; }
+        public DateTime Approved_Date { get; set; }
+        [StringLength(150)]                                                    
+        public string Createduser { get; set; }
+        //lists longtext
+        public string Agpdc { get; set; }
+        public string Agdoc { get; set; }
+        public string Agfac { get; set; }
+        public string Aguti { get; set; }
+        public string Agchk { get; set; }
+        public string Aguni { get; set; }
+
+        //  public AgreementPdcViewModel AgreementPd { get; set; }
+        // public AgreementUtilityViewModel AgreementUtility { get; set; }
         public List<AgreementUtilityViewModel> AgreementUtilityList { get; set; }
         public List<AgreementPdcViewModel> AgreementPdcList { get; set; }
+        public List<AgreementFacilityViewModel> agreementFacilityList { get; set; }
         public List<AgreementDocumentViewModel> agreementDocumentList { get; set; }
+        public List<AgreementDocumentExist> agreementDocumentExistList { get; set; }
         public List<AgreementUnitViewModel> AgreementUnitList { get; set; }
 
     }

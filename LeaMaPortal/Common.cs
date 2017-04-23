@@ -54,6 +54,7 @@ namespace LeaMaPortal
 
 
         public static List<string> PaymentMode = new List<string>() { "Cash", "Cheque", "Online", "Cheque without date", "DD" };
+        public const string AgreementDocumentContainer = "Documents/AgreementDocument/";
     }
     public class FormMaster
     {

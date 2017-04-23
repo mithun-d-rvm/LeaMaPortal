@@ -39,13 +39,45 @@
 </div>
 
 @*@Html.Partial("_AgreementDocumentDetails")*@
-<input type="hidden"  value="@Model.agreementDocumentList.Count" id="agreementDocumentListCount" />
+<input type="hidden"  value="@Model.agreementDocumentExistList.Count" id="agreementDocumentListCount" />
 <div class="row">
-    
+    <table id="AgreementDetailsExistList" class="col-md-12 document-row">
+
+        @for (int i = 0; i < Model.agreementDocumentExistList.Count; i++)
+            {
+
+            <tr class="col-md-12 document-row">
+                <td>
+                    <input type="hidden" name="agreementDocumentExistList[@i].Doc_name" id="agreementDocumentExistList[@i].Doc_name" value="@Model.agreementDocumentExistList[i].Doc_name" data-name="Doc_name" />
+                    <input type="hidden" name="agreementDocumentExistList[@i].Doc_Path" id="agreementDocumentExistList[@i].Doc_Path" value="@Model.agreementDocumentExistList[i].Doc_Path" data-name="Doc_Path" />
+                    <input type="hidden" name="agreementDocumentExistList[@i].Id" id="agreementDocumentExistList[@i].Id" value="@Model.agreementDocumentExistList[i].Id" data-name="Id" />
+
+                    <div class="col-md-12 document-row">
+
+                        <div class="col-md-4 w-md-14">
+                            @Model.agreementDocumentExistList[i].Doc_name
+                            @*@Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        </div>
+                        <div class="col-md-2 w-md-16">
+                            @Model.agreementDocumentExistList[i].Doc_Path
+
+                        </div>
+
+                        <div class="col-md-1 w-md-14">
+                            <button class="btn agreementDocumentExistList-remove">X</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
 
         <table id="AgreementDetailsList" class="col-md-12 document-row" >
 
-            @for (int i = 0; i < Model.agreementDocumentList.Count; i++)
+            @for (int i = 0; i < Model.agreementDocumentExistList.Count; i++)
             {
 
                 <tr class="col-md-12 document-row">
@@ -57,11 +89,9 @@
                         <input type="hidden" name="agreementDocumentList[@i].Id" id="agreementDocumentList[@i].Id" value="@Model.agreementDocumentList[i].Id" data-name="Id" />
                         
                         <div class="col-md-12 document-row">
-                            <div class="col-md-2 col-md-1 w-md-13">
-                                @Model.agreementDocumentList[i].Facility_id
-                            </div>
+                            
                             <div class="col-md-4 w-md-14">
-                                @Model.agreementDocumentList[i].Facility_Name
+                                @Model.agreementDocumentList[i].Doc_name
                                 @*@Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input" } })*@
                             </div>
                             <div class="col-md-2 w-md-16">
@@ -88,17 +118,8 @@
 </div>
 
 <script>
-    $("#Facility_Name").change(function () {
-       // alert($("#Facility_Name option:selected").val());
-       // $("#Facility_id option:selected").select($("#Facility_Name option:selected").val());
-        return;
-    });
-    $("#Facility_id").change(function () {
-      //  $("#Facility_Name option:selected").val($("#Facility_id").val());
-       
-        return;
-    });
-    var aDocListCount = parseInt($("#agreementDocumentListCount").val());
+   
+    var aDocListCount = 0;
     function agreementdoc(e) {
         e.preventDefault();
         var Facility_id = $("#Facility_Name").val();
@@ -161,5 +182,29 @@
 
         });
         aDocListCount = newindex;
+    });
+    $(document).on('click', 'button.agreementDocumentExistList-remove', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('AgreementDetailsExistList');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'agreementDocumentExistList[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });       
     });
 </script>

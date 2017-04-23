@@ -57,6 +57,7 @@ namespace LeaMaPortal.Controllers
                 ViewBag.UnitPropertyName = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_Property_Name");
                 ViewBag.SecurityFlag = new SelectList(Common.SecurityFlag);
                 ViewBag.Agreement_No = db.tbl_agreement.OrderByDescending(x => x.Agreement_No).FirstOrDefault()?.Agreement_No + 1;
+                model.Agreement_No = 0;
                 //model.AgreementPd = new AgreementPdcViewModel();
                 return PartialView("../Tca/Agreement/_AgreementForm", model);
             }
@@ -95,6 +96,32 @@ namespace LeaMaPortal.Controllers
                     }).ToList();
                 }
                 return PartialView("../Tca/_AgreementDocument", model);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public async Task<PartialViewResult> AgreementFacility(int AgreementNo)
+        {
+            AgreementFacilityViewModel model = new AgreementFacilityViewModel();
+            try
+            {
+                var facility = await db.tbl_facilitymaster.Where(x => x.Delmark != "*").ToListAsync();
+                ViewBag.Facility_id = new SelectList(facility, "Facility_Name", "Facility_id");
+                ViewBag.Facility_Name = new SelectList(facility, "Facility_id", "Facility_Name");
+                if (AgreementNo != 0)
+                {
+                    model.agreementFacilityList = db.tbl_agreement_facility.Where(x => x.Agreement_No == AgreementNo)
+                    .Select(x => new AgreementFacilityViewModel()
+                    {
+                        Id = x.id,
+                        Facility_id = x.Facility_id,
+                        Facility_Name = x.Facility_Name,
+                        Numbers_available = x.Numbers_available.HasValue ? x.Numbers_available.Value : 0
+                    }).ToList();
+                }
+                return PartialView("../Tca/_AgreementFacility", model);
             }
             catch
             {
@@ -189,52 +216,48 @@ namespace LeaMaPortal.Controllers
                     var Agreement = await db.tbl_agreement.OrderByDescending(r => r.Agreement_No).FirstOrDefaultAsync();
                     model.Agreement_No = Agreement != null ? Agreement.Agreement_No + 1 : 1;
                 }
-                object[] param = Helper.GetMySqlParameters<AgreementFormViewModel>(model, PFlag, user);
-//                PFlag VARCHAR(10)
-//, PSingle_Multiple_Flag varchar(20)
-//, PAgreement_Refno  int
-//, PNew_Renewal_flag  varchar(20)
-//, PAgreement_No  int(11)
-//, PAgreement_Date  datetime
-//, PAg_Tenant_id  int
-//, PAg_Tenant_Name  varchar(100)
-//, Pproperty_id int
-//, PProperty_ID_Tawtheeq  varchar(100)
-//, PProperties_Name  varchar(100)
-//, PUnit_ID_Tawtheeq  varchar(100)
-//, PUnit_Property_Name varchar(100)
-//, PCaretaker_id  int
-//, PCaretaker_Name  varchar(100)
-//, Ptenant_source  varchar(100)
-//, PAgent_id  int
-//, PAgent_name  varchar(100)
-//, PEmp_id  int
-//, PEmp_name  varchar(100)
-//, PVacantstartdate  datetime
-//, PAgreement_Start_Date  datetime
-//, PAgreement_End_Date  datetime
-//, PTotal_Rental_amount  float
-//, PPerday_Rental  float
-//, PAdvance_Security_Amount  float
-//, PSecurity_Flag  varchar(20)
-//, PSecurity_chequeno  varchar(50)
-//, PSecurity_chequedate  datetime
-//, PNotice_Period  int(11)
-//, Pnofopayments  int(11)
-//, PApproval_Flag  int(11)
-//, PApproved_By  varchar(75)
-//, PApproved_Date  datetime
-//, PTenant_Type varchar(25)
-//, PCreateduser  varchar(150)
-//, PAgpdc longtext
-//, pAgdoc longtext
-//, pAgfac longtext
-//, pAguti longtext
-//, pAgchk longtext
-//, pAgunit longtext
+                string Agpdc = "";
+                if (model.AgreementPdcList != null)
+                {
+                    foreach (var item in model.AgreementPdcList)
+                    {
+                        if (string.IsNullOrWhiteSpace(Agpdc))
+                        {
+                            Agpdc = "(" + model.Agreement_No + ",'" + item.Month + "'," + item.Year + ",'" + item.BankName + "','" + item.Cheque_No +
+                                    "','" + item.Cheque_Date + "','" + item.Cheque_Amount + "''" + item.Payment_Mode + "')";
+                        }
+                        else
+                        {
+                            Agpdc += ",(" + model.Agreement_No + ",'" + item.Month + "'," + item.Year + ",'" + item.BankName + "','" + item.Cheque_No +
+                                    "','" + item.Cheque_Date + "','" + item.Cheque_Amount + "''" + item.Payment_Mode + "')";
+                        }
+                    }
+                }
+                model.Agpdc = Agpdc;
+                string Agdoc = "";
+                //if (model.agreementDocumentList != null)
+                //{
+                //    foreach (var item in model.agreementDocumentList)
+                //    {
+                //        if (string.IsNullOrWhiteSpace(Agdoc))
+                //        {
+                //            Agpdc = "(" + model.Agreement_No + ",'" + item.Month + "'," + item.Year + ",'" + item.BankName + "','" + item.Cheque_No +
+                //                    "','" + item.Cheque_Date + "','" + item.Cheque_Amount + "''" + item.Payment_Mode + "')";
+                //        }
+                //        else
+                //        {
+                //            Agpdc += ",(" + model.Agreement_No + ",'" + item.Month + "'," + item.Year + ",'" + item.BankName + "','" + item.Cheque_No +
+                //                    "','" + item.Cheque_Date + "','" + item.Cheque_Amount + "''" + item.Payment_Mode + "')";
+                //        }
+                //    }
+                //}
 
+                object[] parameters = Helper.GetTcaMySqlParameters<AgreementFormViewModel>(model, PFlag, user);
+                string paramNames = Helper.GetTcaMySqlParametersNames<AgreementFormViewModel>(model, PFlag, user);
+                var tenantCompany = await db.Database.SqlQuery<object>("CALLUsp_Agreement_All(" + paramNames +")", parameters).ToListAsync();
+               
             }
-            catch
+            catch   (Exception e)
             {
 
             }
@@ -287,6 +310,7 @@ namespace LeaMaPortal.Controllers
                 ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
                 ViewBag.Profession = new SelectList(Common.Profession);
                 ViewBag.PropertyId = db.tbl_propertiesmaster.OrderByDescending(x => x.Property_Id).FirstOrDefault()?.Property_Id + 1;
+                model.Agreement_No = 0;
                 return PartialView("../Master/TenantIndividual/_AddOrUpdate", model);
             }
             catch (Exception e)
