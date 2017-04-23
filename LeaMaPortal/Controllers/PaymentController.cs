@@ -129,13 +129,8 @@ namespace LeaMaPortal.Controllers
                     MySqlParameter pa = new MySqlParameter();
                     string PFlag = "INSERT";
 
-                    if (model.Id == 0)
+                    if (model.Id != 0)
                     {
-                        model.Id = 1;
-                    }
-                    else
-                    {
-                        model.Id = 1 + model.PaymentNo;
                         PFlag = "UPDATE";
                     }
                     string invoice = null;

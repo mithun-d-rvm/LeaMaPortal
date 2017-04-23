@@ -236,7 +236,7 @@
                             <input type="text" class="form-control master-form-input" id="Invno" />
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="InvoiceDate" />
+                            <input type="date" class="form-control master-form-input" id="InvoiceDate" />
                         </div>
                         <div class="col-md-2">
                             <input type="text" class="form-control master-form-input" id="Description" />
@@ -304,7 +304,7 @@
                         html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
                         html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Invtype + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invtype' data-name='Inv type' id='Invtype" + @j + "' /></div>";
                         html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Invno + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invno' data-name='Inv no' id='Invno" + @j + "' /></div>";
-                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].InvoiceDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceDate' data-name='Invoice Date' id='InvoiceDate" + @j + "' /></div>";
+                        html += "<div class='col-md-2'><input type='date' value='" + @Model.PaymentDetailsViewModel[j].InvoiceDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceDate' data-name='Invoice Date' id='InvoiceDate" + @j + "' /></div>";
                         html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Description + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Description' data-name='Description' id='Description" + @j + "' /></div>";
                         html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Remarks + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Remarks' data-name='Remarks' id='Remarks" + @j + "' /></div>";
                         html += "</div><div class='col-md-12 document-row' id='GridView'>";
@@ -833,7 +833,7 @@
         html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
         html += "<div class='col-md-2'><input type='text' value='" + Invtype + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invtype' data-name='Inv type' id='Invtype" + j + "' /></div>";
         html += "<div class='col-md-2'><input type='text' value='" + Invno + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invno' data-name='Inv no' id='Invno" + j + "' /></div>";
-        html += "<div class='col-md-2'><input type='text' value='" + InvoiceDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceDate' data-name='Invoice Date' id='InvoiceDate" + j + "' /></div>";
+        html += "<div class='col-md-2'><input type='date' value='" + InvoiceDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceDate' data-name='Invoice Date' id='InvoiceDate" + j + "' /></div>";
         html += "<div class='col-md-2'><input type='text' value='" + Description + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Description' data-name='Description' id='Description" + j + "' /></div>";
         html += "<div class='col-md-2'><input type='text' value='" + Remarks + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Remarks' data-name='Remarks' id='Remarks" + j + "' /></div>";
         html += "</div><div class='col-md-12 document-row' id='GridView'>";
