@@ -1,5 +1,5 @@
 ﻿using LeaMaPortal.Models;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using MvcPaging;
 using MySql.Data.MySqlClient;
 using System;
@@ -14,7 +14,7 @@ namespace LeaMaPortal.Controllers
 {
     public class TenantCompanyController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
         // GET: TenantCompany
         public async Task<PartialViewResult> Index(string Search, int? page, int? defaultPageSize)
         {
@@ -418,7 +418,10 @@ namespace LeaMaPortal.Controllers
 
                                 }
                             }
-                            catch { }
+                            catch
+                            {
+
+                            }
                             
                         }
                     }
@@ -527,10 +530,10 @@ namespace LeaMaPortal.Controllers
                 var spResult = await db.Database.SqlQuery<object>("CALL Usp_Tenant_Company_All(@PFlag, @PTenant_Id, @PCompanyName, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser, @Ptenant_companydt, @Ptenant_companydt1, @Ptenant_companydoc)", parameters).ToListAsync();
                 
                 //await db.SaveChangesAsync();
-
                 //tbl_country.Delmark = "*";
                 //db.Entry(tbl_country).State = EntityState.Modified;
                 //await db.SaveChangesAsync();
+
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch

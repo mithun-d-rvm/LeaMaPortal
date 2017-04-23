@@ -1,5 +1,5 @@
 ﻿using LeaMaPortal.Models;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using LeaMaPortal.Resources;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace LeaMaPortal.Controllers
 {
     public class AuthenticationController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
         // GET: Authentication
         public ActionResult Index()
         {

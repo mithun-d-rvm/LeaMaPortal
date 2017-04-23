@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using LeaMaPortal.Models;
 using MvcPaging;
 using MySql.Data.MySqlClient;
@@ -16,7 +16,7 @@ namespace LeaMaPortal.Controllers
 {
     public class CaretakerController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
 
         // GET: Caretaker
         public ActionResult Index(string Search, int? page, int? defaultPageSize)
@@ -61,7 +61,16 @@ namespace LeaMaPortal.Controllers
         public PartialViewResult AddOrUpdate()
         {
             ViewBag.Region = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
-            ViewBag.CaretakerId = db.tbl_caretaker.OrderByDescending(x => x.Caretaker_id).FirstOrDefault().Caretaker_id + 1;
+            var caretaker = db.tbl_caretaker.OrderByDescending(x => x.Caretaker_id).FirstOrDefault();
+            if (caretaker != null)
+            {
+                ViewBag.CaretakerId = caretaker.Caretaker_id + 1;
+            }
+            else
+            {
+                ViewBag.CaretakerId = 1;
+            }
+            
             return PartialView("../Master/Caretaker/_AddOrUpdate", new CaretakerViewModel());
         }
 
