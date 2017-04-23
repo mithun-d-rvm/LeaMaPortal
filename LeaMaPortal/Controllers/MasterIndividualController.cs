@@ -1,5 +1,5 @@
 ﻿using LeaMaPortal.Models;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using MvcPaging;
 using MySql.Data.MySqlClient;
 using System;
@@ -15,8 +15,7 @@ namespace LeaMaPortal.Controllers
 {
     public class MasterIndividualController : Controller
     {
-        private Entities db = new Entities();
-        private string user = "rmv";
+        private LeamaEntities db = new LeamaEntities();
         // GET: MasterIndividual
         public ActionResult Index(string Search, int? page, int? defaultPageSize)
         {
@@ -59,6 +58,7 @@ namespace LeaMaPortal.Controllers
             try
             {
                 TenantIndividualViewModel model = new TenantIndividualViewModel();
+                model.Marital_Status = Common.DefaultMaridalStatus;
                 model.Title = Common.DefaultTitle;
                 var _titleResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
                 ViewBag.TitleDisplay = new SelectList(_titleResult, Common.DefaultTitle);
@@ -71,8 +71,10 @@ namespace LeaMaPortal.Controllers
 
                 //var region = .Select(x => x.Region_Name);
                 ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
+
                 //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
-                ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
+                ViewBag.Nationality = new SelectList(Common.Nationality);
+               // ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
                 ViewBag.Profession = new SelectList(Common.Profession);
                 var tenant = db.tbl_tenant_individual.OrderByDescending(x => x.Tenant_Id).FirstOrDefault();
                 ViewBag.Tenant_Id = tenant != null ? tenant.Tenant_Id + 1 : 1;
@@ -149,7 +151,7 @@ namespace LeaMaPortal.Controllers
                 }
                 catch { }
                 model.tenantdocdetails = tenantDoc;
-                object[] param = Helper.GetMySqlParameters<TenantIndividualViewModel>(model, PFlag, user);
+                object[] param = Helper.GetMySqlParameters<TenantIndividualViewModel>(model, PFlag, System.Web.HttpContext.Current.User.Identity.Name);
 
                 var _result = await db.Database.SqlQuery<object>(@"CALL Usp_Tenant_Individual_All(@PFlag,@PTenant_Id,@PTitle  ,@PFirst_Name  ,@PMiddle_Name  ,@PLast_Name  ,@PCompany_Educational   ,@PProfession  ,@PMarital_Status  ,@Paddress  ,@Paddress1  ,@PEmirate  ,@PCity  ,@PPostboxNo  ,@PEmail  ,@PMobile_Countrycode  ,@PMobile_Areacode  ,@PMobile_No  ,@PLandline_Countrycode  ,@PLandline_Areacode  ,@PLandline_No  ,@PFax_Countrycode  ,@PFax_Areacode  ,@PFax_No  ,@PNationality  ,@PEmiratesid  ,@PEmirate_issuedate  ,@PEmirate_expirydate  ,@PPassportno  
                 ,@PPlaceofissuance  
@@ -200,7 +202,8 @@ namespace LeaMaPortal.Controllers
                 //var region = .Select(x => x.Region_Name);
                 ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name",tenant.City);
                 //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
-                ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name",tenant.Nationality);
+               // ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name",tenant.Nationality);
+                ViewBag.Nationality = new SelectList(Common.Nationality, tenant.Nationality);
                 ViewBag.Profession = new SelectList(Common.Profession,tenant.Profession);
                 ViewBag.Tenant_Id = tenantId;
                 model.TenantDocumentList =await db.tbl_tenant_individual_doc.Where(x => x.Tenant_Id == tenantId)
@@ -274,7 +277,7 @@ namespace LeaMaPortal.Controllers
             {
                 var model =await db.tbl_tenant_individual.FindAsync(tenantId, type);
 
-                object[] param = Helper.GetMySqlParameters<TenantIndividualViewModel>(Map(model), Common.DELETE, user);
+                object[] param = Helper.GetMySqlParameters<TenantIndividualViewModel>(Map(model), Common.DELETE, System.Web.HttpContext.Current.User.Identity.Name);
 
                 var _result = await db.Database.SqlQuery<object>(@"CALL Usp_Tenant_Individual_All(@PFlag,@PTenant_Id,@PTitle  ,@PFirst_Name  ,@PMiddle_Name  ,@PLast_Name  ,@PCompany_Educational   ,@PProfession  ,@PMarital_Status  ,@Paddress  ,@Paddress1  ,@PEmirate  ,@PCity  ,@PPostboxNo  ,@PEmail  ,@PMobile_Countrycode  ,@PMobile_Areacode  ,@PMobile_No  ,@PLandline_Countrycode  ,@PLandline_Areacode  ,@PLandline_No  ,@PFax_Countrycode  ,@PFax_Areacode  ,@PFax_No  ,@PNationality  ,@PEmiratesid  ,@PEmirate_issuedate  ,@PEmirate_expirydate  ,@PPassportno  
                 ,@PPlaceofissuance  

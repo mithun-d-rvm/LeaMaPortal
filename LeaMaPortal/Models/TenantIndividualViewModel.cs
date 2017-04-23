@@ -103,10 +103,14 @@ namespace LeaMaPortal.Models
         [StringLength(100)]
         [Display(Name = "Emirates ID:")]
         public string Emiratesid { get; set; }
+
         [Display(Name = "Emirate Issue Date:")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? Emirate_issuedate { get; set; }
+
         [Display(Name = "Emirates Expiry Date:")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime? Emirate_expirydate { get; set; }
 
@@ -118,10 +122,12 @@ namespace LeaMaPortal.Models
         [Display(Name = "Place of Insurance:")]
         public string Placeofissuance { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Passport Issue Date:")]
         [DataType(DataType.Date)]
         public DateTime? Passport_Issuedate { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Passport Expiry Date:")]
         [DataType(DataType.Date)]
         public DateTime? Passport_Expirydate { get; set; }
@@ -132,12 +138,18 @@ namespace LeaMaPortal.Models
 
         [StringLength(100)]
         public string Visano { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Visa Issue Date:")]
         [DataType(DataType.Date)]
         public DateTime? Visa_IssueDate { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Visa Expiry Date:")]
         [DataType(DataType.Date)]
         public DateTime? Visa_ExpiryDate { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Date of Birth:")]
         [DataType(DataType.Date)]
         public DateTime? Dob { get; set; }
@@ -174,7 +186,7 @@ namespace LeaMaPortal.Models
         public HttpPostedFileBase File { get; set; }
     }
 
-    public partial class tbl_tenant_individual_doc
+    public partial class tbl_tenant_individual_doc_model
     {
         public int id { get; set; }
 

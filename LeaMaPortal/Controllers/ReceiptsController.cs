@@ -6,13 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 
 namespace LeaMaPortal.Controllers
 {
     public class ReceiptsController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
 
         // GET: Receipts
         public PartialViewResult Index()
@@ -96,6 +96,10 @@ namespace LeaMaPortal.Controllers
             ViewBag.ReceiptType = ReceiptType;
             ViewBag.ReceiptMode = ReceiptMode;
             ViewBag.PDCStatus = PDCStatus;
+
+           
+            //var Pdc = db.Database.SqlQuery<object>(@"call usp_split('Receipts','PDCstatus',',',null)").ToList();
+            //ViewBag.PDCStatus = new SelectList(Pdc);
             return PartialView("../Receipts/Index");
         }
 

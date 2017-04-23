@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using LeaMaPortal.Models;
 using MvcPaging;
 using System.Threading.Tasks;
@@ -16,7 +16,7 @@ namespace LeaMaPortal.Controllers
 {
     public class FacilityController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
 
         // GET: Facility
         public PartialViewResult Index(string Search, int? page, int? defaultPageSize)
@@ -61,6 +61,8 @@ namespace LeaMaPortal.Controllers
         public PartialViewResult AddOrUpdate()
         {
             FacilityViewModel model = new FacilityViewModel();
+            model.Facility_id = db.tbl_facilitymaster.OrderByDescending(o => o.Id).Select(s => s.Facility_id).FirstOrDefault();
+            model.Facility_id = (Convert.ToInt32(model.Facility_id) + 1).ToString();
             return PartialView("../Master/Facility/_AddOrUpdate", model);
         }
         // POST: Facility/Create

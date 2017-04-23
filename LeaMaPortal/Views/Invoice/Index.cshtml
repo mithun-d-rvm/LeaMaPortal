@@ -1,210 +1,65 @@
-﻿
-@model LeaMaPortal.Models.InvoiceViewModel
+﻿@model LeaMaPortal.Models.InvoiceViewModel
+
 @{
-   
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="inner-block">
+<div class="inner-block p-t-5-p">
     <div class="blank">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.invtype, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                       
-                        <select class="col-md-12 leama-field">
-                            <option value="InvType">InvType</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.invno, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.invno, new { htmlAttributes = new { @class = "master-form-input" } })
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "master-form-input" } })
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.Tenant_id, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.Tenant_id, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="Tenant_id">Tenant id</option>
-                        </select>
-                    </div>
-                </div>
-               
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.Tenant_Name, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.Tenant_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="Tenant_Name">Tenant Name</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.Agreement_No, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.Agreement_No, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="Agreement_No">Agreement No</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.Property_ID, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.Property_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="Property_ID">Property No</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.Property_Name, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="Property_Name">Property Name</option>
-                        </select>
-                    </div>
-                </div>
-
-                </div>
-
-            <div class="col-md-6">
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.Unit_ID, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.Unit_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="Unit_ID">Unit ID</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.unit_Name, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.unit_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        <select class="col-md-12 leama-field">
-                            <option value="unit_Name">Unit Name</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.month, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.month, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownListFor(model => model.month, new SelectList(ViewBag.Month, "Text", "Value"), htmlAttributes: new { @class = "master-form-input" })
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.year, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.year, new { htmlAttributes = new { @class = "master-form-input" } })
-                    </div>
-                </div>
-
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.totalamt, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.totalamt, new { htmlAttributes = new { @class = "master-form-input" } })
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.duedate, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.duedate, new { htmlAttributes = new { @class = "master-form-input" } })
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.bank_details, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.bank_details, new { htmlAttributes = new { @class = "master-form-input" } })
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.remarks, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.remarks, new { htmlAttributes = new { @class = "master-form-input" } })
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        &nbsp;
-                    </div>
-                    <div class="col-md-4">
-                        <button class="btn master-form-btn">Submit</button>
-                    </div>
-                </div>
-            </div>
-
-            </div>
-        <div class="row">
-            <div class="col-md-12 document-row">
-                <div class="col-md-1">
-                    ID
-                </div>
-                <div class="col-md-2">
-                  Item Type
-                </div>
-                <div class="col-md-2">
-                    Item Description
-                </div>
-                <div class="col-md-2">
-                   Quantity
-                </div>
-                <div class="col-md-2">
-                    Amount
-                </div>
-            </div>
-        </div>
-        <div class="row ht-5">
-            &nbsp;
-        </div>
-
-        <!-- Begin Dynamic row -->
-        @Html.Partial("_InvoiceDetails")
-        <!-- End Dynamic row -->
-
-        </div>
+        <div id="ContainerAddOrUpdate"></div>
+        <div class="row" id="ContainerList"></div>
+        @*<input type="hidden" id="FormMasterSelected" value="@ViewBag.FormMasterSelected" />*@
     </div>
-
+</div>
+<script>
+    //$(function () {
+    //    GetInvoice();
+    //});
+    $(document).ready(function () {
+        debugger;
+        $("#TopNavBarFilter").empty();
+        GetInvoice();
+    });
+ 
+    function GetInvoice() {
+        debugger;
+        $("#img-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
+        $.ajax(
+        {
+            url: "../Invoice/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Invoice/List",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    </script>

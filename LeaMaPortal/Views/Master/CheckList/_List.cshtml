@@ -10,7 +10,7 @@
 <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
 <!DOCTYPE html>
 
-<div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
+<div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
     <div class="row">
         <div class="col-md-12 leama-fieldset ">
             <div class="col-md-2 pull-left">
@@ -35,6 +35,7 @@
                 <div class="divTableHeading">
                     <div class="divTableCell ">CheckList Id</div>
                     <div class="divTableCell">CheckList Name</div>
+                    <div class="divTableCell">CheckList Type</div>
                     <div class="divTableCell">Action</div>
 
                 </div>
@@ -43,15 +44,17 @@
                     <div class="divTableRow">
                         <div class="divTableCell">@item.Checklist_id</div>
                         <div class="divTableCell">@item.Checklist_Name</div>
+                        <div class="divTableCell">@item.Checklist_Type</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit checklist-edit", title = "Edit", @data_id = @item.Checklist_id + '-' + @item.Checklist_Name + '-' + @item.Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash checklist-delete", @style = "color:red", @title = "Delete", @data_id = @item.Checklist_id + '-' + @item.Checklist_Name + '-' + @item.Id })
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit checklist-edit", title = "Edit", @data_id = @item.Checklist_id + '`' + @item.Checklist_Name + '`' + @item.Id })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash checklist-delete", @style = "color:red", @title = "Delete", @data_id = @item.Checklist_id + '`' + @item.Checklist_Name + '`' + @item.Id })
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
                     </div>
                 }
 
             </div>
+        </div>
             <div class="col-md-12">
                 <br />
                 @Html.HiddenFor(m => m.PageNumber)
@@ -63,7 +66,7 @@
                     {
                         if (i == Model.PageNumber)
                         {
-                            <input type="button" style="background:green" data-id="@i" value="@i" class="" />
+                            <input type="button" data-id="@i" value="@i" class="pagination-btn" />
                         }
                         else
                         {
@@ -72,7 +75,7 @@
                     }
                 </div>
             </div>
-        </div>
+        
 
         <script type="text/javascript">
                 $(".Page").click(function(e)
@@ -128,6 +131,10 @@
     }
 
         </script>
+
+        <div class="col-md-12 leama-fieldset ">
+            &nbsp;
+        </div>
     </div>
 
 
@@ -139,7 +146,7 @@
     $(".checklist-edit").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
-        var param = id.split('-');
+        var param = id.split('`');
         $.ajax(
             {
                 url: "../CheckList/Edit",
@@ -169,7 +176,7 @@
     $(".checklist-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
-        var param = id.split('-');
+        var param = id.split('`');
         var r = confirm("Are you sure want to delete?");
         if (r == false) {
             return;

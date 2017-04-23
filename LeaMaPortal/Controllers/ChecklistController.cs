@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using LeaMaPortal.Models;
 using MvcPaging;
 using MySql.Data.MySqlClient;
@@ -17,7 +17,7 @@ namespace LeaMaPortal.Controllers
 {
     public class ChecklistController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
 
         // GET: Checklist
         public PartialViewResult Index(string Search, int? page, int? defaultPageSize)
@@ -65,6 +65,8 @@ namespace LeaMaPortal.Controllers
         {
             CheckListViewModel model = new CheckListViewModel();
             ViewBag.Checklist_Type = new SelectList(StaticHelper.GetStaticData(StaticHelper.CHECKLIST_DROPDOWN), "Name", "Name");
+            model.Checklist_id = db.tbl_checklistmaster.OrderByDescending(o => o.Id).Select(s => s.Checklist_id).FirstOrDefault();
+            model.Checklist_id = (Convert.ToInt32(model.Checklist_id) + 1).ToString();
             return PartialView("../Master/CheckList/_AddOrUpdate", model);
         }
         // POST: CheckList/Create

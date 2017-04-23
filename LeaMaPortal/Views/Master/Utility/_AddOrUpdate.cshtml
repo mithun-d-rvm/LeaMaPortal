@@ -18,7 +18,7 @@
                     @Html.LabelFor(model => model.Utility_id, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Utility_id, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Utility_Id" } })
+                    @Html.EditorFor(model => model.Utility_id, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Utility_Id", @readonly = "readonly" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace LeaMaPortal
 {
@@ -13,13 +14,14 @@ namespace LeaMaPortal
 
         public static List<string> Months= new List<string>() { "Jan", "Feb", "Mar", "April", "May","June","July","Aug","Sep","Oct","Nov","Dec" };
 
-        public const string DefaultTitle = "MR.";
+        public const string DefaultTitle = "Mr.";
         public static List<string> Role = new List<string>() { "Admin", "Management", "Caretaker" };
         //public static List<string> City = new List<string>() { "Abudhabi", "Sharja" };
         public static List<string> Profession = new List<string>() { "Engineer", "Teacher", "Shop keeper", "Doctor", "Farmer" };
 
-        public const string INSERT = "INSERT", UPDATE = "UPDATE", DELETE = "DELETE", SELECT = "SELECT", View = "View";
-        public const int DefaultMaster = 10;
+        public const string INSERT = "INSERT", UPDATE = "UPDATE", DELETE = "DELETE", SELECT= "SELECT",View = "View";
+        public const int DefaultMaster = 9;
+        public const string Bank_number = "XXXXYYYYZZZZ";
         public const string TenantIndividualDocumentContainer = "Documents/TenantIndividual/";
         public static List<FormMaster> FormMasterList = new List<FormMaster>()
         {
@@ -51,14 +53,84 @@ namespace LeaMaPortal
         public static List<string> ComapanyActivity = new List<string>() { "Activity1" };
         public static List<string> Issuance_authority = new List<string>() { "List-1" };
         public const string TenantCompanyDocumentContainer = "Documents/TenantCompany/";
-
-
-        public static List<string> PaymentMode = new List<string>() { "Cash", "Cheque", "Online", "Cheque without date", "DD" };
-        public const string AgreementDocumentContainer = "Documents/AgreementDocument/";
+        public static List<string> Nationality = new List<string>() { "UAE", "Non-UAE"};
+        public static string DefaultNationality="UAE";
+        public static string DefaultMaridalStatus = "Family";
+        public static List<string> InvoiceType = new List<string>() { "Rental", "Others" };
+        
+        public static List<MonthField> Month = new List<MonthField>()
+        {
+            new MonthField
+            {
+                Text = "January",
+                Value = 1
+            },
+            new MonthField
+            {
+                Text = "February",
+                Value = 2
+            },
+            new MonthField
+            {
+                Text = "March",
+                Value = 3
+            },
+            new MonthField
+            {
+                Text = "Apirl",
+                Value = 4
+            },
+            new MonthField
+            {
+                Text = "May",
+                Value = 5
+            },
+            new MonthField
+            {
+                Text = "June",
+                Value = 6
+            },
+            new MonthField
+            {
+                Text = "July",
+                Value = 7
+            },
+            new MonthField
+            {
+                Text = "August",
+                Value = 8
+            },
+            new MonthField
+            {
+                Text = "September",
+                Value = 9
+            },
+            new MonthField
+            {
+                Text = "October",
+                Value = 10
+            },
+            new MonthField
+            {
+                Text = "November",
+                Value = 11
+            },
+            new MonthField
+            {
+                Text = "December",
+                Value = 12
+            }
+        };
+        
     }
     public class FormMaster
     {
         public int Id { get; set; }
         public string MenuName { get; set; }
+    }
+    public class MonthField
+    {
+        public string Text { get; set; }
+        public int Value { get; set; }
     }
 }
