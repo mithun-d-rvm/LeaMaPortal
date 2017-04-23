@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -12,6 +13,8 @@ namespace LeaMaPortal.Models
         [DisplayName("Payment Number")]
         public int PaymentNo { get; set; }
         [DisplayName("Payment Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? PaymentDate { get; set; }
         [DisplayName("PaymentType")]
         public string PaymentType { get; set; }
@@ -21,7 +24,7 @@ namespace LeaMaPortal.Models
         public int? Supplier_id { get; set; }
         [DisplayName("Supplier Name")]
         public string Supplier_Name { get; set; }
-        [DisplayName("Contract Agreeement Number")]
+        [DisplayName("Agreeement Number")]
         public int? agreement_no { get; set; }
         [DisplayName("Property ID")]
         public string Property_id { get; set; }
@@ -40,6 +43,8 @@ namespace LeaMaPortal.Models
         [DisplayName("DD/Cheque Number")]
         public string DDChequeNo { get; set; }
         [DisplayName("DD/Cheque Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? DDChequeDate { get; set; }
         [DisplayName("Bank Account Number")]
         public string BankAcCode { get; set; }
@@ -60,6 +65,8 @@ namespace LeaMaPortal.Models
         [DisplayName("Invoice Number")]
         public string Invno { get; set; }
         [DisplayName("Invoice Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? InvoiceDate { get; set; }
         [DisplayName("Invoice Description")]
         public string Description { get; set; }

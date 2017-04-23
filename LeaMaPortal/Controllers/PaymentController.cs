@@ -80,22 +80,36 @@ namespace LeaMaPortal.Controllers
             try
             {
                 PaymentViewModel model = new PaymentViewModel();
+                int paymentno = await db.tbl_paymenthd.Select(x => x.PaymentNo).DefaultIfEmpty(0).MaxAsync();
+                model.PaymentNo = paymentno == 0 ? 1 : paymentno + 1;
+                model.PaymentDate = DateTime.Now.Date;
                 var paymentType_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','Reccategory',',',null)").ToList();
                 ViewBag.PaymentType = new SelectList(paymentType_result, model.PaymentType);
                 var paymentMode_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','RecpType',',',null)").ToList();
                 ViewBag.PaymentMode = new SelectList(paymentMode_result, model.PaymentMode);
                 var PDCstatus_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','PDCstatus',',',null)").ToList();
                 ViewBag.PDCstatus = new SelectList(PDCstatus_result, model.PDCstatus);
-                ViewBag.Supplier_id = new SelectList(db.tbl_suppliermaster.Where(w => w.Delmark != "*"), "Supplier_Id", "Supplier_Id");
-                ViewBag.Supplier_Name = new SelectList(db.tbl_suppliermaster.Where(w => w.Delmark != "*"), "Supplier_Id", "Supplier_Name");
-                ViewBag.Property_id = new SelectList(db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Property" && w.Delmark != "*").OrderBy(o => o.id).Distinct(), "Property_ID_Tawtheeq", "Property_ID_Tawtheeq");
-                ViewBag.Property_Name = new SelectList(db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Property" && w.Delmark != "*").OrderBy(o => o.id).Distinct(), "Property_ID_Tawtheeq", "Property_Name");
-                ViewBag.Unit_ID = new SelectList(db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Unit" && w.Delmark != "*").OrderBy(o => o.id).Distinct(), "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
-                ViewBag.unit_Name = new SelectList(db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Unit" && w.Delmark != "*").OrderBy(o => o.id).Distinct(), "Unit_ID_Tawtheeq", "Unit_Property_Name");
+                var suppliers = await db.tbl_suppliermaster.Where(w => w.Delmark != "*").ToListAsync();
+                ViewBag.Supplierid = new SelectList(suppliers, "Supplier_Id", "Supplier_Id");
+                ViewBag.SupplierName = new SelectList(suppliers, "Supplier_Id", "Supplier_Name");
+
+                var properties = db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Property" && w.Delmark != "*").OrderBy(o => o.id);
+
+                ViewBag.Propertyid = new SelectList(properties, "Property_ID_Tawtheeq", "Property_ID_Tawtheeq");
+                ViewBag.PropertyName = new SelectList(properties, "Property_ID_Tawtheeq", "Property_Name");
+
+                var units = db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Unit" && w.Delmark != "*").OrderBy(o => o.id);
+
+                ViewBag.UnitID = new SelectList(units, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
+                ViewBag.unitName = new SelectList(units, "Unit_ID_Tawtheeq", "Unit_Property_Name");
+
+                
                 ViewBag.agreement_no = new SelectList(db.tbl_agreement.Where(w => w.Delmark != "*").OrderBy(o => o.id).Distinct(), "Agreement_No", "Agreement_No");
-                ViewBag.AccountName = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NAME), "Name", "Name");
-                ViewBag.AccountNumber = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NUMBER), "Name", "Name");
-                ViewBag.Adv_Payment_Number = new SelectList(db.tbl_agreement.Where(w => w.Delmark != "*").OrderBy(o => o.id).Distinct(), "Agreement_No", "Agreement_No");
+                ViewBag.BankAcName = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NAME), "Name", "Name");
+                ViewBag.BankAcCode = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NUMBER), "Name", "Name");
+
+                var advancepaymentnumber = db.Database.SqlQuery<int>("Select PaymentNo from view_advance_pending_payment");
+                ViewBag.AdvAcCode = new SelectList(advancepaymentnumber);
                 return PartialView("../Payment/_AddOrUpdate", model);
             }
             catch (Exception ex)
@@ -117,13 +131,14 @@ namespace LeaMaPortal.Controllers
 
                     if (model.Id == 0)
                     {
-
+                        model.Id = 1;
                     }
                     else
                     {
+                        model.Id = 1 + model.PaymentNo;
                         PFlag = "UPDATE";
                     }
-                    string invoice = "";
+                    string invoice = null;
                     if (model.PaymentDetailsViewModel != null && model.PaymentType == "against invoice")
                     {
                         foreach (var item in model.PaymentDetailsViewModel)
@@ -163,10 +178,10 @@ namespace LeaMaPortal.Controllers
                                             new MySqlParameter("@PBankAcName", model.BankAcName),
                                             new MySqlParameter("@PAdvAcCode", model.AdvAcCode),
                                             new MySqlParameter("@PNarration", model.Narration),
-                                            new MySqlParameter("@PPaymentdt", invoice),
-                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name),
+                                           new MySqlParameter("@PPaymentdt", invoice)
                                          };
-                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Payment_All(@PFlag,@PPaymentNo,@PPaymentDate,@Pagreement_no,@PProperty_ID,@PProperty_Name,@PUnit_ID,@Punit_Name,@PSupplier_id,@PSupplier_Name,@PPaymentType,@PPaymentMode,@PTotalAmount,@PAmtInWords,@PDDChequeNo,@PCheqdate,@Ppdcstatus,@PBankAcCode,@PBankAcName,@PAdvAcCode,@PNarration,@PPaymentdt,@PCreateduser)", param).ToListAsync();
+                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Payment_All(@PFlag,@PPaymentNo,@PPaymentDate,@Pagreement_no,@PProperty_ID,@PProperty_Name,@PUnit_ID,@Punit_Name,@PSupplier_id,@PSupplier_Name,@PPaymentType,@PPaymentMode,@PTotalAmount,@PAmtInWords,@PDDChequeNo,@PCheqdate,@Ppdcstatus,@PBankAcCode,@PBankAcName,@PAdvAcCode,@PNarration,@PCreateduser,@PPaymentdt)", param).ToListAsync();
                     await db.SaveChangesAsync();
                 }
                 return Json(result, JsonRequestBehavior.AllowGet);
@@ -219,6 +234,54 @@ namespace LeaMaPortal.Controllers
                     }).ToList()
                 };
 
+                var paymentType_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','Reccategory',',',null)").ToList();
+                ViewBag.PaymentType = new SelectList(paymentType_result, model.PaymentType);
+                var paymentMode_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','RecpType',',',null)").ToList();
+                ViewBag.PaymentMode = new SelectList(paymentMode_result, model.PaymentMode);
+                var PDCstatus_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','PDCstatus',',',null)").ToList();
+                ViewBag.PDCstatus = new SelectList(PDCstatus_result, model.PDCstatus);
+                var suppliers = await db.tbl_suppliermaster.Where(w => w.Delmark != "*").ToListAsync();
+                ViewBag.Supplierid = new SelectList(suppliers, "Supplier_Id", "Supplier_Id",model.Supplier_id);
+                ViewBag.SupplierName = new SelectList(suppliers, "Supplier_Id", "Supplier_Name",model.Supplier_id);
+                var agreements = db.tbl_agreement.Where(w => w.Delmark != "*").OrderBy(o => o.id);
+                ViewBag.agreement_no = new SelectList(agreements, "Agreement_No", "Agreement_No", model.agreement_no);
+                ViewBag.BankAcName = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NAME), "Name", "Name", model.BankAcName);
+                ViewBag.BankAcCode = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NUMBER), "Name", "Name", model.BankAcCode);
+                if (model.agreement_no==null || model.agreement_no == 0)
+                {
+                    var properties = db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Property" && w.Delmark != "*").OrderBy(o => o.id);
+
+                    ViewBag.Propertyid = new SelectList(properties, "Property_ID_Tawtheeq", "Property_ID_Tawtheeq", model.Property_id);
+                    ViewBag.PropertyName = new SelectList(properties, "Property_ID_Tawtheeq", "Property_Name", model.Property_id);
+
+                    var units = db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Unit" && w.Delmark != "*").OrderBy(o => o.id);
+
+                    ViewBag.UnitID = new SelectList(units, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq", model.Unit_ID);
+                    ViewBag.unitName = new SelectList(units, "Unit_ID_Tawtheeq", "Unit_Property_Name", model.Unit_ID);
+                }
+                else
+                {
+                    var agreementDetails = await agreements.FirstOrDefaultAsync(y => y.Agreement_No == model.agreement_no);
+                    List<UnitDropdown> unitsDropdown = new List<UnitDropdown>();
+                    unitsDropdown.Add(new UnitDropdown()
+                    {
+                        Unitid = agreementDetails.Unit_ID_Tawtheeq,
+                        unitName = agreementDetails.Unit_Property_Name
+                    });
+                    ViewBag.UnitID = new SelectList(unitsDropdown, "Unitid", "Unitid", model.Unit_ID);
+                    ViewBag.unitName = new SelectList(unitsDropdown, "Unitid", "unitName", model.Unit_ID);
+
+                    List<PropertyDropdown> propertyDropdown = new List<PropertyDropdown>();
+                    propertyDropdown.Add(new PropertyDropdown()
+                    {
+                        Propertyid = agreementDetails.Property_ID_Tawtheeq,
+                        PropertyName = agreementDetails.Properties_Name
+                    });
+                    ViewBag.Propertyid = new SelectList(propertyDropdown, "Propertyid", "Propertyid", model.Property_id);
+                    ViewBag.PropertyName = new SelectList(propertyDropdown, "Propertyid", "PropertyName", model.Property_id);
+                }
+                var advancepaymentnumber = await db.Database.SqlQuery<int>("Select PaymentNo from view_advance_pending_payment").ToListAsync();
+                ViewBag.AdvAcCode = new SelectList(advancepaymentnumber,model.AdvAcCode);
                 return PartialView("../Payment/_AddorUpdate", model);
             }
             catch (Exception e)
@@ -292,10 +355,10 @@ namespace LeaMaPortal.Controllers
                                             new MySqlParameter("@PBankAcName", model.BankAcName),
                                             new MySqlParameter("@PAdvAcCode", model.AdvAcCode),
                                             new MySqlParameter("@PNarration", model.Narration),
-                                            new MySqlParameter("@PPaymentdt", ""),
+                                            new MySqlParameter("@PPaymentdt", null),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
-                var RE = await db.Database.SqlQuery<object>("CALL Usp_Payment_All(@PFlag,@PPaymentNo,@PPaymentDate,@Pagreement_no,@PProperty_ID,@PProperty_Name,@PUnit_ID,@Punit_Name,@PSupplier_id,@PSupplier_Name,@PPaymentType,@PPaymentMode,@PTotalAmount,@PAmtInWords,@PDDChequeNo,@PCheqdate,@Ppdcstatus,@PBankAcCode,@PBankAcName,@PAdvAcCode,@PNarration,@PPaymentdt,@PCreateduser)", param).ToListAsync();
+                var RE = await db.Database.SqlQuery<object>("CALL Usp_Payment_All(@PFlag,@PPaymentNo,@PPaymentDate,@Pagreement_no,@PProperty_ID,@PProperty_Name,@PUnit_ID,@Punit_Name,@PSupplier_id,@PSupplier_Name,@PPaymentType,@PPaymentMode,@PTotalAmount,@PAmtInWords,@PDDChequeNo,@PCheqdate,@Ppdcstatus,@PBankAcCode,@PBankAcName,@PAdvAcCode,@PNarration,@PCreateduser,@PPaymentdt)", param).ToListAsync();
                 return Json(result, JsonRequestBehavior.AllowGet);
 
             }
@@ -364,31 +427,59 @@ namespace LeaMaPortal.Controllers
                 throw ex;
             }
         }
-        [HttpPost]
-        public async Task<JsonResult> GetAgreementDetails(int AgreementNo)
+        [HttpGet]
+        public async Task<JsonResult> GetAgreementDetails(int? AgreementNo)
         {
+
             try
             {
-                List<OptionModel> model = new List<OptionModel>();
-                if (AgreementNo != 0 && db.tbl_agreement.Any(w => w.Delmark != "*" && w.Agreement_No == AgreementNo))
+                var invoiceDropdown = new InvoiceDropdown();
+                var agreement = await db.tbl_agreement.FirstOrDefaultAsync(x => x.Agreement_No == AgreementNo);
+                if (agreement != null)
                 {
-                    return Json(new
+                    var property = new PropertyDropdown()
                     {
-                        PropertyId = new SelectList(db.tbl_agreement.FirstOrDefault(w => w.Delmark != "*" && w.Agreement_No == AgreementNo).Property_ID_Tawtheeq, "Property_ID_Tawtheeq", "Property_ID_Tawtheeq"),
-                        PropertyName = new SelectList(db.tbl_agreement.FirstOrDefault(w => w.Delmark != "*" && w.Agreement_No == AgreementNo).Properties_Name, "Property_ID_Tawtheeq", "Properties_Name"),
-                        UnitName = new SelectList(db.tbl_agreement.FirstOrDefault(w => w.Delmark != "*" && w.Agreement_No == AgreementNo).Unit_Property_Name, "Unit_ID_Tawtheeq", "Unit_Property_Name"),
-                        UnitId = new SelectList(db.tbl_agreement.FirstOrDefault(w => w.Delmark != "*" && w.Agreement_No == AgreementNo).Unit_ID_Tawtheeq, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq"),
-                    });
+                        Propertyid = agreement.Property_ID_Tawtheeq,
+                        PropertyName = agreement.Properties_Name
+                    };
+                    var unit = new UnitDropdown()
+                    {
+                        Unitid = agreement.Unit_ID_Tawtheeq,
+                        unitName = agreement.Unit_Property_Name,
+                    };
+
+                    invoiceDropdown.Properties.Add(property);
+                    invoiceDropdown.Units.Add(unit);
                 }
-                else
-                {
-                    return null;
-                }
+                return Json(invoiceDropdown, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                throw ex;
+                throw e;
             }
+
+            //try
+            //{
+            //    List<OptionModel> model = new List<OptionModel>();
+            //    if (AgreementNo != 0 && db.tbl_agreement.Any(w => w.Delmark != "*" && w.Agreement_No == AgreementNo))
+            //    {
+            //        return Json(new
+            //        {
+            //            PropertyId = new SelectList(db.tbl_agreement.FirstOrDefault(w => w.Delmark != "*" && w.Agreement_No == AgreementNo).Property_ID_Tawtheeq, "Property_ID_Tawtheeq", "Property_ID_Tawtheeq"),
+            //            PropertyName = new SelectList(db.tbl_agreement.FirstOrDefault(w => w.Delmark != "*" && w.Agreement_No == AgreementNo).Properties_Name, "Property_ID_Tawtheeq", "Properties_Name"),
+            //            UnitName = new SelectList(db.tbl_agreement.FirstOrDefault(w => w.Delmark != "*" && w.Agreement_No == AgreementNo).Unit_Property_Name, "Unit_ID_Tawtheeq", "Unit_Property_Name"),
+            //            UnitId = new SelectList(db.tbl_agreement.FirstOrDefault(w => w.Delmark != "*" && w.Agreement_No == AgreementNo).Unit_ID_Tawtheeq, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq"),
+            //        });
+            //    }
+            //    else
+            //    {
+            //        return null;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
         }
         protected override void Dispose(bool disposing)
         {
