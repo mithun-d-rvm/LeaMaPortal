@@ -157,7 +157,7 @@
                         @Html.DropDownList("PDCStatus",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                     </div>
                 </div>
-                <div class="col-md-12 form-input-padding">
+                <div class="col-md-12 form-input-padding" id="chequeNo">
                     <div class="col-md-4">
                         @Html.LabelFor(model => model.DDChequeNo, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
@@ -165,7 +165,7 @@
                         @Html.EditorFor(model => model.DDChequeNo, new { htmlAttributes = new { @class = "master-form-input form-control" } })
                     </div>
                 </div>
-                <div class="col-md-12 form-input-padding">
+                <div class="col-md-12 form-input-padding" id="chequeDate">
                     <div class="col-md-4">
                         @Html.LabelFor(model => model.DDChequeDate, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
@@ -206,10 +206,7 @@
                 <h3>Invoice Details</h3>
             </div>
                 <div class="row">
-                    <div class="col-md-12 document-row" id="GridView">
-                        <div class="col-md-1">
-                            ID
-                        </div>
+                    <div class="col-md-12 document-row" id="GridView">                        
                         <div class="col-md-2">
                             Invoice Type
                         </div>
@@ -222,16 +219,16 @@
                         <div class="col-md-2">
                             Invoice Description
                         </div>
+                        <div class="col-md-2">
+                            Remarks
+                        </div>
                     </div>
                 </div>
                 <div class="row ht-5">
                     &nbsp;
                 </div>
                 <div class="row">
-                    <div class="col-md-12 document-row" id="GridView">
-                        <div class="col-md-1">
-
-                        </div>
+                    <div class="col-md-12 document-row" id="GridView">                        
                         <div class="col-md-2">
                             <input type="text" class="form-control master-form-input" id="Invtype" />
                         </div>
@@ -244,12 +241,12 @@
                         <div class="col-md-2">
                             <input type="text" class="form-control master-form-input" id="Description" />
                         </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="Remarks" />
+                        </div>
                     </div>
 
                     <div class="col-md-12 document-row" id="GridView">
-                        <div class="col-md-1">
-                            ID
-                        </div>
                         <div class="col-md-2">
                             Invoice Amount
                         </div>
@@ -270,28 +267,20 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 document-row" id="GridView">
-                        <div class="col-md-1">
-
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="InvoiceAmount" onchange="calculateBalance('')" />
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="InvoiceAmount" />
+                            <input type="text" class="form-control master-form-input" id="DebitAmount" onchange="calculateBalance('')" />
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="DebitAmount" />
-                        </div>
-                        <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="PaidAmount" />
+                            <input type="text" class="form-control master-form-input" id="PaidAmount" onchange="calculateBalance('')" />
                         </div>
                         <div class="col-md-2">
                             <input type="text" class="form-control master-form-input" id="Balance" />
                         </div>
-                    </div>
-                    <div class="col-md-12 document-row" id="GridView">
-                        <div class="col-md-1">
-                            ID
-                        </div>
-                        <div class="col-md-2">
-                            Remarks
+                        <div class="col-md-2" >
+                            <button type="button" class="document-btn" onclick="Add()">Add</button>
                         </div>
                     </div>
 
@@ -299,43 +288,26 @@
                 <div class="row ht-5">
                     &nbsp;
                 </div>
-                <div class="row">
-
-                    <div class="col-md-12 document-row" id="GridView">
-                        <div class="col-md-1">
-                        </div>
-                        <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="Remarks" />
-                        </div>
-                        <div class="col-md-2 col-md-offset-2">
-                            <button type="button" class="document-btn" onclick="Add()">Add</button>
-                        </div>
-                        <div class="col-md-2">
-                            @*<button class="document-btn">Delete</button>*@
-                        </div>
-                    </div>
-                </div>
             <table class="row m-t-20" id="PaymentDetailsForm">
                 @if (Model.PaymentDetailsViewModel != null)
                 {
                     for (int j = 0; j < Model.PaymentDetailsViewModel.Count - 1; j++)
                     {
                         var html = "<div class='row'><div class='col-md-12 document-row' id='GridView" + @j + "'>";
-                        html += "<div class='col-md-1'>ID</div>";
                         html += "<div class='col-md-2'>Invoice Type</div>";
                         html += "<div class='col-md-2'>Invoice Number</div>";
                         html += "<div class='col-md-2'>Invoice Date</div>";
                         html += "<div class='col-md-2'>Invoice Description</div>";
+                        html += "<div class='col-md-2'>Remarks</div>";
                         html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
                         html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-                        html += "<div class='col-md-1'></div>";
                         html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Invtype + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invtype' data-name='Inv type' id='Invtype" + @j + "' /></div>";
                         html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Invno + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invno' data-name='Inv no' id='Invno" + @j + "' /></div>";
                         html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].InvoiceDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceDate' data-name='Invoice Date' id='InvoiceDate" + @j + "' /></div>";
                         html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Description + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Description' data-name='Description' id='Description" + @j + "' /></div>";
+                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Remarks + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Remarks' data-name='Remarks' id='Remarks" + @j + "' /></div>";
                         html += "</div><div class='col-md-12 document-row' id='GridView'>";
-                        html += "<div class='col-md-1'>ID</div>";
                         html += "<div class='col-md-2'>Invoice Amount</div>";
                         html += "<div class='col-md-2'>Debit Amount</div>";
                         html += "<div class='col-md-2'>Paid Amount</div>";
@@ -343,21 +315,12 @@
                         html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
                         html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-                        html += "<div class='col-md-1'></div>";
-                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].InvoiceAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceAmount' data-name='Invoice Amount' id='InvoiceAmount" + @j + "' /></div>";
-                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].DebitAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].DebitAmount' data-name='Debit Amount' id='DebitAmount" + @j + "' /></div>";
-                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].PaidAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PaidAmount' data-name='Paid Amount' id='PaidAmount" + @j + "' /></div>";
+                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].InvoiceAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceAmount' data-name='Invoice Amount' id='InvoiceAmount" + @j + "' onchange='calculateBalance("+@j+")' /></div>";
+                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].DebitAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].DebitAmount' data-name='Debit Amount' id='DebitAmount" + @j + "' onchange='calculateBalance(" + @j + ")' /></div>";
+                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].PaidAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PaidAmount' data-name='Paid Amount' id='PaidAmount" + @j + "' onchange='calculateBalance(" + @j + ")' /></div>";
                         html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Balance + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Balance' data-name='Balance' id='Balance" + @j + "' /></div>";
-                        html += "</div><div class='col-md-12 document-row' id='GridView'>";
-                        html += "<div class='col-md-1'>ID</div>";
-                        html += "<div class='col-md-2'>Remarks</div>";
-                        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
-
-                        html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-                        html += "<div class='col-md-1'></div>";
-                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Remarks + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Remarks' data-name='Remarks' id='Remarks" + @j + "' /></div>";
                         html += "<div class='col-md-2'><button type='button' id='Deleter" + @j + "' class='document-btn removebutton'>Delete</button></div>";
-                        html += "</div></div>";
+                        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
                         <tr>
                             <td>
                                 @Html.Raw(html)
@@ -570,6 +533,28 @@
     }
     $("#PaymentType").change(function () { showHideSubForm($("#PaymentType").val()) });
     showHideSubForm($("#PaymentType").val());
+
+    function showHideCheque(paymentMode) {
+        if (paymentMode != "cheque") {
+            document.getElementById('chequeNo').style.display = "none";
+            document.getElementById('chequeDate').style.display = "none";
+        }
+        else {
+            document.getElementById('chequeNo').style.display = "block";
+            document.getElementById('chequeDate').style.display = "block";
+        }
+    }
+    $("#PaymentMode").change(function () { showHideCheque($("#PaymentMode").val()) });
+    showHideCheque($("#PaymentMode").val());
+
+    function calculateBalance(pos) {
+        var InvoiceAmount = document.getElementById("InvoiceAmount"+pos).value;
+        var DebitAmount = document.getElementById("DebitAmount" + pos).value;
+        var PaidAmount = document.getElementById("PaidAmount" + pos).value;
+        var Balance = InvoiceAmount - PaidAmount;
+        document.getElementById("Balance" + pos).value = Balance;
+    }
+
 
     //function getUnitId(flag) {
     //    var PropertyId = null;
@@ -838,21 +823,20 @@
         var Remarks = document.getElementById("Remarks").value;
 
         var html = "<tr><td><div class='row'><div class='col-md-12 document-row' id='GridView" + j + "'>";
-        html += "<div class='col-md-1'>ID</div>";
         html += "<div class='col-md-2'>Invoice Type</div>";
         html += "<div class='col-md-2'>Invoice Number</div>";
         html += "<div class='col-md-2'>Invoice Date</div>";
         html += "<div class='col-md-2'>Invoice Description</div>";
+        html += "<div class='col-md-2'>Remarks</div>";
         html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
         html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-        html += "<div class='col-md-1'></div>";
         html += "<div class='col-md-2'><input type='text' value='" + Invtype + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invtype' data-name='Inv type' id='Invtype" + j + "' /></div>";
         html += "<div class='col-md-2'><input type='text' value='" + Invno + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invno' data-name='Inv no' id='Invno" + j + "' /></div>";
         html += "<div class='col-md-2'><input type='text' value='" + InvoiceDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceDate' data-name='Invoice Date' id='InvoiceDate" + j + "' /></div>";
         html += "<div class='col-md-2'><input type='text' value='" + Description + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Description' data-name='Description' id='Description" + j + "' /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + Remarks + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Remarks' data-name='Remarks' id='Remarks" + j + "' /></div>";
         html += "</div><div class='col-md-12 document-row' id='GridView'>";
-        html += "<div class='col-md-1'>ID</div>";
         html += "<div class='col-md-2'>Invoice Amount</div>";
         html += "<div class='col-md-2'>Debit Amount</div>";
         html += "<div class='col-md-2'>Paid Amount</div>";
@@ -860,22 +844,13 @@
         html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
         html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-        html += "<div class='col-md-1'></div>";
-        html += "<div class='col-md-2'><input type='text' value='" + InvoiceAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceAmount' data-name='Invoice Amount' id='InvoiceAmount" + j + "' /></div>";
-        html += "<div class='col-md-2'><input type='text' value='" + DebitAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].DebitAmount' data-name='Debit Amount' id='DebitAmount" + j + "' /></div>";
-        html += "<div class='col-md-2'><input type='text' value='" + PaidAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PaidAmount' data-name='Paid Amount' id='PaidAmount" + j + "' /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + InvoiceAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceAmount' data-name='Invoice Amount' id='InvoiceAmount" + j + "' onchange='calculateBalance("+j+")' /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + DebitAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].DebitAmount' data-name='Debit Amount' id='DebitAmount" + j + "' onchange='calculateBalance(" + j + ")' /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + PaidAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PaidAmount' data-name='Paid Amount' id='PaidAmount" + j + "' onchange='calculateBalance(" + j + ")' /></div>";
         html += "<div class='col-md-2'><input type='text' value='" + Balance + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Balance' data-name='Balance' id='Balance" + j + "' /></div>";
-        html += "</div><div class='col-md-12 document-row' id='GridView'>";
-        html += "<div class='col-md-1'>ID</div>";
-        html += "<div class='col-md-2'>Remarks</div>";
-        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
-
-        html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-        html += "<div class='col-md-1'></div>";
-        html += "<div class='col-md-2'><input type='text' value='" + Remarks + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Remarks' data-name='Remarks' id='Remarks" + j + "' /></div>";
         html += "<div class='col-md-2'><button type='button' id='Delete" + j + "' class='document-btn removebutton'>Delete</button></div>";
-        html += "</div></div>";
-        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
+        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+        html = html + "</td></tr><tr><td>&nbsp;</td></tr>"
         j++;
         $("#PaymentDetailsForm").append(html);
         document.getElementById("Invtype").value = "";
