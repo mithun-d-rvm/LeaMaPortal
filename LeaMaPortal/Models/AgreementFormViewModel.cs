@@ -127,4 +127,12 @@ namespace LeaMaPortal.Models
         public SelectList Ag_Tenant_id { get; set; }
         public SelectList Ag_Tenant_Name { get; set; }
     }
+    public class PropertyDropdownModel
+    {
+        public int property_id { get; set; }
+        public string Property_ID_Tawtheeq { get; set; }
+        public string Property_Name { get; set; }
+        public string Unit_ID_Tawtheeq { get; set; }
+        public string Unit_Property_Name { get; set; }
+    }
 }

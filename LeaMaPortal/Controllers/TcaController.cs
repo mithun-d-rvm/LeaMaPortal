@@ -46,8 +46,8 @@ namespace LeaMaPortal.Controllers
             {
                 AgreementFormViewModel model = new AgreementFormViewModel();
                 ViewBag.TenantType = new SelectList(Common.TcaTenantType);
-                ViewBag.Ag_Tenant_id = new SelectList("", "");
-                ViewBag.Ag_Tenant_Name = new SelectList("", "");
+                ViewBag.Ag_Tenantid = new SelectList("", "");
+                ViewBag.Ag_TenantName = new SelectList("", "");
                 var property = await db.tbl_propertiesmaster.Where(x => x.Delmark != "*").ToListAsync();
                 ViewBag.TcaPropertyId = new SelectList(property, "Property_Id", "Property_Id");
                 ViewBag.TcaPropertyIDTawtheeq = new SelectList(property,"Property_Id", "Property_ID_Tawtheeq");
@@ -58,8 +58,8 @@ namespace LeaMaPortal.Controllers
                 ViewBag.SecurityFlag = new SelectList(Common.SecurityFlag);
                 ViewBag.Agreement_No = db.tbl_agreement.OrderByDescending(x=> x.Agreement_No).FirstOrDefault()?.Agreement_No + 1;
                 var caretaker=await db.tbl_caretaker.Where(x=> x.Delmark != "*").ToListAsync();
-                ViewBag.Caretaker_id = new SelectList(caretaker, "Caretaker_id", "Caretaker_id");
-                ViewBag.Caretaker_Name = new SelectList(caretaker, "Caretaker_Name", "Caretaker_Name");
+                ViewBag.Caretakerid = new SelectList(caretaker, "Caretaker_id", "Caretaker_id");
+                ViewBag.CaretakerName = new SelectList(caretaker, "Caretaker_id", "Caretaker_Name");
                 
                 model.Agreement_No = 0;
                 //model.AgreementPd = new AgreementPdcViewModel();
@@ -401,27 +401,53 @@ namespace LeaMaPortal.Controllers
         {
             try
             {
-                DdlTenentDetailsViewModel model = new DdlTenentDetailsViewModel();
                 if (Type == "Company")
                 {
-                    var query = await db.tbl_tenant_company.Where(x => x.Delmark != "*" && x.Type == "company").ToListAsync();
-                    model.Ag_Tenant_id = new SelectList(query.OrderBy(r => r.Tenant_Id).ToList(), "Tenant_Id", "Tenant_Id");
-                    model.Ag_Tenant_Name = new SelectList(query.OrderBy(r => r.First_Name).ToList(), "Tenant_Id", "First_Name");
+                    var query = await db.tbl_tenant_company.Where(x => x.Delmark != "*").OrderBy(x => x.Tenant_Id).Select(x => new { Tenant_Id = x.Tenant_Id, Tenant_Name = x.First_Name }).ToListAsync();
+                    return Json(query, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    var query = await db.tbl_tenant_individual.Where(x => x.Delmark != "*" && x.Type == Type).ToListAsync();
-                    model.Ag_Tenant_id = new SelectList(query.OrderBy(r => r.Tenant_Id), "Tenant_Id", "Tenant_Id");
-                    model.Ag_Tenant_Name = new SelectList(query.OrderBy(r => r.First_Name), "First_Name", "First_Name");
+                    var query = await db.tbl_tenant_individual.Where(x => x.Delmark != "*").OrderBy(x => x.Tenant_Id).Select(x => new { Tenant_Id = x.Tenant_Id, Tenant_Name = x.First_Name }).ToListAsync();
+                    return Json(query, JsonRequestBehavior.AllowGet);
                 }
-                //var tbl_caretaker = await db.tbl_tenant_company.FirstOrDefaultAsync(x => x.Id == Id);
-                return Json(model, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
                 throw;
             }
         }
+
+        [HttpGet]
+        public async Task<ActionResult> GetPropertiesDetails(string Type)
+        {
+            try
+            {
+                if (Type != "Multiple")
+                {
+                    var propertylist = await db.Database.SqlQuery<PropertyDropdownModel>("select property_id,  Property_ID_Tawtheeq,Property_Name,Unit_ID_Tawtheeq,Unit_Property_Name from tbl_propertiesmaster where ifnull(Noofunits,0)=0 and Property_Flag='property'  and ifnull(status,'')<>'Avail' and ifnull(delmark,'')<>'*' and ifnull(Company_occupied_Flag,0)<>1 union all select property_id, Ref_unit_Property_ID_Tawtheeq,Ref_Unit_Property_Name, Unit_ID_Tawtheeq,Unit_Property_Name from tbl_propertiesmaster where Property_Flag='Unit'   and  Caretaker_id=2 and ifnull(status,'')<>'Avail' and ifnull(delmark,'')<>'*' and ifnull(Company_occupied_Flag,0)<>1").ToListAsync();
+                    return Json(propertylist, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var propertylist = await db.Database.SqlQuery<tbl_propertiesmaster>("select * from tbl_propertiesmaster where Noofunits>0 and ifnull(status,'')<>'Avail'and ifnull(delmark,'')<>'*' and ifnull(Company_occupied_Flag,0)<>1").ToListAsync();
+                    var details = propertylist.Select(x => new PropertyDropdownModel()
+                    {
+                        property_id = x.Property_Id,
+                        Property_ID_Tawtheeq = x.Property_ID_Tawtheeq,
+                        Property_Name = x.Property_Name,
+                        Unit_Property_Name = x.Unit_Property_Name,
+                        Unit_ID_Tawtheeq = x.Unit_ID_Tawtheeq
+                    }).ToList();
+                    return Json(details, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
 
         // GET: Tca/Details/5
         public ActionResult Details(int id)
