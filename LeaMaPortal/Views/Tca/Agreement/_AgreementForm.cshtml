@@ -21,13 +21,13 @@
                         <span> Single Unit </span>
                     </div>
                     <div class="col-md-1">
-                        @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Single", new { @Name = "SingleMultipleFlag", @class = "input-checkbox" })
+                        @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Single", new {@class = "input-checkbox",@required= "required" })
                     </div>
                     <div class="col-md-4 m-t-3">
                         <span> Multiple Unit </span>
                     </div>
                     <div class="col-md-1 m-l-m-40">
-                        @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Multiple", new { @Name = "SingleMultipleFlag", @class = "input-checkbox" })
+                        @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Multiple", new {@class = "input-checkbox", @required = "required" })
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                         @Html.LabelFor(model => model.Tenant_Type, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.DropDownList("TenantType", null, "-- Select --", new { @class = "master-form-input form-control", @Name = "TenantType" })
+                        @Html.DropDownList("TenantType", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("TenantId", null, new { @class = "master-form-input form-control", @Name = "TenentId" })
+                        @Html.DropDownList("Ag_Tenant_id", null, new { @class = "master-form-input form-control", @Name = "Ag_Tenant_id", @required = "required" })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -89,7 +89,25 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("TenantName", null, new { @class = "master-form-input", @Name = "TenentName" })
+                        @Html.DropDownList("Ag_Tenant_Name", null, new { @class = "master-form-input", @Name = "Ag_Tenant_Name", @required = "required" })
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Caretaker_id, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-6">
+                        @*<input type="text" class="master-form-input form-control" />*@
+                        @Html.DropDownList("Caretaker_id", null, new { @class = "master-form-input form-control", @required = "required" })
+                    </div>
+                </div>
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Caretaker_Name, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-6">
+                        @*<input type="text" class="master-form-input form-control" />*@
+                        @Html.DropDownList("Caretaker_Name", null, new { @class = "master-form-input", @required = "required" })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -301,7 +319,7 @@
     </div>
 }
 <script>
-    $('input[type=radio][name=SingleMultipleFlag]').change(function () {
+    $('input[type=radio][name=Single_Multiple_Flag]').change(function () {
         debugger;
         if (this.value == 'Multiple') {
             //$('#UnitIDTawtheeq').attr('disabled', true);
@@ -326,20 +344,20 @@
         //           success: function (response) {
         //               debugger;
         //               if (response != null) {
-        //                   $("#TenantId").empty();
-        //                   $("#TenantName").empty();
-        //                   for (var i = 0; i < response.TenantId.length; i++) {
+        //                   $("#Ag_Tenant_id").empty();
+        //                   $("#Ag_Tenant_Name").empty();
+        //                   for (var i = 0; i < response.Ag_Tenant_id.length; i++) {
         //                       var option = $("<option/>");
-        //                       option.attr("value", response.TenantId[i].Value).text(response.TenantId[i].Text);
-        //                       $("#TenantId").append(option);
+        //                       option.attr("value", response.Ag_Tenant_id[i].Value).text(response.Ag_Tenant_id[i].Text);
+        //                       $("#Ag_Tenant_id").append(option);
         //                   }
-        //                   for (var i = 0; i < response.TenantName.length; i++) {
+        //                   for (var i = 0; i < response.Ag_Tenant_Name.length; i++) {
         //                       var option = $("<option/>");
-        //                       option.attr("value", response.TenantName[i].Value).text(response.TenantName[i].Text);
-        //                       $("#TenantName").append(option);
+        //                       option.attr("value", response.Ag_Tenant_Name[i].Value).text(response.Ag_Tenant_Name[i].Text);
+        //                       $("#Ag_Tenant_Name").append(option);
         //                   }
-        //                   //$("#TenentId").val(response.TenentId);
-        //                   //$("#TenentName").val(response.TenentName);
+        //                   //$("#Ag_Tenant_id").val(response.Ag_Tenant_id);
+        //                   //$("#Ag_Tenant_Name").val(response.Ag_Tenant_Name);
         //               }
         //           },
         //           error: function (jqXhr, textStatus, errorThrown) {
@@ -367,20 +385,20 @@
                     success: function (response) {
                         debugger;
                         if (response != null) {
-                            $("#TenantId").empty();
-                            $("#TenantName").empty();
-                            for (var i = 0; i < response.TenantId.length; i++) {
+                            $("#Ag_Tenant_id").empty();
+                            $("#Ag_Tenant_Name").empty();
+                            for (var i = 0; i < response.Ag_Tenant_id.length; i++) {
                                 var option = $("<option/>");
-                                option.attr("value", response.TenantId[i].Value).text(response.TenantId[i].Text);
-                                $("#TenantId").append(option);
+                                option.attr("value", response.Ag_Tenant_id[i].Value).text(response.Ag_Tenant_id[i].Text);
+                                $("#Ag_Tenant_id").append(option);
                             }
-                            for (var i = 0; i < response.TenantName.length; i++) {
+                            for (var i = 0; i < response.Ag_Tenant_Name.length; i++) {
                                 var option = $("<option/>");
-                                option.attr("value", response.TenantName[i].Value).text(response.TenantName[i].Text);
-                                $("#TenantName").append(option);
+                                option.attr("value", response.Ag_Tenant_Name[i].Value).text(response.Ag_Tenant_Name[i].Text);
+                                $("#Ag_Tenant_Name").append(option);
                             }
-                            //$("#TenentId").val(response.TenentId);
-                            //$("#TenentName").val(response.TenentName);
+                            //$("#Ag_Tenant_id").val(response.Ag_Tenant_id);
+                            //$("#Ag_Tenant_Name").val(response.Ag_Tenant_Name);
                         }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
@@ -410,12 +428,12 @@
         return;
     });
 
-    $("#TenantId").change(function () {
-        $("#TenantName").val($("#TenantId option:selected").text());
+    $("#Ag_Tenant_id").change(function () {
+       // $("#Ag_Tenant_Name").val($("#Ag_Tenant_id option:selected").text());
         return;
     });
-    $("#TenantName").change(function () {
-        $("#TenantId").val($("#TenantName option:selected").text());
+    $("#Ag_Tenant_Name").change(function () {
+        //$("#Ag_Tenant_id").val($("#Ag_Tenant_Name option:selected").text());
         return;
     });
 </script>

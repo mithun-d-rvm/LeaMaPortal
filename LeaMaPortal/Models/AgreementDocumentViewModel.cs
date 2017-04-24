@@ -9,6 +9,10 @@ namespace LeaMaPortal.Models
 {
     public class AgreementDocumentViewModel
     {
+        public AgreementDocumentViewModel()
+        {
+            agreementDocumentExistList = new List<AgreementDocumentExist>();
+        }
         public int Id { get; set; }
         public string Name { get; set; }
         public HttpPostedFileBase File { get; set; }

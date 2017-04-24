@@ -20,12 +20,15 @@ namespace LeaMaPortal.Models
             AgreementUnitList = new List<AgreementUnitViewModel>();
             agreementFacilityList = new List<AgreementFacilityViewModel>();
             agreementDocumentExistList = new List<AgreementDocumentExist>();
-    }
-        public int Id { get; set; }
+            AgreementCheckList = new List<AgreementCheckListViewModel>();
+        }
+        //public int Id { get; set; }
         [DisplayName("Single Unit or Multiple Unit")]
         public string Single_Multiple_Flag { get; set; }
         [DisplayName("Existing Contract Contract Agreement")]
         public int Agreement_Refno { get; set; }
+        [StringLength(20)]
+        public string New_Renewal_flag { get; set; }
         [DisplayName("Contract Agreement Number")]
         public int Agreement_No { get; set; }
         [DisplayName("Contract Agreement Date")]
@@ -82,8 +85,7 @@ namespace LeaMaPortal.Models
 
 
         //newly  added fields
-        [StringLength(20)]
-        public string New_Renewal_flag { get; set; }
+        
         public int Caretaker_id { get; set; }
         [StringLength(100)]
         public string Caretaker_Name { get; set; }
@@ -96,6 +98,7 @@ namespace LeaMaPortal.Models
         [StringLength(100)]
         public string Emp_name { get; set; }
         public int Approval_Flag { get; set; }
+        public string Approved_By { get; set; }
         public DateTime Approved_Date { get; set; }
         [StringLength(150)]                                                    
         public string Createduser { get; set; }
@@ -105,7 +108,7 @@ namespace LeaMaPortal.Models
         public string Agfac { get; set; }
         public string Aguti { get; set; }
         public string Agchk { get; set; }
-        public string Aguni { get; set; }
+        public string Agunit { get; set; }
 
         //  public AgreementPdcViewModel AgreementPd { get; set; }
         // public AgreementUtilityViewModel AgreementUtility { get; set; }
@@ -115,12 +118,13 @@ namespace LeaMaPortal.Models
         public List<AgreementDocumentViewModel> agreementDocumentList { get; set; }
         public List<AgreementDocumentExist> agreementDocumentExistList { get; set; }
         public List<AgreementUnitViewModel> AgreementUnitList { get; set; }
+        public List<AgreementCheckListViewModel> AgreementCheckList { get; set; }
 
     }
 
     public class DdlTenentDetailsViewModel
     {
-        public SelectList TenantId { get; set; }
-        public SelectList TenantName { get; set; }
+        public SelectList Ag_Tenant_id { get; set; }
+        public SelectList Ag_Tenant_Name { get; set; }
     }
 }

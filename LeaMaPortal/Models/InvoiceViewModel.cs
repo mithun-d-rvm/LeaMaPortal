@@ -38,9 +38,9 @@ namespace LeaMaPortal.Models
         [DisplayName("Month")]
         public int? month { get; set; }
         [DisplayName("Year")]
-        public int year { get; set; }
-        [DisplayName("Subtotal")]
-        public decimal totalamt { get; set; }
+        public int? year { get; set; }
+        [DisplayName("Total Amount")]
+        public float? totalamt { get; set; }
         [DisplayName("Due Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -65,7 +65,7 @@ namespace LeaMaPortal.Models
         public float? qty { get; set; }
         [DisplayName("Amount")]
         public float? amount { get; set; }
-        
+
     }
     public class TenantDropdown
     {

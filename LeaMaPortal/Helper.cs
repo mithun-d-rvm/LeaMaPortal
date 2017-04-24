@@ -30,10 +30,13 @@ namespace LeaMaPortal
             string paramstr= "@PFlag";
             foreach (var property in model.GetType().GetProperties().ToList())
             {
-                if (property.Name == "AgreementUtilityList" || property.Name == "AgreementPdcList" || property.Name == "agreementDocumentList" || property.Name == "AgreementUnitList")
+                if (property.Name == "AgreementUtilityList" || property.Name == "AgreementPdcList" ||
+                   property.Name == "agreementDocumentList" || property.Name == "AgreementUnitList" ||
+                   property.Name == "agreementDocumentExistList" || property.Name == "agreementFacilityList"
+                   ||property.Name== "AgreementCheckList")
                     continue;
                 else
-                paramstr += ",@" + property.Name;
+                paramstr += ", @P" + property.Name;
             }
 
             return paramstr;
@@ -47,7 +50,10 @@ namespace LeaMaPortal
 
             foreach (var property in model.GetType().GetProperties().ToList())
             {
-                if (property.Name == "AgreementUtilityList" || property.Name == "AgreementPdcList" || property.Name == "agreementDocumentList" || property.Name == "AgreementUnitList")
+                if (property.Name == "AgreementUtilityList" || property.Name == "AgreementPdcList" || 
+                    property.Name == "agreementDocumentList" || property.Name == "AgreementUnitList" ||
+                    property.Name== "agreementDocumentExistList" || property.Name== "agreementFacilityList"
+                     || property.Name == "AgreementCheckList")
                     continue;
                 if (property.Name == "Createduser")
                     parameters.Add(new MySqlParameter("@P" + property.Name, CreatedUser));

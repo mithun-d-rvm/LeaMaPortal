@@ -8,7 +8,12 @@
 
 <div class="row">
     <div class="col-md-12 document-row">
-       
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.Checklist_id, htmlAttributes: new { @class = "label-default-remove" })
+        </div>
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.Checklist_Name, htmlAttributes: new { @class = "label-default-remove" })
+        </div>
         <div class="col-md-4">
             @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "label-default-remove" }) 
         </div>
@@ -22,14 +27,25 @@
     &nbsp;
 </div>
 <div class="row">
-    <div class="col-md-12 document-row">       
+    @for (int i = 0; i < Model.AgreementCheckList.Count; i++)
+    {
+    <div class="col-md-12 document-row">  
+        <div class="col-md-2">
+             
+            @Html.HiddenFor(model => model.AgreementCheckList[i].Checklist_id, new { @class = "master-form-input" })
+            @Model.AgreementCheckList[i].Checklist_id
+        </div>
+        <div class="col-md-2">
+            @Html.HiddenFor(model => model.AgreementCheckList[i].Checklist_Name, new { @class = "master-form-input" })
+            @Model.AgreementCheckList[i].Checklist_Name
+        </div>     
         <div class="col-md-3" style="margin-left: -27px;">
             <div class="col-md-5">
                 <div class="col-md-4 m-t-3">
                     <span> Yes </span>
                 </div>
                 <div class="col-md-1">
-                    @Html.RadioButtonFor(m=>m.Status,"1",new { @class = "input-checkbox" })
+                    @Html.RadioButtonFor(model=>model.AgreementCheckList[i].Status, "1", new { @class = "input-checkbox" })
                     @*<input type="radio" class="input-checkbox" name="verified">*@
                 </div>
             </div>
@@ -38,14 +54,15 @@
                     <span> No </span>
                 </div>
                 <div class="col-md-1">
-                    @Html.RadioButtonFor(m => m.Status, "0", new { @class = "input-checkbox" })
+                    @Html.RadioButtonFor(model => model.AgreementCheckList[i].Status, "0", new { @class = "input-checkbox" })
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "master-form-input" } })
+            @Html.EditorFor(model => model.AgreementCheckList[i].Remarks, new { htmlAttributes = new { @class = "master-form-input",@maxlength="1000" } })
         </div>
     </div>
+    }
 </div>
 @*@Html.Partial("_AgreementCheckListDetails")*@
 
