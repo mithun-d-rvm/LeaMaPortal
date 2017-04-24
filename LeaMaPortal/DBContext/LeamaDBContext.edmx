@@ -64,21 +64,6 @@ warning 6002: The table/view 'def.leama.collection_summary' does not have a prim
           <Property Name="Cheque_Amount" Type="float" />
           <Property Name="totalamount" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.dashboard_summary' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="dashboard_summary">
-          <Property Name="category" Type="varchar" MaxLength="100" />
-          <Property Name="Total_Value" Type="float" />
-          <Property Name="Residential" Type="int" />
-          <Property Name="Commercial" Type="int" />
-          <Property Name="water" Type="float" />
-          <Property Name="Eb" Type="float" />
-          <Property Name="Others" Type="float" />
-          <Property Name="overdues" Type="float" />
-          <Property Name="Pdc" Type="float" />
-          <Property Name="Month" Type="varchar" MaxLength="45" />
-          <Property Name="Year" Type="int" />
-        </EntityType>-->
         <EntityType Name="dashboard_utility">
           <Key>
             <PropertyRef Name="id" />
@@ -111,36 +96,6 @@ warning 6013: The table/view 'def.leama.dashboard_summary' does not have a prima
           <Property Name="Loss_Amt" Type="double" />
           <Property Name="user" Type="varchar" MaxLength="45" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.ebwater_caretaker_report' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="ebwater_caretaker_report">
-          <Property Name="Caretaker_id" Type="int" />
-          <Property Name="Caretaker_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Region_Name" Type="varchar" MaxLength="150" />
-          <Property Name="Country" Type="varchar" MaxLength="150" />
-          <Property Name="Noof_properties" Type="int" />
-          <Property Name="Aging_days" Type="int" />
-          <Property Name="Aging_Range" Type="varchar" MaxLength="25" />
-          <Property Name="Amont_Range" Type="varchar" MaxLength="45" />
-          <Property Name="OutstandingAmt" Type="float" />
-          <Property Name="user" Type="varchar" MaxLength="45" />
-          <Property Name="utility_id" Type="varchar" MaxLength="45" />
-          <Property Name="Utility_Name" Type="varchar" MaxLength="45" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.ebwater_region_report' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="ebwater_region_report">
-          <Property Name="Region_Name" Type="varchar" MaxLength="150" />
-          <Property Name="Country" Type="varchar" MaxLength="150" />
-          <Property Name="Noof_properties" Type="int" />
-          <Property Name="Aging_days" Type="int" />
-          <Property Name="Aging_Range" Type="varchar" MaxLength="25" />
-          <Property Name="Amount_Range" Type="varchar" MaxLength="45" />
-          <Property Name="OutstandingAmt" Type="float" />
-          <Property Name="user" Type="varchar" MaxLength="45" />
-          <Property Name="utility_id" Type="varchar" MaxLength="45" />
-          <Property Name="Utility_Name" Type="varchar" MaxLength="45" />
-        </EntityType>-->
         <EntityType Name="ebwater_report">
           <Key>
             <PropertyRef Name="id" />
@@ -191,21 +146,6 @@ warning 6013: The table/view 'def.leama.ebwater_region_report' does not have a p
           <Property Name="Tenant_Type" Type="varchar" MaxLength="25" />
           <Property Name="Emailid" Type="varchar" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.email_report' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="email_report">
-          <Property Name="Emailtext" Type="text" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.esplit' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="esplit">
-          <Property Name="Value" Type="varchar" MaxLength="1000" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.esplit1' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="esplit1">
-          <Property Name="Value" Type="varchar" MaxLength="1000" />
-        </EntityType>-->
         <EntityType Name="eventtest">
           <Key>
             <PropertyRef Name="id" />
@@ -213,32 +153,6 @@ warning 6013: The table/view 'def.leama.esplit1' does not have a primary key def
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.outstanding_caretaker_report' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="outstanding_caretaker_report">
-          <Property Name="Caretaker_id" Type="int" />
-          <Property Name="Caretaker_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Region_Name" Type="varchar" MaxLength="150" />
-          <Property Name="Country" Type="varchar" MaxLength="150" />
-          <Property Name="Noof_properties" Type="int" />
-          <Property Name="Remaining_Days" Type="int" />
-          <Property Name="Remaining_Range" Type="varchar" MaxLength="25" />
-          <Property Name="Amont_Range" Type="varchar" MaxLength="45" />
-          <Property Name="outstanding_amt" Type="float" />
-          <Property Name="user" Type="varchar" MaxLength="45" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.outstanding_region_report' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="outstanding_region_report">
-          <Property Name="Region_Name" Type="varchar" MaxLength="150" />
-          <Property Name="Country" Type="varchar" MaxLength="150" />
-          <Property Name="Noof_properties" Type="int" />
-          <Property Name="Remaining_Days" Type="int" />
-          <Property Name="Remaining_Range" Type="varchar" MaxLength="25" />
-          <Property Name="Amount_Range" Type="varchar" MaxLength="45" />
-          <Property Name="outstanding_amt" Type="float" />
-          <Property Name="user" Type="varchar" MaxLength="45" />
-        </EntityType>-->
         <EntityType Name="outstanding_report">
           <Key>
             <PropertyRef Name="id" />
@@ -290,32 +204,6 @@ warning 6013: The table/view 'def.leama.outstanding_region_report' does not have
           <Property Name="pdcstatus" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="user" Type="varchar" MaxLength="45" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.renewal_caretaker_report' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="renewal_caretaker_report">
-          <Property Name="Caretaker_id" Type="int" />
-          <Property Name="Caretaker_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Region_Name" Type="varchar" MaxLength="150" />
-          <Property Name="Country" Type="varchar" MaxLength="150" />
-          <Property Name="Noof_properties" Type="int" />
-          <Property Name="Remaining_Days" Type="int" />
-          <Property Name="Remaining_Range" Type="varchar" MaxLength="25" />
-          <Property Name="Amont_Range" Type="varchar" MaxLength="45" />
-          <Property Name="Contract_Value" Type="float" />
-          <Property Name="user" Type="varchar" MaxLength="45" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.renewal_region_report' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="renewal_region_report">
-          <Property Name="Region_Name" Type="varchar" MaxLength="150" />
-          <Property Name="Country" Type="varchar" MaxLength="150" />
-          <Property Name="Noof_properties" Type="int" />
-          <Property Name="Remaining_Days" Type="int" />
-          <Property Name="Remaining_Range" Type="varchar" MaxLength="25" />
-          <Property Name="Amount_Range" Type="varchar" MaxLength="45" />
-          <Property Name="Contract_Value" Type="float" />
-          <Property Name="user" Type="varchar" MaxLength="45" />
-        </EntityType>-->
         <EntityType Name="renewal_report">
           <Key>
             <PropertyRef Name="id" />
@@ -339,28 +227,6 @@ warning 6013: The table/view 'def.leama.renewal_region_report' does not have a p
           <Property Name="Contract_Value" Type="double" />
           <Property Name="user" Type="varchar" MaxLength="45" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.summarycollection_caretaker_report' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="summarycollection_caretaker_report">
-          <Property Name="Caretaker_id" Type="int" />
-          <Property Name="Caretaker_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Region_Name" Type="varchar" MaxLength="150" />
-          <Property Name="Country" Type="varchar" MaxLength="150" />
-          <Property Name="Noof_properties" Type="int" />
-          <Property Name="totalrentalamount" Type="float" />
-          <Property Name="Totalpaidamt" Type="float" />
-          <Property Name="user" Type="varchar" MaxLength="45" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.summarycollection_region_report' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="summarycollection_region_report">
-          <Property Name="Region_Name" Type="varchar" MaxLength="150" />
-          <Property Name="Country" Type="varchar" MaxLength="150" />
-          <Property Name="Noof_properties" Type="int" />
-          <Property Name="totalrentalamount" Type="float" />
-          <Property Name="Totalpaidamt" Type="float" />
-          <Property Name="user" Type="varchar" MaxLength="45" />
-        </EntityType>-->
         <EntityType Name="summarycollection_report">
           <Key>
             <PropertyRef Name="id" />
@@ -386,28 +252,6 @@ warning 6013: The table/view 'def.leama.summarycollection_region_report' does no
           <Property Name="totalamount" Type="float" />
           <Property Name="user" Type="varchar" MaxLength="45" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.summaryebwater_caretaker_report' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="summaryebwater_caretaker_report">
-          <Property Name="Caretaker_id" Type="int" />
-          <Property Name="Caretaker_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Region_Name" Type="varchar" MaxLength="150" />
-          <Property Name="Country" Type="varchar" MaxLength="150" />
-          <Property Name="Noof_properties" Type="int" />
-          <Property Name="Billamount" Type="float" />
-          <Property Name="Paidamount" Type="float" />
-          <Property Name="user" Type="varchar" MaxLength="45" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.summaryebwater_region_report' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="summaryebwater_region_report">
-          <Property Name="Region_Name" Type="varchar" MaxLength="150" />
-          <Property Name="Country" Type="varchar" MaxLength="150" />
-          <Property Name="Noof_properties" Type="int" />
-          <Property Name="Billamount" Type="float" />
-          <Property Name="Paidamount" Type="float" />
-          <Property Name="user" Type="varchar" MaxLength="45" />
-        </EntityType>-->
         <EntityType Name="summaryebwater_report">
           <Key>
             <PropertyRef Name="id" />
@@ -1457,23 +1301,6 @@ warning 6013: The table/view 'def.leama.summaryebwater_region_report' does not h
           <Property Name="Delmark" Type="varchar" MaxLength="1" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.test_report' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="test_report">
-          <Property Name="Property_Flag" Type="varchar" MaxLength="100" />
-          <Property Name="Prperty_id" Type="varchar" MaxLength="100" />
-          <Property Name="Property_name" Type="varchar" MaxLength="100" />
-          <Property Name="Unit_id" Type="varchar" MaxLength="100" />
-          <Property Name="Unitname" Type="varchar" MaxLength="100" />
-          <Property Name="Region_Name" Type="varchar" MaxLength="150" />
-          <Property Name="Country" Type="varchar" MaxLength="150" />
-          <Property Name="Caretaker_id" Type="int" />
-          <Property Name="Caretaker_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Rental_Rate_Month" Type="double" />
-          <Property Name="Vacant_Start_Date" Type="datetime" Precision="0" />
-          <Property Name="Aging_Days" Type="int" />
-          <Property Name="Loss_Amt" Type="double" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'def.leama.test_report1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="test_report1">
           <Key>
@@ -1546,18 +1373,6 @@ warning 6002: The table/view 'def.leama.vacancy_caretaker_report' does not have 
           <Property Name="Loss_Amt" Type="double" />
           <Property Name="user" Type="varchar" MaxLength="45" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.vacancy_region_report' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="vacancy_region_report">
-          <Property Name="Region_Name" Type="varchar" MaxLength="150" />
-          <Property Name="Country" Type="varchar" MaxLength="150" />
-          <Property Name="Noof_properties" Type="bigint" />
-          <Property Name="Aging_days" Type="int" />
-          <Property Name="Aging_Range" Type="varchar" MaxLength="25" />
-          <Property Name="Amount_Range" Type="varchar" MaxLength="45" />
-          <Property Name="Loss_Amt" Type="double" />
-          <Property Name="user" Type="varchar" MaxLength="45" />
-        </EntityType>-->
         <EntityType Name="vacancy_report">
           <Key>
             <PropertyRef Name="id" />
@@ -1578,61 +1393,6 @@ warning 6013: The table/view 'def.leama.vacancy_region_report' does not have a p
           <Property Name="Loss_Amt" Type="double" />
           <Property Name="user" Type="varchar" MaxLength="45" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.view_advance' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="view_advance">
-          <Property Name="ReceiptNo" Type="varchar" MaxLength="100" />
-          <Property Name="agreement_no" Type="int" />
-          <Property Name="Property_id" Type="varchar" MaxLength="100" />
-          <Property Name="Property_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Unit_ID" Type="varchar" MaxLength="100" />
-          <Property Name="unit_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Tenant_id" Type="int" />
-          <Property Name="Tenant_Name" Type="varchar" MaxLength="100" />
-          <Property Name="TotalAmount" Type="double" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.view_advance_eb' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="view_advance_eb">
-          <Property Name="PaymentNo" Type="varchar" MaxLength="100" />
-          <Property Name="supplier_id" Type="int" />
-          <Property Name="supplier_Name" Type="varchar" MaxLength="200" />
-          <Property Name="TotalAmount" Type="double" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.view_advance_payment' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="view_advance_payment">
-          <Property Name="PaymentNo" Type="varchar" MaxLength="100" />
-          <Property Name="agreement_no" Type="int" />
-          <Property Name="Property_id" Type="varchar" MaxLength="100" />
-          <Property Name="Property_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Unit_ID" Type="varchar" MaxLength="100" />
-          <Property Name="unit_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Supplier_id" Type="int" />
-          <Property Name="Supplier_Name" Type="varchar" MaxLength="100" />
-          <Property Name="TotalAmount" Type="double" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.view_advance_pending' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="view_advance_pending">
-          <Property Name="ReceiptNo" Type="varchar" MaxLength="100" />
-          <Property Name="agreement_no" Type="int" />
-          <Property Name="Property_id" Type="varchar" MaxLength="100" />
-          <Property Name="Property_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Unit_ID" Type="varchar" MaxLength="100" />
-          <Property Name="unit_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Tenant_id" Type="int" />
-          <Property Name="Tenant_Name" Type="varchar" MaxLength="100" />
-          <Property Name="TotalAmount" Type="double" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.view_advance_pending_eb' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="view_advance_pending_eb">
-          <Property Name="PaymentNo" Type="varchar" MaxLength="100" />
-          <Property Name="supplier_id" Type="int" />
-          <Property Name="supplier_Name" Type="varchar" MaxLength="200" />
-          <Property Name="TotalAmount" Type="double" />
-        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6013: The table/view 'def.leama.view_advance_pending_payment' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="view_advance_pending_payment">
@@ -1667,46 +1427,6 @@ warning 6002: The table/view 'def.leama.view_auto_receipt' does not have a prima
           <Property Name="incno" Type="int" />
           <Property Name="invamt" Type="float" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.view_collection' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="view_collection">
-          <Property Name="agreement_no" Type="int" />
-          <Property Name="Property_id" Type="varchar" MaxLength="100" />
-          <Property Name="Property_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Unit_ID" Type="varchar" MaxLength="100" />
-          <Property Name="unit_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Tenant_id" Type="int" />
-          <Property Name="Tenant_Name" Type="varchar" MaxLength="100" />
-          <Property Name="TotalAmount" Type="double" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.view_collection_pending' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="view_collection_pending">
-          <Property Name="agreement_no" Type="int" />
-          <Property Name="Property_id" Type="varchar" MaxLength="100" />
-          <Property Name="Property_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Unit_ID" Type="varchar" MaxLength="100" />
-          <Property Name="unit_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Tenant_id" Type="int" />
-          <Property Name="Tenant_Name" Type="varchar" MaxLength="100" />
-          <Property Name="TotalAmount" Type="double" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.view_ebbill' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="view_ebbill">
-          <Property Name="refno" Type="int" />
-          <Property Name="meterno" Type="varchar" MaxLength="100" />
-          <Property Name="billno" Type="varchar" MaxLength="100" />
-          <Property Name="amount" Type="double" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.view_ebbill_payment_pending' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="view_ebbill_payment_pending">
-          <Property Name="refno" Type="int" />
-          <Property Name="meterno" Type="varchar" MaxLength="100" />
-          <Property Name="billno" Type="varchar" MaxLength="100" />
-          <Property Name="amount" Type="double" />
-        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'def.leama.view_find_pdcstatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="view_find_pdcstatus">
@@ -1781,76 +1501,6 @@ warning 6002: The table/view 'def.leama.view_invoice_receipt_pending' does not h
           <Property Name="totalamt" Type="float" />
           <Property Name="InvoiceAmount" Type="double" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.view_pdc' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="view_pdc">
-          <Property Name="Agreement_No" Type="int" />
-          <Property Name="Ag_Tenant_id" Type="int" />
-          <Property Name="Ag_Tenant_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Property_ID_Tawtheeq" Type="varchar" MaxLength="100" />
-          <Property Name="Properties_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Unit_ID_Tawtheeq" Type="varchar" MaxLength="100" />
-          <Property Name="Unit_Property_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Cheque_Amount" Type="double" />
-          <Property Name="Cheque_No" Type="varchar" MaxLength="100" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.view_pdc_pending' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="view_pdc_pending">
-          <Property Name="Agreement_No" Type="int" />
-          <Property Name="Tenant_id" Type="int" />
-          <Property Name="Tenant_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Property_id" Type="varchar" MaxLength="100" />
-          <Property Name="Property_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Unit_ID" Type="varchar" MaxLength="100" />
-          <Property Name="unit_Name" Type="varchar" MaxLength="100" />
-          <Property Name="pdc_Amount" Type="double" />
-          <Property Name="DDChequeNo" Type="varchar" MaxLength="100" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.view_receiptdt' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="view_receiptdt">
-          <Property Name="invno" Type="varchar" MaxLength="50" />
-          <Property Name="InvoiceAmount" Type="double" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.view_rep_receipt_advance' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="view_rep_receipt_advance">
-          <Property Name="totalamount" Type="float" />
-          <Property Name="agreement_no" Type="int" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.view_rep_receipt_advance_pending' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="view_rep_receipt_advance_pending">
-          <Property Name="totalamount" Type="double" />
-          <Property Name="agreement_no" Type="int" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.view_security' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="view_security">
-          <Property Name="Agreement_No" Type="int" />
-          <Property Name="Ag_Tenant_id" Type="int" />
-          <Property Name="Ag_Tenant_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Property_ID_Tawtheeq" Type="varchar" MaxLength="100" />
-          <Property Name="Properties_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Unit_ID_Tawtheeq" Type="varchar" MaxLength="100" />
-          <Property Name="Unit_Property_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Advance_Security_Amount" Type="double" />
-          <Property Name="Security_chequeno" Type="varchar" MaxLength="50" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.view_security_pending' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="view_security_pending">
-          <Property Name="Agreement_No" Type="int" />
-          <Property Name="Tenant_id" Type="int" />
-          <Property Name="Tenant_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Property_id" Type="varchar" MaxLength="100" />
-          <Property Name="Property_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Unit_ID" Type="varchar" MaxLength="100" />
-          <Property Name="unit_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Security_Amount" Type="double" />
-          <Property Name="DDChequeNo" Type="varchar" MaxLength="50" />
-        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'def.leama.view_tenant' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="view_tenant">
