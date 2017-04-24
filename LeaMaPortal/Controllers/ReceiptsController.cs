@@ -10,6 +10,7 @@ using LeaMaPortal.DBContext;
 using LeaMaPortal.Models;
 using System.Threading.Tasks;
 using LeaMaPortal.Helpers;
+using MvcPaging;
 
 namespace LeaMaPortal.Controllers
 {
@@ -100,7 +101,7 @@ namespace LeaMaPortal.Controllers
             ViewBag.ReceiptMode = ReceiptMode;
             //ViewBag.PDCStatus = PDCStatus;
 
-           
+
             //var Pdc = db.Database.SqlQuery<object>(@"call usp_split('Receipts','PDCstatus',',',null)").ToList();
             //ViewBag.PDCStatus = new SelectList(Pdc);
             ViewBag.PDCStatus = new SelectList("");
@@ -120,109 +121,155 @@ namespace LeaMaPortal.Controllers
             return PartialView("../Receipts/Index", model);
         }
 
-        // GET: Receipts/Details/5
-        public ActionResult Details(int? id)
+        [HttpGet]
+        public PartialViewResult List(string Search, int? page, int? defaultPageSize)
         {
-            if (id == null)
+            ViewData["Search"] = Search;
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+            int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
+            ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, PageSize);
+            var Rec = db.tbl_receipthd.Where(x => x.Delmark != "*");
+            if (!string.IsNullOrWhiteSpace(Search))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                Rec = Rec.Where(x => x.ReceiptNo.ToString().Contains(Search));
             }
-            tbl_receipthd tbl_receipthd = db.tbl_receipthd.Find(id);
-            if (tbl_receipthd == null)
+            var invoice = Rec.OrderBy(x => x.id).Select(x => new ReceiptViewModel()
             {
-                return HttpNotFound();
-            }
-            return View(tbl_receipthd);
+                AdvAcCode = x.AdvAcCode,
+                agreement_no = x.agreement_no,
+                AmtInWords = x.AmtInWords,
+                BankAcCode = x.BankAcCode,
+                BankAcName = x.BankAcName,
+                DDChequeDate = x.DDChequeDate,
+                DDChequeNo = x.DDChequeNo,
+                Id = x.id,
+                Narration = x.Narration,
+                Reccategory = x.Reccategory,
+                ReceiptNo = x.ReceiptNo,
+                RecpType = x.RecpType,
+                ReceiptDate = x.ReceiptDate,
+                PDCstatus = x.PDCstatus,
+                Property_id = x.Property_id,
+                Property_Name = x.Property_Name,
+                TotalAmount = x.TotalAmount,
+                unit_Name = x.unit_Name,
+                ReceiptDetailsList = db.tbl_receiptdt.Where(y => y.Delmark != "*" && y.ReceiptNo == x.ReceiptNo).Select(z => new ReceiptDetailsViewModel
+                {
+                    Id = z.id,
+                    CreditAmt = z.CreditAmt,
+                    Description = z.Description,
+                    Invno = z.Invno,
+                    InvoiceAmount = z.InvoiceAmount,
+                    InvoiceDate = z.InvoiceDate,
+                    Invtype = z.Invtype,
+                    ReceivedAmount = z.ReceivedAmount,
+                    Balance = z.InvoiceAmount - (z.ReceivedAmount + z.CreditAmt),
+                    Remarks = z.Remarks
+                }).ToList()
+            }).ToPagedList(currentPageIndex, PageSize);
+            return PartialView("../Receipts/_List", invoice);
         }
-
-        // GET: Receipts/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Receipts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+                
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ReceiptNo,id,Reccategory,RecpType,ReceiptDate,agreement_no,Property_id,Property_Name,Unit_ID,unit_Name,Tenant_id,Tenant_Name,TotalAmount,AmtInWords,DDChequeNo,PDCstatus,BankAcCode,BankAcName,AdvAcCode,DDChequeDate,Narration,Accyear,Createddatetime,Createduser,Delmark")] tbl_receipthd tbl_receipthd)
+        public async Task<ActionResult> Edit(int id)
         {
-            if (ModelState.IsValid)
-            {
-                db.tbl_receipthd.Add(tbl_receipthd);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(tbl_receipthd);
+            var rec = await db.tbl_receipthd.FirstOrDefaultAsync(f => f.id == id);
+            var data = new ReceiptViewModel();
+            data.AdvAcCode = rec.AdvAcCode;
+            data.agreement_no = rec.agreement_no;
+            data.AmtInWords = rec.AmtInWords;
+            data.BankAcCode = rec.BankAcCode;
+            data.BankAcName = rec.BankAcName;
+            data.DDChequeDate = rec.DDChequeDate;
+            data.DDChequeNo = rec.DDChequeNo;
+            data.Id = rec.id;
+            data.Narration = rec.Narration;
+            data.PDCstatus = rec.PDCstatus;
+            data.Property_id = rec.Property_id;
+            data.Property_Name = rec.Property_Name;
+            data.Reccategory = rec.Reccategory;
+            data.ReceiptDate = rec.ReceiptDate;
+            data.ReceiptNo = rec.ReceiptNo;
+            data.RecpType = rec.RecpType;
+            data.ReceiptDetailsList = db.tbl_receiptdt.Where(w => w.ReceiptNo == rec.ReceiptNo)
+                .Select(s => new ReceiptDetailsViewModel
+                {
+                    CreditAmt = s.CreditAmt,
+                    Balance = s.InvoiceAmount - (s.ReceivedAmount + s.CreditAmt),
+                    Description = s.Description,
+                    Id = s.id,
+                    Invno = s.Invno,
+                    InvoiceAmount = s.InvoiceAmount,
+                    InvoiceDate = s.InvoiceDate,
+                    Invtype = s.Invtype,
+                    ReceivedAmount = s.ReceivedAmount,
+                    Remarks = s.Remarks
+                }).ToList();
+            return PartialView("../Receipts/_AddorUpdate", data);
         }
 
-        // GET: Receipts/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbl_receipthd tbl_receipthd = db.tbl_receipthd.Find(id);
-            if (tbl_receipthd == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbl_receipthd);
-        }
-
-        // POST: Receipts/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ReceiptNo,id,Reccategory,RecpType,ReceiptDate,agreement_no,Property_id,Property_Name,Unit_ID,unit_Name,Tenant_id,Tenant_Name,TotalAmount,AmtInWords,DDChequeNo,PDCstatus,BankAcCode,BankAcName,AdvAcCode,DDChequeDate,Narration,Accyear,Createddatetime,Createduser,Delmark")] tbl_receipthd tbl_receipthd)
+        public async Task<ActionResult> Delete(int? id)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tbl_receipthd).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(tbl_receipthd);
-        }
-
-        // GET: Receipts/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbl_receipthd tbl_receipthd = db.tbl_receipthd.Find(id);
-            if (tbl_receipthd == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbl_receipthd);
-        }
-
-        // POST: Receipts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbl_receipthd tbl_receipthd = db.tbl_receipthd.Find(id);
-            db.tbl_receipthd.Remove(tbl_receipthd);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+            MessageResult result = new MessageResult();
+            var rec = await db.tbl_receipthd.FirstOrDefaultAsync(f => f.id == id);
+            var data = new ReceiptViewModel();
+            data.AdvAcCode = rec.AdvAcCode;
+            data.agreement_no = rec.agreement_no;
+            data.AmtInWords = rec.AmtInWords;
+            data.BankAcCode = rec.BankAcCode;
+            data.BankAcName = rec.BankAcName;
+            data.DDChequeDate = rec.DDChequeDate;
+            data.DDChequeNo = rec.DDChequeNo;
+            data.Id = rec.id;
+            data.Narration = rec.Narration;
+            data.PDCstatus = rec.PDCstatus;
+            data.Property_id = rec.Property_id;
+            data.Property_Name = rec.Property_Name;
+            data.Reccategory = rec.Reccategory;
+            data.ReceiptDate = rec.ReceiptDate;
+            data.ReceiptNo = rec.ReceiptNo;
+            data.RecpType = rec.RecpType;
+            data.ReceiptDetailsList = db.tbl_receiptdt.Where(w => w.ReceiptNo == rec.ReceiptNo)
+                .Select(s => new ReceiptDetailsViewModel
+                {
+                    CreditAmt = s.CreditAmt,
+                    Balance = s.InvoiceAmount - (s.ReceivedAmount + s.CreditAmt),
+                    Description = s.Description,
+                    Id = s.id,
+                    Invno = s.Invno,
+                    InvoiceAmount = s.InvoiceAmount,
+                    InvoiceDate = s.InvoiceDate,
+                    Invtype = s.Invtype,
+                    ReceivedAmount = s.ReceivedAmount,
+                    Remarks = s.Remarks
+                }).ToList();
+            object[] param = Helper.GetMySqlParameters<ReceiptViewModel>(data, "Delete", System.Web.HttpContext.Current.User.Identity.Name);
+            var _result = await db.Database.SqlQuery<object>(@"CALL Usp_Receipt_All(@PFlag,
+, @PReccategory 
+, @PRecpType 
+, @PReceiptNo
+, @PReceiptDate 
+, @Pagreement_no
+, @PProperty_id 
+, @PProperty_Name
+, @PUnit_ID 
+, @Punit_Name 
+, @PTenant_id 
+, @PTenant_Name 
+, @PTotalAmount 
+, @PAmtInWords 
+, @PDDChequeNo 
+, @PPdcstatus 
+, @PBankAcCode
+, @PBankAcName
+, @PAdvAcCode 
+, @PDDChequeDate 
+, @PNarration 
+, @PCreateduser 
+, @PReceiptdt )", param).ToListAsync();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }        
 
         [HttpGet]
         public PartialViewResult AddOrUpdate()
@@ -246,6 +293,7 @@ namespace LeaMaPortal.Controllers
             ViewBag.BankAcCode = new SelectList(Common.BankAccountNumber);
             ViewBag.BankAcName = new SelectList(Common.BankAccountName);
             ViewBag.PDCstatus = new SelectList(Common.Receipts_PDCStatus);
+            ViewBag.InvoiceNumber = new SelectList(db.view_invoice_receipt_pending.OrderBy(o => o.invno).Distinct(), "invno", "invno");
             return PartialView("../Receipts/_AddorUpdate", model);
         }
 
@@ -380,6 +428,26 @@ namespace LeaMaPortal.Controllers
             //string amountInWords = amount.Humanize();
             return amountInWords;
         }
-
+        [HttpPost]
+        public async Task<JsonResult> GetInvoiceDetails(string InvoiceNumber)
+        {
+            try
+            {
+                var invoice = await db.view_invoice_receipt_pending.FirstOrDefaultAsync(f => f.invno == InvoiceNumber);
+                return Json(new { invtype = invoice.invtype, day = invoice.date.Value.Date, month = invoice.date.Value.Month, year = invoice.date.Value.Year, InvoiceAmount = invoice.InvoiceAmount });
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

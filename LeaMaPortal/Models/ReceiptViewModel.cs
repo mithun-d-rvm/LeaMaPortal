@@ -21,7 +21,7 @@ namespace LeaMaPortal.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Receipt Date")]
-        public DateTime ReceiptDate { get; set; }
+        public DateTime? ReceiptDate { get; set; }
 
         [DisplayName("Receipt Mode")]
         public string RecpType { get; set; }
@@ -36,7 +36,7 @@ namespace LeaMaPortal.Models
         public DateTime ContracAgreementDate { get; set; }
 
         [DisplayName("Contract Agreement Number")]
-        public int agreement_no { get; set; }
+        public int? agreement_no { get; set; }
         [DisplayName("Tenant ID")]
         public int Tenant_id { get; set; }
         [DisplayName("Tenant Name")]
@@ -50,7 +50,7 @@ namespace LeaMaPortal.Models
         [DisplayName("Property Name")]
         public string Property_Name { get; set; }
         [DisplayName("Total Amount")]
-        public decimal TotalAmount { get; set; }
+        public float? TotalAmount { get; set; }
         [DisplayName("Amount in words")]
         public string AmtInWords { get; set; }
         [DisplayName("PDC Status")]
@@ -61,7 +61,7 @@ namespace LeaMaPortal.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("DD/Cheque Date")]
-        public DateTime DDChequeDate { get; set; }
+        public DateTime? DDChequeDate { get; set; }
 
         [DisplayName("Bank Account Number")]
         public string BankAcCode { get; set; }
@@ -88,18 +88,18 @@ namespace LeaMaPortal.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Invoice Date")]
-        public DateTime InvoiceDate { get; set; }
+        public DateTime? InvoiceDate { get; set; }
 
         [DisplayName("Invoice Description")]
         public string Description { get; set; }
         [DisplayName("Invoice Amount")]
-        public decimal InvoiceAmount { get; set; }
+        public float? InvoiceAmount { get; set; }
         [DisplayName("Credit Amount")]
-        public decimal CreditAmt { get; set; }
+        public float? CreditAmt { get; set; }
         [DisplayName("ReceivedAmount")]
-        public decimal ReceivedAmount { get; set; }
+        public float? ReceivedAmount { get; set; }
         [DisplayName("Balance Amount")]
-        public decimal Balance { get; set; }
+        public float? Balance { get; set; }
         [DisplayName("Remarks")]
         public string Remarks { get; set; }
 

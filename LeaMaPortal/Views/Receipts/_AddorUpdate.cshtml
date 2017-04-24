@@ -43,7 +43,7 @@
                     @Html.LabelFor(model => model.RecpType, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.DropDownListFor(model => model.RecpType, null, htmlAttributes: new { @class = "master-form-input" })
+                    @Html.DropDownListFor(model => model.RecpType, null, htmlAttributes: new { @class = "master-form-input", @id = "RecpType" })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding" id="advaccode">
@@ -363,7 +363,7 @@
                         </div>
                         <div class="col-md-2 form-group">
                             <label for="description">Invoice Number</label>
-                            <input type="text" class="form-control master-form-input" id="InvoiceNumber" />
+                            @Html.DropDownList("InvoiceNumber", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                         </div>
                         <div class="col-md-2 form-group">
                             <label for="quantity">Invoice Date</label>
@@ -379,11 +379,11 @@
                         </div>
                         <div class="col-md-2 form-group">
                             <label for="description">Credit Amount</label>
-                            <input type="text" class="form-control master-form-input" id="CreditAmount" />
+                            <input type="text" class="form-control master-form-input" onchange="calculateBalance()" id="CreditAmount" />
                         </div>
                         <div class="col-md-2 form-group">
                             <label for="quantity">Received Amount</label>
-                            <input type="text" class="form-control master-form-input" id="ReceivedAmount" />
+                            <input type="text" class="form-control master-form-input" onchange="calculateBalance()" id="ReceivedAmount" />
                         </div>
                         <div class="col-md-2 form-group">
                             <label for="amount">Balance Amount</label>
@@ -453,7 +453,7 @@
                     html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='ReceivedAmount" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].ReceivedAmount' data-name='ReceivedAmount' value='" + Model.ReceiptDetailsList[@j].ReceivedAmount + "'/></div>";
                     html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='BalanceAmount" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].BalanceAmount' data-name='BalanceAmount' value='" + Model.ReceiptDetailsList[@j].Balance + "'/></div>";
                     html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='Remarks" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].Remarks' data-name='Remarks' value='" + Model.ReceiptDetailsList[@j].Remarks + "'/></div>";
-                    html = html + "<div class='col-md-2 form-group'></br><input type='button' class='document-btn removebutton' id='Delete" + @j + "'value='Delete' onclick='removerow()'/>  </div>";
+                    html = html + "<div class='col-md-2 form-group'></br><input type='button' class='document-btn removebutton' id='Delete" + @j + "'value='Delete' />  </div>";
                     html = html + "</div>";
 
                     html = html + "</div>";
@@ -479,25 +479,61 @@
 }
 <script>
 
+    function getInvoice(invoiceNo) {
+        debugger;
+        $.ajax(
+                {
+                    url: "../Receipts/GetInvoiceDetails",
+                    method: "POST",
+                    data: { InvoiceNumber : invoiceNo },
+                    success: function (response) {
+                        debugger;
+                        $("#InvoiceType").val(response.invtype);
+                        //$("#InvoiceDate").val(response.month+"/"+response.day+"/"+response.year);
+                        $("#InvoiceAmount").val(response.InvoiceAmount);
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+                });
+    }
+    $("#InvoiceNumber").change(function () { getInvoice($("#InvoiceNumber option:selected").val()) });
 
-
-    $("#advaccode").hide();
-    //$("#PDCStatus").hide();
+    function showHideSubForm(Reccategory) {
+        if (Reccategory != "against") {
+            document.getElementById('invoice').style.display = "none";
+            document.getElementById('ReceiptDetailsListForms').style.display = "none";
+        }
+        else {
+            document.getElementById('invoice').style.display = "block";
+            document.getElementById('ReceiptDetailsListForms').style.display = "block";
+        }
+    }
 
     $("#Reccategory").on('change', function () {
-        debugger;
-        //var type = $("#Reccategory").val(); // type
-        //var mode = $("#RecpType").val();
-
-        //if (type == 'against' && mode == 'advance adjustment') {
-        //    $("#advaccode").show();
-        //    GetReceiptNumber();
-        //}
-        //if (mode == 'Pdc') {
-        //    $("#PDCStatus").show();
-        //}
+        showHideSubForm($("#Reccategory option:selected").val());
         ddlChange();
     });
+    showHideSubForm($("#Reccategory option:selected").val());
+
+    $("#RecpType").on('change', function () {        
+        ddlChange();
+    });
+    
+
+    function calculateBalance() {
+        var InvoiceAmount = document.getElementById("InvoiceAmount").value != null ? document.getElementById("InvoiceAmount").value : 0;
+        var CreditAmount = document.getElementById("CreditAmount").value != null ? document.getElementById("CreditAmount").value : 0;
+        var ReceivedAmount = document.getElementById("ReceivedAmount").value != null ? document.getElementById("ReceivedAmount").value : 0;
+
+        var Balance = InvoiceAmount - (ReceivedAmount + CreditAmount);
+        document.getElementById("BalanceAmount").value = Balance;
+    }
+
+    $("#advaccode").hide();
+
     function ddlChange() {
         var type = $("#Reccategory").val(); // type
         var mode = $("#RecpType").val();
@@ -520,20 +556,7 @@
         }
 
     }
-    $("#RecpType").on('change', function () {
-        debugger;
-        //var type = $("#Reccategory").val(); // type
-        //var mode = $("#RecpType").val();
-
-        //if (type == 'against' && mode == 'advance adjustment') {
-        //    $("#advaccode").show();
-        //    GetReceiptNumber();
-        //}
-        //if (mode == 'Pdc') {
-        //    $("#PDCStatus").show();
-        //}
-        ddlChange();
-    });
+   
     $("#TotalAmount").on('change', function () {
         debugger;
         var totalAmount = $("#TotalAmount").val(); // type
@@ -816,7 +839,7 @@
         html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='ReceivedAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].ReceivedAmount' data-name='ReceivedAmount' value='" + ReceivedAmount + "'/></div>";
         html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='BalanceAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].BalanceAmount' data-name='BalanceAmount' value='" + BalanceAmount + "'/></div>";
         html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='Remarks" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].Remarks' data-name='Remarks' value='" + Remarks + "'/></div>";
-        html = html + "<div class='col-md-2 form-group'></br><Input type='button' class='document-btn removebutton' id='Delete" + i + "'value='Delete' onclick='removerow()'/> </div>";
+        html = html + "<div class='col-md-2 form-group'></br><Input type='button' class='document-btn removebutton' id='Delete" + i + "'value='Delete' /> </div>";
         html = html + "</div>";
 
         html = html + "</div>";
@@ -836,14 +859,11 @@
         $("#Remarks").val('');
         return false;
     }
-    function removerow() {
-        alert(1)
-        debugger;
+    $(document).on('click', 'input.removebutton', function () {
         $(this).closest('tr').remove();
         var existfilelist = document.getElementById('ReceiptDetailsListForms');
         var newindex = 0;
         $(existfilelist).find('> tbody > tr').each(function () {
-
             $(this).find("input").each(function () {
                 var dataname = $(this).data("name");
                 // alert(dataname + $(this) .val()+ '-' + newindex)
@@ -857,12 +877,9 @@
                     }
                 });
             });
-
             newindex++;
-
         });
-
         i = newindex;
-    };
+    });
 
 </script>
