@@ -2,7 +2,13 @@
 @model LeaMaPortal.Models.ReceiptViewModel
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Receipts" }))
 {
-
+<style>
+    input[readonly]
+{
+    border: none !important;
+    background: none !important;
+}
+</style>
     <div class="row">
         <div class="col-md-6">
             <div class="col-md-12 form-input-padding">
@@ -438,16 +444,16 @@
                     var html = "<div class='col-md-12 document-row' id='GridViewCompanyContact" + @j + "'>";
 
                     html = html + "<div class='col-md-12'>";
-                    html = html + " <div class='col-md-3 form-group'> <label for='InvoiceType'>Invoice Type</label><input id='InvoiceType" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].Invtype + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceType' data-name='Invoice Type'/></div>";
-                    html = html + " <div class='col-md-3 form-group'> <label for='InvoiceNumber'>Invoice Number</label> <input id='InvoiceNumber" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].Invno + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceNumber' data-name='Invoice Number' /></div>";
-                    html = html + " <div class='col-md-2 form-group'> <label for='InvoiceDate'>Invoice Date</label><input type='text' id='InvoiceDate" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceDate' data-name='InvoiceDate' value='" + Model.ReceiptDetailsList[@j].InvoiceDate + "'/></div>";
-                    html = html + " <div class='col-md-2 form-group'> <label for='InvoiceDescription'>Invoice Description</label><input type='text' id='InvoiceDescription" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceDescription' data-name='InvoiceDescription' value='" + Model.ReceiptDetailsList[@j].Description + "'/></div>";
-                    html = html + " <div class='col-md-3 form-group'> <label for='InvoiceAmount'>Invoice Amount </label><input id='InvoiceAmount" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].InvoiceAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceAmount' data-name='Invoice Amount'/></div>";
-                    html = html + " <div class='col-md-3 form-group'> <label for='CreditAmount'>Credit Amount</label> <input id='CreditAmount" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].CreditAmt + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].CreditAmount' data-name='Credit Amount' /></div>";
-                    html = html + " <div class='col-md-2 form-group'> <label for='ReceivedAmount'>Received Amount</label><input type='text' id='ReceivedAmount" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].ReceivedAmount' data-name='ReceivedAmount' value='" + Model.ReceiptDetailsList[@j].ReceivedAmount + "'/></div>";
-                    html = html + " <div class='col-md-2 form-group'> <label for='BalanceAmount'>Balance Amount</label><input type='text' id='BalanceAmount" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].BalanceAmount' data-name='BalanceAmount' value='" + Model.ReceiptDetailsList[@j].Balance + "'/></div>";
-                    html = html + " <div class='col-md-2 form-group'> <label for='Remarks'>Remarks</label><input type='text' id='Remarks" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].Remarks' data-name='Remarks' value='" + Model.ReceiptDetailsList[@j].Remarks + "'/></div>";
-                    html = html + "<div class='col-md-2 form-group'></br>  <input type='button' class='document-btn removebutton' id='Delete" + @j + "'value='Delete' onclick='removerow()'/>  </div>";
+                    html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceType" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].Invtype + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceType' data-name='Invoice Type'/></div>";
+                    html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceNumber" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].Invno + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceNumber' data-name='Invoice Number' /></div>";
+                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='InvoiceDate" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceDate' data-name='InvoiceDate' value='" + Model.ReceiptDetailsList[@j].InvoiceDate + "'/></div>";
+                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='InvoiceDescription" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceDescription' data-name='InvoiceDescription' value='" + Model.ReceiptDetailsList[@j].Description + "'/></div>";
+                    html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceAmount" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].InvoiceAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceAmount' data-name='Invoice Amount'/></div>";
+                    html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='CreditAmount" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].CreditAmt + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].CreditAmount' data-name='Credit Amount' /></div>";
+                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='ReceivedAmount" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].ReceivedAmount' data-name='ReceivedAmount' value='" + Model.ReceiptDetailsList[@j].ReceivedAmount + "'/></div>";
+                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='BalanceAmount" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].BalanceAmount' data-name='BalanceAmount' value='" + Model.ReceiptDetailsList[@j].Balance + "'/></div>";
+                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='Remarks" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].Remarks' data-name='Remarks' value='" + Model.ReceiptDetailsList[@j].Remarks + "'/></div>";
+                    html = html + "<div class='col-md-2 form-group'></br><input type='button' class='document-btn removebutton' id='Delete" + @j + "'value='Delete' onclick='removerow()'/>  </div>";
                     html = html + "</div>";
 
                     html = html + "</div>";
@@ -801,16 +807,16 @@
         var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + i + "'>";
 
         html = html + "<div class='col-md-12'>";
-        html = html + " <div class='col-md-3 form-group'> <label for='InvoiceType'>Invoice Type</label><input id='InvoiceType" + i + "'  type='text' value='" + InvoiceType + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceType' data-name='Invoice Type'/></div>";
-        html = html + " <div class='col-md-3 form-group'> <label for='InvoiceNumber'>Invoice Number</label> <input id='InvoiceNumber" + i + "'  type='text' value='" + InvoiceNumber + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceNumber' data-name='Invoice Number' /></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='InvoiceDate'>Invoice Date</label><input type='text' id='InvoiceDate" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceDate' data-name='InvoiceDate' value='" + InvoiceDate + "'/></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='InvoiceDescription'>Invoice Description</label><input type='text' id='InvoiceDescription" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceDescription' data-name='InvoiceDescription' value='" + InvoiceDescription + "'/></div>";
-        html = html + " <div class='col-md-3 form-group'> <label for='InvoiceAmount'>Invoice Amount </label><input id='InvoiceAmount" + i + "'  type='text' value='" + InvoiceAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceAmount' data-name='Invoice Amount'/></div>";
-        html = html + " <div class='col-md-3 form-group'> <label for='CreditAmount'>Credit Amount</label> <input id='CreditAmount" + i + "'  type='text' value='" + CreditAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].CreditAmount' data-name='Credit Amount' /></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='ReceivedAmount'>Received Amount</label><input type='text' id='ReceivedAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].ReceivedAmount' data-name='ReceivedAmount' value='" + ReceivedAmount + "'/></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='BalanceAmount'>Balance Amount</label><input type='text' id='BalanceAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].BalanceAmount' data-name='BalanceAmount' value='" + BalanceAmount + "'/></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='Remarks'>Remarks</label><input type='text' id='Remarks" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].Remarks' data-name='Remarks' value='" + Remarks + "'/></div>";
-        html = html + "<div class='col-md-2 form-group'></br>  <Input type='button' class='document-btn removebutton' id='Delete" + i + "'value='Delete' onclick='removerow()'/> </div>";
+        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceType" + i + "'  type='text' value='" + InvoiceType + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceType' data-name='Invoice Type'/></div>";
+        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceNumber" + i + "'  type='text' value='" + InvoiceNumber + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceNumber' data-name='Invoice Number' /></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='InvoiceDate" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceDate' data-name='InvoiceDate' value='" + InvoiceDate + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='InvoiceDescription" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceDescription' data-name='InvoiceDescription' value='" + InvoiceDescription + "'/></div>";
+        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceAmount" + i + "'  type='text' value='" + InvoiceAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceAmount' data-name='Invoice Amount'/></div>";
+        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='CreditAmount" + i + "'  type='text' value='" + CreditAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].CreditAmount' data-name='Credit Amount' /></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='ReceivedAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].ReceivedAmount' data-name='ReceivedAmount' value='" + ReceivedAmount + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='BalanceAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].BalanceAmount' data-name='BalanceAmount' value='" + BalanceAmount + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='Remarks" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].Remarks' data-name='Remarks' value='" + Remarks + "'/></div>";
+        html = html + "<div class='col-md-2 form-group'></br><Input type='button' class='document-btn removebutton' id='Delete" + i + "'value='Delete' onclick='removerow()'/> </div>";
         html = html + "</div>";
 
         html = html + "</div>";
