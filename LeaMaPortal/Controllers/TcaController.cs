@@ -404,13 +404,13 @@ namespace LeaMaPortal.Controllers
                 DdlTenentDetailsViewModel model = new DdlTenentDetailsViewModel();
                 if (Type == "Company")
                 {
-                    var query = db.tbl_tenant_company.Where(x => x.Delmark != "*" && x.Type == "company");
+                    var query = await db.tbl_tenant_company.Where(x => x.Delmark != "*" && x.Type == "company").ToListAsync();
                     model.Ag_Tenant_id = new SelectList(query.OrderBy(r => r.Tenant_Id).ToList(), "Tenant_Id", "Tenant_Id");
-                    model.Ag_Tenant_Name = new SelectList(query.OrderBy(r => r.First_Name).ToList(), "First_Name", "First_Name");
+                    model.Ag_Tenant_Name = new SelectList(query.OrderBy(r => r.First_Name).ToList(), "Tenant_Id", "First_Name");
                 }
                 else
                 {
-                    var query = db.tbl_tenant_individual.Where(x => x.Delmark != "*" && x.Type == Type);
+                    var query = await db.tbl_tenant_individual.Where(x => x.Delmark != "*" && x.Type == Type).ToListAsync();
                     model.Ag_Tenant_id = new SelectList(query.OrderBy(r => r.Tenant_Id), "Tenant_Id", "Tenant_Id");
                     model.Ag_Tenant_Name = new SelectList(query.OrderBy(r => r.First_Name), "First_Name", "First_Name");
                 }

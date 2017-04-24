@@ -8,7 +8,8 @@
 @model LeaMaPortal.Models.AgreementFormViewModel
 @using (Html.BeginForm("AddOrUpdate", "Tca", FormMethod.Post, new { @id = "Tca", @enctype = "multipart/form-data" }))
 {
-
+    @Html.HiddenFor(x=>x.Ag_Tenant_id)
+    @Html.HiddenFor(x => x.Ag_Tenant_Name)
     <div class="font-smaller">
         <div class="text-uppercase font-x-large">
             <strong> Agreement </strong>
