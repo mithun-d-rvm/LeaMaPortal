@@ -254,86 +254,217 @@
         <!-- Begin Dynamic row -->
         @*@Html.Partial("ReceiptDetails1");*@
         <!-- End Dynamic row -->
-
-        <table class="table">
-            <tr>
-                <td>
-                    <div class="col-md-2">
-                        Invoice Type
-                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
-                    </div>
-                    <div class="col-md-2">
-                        Invoice Number
-                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
-                    </div>
-                    <div class="col-md-2">
-                        Invoice Date
-                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
-                    </div>
-                    <div class="col-md-2">
-                        Invoice Description
-                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
-                    </div>
-                    <div class="col-md-2">
-                        Invoice Amount
-                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
-                    </div>
-                    <div class="col-md-2">
-                        Credit Amount
-                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
-                    </div>
-                    <div class="col-md-2">
-                        Received Amount
-                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
-                    </div>
-                    <div class="col-md-2">
-                        Balance Amount
-                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
-                    </div>
-                    <div class="col-md-2">
-                        Remarks
-                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
-                    </div>
-                    <div class="col-md-4">
-                        <button class="btn master-form-btn">Add</button>
-                    </div>
-                </td>
-            </tr>
-
-            @foreach (var item in Model.ReceiptDetailsList)
-            {
+        @*<table class="table">
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Invtype)
+                        <div class="col-md-2">
+                            Invoice Type
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-2">
+                            Invoice Number
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-2">
+                            Invoice Date
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-2">
+                            Invoice Description
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-2">
+                            Invoice Amount
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-2">
+                            Credit Amount
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-2">
+                            Received Amount
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-2">
+                            Balance Amount
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-2">
+                            Remarks
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn master-form-btn">Add</button>
+                        </div>
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Invno)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.InvoiceDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.InvoiceAmount)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreditAmt)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ReceivedAmount)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Balance)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Remarks)
-                    </td>
-
                 </tr>
+
+                @foreach (var item in Model.ReceiptDetailsList)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Invtype)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Invno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InvoiceDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InvoiceAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreditAmt)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReceivedAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Balance)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Remarks)
+                        </td>
+
+                    </tr>
+                }
+
+            </table>*@
+
+        <div class="row" id="invoice">
+            @if (Model.ReceiptDetailsList != null)
+            {
+                <input type="hidden" id="init-company-contact-det-count" value="@Model.ReceiptDetailsList.Count" />
+            }
+            else
+            {
+                <input type="hidden" id="init-company-contact-det-count" value="0" />
             }
 
+            <div class="p-b-25">
+                <h3>Receipts Details</h3>
+            </div>
+            <div class="" id="invoice-details">
+                <div id="Gridview" class="row document-row">
+                    <div class="col-md-12">
+                        <div class="col-md-2 form-group">
+                            <label for="itemtype">Invoice Type</label>
+                            <input type="text" class="form-control master-form-input" id="InvoiceType" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="description">Invoice Number</label>
+                            <input type="text" class="form-control master-form-input" id="InvoiceNumber" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="quantity">Invoice Date</label>
+                            <input type="text" class="form-control master-form-input" id="InvoiceDate" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="amount">Invoice Description</label>
+                            <input id="InvoiceDescription" type="text" class="form-control master-form-input" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="itemtype">Invoice Amount</label>
+                            <input type="text" class="form-control master-form-input" id="InvoiceAmount" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="description">Credit Amount</label>
+                            <input type="text" class="form-control master-form-input" id="CreditAmount" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="quantity">Received Amount</label>
+                            <input type="text" class="form-control master-form-input" id="ReceivedAmount" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="amount">Balance Amount</label>
+                            <input class="form-control master-form-input" id="BalanceAmount" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="amount">Remarks</label>
+                            <input class="form-control master-form-input" id="Remarks" />
+                        </div>
+                        <div class="col-md-2 btn-group">
+                            <br />
+                            <input type="button" class="document-btn" id="AddInvoice" value="Add" onclick='add(this);' />
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            @*<div class="row">
+                    <div class="col-md-12 document-row">
+                        <div class="col-md-1">
+                            ID
+                        </div>
+                        <div class="col-md-2">
+                            Item Type
+                        </div>
+                        <div class="col-md-2">
+                            Item Description
+                        </div>
+                        <div class="col-md-2">
+                            Quantity
+                        </div>
+                        <div class="col-md-2">
+                            Amount
+                        </div>
+                    </div>
+                </div>*@
+            <div class="row ht-5">
+                &nbsp;
+            </div>
+
+            <!-- Begin Dynamic row -->
+            @*@Html.Partial("_ReceiptDetailsList")*@
+            <!-- End Dynamic row -->
+
+        </div>
+
+        <table class="row m-t-20" id="ReceiptDetailsListForms">
+
+
+            @if (Model.ReceiptDetailsList != null)
+            {
+
+                for (int j = 0; j < Model.ReceiptDetailsList.Count; j++)
+                {
+                    // <script>
+                    var html = "<div class='col-md-12 document-row' id='GridViewCompanyContact" + @j + "'>";
+
+                    html = html + "<div class='col-md-12'>";
+                    html = html + " <div class='col-md-3 form-group'> <label for='InvoiceType'>Invoice Type</label><input id='InvoiceType" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].Invtype + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceType' data-name='Invoice Type'/></div>";
+                    html = html + " <div class='col-md-3 form-group'> <label for='InvoiceNumber'>Invoice Number</label> <input id='InvoiceNumber" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].Invno + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceNumber' data-name='Invoice Number' /></div>";
+                    html = html + " <div class='col-md-2 form-group'> <label for='InvoiceDate'>Invoice Date</label><input type='text' id='InvoiceDate" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceDate' data-name='InvoiceDate' value='" + Model.ReceiptDetailsList[@j].InvoiceDate + "'/></div>";
+                    html = html + " <div class='col-md-2 form-group'> <label for='InvoiceDescription'>Invoice Description</label><input type='text' id='InvoiceDescription" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceDescription' data-name='InvoiceDescription' value='" + Model.ReceiptDetailsList[@j].Description + "'/></div>";
+                    html = html + " <div class='col-md-3 form-group'> <label for='InvoiceAmount'>Invoice Amount </label><input id='InvoiceAmount" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].InvoiceAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceAmount' data-name='Invoice Amount'/></div>";
+                    html = html + " <div class='col-md-3 form-group'> <label for='CreditAmount'>Credit Amount</label> <input id='CreditAmount" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].CreditAmt + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].CreditAmount' data-name='Credit Amount' /></div>";
+                    html = html + " <div class='col-md-2 form-group'> <label for='ReceivedAmount'>Received Amount</label><input type='text' id='ReceivedAmount" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].ReceivedAmount' data-name='ReceivedAmount' value='" + Model.ReceiptDetailsList[@j].ReceivedAmount + "'/></div>";
+                    html = html + " <div class='col-md-2 form-group'> <label for='BalanceAmount'>Balance Amount</label><input type='text' id='BalanceAmount" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].BalanceAmount' data-name='BalanceAmount' value='" + Model.ReceiptDetailsList[@j].Balance + "'/></div>";
+                    html = html + " <div class='col-md-2 form-group'> <label for='Remarks'>Remarks</label><input type='text' id='Remarks" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].Remarks' data-name='Remarks' value='" + Model.ReceiptDetailsList[@j].Remarks + "'/></div>";
+                    html = html + "<div class='col-md-2 form-group'></br>  <input type='button' class='document-btn removebutton' id='Delete" + @j + "'value='Delete' onclick='removerow()'/>  </div>";
+                    html = html + "</div>";
+
+                    html = html + "</div>";
+                    html = html + "<div class='row ht-5'> &nbsp;</div>";
+
+                    <tr>
+                        <td>
+                            @Html.Raw(html)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
+                }
+            }
         </table>
     </div>
     <div class="row ht-5">
@@ -341,6 +472,9 @@
     </div>
 }
 <script>
+
+
+
     $("#advaccode").hide();
     //$("#PDCStatus").hide();
 
@@ -651,4 +785,78 @@
             }
         });
     }
+    var i = 0;
+    function add() {
+        var InvoiceType = document.getElementById("InvoiceType").value;
+        var InvoiceNumber = document.getElementById("InvoiceNumber").value;
+        var InvoiceDate = document.getElementById("InvoiceDate").value;
+        var InvoiceDescription = document.getElementById("InvoiceDescription").value;
+
+        var InvoiceAmount = document.getElementById("InvoiceAmount").value;
+        var CreditAmount = document.getElementById("CreditAmount").value;
+        var ReceivedAmount = document.getElementById("ReceivedAmount").value;
+        var BalanceAmount = document.getElementById("BalanceAmount").value;
+        var Remarks = document.getElementById("Remarks").value;
+
+        var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + i + "'>";
+
+        html = html + "<div class='col-md-12'>";
+        html = html + " <div class='col-md-3 form-group'> <label for='InvoiceType'>Invoice Type</label><input id='InvoiceType" + i + "'  type='text' value='" + InvoiceType + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceType' data-name='Invoice Type'/></div>";
+        html = html + " <div class='col-md-3 form-group'> <label for='InvoiceNumber'>Invoice Number</label> <input id='InvoiceNumber" + i + "'  type='text' value='" + InvoiceNumber + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceNumber' data-name='Invoice Number' /></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='InvoiceDate'>Invoice Date</label><input type='text' id='InvoiceDate" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceDate' data-name='InvoiceDate' value='" + InvoiceDate + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='InvoiceDescription'>Invoice Description</label><input type='text' id='InvoiceDescription" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceDescription' data-name='InvoiceDescription' value='" + InvoiceDescription + "'/></div>";
+        html = html + " <div class='col-md-3 form-group'> <label for='InvoiceAmount'>Invoice Amount </label><input id='InvoiceAmount" + i + "'  type='text' value='" + InvoiceAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceAmount' data-name='Invoice Amount'/></div>";
+        html = html + " <div class='col-md-3 form-group'> <label for='CreditAmount'>Credit Amount</label> <input id='CreditAmount" + i + "'  type='text' value='" + CreditAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].CreditAmount' data-name='Credit Amount' /></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='ReceivedAmount'>Received Amount</label><input type='text' id='ReceivedAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].ReceivedAmount' data-name='ReceivedAmount' value='" + ReceivedAmount + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='BalanceAmount'>Balance Amount</label><input type='text' id='BalanceAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].BalanceAmount' data-name='BalanceAmount' value='" + BalanceAmount + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'> <label for='Remarks'>Remarks</label><input type='text' id='Remarks" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].Remarks' data-name='Remarks' value='" + Remarks + "'/></div>";
+        html = html + "<div class='col-md-2 form-group'></br>  <Input type='button' class='document-btn removebutton' id='Delete" + i + "'value='Delete' onclick='removerow()'/> </div>";
+        html = html + "</div>";
+
+        html = html + "</div>";
+        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
+        $('#ReceiptDetailsListForms').append(html);
+        i++;
+
+        //$("#item").val('');
+        $("#InvoiceType").val('');
+        $("#InvoiceNumber").val('');
+        $("#InvoiceDate").val('');
+        $("#InvoiceDescription").val('');
+        $("#InvoiceAmount").val('');
+        $("#CreditAmount").val('');
+        $("#ReceivedAmount").val('');
+        $("#BalanceAmount").val('');
+        $("#Remarks").val('');
+        return false;
+    }
+    function removerow() {
+        alert(1)
+        debugger;
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('ReceiptDetailsListForms');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                // alert(dataname + $(this) .val()+ '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'ReceiptDetailsList[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+
+        i = newindex;
+    };
+
 </script>
