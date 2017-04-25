@@ -25,19 +25,19 @@
     </div>
     <div class="col-md-12 document-row">
         <div class="col-md-2">
-            @Html.DropDownList("Property_ID", null, new { @class = "form-control master-form-input AgreementPdMonth" })
+            @Html.DropDownList("Property_ID", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
         </div>
         <div class="col-md-3">
-          @Html.DropDownList("Properties_Name", null, new { @class = "form-control master-form-input AgreementPdMonth" })
+          @Html.DropDownList("Properties_Name", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
         </div>
         <div class="col-md-2">
-           @Html.DropDownList("Property_ID_Tawtheeq", null, new { @class = "form-control master-form-input AgreementPdMonth" })
+           @Html.DropDownList("Property_ID_Tawtheeq", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
         </div>
         <div class="col-md-2">
-            @Html.DropDownList("Unit_ID_Tawtheeq", null, new { @class = "form-control master-form-input AgreementPdMonth" })
+            @Html.DropDownList("Unit_ID_Tawtheeq", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
         </div>
         <div class="col-md-2">
-           @Html.DropDownList("Unit_Property_Name", null, new { @class = "form-control master-form-input AgreementPdMonth" })
+           @Html.DropDownList("Unit_Property_Name", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
         </div>
         <div class="col-md-1">
             <button class="document-btn" onclick="addAgreementUnitList(event);">Add</button>
@@ -63,10 +63,10 @@
         event.preventDefault();
 
         var Property_ID = $("#AgreementUnit #Property_ID").val();
-        var Properties_Name = $("#AgreementUnit #Properties_Name").val();
-        var Property_ID_Tawtheeq = $("#AgreementUnit #Property_ID_Tawtheeq").val();
-        var Unit_ID_Tawtheeq = $("#AgreementUnit #Unit_ID_Tawtheeq").val();
-        var Unit_Property_Name = $("#AgreementUnit #Unit_Property_Name").val();
+        var Properties_Name = $("#AgreementUnit #Properties_Name option:selected").text();
+        var Property_ID_Tawtheeq = $("#AgreementUnit #Property_ID_Tawtheeq option:selected").text();
+        var Unit_ID_Tawtheeq = $("#AgreementUnit #Unit_ID_Tawtheeq option:selected").text();
+        var Unit_Property_Name = $("#AgreementUnit #Unit_Property_Name option:selected").text();
         
         var html = "<tr><td>" +
                       "<input type='hidden' name='AgreementUnitList[" + AgreementUnitListCount + "].Property_ID' id='AgreementUnitList[" + AgreementUnitListCount + "].Property_ID' value='" + Property_ID + "' data-name='Property_ID' />" +
@@ -109,11 +109,6 @@
         AgreementUnitListCount++;
     }
 
-   
-
-
-
-
     $(document).on('click', 'button.AgreementUnitList-remove', function () {
         $(this).closest('tr').remove();
         var existfilelist = document.getElementById('AgreementUnitList');
@@ -139,6 +134,47 @@
         });
         AgreementUnitListCount = newindex;
     });
+    $("#AgreementUnit #Property_ID").change(function () {
+        debugger;
+        var propertyid = $("#AgreementUnit #Property_ID").val();
+        $("#AgreementUnit #Properties_Name").val(propertyid);
+        $("#AgreementUnit #Property_ID_Tawtheeq").val(propertyid); 
+        $("#AgreementUnit #Unit_ID_Tawtheeq").val(propertyid);
+        $("#AgreementUnit #Unit_Property_Name").val(propertyid);
+        return;
+    });
+    $("#AgreementUnit #Properties_Name").change(function () {
+        var propertyid = $("#AgreementUnit #Properties_Name").val();
+        $("#AgreementUnit #Property_ID").val(propertyid);
+        $("#AgreementUnit #Property_ID_Tawtheeq").val(propertyid);
+        $("#AgreementUnit #Unit_ID_Tawtheeq").val(propertyid);
+        $("#AgreementUnit #Unit_Property_Name").val(propertyid);
+        return;
+    });
+    $("#AgreementUnit #Property_ID_Tawtheeq").change(function () {
+        var propertyid = $("#AgreementUnit #Property_ID_Tawtheeq").val();
+        $("#AgreementUnit #Property_ID").val(propertyid);
+        $("#AgreementUnit #Properties_Name").val(propertyid);
+        $("#AgreementUnit #Unit_ID_Tawtheeq").val(propertyid);
+        $("#AgreementUnit #Unit_Property_Name").val(propertyid);
+        return;
+    });
 
+    $("#AgreementUnit #Unit_ID_Tawtheeq").change(function () {
+        var propertyid = $("#AgreementUnit #Unit_ID_Tawtheeq").val();
+        $("#AgreementUnit #Property_ID").val(propertyid);
+        $("#AgreementUnit #Properties_Name").val(propertyid);
+        $("#AgreementUnit #Property_ID_Tawtheeq").val(propertyid);
+        $("#AgreementUnit #Unit_Property_Name").val(propertyid);
+        return;
+    });
+    $("#AgreementUnit #Unit_Property_Name").change(function () {
+        var propertyid = $("#AgreementUnit #Unit_Property_Name").val();
+        $("#AgreementUnit #Property_ID").val(propertyid);
+        $("#AgreementUnit #Properties_Name").val(propertyid);
+        $("#AgreementUnit #Unit_ID_Tawtheeq").val(propertyid);
+        $("#AgreementUnit #Property_ID_Tawtheeq").val(propertyid);
+        return;
+    });
 
 </script>

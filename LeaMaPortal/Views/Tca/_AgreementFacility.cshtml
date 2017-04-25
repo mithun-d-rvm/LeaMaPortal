@@ -17,10 +17,10 @@
         </div>
         <div class="col-md-12 document-row">
             <div class="col-md-2">
-                @Html.DropDownList("Facility_id", null, new { @class = "form-control master-form-input" })
+                @Html.DropDownList("Facility_id", null,"--Select--", new { @class = "form-control master-form-input" })
             </div>
             <div class="col-md-4">
-                @Html.DropDownList("Facility_Name", null, new { @class = "form-control master-form-input" })
+                @Html.DropDownList("Facility_Name", null, "--Select--", new { @class = "form-control master-form-input" })
             </div>
             <div class="col-md-2">
                 @Html.EditorFor(model => model.Numbers_available, new { htmlAttributes = new { @class = "master-form-input" } })
@@ -29,7 +29,7 @@
                 &nbsp;
             </div>
             <div class="col-md-1 w-md-10 ">
-                <button type="button" class="document-btn agreementdoc" onclick="agreementfacility(event);" id="addagreementFacilitydetails">Add doc</button>
+                <button type="button" class="document-btn agreementdoc" onclick="agreementfacility(event);" id="addagreementFacilitydetails">Add</button>
             </div>
         </div>
     </div>
@@ -102,7 +102,7 @@
     function agreementfacility(e) {
         e.preventDefault();
         var Facility_id = $("#Facility_Name").val();
-        var Facility_Name = $("#Facility_id").val();
+        var Facility_Name = $("#Facility_Name option:selected").text();
         var Numbers_available = $("#Numbers_available").val();
 
         var html="<tr><td>"+
@@ -162,5 +162,16 @@
 
         });
         aFacilityListCount = newindex;
+    });
+    $("#Facility_id").change(function () {
+        debugger;
+        var facility_id = $("#Facility_id").val();
+        $("#Facility_Name").val(facility_id);
+        return;
+    });
+    $("#Facility_Name").change(function () {
+        var facility_id = $("#Facility_Name").val();
+        $("#Facility_id").val(facility_id);
+        return;
     });
 </script>

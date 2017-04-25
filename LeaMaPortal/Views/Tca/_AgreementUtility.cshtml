@@ -25,16 +25,16 @@
     </div>
     <div class="col-md-12 document-row">
         <div class="col-md-2">
-            @Html.DropDownList("Utility_id",null, new { @class = "form-control master-form-input" })
+            @Html.DropDownList("Utility_id",null, "--Select--", new { @class = "form-control master-form-input" })
         </div>
         <div class="col-md-3">
-            @Html.DropDownList("Utility_Name",null, new { @class = "form-control master-form-input" })
+            @Html.DropDownList("Utility_Name",null, "--Select--", new { @class = "form-control master-form-input" })
         </div>
         <div class="col-md-2">
-            @Html.DropDownList("Payable", null, new { @class = "form-control master-form-input" })
+            @Html.DropDownList("Payable", null, "--Select--", new { @class = "form-control master-form-input" })
         </div>
         <div class="col-md-2">
-            @Html.DropDownList("Amount_Type", null, new { @class = "form-control master-form-input" })
+            @Html.DropDownList("Amount_Type", null, "--Select--", new { @class = "form-control master-form-input" })
         </div>
         <div class="col-md-2">
             @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "master-form-input text-box single-line" } })
@@ -115,7 +115,7 @@
     function addAgreementUtilityDetails(event) {
         
         var Utility_Name = $("#Utility_id").val();
-        var Utility_id  = $("#Utility_Name").val();
+        var Utility_id = $("#Utility_Name option:selected").text();
         var Payable = $("#Payable").val();
         var Amount_Type = $("#Amount_Type").val();
         var Amount = $("#AgreementUtilityDiv #Amount").val();
@@ -186,5 +186,15 @@
         AgreementUtilityCount = newindex;
     });
 
-   
+    $("#Utility_id").change(function () {
+        debugger;
+        var utility_id = $("#Utility_id").val();
+        $("#Utility_Name").val(utility_id);
+        return;
+    });
+    $("#Utility_Name").change(function () {
+        var utility_id = $("#Utility_Name").val();
+        $("#Utility_id").val(utility_id);
+        return;
+    });
 </script>

@@ -14,7 +14,7 @@ namespace LeaMaPortal.Controllers
     public class TcaController : Controller
     {
         private LeamaEntities db = new LeamaEntities();
-        private string user = "rmv";
+        //private string user = "rmv";
         // GET: Tca
         public ActionResult Index()
         {
@@ -185,7 +185,7 @@ namespace LeaMaPortal.Controllers
             try
             {
                 var facility = await db.tbl_facilitymaster.Where(x => x.Delmark != "*").ToListAsync();
-                ViewBag.Facility_id = new SelectList(facility, "Facility_Name", "Facility_id");
+                ViewBag.Facility_id = new SelectList(facility, "Facility_id", "Facility_id");
                 ViewBag.Facility_Name = new SelectList(facility, "Facility_id", "Facility_Name");
                 if (AgreementNo != 0)
                 {
@@ -210,7 +210,7 @@ namespace LeaMaPortal.Controllers
             try
             {
                 var facility = await db.tbl_facilitymaster.Where(x => x.Delmark != "*").ToListAsync();
-                ViewBag.Facility_id = new SelectList(facility, "Facility_Name", "Facility_id");
+                ViewBag.Facility_id = new SelectList(facility, "Facility_id", "Facility_id");
                 ViewBag.Facility_Name = new SelectList(facility, "Facility_id", "Facility_Name");
                 if (AgreementNo != 0)
                 {
@@ -236,7 +236,7 @@ namespace LeaMaPortal.Controllers
             try
             {
                 var utility =await db.tbl_utilitiesmaster.Where(x => x.Delmark != "*").ToListAsync();
-                ViewBag.Utility_id = new SelectList(utility, "Utility_Name", "Utility_id");
+                ViewBag.Utility_id = new SelectList(utility, "Utility_id", "Utility_id");
                 ViewBag.Utility_Name = new SelectList(utility, "Utility_id", "Utility_Name");
                 ViewBag.Amount_Type = new SelectList(Common.PaymentMode);
                 List<PaybleName> payable = new List<PaybleName>();
@@ -278,10 +278,10 @@ namespace LeaMaPortal.Controllers
             var property =await db.tbl_propertiesmaster.Where(x => x.Delmark != "*").ToListAsync();
             
             ViewBag.Property_ID = new SelectList(property, "Property_ID", "Property_ID");
-            ViewBag.Properties_Name = new SelectList(property, "Property_Name", "Property_Name");
-            ViewBag.Property_ID_Tawtheeq = new SelectList(property, "Property_ID_Tawtheeq", "Property_ID_Tawtheeq");
-            ViewBag.Unit_ID_Tawtheeq = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
-            ViewBag.Unit_Property_Name = new SelectList(property, "Unit_Property_Name", "Unit_Property_Name");
+            ViewBag.Properties_Name = new SelectList(property, "Property_ID", "Property_Name");
+            ViewBag.Property_ID_Tawtheeq = new SelectList(property, "Property_ID", "Property_ID_Tawtheeq");
+            ViewBag.Unit_ID_Tawtheeq = new SelectList(property, "Property_ID", "Unit_ID_Tawtheeq");
+            ViewBag.Unit_Property_Name = new SelectList(property, "Property_ID", "Unit_Property_Name");
 
             return PartialView("../Tca/_AgreementUnit", model);
         }
@@ -481,7 +481,7 @@ namespace LeaMaPortal.Controllers
                // model.Ag_Tenant_Name = FC["TenantId"].ToString();
                 model.Agunit = Agunit;
                // model.Ag_Tenant_Name = "ARUL";
-                object[] parameters = Helper.GetTcaMySqlParameters<AgreementFormViewModel>(model, PFlag, user);
+                object[] parameters = Helper.GetTcaMySqlParameters<AgreementFormViewModel>(model, PFlag, System.Web.HttpContext.Current.User.Identity.Name);
                 //string paramNames = Helper.GetTcaMySqlParametersNames<AgreementFormViewModel>(model, PFlag, user);
                 string paramNames = "@PFlag, @PSingle_Multiple_Flag, @PAgreement_Refno, @PNew_Renewal_flag, @PAgreement_No, @PAgreement_Date, @PAg_Tenant_id, @PAg_Tenant_Name, @Pproperty_id, @PProperty_ID_Tawtheeq, @PProperties_Name, @PUnit_ID_Tawtheeq, @PUnit_Property_Name, @PCaretaker_id, @PCaretaker_Name, @Ptenant_source, @PAgent_id, @PAgent_name, @PEmp_id, @PEmp_name, @PVacantstartdate, @PAgreement_Start_Date, @PAgreement_End_Date, @PTotal_Rental_amount, @PPerday_Rental, @PAdvance_Security_Amount, @PSecurity_Flag, @PSecurity_chequeno, @PSecurity_chequedate, @PNotice_Period, @Pnofopayments, @PApproval_Flag, @PApproved_By, @PApproved_Date, @PTenant_Type, @PCreateduser, @PAgpdc, @PAgdoc, @PAgfac, @PAguti, @PAgchk, @PAgunit";
                 var c = paramNames.Split(',').Count();
