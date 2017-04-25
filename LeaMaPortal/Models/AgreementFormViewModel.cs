@@ -65,13 +65,13 @@ namespace LeaMaPortal.Models
         [DataType(DataType.Date)]
         public DateTime Agreement_End_Date { get; set; }
         [DisplayName("Contract Total Rental amount")]
-        public decimal Total_Rental_amount { get; set; }
+        public float Total_Rental_amount { get; set; }
         [DisplayName("Contract Perday Rental")]
-        public decimal Perday_Rental { get; set; }
+        public float Perday_Rental { get; set; }
         [DisplayName("Total Number of Payments")]
         public int nofopayments { get; set; }   
         [DisplayName("Contract Security Deposit Amount")]
-        public decimal Advance_Security_Amount { get; set; }
+        public float Advance_Security_Amount { get; set; }
         [DisplayName("Security Deposit Payment Mode")]
         public string Security_Flag { get; set; }
         [DisplayName("Security Deposit cheque/Ref no")]
