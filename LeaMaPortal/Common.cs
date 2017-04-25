@@ -62,6 +62,8 @@ namespace LeaMaPortal
         //agreement
         public const string AgreementDocumentContainer = "Documents/AgreementDocument/";
         public const string AgreementCheck_type= "New Contract";
+        public const string NewAgreement = "New";
+        public const string Renewal = "Renewal";
 
         public static List<MonthField> Month = new List<MonthField>()
         {

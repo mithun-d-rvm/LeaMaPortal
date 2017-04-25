@@ -34,87 +34,17 @@
             &nbsp;
         </div>
         <div class="row leama-fieldset leama-header-top" style="background-color:white;">
-            <div class="col-md-12">
-                <div class="col-md-12 leama-fieldset ">
-                    <div class="col-md-2 pull-left">
-                        @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="leama-field form-control" />
-                    </div>
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-info leama-search-btn col-md-4">Go</button>
-                    </div>
-                </div>
+            <div id="agreementList">
 
-                <div class="col-md-12 leama-fieldset ">
-                    &nbsp;
-                </div>
-
-                <div class="divTable leama-fieldset col-md-12">
-
-
-                    <div class="divTableBody divFontBodyTable">
-                        <div class="divTableHeading">
-                            <div class="divTableCell">Agreement No</div>
-                            <div class="divTableCell">Property Name</div>
-                            <div class="divTableCell">Tenant Name</div>
-                            <div class="divTableCell">Unit Name</div>
-                            <div class="divTableCell">Action</div>
-
-                        </div>
-                        <div class="divTableRow">
-                            <div class="divTableCell">1562154</div>
-                            <div class="divTableCell">Agri land</div>
-                            <div class="divTableCell">Michele</div>
-                            <div class="divTableCell">Qwerty 123</div>
-                            <div class="divTableCell">
-                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-open", title = "Renewal", @data_toggle = "modal", @data_target = "#renewalModal" })  |
-                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-save", title = "Closure", @data_toggle = "modal", @data_target = "#closureModal" })  |
-                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-stats", title = "Status", @data_toggle = "modal", @data_target = "#statusModal" })  |
-                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
-                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })
-                            </div>
-                        </div>
-                        <div class="divTableRow divFontBodyTable">
-                            <div class="divTableCell">21485421</div>
-                            <div class="divTableCell">Empty land</div>
-                            <div class="divTableCell">Stephen</div>
-                            <div class="divTableCell">unit1245</div>
-                            <div class="divTableCell">
-                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-open", title = "Renewal", @data_toggle = "modal", @data_target = "#renewalModal" })  |
-                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-save", title = "Closure", @data_toggle = "modal", @data_target = "#closureModal" })  |
-                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-stats", title = "Status", @data_toggle = "modal", @data_target = "#statusModal" })  |
-                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
-                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="col-sm-12">
-                    <div class="col-sm-6">
-                    </div>
-                    <div class="col-sm-6">
-                        <ul class="pagination pull-right">
-                            <li><a href="#">1</a></li>
-                            <li class="active"><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
         <!-- End Grid view -->
         <!-- Trigger the modal with a button -->
-        @*<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#closureModal">Closure Modal</button>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#closureModal">Closure Modal</button>
 
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#renewalModal">Renewal Modal</button>
 
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#statusModal">Status Modal</button>*@
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#statusModal">Status Modal</button>
 
         <!-- Modal -->
       
@@ -203,6 +133,7 @@
     //AgreementUtility();
     //AgreementUnit();
     //AgreementCheckList();
+    getAgreementList();
     function CreateAgreement() {
         debugger;
         $("#img-loader").removeClass("hide");
@@ -356,5 +287,21 @@
             }
         });
     }
-
+    function getAgreementList() {
+        $.ajax(
+           {
+               url: "../Tca/List",
+               type: "Get",
+               data: { Search: "", page: 1 },
+               success: function (html) {
+                   $("#agreementList").html(html);
+               },
+               error: function (jqXhr, textStatus, errorThrown) {
+                   alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+               },
+               complete: function () {
+                   //   $("#VerifyIdDetailsLoader").addClass("hide");
+               }
+           });
+    }
 </script>

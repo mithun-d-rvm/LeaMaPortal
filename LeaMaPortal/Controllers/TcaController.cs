@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using MvcPaging;
 
 namespace LeaMaPortal.Controllers
 {
@@ -40,6 +41,49 @@ namespace LeaMaPortal.Controllers
             return View();
         }
 
+        public async Task<PartialViewResult>List(string Search, int? page, int? defaultPageSize)
+        {
+            try
+            {
+                ViewData["Search"] = Search;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+                int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
+                ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, defaultPageSize);
+                
+                //IList<CountryViewModel> list;
+                if (string.IsNullOrWhiteSpace(Search))
+                {
+                   var list = db.tbl_agreement.Where(x => x.Delmark != "*").OrderBy(x => x.Agreement_No).Select(x => new AgreementFormViewModel()
+                    {
+                       Agreement_No=x.Agreement_No, 
+                       Properties_Name=x.Properties_Name,
+                       Ag_Tenant_Name=x.Ag_Tenant_Name,
+                       Unit_Property_Name=x.Unit_Property_Name
+
+                    }).ToPagedList(currentPageIndex, PageSize);
+                    return PartialView("../Tca/_List", list);
+                }
+                else
+                {
+                   var list = db.tbl_agreement.Where(x => x.Delmark != "*" && x.Agreement_No.ToString().ToLower().Contains(Search.ToLower()))
+                                  .OrderBy(x => x.Agreement_No).Select(x => new AgreementFormViewModel()
+                                  {
+                                      Agreement_No = x.Agreement_No,
+                                      Properties_Name = x.Properties_Name,
+                                      Ag_Tenant_Name = x.Ag_Tenant_Name,
+                                      Unit_Property_Name = x.Unit_Property_Name
+                                  }).ToPagedList(currentPageIndex, PageSize);
+                    return PartialView("../Tca/_List", list);
+                }
+
+                //return PartialView("../Tca/_List", model.List);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
         public async Task<PartialViewResult> AddOrUpdate()
         {
             try
@@ -60,7 +104,7 @@ namespace LeaMaPortal.Controllers
                 var caretaker=await db.tbl_caretaker.Where(x=> x.Delmark != "*").ToListAsync();
                 ViewBag.Caretaker_id = new SelectList(caretaker, "Caretaker_id", "Caretaker_id");
                 ViewBag.Caretaker_Name = new SelectList(caretaker, "Caretaker_Name", "Caretaker_Name");
-                
+                model.New_Renewal_flag = Common.NewAgreement;
                 model.Agreement_No = 0;
                 //model.AgreementPd = new AgreementPdcViewModel();
                 return PartialView("../Tca/Agreement/_AgreementForm", model);
@@ -69,6 +113,61 @@ namespace LeaMaPortal.Controllers
             {
                 throw;
             }
+        }
+        public async Task<PartialViewResult> Renewal(int AgreementNo)
+        {
+            try
+            {
+                AgreementFormViewModel model = new AgreementFormViewModel();
+                var agreementDet =await db.tbl_agreement.FirstOrDefaultAsync(x => x.Agreement_No == AgreementNo && x.Delmark != "*");
+                AgreementRenwalMap(agreementDet, model);
+                ViewBag.TenantType = new SelectList(Common.TcaTenantType);
+                ViewBag.Ag_Tenant_id = new SelectList("", "");
+                ViewBag.Ag_Tenant_Name = new SelectList("", "");
+                var property = await db.tbl_propertiesmaster.Where(x => x.Delmark != "*").ToListAsync();
+                ViewBag.TcaPropertyId = new SelectList(property, "Property_Id", "Property_Id", agreementDet.property_id);
+                ViewBag.TcaPropertyIDTawtheeq = new SelectList(property, "Property_Id", "Property_ID_Tawtheeq", agreementDet.Property_ID_Tawtheeq);
+                ViewBag.TcaPropertyName = new SelectList(property, "Property_Id", "Property_Name",agreementDet.Properties_Name);
+                //var unit = property.Where(x => x.Property_Flag == "Unit").ToList();
+                ViewBag.UnitIDTawtheeq = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq",agreementDet.Unit_ID_Tawtheeq);
+                ViewBag.UnitPropertyName = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_Property_Name",agreementDet.Unit_Property_Name);
+                ViewBag.SecurityFlag = new SelectList(Common.SecurityFlag);
+                ViewBag.Agreement_No = AgreementNo; //db.tbl_agreement.OrderByDescending(x => x.Agreement_No).FirstOrDefault()?.Agreement_No + 1;
+                var caretaker = await db.tbl_caretaker.Where(x => x.Delmark != "*").ToListAsync();
+                ViewBag.Caretaker_id = new SelectList(caretaker, "Caretaker_id", "Caretaker_id", agreementDet.Caretaker_id);
+                ViewBag.Caretaker_Name = new SelectList(caretaker, "Caretaker_Name", "Caretaker_Name",agreementDet.Caretaker_Name);
+                model.New_Renewal_flag = Common.Renewal;
+                model.Agreement_No = AgreementNo;
+                model.Agreement_Refno = AgreementNo;
+                
+                //model.AgreementPd = new AgreementPdcViewModel();
+                return PartialView("../Tca/Agreement/_AgreementForm", model);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        public void AgreementRenwalMap(tbl_agreement from, AgreementFormViewModel to)
+        {
+            to.Single_Multiple_Flag = from.Single_Multiple_Flag;
+            to.nofopayments = from.nofopayments.HasValue?from.nofopayments.Value:0;
+            to.Agreement_Date = from.Agreement_Date.HasValue ? from.Agreement_Date.Value : DateTime.Now;
+            to.Vacantstartdate = from.Vacantstartdate.HasValue ? from.Vacantstartdate.Value :DateTime.MinValue; 
+            to.Agreement_Start_Date=from.Agreement_Start_Date.HasValue? from.Agreement_Start_Date.Value: DateTime.Now;
+            to.Agreement_End_Date = from.Agreement_End_Date.HasValue ? from.Agreement_End_Date.Value : DateTime.Now;
+            to.Total_Rental_amount = from.Total_Rental_amount.HasValue ? from.Total_Rental_amount.Value : 0;
+            to.Perday_Rental = from.Perday_Rental.HasValue ? from.Perday_Rental.Value : 0;
+            to.nofopayments = from.nofopayments.HasValue ? from.nofopayments.Value : 0;
+            to.Advance_Security_Amount = from.Advance_Security_Amount.HasValue ? from.Advance_Security_Amount.Value : 0;
+            to.Security_Flag = from.Security_Flag;
+            to.Security_chequeno = from.Security_chequeno;
+            to.Security_chequedate = from.Security_chequedate.HasValue ? from.Security_chequedate.Value : DateTime.MinValue;
+            to.Notice_Period = from.Notice_Period.HasValue ? from.Notice_Period.Value : 0;
+            to.Approval_Flag = from.Approval_Flag.HasValue ? from.Approval_Flag.Value : 0;
+            to.Approved_By = from.Approved_By;
+            to.Approved_Date = from.Approved_Date.HasValue ? from.Approved_Date.Value : DateTime.MinValue;
         }
 
         public PartialViewResult AgreementPdc(int AgreementNo)
