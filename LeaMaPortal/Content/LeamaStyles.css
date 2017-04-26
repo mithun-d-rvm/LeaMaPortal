@@ -25,6 +25,9 @@
 .p-t-5-p{
     padding-top:5%;
 }
+.p-b-18 {
+    padding-bottom: 18px;
+}
 .m-t-5-p{
     margin-top:5%;
 }
@@ -33,6 +36,9 @@
 }
 .m-t-15{
     margin-top:15px;
+}
+.m-t-16{
+    margin-top: 16px;
 }
 .m-t-6{
     margin-top:6px;
@@ -57,6 +63,9 @@
 }
 .font-15{
     font-size: 15px;
+}
+.font-12 {
+    font-size: 12px;
 }
 .full-width{
     width:100% !important;
@@ -91,6 +100,7 @@
 .color-f5a623{
     color:#f5a623;
 }
+
 
 /* Custom Width */
 
@@ -128,6 +138,197 @@
     border: solid 1px #1a91eb; 
     color:white;
 }
+.dashboard-bg {
+    background: #eff3f6;
+}
+.earning-bg {
+    background-color: #554289 !important;
+}
+.earning-header {
+    padding-bottom: 18px;
+    font-size: 12px;
+    color: white;
+}
+.earning-money {
+    font-size: 30px;
+    color: #52ce6f;
+    padding-bottom: 18px;
+}
+.earning-up-icon {
+    font-size: 34px;
+    background-color: rgba(73, 50, 123, 0.57);
+    padding: 6px;
+    border-radius: 20px;
+    color: #52ce6f;
+}
+.earning-month {
+    color: white;
+    font-size: 16px;
+}
+.vacant-portlet {
+    font-size: 12px;
+    color: #594286;
+    padding-left: 25px;
+    padding-top: 7px;
+}
+.vacant-total {
+    font-size: 40px;
+    color: #FC8213;
+    padding-bottom: 18px;
+}
+.vacant-not-occupied {
+    color: green;
+    text-transform: uppercase;
+    font-size: 10px;
+    padding-bottom: 15px;
+}
+.vacant-not-occupied-number {
+    background-color: darkgreen;
+    color: white;
+    border-radius: 5px;
+    padding: 3px;
+}
+.vacant-lease {
+    color: red;
+    text-transform: uppercase;
+    font-size: 10px;
+}
+.vacant-lease-number {
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    padding: 3px;
+}
+.vacant-second-tab {
+    margin-top: 4px;
+    padding-right: 20px;
+}
+.vacant-residential-div {
+    background-color: #e8f5ff;
+    height: 85px;
+    /* padding-top: 8px; */
+}
+.vacant-residential-number {
+    font-size: 30px;
+    margin-top: 7px;
+}
+.vacant-residential-text {
+    font-size: 8px;
+    background-color: #0474c8;
+    padding: 3px;
+    color: white;
+    border-radius: 4px;
+    text-transform: uppercase;
+    /* width: 50%; */
+}
+.vacant-commercial-div {
+    background-color: #fff3fd;
+    height: 85px;
+    /* padding-top: 8px; */
+}
+.vacant-commercial-text {
+    font-size: 8px;
+    background-color: #b24a9a;
+    padding: 3px;
+    color: white;
+    border-radius: 4px;
+    text-transform: uppercase;
+    /* width: 50%; */
+}
+.total-loss-div {
+    font-size: 12px;
+    color: #594286;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.total-loss-down-arrow {
+    border-radius: 3px;
+    background-color: #d35847;
+    color: white;
+    padding: 5px;
+}
+.total-loss-number {
+    font-size: 25px;
+    color: #d35847;
+}
+.total-loss-resid-div{
+    background-color: #f9f9f9;
+    height: 110px;
+    margin-top: 10px;
+    width: 44% !important;
+    margin-left: 9px;
+}
+.total-loss-res-text{
+    background-color: #0474c8;
+    font-size: 10px;
+    color: white;
+    padding: 2px;
+    border-radius: 5px;
+}
+.total-loss-res-amt {
+    font-size: 30px;
+    color: #2c2e35;
+}
+.total-loss-comm-div {
+    background-color: #f9f9f9;
+    height: 110px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+.total-loss-comm-text {
+    background-color: #b24a9a;
+    font-size: 10px;
+    color: white;
+    padding: 2px;
+    border-radius: 5px;
+}
+.dues-text {
+    font-size: 12px;
+    color: #354052;
+    padding-bottom: 15px;
+    font-weight:bolder;
+}
+.dues-div {
+    padding-top: 20px;
+    font-size: 30px;
+    color: #0daeff;
+}
+.dues-icon {
+    color: white;
+    background-color: #554289;
+    border-radius: 6px;
+}
+.expense-div {
+    padding-top: 20px;
+    font-size: 30px;
+    color: #2c2e35;
+}
+.notif-portlet {
+    width: 98% !important;
+    height: 100px !important;
+}
+.imp-notif-text {
+    font-size: 16px;
+    color: #432f76;
+    font-weight: bold;
+    margin-top: 9px;
+}
+.notif-sub-text {
+    width: 207px;
+    height: 40px;
+    border-radius: 50px;
+    border: solid 1px #554289;
+    background: transparent;
+}
+.notif-total {
+    font-size: 10px;
+    background-color: #e61d1d;
+    border-radius: 10px;
+    padding: 3px;
+    color: white;
+}
+
+
 
 /* Menu */
 .menu{
