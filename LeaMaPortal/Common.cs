@@ -19,7 +19,7 @@ namespace LeaMaPortal
         //public static List<string> City = new List<string>() { "Abudhabi", "Sharja" };
         public static List<string> Profession = new List<string>() { "Engineer", "Teacher", "Shop keeper", "Doctor", "Farmer" };
 
-        public const string INSERT = "INSERT", UPDATE = "UPDATE", DELETE = "DELETE", SELECT= "SELECT",View = "View";
+        public const string INSERT = "INSERT", UPDATE = "UPDATE", DELETE = "DELETE", SELECT = "SELECT", View = "View";
         public const int DefaultMaster = 9;
         public const string Bank_number = "XXXXYYYYZZZZ";
         public const string TenantIndividualDocumentContainer = "Documents/TenantIndividual/";
@@ -54,8 +54,8 @@ namespace LeaMaPortal
         public static List<string> ComapanyActivity = new List<string>() { "Activity1" };
         public static List<string> Issuance_authority = new List<string>() { "List-1" };
         public const string TenantCompanyDocumentContainer = "Documents/TenantCompany/";
-        public static List<string> Nationality = new List<string>() { "UAE", "Non-UAE"};
-        public static string DefaultNationality="UAE";
+        public static List<string> Nationality = new List<string>() { "UAE", "Non-UAE" };
+        public static string DefaultNationality = "UAE";
         public static string DefaultMaridalStatus = "Family";
         public static List<string> InvoiceType = new List<string>() { "Rental", "Others" };
 
@@ -129,6 +129,14 @@ namespace LeaMaPortal
             }
         };
         
+
+        public static List<string> Reccategory = new List<string>() { "advance", "against", "invoice", "others", "security", "deposit" };
+        public static List<string> ReceiptMode = new List<string>() { "cheque", "cash", "online", "Pdc", "advance adjustment" };
+
+        public static List<string> BankAccountNumber = new List<string>() { "Account 1", "Account 2", "Account 3", "Account 4" };
+        public static List<string> BankAccountName = new List<string>() { "Axis Bank", "ICICI Bank", "HDFC Bank", "SBI Bank" };
+
+        public static List<string> Receipts_PDCStatus = new List<string>() { "Received", "Cleared", "Bounced", "Cancelled" };
     }
     public class FormMaster
     {
