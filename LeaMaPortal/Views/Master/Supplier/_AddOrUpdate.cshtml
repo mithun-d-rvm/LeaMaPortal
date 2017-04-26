@@ -826,8 +826,7 @@
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
-
-                        GetTenantCompany();
+                        GetSupplier();
                         $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
                         $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
                         $(".result-title").text("Success");
