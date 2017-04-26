@@ -8,16 +8,22 @@ namespace LeaMaPortal
 {
     public static class Common
     {
-        public static List<string> Title = new List<string>() {"MR.", "MRS.","MS." };
+        public static List<string> Title = new List<string>() { "MR.", "MRS.", "MS." };
+        public static List<string> TcaTenantType = new List<string>() { "Company", "Individual" };
+        public static List<string> SecurityFlag = new List<string>() { "Cash", "Cheque", "Online", "Cheque without date", "DD" };
+
+        public static List<string> Months= new List<string>() { "Jan", "Feb", "Mar", "April", "May","June","July","Aug","Sep","Oct","Nov","Dec" };
+        public static List<string> PaymentMode = new List<string>() { "Cash", "Cheque", "Online", "Cheque without date", "DD" };
+        public const string DefaultTitle = "Mr.";
         public static List<string> Role = new List<string>() { "Admin", "Management", "Caretaker" };
-        public const string DefaultTitle= "Mr.";
         //public static List<string> City = new List<string>() { "Abudhabi", "Sharja" };
-        public static List<string> Profession = new List<string>() { "Engineer", "Teacher", "Shop keeper","Doctor","Farmer" };
+        public static List<string> Profession = new List<string>() { "Engineer", "Teacher", "Shop keeper", "Doctor", "Farmer" };
 
         public const string INSERT = "INSERT", UPDATE = "UPDATE", DELETE = "DELETE", SELECT= "SELECT",View = "View";
         public const int DefaultMaster = 9;
         public const string Bank_number = "XXXXYYYYZZZZ";
         public const string TenantIndividualDocumentContainer = "Documents/TenantIndividual/";
+        
         public static List<FormMaster> FormMasterList = new List<FormMaster>()
         {
            //new FormMaster() {Id=1,FormName="" },
@@ -52,7 +58,13 @@ namespace LeaMaPortal
         public static string DefaultNationality="UAE";
         public static string DefaultMaridalStatus = "Family";
         public static List<string> InvoiceType = new List<string>() { "Rental", "Others" };
-        
+
+        //agreement
+        public const string AgreementDocumentContainer = "Documents/AgreementDocument/";
+        public const string AgreementCheck_type= "New Contract";
+        public const string NewAgreement = "New";
+        public const string Renewal = "Renewal";
+
         public static List<MonthField> Month = new List<MonthField>()
         {
             new MonthField
@@ -128,4 +140,6 @@ namespace LeaMaPortal
         public string Text { get; set; }
         public int Value { get; set; }
     }
+    
+
 }

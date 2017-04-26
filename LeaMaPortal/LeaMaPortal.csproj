@@ -438,6 +438,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\StaticHelper.cs" />
+    <Compile Include="Models\AgreementFacilityViewModel.cs" />
     <Compile Include="Models\ApprovalSettingsViewModel.cs" />
     <Compile Include="Models\AgreementCheckListViewModel.cs" />
     <Compile Include="Models\AgreementClosureViewModel.cs" />
@@ -748,9 +749,12 @@
     <Content Include="Views\Master\Supplier\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\Supplier\_List.cshtml" />
     <Content Include="Views\Invoice\_List.cshtml" />
+    <Content Include="Views\Tca\_AgreementFacility.cshtml" />
+    <Content Include="Views\Tca\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Documents\AgreementDocument\" />
     <Folder Include="Documents\TenantCompany\" />
     <Folder Include="Documents\TenantIndividual\" />
     <Folder Include="Views\Supplier\" />
