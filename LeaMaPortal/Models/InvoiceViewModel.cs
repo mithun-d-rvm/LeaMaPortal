@@ -65,7 +65,7 @@ namespace LeaMaPortal.Models
         public float? qty { get; set; }
         [DisplayName("Amount")]
         public float? amount { get; set; }
-        
+
     }
     public class TenantDropdown
     {
