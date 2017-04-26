@@ -22,7 +22,47 @@
         <input type="hidden" id="FormMasterSelected" value="@ViewBag.FormMasterSelected" />
     </div>
 </div>
+<!-- Modal -->
+<div id="masterResultModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title result-title"></h4>
+            </div>
+            <div class="modal-body result-modal-body">
+                <span></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 <script>
+
+    window.masterResultError = "Oops some bits or bytes wrong. Please try some other time";
+    window.userRightsAdded = "User rights added successfully";
+    window.userApprovalAdded = "User approval added successfully";
+    window.countryAdded = "Country master added successfully";
+    window.regionAdded = "Region master added successfully";
+    window.caretakerAdded = "Caretaker master added successfully";
+    window.propTypeAdded = "Property type master added successfully";
+    window.propMasterAdded = "Property master added successfully";
+    window.compAdded = "Tenant master company added successfully";
+    window.individualAdded = "Tenant master individual added successfully";
+    window.checkListAdded = "Check list master added successfully";
+    window.facilityAdded = "Facility added successfully";
+    window.utilityAdded = "Utility added successfully";
+    window.supplierAdded = "Supplier master added successfully";
+    window.slabAdded = "Slab master added successfully";
+    window.meterAdded = "Meter master added successfully";
+    window.emailTemplateAdded = "Email template added successfully";
+
     $(function () {
         $("#TopNavBarFilter").empty();
         GetCountryFilter();

@@ -120,6 +120,24 @@
     width:10% !important;
 }
 
+/* Modal for success/error result */
+.result-modal-body {
+    font-size: 20px;
+    padding: 25px;
+}
+.result-modal-success {
+    background-color: seagreen;
+    color: white;
+}
+.result-modal-error {
+    /*background-color: rgba(139, 0, 0, 0.88);*/
+    background-color:rgb(183, 39, 39);
+    color: white;
+}
+.result-title {
+    font-weight: bold !important;
+}
+
 /* Dashboard */
 
 .logo-thumb{
