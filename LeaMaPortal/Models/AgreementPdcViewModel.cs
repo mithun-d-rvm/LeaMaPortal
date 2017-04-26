@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace LeaMaPortal.Models
 {
     public class AgreementPdcViewModel
     {
+        public AgreementPdcViewModel()
+        {
+            AgreementPdcList = new List<AgreementPdcViewModel>();
+        }
         public int Id { get; set; }
         [DisplayName("Month")]
         public string Month { get; set; }
@@ -20,10 +26,10 @@ namespace LeaMaPortal.Models
         [DisplayName("Cheque No")]
         public string Cheque_No { get; set; }
         [DisplayName("Cheque Date")]
-        public string Cheque_Date { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime Cheque_Date { get; set; }
         [DisplayName("Amount")]
         public decimal Cheque_Amount { get; set; }
-
-
+        public List<AgreementPdcViewModel> AgreementPdcList  { get; set; }
     }
 }
