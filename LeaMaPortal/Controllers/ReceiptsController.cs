@@ -282,14 +282,20 @@ namespace LeaMaPortal.Controllers
             model.ReceiptDate = DateTime.Today;
             ViewBag.Reccategory = new SelectList(Common.Reccategory);
             ViewBag.RecpType = new SelectList(Common.ReceiptMode);
-            ViewBag.agreement_no = new SelectList("", "");
-            ViewBag.AdvAcCode = new SelectList("", "");
-            ViewBag.Property_id = new SelectList("", "");
-            ViewBag.Property_Name = new SelectList("", "");
-            ViewBag.Tenant_id = new SelectList("", "");
-            ViewBag.Tenant_Name = new SelectList("", "");
-            ViewBag.Unit_ID = new SelectList("", "");
-            ViewBag.unit_Name = new SelectList("", "");
+            ViewBag.agreement_no = new SelectList(db.tbl_agreement.Where(x => x.Delmark != "*").OrderBy(x => x.Agreement_No).Select(x => x.Agreement_No));
+            var advancepaymentnumber = db.Database.SqlQuery<int>("Select PaymentNo from view_advance_pending_payment");
+            ViewBag.AdvAcCode = new SelectList(advancepaymentnumber);
+            var properties = db.tbl_propertiesmaster.Where(x => x.Delmark != "*" && x.Property_Flag == "Property").OrderBy(x => x.Property_Id).Select(x => new { PropertyId = x.Property_Id, PropertyName = x.Property_Name, GroupedValue = x.Property_Id + ":" + x.Property_Name, PropertyIdTawtheeq = x.Property_ID_Tawtheeq });
+            ViewBag.Property_id = new SelectList(properties, "PropertyIdTawtheeq", "PropertyIdTawtheeq");
+            ViewBag.Property_Name = new SelectList(properties, "PropertyIdTawtheeq", "PropertyName");
+
+            var units = db.tbl_propertiesmaster.Where(x => x.Delmark != "*" && x.Property_Flag == "Unit").OrderBy(x => x.Unit_ID_Tawtheeq).Select(x => new { UnitId = x.Unit_ID_Tawtheeq, UnitName = x.Unit_Property_Name, GroupedValue = x.Unit_ID_Tawtheeq + ":" + x.Unit_Property_Name });
+            ViewBag.Unit_ID = new SelectList(units, "UnitId", "UnitId");
+            ViewBag.unit_Name = new SelectList(units, "UnitId", "UnitName");
+
+            var tenant = db.view_tenant.Select(x => new { TenantId = x.Tenant_id, TenantName = x.First_Name, Type = x.type, GroupedValue = x.Tenant_id + ":" + x.First_Name + ":" + x.type });
+            ViewBag.Tenant_id = new SelectList(items: tenant, dataValueField: "TenantId", dataTextField: "TenantId", selectedValue: null);
+            ViewBag.Tenant_Name = new SelectList(items: tenant, dataValueField: "TenantId", dataTextField: "TenantName", selectedValue: null);
             ViewBag.BankAcCode = new SelectList(Common.BankAccountNumber);
             ViewBag.BankAcName = new SelectList(Common.BankAccountName);
             ViewBag.PDCstatus = new SelectList(Common.Receipts_PDCStatus);

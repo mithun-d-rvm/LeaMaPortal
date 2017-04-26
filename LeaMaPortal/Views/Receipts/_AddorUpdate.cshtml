@@ -2,13 +2,6 @@
 @model LeaMaPortal.Models.ReceiptViewModel
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Receipts" }))
 {
-<style>
-    input[readonly]
-{
-    border: none !important;
-    background: none !important;
-}
-</style>
     <div class="row">
         <div class="col-md-6">
             <div class="col-md-12 form-input-padding">
@@ -51,10 +44,7 @@
                     @Html.LabelFor(model => model.AdvAcCode, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @*<select class="col-md-12 leama-field">
-                            <option value="Advance Receipt Number">Advance Receipt Number</option>
-                        </select>*@
-                    @Html.DropDownListFor(model => model.AdvAcCode, null, htmlAttributes: new { @class = "master-form-input", Id = "AdvAcCode" })
+                    @Html.DropDownList("AdvAcCode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                 </div>
             </div>
 
@@ -63,10 +53,7 @@
                     @Html.LabelFor(model => model.agreement_no, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @*<select class="col-md-12 leama-field">
-                            <option value="Agreement_No">Agreement No</option>
-                        </select>*@
-                    @Html.DropDownListFor(model => model.agreement_no, null, htmlAttributes: new { @class = "master-form-input", Id = "agreement_no" })
+                    @Html.DropDownList("agreement_no", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })                        
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -82,11 +69,7 @@
                     @Html.LabelFor(model => model.Tenant_id, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @*@Html.EditorFor(model => model.Property_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                    @*<select class="col-md-12 leama-field">
-                            <option value="Tenant_id">Tenant No</option>
-                        </select>*@
-                    @Html.DropDownListFor(model => model.Tenant_id, null, htmlAttributes: new { @class = "master-form-input", Id = "Tenant_id" })
+                    @Html.DropDownList("Tenant_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -94,11 +77,7 @@
                     @Html.LabelFor(model => model.Tenant_Name, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @*@Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                    @*<select class="col-md-12 leama-field">
-                            <option value="Tenant_Name">Tenant Name</option>
-                        </select>*@
-                    @Html.DropDownListFor(model => model.Tenant_Name, null, htmlAttributes: new { @class = "master-form-input", Id = "Tenant_Name" })
+                    @Html.DropDownList("Tenant_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                 </div>
             </div>
 
@@ -106,24 +85,14 @@
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.Property_id, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
-                <div class="col-md-8">
-                    @*@Html.EditorFor(model => model.Property_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                    @*<select class="col-md-12 leama-field">
-                            <option value="Property_ID">Property No</option>
-                        </select>*@
-                    @Html.DropDownListFor(model => model.Property_id, null, htmlAttributes: new { @class = "master-form-input", Id = "Property_id" })
+                <div class="col-md-8">@Html.DropDownList("Property_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })                        
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.Property_Name, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
-                <div class="col-md-8">
-                    @*@Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                    @*<select class="col-md-12 leama-field">
-                            <option value="Property_Name">Property Name</option>
-                        </select>*@
-                    @Html.DropDownListFor(model => model.Property_Name, null, htmlAttributes: new { @class = "master-form-input", Id = "Property_Name" })
+                <div class="col-md-8">@Html.DropDownList("Property_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                 </div>
             </div>
 
@@ -135,11 +104,8 @@
                     @Html.LabelFor(model => model.Unit_ID, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @*@Html.EditorFor(model => model.Unit_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                    @*<select class="col-md-12 leama-field">
-                            <option value="Unit_ID">Unit ID</option>
-                        </select>*@
-                    @Html.DropDownListFor(model => model.Unit_ID, null, htmlAttributes: new { @class = "master-form-input", Id = "Unit_ID" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("Unit_ID", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -147,11 +113,7 @@
                     @Html.LabelFor(model => model.unit_Name, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @*@Html.EditorFor(model => model.unit_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                    @*<select class="col-md-12 leama-field">
-                            <option value="unit_Name">Unit Name</option>
-                        </select>*@
-                    @Html.DropDownListFor(model => model.unit_Name, null, htmlAttributes: new { @class = "master-form-input", Id = "unit_Name" })
+                    @Html.DropDownList("unit_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                 </div>
             </div>
 
@@ -476,9 +438,114 @@
     <div class="row ht-5">
         &nbsp;
     </div>
+        </div>
 }
 <script>
+    $("#Tenant_id").on('change', function (e) {
+        debugger;
+        var tenantid = $("#Tenant_id").val();
+        $("#Tenant_Name").val($("#Tenant_id option:selected").val());
+    });
+    $("#Tenant_Name").on('change', function (e) {
+        debugger;
+        var tenantid = $("#Tenant_Name").val();
+        $("#Tenant_id").val($("#Tenant_Name option:selected").val());
+    });
+    $("#Property_id").on('change', function (e) {
+        debugger;
+        var propertyid = $("#Property_id").val();
+        $("#Property_Name").val($("#Property_id option:selected").val());
+        var id = $("#Property_id option:selected").text() == "--Select--" ? null : propertyid;
+        getunits(id);
+    });
+    $("#Property_Name").on('change', function (e) {
+        debugger;
+        var propertyid = $("#Property_Name").val();
+        $("#Property_id").val($("#Property_Name option:selected").val());
+        var id = $("#Property_Name option:selected").text() == "--Select--" ? null : propertyid;
+        getunits(id);
+    });
 
+
+    $("#Unit_ID").on('change', function (e) {
+        debugger;
+        var unitid = $("#Unit_ID").val();
+        $("#unit_Name").val($("#Unit_ID option:selected").val());
+        var id = $("#Unit_ID option:selected").text() == "--Select--" ? null : unitid;
+        getproperty(id);
+    });
+    $("#unit_Name").on('change', function (e) {
+        debugger;
+        var unitid = $("#unit_Name").val();
+        $("#Unit_ID").val($("#unit_Name option:selected").val());
+        var id = $("#unit_Name option:selected").text() == "--Select--" ? null : unitid;
+        getproperty(id);
+    });
+
+
+    function getunits(id) {
+        var data = id == null ? {} : { propertyid: id };
+        $.ajax(
+                {
+                    url: "../Invoice/GetPropertyUnits",
+                    method: "GET",
+                    data: data, //FormData(form.get(0)),
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        var options = '<option value="" selected>--Select--</option>';
+                        $("#UnitID").empty();
+
+                        $.each(response, function (index, data) {
+                            options += '<option value="' + data.Unitid + '">' + data.Unitid + '</option>';
+                        });
+                        $('#UnitID').append(options);
+
+                        $("#unitName").empty();
+                        var options = '<option value="" selected>--Select--</option>';
+                        $.each(response, function (index, data) {
+                            options += '<option value="' + data.Unitid + '">' + data.unitName + '</option>';
+                        });
+                        $('#unitName').append(options);
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+
+                });
+    }
+
+    function getproperty(id) {
+        if (id == null) {
+            $('#Propertyid').val('')
+            $("#Propertyid").prop('selected', false).change();
+        }
+        else {
+            $.ajax(
+                {
+                    url: "../Invoice/GetUnitProperty",
+                    method: "GET",
+                    data: { unitid: id }, 
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        $("#Propertyid").val(response);
+                        $("#PropertyName").val(response);
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+
+                });
+        }
+
+    }
     function getInvoice(invoiceNo) {
         debugger;
         $.ajax(
