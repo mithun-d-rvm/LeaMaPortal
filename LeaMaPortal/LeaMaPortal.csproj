@@ -841,7 +841,6 @@
     <Content Include="Views\Invoice\_List.cshtml" />
     <Content Include="Views\Tca\_AgreementFacility.cshtml" />
     <Content Include="Views\Tca\_List.cshtml" />
-    <Content Include="Views\Receipts\ReceiptDetails1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
