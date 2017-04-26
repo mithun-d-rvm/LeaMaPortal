@@ -8,6 +8,10 @@ namespace LeaMaPortal.Models
 {
     public class AgreementUtilityViewModel
     {
+        public AgreementUtilityViewModel()
+        {
+            AgreementUtilityList = new List<AgreementUtilityViewModel>();
+        }
         public int Id { get; set; }
         [DisplayName("Utility ID")]
         public string Utility_id { get; set; }
@@ -18,7 +22,8 @@ namespace LeaMaPortal.Models
         [DisplayName("Amount Type")]
         public string Amount_Type { get; set; }
         [DisplayName("Amount")]
-        public decimal Amount { get; set; }
+        public decimal Amount { get; set; } 
+        public List<AgreementUtilityViewModel> AgreementUtilityList { get; set; }
 
     }
 }
