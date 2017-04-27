@@ -45,7 +45,7 @@
                     <div class="divTableCell">@item.Ag_Tenant_Name</div>
                     <div class="divTableCell">@item.Unit_Property_Name</div>
                     <div class="divTableCell">
-                        @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-open agreement-renewal", title = "Renewal", @data_toggle = "modal", @data_target = "#renewalModal",@data_agreementno=@item.Agreement_No })  |
+                        @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-open agreement-renewal", title = "Renewal",@data_agreementno=@item.Agreement_No })  |
                         @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-save", title = "Closure", @data_toggle = "modal", @data_target = "#closureModal", @data_agreementno = @item.Agreement_No })  |
                         @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-stats", title = "Status", @data_toggle = "modal", @data_target = "#statusModal", @data_agreementno = @item.Agreement_No })  |
                         @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit", @data_agreementno = @item.Agreement_No })  |
@@ -53,16 +53,8 @@
                     </div>
                 </div>
             }
-            
-            
-
-
-
-
-            
-
         </div>
-
+        @*, @data_toggle = "modal", @data_target = "#renewalModal"*@
     </div>
     <div class="col-sm-12">
        
@@ -140,7 +132,9 @@
     }
 
         </script>
-       <script>
+    </div>
+</div>
+<script>
 
            $(".agreement-renewal").on("click", function (e) {
 
@@ -162,6 +156,7 @@
                            if (result.Errors == undefined || result.Errors == "") {
                                $("#renewalAddOrUpdateContainer").empty();
                                $("#renewalAddOrUpdateContainer").html(result);
+                               $("#renewalModal").modal('show');
                                //$("#CountryId").val(result.Id);
                                //$("#CountryName").val(result.Country);
                            }
@@ -178,7 +173,4 @@
                        }
                    });
            });
-       </script>
-    </div>
-</div>
-
+</script>
