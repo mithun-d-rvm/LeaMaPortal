@@ -15,7 +15,9 @@
 <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
 <!DOCTYPE html>
 <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
-    <div class="row">
+    <div id="master-loader-list" class="fa hide">
+    </div>
+    <div class="row" id="company-list">
         <div class="col-md-12 leama-fieldset ">
             <div class="col-md-2 pull-left">
                 @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
@@ -94,6 +96,8 @@
         <script type="text/javascript">
                 $(".Page").click(function(e)
                 {
+                    $("#master-loader-list").removeClass("hide");
+                    $("#company-list").addClass("hide");
                     var page = parseInt($(this).data("id"));
                     var defaultPageSize = $("#defaultPageSize").val();
                     var search = $("#Search").val();
@@ -101,11 +105,15 @@
                     getCountryList(search,page,defaultPageSize)
                 });
                 $("#defaultPageSize").change(function () {
+                    $("#master-loader-list").removeClass("hide");
+                    $("#company-list").addClass("hide");
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
                     getCountryList(search, 1, defaultPageSize)
                 });
                 $("#btn-search").click(function (e) {
+                    $("#master-loader-list").removeClass("hide");
+                    $("#company-list").addClass("hide");
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
                     getCountryList(search, 1, defaultPageSize)
@@ -126,6 +134,8 @@
                            },
                            complete: function () {
                                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                               //$("#master-loader-list").addClass("hide");
+                               //$("#company-list").removeClass("hide");
                            }
                        });
                 }
@@ -155,8 +165,10 @@
     //Edit get
 
     $(".tenant-edit").click(function (e) {
-        $("#img-loader").removeClass("hide");
+        //$("#img-loader").removeClass("hide");
         e.preventDefault();
+        $("#master-loader-edit").removeClass("hide");
+        $("#ContainerAddOrUpdate").hide();
         var id = $(this).data("id");
         $.ajax(
             {
@@ -181,7 +193,9 @@
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
-                    $("#img-loader").addClass("hide");
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader-edit").addClass("hide");
+                    $("#ContainerAddOrUpdate").show();
                     $("body").scrollTop(0);
                 }
             });

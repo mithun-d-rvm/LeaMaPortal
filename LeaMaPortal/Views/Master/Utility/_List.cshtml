@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 
 <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
-    <div class="row">
+    <div class="row" id="utility-list">
         <div class="col-md-12 leama-fieldset ">
             <div class="col-md-2 pull-left">
                 @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
@@ -78,6 +78,8 @@
         <script type="text/javascript">
                 $(".Page").click(function(e)
                 {
+                    $("#master-loader-list").removeClass("hide");
+                    $("#utility-list").addClass("hide");
                     var page = parseInt($(this).data("id"));
                     var defaultPageSize = $("#defaultPageSize").val();
                     var search = $("#Search").val();
@@ -85,11 +87,15 @@
                     getUtilityList(search,page,defaultPageSize)
                 });
                 $("#defaultPageSize").change(function () {
+                    $("#master-loader-list").removeClass("hide");
+                    $("#utility-list").addClass("hide");
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
                     getUtilityList(search, 1, defaultPageSize)
                 });
                 $("#btn-search").click(function (e) {
+                    $("#master-loader-list").removeClass("hide");
+                    $("#utility-list").addClass("hide");
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
                     getUtilityList(search, 1, defaultPageSize)
@@ -110,6 +116,8 @@
                            },
                            complete: function () {
                                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                               //$("#master-loader-list").addClass("hide");
+                               //$("#utility-list").removeClass("hide");
                            }
                        });
                 }
@@ -142,6 +150,8 @@
 
     $(".utility-edit").click(function (e) {
         e.preventDefault();
+        $("#master-loader-edit").removeClass("hide");
+        $("#ContainerAddOrUpdate").hide();
         var id = $(this).data("id");
         var param = id.split('`');
         $.ajax(
@@ -165,6 +175,8 @@
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
+                    $("#master-loader-edit").addClass("hide");
+                    $("#ContainerAddOrUpdate").show();
                     $("body").scrollTop(0);
                 }
             });

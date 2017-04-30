@@ -10,7 +10,9 @@
 <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
 <!DOCTYPE html>
 <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
-    <div class="row">
+    <div id="master-loader-list" class="fa hide">
+    </div>
+    <div class="row" id="supplier-list">
         <div class="col-md-12 leama-fieldset ">
             <div class="col-md-2 pull-left">
                 @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
@@ -91,6 +93,8 @@
         <script type="text/javascript">
                 $(".Page").click(function(e)
                 {
+                    $("#master-loader-list").removeClass("hide");
+                    $("#supplier-list").addClass("hide");
                     var page = parseInt($(this).data("id"));
                     var defaultPageSize = $("#defaultPageSize").val();
                     var search = $("#Search").val();
@@ -98,11 +102,15 @@
                     getCountryList(search,page,defaultPageSize)
                 });
                 $("#defaultPageSize").change(function () {
+                    $("#master-loader-list").removeClass("hide");
+                    $("#supplier-list").addClass("hide");
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
                     getCountryList(search, 1, defaultPageSize)
                 });
                 $("#btn-search").click(function (e) {
+                    $("#master-loader-list").removeClass("hide");
+                    $("#supplier-list").addClass("hide");
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
                     getCountryList(search, 1, defaultPageSize)
@@ -123,6 +131,8 @@
                            },
                            complete: function () {
                                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                               //$("#master-loader-list").addClass("hide");
+                               //$("#supplier-list").removeClass("hide");
                            }
                        });
                 }
@@ -149,6 +159,8 @@
 <script>
     $(".supplier-edit").click(function (e) {
         e.preventDefault();
+        $("#master-loader-edit").removeClass("hide");
+        $("#ContainerAddOrUpdate").hide();
         var supplierId = $(this).data("id");
         $.ajax(
             {
@@ -162,6 +174,8 @@
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
+                    $("#master-loader-edit").addClass("hide");
+                    $("#ContainerAddOrUpdate").show();
                     $("body").scrollTop(0);
                 }
             });
