@@ -14,20 +14,11 @@ namespace LeaMaPortal.DBContext
     
     public partial class tbl_country
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_country()
-        {
-            this.tbl_region = new HashSet<tbl_region>();
-        }
-    
         public int Id { get; set; }
         public string Country_name { get; set; }
         public Nullable<int> Accyear { get; set; }
         public Nullable<System.DateTime> Createddatetime { get; set; }
         public string Createduser { get; set; }
         public string Delmark { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_region> tbl_region { get; set; }
     }
 }

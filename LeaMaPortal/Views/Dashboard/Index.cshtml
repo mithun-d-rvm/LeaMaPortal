@@ -4,20 +4,17 @@
 }
 <script src="~/theme/js/Chart.min.js"></script>
 
-<div class="inner-block p-t-5-p" style="background: #eff3f6;">
+<div class="inner-block p-t-5-p dashboard-bg">
     <div class="blank">
-
-
 
         <div class="portlet-grid-page">
             <h4 class="p-b-25">OVERALL PERFORMANCE FOR CURRENT MONTH</h4>
 
 
-            <div class="portlet-grid panel-primary" style="background-color:#554289;">
+            <div class="portlet-grid panel-primary earning-bg" id="earning-div">
                 <div class="panel-body">
-                    <div class="row" style="padding-bottom: 18px;font-size: 12px;
-    color: white;">
-                        <div class="col-md-6" style="font-size: 12px;">
+                    <div class="row earning-header">
+                        <div class="col-md-6 font-12">
                             <strong>  EARNING HISTORY </strong>
                         </div>
                         <div class="col-md-6">
@@ -33,20 +30,13 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div style="font-size: 30px;
-                    color: #52ce6f;
-                    padding-bottom: 18px;">
+                            <div class="earning-money">
                                 <span> 78,380 </span>
                                 <span class="per-month">AED</span>
                             </div>
                             <div>
-                                <i class="fa fa-chevron-up" style="font-size: 34px;
-    background-color: rgba(73, 50, 123, 0.57);
-    padding: 6px;
-    border-radius: 20px;
-    color: #52ce6f;"></i>
-                                <span style="color: white;
-    font-size: 16px;">
+                                <i class="fa fa-chevron-up earning-up-icon"></i>
+                                <span class="earning-month">
                                     JAN 2017
                                 </span>
                             </div>
@@ -60,145 +50,219 @@
             </div>
 
 
-            <div class="portlet-grid panel-primary">
+            <div class="portlet-grid panel-primary" id="vacant-div">
                 <div class="row">
-                    <div class="col-md-6 text-center" style="font-size: 12px;color: #594286;
-                padding-left: 25px;
-                padding-top: 7px;">
-                        <div style="padding-bottom: 18px;">
+                    <div class="col-md-6 text-center vacant-portlet">
+                        <div class="p-b-18">
                             <strong>  VACANT PROPERTIES </strong>
                         </div>
-                        <div style="font-size: 40px;
-                    color: #FC8213;
-                    padding-bottom: 18px;">
+                        <div class="vacant-total">
                             26
                         </div>
-                        <div style="color: green;
-                    text-transform: uppercase;
-                    font-size: 10px;
-                    padding-bottom: 15px;">
-                            Not Occupied &gt; <span style="background-color: darkgreen;
-                    color: white;
-                    border-radius: 5px;
-                    padding: 3px;">15</span>
+                        <div class="vacant-not-occupied">
+                            Not Occupied &gt; <span class="vacant-not-occupied-number">15</span>
                         </div>
-                        <div style="color: red;
-                    text-transform: uppercase;
-                    font-size: 10px;">
-                            Lease Expired &gt; <span style="background-color: red;
-                    color: white;
-                    border-radius: 5px;
-                    padding: 3px;">18</span>
+                        <div class="vacant-lease">
+                            Lease Expired &gt; <span class="vacant-lease-number">18</span>
                         </div>
                     </div>
-                    <div class="col-md-6 text-center" style="margin-top: 4px;
-                padding-right: 20px;">
-                        <div class="col-md-12" style="background-color: #e8f5ff;
-                    height: 85px;
-                    /* padding-top: 8px; */">
-                            <div style="font-size: 30px;margin-top: 7px;">
+                    <div class="col-md-6 text-center vacant-second-tab">
+                        <div class="col-md-12 vacant-residential-div">
+                            <div class="vacant-residential-number">
                                 <i class="fa fa-home"></i>
                                 <span> 10 </span>
                             </div>
-                            <div style="font-size: 8px;
-                        background-color: #0474c8;
-                        padding: 3px;
-                        color: white;
-                        border-radius: 4px;
-                        text-transform: uppercase;
-                        /* width: 50%; */">Residential</div>
+                            <div class="vacant-residential-text">Residential</div>
                         </div>
-                        <div class="col-md-12" style="background-color: #fff3fd;
-                    height: 85px;
-                    /* padding-top: 8px; */">
-                            <div style="font-size: 30px;margin-top: 7px;">
+                        <div class="col-md-12 vacant-commercial-div">
+                            <div class="vacant-residential-number">
                                 <i class="fa fa-home"></i>
                                 <span> 16 </span>
                             </div>
-                            <div style="font-size: 8px;
-                        background-color: #b24a9a;
-                        padding: 3px;
-                        color: white;
-                        border-radius: 4px;
-                        text-transform: uppercase;
-                        /* width: 50%; */">Commercial</div>
+                            <div class="vacant-commercial-text">Commercial</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="portlet-grid panel-primary">
+            
+            
+            <div class="portlet-grid panel-primary" id="total-loss-div">
                 <div class="panel-body">
                     <div class="row">
-                        @*<div class="col-md-12">*@
-                        <div class="col-md-7" style="font-size: 12px;
-    color: #594286;
-    text-transform: uppercase;
-    font-weight: bold;">
+
+                        <div class="col-md-7 total-loss-div">
                             Total loss from vacant properties
                         </div>
                         <div class="col-md-5">
-                            <i class="fa fa-chevron-down" style="border-radius: 3px;
-    background-color: #d35847;
-    color: white;
-    padding: 5px;"></i> <span style="font-size: 25px;
-    color: #d35847;">36,100</span>
+                            <i class="fa fa-chevron-down total-loss-down-arrow"></i> <span class="total-loss-number">36,100</span>
                         </div>
-                        @*</div>*@
 
                     </div>
                     <div class="row">
-                        <div class="col-md-6" style="background-color: #f9f9f9;
-    height: 110px;
-    margin-top: 10px;
-    width: 44%;
-    margin-left: 9px;">
-                            <div style="margin-top: 16px;">
-                                <span style="background-color: #0474c8;
-    font-size: 10px;
-    color: white;
-    padding: 2px;
-    border-radius: 5px;">RES</span> 10
+                        <div class="col-md-6 total-loss-resid-div">
+                            <div class="m-t-16">
+                                <span class="total-loss-res-text">RES</span> 10
                             </div>
-                            <div style="font-size: 30px;color: #2c2e35;">
+                            <div class="total-loss-res-amt">
                                 <span> 11,500 </span>
                                 <span class="per-month">AED</span>
                             </div>
                         </div>
-                        <div class="col-md-6" style="background-color: #f9f9f9;
-    height: 110px;
-    margin-top: 10px;
-    margin-left: 5px;">
-                            <div style="margin-top: 16px;">
-                                <span style="background-color: #b24a9a;
-                              font-size :10px;
-                              color: white;
-                              padding :2px;
-                              border-radius: 5px;">COM</span> 16
+                        <div class="col-md-6 total-loss-comm-div">
+                            <div class="m-t-16">
+                                <span class="total-loss-comm-text">COM</span> 16
                             </div>
-                            <div style="font-size: 30px;color: #2c2e35;">
+                            <div class="total-loss-res-amt">
                                 <span> 12,231 </span>
                                 <span class="per-month">AED</span>
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
+
+            <!-- Begin Grid View -->
+
+            <div class="portlet-grid" style="width:98%;" id="earning-table">
+                <div class="panel-body">
+                    @*<div class="col-md-12" style="background-color:white;">*@
+                    <div class="divTable leama-fieldset">
+                        <div class="divTableBody divFontBodyTable">
+                            <div class="divTableHeading">
+                                <div class="divTableCell">Tenant ID</div>
+                                <div class="divTableCell">Company Name</div>
+                                <div class="divTableCell">Tenant Type</div>
+                                <div class="divTableCell">Trade License Number</div>
+                                <div class="divTableCell">Action</div>
+
+                            </div>
+
+                            <div class="divTableRow">
+                                <div class="divTableCell">TenantId</div>
+                                <div class="divTableCell">CompanyName</div>
+                                <div class="divTableCell">TenantType</div>
+                                <div class="divTableCell">TradelicenseNo</div>
+                                <div class="divTableCell">
+                                    <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
+                                    <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
+                                </div>
+
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell">TenantId</div>
+                                <div class="divTableCell">CompanyName</div>
+                                <div class="divTableCell">TenantType</div>
+                                <div class="divTableCell">TradelicenseNo</div>
+                                <div class="divTableCell">
+                                    <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
+                                    <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    @*</div>*@
+                </div>
+            </div>
+
+            <div class="portlet-grid" style="width:98%;" id="vacant-table">
+                <div class="panel-body">
+                    @*<div class="col-md-12" style="background-color:white;">*@
+                    <div class="divTable leama-fieldset">
+                        <div class="divTableBody divFontBodyTable">
+                            <div class="divTableHeading">
+                                <div class="divTableCell">Vacant ID</div>
+                                <div class="divTableCell">Company Name</div>
+                                <div class="divTableCell">Tenant Type</div>
+                                <div class="divTableCell">Trade License Number</div>
+                                <div class="divTableCell">Action</div>
+
+                            </div>
+
+                            <div class="divTableRow">
+                                <div class="divTableCell">TenantId</div>
+                                <div class="divTableCell">CompanyName</div>
+                                <div class="divTableCell">TenantType</div>
+                                <div class="divTableCell">TradelicenseNo</div>
+                                <div class="divTableCell">
+                                    <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
+                                    <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
+                                </div>
+
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell">TenantId</div>
+                                <div class="divTableCell">CompanyName</div>
+                                <div class="divTableCell">TenantType</div>
+                                <div class="divTableCell">TradelicenseNo</div>
+                                <div class="divTableCell">
+                                    <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
+                                    <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    @*</div>*@
+                </div>
+            </div>
+
+            <div class="portlet-grid" style="width:98%;" id="loss-table">
+                <div class="panel-body">
+                    @*<div class="col-md-12" style="background-color:white;">*@
+                    <div class="divTable leama-fieldset">
+                        <div class="divTableBody divFontBodyTable">
+                            <div class="divTableHeading">
+                                <div class="divTableCell">Loss ID</div>
+                                <div class="divTableCell">Company Name</div>
+                                <div class="divTableCell">Tenant Type</div>
+                                <div class="divTableCell">Trade License Number</div>
+                                <div class="divTableCell">Action</div>
+
+                            </div>
+
+                            <div class="divTableRow">
+                                <div class="divTableCell">TenantId</div>
+                                <div class="divTableCell">CompanyName</div>
+                                <div class="divTableCell">TenantType</div>
+                                <div class="divTableCell">TradelicenseNo</div>
+                                <div class="divTableCell">
+                                    <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
+                                    <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
+                                </div>
+
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell">TenantId</div>
+                                <div class="divTableCell">CompanyName</div>
+                                <div class="divTableCell">TenantType</div>
+                                <div class="divTableCell">TradelicenseNo</div>
+                                <div class="divTableCell">
+                                    <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
+                                    <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    @*</div>*@
+                </div>
+            </div>
+
+            <!-- End Grid View -->
 
 
             <div class="portlet-grid panel-primary">
                 <div class="panel-body">
-                    <div style="font-size: 12px;
-    color: #354052;
-    padding-bottom: 15px;">UTILITY DUES</div>
-                    <div class="text-center" style="padding-top: 20px;
-    font-size: 30px;
-    color: #0daeff;">
-                        <i class="fa fa-home" style="color: white;
-    background-color: #554289;
-    border-radius: 6px;"></i>
+                    <div class="dues-text">UTILITY DUES</div>
+                    <div class="text-center dues-div">
+                        <i class="fa fa-home dues-icon"></i>
                         <span> 64,300 </span>
                         <span class="per-month">AED</span>
                     </div>
@@ -208,15 +272,9 @@
 
             <div class="portlet-grid panel-primary">
                 <div class="panel-body">
-                    <div style="font-size: 12px;
-    color: #354052;
-    padding-bottom: 15px;">RENT DUES</div>
-                    <div class="text-center" style="padding-top: 20px;
-    font-size: 30px;
-    color: #0daeff;">
-                        <i class="fa fa-money" style="color: white;
-    background-color: #554289;
-    border-radius: 6px;"></i>
+                    <div class="dues-text">RENT DUES</div>
+                    <div class="text-center dues-div">
+                        <i class="fa fa-money dues-icon"></i>
                         <span> 122,541 </span>
                         <span class="per-month">AED</span>
                     </div>
@@ -226,65 +284,32 @@
 
             <div class="portlet-grid panel-primary">
                 <div class="panel-body">
-                    <div style="font-size: 12px;
-    color: #354052;
-    padding-bottom: 15px;">TOTAL EXPENSE</div>
-                    <div class="text-center" style="padding-top: 20px;
-    font-size: 30px;
-    color: #2c2e35;">
+                    <div class="dues-text">TOTAL EXPENSE</div>
+                    <div class="text-center expense-div">
                         <span> 199,751 </span>
                     </div>
                 </div>
             </div>
 
-            <div class="portlet-grid" style="width: 98%;height: 100px;">
-                <div class="panel-body" style="margin-top: 15px;">
-                    <div class="col-md-3" style="font-size: 16px;
-    color: #432f76;
-    font-weight: bold;
-    margin-top: 9px;">
+            <div class="portlet-grid notif-portlet">
+                <div class="panel-body m-t-15">
+                    <div class="col-md-3 imp-notif-text">
                         IMPORTANT NOTIFICATIONS
                     </div>
-                    <div class="col-md-8" style="font-size: 15px;">
-                        <button class="" style="width: 207px;
-    height: 40px;
-    border-radius: 50px;
-    border: solid 1px #554289;
-    background: transparent;">
+                    <div class="col-md-8 font-15">
+                        <button data-toggle="modal" data-target="#myModal" class="notif-sub-text">
                             PDC Notification
-                            <span style="font-size: 10px;
-    background-color: #e61d1d;
-    border-radius: 10px;
-    padding: 3px;
-    color: white;">12</span>
+                            <span class="notif-total">12</span>
                         </button>
 
-                        <button class="" style="width: 207px;
-    height: 40px;
-    border-radius: 50px;
-    border: solid 1px #554289;
-    background: transparent;
-    margin-left: 15px;">
+                        <button data-toggle="modal" data-target="#myModal" class="notif-sub-text">
                             Renewals
-                            <span style="font-size: 10px;
-    background-color: #e61d1d;
-    border-radius: 10px;
-    padding: 3px;
-    color: white;">12</span>
+                            <span class="notif-total">12</span>
                         </button>
 
-                        <button class="" style="width: 207px;
-    height: 40px;
-    border-radius: 50px;
-    border: solid 1px #554289;
-    background: transparent;
-    margin-left: 15px;">
+                        <button data-toggle="modal" data-target="#myModal" class="notif-sub-text">
                             Contracts Expiry
-                            <span style="font-size: 10px;
-    background-color: #e61d1d;
-    border-radius: 10px;
-    padding: 3px;
-    color: white;">12</span>
+                            <span class="notif-total">12</span>
                         </button>
                     </div>
                 </div>
@@ -318,4 +343,27 @@
     window.homeBarChart = new Chart(ctx).Bar(data, options);
     homeBarChart.datasets[0].bars[0].fillColor = "#529ace"; //bar1
     homeBarChart.datasets[0].bars[1].fillColor = "#d04242"; //bar 2
+
+
+    $(document).ready(function () {
+        $("#earning-table").hide();
+        $("#vacant-table").hide();
+        $("#loss-table").hide();
+        $("#earning-div").click(function () {
+            $("#earning-table").toggle();
+            $("#vacant-table").hide();
+            $("#loss-table").hide();
+        });
+        $("#vacant-div").click(function () {
+            $("#vacant-table").toggle();
+            $("#earning-table").hide();
+            $("#loss-table").hide();
+        });
+        $("#total-loss-div").click(function () {
+            $("#loss-table").toggle();
+            $("#vacant-table").hide();
+            $("#earning-table").hide();
+        });
+    });
+
 </script>
