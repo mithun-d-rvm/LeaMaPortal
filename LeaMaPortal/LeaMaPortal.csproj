@@ -216,7 +216,7 @@
     <Compile Include="DBContext\ebwater_report.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBContext\email_newagreement.cs">
+    <Compile Include="DBContext\email_output.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="DBContext\eventtest.cs">
