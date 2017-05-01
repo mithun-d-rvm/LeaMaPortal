@@ -2241,20 +2241,6 @@ warning 6035: The relationship 'FKtenantind1' has columns that are not part of t
         <!--Errors Found During Generation:
 warning 6035: The relationship 'FKtenantinddt' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FKtenantinddt" />-->
-        <Function Name="Usp_Vacant_Report_all" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="leama">
-          <Parameter Name="Pgroup" Type="varchar" Mode="In" />
-          <Parameter Name="Pfromdate" Type="date" Mode="In" />
-          <Parameter Name="Ptodate" Type="date" Mode="In" />
-          <Parameter Name="Pfilter_field" Type="varchar" Mode="In" />
-          <Parameter Name="Pfilter_value" Type="varchar" Mode="In" />
-          <Parameter Name="Pagin_Filter" Type="varchar" Mode="In" />
-          <Parameter Name="Pagin_Filter_From" Type="int" Mode="In" />
-          <Parameter Name="Pagin_Filter_To" Type="int" Mode="In" />
-          <Parameter Name="Prentalamt_Filter" Type="varchar" Mode="In" />
-          <Parameter Name="Prentalamt_Filter_From" Type="int" Mode="In" />
-          <Parameter Name="Prentalamt_Filter_To" Type="int" Mode="In" />
-          <Parameter Name="PCreateduser" Type="varchar" Mode="In" />
-        </Function>
         <EntityContainer Name="LeamaModelStoreContainer">
           <EntitySet Name="dashboard_rental" EntityType="Self.dashboard_rental" Schema="leama" store:Type="Tables" />
           <EntitySet Name="dashboard_utility" EntityType="Self.dashboard_utility" Schema="leama" store:Type="Tables" />
@@ -2610,20 +2596,6 @@ FROM `view_tenant` AS `view_tenant`</DefiningQuery>
     <edmx:ConceptualModels>
       <Schema Namespace="LeamaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="LeamaEntities" annotation:LazyLoadingEnabled="true">
-          <FunctionImport Name="Usp_Vacant_Report_all" ReturnType="Collection(LeamaModel.Usp_Vacant_Report_all_Result)">
-            <Parameter Name="Pgroup" Mode="In" Type="String" />
-            <Parameter Name="Pfromdate" Mode="In" Type="DateTime" />
-            <Parameter Name="Ptodate" Mode="In" Type="DateTime" />
-            <Parameter Name="Pfilter_field" Mode="In" Type="String" />
-            <Parameter Name="Pfilter_value" Mode="In" Type="String" />
-            <Parameter Name="Pagin_Filter" Mode="In" Type="String" />
-            <Parameter Name="Pagin_Filter_From" Mode="In" Type="Int32" />
-            <Parameter Name="Pagin_Filter_To" Mode="In" Type="Int32" />
-            <Parameter Name="Prentalamt_Filter" Mode="In" Type="String" />
-            <Parameter Name="Prentalamt_Filter_From" Mode="In" Type="Int32" />
-            <Parameter Name="Prentalamt_Filter_To" Mode="In" Type="Int32" />
-            <Parameter Name="PCreateduser" Mode="In" Type="String" />
-          </FunctionImport>
           <EntitySet Name="dashboard_rental" EntityType="LeamaModel.dashboard_rental" />
           <EntitySet Name="dashboard_utility" EntityType="LeamaModel.dashboard_utility" />
           <EntitySet Name="dashboard_vacancy" EntityType="LeamaModel.dashboard_vacancy" />
@@ -2807,7 +2779,6 @@ FROM `view_tenant` AS `view_tenant`</DefiningQuery>
             <End Role="tbl_supplierdt1" EntitySet="tbl_supplierdt1" />
           </AssociationSet>
         </EntityContainer>
-        <ComplexType Name="Usp_Vacant_Report_all_Result" />
         <EntityType Name="dashboard_rental">
           <Key>
             <PropertyRef Name="id" />
@@ -4684,17 +4655,12 @@ FROM `view_tenant` AS `view_tenant`</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="LeamaModelStoreContainer" CdmEntityContainer="LeamaEntities">
-          <FunctionImportMapping FunctionImportName="Usp_Vacant_Report_all" FunctionName="LeamaModel.Store.Usp_Vacant_Report_all">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LeamaModel.Usp_Vacant_Report_all_Result" />
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="dashboard_rental">
             <EntityTypeMapping TypeName="LeamaModel.dashboard_rental">
               <MappingFragment StoreEntitySet="dashboard_rental">

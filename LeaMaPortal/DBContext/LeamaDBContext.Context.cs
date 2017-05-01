@@ -12,8 +12,6 @@ namespace LeaMaPortal.DBContext
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
     public partial class LeamaEntities : DbContext
     {
@@ -101,58 +99,5 @@ namespace LeaMaPortal.DBContext
         public virtual DbSet<view_invoice_agreement> view_invoice_agreement { get; set; }
         public virtual DbSet<view_invoice_receipt_pending> view_invoice_receipt_pending { get; set; }
         public virtual DbSet<view_tenant> view_tenant { get; set; }
-    
-        public virtual ObjectResult<Usp_Vacant_Report_all_Result> Usp_Vacant_Report_all(string pgroup, Nullable<System.DateTime> pfromdate, Nullable<System.DateTime> ptodate, string pfilter_field, string pfilter_value, string pagin_Filter, Nullable<int> pagin_Filter_From, Nullable<int> pagin_Filter_To, string prentalamt_Filter, Nullable<int> prentalamt_Filter_From, Nullable<int> prentalamt_Filter_To, string pCreateduser)
-        {
-            var pgroupParameter = pgroup != null ?
-                new ObjectParameter("Pgroup", pgroup) :
-                new ObjectParameter("Pgroup", typeof(string));
-    
-            var pfromdateParameter = pfromdate.HasValue ?
-                new ObjectParameter("Pfromdate", pfromdate) :
-                new ObjectParameter("Pfromdate", typeof(System.DateTime));
-    
-            var ptodateParameter = ptodate.HasValue ?
-                new ObjectParameter("Ptodate", ptodate) :
-                new ObjectParameter("Ptodate", typeof(System.DateTime));
-    
-            var pfilter_fieldParameter = pfilter_field != null ?
-                new ObjectParameter("Pfilter_field", pfilter_field) :
-                new ObjectParameter("Pfilter_field", typeof(string));
-    
-            var pfilter_valueParameter = pfilter_value != null ?
-                new ObjectParameter("Pfilter_value", pfilter_value) :
-                new ObjectParameter("Pfilter_value", typeof(string));
-    
-            var pagin_FilterParameter = pagin_Filter != null ?
-                new ObjectParameter("Pagin_Filter", pagin_Filter) :
-                new ObjectParameter("Pagin_Filter", typeof(string));
-    
-            var pagin_Filter_FromParameter = pagin_Filter_From.HasValue ?
-                new ObjectParameter("Pagin_Filter_From", pagin_Filter_From) :
-                new ObjectParameter("Pagin_Filter_From", typeof(int));
-    
-            var pagin_Filter_ToParameter = pagin_Filter_To.HasValue ?
-                new ObjectParameter("Pagin_Filter_To", pagin_Filter_To) :
-                new ObjectParameter("Pagin_Filter_To", typeof(int));
-    
-            var prentalamt_FilterParameter = prentalamt_Filter != null ?
-                new ObjectParameter("Prentalamt_Filter", prentalamt_Filter) :
-                new ObjectParameter("Prentalamt_Filter", typeof(string));
-    
-            var prentalamt_Filter_FromParameter = prentalamt_Filter_From.HasValue ?
-                new ObjectParameter("Prentalamt_Filter_From", prentalamt_Filter_From) :
-                new ObjectParameter("Prentalamt_Filter_From", typeof(int));
-    
-            var prentalamt_Filter_ToParameter = prentalamt_Filter_To.HasValue ?
-                new ObjectParameter("Prentalamt_Filter_To", prentalamt_Filter_To) :
-                new ObjectParameter("Prentalamt_Filter_To", typeof(int));
-    
-            var pCreateduserParameter = pCreateduser != null ?
-                new ObjectParameter("PCreateduser", pCreateduser) :
-                new ObjectParameter("PCreateduser", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Usp_Vacant_Report_all_Result>("Usp_Vacant_Report_all", pgroupParameter, pfromdateParameter, ptodateParameter, pfilter_fieldParameter, pfilter_valueParameter, pagin_FilterParameter, pagin_Filter_FromParameter, pagin_Filter_ToParameter, prentalamt_FilterParameter, prentalamt_Filter_FromParameter, prentalamt_Filter_ToParameter, pCreateduserParameter);
-        }
     }
 }
