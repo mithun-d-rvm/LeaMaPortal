@@ -89,24 +89,24 @@
                     var defaultPageSize = $("#defaultPageSize").val();
                     var search = $("#Search").val();
                     //alert(page);
-                    getCheckListList(search,page,defaultPageSize)
+                    getSlabList(search, page, defaultPageSize)
                 });
                 $("#defaultPageSize").change(function () {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getCheckListList(search, 1, defaultPageSize)
+                    getSlabList(search, 1, defaultPageSize)
                 });
                 $("#btn-search").click(function (e) {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getCheckListList(search, 1, defaultPageSize)
+                    getSlabList(search, 1, defaultPageSize)
                 });
 
-                function getCheckListList(search, page, defaultPageSize)
+                function getSlabList(search, page, defaultPageSize)
                 {
                     $.ajax(
                        {
-                           url: "../CheckList/Index",
+                           url: "../Slab/Index",
                            type: "Get",
                            data: { Search: search, page: page, defaultPageSize: defaultPageSize },
                            success: function (html) {
@@ -158,14 +158,15 @@
                 data: { Id : id },
                 success: function (result) {
                     if (result.Errors == undefined || result.Errors == "") {
-                        $("#MeterId").val(result.Id);
-                        $("#Meter_no").val(result.Meter_no);
+                        $("#SlabMasterId").val(result.Id);
+                        $("#SlabId").val(result.SlabId);
                         $("#Utility_id").val(result.Utility_id);
                         $("#Utility_Name").val(result.Utility_Name);
-                        $("#Accno").val(result.Accno);
-                        //$("#unit_id").val(result.unit_id);
-                        $("#Property_id").val(result.Property_id);
-                        $("#Dueday").val(result.Dueday);
+                        $("#Unit_From").val(result.Unit_From);
+                        $("#Unit_to").val(result.Unit_to);
+                        $("#rate").val(result.rate);
+                        $("#Colour").val(result.Colour);
+                        $("#Residence_type").val(result.Residence_type);
                     }
                     else {
                         alert(data.Errors);

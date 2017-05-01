@@ -1,9 +1,10 @@
-﻿@model LeaMaPortal.Models.AgreementUtilityViewModel
+﻿@*@model LeaMaPortal.Models.AgreementUtilityViewModel*@
+@model LeaMaPortal.Models.AgreementUtilityViewModel
 <div class="row p-b-25 text-uppercase">
     <span> <strong> Agreement utility </strong> </span>
 </div>
 
-<div class="row">
+<div class="row" id="AgreementUtilityDiv">
     <div class="col-md-12 document-row">
         <div class="col-md-2">
             @Html.LabelFor(model => model.Utility_id, htmlAttributes: new { @class = "label-default-remove" })
@@ -20,22 +21,180 @@
         <div class="col-md-2">
             @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "label-default-remove" })
         </div>
+       
+    </div>
+    <div class="col-md-12 document-row">
+        <div class="col-md-2">
+            @Html.DropDownList("Utility_id",null, "--Select--", new { @class = "form-control master-form-input" })
+        </div>
+        <div class="col-md-3">
+            @Html.DropDownList("Utility_Name",null, "--Select--", new { @class = "form-control master-form-input" })
+        </div>
+        <div class="col-md-2">
+            @Html.DropDownList("Payable", null, "--Select--", new { @class = "form-control master-form-input" })
+        </div>
+        <div class="col-md-2">
+            @Html.DropDownList("Amount_Type", null, "--Select--", new { @class = "form-control master-form-input" })
+        </div>
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "master-form-input text-box single-line" } })
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="document-btn" onclick="addAgreementUtilityDetails(event);">Add</button>
+        </div>
     </div>
 </div>
 <div class="row ht-5">
     &nbsp;
 </div>
-
-@Html.Partial("_AgreementUtilityDetails")
+<input type="hidden" id="AgreementUtilityListCount" value="@Model.AgreementUtilityList.Count" />
+@*@Html.Partial("_AgreementUtilityDetails")*@
 
 <div class="row">
-    <div class="col-md-1 w-md-10 pull-right">
-        <button class="document-btn">Delete</button>
-    </div>
-    <div class="col-md-1 w-md-10 pull-right">
-        <button class="document-btn">Add</button>
-    </div>
+    <table id="AgreementUtilityList" class="col-md-12 document-row">
+
+        @for (int i = 0; i < Model.AgreementUtilityList.Count; i++)
+            {
+
+            <tr>
+                <td>
+                    <input type="hidden" name="AgreementUtilityList[@i].Id" id="AgreementUtilityList[@i].Id" value="@Model.AgreementUtilityList[i].Id" data-name="Id" />
+                    <input type="hidden" name="AgreementUtilityList[@i].Utility_id" id="AgreementUtilityList[@i].Utility_id" value="@Model.AgreementUtilityList[i].Utility_id" data-name="Utility_id" />
+                    <input type="hidden" name="AgreementUtilityList[@i].Utility_Name" id="AgreementUtilityList[@i].Utility_Name" value="@Model.AgreementUtilityList[i].Utility_Name" data-name="Utility_Name" />
+
+                    <input type="hidden" name="AgreementUtilityList[@i].Payable" id="AgreementUtilityList[@i].Payable" value="@Model.AgreementUtilityList[i].Payable" data-name="Payable" />
+                    <input type="hidden" name="AgreementUtilityList[@i].Amount_Type" id="AgreementUtilityList[@i].Amount_Type" value="@Model.AgreementUtilityList[i].Amount_Type" data-name="Amount_Type" />
+                    <input type="hidden" name="AgreementUtilityList[@i].Amount" id="AgreementUtilityList[@i].Amount" value="@Model.AgreementUtilityList[i].Amount" data-name="Amount" />
+                   
+                    <div class="col-md-12 document-row">
+                        <div class="col-md-1 col-md-1 w-md-13">
+                            @Model.AgreementUtilityList[i].Utility_id
+                        </div>
+                        <div class="col-md-1 w-md-14">
+                            @Model.AgreementUtilityList[i].Utility_Name
+                            @*@Html.EditorFor(model => model.Utility_id, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        </div>
+                        <div class="col-md-1">
+                            @Model.AgreementUtilityList[i].Utility_Name
+                            @*<select class="form-control master-form-input">
+                                    <option> Cash </option>
+                                    <option> Cheque </option>
+                                    <option> Card </option>
+                                </select>*@
+                        </div>
+                        <div class="col-md-1 w-md-15">
+                            @Model.AgreementUtilityList[i].Payable
+                            @*@Html.EditorFor(model => model.Payable, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        </div>
+                        <div class="col-md-1 w-md-14">
+                            @*@Html.EditorFor(model => model.Amount_Type, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                            @Model.AgreementUtilityList[i].Amount_Type
+                        </div>
+                        <div class="col-md-1 w-md-14">
+                            @*@Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                            @Model.AgreementUtilityList[i].Amount
+                        </div>
+                        
+                        <div class="col-md-1">
+                            <button class="btn AgreementUtilityList-remove">X</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+
 </div>
 <div class="row ht-5">
     &nbsp;
 </div>
+<script>
+    var AgreementUtilityCount = parseInt($("#AgreementUtilityListCount").val());
+
+    function addAgreementUtilityDetails(event) {
+        
+        var Utility_Name = $("#Utility_id").val();
+        var Utility_id = $("#Utility_Name option:selected").text();
+        var Payable = $("#Payable").val();
+        var Amount_Type = $("#Amount_Type").val();
+        var Amount = $("#AgreementUtilityDiv #Amount").val();
+
+        var html = "<tr><td>" +
+                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Utility_id' id='AgreementUtilityList[" + AgreementUtilityCount + "].Utility_id' value='" + Utility_id + "' data-name='Utility_id' />" +
+                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Utility_Name' id='AgreementUtilityList[" + AgreementUtilityCount + "].Utility_Name' value='" + Utility_Name + "' data-name='Utility_Name' />" +
+                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Payable' id='AgreementUtilityList[" + AgreementUtilityCount + "].Payable' value='" + Payable + "' data-name='Payable' />" +
+                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Amount_Type' id='AgreementUtilityList[" + AgreementUtilityCount + "].Amount_Type' value='" + Amount_Type + "' data-name='Amount_Type' />" +
+                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Amount' id='AgreementUtilityList[" + AgreementUtilityCount + "].Amount' value='" + Amount + "' data-name='Amount' />" +
+
+
+                      "<div class='col-md-12 document-row'>" +
+                          "<div class='col-md-1 col-md-1 w-md-13'>" + Utility_id + "</div>" +
+
+
+                          "<div class='col-md-1 w-md-14'>" +
+
+                          Utility_Name +
+
+        "</div>" +
+        "<div class='col-md-1 w-md-16'>" +
+        Payable +
+        "</div>" +
+        "<div class='col-md-1 w-md-15'>" +
+
+        Amount_Type +
+
+        "</div>" +
+        "<div class='col-md-1 w-md-14'>" +
+            Amount +
+        "</div>" +
+        "<div class='col-md-1 w-md-14'>" +
+           "<button class='btn AgreementUtilityList-remove' onclick='removeAgreementUtilityDetails(event);'>X</button>" +
+        "</div>" +
+    "</div>" +
+"</td>" +
+"</tr>";
+       // alert(html);
+
+        $("#AgreementUtilityList").append(html);
+        AgreementUtilityCount++;
+    }
+    
+    $(document).on('click', 'button.AgreementUtilityList-remove', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('AgreementUtilityList');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'AgreementUtilityDetailsList[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+        AgreementUtilityCount = newindex;
+    });
+
+    $("#Utility_id").change(function () {
+        debugger;
+        var utility_id = $("#Utility_id").val();
+        $("#Utility_Name").val(utility_id);
+        return;
+    });
+    $("#Utility_Name").change(function () {
+        var utility_id = $("#Utility_Name").val();
+        $("#Utility_id").val(utility_id);
+        return;
+    });
+</script>
