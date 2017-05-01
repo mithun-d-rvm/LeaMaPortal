@@ -1,9 +1,19 @@
-﻿
-
-@{
+﻿@{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<style>
+    #master-loader {
+        background: url("../Images/loader.gif") no-repeat scroll center center #FFF;
+        position: absolute;
+        height: 30%;
+        width: 85%;
+    }
+</style>
+<div id="master-loader" class="fa hide">
+</div>
+
 <div class="inner-block">
     <div class="blank">
         <div id="ContainerAddOrUpdate"></div>
@@ -263,8 +273,9 @@
     AddOrUpdate();
     function AddOrUpdate() {
         debugger;
-        $("#img-loader").removeClass("hide");
-        //$("#ContainerAddOrUpdate").empty();
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
         //$("#ContainerList").empty();
         $.ajax(
         {
@@ -280,7 +291,8 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                $("#img-loader").addClass("hide");
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
             }
         });
     };
