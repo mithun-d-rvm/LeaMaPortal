@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Notification.Model;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -10,31 +12,32 @@ namespace Notification
 {
     public class NotificationHelper
     {
-        public void sendMail()
+        public void sendMail(EmailModel model)
         {
-            Console.WriteLine("Mail To");
-            MailAddress to = new MailAddress(Console.ReadLine());
+            MailAddress from = new MailAddress(model.from);
 
-            Console.WriteLine("Mail From");
-            MailAddress from = new MailAddress(Console.ReadLine());
-
-            MailMessage mail = new MailMessage(from, to);
-
-            Console.WriteLine("Subject");
-            mail.Subject = Console.ReadLine();
-
-            Console.WriteLine("Your Message");
-            mail.Body = Console.ReadLine();
+            MailMessage mail = new MailMessage();
+            foreach(var to in model.toList)
+            {
+                mail.To.Add(to);
+            }
+            foreach (var cc in model.ccList)
+            {
+                mail.CC.Add(cc);
+            }
+            mail.Subject = model.sub;
+            mail.Body = model.body;
 
             SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com";
-            smtp.Port = 587;
-
+            smtp.Host = ConfigurationManager.AppSettings["SMTPHost"];
+            smtp.Port = Convert.ToInt32(ConfigurationManager.AppSettings["SMTPPort"]);
             smtp.Credentials = new NetworkCredential(
-                "username@domain.com", "password");
+                ConfigurationManager.AppSettings["FromEmail"], 
+                ConfigurationManager.AppSettings["EmailPassword"]);
             smtp.EnableSsl = true;
             Console.WriteLine("Sending email...");
             smtp.Send(mail);
+            Console.WriteLine("Mail sent");
         }
     }
 }

@@ -10,8 +10,15 @@ namespace Notification
     {
         static void Main(string[] args)
         {
-            NotificationHelper obj = new NotificationHelper();
-            obj.sendMail();                     
+            try
+            {
+                NotificationDAL obj = new NotificationDAL();
+                obj.dailyNotification();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
