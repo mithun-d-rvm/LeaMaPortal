@@ -36,7 +36,6 @@ namespace LeaMaPortal.DBContext
         public string Createduser { get; set; }
         public string Delmark { get; set; }
     
-        public virtual tbl_agreement_status tbl_agreement_status { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_agreement_closure_checklist> tbl_agreement_closure_checklist { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -18,7 +18,6 @@ namespace LeaMaPortal.DBContext
         public tbl_caretaker()
         {
             this.tbl_agreement = new HashSet<tbl_agreement>();
-            this.tbl_propertiesmaster = new HashSet<tbl_propertiesmaster>();
         }
     
         public int Id { get; set; }
@@ -42,8 +41,5 @@ namespace LeaMaPortal.DBContext
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_agreement> tbl_agreement { get; set; }
-        public virtual tbl_region tbl_region { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_propertiesmaster> tbl_propertiesmaster { get; set; }
     }
 }

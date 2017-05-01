@@ -19,7 +19,6 @@ namespace LeaMaPortal.DBContext
         {
             this.tbl_metermaster = new HashSet<tbl_metermaster>();
             this.tbl_propertiesdt1 = new HashSet<tbl_propertiesdt1>();
-            this.tbl_slabmaster = new HashSet<tbl_slabmaster>();
         }
     
         public int id { get; set; }
@@ -34,7 +33,5 @@ namespace LeaMaPortal.DBContext
         public virtual ICollection<tbl_metermaster> tbl_metermaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_propertiesdt1> tbl_propertiesdt1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_slabmaster> tbl_slabmaster { get; set; }
     }
 }
