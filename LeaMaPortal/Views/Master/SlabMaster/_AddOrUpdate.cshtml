@@ -11,7 +11,7 @@
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Slab" }))
 {
-    @Html.HiddenFor(m => m.Id, new { @id = "SlabId" })
+    @Html.HiddenFor(m => m.Id, new { @id = "SlabMasterId" })
     <div class="col-md-12 leama-fieldset leama-header-top">
         <div class="row">
             <div class="col-md-12 leama-fieldset ">
@@ -121,7 +121,7 @@
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
-                        GetMeter();
+                        GetSlab();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");

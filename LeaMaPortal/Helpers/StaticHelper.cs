@@ -31,6 +31,8 @@ namespace LeaMaPortal.Helpers
         public const byte PROPERTY = 6;
         public const byte UNIT = 7;
         public const byte PROPERTYCATEGORY_DROPDOWN = 8;
+        public const byte ACCOUNT_NAME = 9;
+        public const byte ACCOUNT_NUMBER = 10;
 
         public const string PROPERTY_RESIDENTIAL = "residential";
         public const string PROPERTY_COMMERCIAL = "commercial";
@@ -44,6 +46,12 @@ namespace LeaMaPortal.Helpers
         public const string PROPERTYCATEGORY_CATEGORY_1 = "category 1";
         public const string PROPERTYCATEGORY_CATEGORY_2 = "category 2";
         public const string PROPERTYCATEGORY_CATEGORY_3 = "category 3";
+
+        public const string ACCOUNT_NAME_1 = "123456789";
+        public const string ACCOUNT_NAME_2 = "123456790";
+
+        public const string ACCOUNT_NUMBER_1 = "Name 1";
+        public const string ACCOUNT_NUMBER_2 = "Name 2";
 
         private static List<OptionModel> GetCheckListDropdown()
         {
@@ -109,6 +117,20 @@ namespace LeaMaPortal.Helpers
             options.Add(new OptionModel { Name = SLAB_NONUAE });
             return options;
         }
+        private static List<OptionModel> GetAccountName()
+        {
+            List<OptionModel> options = new List<OptionModel>();
+            options.Add(new OptionModel { Name = StaticHelper.ACCOUNT_NAME_1 });
+            options.Add(new OptionModel { Name = StaticHelper.ACCOUNT_NAME_2 });
+            return options;
+        }
+        private static List<OptionModel> GetAccountNumber()
+        {
+            List<OptionModel> options = new List<OptionModel>();
+            options.Add(new OptionModel { Name = StaticHelper.ACCOUNT_NUMBER_1 });
+            options.Add(new OptionModel { Name = StaticHelper.ACCOUNT_NUMBER_2 });
+            return options;
+        }
         public static List<OptionModel> GetStaticData(byte dataModelType)
         {
             switch (dataModelType)
@@ -129,6 +151,10 @@ namespace LeaMaPortal.Helpers
                     return GetUnitDropdown();
                 case PROPERTYCATEGORY_DROPDOWN:
                     return GetPropertyCategoryDropdown();
+                case ACCOUNT_NAME:
+                    return GetAccountName();
+                case ACCOUNT_NUMBER:
+                    return GetAccountNumber();
                 default:
                     return new List<OptionModel>();
             }

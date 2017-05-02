@@ -1,7 +1,5 @@
-﻿
-@*@model LeaMaPortal.Models.SlabViewModel*@
-@using MvcPaging
-@model IPagedList<LeaMaPortal.Models.SlabViewModel>
+﻿@using MvcPaging
+@model IPagedList<LeaMaPortal.Models.PaymentViewModel>
 @{
     Layout = null;
 }
@@ -9,7 +7,6 @@
 <link href="~/theme/css/leemastyle.css" rel="stylesheet" />
 <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
 <!DOCTYPE html>
-
 <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
     <div class="row">
         <div class="col-md-12 leama-fieldset ">
@@ -33,26 +30,28 @@
 
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
-                    <div class="divTableCell ">Slab Id</div>
-                    <div class="divTableCell">Utility Name</div>
-                    <div class="divTableCell ">Colour</div>
-                    <div class="divTableCell ">Rate</div>
-                    <div class="divTableCell ">Residence Type</div>
+                    <div class="divTableCell">Payment No</div>
+                    <div class="divTableCell">Payment Type</div>
+                    <div class="divTableCell">Payment Mode</div>
+                    <div class="divTableCell">Payment Date</div>
+                    <div class="divTableCell">Property Id Tawtheeq</div>
+                    <div class="divTableCell">Agreement Number</div>
+                    <div class="divTableCell">PDC Status</div>
                     <div class="divTableCell">Action</div>
-
                 </div>
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
-                        <div class="divTableCell">@item.SlabId</div>
-                        <div class="divTableCell">@item.Utility_Name</div>
-                        <div class="divTableCell">@item.Colour</div>
-                        <div class="divTableCell">@item.rate</div>
-                        <div class="divTableCell">@item.Residence_type</div>
+                        <div class="divTableCell">@item.PaymentNo</div>
+                        <div class="divTableCell">@item.PaymentType</div>
+                        <div class="divTableCell">@item.PaymentMode</div>
+                        <div class="divTableCell">@item.PaymentDate</div>
+                        <div class="divTableCell">@item.Property_id</div>
+                        <div class="divTableCell">@item.agreement_no</div>
+                        <div class="divTableCell">@item.PDCstatus</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit slab-edit", title = "Edit", @data_id = @item.Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash slab-delete", @style = "color:red", @title = "Delete", @data_id = @item.Id })
-                            @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit payment-edit", title = "Edit", @data_id = @item.PaymentNo })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash payment-delete", @style = "color:red", @title = "Delete", @data_id = @item.PaymentNo })
                         </div>
                     </div>
                 }
@@ -60,53 +59,56 @@
             </div>
 
         </div>
-            <div class="col-md-12">
-                <br />
-                @Html.HiddenFor(m => m.PageNumber)
-                <div class="col-md-2">
-                    @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="col-lg-10 text-right">
-                    @for (int i = 1; i <= Model.PageCount; i++)
-                    {
-                        if (i == Model.PageNumber)
-                        {
-                            <input type="button" data-id="@i" value="@i" class="pagination-btn" />
-                        }
-                        else
-                        {
-                            <input type="button" data-id="@i" value="@i" class="Page" />
-                        }
-                    }
-                </div>
+        <div class="col-md-12">
+            @Html.HiddenFor(m => m.PageNumber)
+            <div class="col-md-2">
+                @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
             </div>
-       
+            <div class="col-lg-10 text-right">
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    if (i == Model.PageNumber)
+                    {
+                        <input type="button" data-id="@i" value="@i" class="pagination-btn" />
+                    }
+                    else
+                    {
+                        <input type="button" data-id="@i" value="@i" class="Page" />
+                    }
 
-        <script type="text/javascript">
+                }
+            </div>
+        </div>
+        <div class="col-md-12 leama-fieldset ">
+            &nbsp;
+        </div>
+        </div>
+    </div>
+<script type="text/javascript">
                 $(".Page").click(function(e)
                 {
                     var page = parseInt($(this).data("id"));
                     var defaultPageSize = $("#defaultPageSize").val();
                     var search = $("#Search").val();
                     //alert(page);
-                    getSlabList(search, page, defaultPageSize)
+                    getPaymentList(search,page,defaultPageSize)
                 });
                 $("#defaultPageSize").change(function () {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getSlabList(search, 1, defaultPageSize)
+                    getPaymentList(search, 1, defaultPageSize)
                 });
                 $("#btn-search").click(function (e) {
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getSlabList(search, 1, defaultPageSize)
+                    getPaymentList(search, 1, defaultPageSize)
                 });
 
-                function getSlabList(search, page, defaultPageSize)
+                function getPaymentList(search, page, defaultPageSize)
                 {
                     $.ajax(
                        {
-                           url: "../Slab/Index",
+                           url: "../Payment/List",
                            type: "Get",
                            data: { Search: search, page: page, defaultPageSize: defaultPageSize },
                            success: function (html) {
@@ -135,42 +137,17 @@
         alert("Could not retrieve list.");
     }
 
-        </script>
-
-        <div class="col-md-12 leama-fieldset ">
-            &nbsp;
-        </div>
-    </div>
-
-
-</div>
-
-<script>
-    //Edit get
-
-    $(".slab-edit").click(function (e) {
+    $(".payment-edit").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
+        //var param = id.split('`');
         $.ajax(
             {
-                url: "../Slab/Edit",
+                url: "../Payment/Edit",
                 type: "Get",
-                data: { Id : id },
-                success: function (result) {
-                    if (result.Errors == undefined || result.Errors == "") {
-                        $("#SlabMasterId").val(result.Id);
-                        $("#SlabId").val(result.SlabId);
-                        $("#Utility_id").val(result.Utility_id);
-                        $("#Utility_Name").val(result.Utility_Name);
-                        $("#Unit_From").val(result.Unit_From);
-                        $("#Unit_to").val(result.Unit_to);
-                        $("#rate").val(result.rate);
-                        $("#Colour").val(result.Colour);
-                        $("#Residence_type").val(result.Residence_type);
-                    }
-                    else {
-                        alert(data.Errors);
-                    }
+                data: { Payment_No: id },
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -182,9 +159,10 @@
     });
 
     // delete
-    $(".slab-delete").click(function (e) {
+    $(".payment-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
+        //var param = id.split('`');
         var r = confirm("Are you sure want to delete?");
         if (r == false) {
             return;
@@ -192,11 +170,11 @@
         else {
             $.ajax(
                 {
-                    url: "../Slab/Delete",
-                    type: "Get",
-                    data: { Id: id },
+                    url: "../Payment/Delete",
+                    type: "post",
+                    data: { Payment_No: id },
                     success: function (response) {
-                        GetSlab();
+                        GetPayment();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");

@@ -52,6 +52,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Humanizer, Version=2.1.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Humanizer.Core.2.1.0\lib\netstandard1.0\Humanizer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -437,7 +441,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\NumberToText.cs" />
     <Compile Include="Helpers\StaticHelper.cs" />
+    <Compile Include="Models\AgreementFacilityViewModel.cs" />
     <Compile Include="Models\ApprovalSettingsViewModel.cs" />
     <Compile Include="Models\AgreementCheckListViewModel.cs" />
     <Compile Include="Models\AgreementClosureViewModel.cs" />
@@ -832,12 +838,18 @@
     <Content Include="Views\Master\Payment\_List.cshtml" />
     <Content Include="Views\Master\Supplier\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\Supplier\_List.cshtml" />
+    <Content Include="Views\Payment\_List.cshtml" />
     <Content Include="Views\Invoice\_List.cshtml" />
+    <Content Include="Views\Tca\_AgreementFacility.cshtml" />
+    <Content Include="Views\Tca\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Documents\AgreementDocument\" />
     <Folder Include="Documents\TenantCompany\" />
     <Folder Include="Documents\TenantIndividual\" />
+    <Folder Include="Models\DBContext\" />
+    <Folder Include="Views\PropertyMaster\" />
     <Folder Include="Views\Supplier\" />
   </ItemGroup>
   <ItemGroup>
