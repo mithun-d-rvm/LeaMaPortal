@@ -84,8 +84,8 @@
                     </div>
                 </div>
             </div>
-            
-            
+
+
             <div class="portlet-grid panel-primary" id="total-loss-div">
                 <div class="panel-body">
                     <div class="row">
@@ -364,6 +364,84 @@
             $("#vacant-table").hide();
             $("#earning-table").hide();
         });
+        GetDashboardData();
     });
 
+    function GetDashboardData() {
+        alert(1);
+        $.ajax(
+        {
+            url: "Dashboard/Summary",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+                GetUtilityDues();
+                GetRentDues();
+                GetTotalExpense();
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+    function GetUtilityDues() {
+        $.ajax(
+        {
+            url: "Dashboard/GetUtilityDues",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+    function GetRentDues() {
+        $.ajax(
+        {
+            url: "Dashboard/GetRentDues",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+    function GetTotalExpense() {
+        $.ajax(
+        {
+            url: "Dashboard/GetTotalExpense",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
 </script>

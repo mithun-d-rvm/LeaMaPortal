@@ -454,6 +454,7 @@
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Models\CountryViewModel.cs" />
+    <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\EmailTemplateViewModel.cs" />
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\MasterViewModel.cs" />

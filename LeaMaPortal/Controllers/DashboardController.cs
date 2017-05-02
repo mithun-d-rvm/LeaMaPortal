@@ -5,18 +5,72 @@ using System.Web;
 using System.Web.Mvc;
 using LeaMaPortal.Helpers;
 using System.Threading.Tasks;
+using LeaMaPortal.DBContext;
+using LeaMaPortal.Models;
 
 namespace LeaMaPortal.Controllers
 {
     [Authorize]
     public class DashboardController : Controller
     {
+        private LeamaEntities db = new LeamaEntities();
         // GET: Dashboard
         public ActionResult Index()
         {
             return View();
         }
-
+        [HttpGet]
+        public async Task<JsonResult> Summary()
+        {
+            try
+            {
+                var result = await db.Database.SqlQuery<DashboardModel>("call Usp_Dashboardreport").ToListAsync();
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetUtilityDues()
+        {
+            try
+            {
+                var result = "";
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetRentDues()
+        {
+            try
+            {
+                var result = await db.Database.SqlQuery<DashboardModel>("call Usp_Dashboardreport").ToListAsync();
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetTotalExpense()
+        {
+            try
+            {
+                var result = await db.Database.SqlQuery<DashboardModel>("call Usp_Dashboardreport").ToListAsync();
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         // GET: Dashboard/Details/5
         public ActionResult Details()
         {
