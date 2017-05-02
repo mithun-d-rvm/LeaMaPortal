@@ -19,7 +19,7 @@ namespace LeaMaPortal.Views.Report.VacancyReport
                 {
                     ReportViewer1.Visible = true;
                     ReportViewer1.ProcessingMode = ProcessingMode.Local;
-                    ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/ReportRDLC/Vacancy/vacancycaretaker.rdlc");
+                    ReportViewer1.LocalReport.ReportPath = "ReportRDLC/Vacancy/vacancycaretaker.rdlc";
                     ReportViewer1.LocalReport.DataSources.Clear();
                     ReportDataSource rdc = new ReportDataSource("DataSet1", db.vacancy_caretaker_report.ToList());
                     ReportViewer1.LocalReport.DataSources.Add(rdc);

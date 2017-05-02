@@ -55,8 +55,9 @@ namespace LeaMaPortal.Models
         public string Region_Name { get; set; }
         public string Country { get; set; }
         public long Noof_properties { get; set; }
+        public int Aging_days { get; set; }
         public string Aging_Range { get; set; }
-        public string Amount_range { get; set; }
+        public string Amount_Range { get; set; }
         public double Loss_Amt { get; set; }
     }
 
@@ -67,7 +68,28 @@ namespace LeaMaPortal.Models
         public string Region_Name { get; set; }
         public string Country { get; set; }
         public long Noof_properties { get; set; }
+        public int Aging_days { get; set; }
         public string Aging_Range { get; set; }
+        public string Amont_Range { get; set; }
+        public double Loss_Amt { get; set; }
+        public string user { get; set; }
+    }
+
+    public class VacantPropertyReportModel
+    {
+        public int id { get; set; }
+        public string Property_Flag { get; set; }
+        public string Property_id { get; set; }
+        public string Property_Name { get; set; }
+        public string Unit_id { get; set; }
+        public string Unitname { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
+        public int Caretaker_id { get; set; }
+        public string Caretaker_Name { get; set; }
+        public double Rental_Rate_Month { get; set; }
+        public DateTime Vacant_Start_Date { get; set; }
+        public int Aging_Days { get; set; }
         public double Loss_Amt { get; set; }
         public string user { get; set; }
     }

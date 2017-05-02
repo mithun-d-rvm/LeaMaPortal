@@ -11,9 +11,9 @@
 <body>
     <form id="form1" runat="server">
     <div>
+        <asp:ScriptManager runat="server" ID="SillyPrerequisite"></asp:ScriptManager>
         <rsweb:ReportViewer ID="ReportViewer1" runat="server" Visible="false">
         </rsweb:ReportViewer>
-        <asp:ScriptManager runat="server" ID="SillyPrerequisite"></asp:ScriptManager>
     </div>
     </form>
 </body>

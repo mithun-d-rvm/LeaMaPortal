@@ -73,6 +73,7 @@
             contentType: "application/json",
             processData: false,
             success: function (html) {
+                $("#ReportArea").html('');
                 $("#ReportArea").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {

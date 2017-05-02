@@ -204,6 +204,11 @@
     <Compile Include="Controllers\TcaController.cs" />
     <Compile Include="Controllers\UserCreationController.cs" />
     <Compile Include="Controllers\VacancyReportController.cs" />
+    <Compile Include="Datasets\vacancy_caretakerds.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>vacancy_caretakerds.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DBContext\collection_summary.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
@@ -420,9 +425,6 @@
     <Compile Include="DBContext\test_report2.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBContext\Usp_Vacant_Report_all_Result.cs">
-      <DependentUpon>LeamaDBContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="DBContext\vacancy_caretaker_report.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
@@ -593,6 +595,17 @@
     <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker.min.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
+    <Content Include="Datasets\vacancy_caretakerds.xsc">
+      <DependentUpon>vacancy_caretakerds.xsd</DependentUpon>
+    </Content>
+    <None Include="Datasets\vacancy_caretakerds.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>vacancy_caretakerds.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Datasets\vacancy_caretakerds.xss">
+      <DependentUpon>vacancy_caretakerds.xsd</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\leamaportal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
