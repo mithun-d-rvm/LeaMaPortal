@@ -24,7 +24,7 @@ namespace LeaMaPortal.DBContext
         public int Refno { get; set; }
         public Nullable<System.DateTime> refdate { get; set; }
         public string Utility_id { get; set; }
-        public string Utiltiy_name { get; set; }
+        public string utility_name { get; set; }
         public Nullable<int> Supplier_id { get; set; }
         public string Supplier_name { get; set; }
         public Nullable<int> Accyear { get; set; }

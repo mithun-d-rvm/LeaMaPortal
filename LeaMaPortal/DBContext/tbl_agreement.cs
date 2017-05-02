@@ -75,6 +75,5 @@ namespace LeaMaPortal.DBContext
         public virtual tbl_caretaker tbl_caretaker { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_agreement_utility> tbl_agreement_utility { get; set; }
-        public virtual tbl_agreement_status tbl_agreement_status { get; set; }
     }
 }
