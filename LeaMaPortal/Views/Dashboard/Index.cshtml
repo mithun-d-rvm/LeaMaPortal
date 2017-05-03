@@ -380,7 +380,7 @@
     function GetDashboardData() {
         $.ajax(
         {
-            url: "Dashboard/Summary",
+            url: "../Dashboard/Summary",
             type: "Get",
             contentType: "application/json",
             processData: false,
@@ -399,7 +399,7 @@
     function GetUtilityDues(param) {
         $.ajax(
         {
-            url: "Dashboard/GetDashboardSummary?category='" + param + "'",
+            url: "../Dashboard/GetDashboardSummary?category='" + param + "'",
             type: "Get",
             contentType: "application/json",
             processData: false,
@@ -420,7 +420,7 @@
     function GetRentDues(param) {
         $.ajax(
         {
-            url: "Dashboard/GetDashboardSummary?category='" + param + "'",
+            url: "../Dashboard/GetDashboardSummary?category='" + param + "'",
             type: "Get",
             contentType: "application/json",
             processData: false,
@@ -443,7 +443,7 @@
     function GetTotalExpense(param) {
         $.ajax(
         {
-            url: "Dashboard/GetDashboardSummary?category='" + param + "'",
+            url: "../Dashboard/GetDashboardSummary?category='" + param + "'",
             type: "Get",
             contentType: "application/json",
             processData: false,
@@ -466,7 +466,7 @@
     function GetVacantLoss(param) {
         $.ajax(
         {
-            url: "Dashboard/GetDashboardSummary?category='" + param + "'",
+            url: "../Dashboard/GetDashboardSummary?category='" + param + "'",
             type: "Get",
             contentType: "application/json",
             processData: false,
@@ -491,7 +491,7 @@
     function GetVacantCount(param) {
         $.ajax(
         {
-            url: "Dashboard/GetDashboardSummary?category='" + param + "'",
+            url: "../Dashboard/GetDashboardSummary?category='" + param + "'",
             type: "Get",
             contentType: "application/json",
             processData: false,
@@ -514,7 +514,7 @@
     function GetEarningHistory(category, month, year) {
         $.ajax(
         {
-            url: "Dashboard/GetDashboardSummary?category='" + category + "'&month='" + month + "'&year='" + year + "'",
+            url: "../Dashboard/GetDashboardSummary?category='" + category + "'&month='" + month + "'&year='" + year + "'",
             type: "Get",
             contentType: "application/json",
             processData: false,
