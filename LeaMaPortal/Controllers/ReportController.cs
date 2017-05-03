@@ -36,6 +36,35 @@ namespace LeaMaPortal.Controllers
             }
         }
 
+        public ActionResult GetContractReport()
+        {
+            return PartialView("../Report/ContractReport/_ContractReport");
+        }
+        public ActionResult GetOutStandingReport()
+        {
+            return PartialView("../Report/OutStandingReport/_OutStandingReport");
+        }
+        public ActionResult GetUtilityReport()
+        {
+            return PartialView("../Report/UtilityReport/_EBWaterReport");
+        }
+        public ActionResult GetPDCReport()
+        {
+            return PartialView("../Report/PDCReport/_PDCReport");
+        }
+        public ActionResult GetCollectionSummaryReport()
+        {
+            return PartialView("../Report/CollectionSummary/_CollectionSummaryReport");
+        }
+        public ActionResult GetSummaryEBWaterReport()
+        {
+            return PartialView("../Report/SummaryEBWaterReport/_SummaryEBWaterReport");
+        }
+        public ActionResult GetVacancyReport()
+        {
+            return PartialView("../Report/VacancyReport/_VacancyReport");
+        }
+
         // GET: Report/Details/5
         public ActionResult Details(int id)
         {

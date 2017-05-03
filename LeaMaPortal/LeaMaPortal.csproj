@@ -204,11 +204,6 @@
     <Compile Include="Controllers\TcaController.cs" />
     <Compile Include="Controllers\UserCreationController.cs" />
     <Compile Include="Controllers\VacancyReportController.cs" />
-    <Compile Include="Datasets\vacancy_caretakerds.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>vacancy_caretakerds.xsd</DependentUpon>
-    </Compile>
     <Compile Include="DBContext\collection_summary.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
@@ -488,19 +483,54 @@
     <Compile Include="Models\TenantCompanyViewModel.cs" />
     <Compile Include="Models\TenantIndividualViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportASPX\VacancyReport\VacancyCaretakerReportView.aspx.cs">
-      <DependentUpon>VacancyCaretakerReportView.aspx</DependentUpon>
+    <Compile Include="ReportASPX\CollectionSummary\CollectionSummaryReportView.aspx.cs">
+      <DependentUpon>CollectionSummaryReportView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ReportASPX\VacancyReport\VacancyCaretakerReportView.aspx.designer.cs">
-      <DependentUpon>VacancyCaretakerReportView.aspx</DependentUpon>
+    <Compile Include="ReportASPX\CollectionSummary\CollectionSummaryReportView.aspx.designer.cs">
+      <DependentUpon>CollectionSummaryReportView.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ReportASPX\VacancyReport\VacancyRegionReportView.aspx.cs">
-      <DependentUpon>VacancyRegionReportView.aspx</DependentUpon>
+    <Compile Include="ReportASPX\ContractReport\ContractReportView.aspx.cs">
+      <DependentUpon>ContractReportView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ReportASPX\VacancyReport\VacancyRegionReportView.aspx.designer.cs">
-      <DependentUpon>VacancyRegionReportView.aspx</DependentUpon>
+    <Compile Include="ReportASPX\ContractReport\ContractReportView.aspx.designer.cs">
+      <DependentUpon>ContractReportView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportASPX\Outstanding\OutstandingReportView.aspx.cs">
+      <DependentUpon>OutstandingReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportASPX\Outstanding\OutstandingReportView.aspx.designer.cs">
+      <DependentUpon>OutstandingReportView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportASPX\PDC\PDCReportView.aspx.cs">
+      <DependentUpon>PDCReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportASPX\PDC\PDCReportView.aspx.designer.cs">
+      <DependentUpon>PDCReportView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportASPX\SummaryEBWater\SummaryEBWaterReportView.aspx.cs">
+      <DependentUpon>SummaryEBWaterReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportASPX\SummaryEBWater\SummaryEBWaterReportView.aspx.designer.cs">
+      <DependentUpon>SummaryEBWaterReportView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportASPX\Utility\EBWaterReportView.aspx.cs">
+      <DependentUpon>EBWaterReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportASPX\Utility\EBWaterReportView.aspx.designer.cs">
+      <DependentUpon>EBWaterReportView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportASPX\VacancyReport\VacancyReportView.aspx.cs">
+      <DependentUpon>VacancyReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportASPX\VacancyReport\VacancyReportView.aspx.designer.cs">
+      <DependentUpon>VacancyReportView.aspx</DependentUpon>
     </Compile>
     <Compile Include="Resources\ErrorMessage.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -511,20 +541,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SuccessMessage.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ReportASPX\VacancyReport\VacancyPropertyReportView.aspx.cs">
-      <DependentUpon>VacancyPropertyReportView.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ReportASPX\VacancyReport\VacancyPropertyReportView.aspx.designer.cs">
-      <DependentUpon>VacancyPropertyReportView.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Report\VacancyReport\VacancyReportView.aspx.cs">
-      <DependentUpon>VacancyReportView.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Report\VacancyReport\VacancyReportView.aspx.designer.cs">
-      <DependentUpon>VacancyReportView.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -567,8 +583,13 @@
     <Content Include="Images\Reciepts.png" />
     <Content Include="Images\RenewContract.png" />
     <Content Include="Images\REPORTING.png" />
-    <Content Include="ReportASPX\VacancyReport\VacancyCaretakerReportView.aspx" />
-    <Content Include="ReportASPX\VacancyReport\VacancyRegionReportView.aspx" />
+    <Content Include="ReportASPX\CollectionSummary\CollectionSummaryReportView.aspx" />
+    <Content Include="ReportASPX\ContractReport\ContractReportView.aspx" />
+    <Content Include="ReportASPX\Outstanding\OutstandingReportView.aspx" />
+    <Content Include="ReportASPX\PDC\PDCReportView.aspx" />
+    <Content Include="ReportASPX\SummaryEBWater\SummaryEBWaterReportView.aspx" />
+    <Content Include="ReportASPX\Utility\EBWaterReportView.aspx" />
+    <Content Include="ReportASPX\VacancyReport\VacancyReportView.aspx" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
@@ -595,17 +616,6 @@
     <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker.min.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
-    <Content Include="Datasets\vacancy_caretakerds.xsc">
-      <DependentUpon>vacancy_caretakerds.xsd</DependentUpon>
-    </Content>
-    <None Include="Datasets\vacancy_caretakerds.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>vacancy_caretakerds.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="Datasets\vacancy_caretakerds.xss">
-      <DependentUpon>vacancy_caretakerds.xsd</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\leamaportal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -760,8 +770,6 @@
     <Content Include="theme\signup.html" />
     <Content Include="theme\typography.html" />
     <Content Include="Views\Dashboard\blank.html" />
-    <Content Include="ReportASPX\VacancyReport\VacancyPropertyReportView.aspx" />
-    <Content Include="Views\Report\VacancyReport\VacancyReportView.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -896,6 +904,12 @@
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Report\_Filter.cshtml" />
     <Content Include="Views\Report\VacancyReport\_VacancyReport.cshtml" />
+    <Content Include="Views\Report\ContractReport\_ContractReport.cshtml" />
+    <Content Include="Views\Report\OutstandingReport\_OutstandingReport.cshtml" />
+    <Content Include="Views\Report\UtilityReport\_EBWaterReport.cshtml" />
+    <Content Include="Views\Report\PDCReport\_PDCReport.cshtml" />
+    <Content Include="Views\Report\CollectionSummary\_CollectionSummaryReport.cshtml" />
+    <Content Include="Views\Report\SummaryEBWaterReport\_SummaryEBWaterReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -918,6 +932,22 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ReportRDLC\CollectionSummary\summarycollectioncaretaker.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\CollectionSummary\summarycollectionprop.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\CollectionSummary\summarycollectionregion.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\Contract\renewalcaretaker.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\Contract\Renewalprop.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\Contract\renewal_region_report.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\Outstanding\outstandingcaretaker.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\Outstanding\outstandingregion.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\Outstanding\outstanding_prop.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\PDC\PDCreport.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\SummaryEBWater\summaryebwatercaretaker.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\SummaryEBWater\summaryebwaterprop.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\SummaryEBWater\summaryebwaterregion.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\Utility\ebwatercaretaker.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\Utility\ebwaterprop.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\Utility\ebwaterregion.rdlc" />
     <EmbeddedResource Include="ReportRDLC\Vacancy\vacancycaretaker.rdlc" />
     <EmbeddedResource Include="ReportRDLC\Vacancy\vacancyregion.rdlc" />
     <EmbeddedResource Include="Resources\ErrorMessage.resx">
