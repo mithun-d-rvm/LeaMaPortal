@@ -6,6 +6,7 @@ using Notification.Model;
 using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
+using LeaMaPortal.Helpers;
 
 namespace Notification
 {
@@ -20,16 +21,20 @@ namespace Notification
                 var data = await db.email_output.Where(w => string.IsNullOrEmpty(w.Mailstatus))
                             .Select(s => new EmailModel
                             {
-                                toList = s.toid,
-                                ccList = s.cc,
-                                sub = s.Subject,
-                                body = s.body
+                                Id = s.id,
+                                ToList = s.toid,
+                                CCList = s.cc,
+                                Subject = s.Subject,
+                                Body = s.body
                             }).ToListAsync();
                 Type myType = data.GetType();
 
                 foreach (var obj in data)
                 {                    
                     notify.sendMail(obj);
+                    email_output model = await db.email_output.FirstOrDefaultAsync(f => f.id == obj.Id);
+                    model.Mailstatus = StaticHelper.MAIL_SENT;
+                    await db.SaveChangesAsync();
                 }
                 return true;
             }
