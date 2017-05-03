@@ -5,6 +5,7 @@ using System;
 using Notification.Model;
 using System.Reflection;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Notification
 {
@@ -16,7 +17,14 @@ namespace Notification
             try
             {
                 NotificationHelper notify = new NotificationHelper();
-                var data = await db.email_output.Where(w => string.IsNullOrEmpty(w.Mailstatus)).ToListAsync();
+                var data = await db.email_output.Where(w => string.IsNullOrEmpty(w.Mailstatus))
+                            .Select(s => new EmailModel
+                            {
+                                toList = s.toid,
+                                ccList = s.cc,
+                                sub = s.Subject,
+                                body = s.body
+                            }).ToListAsync();
                 Type myType = data.GetType();
 
                 foreach (var obj in data)

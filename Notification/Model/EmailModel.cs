@@ -9,8 +9,8 @@ namespace Notification.Model
     public class EmailModel
     {
         public string from { get; set; }
-        public List<string> toList { get; set; }
-        public List<string> ccList { get; set; }
+        public string toList { get; set; }
+        public string ccList { get; set; }
         public string sub { get; set; }
         public string body { get; set; }
     }

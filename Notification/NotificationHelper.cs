@@ -14,14 +14,16 @@ namespace Notification
     {
         public void sendMail(EmailModel model)
         {
-            MailAddress from = new MailAddress(model.from);
+            MailAddress from = new MailAddress(ConfigurationManager.AppSettings["FromEmail"]);
 
             MailMessage mail = new MailMessage();
-            foreach(var to in model.toList)
+            List<string> toid = model.toList.Split(',').ToList();
+            foreach(var to in toid)
             {
                 mail.To.Add(to);
             }
-            foreach (var cc in model.ccList)
+            List<string> ccid = model.ccList.Split(',').ToList();
+            foreach (var cc in ccid)
             {
                 mail.CC.Add(cc);
             }
