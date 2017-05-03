@@ -183,9 +183,9 @@
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
-                    $("#master-loader-edit").addClass("hide");
-                    $("#ContainerAddOrUpdate").show();
                     $("body").scrollTop(0);
+                    $("#master-loader-edit").addClass("hide");
+                    $("#ContainerAddOrUpdate").show();                    
                 }
             });
     });

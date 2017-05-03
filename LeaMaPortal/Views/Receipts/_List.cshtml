@@ -9,7 +9,9 @@
 <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
 <!DOCTYPE html>
 <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
-    <div class="row">
+    <div id="master-loader-list" class="fa hide">
+    </div>
+    <div class="row" id="receipts-list">
         <div class="col-md-12 leama-fieldset ">
             <div class="col-md-2 pull-left">
                 @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
@@ -81,14 +83,11 @@
             </div>
         </div>
 
-        <div class="col-md-12 leama-fieldset ">
-            &nbsp;
-        </div>
-    </div>
-</div>
-<script type="text/javascript">
+        <script type="text/javascript">
                 $(".Page").click(function(e)
                 {
+                    $("#master-loader-list").removeClass("hide");
+                    $("#receipts-list").addClass("hide");
                     var page = parseInt($(this).data("id"));
                     var defaultPageSize = $("#defaultPageSize").val();
                     var search = $("#Search").val();
@@ -96,11 +95,15 @@
                     getReceiptList(search,page,defaultPageSize)
                 });
                 $("#defaultPageSize").change(function () {
+                    $("#master-loader-list").removeClass("hide");
+                    $("#receipts-list").addClass("hide");
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
                     getReceiptList(search, 1, defaultPageSize)
                 });
                 $("#btn-search").click(function (e) {
+                    $("#master-loader-list").removeClass("hide");
+                    $("#receipts-list").addClass("hide");
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
                     getReceiptList(search, 1, defaultPageSize)
@@ -120,6 +123,8 @@
                                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                            },
                            complete: function () {
+                               //$("#master-loader-list").addClass("hide");
+                               //$("#receipts-list").removeClass("hide");
                            }
                        });
                 }
@@ -138,8 +143,19 @@
         alert("Could not retrieve list.");
     }
 
+    </script>
+
+        <div class="col-md-12 leama-fieldset ">
+            &nbsp;
+        </div>
+    </div>
+</div>
+
+<script>
     $(".receipt-edit").click(function (e) {
         e.preventDefault();
+        $("#master-loader-edit").removeClass("hide");
+        $("#ContainerAddOrUpdate").hide();
         var id = $(this).data("id");
         //var param = id.split('`');
         $.ajax(
@@ -155,6 +171,8 @@
                 },
                 complete: function () {
                     $("body").scrollTop(0);
+                    $("#master-loader-edit").addClass("hide");
+                    $("#ContainerAddOrUpdate").show();
                 }
             });
     });
