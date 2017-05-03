@@ -13,20 +13,70 @@
 
 <div class="inner-block p-t-5-p">
     <div class="blank">
+@using (Html.BeginForm("AddOrUpdate", "Tca", FormMethod.Post, new { @id = "Tca", @enctype = "multipart/form-data" }))
+{
         <div id="AgreementForm">
         </div>
-        @*<div id="AgreementPdc">
+        <div>
+            <!-- BEGIN AGREEMENT PDC -->
+            <div class="p-lr-20" id="AgreementPdc">
+                @*@Html.Partial("_AgreementPdc")*@
+            </div>
+            <!-- END AGREEMENT Facility -->
+            <div class="row ht-5">
+                &nbsp;
+            </div>
+            <!-- BEGIN AGREEMENT Facility -->
+            <div class="p-lr-20" id="AgreementFacility">
+                @*@Html.Partial("_AgreementDocument")*@
+            </div>
+            <!-- END AGREEMENT Facility -->
+            <!-- END AGREEMENT PDC -->
+            <div class="row ht-5">
+                &nbsp;
+            </div>
+            <!-- BEGIN AGREEMENT DOCUMENT -->
+            <div class="p-lr-20" id="AgreementDocument">
+                @*@Html.Partial("_AgreementDocument")*@
+            </div>
+            <!-- END AGREEMENT DOCUMENT -->
+            <div class="row ht-5">
+                &nbsp;
+            </div>
+            <!-- BEGIN AGREEMENT UTILITY -->
+            <div class="p-lr-20" id="AgreementUtility">
+                @*@Html.Partial("_AgreementUtility")*@
+            </div>
+            <!-- END AGREEMENT UTILITY -->
+            <div class="row ht-5">
+                &nbsp;
+            </div>
+            <!-- BEGIN AGREEMENT UNIT -->
+            <div class="p-lr-20" id="AgreementUnit">
+                @*@Html.Partial("_AgreementUnit")*@
+            </div>
+            <!-- END AGREEMENT UNIT -->
+            <div class="row ht-5">
+                &nbsp;
+            </div>
+            <!-- BEGIN AGREEMENT UNIT -->
+            <div class="p-lr-20" id="AgreementCheckList">
+                @*@Html.Partial("_AgreementCheckList")*@
+            </div>
+            @*END AGREEMENT UNIT*@
         </div>
-        <div id="AgreementFacility">
+        <div class="p-b-10">
+            &nbsp;
         </div>
-        <div id="AgreementDocument">
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-6">
+                &nbsp;
+            </div>
+            <div class="col-md-4">
+                <input type="submit" class="btn master-form-btn" value="Submit" />
+            </div>
         </div>
-        <div id="AgreementUtility">
-        </div>
-        <div id="AgreementUnit">
-        </div>
-        <div id="AgreementCheckList">
-        </div>*@
+}
         @*@Html.Partial("Agreement/_AgreementForm")*@
 
         <!-- Begin Grid view -->
@@ -39,7 +89,7 @@
             </div>
         </div>
         <div id="renewalModal" class="modal fade" role="dialog">
-            <div class="modal-dialog tca-modal-md" id="renewalAddOrUpdateContainer">
+            <div class="modal-dialog tca-modal-md" id="renewalAddOrUpdateContainer" style="background-color: white;">
 
             </div>
         </div>
@@ -134,6 +184,13 @@
 <script>
     $("#TopNavBarFilter").empty();
     CreateAgreement();
+    var AgreementNo = 0;//$("#Agreement_No").val();
+    AgreementPdc(AgreementNo);
+    AgreementFacility(AgreementNo);
+    AgreementDocument(AgreementNo);
+    AgreementUtility(AgreementNo);
+    AgreementUnit(AgreementNo);
+    AgreementCheckList(AgreementNo);
     //AgreementPdc();
     //AgreementDocument();
     //AgreementUtility();
@@ -159,13 +216,14 @@
             complete: function () {
                 
                
-                var AgreementNo = $("#Agreement_No").val();
-                AgreementPdc(AgreementNo);
-                AgreementFacility(AgreementNo);
-                AgreementDocument(AgreementNo);
-                AgreementUtility(AgreementNo);
-                AgreementUnit(AgreementNo);
-                AgreementCheckList(AgreementNo);
+                //var AgreementNo = 0;//$("#Agreement_No").val();
+                //AgreementPdc(AgreementNo);
+                //AgreementFacility(AgreementNo);
+                //AgreementDocument(AgreementNo);
+                //AgreementUtility(AgreementNo);
+                //AgreementUnit(AgreementNo);
+                //AgreementCheckList(AgreementNo);
+                
                 $("#img-loader").addClass("hide");
             }
         });

@@ -157,7 +157,7 @@ namespace LeaMaPortal.Controllers
                 model.Agreement_Refno = AgreementNo;
                 
                 //model.AgreementPd = new AgreementPdcViewModel();
-                return PartialView("../Tca/Agreement/_AgreementForm", model);
+                return PartialView("../Tca/Agreement/_AgreementFormRenewal", model);
             }
             catch (Exception e)
             {
@@ -193,6 +193,10 @@ namespace LeaMaPortal.Controllers
             ViewBag.Month = new SelectList(Common.Months);
             ViewBag.Payment_Mode = new SelectList(Common.PaymentMode);
             //ViewBag.AgreementPd = model.AgreementPd;
+            if(AgreementNo!=0)
+            {
+                    return PartialView("../Tca/Renewal/_AgreementPdc", model);
+            }
             return PartialView("../Tca/_AgreementPdc", model);
         }
         public async Task<PartialViewResult> AgreementDocument(int AgreementNo)
@@ -212,6 +216,8 @@ namespace LeaMaPortal.Controllers
                         Doc_name = x.Doc_name,
                         Doc_Path = x.Doc_Path,
                     }).ToList();
+                    
+                   return PartialView("../Tca/Renewal/_AgreementDocument", model);
                 }
                 return PartialView("../Tca/_AgreementDocument", model);
             }
@@ -238,6 +244,8 @@ namespace LeaMaPortal.Controllers
                         Facility_Name = x.Facility_Name,
                         Numbers_available = x.Numbers_available.HasValue ? x.Numbers_available.Value : 0
                     }).ToList();
+                    
+                        return PartialView("../Tca/Renewal/_AgreementFacility", model);
                 }
                 return PartialView("../Tca/_AgreementFacility", model);
             }
@@ -272,8 +280,11 @@ namespace LeaMaPortal.Controllers
                                                     Utility_Name=x.Utility_Name,
                                                     Payable=x.Payable,
                                                     Amount_Type=x.Amount_Type,
-                                                    Amount=x.Amount.HasValue?decimal.Parse(x.Amount.ToString()):0
+                                                    Amount=x.Amount.HasValue?x.Amount.Value:0
                                                 }).ToListAsync();
+                    
+                return PartialView("../Tca/Renewal/_AgreementUtility", model);
+
                 }
                 return PartialView("../Tca/_AgreementUtility", model);
             }
@@ -292,12 +303,24 @@ namespace LeaMaPortal.Controllers
         {
             AgreementUnitViewModel model = new AgreementUnitViewModel();
             var property =await db.tbl_propertiesmaster.Where(x => x.Delmark != "*").ToListAsync();
-            
             ViewBag.Property_ID = new SelectList(property, "Property_ID", "Property_ID");
             ViewBag.Properties_Name = new SelectList(property, "Property_ID", "Property_Name");
             ViewBag.Property_ID_Tawtheeq = new SelectList(property, "Property_ID", "Property_ID_Tawtheeq");
             ViewBag.Unit_ID_Tawtheeq = new SelectList(property, "Property_ID", "Unit_ID_Tawtheeq");
             ViewBag.Unit_Property_Name = new SelectList(property, "Property_ID", "Unit_Property_Name");
+            if (AgreementNo != 0)
+            {
+                model.AgreementUnitList =await db.tbl_agreement_unit_inner.Where(x => x.Delmark != "*" && x.Agreement_No == AgreementNo).Select(x => new AgreementUnitViewModel()
+                {
+                       Id=x.id,
+                       Property_ID=x.Property_ID.ToString(),
+                       Properties_Name=x.Properties_Name,
+                       Property_ID_Tawtheeq=x.Property_ID_Tawtheeq,
+                       Unit_ID_Tawtheeq=x.Unit_ID_Tawtheeq,
+                       Unit_Property_Name=x.Unit_Property_Name
+                }).ToListAsync();
+                return PartialView("../Tca/Renewal/_AgreementUnit", model);
+            }
 
             return PartialView("../Tca/_AgreementUnit", model);
         }

@@ -841,6 +841,18 @@
     <Content Include="Views\Invoice\_List.cshtml" />
     <Content Include="Views\Tca\_AgreementFacility.cshtml" />
     <Content Include="Views\Tca\_List.cshtml" />
+    <Content Include="Views\Tca\Agreement\_AgreementFormRenewal.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementCheckList.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementCheckListDetails.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementDocument.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementDocumentDetails.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementFacility.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementPdc.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementPdcDetails.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementUnit.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementUnitDetails.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementUtility.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementUtilityDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
