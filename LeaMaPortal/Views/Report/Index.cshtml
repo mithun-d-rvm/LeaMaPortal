@@ -1,0 +1,226 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="inner-block p-t-5-p">
+    <div class="blank">
+        <div id="ReportArea"></div>
+        <input type="hidden" id="ReportSelected" value="@ViewBag.ReportSelected" />
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#TopNavBarFilter").empty();
+        GetReportFilter();
+    });
+    $("#Reports").change(function () {
+        var type = parseInt($("#Reports").val());
+        getReport(type);
+    });
+    //$("#FormMasterId").change(function () {
+    //    var type = parseInt($("#FormMasterId").val());
+    //    formMaster(type);
+    //});
+    function GetReportFilter() {
+        $("#TopNavBarFilter").empty();
+        var ReportSelected = $("#ReportSelected").val();
+        $.ajax(
+       {
+           url: "../Report/Filter",
+           type: "Get",
+           data: { selected: ReportSelected },
+
+           success: function (html) {
+               $("#TopNavBarFilter").html(html);
+           },
+           error: function (jqXhr, textStatus, errorThrown) {
+               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+           },
+           complete: function () {
+               //   $("#VerifyIdDetailsLoader").addClass("hide");
+           }
+       });
+    }
+    function getReport(type) {
+        switch (type) {
+            case 1:
+                GetVacancyReport();
+                break;
+            case 2:
+                GetContractReport();
+                break;
+            case 3:
+                GetOutStandingReport();
+                break;
+            case 4:
+                GetUtilityReport();
+                break;
+            case 5:
+                GetPDCReport();
+                break;
+            case 6:
+                GetCollectionSummaryReport();
+                break;
+            case 7:
+                GetSummaryEBWaterReport();
+                break;
+        }
+    }
+    function GetVacancyReport() {
+        $("#img-loader").removeClass("hide");
+        $("#ReportArea").empty();
+        $.ajax(
+        {
+            url: "../Report/GetVacancyReport",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ReportArea").html('');
+                $("#ReportArea").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+
+    function GetContractReport() {
+        $("#img-loader").removeClass("hide");
+        $("#ReportArea").empty();
+        $.ajax(
+        {
+            url: "../Report/GetContractReport",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ReportArea").html('');
+                $("#ReportArea").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+        function GetOutStandingReport() {
+            $("#img-loader").removeClass("hide");
+            $("#ReportArea").empty();
+            $.ajax(
+            {
+                url: "../Report/GetOutStandingReport",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ReportArea").html('');
+                    $("#ReportArea").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    $("#img-loader").addClass("hide");
+                }
+            });
+        }
+        function GetUtilityReport() {
+            $("#img-loader").removeClass("hide");
+            $("#ReportArea").empty();
+            $.ajax(
+            {
+                url: "../Report/GetUtilityReport",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ReportArea").html('');
+                    $("#ReportArea").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    $("#img-loader").addClass("hide");
+                }
+            });
+        }
+        function GetPDCReport() {
+            $("#img-loader").removeClass("hide");
+            $("#ReportArea").empty();
+            $.ajax(
+            {
+                url: "../Report/GetPDCReport",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ReportArea").html('');
+                    $("#ReportArea").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    $("#img-loader").addClass("hide");
+                }
+            });
+        }
+        function GetCollectionSummaryReport() {
+            $("#img-loader").removeClass("hide");
+            $("#ReportArea").empty();
+            $.ajax(
+            {
+                url: "../Report/GetCollectionSummaryReport",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ReportArea").html('');
+                    $("#ReportArea").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    $("#img-loader").addClass("hide");
+                }
+            });
+        }
+        function GetSummaryEBWaterReport() {
+            $("#img-loader").removeClass("hide");
+            $("#ReportArea").empty();
+            $.ajax(
+            {
+                url: "../Report/GetSummaryEBWaterReport",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ReportArea").html('');
+                    $("#ReportArea").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    $("#img-loader").addClass("hide");
+                }
+            });
+        }
+</script>

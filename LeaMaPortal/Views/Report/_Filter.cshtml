@@ -1,0 +1,12 @@
+﻿@Html.DropDownList("Reports", null, htmlAttributes: new { @class = "master-form-input form-control subheader-select" })
+
+<script>
+    $("#Reports").change(function () {
+        var type = parseInt($("#Reports").val());
+        getReport(type);
+    });
+    $(function () {
+        var type = parseInt($("#Reports").val());
+        getReport(type);
+    });
+</script>
