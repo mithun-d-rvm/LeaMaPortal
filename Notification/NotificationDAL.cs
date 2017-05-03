@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System;
 using Notification.Model;
+using System.Reflection;
+using System.Collections.Generic;
 
 namespace Notification
 {
@@ -13,13 +15,53 @@ namespace Notification
         {
             try
             {
-                NotificationHelper obj = new NotificationHelper();
-                var data = await db.Database.SqlQuery<object>(@"CALL Email_agreement_renewal_daily").ToListAsync();
-                EmailModel email = new EmailModel();
-                obj.sendMail(email);
+                NotificationHelper notify = new NotificationHelper();
+                var data = await db.email_output.Where(w => string.IsNullOrEmpty(w.Mailstatus)).ToListAsync();
+                Type myType = data.GetType();
+
+                foreach (var obj in data)
+                {                    
+                    notify.sendMail(obj);
+                }
                 return true;
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        internal async Task<bool> weeklyNotification()
+        {
+            try
+            {
+                NotificationHelper notify = new NotificationHelper();
+                var data = await db.Database.SqlQuery<object>(@"CALL Email_agreement_renewal_daily").ToListAsync();
+                foreach (var obj in data)
+                {
+                    EmailModel email = new EmailModel();
+                    notify.sendMail(email);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        internal async Task<bool> monthlyNotification()
+        {
+            try
+            {
+                NotificationHelper notify = new NotificationHelper();
+                var data = await db.Database.SqlQuery<object>(@"CALL Email_agreement_renewal_daily").ToListAsync();
+                foreach (var obj in data)
+                {
+                    EmailModel email = new EmailModel();
+                    notify.sendMail(email);
+                }
+                return true;
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
