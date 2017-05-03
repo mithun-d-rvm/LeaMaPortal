@@ -38,11 +38,11 @@ namespace LeaMaPortal.Models
         [DisplayName("Contract Agreement Number")]
         public int? agreement_no { get; set; }
         [DisplayName("Tenant ID")]
-        public int Tenant_id { get; set; }
+        public int? Tenant_id { get; set; }
         [DisplayName("Tenant Name")]
         public string Tenant_Name { get; set; }
         [DisplayName("Unit ID")]
-        public int Unit_ID { get; set; }
+        public string Unit_ID { get; set; }
         [DisplayName("Unit Name")]
         public string unit_Name { get; set; }
         [DisplayName("Property ID")]
