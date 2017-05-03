@@ -27,7 +27,8 @@
                     @Html.LabelFor(model => model.Reccategory, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.DropDownListFor(model => model.Reccategory, null, htmlAttributes: new { @class = "master-form-input" })
+                    @*@Html.DropDownListFor(model => model.Reccategory, null, htmlAttributes: new { @class = "master-form-input" })*@
+                    @Html.DropDownList("Reccategory", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -85,7 +86,8 @@
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.Property_id, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
-                <div class="col-md-8">@Html.DropDownList("Property_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })                        
+                <div class="col-md-8">
+                    @Html.DropDownList("Property_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })                        
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -104,7 +106,6 @@
                     @Html.LabelFor(model => model.Unit_ID, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    <div class="col-md-8">
                         @Html.DropDownList("Unit_ID", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                 </div>
             </div>
@@ -195,7 +196,7 @@
                     &nbsp;
                 </div>
                 <div class="col-md-4">
-                    <button class="btn master-form-btn">Submit</button>
+                    <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
                 </div>
             </div>
         </div>
@@ -303,7 +304,7 @@
 
             </table>*@
 
-        <div class="row" id="invoice">
+        <div class="pull-left" id="invoice" >
             @if (Model.ReceiptDetailsList != null)
             {
                 <input type="hidden" id="init-company-contact-det-count" value="@Model.ReceiptDetailsList.Count" />
@@ -312,7 +313,7 @@
             {
                 <input type="hidden" id="init-company-contact-det-count" value="0" />
             }
-
+            <br />
             <div class="p-b-25">
                 <h3>Receipts Details</h3>
             </div>
@@ -329,37 +330,39 @@
                         </div>
                         <div class="col-md-2 form-group">
                             <label for="quantity">Invoice Date</label>
-                            <input type="text" class="form-control master-form-input" id="InvoiceDate" />
+                            <input type="date" class="form-control master-form-input" id="InvoiceDate" />
                         </div>
                         <div class="col-md-2 form-group">
                             <label for="amount">Invoice Description</label>
                             <input id="InvoiceDescription" type="text" class="form-control master-form-input" />
                         </div>
                         <div class="col-md-2 form-group">
-                            <label for="itemtype">Invoice Amount</label>
-                            <input type="text" class="form-control master-form-input" id="InvoiceAmount" />
-                        </div>
-                        <div class="col-md-2 form-group">
-                            <label for="description">Credit Amount</label>
-                            <input type="text" class="form-control master-form-input" onchange="calculateBalance()" id="CreditAmount" />
-                        </div>
-                        <div class="col-md-2 form-group">
-                            <label for="quantity">Received Amount</label>
-                            <input type="text" class="form-control master-form-input" onchange="calculateBalance()" id="ReceivedAmount" />
-                        </div>
-                        <div class="col-md-2 form-group">
-                            <label for="amount">Balance Amount</label>
-                            <input class="form-control master-form-input" id="BalanceAmount" />
-                        </div>
-                        <div class="col-md-2 form-group">
                             <label for="amount">Remarks</label>
                             <input class="form-control master-form-input" id="Remarks" />
                         </div>
-                        <div class="col-md-2 btn-group">
-                            <br />
-                            <input type="button" class="document-btn" id="AddInvoice" value="Add" onclick='add(this);' />
                         </div>
-                    </div>
+                        <div class="col-md-12">
+                            <div class="col-md-2 form-group">
+                                <label for="itemtype">Invoice Amount</label>
+                                <input type="text" class="form-control master-form-input" id="InvoiceAmount" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="description">Credit Amount</label>
+                                <input type="text" class="form-control master-form-input" onchange="calculateBalance()" id="CreditAmount" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="quantity">Received Amount</label>
+                                <input type="text" class="form-control master-form-input" onchange="calculateBalance()" id="ReceivedAmount" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="amount">Balance Amount</label>
+                                <input class="form-control master-form-input" id="BalanceAmount" />
+                            </div>
+                            <div class="col-md-2 btn-group">
+                                <br />
+                                <input type="button" class="document-btn" id="AddInvoice" value="Add" onclick='add(this);' />
+                            </div>
+                        </div>
 
                 </div>
 
@@ -408,13 +411,13 @@
                     html = html + "<div class='col-md-12'>";
                     html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceType" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].Invtype + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceType' data-name='Invoice Type'/></div>";
                     html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceNumber" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].Invno + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceNumber' data-name='Invoice Number' /></div>";
-                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='InvoiceDate" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceDate' data-name='InvoiceDate' value='" + Model.ReceiptDetailsList[@j].InvoiceDate + "'/></div>";
+                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='date' id='InvoiceDate" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceDate' data-name='InvoiceDate' value='" + Model.ReceiptDetailsList[@j].InvoiceDate + "'/></div>";
                     html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='InvoiceDescription" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceDescription' data-name='InvoiceDescription' value='" + Model.ReceiptDetailsList[@j].Description + "'/></div>";
+                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='Remarks" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].Remarks' data-name='Remarks' value='" + Model.ReceiptDetailsList[@j].Remarks + "'/></div></div><div class='col-md-12'>";
                     html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceAmount" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].InvoiceAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceAmount' data-name='Invoice Amount'/></div>";
                     html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='CreditAmount" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].CreditAmt + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].CreditAmount' data-name='Credit Amount' /></div>";
                     html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='ReceivedAmount" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].ReceivedAmount' data-name='ReceivedAmount' value='" + Model.ReceiptDetailsList[@j].ReceivedAmount + "'/></div>";
                     html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='BalanceAmount" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].BalanceAmount' data-name='BalanceAmount' value='" + Model.ReceiptDetailsList[@j].Balance + "'/></div>";
-                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='Remarks" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].Remarks' data-name='Remarks' value='" + Model.ReceiptDetailsList[@j].Remarks + "'/></div>";
                     html = html + "<div class='col-md-2 form-group'></br><input type='button' class='document-btn removebutton' id='Delete" + @j + "'value='Delete' />  </div>";
                     html = html + "</div>";
 
@@ -438,7 +441,6 @@
     <div class="row ht-5">
         &nbsp;
     </div>
-        </div>
 }
 <script>
     $("#Tenant_id").on('change', function (e) {
@@ -899,13 +901,13 @@
         html = html + "<div class='col-md-12'>";
         html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceType" + i + "'  type='text' value='" + InvoiceType + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceType' data-name='Invoice Type'/></div>";
         html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceNumber" + i + "'  type='text' value='" + InvoiceNumber + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceNumber' data-name='Invoice Number' /></div>";
-        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='InvoiceDate" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceDate' data-name='InvoiceDate' value='" + InvoiceDate + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='date' id='InvoiceDate" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceDate' data-name='InvoiceDate' value='" + InvoiceDate + "'/></div>";
         html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='InvoiceDescription" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceDescription' data-name='InvoiceDescription' value='" + InvoiceDescription + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='Remarks" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].Remarks' data-name='Remarks' value='" + Remarks + "'/></div></div><div class='col-md-12'>";
         html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceAmount" + i + "'  type='text' value='" + InvoiceAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceAmount' data-name='Invoice Amount'/></div>";
         html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='CreditAmount" + i + "'  type='text' value='" + CreditAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].CreditAmount' data-name='Credit Amount' /></div>";
         html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='ReceivedAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].ReceivedAmount' data-name='ReceivedAmount' value='" + ReceivedAmount + "'/></div>";
-        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='BalanceAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].BalanceAmount' data-name='BalanceAmount' value='" + BalanceAmount + "'/></div>";
-        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='Remarks" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].Remarks' data-name='Remarks' value='" + Remarks + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='BalanceAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].BalanceAmount' data-name='BalanceAmount' value='" + BalanceAmount + "'/></div>";        
         html = html + "<div class='col-md-2 form-group'></br><Input type='button' class='document-btn removebutton' id='Delete" + i + "'value='Delete' /> </div>";
         html = html + "</div>";
 
@@ -948,5 +950,66 @@
         });
         i = newindex;
     });
+    $("form#Receipts").off("submit").on("submit", function (e) {
+        debugger;
+        e.preventDefault();
+        try {
 
+            var form = $("form#Receipts");
+            $("#Tenant_id").val($("#Supplierid option:selected").text() == "--Select--" ? null : $("#Tenant_id option:selected").text());
+            $("#Tenant_Name").val($("#SupplierName option:selected").text() == "--Select--" ? null : $("#Tenant_Name option:selected").text());
+
+            $("#Property_id").val($("#Propertyid option:selected").text() == "--Select--" ? null : $("#Propertyid option:selected").text());
+            $("#Property_Name").val($("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
+
+            $("#Unit_ID").val($("#UnitID option:selected").text() == "--Select--" ? null : $("#UnitID option:selected").text());
+            $("#unit_Name").val($("#unitName option:selected").text() == "--Select--" ? null : $("#unitName option:selected").text());
+            $.ajax(
+                {
+                    url: "../Receipts/AddOrUpdate",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        debugger;
+                        getReceipt();
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                        $(".result-title").text("Success");
+                        $(".result-modal-body span").text(receiptsAdded);
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(masterResultError);
+                    },
+                    complete: function () {
+                        $('#masterResultModal').modal('show');
+                    }
+                });
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
 </script>
