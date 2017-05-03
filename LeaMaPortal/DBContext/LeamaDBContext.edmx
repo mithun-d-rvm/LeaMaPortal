@@ -192,6 +192,11 @@ warning 6013: The table/view 'def.leama.ebwater_region_report' does not have a p
           <Property Name="createddate" Type="datetime" Precision="0" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6013: The table/view 'def.leama.email_report' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="email_report">
+          <Property Name="Emailtext" Type="text" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
 warning 6013: The table/view 'def.leama.esplit' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="esplit">
           <Property Name="Value" Type="varchar" MaxLength="1000" />
@@ -2665,11 +2670,6 @@ FROM `view_tenant` AS `view_tenant`</DefiningQuery>
           <EntitySet Name="test_report1" EntityType="LeamaModel.test_report1" />
           <EntitySet Name="test_report2" EntityType="LeamaModel.test_report2" />
           <EntitySet Name="vacancy_caretaker_report" EntityType="LeamaModel.vacancy_caretaker_report" />
-          <EntitySet Name="view_auto_receipt" EntityType="LeamaModel.view_auto_receipt" />
-          <EntitySet Name="view_find_pdcstatus" EntityType="LeamaModel.view_find_pdcstatus" />
-          <EntitySet Name="view_invoice_agreement" EntityType="LeamaModel.view_invoice_agreement" />
-          <EntitySet Name="view_invoice_receipt_pending" EntityType="LeamaModel.view_invoice_receipt_pending" />
-          <EntitySet Name="view_tenant" EntityType="LeamaModel.view_tenant" />
           <AssociationSet Name="FKagfa2" Association="LeamaModel.FKagfa2">
             <End Role="tbl_agreement" EntitySet="tbl_agreement" />
             <End Role="tbl_agreement_facility" EntitySet="tbl_agreement_facility" />
@@ -2778,6 +2778,11 @@ FROM `view_tenant` AS `view_tenant`</DefiningQuery>
             <End Role="tbl_suppliermaster" EntitySet="tbl_suppliermaster" />
             <End Role="tbl_supplierdt1" EntitySet="tbl_supplierdt1" />
           </AssociationSet>
+          <EntitySet Name="view_auto_receipt" EntityType="LeamaModel.view_auto_receipt" />
+          <EntitySet Name="view_find_pdcstatus" EntityType="LeamaModel.view_find_pdcstatus" />
+          <EntitySet Name="view_invoice_agreement" EntityType="LeamaModel.view_invoice_agreement" />
+          <EntitySet Name="view_invoice_receipt_pending" EntityType="LeamaModel.view_invoice_receipt_pending" />
+          <EntitySet Name="view_tenant" EntityType="LeamaModel.view_tenant" />
         </EntityContainer>
         <EntityType Name="dashboard_rental">
           <Key>
@@ -4220,105 +4225,6 @@ FROM `view_tenant` AS `view_tenant`</DefiningQuery>
           <Property Name="Loss_Amt" Type="Double" />
           <Property Name="user" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="view_auto_receipt">
-          <Key>
-            <PropertyRef Name="invno" />
-          </Key>
-          <Property Name="invno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Agreement_No" Type="Int32" />
-          <Property Name="Property_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Unit_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="unit_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Tenant_id" Type="Int32" />
-          <Property Name="Tenant_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="month" Type="Int32" />
-          <Property Name="year" Type="Int32" />
-          <Property Name="date" Type="DateTime" />
-          <Property Name="InvoiceAmount" Type="Double" />
-          <Property Name="incno" Type="Int32" />
-          <Property Name="invamt" Type="Single" />
-        </EntityType>
-        <EntityType Name="view_find_pdcstatus">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="ReceiptNo" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="Reccategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RecpType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ReceiptNo" Type="Int32" Nullable="false" />
-          <Property Name="ReceiptDate" Type="DateTime" />
-          <Property Name="agreement_no" Type="Int32" />
-          <Property Name="Property_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Unit_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="unit_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Tenant_id" Type="Int32" />
-          <Property Name="Tenant_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="TotalAmount" Type="Single" />
-          <Property Name="AmtInWords" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="DDChequeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PDCstatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="BankAcCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="BankAcName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="AdvAcCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DDChequeDate" Type="DateTime" />
-          <Property Name="Narration" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Accyear" Type="Int32" />
-          <Property Name="Createddatetime" Type="DateTime" />
-          <Property Name="Createduser" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Delmark" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="view_invoice_agreement">
-          <Key>
-            <PropertyRef Name="Agreement_No" />
-            <PropertyRef Name="Ag_Tenant_id" />
-            <PropertyRef Name="Ag_Tenant_Name" />
-          </Key>
-          <Property Name="Agreement_No" Type="Int32" Nullable="false" />
-          <Property Name="Ag_Tenant_id" Type="Int32" Nullable="false" />
-          <Property Name="Ag_Tenant_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Property_ID_Tawtheeq" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Properties_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Unit_ID_Tawtheeq" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Unit_Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Perday_Rental" Type="Single" />
-          <Property Name="Agreement_Start_Date" Type="DateTime" />
-          <Property Name="Agreement_End_Date" Type="DateTime" />
-        </EntityType>
-        <EntityType Name="view_invoice_receipt_pending">
-          <Key>
-            <PropertyRef Name="invno" />
-          </Key>
-          <Property Name="invno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Agreement_No" Type="Int32" />
-          <Property Name="Property_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Unit_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="unit_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Tenant_id" Type="Int32" />
-          <Property Name="Tenant_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="month" Type="Int32" />
-          <Property Name="year" Type="Int32" />
-          <Property Name="date" Type="DateTime" />
-          <Property Name="incno" Type="Int32" />
-          <Property Name="invtype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="totalamt" Type="Single" />
-          <Property Name="InvoiceAmount" Type="Double" />
-        </EntityType>
-        <EntityType Name="view_tenant">
-          <Key>
-            <PropertyRef Name="Tenant_id" />
-            <PropertyRef Name="type" />
-          </Key>
-          <Property Name="Tenant_id" Type="Int32" Nullable="false" />
-          <Property Name="First_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Middle_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Last_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Emailid" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <Association Name="FKagfa2">
           <End Type="LeamaModel.tbl_agreement" Role="tbl_agreement" Multiplicity="0..1" />
           <End Type="LeamaModel.tbl_agreement_facility" Role="tbl_agreement_facility" Multiplicity="*" />
@@ -4655,6 +4561,105 @@ FROM `view_tenant` AS `view_tenant`</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="view_auto_receipt">
+          <Key>
+            <PropertyRef Name="invno" />
+          </Key>
+          <Property Name="invno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Agreement_No" Type="Int32" />
+          <Property Name="Property_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Unit_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="unit_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tenant_id" Type="Int32" />
+          <Property Name="Tenant_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="date" Type="DateTime" />
+          <Property Name="InvoiceAmount" Type="Double" />
+          <Property Name="incno" Type="Int32" />
+          <Property Name="invamt" Type="Single" />
+        </EntityType>
+        <EntityType Name="view_find_pdcstatus">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ReceiptNo" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Reccategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RecpType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ReceiptNo" Type="Int32" Nullable="false" />
+          <Property Name="ReceiptDate" Type="DateTime" />
+          <Property Name="agreement_no" Type="Int32" />
+          <Property Name="Property_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Unit_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="unit_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tenant_id" Type="Int32" />
+          <Property Name="Tenant_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TotalAmount" Type="Single" />
+          <Property Name="AmtInWords" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="DDChequeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PDCstatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BankAcCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BankAcName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AdvAcCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DDChequeDate" Type="DateTime" />
+          <Property Name="Narration" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Accyear" Type="Int32" />
+          <Property Name="Createddatetime" Type="DateTime" />
+          <Property Name="Createduser" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Delmark" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="view_invoice_agreement">
+          <Key>
+            <PropertyRef Name="Agreement_No" />
+            <PropertyRef Name="Ag_Tenant_id" />
+            <PropertyRef Name="Ag_Tenant_Name" />
+          </Key>
+          <Property Name="Agreement_No" Type="Int32" Nullable="false" />
+          <Property Name="Ag_Tenant_id" Type="Int32" Nullable="false" />
+          <Property Name="Ag_Tenant_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Property_ID_Tawtheeq" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Properties_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Unit_ID_Tawtheeq" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Unit_Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Perday_Rental" Type="Single" />
+          <Property Name="Agreement_Start_Date" Type="DateTime" />
+          <Property Name="Agreement_End_Date" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="view_invoice_receipt_pending">
+          <Key>
+            <PropertyRef Name="invno" />
+          </Key>
+          <Property Name="invno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Agreement_No" Type="Int32" />
+          <Property Name="Property_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Unit_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="unit_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tenant_id" Type="Int32" />
+          <Property Name="Tenant_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="date" Type="DateTime" />
+          <Property Name="incno" Type="Int32" />
+          <Property Name="invtype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="totalamt" Type="Single" />
+          <Property Name="InvoiceAmount" Type="Double" />
+        </EntityType>
+        <EntityType Name="view_tenant">
+          <Key>
+            <PropertyRef Name="Tenant_id" />
+            <PropertyRef Name="type" />
+          </Key>
+          <Property Name="Tenant_id" Type="Int32" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Middle_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Emailid" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

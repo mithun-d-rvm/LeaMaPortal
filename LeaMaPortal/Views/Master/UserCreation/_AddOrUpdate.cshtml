@@ -207,6 +207,7 @@
 </div>
 
 
+
 <script>
     //Add or update
     $("form#UserCreation").off("submit").on("submit", function (e) {
@@ -251,12 +252,21 @@
                     processData: false,
                     success: function (response) {
                         GetUserCreation();
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                        $(".result-title").text("Success");
+                        $(".result-modal-body span").text(userRightsAdded);
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
-                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(masterResultError);
                     },
                     complete: function () {
                         // $("#").addClass("hide");
+                        $('#masterResultModal').modal('show');
                     }
 
                 });

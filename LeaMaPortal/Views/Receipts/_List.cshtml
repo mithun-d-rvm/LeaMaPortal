@@ -1,7 +1,6 @@
 ﻿
-@*@model LeaMaPortal.Models.ApprovalSettingsViewModel*@
 @using MvcPaging
-@model IPagedList<LeaMaPortal.Models.ApprovalSettingsViewModel>
+@model IPagedList<LeaMaPortal.Models.ReceiptViewModel>
 @{
     Layout = null;
 }
@@ -9,11 +8,10 @@
 <link href="~/theme/css/leemastyle.css" rel="stylesheet" />
 <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
 <!DOCTYPE html>
-
 <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
     <div id="master-loader-list" class="fa hide">
     </div>
-    <div class="row" id="approval-list">
+    <div class="row" id="receipts-list">
         <div class="col-md-12 leama-fieldset ">
             <div class="col-md-2 pull-left">
                 @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
@@ -35,79 +33,87 @@
 
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
-                    <div class="divTableCell ">User Id</div>
-                    <div class="divTableCell">Approval Settings</div>
+                    <div class="divTableCell">Receipt number</div>
+                    <div class="divTableCell">Property Name</div>
+                    <div class="divTableCell">Unit Name</div>
+                    <div class="divTableCell">Tenant Name</div>
+                    <div class="divTableCell">Agreement Number</div>
+                    <div class="divTableCell">Receipt Type</div>
+                    <div class="divTableCell">Total Amount</div>
                     <div class="divTableCell">Action</div>
 
                 </div>
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
-                        <div class="divTableCell">@item.Userid</div>
-                        <div class="divTableCell">@item.Approval_flag</div>
+                        <div class="divTableCell">@item.ReceiptNo</div>
+                        <div class="divTableCell">@item.Property_Name</div>
+                        <div class="divTableCell">@item.unit_Name</div>
+                        <div class="divTableCell">@item.Tenant_Name</div>
+                        <div class="divTableCell">@item.agreement_no</div>
+                        <div class="divTableCell">@item.RecpType</div>
+                        <div class="divTableCell">@item.TotalAmount</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit approval-edit", title = "Edit", @data_id = @item.Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash approval-delete", @style = "color:red", @title = "Delete", @data_id = @item.Id })
-                            @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit receipt-edit", title = "Edit", @data_id = @item.Id })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash receipt-delete", @style = "color:red", @title = "Delete", @data_id = @item.Id })
                         </div>
                     </div>
                 }
-
             </div>
         </div>
-            <div class="col-md-12">
-                <br />
-                @Html.HiddenFor(m => m.PageNumber)
-                <div class="col-md-2">
-                    @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="col-lg-10 text-right">
-                    @for (int i = 1; i <= Model.PageCount; i++)
-                    {
-                        if (i == Model.PageNumber)
-                        {
-                            <input type="button" data-id="@i" value="@i" class="pagination-btn" />
-                        }
-                        else
-                        {
-                            <input type="button" data-id="@i" value="@i" class="Page" />
-                        }
-                    }
-                </div>
+
+        <div class="col-md-12">
+            @Html.HiddenFor(m => m.PageNumber)
+            <div class="col-md-2">
+                @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
             </div>
-        
+            <div class="col-lg-10 text-right">
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    if (i == Model.PageNumber)
+                    {
+                        <input type="button" data-id="@i" value="@i" class="pagination-btn" />
+                    }
+                    else
+                    {
+                        <input type="button" data-id="@i" value="@i" class="Page" />
+                    }
+
+                }
+            </div>
+        </div>
 
         <script type="text/javascript">
                 $(".Page").click(function(e)
                 {
                     $("#master-loader-list").removeClass("hide");
-                    $("#approval-list").addClass("hide");
+                    $("#receipts-list").addClass("hide");
                     var page = parseInt($(this).data("id"));
                     var defaultPageSize = $("#defaultPageSize").val();
                     var search = $("#Search").val();
                     //alert(page);
-                    getApprovalSettingsList(search,page,defaultPageSize)
+                    getReceiptList(search,page,defaultPageSize)
                 });
                 $("#defaultPageSize").change(function () {
                     $("#master-loader-list").removeClass("hide");
-                    $("#approval-list").addClass("hide");
+                    $("#receipts-list").addClass("hide");
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getApprovalSettingsList(search, 1, defaultPageSize)
+                    getReceiptList(search, 1, defaultPageSize)
                 });
                 $("#btn-search").click(function (e) {
                     $("#master-loader-list").removeClass("hide");
-                    $("#approval-list").addClass("hide");
+                    $("#receipts-list").addClass("hide");
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getApprovalSettingsList(search, 1, defaultPageSize)
+                    getReceiptList(search, 1, defaultPageSize)
                 });
 
-                function getApprovalSettingsList(search, page, defaultPageSize)
+                function getReceiptList(search, page, defaultPageSize)
                 {
                     $.ajax(
                        {
-                           url: "../ApprovalSettings/Index",
+                           url: "../Receipts/List",
                            type: "Get",
                            data: { Search: search, page: page, defaultPageSize: defaultPageSize },
                            success: function (html) {
@@ -117,9 +123,8 @@
                                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                            },
                            complete: function () {
-                               //   $("#VerifyIdDetailsLoader").addClass("hide");
                                //$("#master-loader-list").addClass("hide");
-                               //$("#approval-list").removeClass("hide");
+                               //$("#receipts-list").removeClass("hide");
                            }
                        });
                 }
@@ -138,43 +143,28 @@
         alert("Could not retrieve list.");
     }
 
-        </script>
+    </script>
+
         <div class="col-md-12 leama-fieldset ">
             &nbsp;
         </div>
-
     </div>
 </div>
 
 <script>
-    //Edit get
-
-    $(".approval-edit").click(function (e) {
+    $(".receipt-edit").click(function (e) {
         e.preventDefault();
         $("#master-loader-edit").removeClass("hide");
         $("#ContainerAddOrUpdate").hide();
         var id = $(this).data("id");
+        //var param = id.split('`');
         $.ajax(
             {
-                url: "../ApprovalSettings/Edit",
-                type: "Get",
-                data: { Id: id },
-                success: function (result) {
-                    if (result.Errors == undefined || result.Errors == "") {
-                        $("#ApprovalSettingsId").val(result.Id);
-                        $("#Userid").val(result.Userid);                        
-                        if (result.Approval_flag == "Yes")
-                        {
-                            $("#Approval_flag_yes").attr("checked", "checked");
-                        }
-                        else
-                        {
-                            $("#Approval_flag_no").attr("checked", "checked");
-                        }
-                    }
-                    else {
-                        alert(data.Errors);
-                    }
+                url: "../Receipts/Edit",
+                type: "GET",
+                data: { id: id },
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -188,7 +178,7 @@
     });
 
     // delete
-    $(".approval-delete").click(function (e) {
+    $(".receipt-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
         var r = confirm("Are you sure want to delete?");
@@ -198,11 +188,11 @@
         else {
             $.ajax(
                 {
-                    url: "../ApprovalSettings/Delete",
-                    type: "Get",
-                    data: { Id: id },
+                    url: "../Receipts/Delete",
+                    type: "post",
+                    data: { id: id },
                     success: function (response) {
-                        GetApprovalSettings();
+                        getReceipt();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
