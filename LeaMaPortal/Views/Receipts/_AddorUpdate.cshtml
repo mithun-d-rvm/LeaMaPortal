@@ -106,7 +106,6 @@
                     @Html.LabelFor(model => model.Unit_ID, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    <div class="col-md-8">
                         @Html.DropDownList("Unit_ID", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                 </div>
             </div>
@@ -442,7 +441,6 @@
     <div class="row ht-5">
         &nbsp;
     </div>
-        </div>
 }
 <script>
     $("#Tenant_id").on('change', function (e) {
@@ -976,11 +974,20 @@
                     success: function (response) {
                         debugger;
                         getReceipt();
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                        $(".result-title").text("Success");
+                        $(".result-modal-body span").text(receiptsAdded);
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
-                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(masterResultError);
                     },
                     complete: function () {
+                        $('#masterResultModal').modal('show');
                     }
                 });
 
