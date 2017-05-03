@@ -20,7 +20,7 @@ namespace LeaMaPortal.DBContext
         public string Year { get; set; }
         public string BankName { get; set; }
         public string Cheque_No { get; set; }
-        public string Cheque_Date { get; set; }
+        public Nullable<System.DateTime> Cheque_Date { get; set; }
         public Nullable<float> Cheque_Amount { get; set; }
         public string Payment_Mode { get; set; }
         public string Delmark { get; set; }
