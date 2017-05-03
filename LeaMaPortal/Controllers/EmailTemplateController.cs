@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using LeaMaPortal.Models;
 using MvcPaging;
 using System.Threading.Tasks;
@@ -16,7 +16,7 @@ namespace LeaMaPortal.Controllers
 {
     public class EmailTemplateController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
 
         // GET: EmailTemplate
         public PartialViewResult Index(string Search, int? page, int? defaultPageSize)
@@ -99,12 +99,13 @@ namespace LeaMaPortal.Controllers
                                             new MySqlParameter("@PTemplateName",model.TemplateName),
                                             new MySqlParameter("@PSubject",model.Subject),
                                             new MySqlParameter("@PBodytext",model.BodyText),
+                                            new MySqlParameter("@PBody",model.Body),
                                             new MySqlParameter("@PSubjectParameter",model.SubjectParameter),
                                             new MySqlParameter("@PBodyParameter",""),
                                             new MySqlParameter("@PInActive",false),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
-                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Emailtemplate_All(@PFlag,@PId,@PTemplateID,@PTemplateName,@PSubject,@PBodytext,@PSubjectParameter,@PBodyParameter,@PInActive,@PCreateduser)", param).ToListAsync();
+                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Emailtemplate_All(@PFlag,@PId,@PTemplateID,@PTemplateName,@PSubject,@PBodytext,@PBody,@PSubjectParameter,@PBodyParameter,@PInActive,@PCreateduser)", param).ToListAsync();
                     await db.SaveChangesAsync();
 
                 }
@@ -167,12 +168,13 @@ namespace LeaMaPortal.Controllers
                                             new MySqlParameter("@PTemplateName",tbl_email.TemplateName),
                                             new MySqlParameter("@PSubject",tbl_email.Subject),
                                             new MySqlParameter("@PBodytext",tbl_email.Bodytext),
+                                            new MySqlParameter("@PBody",tbl_email.Body),
                                             new MySqlParameter("@PSubjectParameter",tbl_email.SubjectParameter),
                                             new MySqlParameter("@PBodyParameter",tbl_email.BodyParameter),
                                             new MySqlParameter("@PInActive",true),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
-                var spResult = await db.Database.SqlQuery<object>("Usp_Emailtemplate_All(@PFlag,@PId,@PTemplateID,@PTemplateName,@PSubject,@PBodytext,@PSubjectParameter,@PBodyParameter,@PInActive,@PCreateduser)", param).ToListAsync();
+                var spResult = await db.Database.SqlQuery<object>("Usp_Emailtemplate_All(@PFlag,@PId,@PTemplateID,@PTemplateName,@PSubject,@PBodytext,@PBody,@PSubjectParameter,@PBodyParameter,@PInActive,@PCreateduser)", param).ToListAsync();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

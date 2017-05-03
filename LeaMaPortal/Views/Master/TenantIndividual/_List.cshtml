@@ -1,8 +1,8 @@
 ﻿
 @using MvcPaging
-@model IPagedList<LeaMaPortal.Models.DBContext.tbl_tenant_individual>
+@model IPagedList<LeaMaPortal.DBContext.tbl_tenant_individual>
 @{
-    Layout =null;
+    Layout = null;
 }
 
 <hr />
@@ -18,139 +18,178 @@
         <button type="button" id="btn-search" class="btn btn-info leama-search-btn col-md-4">Go</button>
     </div>
 </div>
-<table class="table">
-    @*<tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Middle_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Last_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Company_Educational)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Profession)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Marital_Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.address1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Emirate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PostboxNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Mobile_Countrycode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Mobile_Areacode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Mobile_No)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Landline_Countrycode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Landline_Areacode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Landline_No)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fax_Countrycode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fax_Areacode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fax_No)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nationality)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Emiratesid)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Emirate_issuedate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Emirate_expirydate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Passportno)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Placeofissuance)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Passport_Issuedate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Passport_Expirydate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VisaType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Visano)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Visa_IssueDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Visa_ExpiryDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Dob)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Familyno)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Familybookcity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ADWEA_Regid)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Accyear)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Createddatetime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Createduser)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Delmark)
-        </th>
-        <th></th>
-    </tr>*@
+
+<div class="col-md-12 leama-fieldset ">
+    &nbsp;
+</div>
+
+<div class="divTable leama-fieldset col-md-12">
+    <div class="divTableBody divFontBodyTable">
+        <div class="divTableHeading">
+            <div class="divTableCell">Tenant ID</div>
+            <div class="divTableCell">Title</div>
+            <div class="divTableCell">Name</div>
+            <div class="divTableCell">Company Name</div>
+            <div class="divTableCell">Profession</div>
+            <div class="divTableCell">Address</div>
+            <div class="divTableCell">City</div>
+            <div class="divTableCell">Action</div>
+        </div>
+
+        @foreach (var item in Model)
+        {
+            <div class="divTableRow">
+                <div class="divTableCell">@item.Id</div>
+                <div class="divTableCell">@item.Title</div>
+                <div class="divTableCell">@item.First_Name  @item.Last_Name</div>
+                <div class="divTableCell">@item.Company_Educational</div>
+                <div class="divTableCell">@item.Profession</div>
+                <div class="divTableCell">@item.address</div>
+                <div class="divTableCell">@item.City</div>
+                <div class="divTableCell">
+                    @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit tenant-individual-edit", title = "Edit", @data_id = @item.Tenant_Id, @data_type = @item.Type })  |
+                    @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash tenant-individual-delete", @style = "color:red", @title = "Delete", @data_id = @item.Tenant_Id, @data_type = @item.Type })
+
+                </div>
+
+            </div>
+        }
+    </div>
+</div>
+
+@*<table class="table">
+    <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Middle_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Last_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company_Educational)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profession)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marital_Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.address1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emirate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostboxNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile_Countrycode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile_Areacode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile_No)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Landline_Countrycode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Landline_Areacode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Landline_No)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fax_Countrycode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fax_Areacode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fax_No)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nationality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emiratesid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emirate_issuedate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emirate_expirydate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Passportno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Placeofissuance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Passport_Issuedate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Passport_Expirydate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VisaType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visano)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visa_IssueDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visa_ExpiryDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dob)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Familyno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Familybookcity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ADWEA_Regid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Accyear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Createddatetime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Createduser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Delmark)
+            </th>
+            <th></th>
+        </tr>
 
     @foreach (var item in Model)
     {
@@ -289,11 +328,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Delmark)
             </td>
-            
+
         </tr>
     }
 
-</table>
+</table>*@
 <div class="col-md-12">
     <br />
     @Html.HiddenFor(m => m.PageNumber)
@@ -305,7 +344,7 @@
         {
             if (i == Model.PageNumber)
             {
-                <input type="button" style="background:green" data-id="@i" value="@i" class="" />
+                <input type="button" data-id="@i" value="@i" class="pagination-btn" />
             }
             else
             {
@@ -316,43 +355,41 @@
     </div>
 </div>
 <script type="text/javascript">
-                $(".Page").click(function(e)
-                {
-                    var page = parseInt($(this).data("id"));
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    var search = $("#Search").val();
-                    //alert(page);
-                    getTenantIndividualList(search, page, defaultPageSize)
-                });
-                $("#defaultPageSize").change(function () {
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getTenantIndividualList(search, 1, defaultPageSize)
-                });
-                $("#btn-search").click(function (e) {
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getTenantIndividualList(search, 1, defaultPageSize)
-                });
+    $(".Page").click(function (e) {
+        var page = parseInt($(this).data("id"));
+        var defaultPageSize = $("#defaultPageSize").val();
+        var search = $("#Search").val();
+        //alert(page);
+        getTenantIndividualList(search, page, defaultPageSize)
+    });
+    $("#defaultPageSize").change(function () {
+        var search = $("#Search").val();
+        var defaultPageSize = $("#defaultPageSize").val();
+        getTenantIndividualList(search, 1, defaultPageSize)
+    });
+    $("#btn-search").click(function (e) {
+        var search = $("#Search").val();
+        var defaultPageSize = $("#defaultPageSize").val();
+        getTenantIndividualList(search, 1, defaultPageSize)
+    });
 
-                function getTenantIndividualList(search,page,defaultPageSize)
-                {
-                    $.ajax(
-                       {
-                           url: "../MasterIndividual/Index",
-                           type: "Get",
-                           data: { Search: search, page: page, defaultPageSize: defaultPageSize },
-                           success: function (html) {
-                               $("#ContainerList").html(html);
-                           },
-                           error: function (jqXhr, textStatus, errorThrown) {
-                               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                           },
-                           complete: function () {
-                               //   $("#VerifyIdDetailsLoader").addClass("hide");
-                           }
-                       });
-                }
+    function getTenantIndividualList(search, page, defaultPageSize) {
+        $.ajax(
+           {
+               url: "../MasterIndividual/Index",
+               type: "Get",
+               data: { Search: search, page: page, defaultPageSize: defaultPageSize },
+               success: function (html) {
+                   $("#ContainerList").html(html);
+               },
+               error: function (jqXhr, textStatus, errorThrown) {
+                   alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+               },
+               complete: function () {
+                   //   $("#VerifyIdDetailsLoader").addClass("hide");
+               }
+           });
+    }
     function beginPaging(args) {
         // Animate
         $('#grid-list').fadeOut('normal');
@@ -413,7 +450,7 @@
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                     },
                     complete: function () {
-                        
+
                     }
                 });
         }

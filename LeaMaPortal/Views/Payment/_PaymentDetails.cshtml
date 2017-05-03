@@ -103,12 +103,39 @@
         </div>
 
         <div class="col-md-2 col-md-offset-2">
-            <button class="document-btn">Add</button>
+            <button class="document-btn" onclick="Add()">Add</button>
         </div>
         <div class="col-md-2">
             <button class="document-btn">Delete</button>
         </div>
     </div>
 </div>
+<script>
+    var count = 1;
+    function Add() {
 
+        var UtilityId = document.getElementById("UtilityId").value;
+        var UtilityName = document.getElementById("UtilityName").value;
+
+        var html = "<div class='col-md-12 document-row' id='GridView"+count+"'>";
+        html=html+"<div class='col-md-1'>";
+        html = html + count;
+        html=html+" </div>";
+        html = html + " <div class='col-md-3'> <input id='UtilityId" +count+"'  type='text' value='" +UtilityId+ "' class='master-form-input' /></div>";
+        html = html + "<div class='col-md-4'> <input id='UtilityId" +count+ "' type='text'  value='" +UtilityName+ "' class='master-form-input' /></div>";
+      //  html=html+ "<div class='col-md-2'><button class='document-btn'>Add</button> </div>";
+        html = html + "<div class='col-md-2'>  <button class='document-btn' id='Delete"+count+"' onclick='Delete(this)'>Delete</button></div>";
+        html=html+"</div>";
+        $('#UtilityForm').append(html);
+
+        document.getElementById("UtilityId").value="";
+       document.getElementById("UtilityName").value="";
+       count = count + 1;
+
+    }
+    function Delete(e) {
+        DeleteRow = e.parentNode.parentNode.id;
+        $('#' + DeleteRow).remove();
+    }
+</script>
 

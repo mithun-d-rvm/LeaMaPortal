@@ -1,5 +1,5 @@
 ﻿using LeaMaPortal.Models;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using LeaMaPortal.Resources;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace LeaMaPortal.Controllers
 {
     public class AuthenticationController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
         // GET: Authentication
         public ActionResult Index()
         {
@@ -45,6 +45,15 @@ namespace LeaMaPortal.Controllers
             {
                 return View(LoginModel);
             }
+        }
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            HttpCookie cookie1 = new HttpCookie(FormsAuthentication.FormsCookieName, "");
+            cookie1.Expires = DateTime.Now.AddYears(-1);
+            Response.Cookies.Add(cookie1);
+            //Session.Abandon();
+            return RedirectToAction("Login");
         }
 
         // GET: Authentication/Details/5

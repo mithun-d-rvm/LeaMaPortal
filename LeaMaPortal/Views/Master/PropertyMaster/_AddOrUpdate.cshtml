@@ -11,970 +11,1148 @@
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Property_Id, new { @id = "Id" })
-    <div class="inner-block">
-        <div class="blank">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Property Type:
-                            @*@Html.LabelFor(model => model.Property_Flag, htmlAttributes: new { @class = "control-label" })*@
-                        </div>
-                        <div class="col-md-8">
-                            @*<div class="col-md-6">
-                                    <div class="col-md-1">
-                                        <input type="radio" class="input-checkbox">
-                                    </div>
-                                    <div class="col-md-8 m-t-3">
-                                        <span> Property </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="col-md-1">
-                                        <input type="radio" class="input-checkbox">
-                                    </div>
-                                    <div class="col-md-8 m-t-3">
-                                        <span> Unit </span>
-                                    </div>
-                                </div>*@
-                            @Html.RadioButtonFor(model => model.Property_Flag, "Property", new { @Name = "PropertyType" }) Property
-                            @Html.RadioButtonFor(model => model.Property_Flag, "Unit", new { @Name = "PropertyType" }) Unit
-                        </div>
-                    </div>
+    @*<div class="inner-block">
+        <div class="blank">*@
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Property Type:
+                    @*@Html.LabelFor(model => model.Property_Flag, htmlAttributes: new { @class = "control-label" })*@
                 </div>
-                <div class="col-md-6">
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Property ID:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.HiddenFor(model => model.Property_Id)
-                            <input type="text" value="@ViewBag.PropertyId" disabled class="master-form-input" />
-                            @*@Html.EditorFor(model => model.Property_Id, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                            @Html.ValidationMessageFor(model => model.Property_Id, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-6" id="TypeProperty">
-
-
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Property Thwtheeq ID:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Property_ID_Tawtheeq, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Property_ID_Tawtheeq, "", new { @class = "text-danger" })
-                            @*<input type="text" class="master-form-input" />*@
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Property Name:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Property_Name, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Compound:
-                        </div>
-                        <div class="col-md-8">
-                            @{
-                                List<SelectListItem> Compound = new List<SelectListItem>();
-                                Compound.Add(new SelectListItem
-                                {
-                                    Text = "Manly",
-                                    Value = "Manly"
-                                });
-                                Compound.Add(new SelectListItem
-                                {
-                                    Text = "Chennai",
-                                    Value = "Chennai",
-                                    Selected = true
-                                });
-                                Compound.Add(new SelectListItem
-                                {
-                                    Text = "London",
-                                    Value = "London"
-                                });
-                            }
-
-                            @Html.DropDownListFor(model => model.Compound, Compound, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
-
-
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Zone:
-                        </div>
-                        <div class="col-md-8">
-                            @*<select class="master-form-input">
-                                    <option> Zone 1 </option>
-                                    <option> Zone 2 </option>
-                                    <option> Zone 3 </option>
-                                </select>*@
-                            @{
-                                List<SelectListItem> Zone = new List<SelectListItem>();
-                                Zone.Add(new SelectListItem
-                                {
-                                    Text = "Zone 1 ",
-                                    Value = "Zone 1 "
-                                });
-                                Zone.Add(new SelectListItem
-                                {
-                                    Text = "Zone 2",
-                                    Value = "Zone 2",
-                                    Selected = true
-                                });
-                                Zone.Add(new SelectListItem
-                                {
-                                    Text = "Zone 3",
-                                    Value = "Zone 3"
-                                });
-                            }
-
-                            @Html.DropDownListFor(model => model.Zone, Zone, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
-
-
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Sector:
-                        </div>
-                        <div class="col-md-8">
-                            @*<select class="master-form-input">
-                                    <option> Sector 1 </option>
-                                    <option> Sector 2 </option>
-                                    <option> Sector 3 </option>
-                                </select>*@
-                            @{
-                                List<SelectListItem> Sector = new List<SelectListItem>();
-                                Sector.Add(new SelectListItem
-                                {
-                                    Text = "Sector 1",
-                                    Value = "Sector 1"
-                                });
-                                Sector.Add(new SelectListItem
-                                {
-                                    Text = "Sector 2",
-                                    Value = "Sector 2",
-                                });
-                                Sector.Add(new SelectListItem
-                                {
-                                    Text = "Sector 3",
-                                    Value = "Sector 3"
-                                });
-                            }
-
-                            @Html.DropDownListFor(model => model.sector, Sector, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
-
-
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Plot Number:
-                        </div>
-                        <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.plotno, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.plotno, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Owned by Registrant:
-                        </div>
-                        <div class="col-md-8">
-                            <div class="col-md-6" style="margin-left: -20px;">
-                                <div class="col-md-1">
-                                    <input type="checkbox" class="input-checkbox">
-                                </div>
+                <div class="col-md-8">
+                    @*<div class="col-md-6">
+                            <div class="col-md-1">
+                                <input type="radio" class="input-checkbox">
+                            </div>
+                            <div class="col-md-8 m-t-3">
+                                <span> Property </span>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Property Usage:
-                        </div>
-                        <div class="col-md-8">
-                            @*<select class="master-form-input">
-                                    <option> New </option>
-                                    <option> 1 Year old </option>
-                                    <option> More than 1 year </option>
-                                </select>*@
-                            @{
-                                List<SelectListItem> PropertyUsage = new List<SelectListItem>();
-                                PropertyUsage.Add(new SelectListItem
-                                {
-                                    Text = "Manly",
-                                    Value = "Manly"
-                                });
-                                PropertyUsage.Add(new SelectListItem
-                                {
-                                    Text = "Chennai",
-                                    Value = "Chennai",
-                                    Selected = true
-                                });
-                                PropertyUsage.Add(new SelectListItem
-                                {
-                                    Text = "London",
-                                    Value = "London"
-                                });
-                            }
-
-                            @Html.DropDownListFor(model => model.Property_Usage, PropertyUsage, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
-
-
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Property Category:
-                        </div>
-                        <div class="col-md-8">
-                            @*<select class="master-form-input">
-                                    <option> Category 1 </option>
-                                    <option> Category 2 </option>
-                                    <option> Category 3 </option>
-                                </select>*@
-                            @{
-                                List<SelectListItem> PropertyCategory = new List<SelectListItem>();
-                                PropertyCategory.Add(new SelectListItem
-                                {
-                                    Text = "Manly",
-                                    Value = "Manly"
-                                });
-                                PropertyCategory.Add(new SelectListItem
-                                {
-                                    Text = "Chennai",
-                                    Value = "Chennai",
-                                    Selected = true
-                                });
-                                PropertyCategory.Add(new SelectListItem
-                                {
-                                    Text = "London",
-                                    Value = "London"
-                                });
-                            }
-
-                            @Html.DropDownListFor(model => model.Property_Type, PropertyCategory, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
-
-
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Commercial Villa:
-                        </div>
-                        <div class="col-md-8">
-                            <div class="col-md-6" style="margin-left: -20px;">
-                                <div class="col-md-1">
-                                    <input type="checkbox" class="input-checkbox">
-                                </div>
+                        <div class="col-md-6">
+                            <div class="col-md-1">
+                                <input type="radio" class="input-checkbox">
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Street Name:
-                        </div>
-                        <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.Street_Name, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Street_Name, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Address 1:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.TextAreaFor(model => model.Address1, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Address 2:
-                        </div>
-                        <div class="col-md-8">
-                            @*<textarea class="master-form-input"></textarea>*@
-                            @Html.TextAreaFor(model => model.Address2, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Address 3:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.TextAreaFor(model => model.Address3, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Address3, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Region:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.DropDownList("Region", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-Select-" })
-
-
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Country:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            City:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            State:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            External ref no:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Externalrefno, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Externalrefno, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Number of Floors:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Noofoffloors, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Noofoffloors, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Number of Units:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Noofunits, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Noofunits, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Built Area:
-                        </div>
-                        <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.Builtarea, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Builtarea, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Plot Area:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Plotarea, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Plotarea, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Leasable Area:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Leasablearea, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Leasablearea, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Common Area:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.commonarea, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.commonarea, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Completion Date:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.completion_Date, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.completion_Date, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Property Value (in AED):
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.AEDvalue, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.AEDvalue, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Purchased Date:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Purchased_date, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Purchased_date, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Property Valued Date:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Valued_Date, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Valued_Date, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Available From:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Vacant_Start_Date, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Vacant_Start_Date, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Min.Rental Rate/Month (in AED):
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Rental_Rate_Month, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Rental_Rate_Month, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Comments:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-6" id="TypeUnit">
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Main Property Tawtheeq ID:
-                        </div>
-                        <div class="col-md-8">
-                            @*<select class="master-form-input">
-                                    <option> ID 1 </option>
-                                    <option> ID 2 </option>
-                                    <option> ID 3 </option>
-                                </select>*@
-                            @{
-                                List<SelectListItem> Taqtheeq = new List<SelectListItem>();
-                                Taqtheeq.Add(new SelectListItem
-                                {
-                                    Text = "ID 1",
-                                    Value = "ID 1"
-                                });
-                                Taqtheeq.Add(new SelectListItem
-                                {
-                                    Text = "ID 2",
-                                    Value = "ID 2",
-                                });
-                                Taqtheeq.Add(new SelectListItem
-                                {
-                                    Text = "ID 3",
-                                    Value = "ID 3"
-                                });
-                            }
-
-                            @Html.DropDownListFor(model => model.Ref_unit_Property_ID_Tawtheeq, Taqtheeq, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
-
-
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Main Property ID:
-                        </div>
-                        <div class="col-md-8">
-                            @*<select class="master-form-input">
-                                    <option> ID 1 </option>
-                                    <option> ID 2 </option>
-                                    <option> ID 3 </option>
-                                </select>*@
-                            @{
-                                List<SelectListItem> MainProperty = new List<SelectListItem>();
-                                MainProperty.Add(new SelectListItem
-                                {
-                                    Text = "ID 1",
-                                    Value = "ID 1"
-                                });
-                                MainProperty.Add(new SelectListItem
-                                {
-                                    Text = "ID 2",
-                                    Value = "ID 2",
-                                });
-                                MainProperty.Add(new SelectListItem
-                                {
-                                    Text = "ID 3",
-                                    Value = "ID 3"
-                                });
-                            }
-
-                            @Html.DropDownListFor(model => model.Ref_Unit_Property_ID, MainProperty, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
-
-
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Main Property Name:
-                        </div>
-                        <div class="col-md-8">
-                            @*<select class="master-form-input">
-                                    <option> Villa </option>
-                                    <option> Real Estate </option>
-                                    <option> Bunglow </option>
-                                </select>*@
-                            @{
-                                List<SelectListItem> MainPropertyName = new List<SelectListItem>();
-                                MainPropertyName.Add(new SelectListItem
-                                {
-                                    Text = "Villa",
-                                    Value = "Villa"
-                                });
-                                MainPropertyName.Add(new SelectListItem
-                                {
-                                    Text = "Real Estate",
-                                    Value = "Real Estate",
-                                });
-                                MainPropertyName.Add(new SelectListItem
-                                {
-                                    Text = "Bunglow",
-                                    Value = "Bunglow"
-                                });
-                            }
-
-                            @Html.DropDownListFor(model => model.Ref_Unit_Property_Name, MainPropertyName, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
-
-
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Unit Tawteeq ID:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Unit_ID_Tawtheeq, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Unit_ID_Tawtheeq, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Unit Name:
-                        </div>
-                        <div class="col-md-8">
-                            @*<select class="master-form-input">
-                                    <option> ID 1 </option>
-                                    <option> ID 2 </option>
-                                    <option> ID 3 </option>
-                                </select>*@
-                            @Html.EditorFor(model => model.Unit_Property_Name, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Unit_Property_Name, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            External Ref No (Unit):
-                        </div>
-                        <div class="col-md-8">
-                            @*<select class="master-form-input">
-                                    <option> ID 1 </option>
-                                    <option> ID 2 </option>
-                                    <option> ID 3 </option>
-                                </select>*@
-                            @Html.EditorFor(model => model.Externalrefno_unit, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Externalrefno_unit, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Property Value (in AED) (Unit):
-                        </div>
-                        <div class="col-md-8">
-                            @*<select class="master-form-input">
-                                    <option> Villa </option>
-                                    <option> Real Estate </option>
-                                    <option> Bunglow </option>
-                                </select>*@
-                            @Html.EditorFor(model => model.AEDvalue_unit, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.AEDvalue_unit, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Purchased Date:
-                        </div>
-                        <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.Purchased_date, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Purchased_date, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Property Valued Date:
-                        </div>
-                        <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.Valued_Date, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Valued_Date, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Occupancy Status:
-                        </div>
-                        <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Available From:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Vacant_Start_Date, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Vacant_Start_Date, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Min Rental Rate/Month (in AED) (Unit):
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Rental_Rate_Month, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Rental_Rate_Month, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Floor Number:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Floorno, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Floorno, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            FLoor Level:
-                        </div>
-                        <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.Floorlevel, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Floorlevel, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Units Usage:
-                        </div>
-                        <div class="col-md-8">
-                            @*<select class="master-form-input">
-                                    <option> ID 1 </option>
-                                    <option> ID 2 </option>
-                                    <option> ID 3 </option>
-                                </select>*@
-                            @Html.DropDownListFor(model => model.Property_Usage_unit, Model.Property_Usage_unitList, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Property Category (Unit):
-                        </div>
-                        <div class="col-md-8">
-                            @*<select class="master-form-input">
-                                    <option> ID 1 </option>
-                                    <option> ID 2 </option>
-                                    <option> ID 3 </option>
-                                </select>*@
-                            @Html.DropDownListFor(model => model.Property_Type_unit, Model.Property_Type_unitList, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Total Area:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Total_Area, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Total_Area, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Unit Common Area:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Unit_Common_Area, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Unit_Common_Area, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Common Area:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.commonarea, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.commonarea, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Parking Number:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Parkingno, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Parkingno, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Comments (Unit):
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Unitcomments, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Unitcomments, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="col-md-6">
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Car Taker Name:
-                        </div>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Caretaker_Name, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Caretaker_Name, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Car Taker ID:
-                        </div>
-                        <div class="col-md-8">
-                            @*<select class="master-form-input">
-                                    <option> ID 1 </option>
-                                    <option> ID 2 </option>
-                                    <option> ID 3 </option>
-                                </select>*@
-                            @Html.DropDownList("Caretaker", null, "-- Select --", htmlAttributes: new { @class = "master-form-input" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Occupancy Status (Unit):
-                        </div>
-                        <div class="col-md-8">
-                            @*<input type="text" class="master-form-input" />*@
-                            @Html.EditorFor(model => model.Status_unit, new { htmlAttributes = new { @class = "master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Status_unit, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Using by Hameem and Not For Lease:
-                        </div>
-                        <div class="col-md-8">
-                            <div class="col-md-6" style="margin-left: -20px;">
-                                <div class="col-md-1">
-                                    <input type="checkbox" class="input-checkbox">
-                                </div>
+                            <div class="col-md-8 m-t-3">
+                                <span> Unit </span>
                             </div>
-                        </div>
-                    </div>
+                        </div>*@
+                    @Html.RadioButtonFor(model => model.Property_Flag, "Property", new { @id = "property" }) Property
+                    @Html.RadioButtonFor(model => model.Property_Flag, "Unit", new { @id = "unit" }) Unit
                 </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        &nbsp;
-                    </div>
-                    <div class="col-md-4">
-                        <button class="btn master-form-btn">Submit</button>
-                    </div>
-                </div>
-
             </div>
-            @*
-                <div class="row p-b-25">
-                    <span> <strong> Fecility Details </strong> </span>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Property ID:
                 </div>
+                <div class="col-md-8">
+                    @Html.HiddenFor(model => model.Property_Id)
+                    <input type="text" value="@ViewBag.PropertyId" disabled class="form-control master-form-input" />
+                    @*@Html.EditorFor(model => model.Property_Id, new { htmlAttributes = new { @class = "form-control master-form-input" } })*@
+                    @Html.ValidationMessageFor(model => model.Property_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
 
-                <div class="row">
-                    <div class="col-md-12 document-row">
+
+        <div class="col-md-6" id="TypeProperty">
+
+
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Property Thwtheeq ID:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Property_ID_Tawtheeq, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Property_ID_Tawtheeq, "", new { @class = "text-danger" })
+                    @*<input type="text" class="form-control master-form-input" />*@
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Property Name:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Property_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Compound:
+                </div>
+                <div class="col-md-8">
+                    @{
+                        List<SelectListItem> Compound = new List<SelectListItem>();
+                        Compound.Add(new SelectListItem
+                        {
+                            Text = "Compound 1",
+                            Value = "Compound 1"
+                        });
+                        Compound.Add(new SelectListItem
+                        {
+                            Text = "Compound 2",
+                            Value = "Compound 2",
+                        });
+                        Compound.Add(new SelectListItem
+                        {
+                            Text = "Compound 3",
+                            Value = "Compound 3"
+                        });
+                    }
+
+                    @Html.DropDownListFor(model => model.Compound, Compound, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })
+
+
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Zone:
+                </div>
+                <div class="col-md-8">
+                    @*<select class="form-control master-form-input">
+                            <option> Zone 1 </option>
+                            <option> Zone 2 </option>
+                            <option> Zone 3 </option>
+                        </select>*@
+                    @{
+                        List<SelectListItem> Zone = new List<SelectListItem>();
+                        Zone.Add(new SelectListItem
+                        {
+                            Text = "Zone 1 ",
+                            Value = "Zone 1 "
+                        });
+                        Zone.Add(new SelectListItem
+                        {
+                            Text = "Zone 2",
+                            Value = "Zone 2",
+                        });
+                        Zone.Add(new SelectListItem
+                        {
+                            Text = "Zone 3",
+                            Value = "Zone 3"
+                        });
+                    }
+
+                    @Html.DropDownListFor(model => model.Zone, Zone, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })
+
+
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Sector:
+                </div>
+                <div class="col-md-8">
+                    @*<select class="form-control master-form-input">
+                            <option> Sector 1 </option>
+                            <option> Sector 2 </option>
+                            <option> Sector 3 </option>
+                        </select>*@
+                    @{
+                        List<SelectListItem> Sector = new List<SelectListItem>();
+                        Sector.Add(new SelectListItem
+                        {
+                            Text = "Sector 1",
+                            Value = "Sector 1"
+                        });
+                        Sector.Add(new SelectListItem
+                        {
+                            Text = "Sector 2",
+                            Value = "Sector 2",
+                        });
+                        Sector.Add(new SelectListItem
+                        {
+                            Text = "Sector 3",
+                            Value = "Sector 3"
+                        });
+                    }
+
+                    @Html.DropDownListFor(model => model.sector, Sector, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })
+
+
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Plot Number:
+                </div>
+                <div class="col-md-8">
+                    @*<input type="text" class="form-control master-form-input" />*@
+                    @Html.EditorFor(model => model.plotno, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.plotno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Owned by Registrant:
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-6" style="margin-left: -20px;">
                         <div class="col-md-1">
-                            ID
+                            @Html.HiddenFor(model => model.ownedbyregistrant, new { @id = "hdnOwnedByRegistrant" })
+                            @Html.CheckBoxFor(model => model.ownedbyregistrant.HasValue, new { @id = "chkOwnedByRegistrant", @class = "input-checkbox" })
                         </div>
-                        <div class="col-md-2">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Property Usage:
+                </div>
+                <div class="col-md-8">
+                    @*<select class="form-control master-form-input">
+                            <option> New </option>
+                            <option> 1 Year old </option>
+                            <option> More than 1 year </option>
+                        </select>*@
+                    @*@{
+                            List<SelectListItem> PropertyUsage = new List<SelectListItem>();
+                            PropertyUsage.Add(new SelectListItem
+                            {
+                                Text = "Manly",
+                                Value = "Manly"
+                            });
+                            PropertyUsage.Add(new SelectListItem
+                            {
+                                Text = "Chennai",
+                                Value = "Chennai",
+                                Selected = true
+                            });
+                            PropertyUsage.Add(new SelectListItem
+                            {
+                                Text = "London",
+                                Value = "London"
+                            });
+                        }
+
+                        @Html.DropDownListFor(model => model.Property_Usage, PropertyUsage, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })*@
+                    @Html.DropDownList("Property_Usage", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-Select-" })
+
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Property Category:
+                </div>
+                <div class="col-md-8">
+                    @*<select class="form-control master-form-input">
+                            <option> Category 1 </option>
+                            <option> Category 2 </option>
+                            <option> Category 3 </option>
+                        </select>*@
+                    @*@{
+                            List<SelectListItem> PropertyCategory = new List<SelectListItem>();
+                            PropertyCategory.Add(new SelectListItem
+                            {
+                                Text = "Manly",
+                                Value = "Manly"
+                            });
+                            PropertyCategory.Add(new SelectListItem
+                            {
+                                Text = "Chennai",
+                                Value = "Chennai",
+                                Selected = true
+                            });
+                            PropertyCategory.Add(new SelectListItem
+                            {
+                                Text = "London",
+                                Value = "London"
+                            });
+                        }
+
+                        @Html.DropDownListFor(model => model.Property_Type, PropertyCategory, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })*@
+                    @Html.DropDownList("Property_Type", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-Select-" })
+
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Commercial Villa:
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-6" style="margin-left: -20px;">
+                        <div class="col-md-1">
+                            @Html.HiddenFor(model => model.Commercial_villa, new { @id = "hdnCommercial_villa" })
+                            @Html.CheckBoxFor(model => model.Commercial_villa.HasValue, new { @id = "chkCommercial_villa", @class = "input-checkbox" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Street Name:
+                </div>
+                <div class="col-md-8">
+                    @*<input type="text" class="form-control master-form-input" />*@
+                    @Html.EditorFor(model => model.Street_Name, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Street_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Address 1:
+                </div>
+                <div class="col-md-8">
+                    @Html.TextAreaFor(model => model.Address1, new { @class = "form-control master-form-input", @rows = "4" })
+                    @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Address 2:
+                </div>
+                <div class="col-md-8">
+                    @*<textarea class="form-control master-form-input"></textarea>*@
+                    @Html.TextAreaFor(model => model.Address2, new { @class = "form-control master-form-input", @rows = "4" })
+                    @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Address 3:
+                </div>
+                <div class="col-md-8">
+                    @Html.TextAreaFor(model => model.Address3, new { @class = "form-control master-form-input", @rows = "4" })
+                    @Html.ValidationMessageFor(model => model.Address3, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Region:
+                </div>
+                <div class="col-md-8">
+                    @Html.DropDownList("Region_Name", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-Select-" })
+
+
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Country:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    City:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    State:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    External ref no:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Externalrefno, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Externalrefno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Number of Floors:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Noofoffloors, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Noofoffloors, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Number of Units:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Noofunits, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Noofunits, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Built Area:
+                </div>
+                <div class="col-md-8">
+                    @*<input type="text" class="form-control master-form-input" />*@
+                    @Html.EditorFor(model => model.Builtarea, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Builtarea, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Plot Area:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Plotarea, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Plotarea, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Leasable Area:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Leasablearea, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Leasablearea, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Common Area:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.commonarea, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.commonarea, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Completion Date:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.completion_Date, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.completion_Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Property Value (in AED):
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.AEDvalue, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.AEDvalue, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Purchased Date:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Purchased_date, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Purchased_date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Property Valued Date:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Valued_Date, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Valued_Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Available From:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Vacant_Start_Date, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Vacant_Start_Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Min.Rental Rate/Month (in AED):
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Rental_Rate_Month, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Rental_Rate_Month, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Comments:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6" id="TypeUnit">
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Main Property Tawtheeq ID:
+                </div>
+                <div class="col-md-8">
+                    @*<select class="form-control master-form-input">
+                            <option> ID 1 </option>
+                            <option> ID 2 </option>
+                            <option> ID 3 </option>
+                        </select>*@
+                    @*@{
+                            List<SelectListItem> Taqtheeq = new List<SelectListItem>();
+                            Taqtheeq.Add(new SelectListItem
+                            {
+                                Text = "ID 1",
+                                Value = "ID 1"
+                            });
+                            Taqtheeq.Add(new SelectListItem
+                            {
+                                Text = "ID 2",
+                                Value = "ID 2",
+                            });
+                            Taqtheeq.Add(new SelectListItem
+                            {
+                                Text = "ID 3",
+                                Value = "ID 3"
+                            });
+                        }*@
+
+                    @Html.DropDownList("Ref_unit_Property_ID_Tawtheeq", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-- Select --" })
+
+
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Main Property ID:
+                </div>
+                <div class="col-md-8">
+                    @*<select class="form-control master-form-input">
+                            <option> ID 1 </option>
+                            <option> ID 2 </option>
+                            <option> ID 3 </option>
+                        </select>*@
+                    @*@{
+                            List<SelectListItem> MainProperty = new List<SelectListItem>();
+                            MainProperty.Add(new SelectListItem
+                            {
+                                Text = "ID 1",
+                                Value = "ID 1"
+                            });
+                            MainProperty.Add(new SelectListItem
+                            {
+                                Text = "ID 2",
+                                Value = "ID 2",
+                            });
+                            MainProperty.Add(new SelectListItem
+                            {
+                                Text = "ID 3",
+                                Value = "ID 3"
+                            });
+                        }*@
+
+                    @Html.DropDownList("Ref_Unit_Property_ID", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-- Select --" })
+
+
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Main Property Name:
+                </div>
+                <div class="col-md-8">
+                    @*<select class="form-control master-form-input">
+                            <option> Villa </option>
+                            <option> Real Estate </option>
+                            <option> Bunglow </option>
+                        </select>*@
+                    @*@{
+                            List<SelectListItem> MainPropertyName = new List<SelectListItem>();
+                            MainPropertyName.Add(new SelectListItem
+                            {
+                                Text = "Villa",
+                                Value = "Villa"
+                            });
+                            MainPropertyName.Add(new SelectListItem
+                            {
+                                Text = "Real Estate",
+                                Value = "Real Estate",
+                            });
+                            MainPropertyName.Add(new SelectListItem
+                            {
+                                Text = "Bunglow",
+                                Value = "Bunglow"
+                            });
+                        }*@
+
+                    @Html.DropDownList("Ref_Unit_Property_Name", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-- Select --" })
+
+
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Unit Tawteeq ID:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Unit_ID_Tawtheeq, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Unit_ID_Tawtheeq, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Unit Name:
+                </div>
+                <div class="col-md-8">
+                    @*<select class="form-control master-form-input">
+                            <option> ID 1 </option>
+                            <option> ID 2 </option>
+                            <option> ID 3 </option>
+                        </select>*@
+                    @Html.EditorFor(model => model.Unit_Property_Name, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Unit_Property_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    External Ref No (Unit):
+                </div>
+                <div class="col-md-8">
+                    @*<select class="form-control master-form-input">
+                            <option> ID 1 </option>
+                            <option> ID 2 </option>
+                            <option> ID 3 </option>
+                        </select>*@
+                    @Html.EditorFor(model => model.Externalrefno_unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Externalrefno_unit, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Property Value (in AED) (Unit):
+                </div>
+                <div class="col-md-8">
+                    @*<select class="form-control master-form-input">
+                            <option> Villa </option>
+                            <option> Real Estate </option>
+                            <option> Bunglow </option>
+                        </select>*@
+                    @Html.EditorFor(model => model.AEDvalue_unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.AEDvalue_unit, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Purchased Date:
+                </div>
+                <div class="col-md-8">
+                    @*<input type="text" class="form-control master-form-input" />*@
+                    @Html.EditorFor(model => model.Purchased_date_unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Purchased_date_unit, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Property Valued Date:
+                </div>
+                <div class="col-md-8">
+                    @*<input type="text" class="form-control master-form-input" />*@
+                    @Html.EditorFor(model => model.Valued_Date_unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Valued_Date_unit, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Occupancy Status (Unit):
+                </div>
+                <div class="col-md-8">
+                    @*<input type="text" class="master-form-input" />*@
+                    @Html.EditorFor(model => model.Status_unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Status_unit, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Available From:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Vacant_Start_Date_Unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Vacant_Start_Date_Unit, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Min Rental Rate/Month (in AED) (Unit):
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Rental_Rate_Month, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Rental_Rate_Month, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Floor Number:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Floorno, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Floorno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    FLoor Level:
+                </div>
+                <div class="col-md-8">
+                    @*<input type="text" class="form-control master-form-input" />*@
+                    @Html.EditorFor(model => model.Floorlevel, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Floorlevel, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Units Usage:
+                </div>
+                <div class="col-md-8">
+                    @*<select class="form-control master-form-input">
+                            <option> ID 1 </option>
+                            <option> ID 2 </option>
+                            <option> ID 3 </option>
+                        </select>*@
+                    @Html.DropDownList("Property_Usage_unit", null, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input", @placeholder = "-Select-" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Property Category (Unit):
+                </div>
+                <div class="col-md-8">
+                    @*<select class="form-control master-form-input">
+                            <option> ID 1 </option>
+                            <option> ID 2 </option>
+                            <option> ID 3 </option>
+                        </select>*@
+                    @Html.DropDownList("Property_Type_unit", null, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input", @placeholder = "-Select-" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Total Area:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Total_Area, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Total_Area, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Unit Common Area:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Unit_Common_Area, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Unit_Common_Area, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Common Area:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Common_Area, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Common_Area, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Parking Number:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Parkingno, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Parkingno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Comments (Unit):
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Unitcomments, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Unitcomments, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Caretaker Name:
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Caretaker_Name, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Caretaker_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Caretaker ID:
+                </div>
+                <div class="col-md-8">
+                    @*<select class="form-control master-form-input">
+                            <option> ID 1 </option>
+                            <option> ID 2 </option>
+                            <option> ID 3 </option>
+                        </select>*@
+                    @Html.DropDownList("Caretaker_ID", null, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Occupancy Status:
+                </div>
+                <div class="col-md-8">
+                    @*<input type="text" class="master-form-input" />*@
+                    @Html.EditorFor(model => model.Status, new { disabled = "disabled", htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    Using by Hameem and Not For Lease:
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-6" style="margin-left: -20px;">
+                        <div class="col-md-1">
+                            @Html.HiddenFor(model => model.Company_occupied_Flag, new { @id = "hdnCompany_occupied_Flag" })
+                            @Html.CheckBoxFor(model => model.Company_occupied_Flag.HasValue, new { @id = "ChkCompany_occupied_Flag", @class = "input-checkbox" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="m-t-5-p col-md-10 document-row" id="GridView">
+        <div class="p-b-25">
+            <span> <strong> Fecility Details </strong> </span>
+        </div>
+
+        <div class="">
+            <table class="col-md-12">
+                <tr>
+                    <td>
+                        <div class="col-md-3">
                             Fecility ID
+                            @Html.DropDownList("Facility_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             Fecility Name
+                            @Html.DropDownList("Facility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                         </div>
                         <div class="col-md-3">
                             Numbers Available
+                            <input type="number" step="1" id="Numbers_available" class="form-control" />
                         </div>
-                    </div>
-                </div>
-                <div class="row ht-5">
-                    &nbsp;
-                </div>
-
-                <!-- Begin Dynamic row -->
-                @Html.Partial("_FecilityDetails")
-                        <!-- End Dynamic row -->
-
-                        <div class="row p-b-25 p-t-17">
-                            <span> <strong> Utility Details </strong> </span>
+                        <div class="col-md-2">
+                            <br />
+                            <button type="button" id="add_utility" onclick="addPropertiesdt(event);" class="document-btn" value="Add">Add</button>
                         </div>
+                    </td>
+                </tr>
+            </table>
 
-                        <div class="row">
-                            <div class="col-md-12 document-row">
-                                <div class="col-md-1">
-                                    ID
-                                </div>
+
+
+            <div class="">
+                @if (Model.PropertiesdtList != null)
+                    {
+                    <input type="hidden" id="propertiesdt-list-count" value="@Model.PropertiesdtList.Count" />
+                    }
+                    else
+                    {
+                    <input type="hidden" id="propertiesdt-list-count" value="0" />
+                    }
+                <table id="facility-details-list" class="col-md-12 document-row m-l-5">
+                    @if (Model.PropertiesdtList != null)
+                        {
+
+                            for (int i = 0; i < Model.PropertiesdtList.Count; i++)
+                            {
+
+                        <tr class="document-row">
+                            <td class="p-t-25">
                                 <div class="col-md-3">
-                                    Utility ID
+                                    @Html.HiddenFor(m => m.PropertiesdtList[i].Facility_id, new { @data_name = "Facility_id" })
+                                    @Html.HiddenFor(m => m.PropertiesdtList[i].Facility_Name, new { @data_name = "Facility_Name" })
+                                    @Html.HiddenFor(m => m.PropertiesdtList[i].Numbers_available, new { @data_name = "Numbers_available" })
+                                    @Model.PropertiesdtList[i].Facility_id
                                 </div>
                                 <div class="col-md-4">
-                                    Utility Name
+                                    @Model.PropertiesdtList[i].Facility_Name
                                 </div>
-                            </div>
-                        </div>
+                                <div class="col-md-3">
+                                    @Model.PropertiesdtList[i].Numbers_available
+                                </div>
+                                <div class="col-md-2">
+                                    <button class='document-btn remove-propertiesdtlist-button' id='Delete" + @i + "'> Delete </button>
+                                </div>
+                            </td>
+                        </tr>
+                            }
+                        }
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+            <div class="row ht-5">
+                &nbsp;
+            </div>
+
+            <div class="m-t-5-p col-md-10 document-row" id="GridView">
+                <!-- Begin Dynamic row -->
+                @*@Html.Partial("_FecilityDetails")*@
+                <!-- End Dynamic row -->
+
+                <div class="p-b-25">
+                    <span> <strong> Utility Details </strong> </span>
+                </div>
+
+                <div class="">
+                    <table class="col-md-12">
+                        <tr>
+                            <td>
+                                <div class="col-md-5">
+                                    Utility ID
+                                    @Html.DropDownList("Utility_ID", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                                </div>
+                                <div class="col-md-5">
+                                    Utility Name
+                                    @Html.DropDownList("Utility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                                </div>
+                                <div class="col-md-2">
+                                    <br />
+                                    <button type="button" id="add_utility" onclick="addPropertiesdt1(event);" value="Add" class="document-btn">Add</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class="">
+                        @if (Model.Propertiesdt1List != null)
+                                {
+                                <input type="hidden" id="propertiesdt1-list-count" value="@Model.Propertiesdt1List.Count" />
+                                }
+                                else
+                                {
+                                <input type="hidden" id="propertiesdt1-list-count" value="0" />
+                                }
+                        <table id="utility-details-list" class="col-md-12 document-row m-l-5">
+                            @if (Model.Propertiesdt1List != null)
+                                    {
+
+                                        for (int i = 0; i < Model.Propertiesdt1List.Count; i++)
+                                        {
+
+                                    <tr class="document-row">
+                                        <td class="p-t-25">
+                                            <div class="col-md-5">
+                                                @Html.HiddenFor(m => m.Propertiesdt1List[i].Utility_id, new { @data_name = "Utility_id" })
+                                                @Html.HiddenFor(m => m.Propertiesdt1List[i].Utility_Name, new { @data_name = "Utility_Name" })
+                                                @Model.Propertiesdt1List[i].Utility_id
+                                            </div>
+                                            <div class="col-md-5">
+                                                @Model.Propertiesdt1List[i].Utility_Name
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button class='document-btn remove-propertiesdt1list-button' id='Delete" + @i + "'> Delete </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                        }
+                                    }
+                        </table>
+
+                    </div>
+                </div>
+            </div>
                         <div class="row ht-5">
                             &nbsp;
                         </div>
 
                         <!-- Begin Dynamic row -->
-                        @Html.Partial("_UtilityDetails")
+                        @*@Html.Partial("_UtilityDetails")*@
                         <!-- End Dynamic row -->
                         <!-- Begin Grid view -->
                         <div class="row">
                             &nbsp;
                         </div>
-                        <div class="row leama-fieldset leama-header-top" style="background-color:white;">
-                            <div class="col-md-12">
-                                <div class="col-md-12 leama-fieldset ">
-                                    <div class="col-md-2 pull-left">
-                                        @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="text" class="leama-field form-control" />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button type="submit" class="btn btn-info leama-search-btn col-md-4">Go</button>
-                                    </div>
-                                </div>
 
-                                <div class="col-md-12 leama-fieldset ">
-                                    &nbsp;
-                                </div>
+                        <!-- End Grid view -->
 
-                                <div class="divTable leama-fieldset col-md-12">
-
-
-                                    <div class="divTableBody divFontBodyTable">
-                                        <div class="divTableHeading">
-                                            <div class="divTableCell">Country Name</div>
-                                            <div class="divTableCell">Action</div>
-
-                                        </div>
-                                        <div class="divTableRow">
-                                            <div class="divTableCell">Chennai</div>
-                                            <div class="divTableCell">
-                                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
-                                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
-                                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
-                                            </div>
-
-                                        </div>
-                                        <div class="divTableRow divFontBodyTable">
-                                            <div class="divTableCell">Coimbatore</div>
-                                            <div class="divTableCell">
-                                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit" })  |
-                                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete" })  |
-                                                @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="col-sm-6">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <ul class="pagination pull-right">
-                                            <li><a href="#">1</a></li>
-                                            <li class="active"><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        @*</div>
+                            </div>*@
+                        <div class="col-md-12 form-input-padding">
+                            <div class="col-md-4">
+                                &nbsp;
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn master-form-btn">Submit</button>
                             </div>
                         </div>
-                        <!-- End Grid view -->
-            *@
-        </div>
-    </div>
-                                }
+                        }
 <script>
-    $("#Caretaker").on('change', function (e) {
-        var region = $("#Caretaker").val();
-        if (region != "" && region != null) {
+
+    $("#Ref_unit_Property_ID_Tawtheeq").change(function () {
+        debugger;
+        $("#Ref_Unit_Property_ID").val($("#Ref_unit_Property_ID_Tawtheeq option:selected").val());
+        $("#Ref_Unit_Property_Name").val($("#Ref_unit_Property_ID_Tawtheeq option:selected").val());
+        return;
+    });
+    $("#Ref_Unit_Property_ID").change(function () {
+        $("#Ref_unit_Property_ID_Tawtheeq").val($("#Ref_Unit_Property_ID option:selected").val());
+        $("#Ref_Unit_Property_Name").val($("#Ref_Unit_Property_ID option:selected").val());
+        return;
+    });
+    $("#Ref_Unit_Property_Name").change(function () {
+        $("#Ref_Unit_Property_ID").val($("#Ref_Unit_Property_Name option:selected").val());
+        $("#Ref_unit_Property_ID_Tawtheeq").val($("#Ref_Unit_Property_Name option:selected").val());
+        return;
+    });
+
+
+    $("#Utility_ID").change(function () {
+        $("#Utility_Name").val($("#Utility_ID option:selected").text());
+        return;
+    });
+    $("#Utility_Name").change(function () {
+        $("#Utility_ID").val($("#Utility_Name option:selected").text());
+        return;
+    });
+    var i = parseInt($("#propertiesdt1-list-count").val());
+    function addPropertiesdt1(e) {
+        var Utility_id = $("#Utility_ID option:selected").text();
+        var Utility_Name = $("#Utility_ID").val();
+        var html = "<tr class=''> <td class='p-t-25'>" +
+ "<div class='col-md-5'>" +
+                                                    "<input type='hidden' name='Propertiesdt1List[" + i + "].Utility_id' value='" + Utility_id + "' data-name='Utility_id' />" +
+                                                    "<input type='hidden' name='Propertiesdt1List[" + i + "].Utility_Name' value='" + Utility_Name + "' data-name='Utility_Name' />" +
+                                                  "" + Utility_id + "</div>" +
+                                                    "<div class='col-md-5'>" +
+                                                        Utility_Name +
+                                                    "</div>" +
+                                                   " <div class='col-md-2'>" +
+                                                   "<button class='document-btn remove-propertiesdt1list-button' id='Delete" + i + "'> Delete </button>" +
+                                                    "</div></td></tr>";
+        $("#utility-details-list").append(html);
+        i++;
+        return;
+    }
+    //remove-row
+    $(document).on('click', 'button.remove-propertiesdt1list-button', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('utility-details-list');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'Propertiesdt1List[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+        i = newindex;
+    });
+
+    var j = parseInt($("#propertiesdt-list-count").val());
+    $("#Facility_id").change(function () {
+        $("#Facility_Name").val($("#Facility_id option:selected").text());
+        return;
+    });
+    $("#Facility_Name").change(function () {
+        $("#Facility_id").val($("#Facility_Name option:selected").text());
+        return;
+    });
+
+    function addPropertiesdt(e) {
+        debugger;
+        //var Utility_id = $("#Utility_ID option:selected").text();
+        //var Utility_Name = $("#Utility_ID").val();
+
+        //var fid = $("#Facility_id option:selected").text();
+        //var fname = $("#Facility_id").val();
+
+        var Facility_id = $("#Facility_id option:selected").text();
+        var Facility_Name = $("#Facility_id").val();
+        var Numbers_available = $("#Numbers_available").val();
+        var html = "<tr class=''> <td class='p-t-25'>" +
+ "<div class='col-md-3'>" +
+                                                    "<input type='hidden' name='PropertiesdtList[" + j + "].Facility_id' value='" + Facility_id + "' data-name='Facility_id' />" +
+                                                    "<input type='hidden' name='PropertiesdtList[" + j + "].Facility_Name' value='" + Facility_Name + "' data-name='Facility_Name' />" +
+                                                    "<input type='hidden' name='PropertiesdtList[" + j + "].Numbers_available' value='" + Numbers_available + "' data-name='Numbers_available' />" +
+                                                  "" + Facility_id + "</div>" +
+                                                    "<div class='col-md-4'>" +
+                                                        Facility_Name +
+                                                    "</div>" +
+                                                    "<div class='col-md-3'>" +
+                                                        Numbers_available +
+                                                    "</div>" +
+                                                   " <div class='col-md-2'>" +
+                                                   "<button class='document-btn remove-propertiesdtlist-button' id='Delete" + j + "'> Delete </button>" +
+                                                    "</div></td></tr>";
+        $("#facility-details-list").append(html);
+        j++;
+        return;
+    }
+    //remove-row
+    $(document).on('click', 'button.remove-propertiesdtlist-button', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('facility-details-list');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'PropertiesdtList[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+        j = newindex;
+    });
+
+
+    $("#Caretaker_ID").on('change', function (e) {
+        var caretaker = $("#Caretaker_ID").val();
+        if (caretaker != "" && caretaker != null) {
             $.ajax(
                 {
                     url: "../Caretaker/GetCaretakerName",
                     // dataType: "jsonp",
                     method: "GET",
-                    data: { Id: $("#Caretaker").val() }, //FormData(form.get(0)),
+                    data: { Id: $("#Caretaker_ID").val() }, //FormData(form.get(0)),
                     contentType: "application/json",
 
                     success: function (response) {
@@ -993,26 +1171,53 @@
                 });
         }
     });
-    $('input[type=radio][name=PropertyType]').change(function () {
+    $('input[type=checkbox][id=ChkCompany_occupied_Flag]').change(function () {
+        debugger;
+        if (this.checked) {
+            $("#hdnCompany_occupied_Flag").val(1);
+        }
+        else {
+            $("#hdnCompany_occupied_Flag").val(null);
+        }
+    });
+    $('input[type=checkbox][id=chkCommercial_villa]').change(function () {
+        if (this.checked) {
+            $("#hdnCommercial_villa").val(1);
+        }
+        else {
+            $("#hdnCommercial_villa").val(null);
+        }
+    });
+    $('input[type=checkbox][id=chkOwnedByRegistrant]').change(function () {
+        if (this.checked) {
+            $("#hdnOwnedByRegistrant").val(1);
+        }
+        else {
+            $("#hdnOwnedByRegistrant").val(null);
+        }
+    });
+    $('input[type=radio][name=Property_Flag]').change(function () {
         if (this.value == 'Property') {
+            // $("select option").prop("selected", false);
             $("#TypeProperty").show();
             $("#TypeUnit").hide();
         }
         else {
+            // $("select option").prop("selected", false);
             $("#TypeProperty").hide();
             $("#TypeUnit").show();
         }
     });
-    $("#Region").on('change', function (e) {
+    $("#Region_Name").on('change', function (e) {
         debugger;
-        var region = $("#Region").val();
+        var region = $("#Region_Name").val();
         if (region != "" && region != null) {
             $.ajax(
                 {
                     url: "../Region/GetCountry",
                     // dataType: "jsonp",
                     method: "GET",
-                    data: { region: $("#Region").val() }, //FormData(form.get(0)),
+                    data: { region: $("#Region_Name").val() }, //FormData(form.get(0)),
                     contentType: "application/json",
 
                     success: function (response) {
@@ -1032,4 +1237,19 @@
         }
         // $("#Title").val($("#TitleDisplay").val());
     });
+    $(document).ready(function () {
+        debugger;
+        $('#Status_unit').attr('disabled', 'disabled');
+        $('#Status').attr('disabled', 'disabled');
+        if ($("#unit")[0].checked) {
+            $("#unit").prop('checked', true).change();
+            //$("select option").prop("selected", false);
+        }
+        else {
+            $("#property").prop('checked', true).change();
+            //$("select option").prop("selected", false);
+        }
+        //$("#property").prop('checked', true).change();
+    });
+
 </script>

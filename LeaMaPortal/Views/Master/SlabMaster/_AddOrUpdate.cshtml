@@ -11,7 +11,7 @@
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Slab" }))
 {
-    @Html.HiddenFor(m => m.Id, new { @id = "SlabId" })
+    @Html.HiddenFor(m => m.Id, new { @id = "SlabMasterId" })
     <div class="col-md-12 leama-fieldset leama-header-top">
         <div class="row">
             <div class="col-md-12 leama-fieldset ">
@@ -19,7 +19,7 @@
                     @Html.LabelFor(model => model.SlabId, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.SlabId, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "SlabId" } })
+                    @Html.EditorFor(model => model.SlabId, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "SlabId", @readonly = "readonly" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -27,7 +27,7 @@
                     @Html.LabelFor(model => model.Utility_id, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Utility_id, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Utility_id" } })
+                    @Html.EditorFor(model => model.Utility_id, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Utility_id", @readonly = "readonly" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -92,8 +92,9 @@
         var UtilityName = $("#Utility_Name").val();
         $.ajax(
                 {
-                    url: "../Meter/GetUtilityId",
-                    method: "GET",
+                    url: "../Slab/GetUtilityId",
+                    method: "POST",
+                    async : false,
                     data: { UtilityName: UtilityName },
                     success: function (response) {
                         $("#Utility_id").val(response);
@@ -103,10 +104,9 @@
                     },
                     complete: function () {
                     }
-
                 });
     }
-    $("#Utility_Name").change(getUtilityId());
+    $("#Utility_Name").change(function () { getUtilityId() });
     getUtilityId();
     //Add or update
     $("form#Slab").off("submit").on("submit", function (e) {
@@ -121,16 +121,14 @@
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
-                        GetMeter();
+                        GetSlab();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                     },
                     complete: function () {
                     }
-
                 });
-
         }
         catch (ex) {
             alert(ex);

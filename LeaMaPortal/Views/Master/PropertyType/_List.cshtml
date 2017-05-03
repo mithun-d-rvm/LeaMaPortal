@@ -10,7 +10,7 @@
 <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
 <!DOCTYPE html>
 
-<div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
+<div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
     <div class="row">
         <div class="col-md-12 leama-fieldset ">
             <div class="col-md-2 pull-left">
@@ -46,7 +46,7 @@
                         <div class="divTableCell">@item.PropertyCategory</div>
                         <div class="divTableCell">@item.Usage_name</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit propertytype-edit", title = "Edit", @data_id = @item.PropertyType + "-" + @item.PropertyCategory + "-" + @item.Usage_name})  |
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit propertytype-edit", title = "Edit", @data_propertytype = @item.PropertyType, @data_propertycategory= @item.PropertyCategory, @data_usagename= @item.Usage_name})  |
                             @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash propertytype-delete", @style = "color:red", @title = "Delete", @data_id = @item.PropertyType + "-" + @item.PropertyCategory + "-" + @item.Usage_name })
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
@@ -54,6 +54,8 @@
                 }
 
             </div>
+
+        </div>
             <div class="col-md-12">
                 <br />
                 @Html.HiddenFor(m => m.PageNumber)
@@ -65,7 +67,7 @@
                     {
                         if (i == Model.PageNumber)
                         {
-                            <input type="button" style="background:green" data-id="@i" value="@i" class="" />
+                            <input type="button" data-id="@i" value="@i" class="pagination-btn" />
                         }
                         else
                         {
@@ -74,7 +76,7 @@
                     }
                 </div>
             </div>
-        </div>
+        
 
         <script type="text/javascript">
                 $(".Page").click(function(e)
@@ -130,6 +132,10 @@
     }
 
         </script>
+        <div class="col-md-12 leama-fieldset ">
+            &nbsp;
+        </div>
+
     </div>
 
 
@@ -140,15 +146,20 @@
 
     $(".propertytype-edit").click(function (e) {
         e.preventDefault();
-        var id = $(this).data("id");
-        var param = id.split('-');
+        debugger;
+        var propertytype = $(this).data("propertytype");
+        var propertycategory = $(this).data("propertycategory");
+        var usagename= $(this).data("usagename");
+       // var id = $(this).data("id");
+        //var param = id.split('-');
         $.ajax(
             {
                 url: "../PropertyType/Edit",
                 type: "Get",
-                data: { PropertyType: param[0], PropertyCategory: param[1], Usage_name: param[2] },
+                data: { PropertyType: propertytype, PropertyCategory: propertycategory, Usage_name: usagename },
                 success: function (result) {
                     if (result.Errors == undefined || result.Errors == "") {
+                        debugger;
                         $("#PropertyTypeId").val(result.Id);
                         $("#PropertyType").val(result.PropertyType);
                         $("#UsageName").val(result.Usage_name);
@@ -162,6 +173,7 @@
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
+                    $("body").scrollTop(0);
                 }
             });
     });
@@ -169,8 +181,9 @@
     // delete
     $(".propertytype-delete").click(function (e) {
         e.preventDefault();
-        var id = $(this).data("id");
-        var param = id.split('-');
+        var propertytype = $(this).data("propertytype");
+        var propertycategory = $(this).data("propertycategory");
+        var usagename = $(this).data("usagename");
         var r = confirm("Are you sure want to delete?");
         if (r == false) {
             return;
@@ -180,7 +193,7 @@
                 {
                     url: "../PropertyType/Delete",
                     type: "Get",
-                    data: { PropertyType: param[0], PropertyCategory: param[1], Usage_name: param[2] },
+                    data: { PropertyType: propertytype, PropertyCategory: propertycategory, Usage_name: usagename },
                     success: function (response) {
                         GetPropertyType();
                     },

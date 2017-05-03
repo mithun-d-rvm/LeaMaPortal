@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using LeaMaPortal.Models;
 using MvcPaging;
 using LeaMaPortal.Helpers;
@@ -17,7 +17,7 @@ namespace LeaMaPortal.Controllers
 {
     public class PropertyTypeController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
 
         // GET: PropertyType
         public PartialViewResult Index(string Search, int? page, int? defaultPageSize)
@@ -64,7 +64,9 @@ namespace LeaMaPortal.Controllers
         public PartialViewResult AddOrUpdate()
         {
             PropertyTypeViewModel model = new PropertyTypeViewModel();
-            ViewBag.PropertyCategory = new SelectList(StaticHelper.GetStaticData(StaticHelper.PROPERTYTYPE_DROPDOWN), "Name", "Name");
+            ViewBag.PropertyType = new SelectList(StaticHelper.GetStaticData(StaticHelper.PROPERTYTYPE_DROPDOWN), "Name", "Name");
+            ViewBag.PropertyCategory = new SelectList(StaticHelper.GetStaticData(StaticHelper.PROPERTYCATEGORY_DROPDOWN), "Name", "Name");
+            ViewBag.Usage_name = new SelectList(new List<OptionModel>());
             return PartialView("../Master/PropertyType/_AddOrUpdate", model);
         }
         [HttpPost]
@@ -159,6 +161,25 @@ namespace LeaMaPortal.Controllers
             catch (Exception ex)
             {
                 return Json(new MessageResult() { Errors = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public async Task<JsonResult> GetUsage(string PropertyType)
+        {
+            try
+            {
+                List<OptionModel> model = new List<OptionModel>();
+                if (PropertyType.ToLower() == StaticHelper.PROPERTYTYPE_PROPERTY.ToLower())
+                {
+                    return Json(new SelectList(StaticHelper.GetStaticData(StaticHelper.PROPERTY), "Name", "Name"));
+                }
+                else
+                {
+                    return Json(new SelectList(StaticHelper.GetStaticData(StaticHelper.UNIT), "Name", "Name"));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
         protected override void Dispose(bool disposing)

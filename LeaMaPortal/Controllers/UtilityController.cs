@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using System.Threading.Tasks;
 using LeaMaPortal.Models;
 using MySql.Data.MySqlClient;
@@ -16,7 +16,7 @@ namespace LeaMaPortal.Controllers
 {
     public class UtilityController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
 
         // GET: Utility
         public PartialViewResult Index(string Search, int? page, int? defaultPageSize)
@@ -61,6 +61,8 @@ namespace LeaMaPortal.Controllers
         public PartialViewResult AddOrUpdate()
         {
             UtilityViewModel model = new UtilityViewModel();
+            model.Utility_id = db.tbl_utilitiesmaster.OrderByDescending(o => o.id).Select(s => s.Utility_id).FirstOrDefault();
+            model.Utility_id = (Convert.ToInt32(model.Utility_id) + 1).ToString();
             return PartialView("../Master/Utility/_AddOrUpdate", model);
         }
         // POST: Utility/Create

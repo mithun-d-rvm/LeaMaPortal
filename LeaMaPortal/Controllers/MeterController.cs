@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using LeaMaPortal.Models.DBContext;
+using LeaMaPortal.DBContext;
 using LeaMaPortal.Models;
 using MvcPaging;
 using LeaMaPortal.Helpers;
@@ -17,7 +17,7 @@ namespace LeaMaPortal.Controllers
 {
     public class MeterController : Controller
     {
-        private Entities db = new Entities();
+        private LeamaEntities db = new LeamaEntities();
 
         // GET: Meter
         public PartialViewResult Index(string Search, int? page, int? defaultPageSize)
@@ -75,7 +75,7 @@ namespace LeaMaPortal.Controllers
             MeterViewModel model = new MeterViewModel();
             ViewBag.Utility_Name = new SelectList(db.tbl_utilitiesmaster.OrderBy(o => o.Utility_Name).Distinct(), "Utility_Name", "Utility_Name");
             ViewBag.Property_id = new SelectList(db.tbl_propertiesmaster.OrderBy(o => o.Property_Id).Distinct(), "Property_Id", "Property_Id");
-            //ViewBag.Unit_id = new SelectList(db.tbl_propertiesmaster.OrderBy(o => o.Unit_Property_Name).Distinct(), "Unit_Property_Name", "Unit_Property_Name");
+            ViewBag.Unit_id = new SelectList(new List<OptionModel>());
             ViewBag.Dueday = new SelectList(StaticHelper.GetStaticData(StaticHelper.METER_DROPDOWN), "Id", "Id");
             return PartialView("../Master/MeterMaster/_AddOrUpdate", model);
         }
@@ -83,7 +83,7 @@ namespace LeaMaPortal.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<ActionResult> AddOrUpdate([Bind(Include = "Meter_no,Utility_id,Utility_Name,Accno,Dueday,Property_id,Id")] MeterViewModel model)
+        public async Task<ActionResult> AddOrUpdate([Bind(Include = "Meter_no,Utility_id,Utility_Name,unit_id,Accno,Dueday,Property_id,Id")] MeterViewModel model)
         {
             MessageResult result = new MessageResult();
             try
@@ -187,13 +187,29 @@ namespace LeaMaPortal.Controllers
                 return Json(new MessageResult() { Errors = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
-        [HttpGet]
+        [HttpPost]
         public async Task<string> GetUtilityId(string UtilityName)
         {
             try
             {
                 var utility = await db.tbl_utilitiesmaster.FirstOrDefaultAsync(f => f.Utility_Name == UtilityName);
                 return utility.Utility_id;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task<JsonResult> GetUnitId(int? PropertyId)
+        {
+            try
+            {
+                //MeterViewModel model = new MeterViewModel();
+                //ViewBag.Unit_id = new SelectList(db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Unit" && w.Ref_Unit_Property_ID == PropertyId).OrderBy(o => o.Property_Id).Distinct(), "Property_Id", "Property_Id");
+                //return PartialView("../Master/MeterMaster/_AddOrUpdate", model);
+                List<OptionModel> model = new List<OptionModel>();
+                //var data = await db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Unit" && w.Ref_Unit_Property_ID == PropertyId).OrderBy(o => o.Property_Id).Select(s => s.Property_Id).ToListAsync();
+                return Json(new SelectList(db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Unit" && w.Ref_Unit_Property_ID == PropertyId).OrderBy(o => o.Ref_unit_Property_ID_Tawtheeq), "Ref_unit_Property_ID_Tawtheeq", "Ref_unit_Property_ID_Tawtheeq"));
             }
             catch (Exception ex)
             {

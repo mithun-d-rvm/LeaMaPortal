@@ -1,7 +1,952 @@
 ﻿
-@{
-    ViewBag.Title = "_AddorUpdate";
+@model LeaMaPortal.Models.ReceiptViewModel
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Receipts" }))
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.ReceiptNo, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+
+                    @Html.EditorFor(model => model.ReceiptNo, new { htmlAttributes = new { @class = "master-form-input", disabled = "disabled" } })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.ReceiptDate, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ReceiptDate, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    <!--Receipt type-->
+                    @Html.LabelFor(model => model.Reccategory, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @Html.DropDownListFor(model => model.Reccategory, null, htmlAttributes: new { @class = "master-form-input" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    <!--Receipt mode-->
+                    @Html.LabelFor(model => model.RecpType, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @Html.DropDownListFor(model => model.RecpType, null, htmlAttributes: new { @class = "master-form-input", @id = "RecpType" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding" id="advaccode">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.AdvAcCode, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @Html.DropDownList("AdvAcCode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                </div>
+            </div>
+
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.agreement_no, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @Html.DropDownList("agreement_no", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })                        
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.ContracAgreementDate, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ContracAgreementDate, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.Tenant_id, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @Html.DropDownList("Tenant_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.Tenant_Name, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @Html.DropDownList("Tenant_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                </div>
+            </div>
+
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.Property_id, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">@Html.DropDownList("Property_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })                        
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.Property_Name, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">@Html.DropDownList("Property_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.Unit_ID, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-8">
+                        @Html.DropDownList("Unit_ID", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.unit_Name, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @Html.DropDownList("unit_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                </div>
+            </div>
+
+
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.AmtInWords, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.AmtInWords, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding" id="PDCStatus" style="display:none">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.PDCstatus, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @Html.DropDownListFor(model => model.PDCstatus, null, htmlAttributes: new { @class = "master-form-input" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.DDChequeNo, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.DDChequeNo, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.DDChequeDate, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.DDChequeDate, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.BankAcCode, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @*@Html.EditorFor(model => model.BankAcCode, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                    @*<select class="col-md-12 leama-field">
+                            <option value="BankAcCode">Bank Account Code</option>
+                        </select>*@
+                    @Html.DropDownListFor(model => model.BankAcCode, null, htmlAttributes: new { @class = "master-form-input", Id = "BankAcCode" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.BankAcName, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @*@Html.EditorFor(model => model.BankAcName, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                    @*<select class="col-md-12 leama-field">
+                            <option value="Bank Account Name">Bank Account Name</option>
+                        </select>*@
+                    @Html.DropDownListFor(model => model.BankAcName, null, htmlAttributes: new { @class = "master-form-input", Id = "BankAcName" })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.Narration, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    &nbsp;
+                </div>
+                <div class="col-md-4">
+                    <button class="btn master-form-btn">Submit</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        @*<div class="col-md-12 document-row">
+                <div class="col-md-1">
+                    ID
+                </div>
+                <div class="col-md-2">
+                    Invoice Type
+                </div>
+                <div class="col-md-2">
+                    Invoice Number
+                </div>
+                <div class="col-md-2">
+                    Invoice Date
+                </div>
+                <div class="col-md-2">
+                    Invoice Description
+                </div>
+            </div>*@
+        <!-- Begin Dynamic row -->
+        @*@Html.Partial("ReceiptDetails1");*@
+        <!-- End Dynamic row -->
+        @*<table class="table">
+                <tr>
+                    <td>
+                        <div class="col-md-2">
+                            Invoice Type
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-2">
+                            Invoice Number
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-2">
+                            Invoice Date
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-2">
+                            Invoice Description
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-2">
+                            Invoice Amount
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-2">
+                            Credit Amount
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-2">
+                            Received Amount
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-2">
+                            Balance Amount
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-2">
+                            Remarks
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn master-form-btn">Add</button>
+                        </div>
+                    </td>
+                </tr>
+
+                @foreach (var item in Model.ReceiptDetailsList)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Invtype)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Invno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InvoiceDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InvoiceAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreditAmt)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReceivedAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Balance)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Remarks)
+                        </td>
+
+                    </tr>
+                }
+
+            </table>*@
+
+        <div class="row" id="invoice">
+            @if (Model.ReceiptDetailsList != null)
+            {
+                <input type="hidden" id="init-company-contact-det-count" value="@Model.ReceiptDetailsList.Count" />
+            }
+            else
+            {
+                <input type="hidden" id="init-company-contact-det-count" value="0" />
+            }
+
+            <div class="p-b-25">
+                <h3>Receipts Details</h3>
+            </div>
+            <div class="" id="invoice-details">
+                <div id="Gridview" class="row document-row">
+                    <div class="col-md-12">
+                        <div class="col-md-2 form-group">
+                            <label for="itemtype">Invoice Type</label>
+                            <input type="text" class="form-control master-form-input" id="InvoiceType" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="description">Invoice Number</label>
+                            @Html.DropDownList("InvoiceNumber", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="quantity">Invoice Date</label>
+                            <input type="text" class="form-control master-form-input" id="InvoiceDate" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="amount">Invoice Description</label>
+                            <input id="InvoiceDescription" type="text" class="form-control master-form-input" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="itemtype">Invoice Amount</label>
+                            <input type="text" class="form-control master-form-input" id="InvoiceAmount" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="description">Credit Amount</label>
+                            <input type="text" class="form-control master-form-input" onchange="calculateBalance()" id="CreditAmount" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="quantity">Received Amount</label>
+                            <input type="text" class="form-control master-form-input" onchange="calculateBalance()" id="ReceivedAmount" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="amount">Balance Amount</label>
+                            <input class="form-control master-form-input" id="BalanceAmount" />
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="amount">Remarks</label>
+                            <input class="form-control master-form-input" id="Remarks" />
+                        </div>
+                        <div class="col-md-2 btn-group">
+                            <br />
+                            <input type="button" class="document-btn" id="AddInvoice" value="Add" onclick='add(this);' />
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            @*<div class="row">
+                    <div class="col-md-12 document-row">
+                        <div class="col-md-1">
+                            ID
+                        </div>
+                        <div class="col-md-2">
+                            Item Type
+                        </div>
+                        <div class="col-md-2">
+                            Item Description
+                        </div>
+                        <div class="col-md-2">
+                            Quantity
+                        </div>
+                        <div class="col-md-2">
+                            Amount
+                        </div>
+                    </div>
+                </div>*@
+            <div class="row ht-5">
+                &nbsp;
+            </div>
+
+            <!-- Begin Dynamic row -->
+            @*@Html.Partial("_ReceiptDetailsList")*@
+            <!-- End Dynamic row -->
+
+        </div>
+
+        <table class="row m-t-20" id="ReceiptDetailsListForms">
+
+
+            @if (Model.ReceiptDetailsList != null)
+            {
+
+                for (int j = 0; j < Model.ReceiptDetailsList.Count; j++)
+                {
+                    // <script>
+                    var html = "<div class='col-md-12 document-row' id='GridViewCompanyContact" + @j + "'>";
+
+                    html = html + "<div class='col-md-12'>";
+                    html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceType" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].Invtype + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceType' data-name='Invoice Type'/></div>";
+                    html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceNumber" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].Invno + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceNumber' data-name='Invoice Number' /></div>";
+                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='InvoiceDate" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceDate' data-name='InvoiceDate' value='" + Model.ReceiptDetailsList[@j].InvoiceDate + "'/></div>";
+                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='InvoiceDescription" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceDescription' data-name='InvoiceDescription' value='" + Model.ReceiptDetailsList[@j].Description + "'/></div>";
+                    html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceAmount" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].InvoiceAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceAmount' data-name='Invoice Amount'/></div>";
+                    html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='CreditAmount" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].CreditAmt + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].CreditAmount' data-name='Credit Amount' /></div>";
+                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='ReceivedAmount" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].ReceivedAmount' data-name='ReceivedAmount' value='" + Model.ReceiptDetailsList[@j].ReceivedAmount + "'/></div>";
+                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='BalanceAmount" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].BalanceAmount' data-name='BalanceAmount' value='" + Model.ReceiptDetailsList[@j].Balance + "'/></div>";
+                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='Remarks" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].Remarks' data-name='Remarks' value='" + Model.ReceiptDetailsList[@j].Remarks + "'/></div>";
+                    html = html + "<div class='col-md-2 form-group'></br><input type='button' class='document-btn removebutton' id='Delete" + @j + "'value='Delete' />  </div>";
+                    html = html + "</div>";
+
+                    html = html + "</div>";
+                    html = html + "<div class='row ht-5'> &nbsp;</div>";
+
+                    <tr>
+                        <td>
+                            @Html.Raw(html)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+    <div class="row ht-5">
+        &nbsp;
+    </div>
+        </div>
 }
+<script>
+    $("#Tenant_id").on('change', function (e) {
+        debugger;
+        var tenantid = $("#Tenant_id").val();
+        $("#Tenant_Name").val($("#Tenant_id option:selected").val());
+    });
+    $("#Tenant_Name").on('change', function (e) {
+        debugger;
+        var tenantid = $("#Tenant_Name").val();
+        $("#Tenant_id").val($("#Tenant_Name option:selected").val());
+    });
+    $("#Property_id").on('change', function (e) {
+        debugger;
+        var propertyid = $("#Property_id").val();
+        $("#Property_Name").val($("#Property_id option:selected").val());
+        var id = $("#Property_id option:selected").text() == "--Select--" ? null : propertyid;
+        getunits(id);
+    });
+    $("#Property_Name").on('change', function (e) {
+        debugger;
+        var propertyid = $("#Property_Name").val();
+        $("#Property_id").val($("#Property_Name option:selected").val());
+        var id = $("#Property_Name option:selected").text() == "--Select--" ? null : propertyid;
+        getunits(id);
+    });
 
-<h2>_AddorUpdate</h2>
 
+    $("#Unit_ID").on('change', function (e) {
+        debugger;
+        var unitid = $("#Unit_ID").val();
+        $("#unit_Name").val($("#Unit_ID option:selected").val());
+        var id = $("#Unit_ID option:selected").text() == "--Select--" ? null : unitid;
+        getproperty(id);
+    });
+    $("#unit_Name").on('change', function (e) {
+        debugger;
+        var unitid = $("#unit_Name").val();
+        $("#Unit_ID").val($("#unit_Name option:selected").val());
+        var id = $("#unit_Name option:selected").text() == "--Select--" ? null : unitid;
+        getproperty(id);
+    });
+
+
+    function getunits(id) {
+        var data = id == null ? {} : { propertyid: id };
+        $.ajax(
+                {
+                    url: "../Invoice/GetPropertyUnits",
+                    method: "GET",
+                    data: data, //FormData(form.get(0)),
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        var options = '<option value="" selected>--Select--</option>';
+                        $("#UnitID").empty();
+
+                        $.each(response, function (index, data) {
+                            options += '<option value="' + data.Unitid + '">' + data.Unitid + '</option>';
+                        });
+                        $('#UnitID').append(options);
+
+                        $("#unitName").empty();
+                        var options = '<option value="" selected>--Select--</option>';
+                        $.each(response, function (index, data) {
+                            options += '<option value="' + data.Unitid + '">' + data.unitName + '</option>';
+                        });
+                        $('#unitName').append(options);
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+
+                });
+    }
+
+    function getproperty(id) {
+        if (id == null) {
+            $('#Propertyid').val('')
+            $("#Propertyid").prop('selected', false).change();
+        }
+        else {
+            $.ajax(
+                {
+                    url: "../Invoice/GetUnitProperty",
+                    method: "GET",
+                    data: { unitid: id }, 
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        $("#Propertyid").val(response);
+                        $("#PropertyName").val(response);
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+
+                });
+        }
+
+    }
+    function getInvoice(invoiceNo) {
+        debugger;
+        $.ajax(
+                {
+                    url: "../Receipts/GetInvoiceDetails",
+                    method: "POST",
+                    data: { InvoiceNumber : invoiceNo },
+                    success: function (response) {
+                        debugger;
+                        $("#InvoiceType").val(response.invtype);
+                        //$("#InvoiceDate").val(response.month+"/"+response.day+"/"+response.year);
+                        $("#InvoiceAmount").val(response.InvoiceAmount);
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+                });
+    }
+    $("#InvoiceNumber").change(function () { getInvoice($("#InvoiceNumber option:selected").val()) });
+
+    function showHideSubForm(Reccategory) {
+        if (Reccategory != "against") {
+            document.getElementById('invoice').style.display = "none";
+            document.getElementById('ReceiptDetailsListForms').style.display = "none";
+        }
+        else {
+            document.getElementById('invoice').style.display = "block";
+            document.getElementById('ReceiptDetailsListForms').style.display = "block";
+        }
+    }
+
+    $("#Reccategory").on('change', function () {
+        showHideSubForm($("#Reccategory option:selected").val());
+        ddlChange();
+    });
+    showHideSubForm($("#Reccategory option:selected").val());
+
+    $("#RecpType").on('change', function () {        
+        ddlChange();
+    });
+    
+
+    function calculateBalance() {
+        var InvoiceAmount = document.getElementById("InvoiceAmount").value != null ? document.getElementById("InvoiceAmount").value : 0;
+        var CreditAmount = document.getElementById("CreditAmount").value != null ? document.getElementById("CreditAmount").value : 0;
+        var ReceivedAmount = document.getElementById("ReceivedAmount").value != null ? document.getElementById("ReceivedAmount").value : 0;
+
+        var Balance = InvoiceAmount - (ReceivedAmount + CreditAmount);
+        document.getElementById("BalanceAmount").value = Balance;
+    }
+
+    $("#advaccode").hide();
+
+    function ddlChange() {
+        var type = $("#Reccategory").val(); // type
+        var mode = $("#RecpType").val();
+
+        if (type == 'against' && mode == 'advance adjustment') {
+            $("#advaccode").show();
+            GetReceiptNumber();
+        }
+        if (type == 'advance' && mode == 'Pdc') {
+            GetAgreementNoByPdc();
+        }
+        if (type == 'against' && mode != 'advance adjustment') {
+            GetAgreementNoByInvoice();
+        }
+        if (type == 'security') {
+            GetAgreementNoBySecurity();
+        }
+        if (mode == 'Pdc') {
+            $("#PDCStatus").show();
+        }
+
+    }
+   
+    $("#TotalAmount").on('change', function () {
+        debugger;
+        var totalAmount = $("#TotalAmount").val(); // type
+        AmountInWords(totalAmount);
+    });
+    function AmountInWords(totalAmount) {
+        $.ajax(
+        {
+            url: "../Receipts/AmountInWords",
+            type: "Get",
+            data: { amount: totalAmount },
+            success: function (response) {
+                $("#AmtInWords").val(response);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function GetReceiptNumber() {
+        $.ajax(
+        {
+            url: "../Receipts/GetReceiptNumber",
+            type: "Get",
+            data: {},
+            //contentType: "application/json",
+            //processData: false,
+            success: function (response) {
+                debugger;
+                $("#AdvAcCode").empty();
+                var AdvAcCode = '';
+                $.each(response.ReceiptNo, function (index, data) {
+                    AdvAcCode += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#AdvAcCode').append(AdvAcCode);
+
+                $("#agreement_no").empty();
+                var Agreement_No = '';
+                $.each(response.Agreement_No, function (index, data) {
+                    Agreement_No += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#agreement_no').append(Agreement_No);
+
+                $("#Property_id").empty();
+                var Property_Id = '';
+                $.each(response.Property_Id, function (index, data) {
+                    Property_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Property_id').append(Property_Id);
+
+                $("#Property_Name").empty();
+                var Property_Name = '';
+                $.each(response.Property_Name, function (index, data) {
+                    Property_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Property_Name').append(Property_Name);
+
+                $("#Tenant_id").empty();
+                var Tenant_Id = '';
+                $.each(response.Tenant_Id, function (index, data) {
+                    Tenant_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Tenant_id').append(Tenant_Id);
+
+                $("#Tenant_Name").empty();
+                var Tenant_Name = '';
+                $.each(response.Tenant_Name, function (index, data) {
+                    Tenant_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Tenant_Name').append(Tenant_Name);
+
+                $("#Unit_ID").empty();
+                var Unit_Id = '';
+                $.each(response.Unit_Id, function (index, data) {
+                    Unit_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Unit_ID').append(Unit_Id);
+
+                $("#unit_Name").empty();
+                var Unit_Name = '';
+                $.each(response.Unit_Name, function (index, data) {
+                    Unit_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#unit_Name').append(Unit_Name);
+
+                $('#TotalAmount').val(response.TotalAmount[0].Text);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+
+    function GetAgreementNoByPdc() {
+        $.ajax(
+        {
+            url: "../Receipts/GetAgreementNoByPdc",
+            type: "Get",
+            data: {},
+            //contentType: "application/json",
+            //processData: false,
+            success: function (response) {
+                debugger;
+                //$("#AdvAcCode").empty();
+                //var AdvAcCode = '';
+                //$.each(response.ReceiptNo, function (index, data) {
+                //    AdvAcCode += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                //});
+                //$('#AdvAcCode').append(AdvAcCode);
+
+                $("#agreement_no").empty();
+                var Agreement_No = '';
+                $.each(response.Agreement_No, function (index, data) {
+                    Agreement_No += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#agreement_no').append(Agreement_No);
+
+                $("#Property_id").empty();
+                var Property_Id = '';
+                $.each(response.Property_Id, function (index, data) {
+                    Property_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Property_id').append(Property_Id);
+
+                $("#Property_Name").empty();
+                var Property_Name = '';
+                $.each(response.Property_Name, function (index, data) {
+                    Property_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Property_Name').append(Property_Name);
+
+                $("#Tenant_id").empty();
+                var Tenant_Id = '';
+                $.each(response.Tenant_Id, function (index, data) {
+                    Tenant_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Tenant_id').append(Tenant_Id);
+
+                $("#Tenant_Name").empty();
+                var Tenant_Name = '';
+                $.each(response.Tenant_Name, function (index, data) {
+                    Tenant_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Tenant_Name').append(Tenant_Name);
+
+                $("#Unit_ID").empty();
+                var Unit_Id = '';
+                $.each(response.Unit_Id, function (index, data) {
+                    Unit_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Unit_ID').append(Unit_Id);
+
+                $("#unit_Name").empty();
+                var Unit_Name = '';
+                $.each(response.Unit_Name, function (index, data) {
+                    Unit_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#unit_Name').append(Unit_Name);
+
+                //$('#TotalAmount').val(response.TotalAmount[0].Text);
+
+                $('#TotalAmount').val(response.pdc_Amount[0].Text);
+
+                $('#DDChequeNo').val(response.DDChequeNo[0].Text);
+
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+
+    function GetAgreementNoByInvoice() {
+        $.ajax(
+        {
+            url: "../Receipts/GetAgreementNoByInvoice",
+            type: "Get",
+            data: {},
+            //contentType: "application/json",
+            //processData: false,
+            success: function (response) {
+                debugger;
+                //$("#AdvAcCode").empty();
+                //var AdvAcCode = '';
+                //$.each(response.ReceiptNo, function (index, data) {
+                //    AdvAcCode += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                //});
+                //$('#AdvAcCode').append(AdvAcCode);
+
+                $("#agreement_no").empty();
+                var Agreement_No = '';
+                $.each(response.Agreement_No, function (index, data) {
+                    Agreement_No += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#agreement_no').append(Agreement_No);
+
+                $("#Property_id").empty();
+                var Property_Id = '';
+                $.each(response.Property_Id, function (index, data) {
+                    Property_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Property_id').append(Property_Id);
+
+                $("#Property_Name").empty();
+                var Property_Name = '';
+                $.each(response.Property_Name, function (index, data) {
+                    Property_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Property_Name').append(Property_Name);
+
+                $("#Tenant_id").empty();
+                var Tenant_Id = '';
+                $.each(response.Tenant_Id, function (index, data) {
+                    Tenant_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Tenant_id').append(Tenant_Id);
+
+                $("#Tenant_Name").empty();
+                var Tenant_Name = '';
+                $.each(response.Tenant_Name, function (index, data) {
+                    Tenant_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Tenant_Name').append(Tenant_Name);
+
+                $("#Unit_ID").empty();
+                var Unit_Id = '';
+                $.each(response.Unit_Id, function (index, data) {
+                    Unit_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#Unit_ID').append(Unit_Id);
+
+                $("#unit_Name").empty();
+                var Unit_Name = '';
+                $.each(response.Unit_Name, function (index, data) {
+                    Unit_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+                });
+                $('#unit_Name').append(Unit_Name);
+
+                $('#TotalAmount').val(response.TotalAmount[0].Text);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    var i = 0;
+    function add() {
+        var InvoiceType = document.getElementById("InvoiceType").value;
+        var InvoiceNumber = document.getElementById("InvoiceNumber").value;
+        var InvoiceDate = document.getElementById("InvoiceDate").value;
+        var InvoiceDescription = document.getElementById("InvoiceDescription").value;
+
+        var InvoiceAmount = document.getElementById("InvoiceAmount").value;
+        var CreditAmount = document.getElementById("CreditAmount").value;
+        var ReceivedAmount = document.getElementById("ReceivedAmount").value;
+        var BalanceAmount = document.getElementById("BalanceAmount").value;
+        var Remarks = document.getElementById("Remarks").value;
+
+        var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + i + "'>";
+
+        html = html + "<div class='col-md-12'>";
+        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceType" + i + "'  type='text' value='" + InvoiceType + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceType' data-name='Invoice Type'/></div>";
+        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceNumber" + i + "'  type='text' value='" + InvoiceNumber + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceNumber' data-name='Invoice Number' /></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='InvoiceDate" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceDate' data-name='InvoiceDate' value='" + InvoiceDate + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='InvoiceDescription" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceDescription' data-name='InvoiceDescription' value='" + InvoiceDescription + "'/></div>";
+        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceAmount" + i + "'  type='text' value='" + InvoiceAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceAmount' data-name='Invoice Amount'/></div>";
+        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='CreditAmount" + i + "'  type='text' value='" + CreditAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].CreditAmount' data-name='Credit Amount' /></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='ReceivedAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].ReceivedAmount' data-name='ReceivedAmount' value='" + ReceivedAmount + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='BalanceAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].BalanceAmount' data-name='BalanceAmount' value='" + BalanceAmount + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='Remarks" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].Remarks' data-name='Remarks' value='" + Remarks + "'/></div>";
+        html = html + "<div class='col-md-2 form-group'></br><Input type='button' class='document-btn removebutton' id='Delete" + i + "'value='Delete' /> </div>";
+        html = html + "</div>";
+
+        html = html + "</div>";
+        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
+        $('#ReceiptDetailsListForms').append(html);
+        i++;
+
+        //$("#item").val('');
+        $("#InvoiceType").val('');
+        $("#InvoiceNumber").val('');
+        $("#InvoiceDate").val('');
+        $("#InvoiceDescription").val('');
+        $("#InvoiceAmount").val('');
+        $("#CreditAmount").val('');
+        $("#ReceivedAmount").val('');
+        $("#BalanceAmount").val('');
+        $("#Remarks").val('');
+        return false;
+    }
+    $(document).on('click', 'input.removebutton', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('ReceiptDetailsListForms');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                // alert(dataname + $(this) .val()+ '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'ReceiptDetailsList[' + newindex + '].' + dataname
+                    }
+                });
+            });
+            newindex++;
+        });
+        i = newindex;
+    });
+
+</script>

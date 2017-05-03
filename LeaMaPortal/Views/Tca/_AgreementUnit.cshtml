@@ -1,40 +1,180 @@
-﻿<div class="row p-b-25 text-uppercase">
+﻿
+@model LeaMaPortal.Models.AgreementUnitViewModel
+
+<div class="row p-b-25 text-uppercase">
     <span> <strong> Agreement unit inner - only for multiple units </strong> </span>
 </div>
 
-<div class="row">
+<div class="row" id="AgreementUnit">
     <div class="col-md-12 document-row">
         <div class="col-md-2">
-            Property ID
+            @Html.LabelFor(model => model.Property_ID, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-3">
-            Property Tawtheeq ID
+            @Html.LabelFor(model => model.Properties_Name, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-2">
-            Property Name
+            @Html.LabelFor(model => model.Property_ID_Tawtheeq, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-2">
-            Unit Tawtheeq ID
+            @Html.LabelFor(model => model.Unit_ID_Tawtheeq, htmlAttributes: new { @class = "label-default-remove" })
         </div>
         <div class="col-md-2">
-            Unit Name
+            @Html.LabelFor(model => model.Unit_Property_Name, htmlAttributes: new { @class = "label-default-remove" })
         </div>        
     </div>
+    <div class="col-md-12 document-row">
+        <div class="col-md-2">
+            @Html.DropDownList("Property_ID", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
+        </div>
+        <div class="col-md-3">
+          @Html.DropDownList("Properties_Name", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
+        </div>
+        <div class="col-md-2">
+           @Html.DropDownList("Property_ID_Tawtheeq", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
+        </div>
+        <div class="col-md-2">
+            @Html.DropDownList("Unit_ID_Tawtheeq", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
+        </div>
+        <div class="col-md-2">
+           @Html.DropDownList("Unit_Property_Name", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
+        </div>
+        <div class="col-md-1">
+            <button class="document-btn" onclick="addAgreementUnitList(event);">Add</button>
+        </div>
+    </div>
 </div>
 <div class="row ht-5">
     &nbsp;
 </div>
 
-@Html.Partial("_AgreementUnitDetails")
+@Html.Partial("_AgreementUnitDetails",Model)
+<input type="hidden"  value="@Model.AgreementUnitList.Count" id="AgreementUnitListCount" />
 
-<div class="row">
-    <div class="col-md-1 w-md-10 pull-right">
-        <button class="document-btn">Delete</button>
-    </div>
-    <div class="col-md-1 w-md-10 pull-right">
-        <button class="document-btn">Add</button>
-    </div>
-</div>
+
+
 <div class="row ht-5">
     &nbsp;
 </div>
+<script>
+    var AgreementUnitListCount = parseInt($("#AgreementUnitListCount").val());
+
+    function addAgreementUnitList(event) {
+        event.preventDefault();
+
+        var Property_ID = $("#AgreementUnit #Property_ID").val();
+        var Properties_Name = $("#AgreementUnit #Properties_Name option:selected").text();
+        var Property_ID_Tawtheeq = $("#AgreementUnit #Property_ID_Tawtheeq option:selected").text();
+        var Unit_ID_Tawtheeq = $("#AgreementUnit #Unit_ID_Tawtheeq option:selected").text();
+        var Unit_Property_Name = $("#AgreementUnit #Unit_Property_Name option:selected").text();
+        
+        var html = "<tr><td>" +
+                      "<input type='hidden' name='AgreementUnitList[" + AgreementUnitListCount + "].Property_ID' id='AgreementUnitList[" + AgreementUnitListCount + "].Property_ID' value='" + Property_ID + "' data-name='Property_ID' />" +
+                      "<input type='hidden' name='AgreementUnitList[" + AgreementUnitListCount + "].Properties_Name' id='AgreementUnitList[" + AgreementUnitListCount + "].Properties_Name' value='" + Properties_Name + "' data-name='Properties_Name' />" +
+                      "<input type='hidden' name='AgreementUnitList[" + AgreementUnitListCount + "].Property_ID_Tawtheeq' id='AgreementUnitList[" + AgreementUnitListCount + "].Property_ID_Tawtheeq' value='" + Payment_Mode + "' data-name='Property_ID_Tawtheeq' />" +
+                      "<input type='hidden' name='AgreementUnitList[" + AgreementUnitListCount + "].Unit_ID_Tawtheeq' id='AgreementUnitList[" + AgreementUnitListCount + "].Unit_ID_Tawtheeq' value='" + Unit_ID_Tawtheeq + "' data-name='Unit_ID_Tawtheeq' />" +
+                      "<input type='hidden' name='AgreementUnitList[" + AgreementUnitListCount + "].Unit_Property_Name' id='AgreementUnitList[" + AgreementUnitListCount + "].Unit_Property_Name' value='" + Unit_Property_Name + "' data-name='Unit_Property_Name' />" +
+                      
+
+                      "<div class='col-md-12 document-row'>" +
+                          "<div class='col-md-1 col-md-1 w-md-13'>" + Property_ID + "</div>" +
+
+
+                          "<div class='col-md-1 w-md-14'>" +
+
+                          Properties_Name +
+
+        "</div>" +
+        "<div class='col-md-1'>" +
+        Property_ID_Tawtheeq +
+        "</div>" +
+        "<div class='col-md-1 w-md-15'>" +
+
+        Unit_ID_Tawtheeq +
+
+        "</div>" +
+        "<div class='col-md-1 w-md-14'>" +
+            Unit_Property_Name +
+        "</div>" +
+       
+        "<div class='col-md-1'>" +
+           "<button class='btn AgreementUnitList-remove'>X</button>" +
+        "</div>" +
+    "</div>" +
+"</td>" +
+"</tr>";
+
+
+        $("#AgreementUnitList").append(html);
+        AgreementUnitListCount++;
+    }
+
+    $(document).on('click', 'button.AgreementUnitList-remove', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('AgreementUnitList');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'AgreementUnitList[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+        AgreementUnitListCount = newindex;
+    });
+    $("#AgreementUnit #Property_ID").change(function () {
+        debugger;
+        var propertyid = $("#AgreementUnit #Property_ID").val();
+        $("#AgreementUnit #Properties_Name").val(propertyid);
+        $("#AgreementUnit #Property_ID_Tawtheeq").val(propertyid); 
+        $("#AgreementUnit #Unit_ID_Tawtheeq").val(propertyid);
+        $("#AgreementUnit #Unit_Property_Name").val(propertyid);
+        return;
+    });
+    $("#AgreementUnit #Properties_Name").change(function () {
+        var propertyid = $("#AgreementUnit #Properties_Name").val();
+        $("#AgreementUnit #Property_ID").val(propertyid);
+        $("#AgreementUnit #Property_ID_Tawtheeq").val(propertyid);
+        $("#AgreementUnit #Unit_ID_Tawtheeq").val(propertyid);
+        $("#AgreementUnit #Unit_Property_Name").val(propertyid);
+        return;
+    });
+    $("#AgreementUnit #Property_ID_Tawtheeq").change(function () {
+        var propertyid = $("#AgreementUnit #Property_ID_Tawtheeq").val();
+        $("#AgreementUnit #Property_ID").val(propertyid);
+        $("#AgreementUnit #Properties_Name").val(propertyid);
+        $("#AgreementUnit #Unit_ID_Tawtheeq").val(propertyid);
+        $("#AgreementUnit #Unit_Property_Name").val(propertyid);
+        return;
+    });
+
+    $("#AgreementUnit #Unit_ID_Tawtheeq").change(function () {
+        var propertyid = $("#AgreementUnit #Unit_ID_Tawtheeq").val();
+        $("#AgreementUnit #Property_ID").val(propertyid);
+        $("#AgreementUnit #Properties_Name").val(propertyid);
+        $("#AgreementUnit #Property_ID_Tawtheeq").val(propertyid);
+        $("#AgreementUnit #Unit_Property_Name").val(propertyid);
+        return;
+    });
+    $("#AgreementUnit #Unit_Property_Name").change(function () {
+        var propertyid = $("#AgreementUnit #Unit_Property_Name").val();
+        $("#AgreementUnit #Property_ID").val(propertyid);
+        $("#AgreementUnit #Properties_Name").val(propertyid);
+        $("#AgreementUnit #Unit_ID_Tawtheeq").val(propertyid);
+        $("#AgreementUnit #Property_ID_Tawtheeq").val(propertyid);
+        return;
+    });
+
+</script>

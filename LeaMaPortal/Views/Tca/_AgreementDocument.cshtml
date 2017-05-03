@@ -1,34 +1,178 @@
-﻿<div class="row p-b-25 text-uppercase">
+﻿@model LeaMaPortal.Models.AgreementDocumentViewModel
+
+<div class="row p-b-25 text-uppercase">
     <span> <strong> Agreement Document </strong> </span>
 </div>
-
 <div class="row">
-    <div class="col-md-12 document-row">
-        <div class="col-md-2">
-            Facility ID
+    @if (Model.agreementDocumentExistList != null)
+    {   if (Model.agreementDocumentExistList.Count > 0)
+        {
+        <div class="col-md-10 document-row" id="GridView">
+            <div class="">
+                <span style="text-transform: uppercase;font-weight: bold;">Existing Documents</span>}
+                <table class="col-md-12" id="AgreementDetailsExistList">
+                    @for (int i = 0; i < Model.agreementDocumentExistList.Count; i++)
+                    {
+                    <tr>
+                        <td class="col-md-4 p-t-25">
+                            @Html.HiddenFor(m => m.agreementDocumentExistList[i].Id, new { @data_name = "id" })
+                            @Html.HiddenFor(m => m.agreementDocumentExistList[i].Doc_Path, new { @data_name = "Doc_Path" })
+                            @Html.HiddenFor(m => m.agreementDocumentExistList[i].Doc_name, new { @data_name = "Doc_name" })
+                            @Model.agreementDocumentExistList[i].Doc_name
+                        </td>
+                        <td class="col-md-4 p-t-25"><a href="~/Documents/AgreementDocument/@Model.agreementDocumentExistList[i].Doc_Path" target="_blank">Download</a></td>
+                        <td class="col-md-2 p-t-25">
+                            <button type="button" class="remove-exist-file document-btn" title="Remove this row"> Delete </button>
+                        </td>
+                    </tr>
+                    }
+                </table>
+            </div>
+            <div class="clearfix"><br /></div>
         </div>
-        <div class="col-md-4">
-            Facility Name
+        <div class="row ht-5">
+            &nbsp;
         </div>
-        <div class="col-md-2">
-            Numbers Available
-        </div>
+        }
+    }
+
+    <div class="m-t-5-p col-md-10 document-row" id="GridView">
+        <table class="col-md-12">
+            <tr>
+                <td class="col-md-4" style="text-transform: uppercase;font-weight: bold;"> Content Name </td>
+                <td class="col-md-4" style="text-transform: uppercase;font-weight: bold;"> Document </td>
+                <td class="col-md-2"> <input type="button" id="addbutton" onclick="addFile(event);" class="document-btn" value="Add" /> </td>
+            </tr>
+        </table>
+
+        @*<div class="col-md-12">
+                <div class="col-md-4 text-left">Content Name</div>
+                <div class="col-md-3 text-left">Document</div>
+                <div class="col-md-1 text-left"><input type="button" class="btn btn-default" id="addbutton" value="Add" /></div>
+            </div>*@
+        <div class="clearfix"><br /><br /></div>
+
+        <table id="AgreementDetailsList" class="col-md-12 document-row"></table>
+
     </div>
 </div>
 <div class="row ht-5">
     &nbsp;
 </div>
 
-@Html.Partial("_AgreementDocumentDetails")
+@*@Html.Partial("_AgreementDocumentDetails")*@
+<input type="hidden"  value="@Model.agreementDocumentExistList.Count" id="agreementDocumentListCount" />
 
-<div class="row">
-    <div class="col-md-1 w-md-10 pull-right">
-        <button class="document-btn">Delete</button>
-    </div>
-    <div class="col-md-1 w-md-10 pull-right">
-        <button class="document-btn">Add</button>
-    </div>
-</div>
+
+
 <div class="row ht-5">
     &nbsp;
 </div>
+
+<script>
+   
+    var i = 0;
+    function agreementdoc(e) {
+        e.preventDefault();
+        var Facility_id = $("#Facility_Name").val();
+        var Facility_Name = $("#Facility_id").val();
+        var Numbers_available = $("#Numbers_available").val();
+        
+        var html="<tr><td>"+
+        "<input type='hidden' name='agreementDocumentList["+aDocListCount+"].Facility_id' id='agreementDocumentList["+aDocListCount+"].Facility_id'"+
+        "value='"+Facility_id+"' data-name='Facility_id' />" +
+        "<input type='hidden' name='agreementDocumentList["+aDocListCount+"].Facility_Name' id='agreementDocumentList["+aDocListCount+"].Facility_Name'"+
+        "value='"+Facility_Name+"' data-name='Facility_Name' />"+
+        " <input type='hidden' name='agreementDocumentList["+aDocListCount+"].Numbers_available' id='agreementDocumentList["+aDocListCount+"].Numbers_available'"+
+        "value='"+Numbers_available+"' data-name='Numbers_available' />"+
+
+        "<input type='hidden' name='agreementDocumentList["+aDocListCount+"].Id' id='agreementDocumentList["+aDocListCount+"].Id' value='0' data-name='Id' />"+
+
+        "<div class='col-md-12 document-row'>"+
+        " <div class='col-md-2 col-md-1 w-md-13'>"+
+                                   Facility_id +
+        "</div>"+
+        "<div class='col-md-4 w-md-14'>"+
+                                   Facility_Name +
+
+        "</div>"+
+                                "<div class='col-md-2 w-md-16'>"+
+                                   Numbers_available+
+
+        "</div>"+
+
+        "<div class='col-md-1 w-md-14'>"+
+                                 "<button class='btn agreementdocumentlist-remove'>X</button>"+
+                                 "</div></div></td></tr>";
+        $("#AgreementDetailsList").append(html);
+       
+        aDocListCount++;
+        return;
+    }
+
+    function addFile(e) {
+
+        var html = "<tr class='document-row' id='GridView" + i + "'>";
+        //html = html + "<div class=''>";
+        html = html + "<td class='col-md-4 p-t-25 form-group'> <input id='Designation" + i + "' type='text'  value='' class='master-form-input form-control' name='agreementDocumentList[" + i + "].Name' data-name='Name' /></td>";
+        html = html + " <td class='col-md-4 p-t-25 form-group'> <input type='file' id='File" + i + "' class='master-form-input form-control' name='agreementDocumentList[" + i + "].File' data-name='File' value=''/></td>";
+        html = html + "<td class='col-md-2 p-t-25'><button class='document-btn agreementdocumentlist-remove' id='Delete" + i + "'> Delete </button></td>";
+
+        //html = html + "</div>";
+
+        //html = html + "</div>";
+        //html = html + "<div class='row ht-5'> &nbsp;</div></td></tr>"
+        html = html + "</tr>"
+        $('#AgreementDetailsList').append(html);
+        i++;
+        return false;
+    }
+
+    $(document).on('click', 'button.agreementdocumentlist-remove', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('AgreementDetailsList');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iagreementDocumentList[0].Name
+                        return 'agreementDocumentList[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+        i = newindex;
+    });
+   
+    $(document).on('click', 'button.remove-exist-file', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('AgreementDetailsExistList');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iagreementDocumentList[0].Name
+                        return 'agreementDocumentExistList[' + newindex + '].' + dataname
+                    }
+                });
+            });
+            newindex++;
+        });
+        return false;
+    });
+</script>
