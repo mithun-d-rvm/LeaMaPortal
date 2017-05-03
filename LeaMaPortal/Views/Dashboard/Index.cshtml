@@ -31,13 +31,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="earning-money">
-                                <span> 78,380 </span>
+                                <span id="EarningHistory"> 78,380 </span>
                                 <span class="per-month">AED</span>
                             </div>
                             <div>
                                 <i class="fa fa-chevron-up earning-up-icon"></i>
-                                <span class="earning-month">
-                                    JAN 2017
+                                <span class="earning-month" id="EarningHistoryMonth">
+                                    JAN <span id="EarningHistoryYear">2017</span>
                                 </span>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                         <div class="p-b-18">
                             <strong>  VACANT PROPERTIES </strong>
                         </div>
-                        <div class="vacant-total">
+                        <div class="vacant-total" id="VacantCount">
                             26
                         </div>
                         <div class="vacant-not-occupied">
@@ -70,14 +70,14 @@
                         <div class="col-md-12 vacant-residential-div">
                             <div class="vacant-residential-number">
                                 <i class="fa fa-home"></i>
-                                <span> 10 </span>
+                                <span id="VacantCountRes"> 10 </span>
                             </div>
                             <div class="vacant-residential-text">Residential</div>
                         </div>
                         <div class="col-md-12 vacant-commercial-div">
                             <div class="vacant-residential-number">
                                 <i class="fa fa-home"></i>
-                                <span> 16 </span>
+                                <span id="VacantCountCom"> 16 </span>
                             </div>
                             <div class="vacant-commercial-text">Commercial</div>
                         </div>
@@ -94,7 +94,7 @@
                             Total loss from vacant properties
                         </div>
                         <div class="col-md-5">
-                            <i class="fa fa-chevron-down total-loss-down-arrow"></i> <span class="total-loss-number">36,100</span>
+                            <i class="fa fa-chevron-down total-loss-down-arrow"></i> <span class="total-loss-number" id="VacantLoss">36,100</span>
                         </div>
 
                     </div>
@@ -104,7 +104,7 @@
                                 <span class="total-loss-res-text">RES</span> 10
                             </div>
                             <div class="total-loss-res-amt">
-                                <span> 11,500 </span>
+                                <span id="VacantLossRes"> 11,500 </span>
                                 <span class="per-month">AED</span>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                                 <span class="total-loss-comm-text">COM</span> 16
                             </div>
                             <div class="total-loss-res-amt">
-                                <span> 12,231 </span>
+                                <span id="VacantLossCom"> 12,231 </span>
                                 <span class="per-month">AED</span>
                             </div>
                         </div>
@@ -263,7 +263,8 @@
                     <div class="dues-text">UTILITY DUES</div>
                     <div class="text-center dues-div">
                         <i class="fa fa-home dues-icon"></i>
-                        <span> 64,300 </span>
+                        @*<span> 64,300 </span>*@
+                        <span id="UtilityDue"> 0</span>
                         <span class="per-month">AED</span>
                     </div>
                 </div>
@@ -275,7 +276,8 @@
                     <div class="dues-text">RENT DUES</div>
                     <div class="text-center dues-div">
                         <i class="fa fa-money dues-icon"></i>
-                        <span> 122,541 </span>
+                        @*<span> 122,541 </span>*@
+                        <span id="RentDue"> 0</span>
                         <span class="per-month">AED</span>
                     </div>
                 </div>
@@ -286,7 +288,8 @@
                 <div class="panel-body">
                     <div class="dues-text">TOTAL EXPENSE</div>
                     <div class="text-center expense-div">
-                        <span> 199,751 </span>
+                        @*<span> 199,751 </span>*@
+                        <span id="TotalExpense"> 0</span>
                     </div>
                 </div>
             </div>
@@ -365,10 +368,16 @@
             $("#earning-table").hide();
         });
         GetDashboardData();
+        //GetUtilityDues("Utility Due");
+        GetUtilityDues("Utility Due");
+        GetRentDues("Renatl due");
+        GetTotalExpense("Expenses");
+        GetVacantLoss("Vacancy Loss");
+        GetVacantCount("Vacancy count");
+        GetEarningHistory("Earning History", "N/A");
     });
 
     function GetDashboardData() {
-        alert(1);
         $.ajax(
         {
             url: "Dashboard/Summary",
@@ -376,27 +385,6 @@
             contentType: "application/json",
             processData: false,
             success: function (response) {
-                GetUtilityDues();
-                GetRentDues();
-                GetTotalExpense();
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
-    function GetUtilityDues() {
-        $.ajax(
-        {
-            url: "Dashboard/GetUtilityDues",
-            type: "Get",
-            contentType: "application/json",
-            processData: false,
-            success: function (response) {
 
             },
             error: function (jqXhr, textStatus, errorThrown) {
@@ -408,14 +396,17 @@
             }
         });
     }
-    function GetRentDues() {
+    function GetUtilityDues(param) {
         $.ajax(
         {
-            url: "Dashboard/GetRentDues",
+            url: "Dashboard/GetDashboardSummary?category='" + param + "'",
             type: "Get",
             contentType: "application/json",
             processData: false,
             success: function (response) {
+                $.each(response, function (index, el) {
+                    $("#UtilityDue").text(el.Total_Value);
+                });
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -426,14 +417,113 @@
             }
         });
     }
-    function GetTotalExpense() {
+    function GetRentDues(param) {
         $.ajax(
         {
-            url: "Dashboard/GetTotalExpense",
+            url: "Dashboard/GetDashboardSummary?category='" + param + "'",
             type: "Get",
             contentType: "application/json",
             processData: false,
             success: function (response) {
+
+                $.each(response, function (index, el) {
+                    debugger;
+                    $("#RentDue").text(el.Total_Value);
+                });
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+    function GetTotalExpense(param) {
+        $.ajax(
+        {
+            url: "Dashboard/GetDashboardSummary?category='" + param + "'",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+                $.each(response, function (index, el) {
+                    debugger;
+                    if (el.Month == "N/A")
+                        $("#TotalExpense").text(el.Total_Value);
+                });
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+    function GetVacantLoss(param) {
+        $.ajax(
+        {
+            url: "Dashboard/GetDashboardSummary?category='" + param + "'",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+                $.each(response, function (index, el) {
+                    debugger;
+                    $("#VacantLoss").text(el.Total_Value);
+                    $("#VacantLossRes").text(el.Residential);
+                    $("#VacantLossCom").text(el.Commercial);
+
+                });
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+    function GetVacantCount(param) {
+        $.ajax(
+        {
+            url: "Dashboard/GetDashboardSummary?category='" + param + "'",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+                $.each(response, function (index, el) {
+                    $("#VacantCount").text(el.Total_Value);
+                    $("#VacantCountRes").text(el.Residential);
+                    $("#VacantcountCom").text(el.Commercial);
+                });
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+    function GetEarningHistory(category, month, year) {
+        $.ajax(
+        {
+            url: "Dashboard/GetDashboardSummary?category='" + category + "'&month='" + month + "'&year='" + year + "'",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+                $.each(response, function (index, el) {
+                    $("#EarningHistory").text(el.Total_Value);
+                    $("#EarningHistoryMonth").text(el.Month);
+                    $("#EarningHistoryYear").text(el.Year);
+                });
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");

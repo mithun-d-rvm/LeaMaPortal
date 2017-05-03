@@ -33,44 +33,54 @@ namespace LeaMaPortal.Controllers
             }
         }
         [HttpGet]
-        public async Task<JsonResult> GetUtilityDues()
+        public async Task<JsonResult> GetDashboardSummary(string category, string month = null, string year = null)
         {
             try
             {
-                var result = "";
-                return Json(result, JsonRequestBehavior.AllowGet);
+                var summary = await GetDashboardSummaryByCategory(category);
+                return Json(summary, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        [HttpGet]
-        public async Task<JsonResult> GetRentDues()
+        private async Task<List<DashboardModel>> GetDashboardSummaryByCategory(string category, string month = null, string year = null)
         {
-            try
-            {
-                var result = await db.Database.SqlQuery<DashboardModel>("call Usp_Dashboardreport").ToListAsync();
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            string query = "SELECT * FROM leama.dashboard_summary where category=" + category;
+            if (!string.IsNullOrEmpty(month))
+                query += "&Month=" + month;
+            if (!string.IsNullOrEmpty(year))
+                query += "&Year=" + year;
+            var result = await db.Database.SqlQuery<DashboardModel>(query).ToListAsync();
+            return result;
         }
-        [HttpGet]
-        public async Task<JsonResult> GetTotalExpense()
-        {
-            try
-            {
-                var result = await db.Database.SqlQuery<DashboardModel>("call Usp_Dashboardreport").ToListAsync();
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //[HttpGet]
+        //public async Task<JsonResult> GetRentDues()
+        //{
+        //    try
+        //    {
+        //        var result = await db.Database.SqlQuery<DashboardModel>("call Usp_Dashboardreport").ToListAsync();
+        //        return Json(result, JsonRequestBehavior.AllowGet);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+        //[HttpGet]
+        //public async Task<JsonResult> GetTotalExpense()
+        //{
+        //    try
+        //    {
+        //        var result = await db.Database.SqlQuery<DashboardModel>("call Usp_Dashboardreport").ToListAsync();
+        //        return Json(result, JsonRequestBehavior.AllowGet);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
         // GET: Dashboard/Details/5
         public ActionResult Details()
         {
