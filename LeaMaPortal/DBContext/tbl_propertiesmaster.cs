@@ -89,11 +89,9 @@ namespace LeaMaPortal.DBContext
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_agreement> tbl_agreement { get; set; }
-        public virtual tbl_caretaker tbl_caretaker { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_propertiesdt> tbl_propertiesdt { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_propertiesdt1> tbl_propertiesdt1 { get; set; }
-        public virtual tbl_region tbl_region { get; set; }
     }
 }

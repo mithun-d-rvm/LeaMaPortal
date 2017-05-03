@@ -25,6 +25,18 @@ namespace LeaMaPortal.DBContext
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<dashboard_rental> dashboard_rental { get; set; }
+        public virtual DbSet<dashboard_utility> dashboard_utility { get; set; }
+        public virtual DbSet<dashboard_vacancy> dashboard_vacancy { get; set; }
+        public virtual DbSet<ebwater_report> ebwater_report { get; set; }
+        public virtual DbSet<email_output> email_output { get; set; }
+        public virtual DbSet<eventtest> eventtests { get; set; }
+        public virtual DbSet<outstanding_report> outstanding_report { get; set; }
+        public virtual DbSet<pdc_report> pdc_report { get; set; }
+        public virtual DbSet<renewal_report> renewal_report { get; set; }
+        public virtual DbSet<summarycollection_report> summarycollection_report { get; set; }
+        public virtual DbSet<summaryebwater_report> summaryebwater_report { get; set; }
+        public virtual DbSet<tbl_aging_range> tbl_aging_range { get; set; }
         public virtual DbSet<tbl_agreement> tbl_agreement { get; set; }
         public virtual DbSet<tbl_agreement_checklist> tbl_agreement_checklist { get; set; }
         public virtual DbSet<tbl_agreement_closure> tbl_agreement_closure { get; set; }
@@ -74,30 +86,18 @@ namespace LeaMaPortal.DBContext
         public virtual DbSet<tbl_tenant_companydt> tbl_tenant_companydt { get; set; }
         public virtual DbSet<tbl_tenant_companydt1> tbl_tenant_companydt1 { get; set; }
         public virtual DbSet<tbl_tenant_individual> tbl_tenant_individual { get; set; }
+        public virtual DbSet<tbl_tenant_individual_doc> tbl_tenant_individual_doc { get; set; }
         public virtual DbSet<tbl_userrights> tbl_userrights { get; set; }
         public virtual DbSet<tbl_utilitiesmaster> tbl_utilitiesmaster { get; set; }
+        public virtual DbSet<vacancy_report> vacancy_report { get; set; }
+        public virtual DbSet<collection_summary> collection_summary { get; set; }
         public virtual DbSet<test_report1> test_report1 { get; set; }
         public virtual DbSet<test_report2> test_report2 { get; set; }
+        public virtual DbSet<vacancy_caretaker_report> vacancy_caretaker_report { get; set; }
         public virtual DbSet<view_auto_receipt> view_auto_receipt { get; set; }
         public virtual DbSet<view_find_pdcstatus> view_find_pdcstatus { get; set; }
         public virtual DbSet<view_invoice_agreement> view_invoice_agreement { get; set; }
         public virtual DbSet<view_invoice_receipt_pending> view_invoice_receipt_pending { get; set; }
         public virtual DbSet<view_tenant> view_tenant { get; set; }
-        public virtual DbSet<tbl_tenant_individual_doc> tbl_tenant_individual_doc { get; set; }
-        public virtual DbSet<dashboard_rental> dashboard_rental { get; set; }
-        public virtual DbSet<dashboard_utility> dashboard_utility { get; set; }
-        public virtual DbSet<dashboard_vacancy> dashboard_vacancy { get; set; }
-        public virtual DbSet<ebwater_report> ebwater_report { get; set; }
-        public virtual DbSet<email_newagreement> email_newagreement { get; set; }
-        public virtual DbSet<eventtest> eventtests { get; set; }
-        public virtual DbSet<outstanding_report> outstanding_report { get; set; }
-        public virtual DbSet<pdc_report> pdc_report { get; set; }
-        public virtual DbSet<renewal_report> renewal_report { get; set; }
-        public virtual DbSet<summarycollection_report> summarycollection_report { get; set; }
-        public virtual DbSet<summaryebwater_report> summaryebwater_report { get; set; }
-        public virtual DbSet<tbl_aging_range> tbl_aging_range { get; set; }
-        public virtual DbSet<vacancy_report> vacancy_report { get; set; }
-        public virtual DbSet<collection_summary> collection_summary { get; set; }
-        public virtual DbSet<vacancy_caretaker_report> vacancy_caretaker_report { get; set; }
     }
 }

@@ -14,13 +14,6 @@ namespace LeaMaPortal.DBContext
     
     public partial class tbl_region
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_region()
-        {
-            this.tbl_caretaker = new HashSet<tbl_caretaker>();
-            this.tbl_propertiesmaster = new HashSet<tbl_propertiesmaster>();
-        }
-    
         public int Id { get; set; }
         public string Region_Name { get; set; }
         public string Country { get; set; }
@@ -28,11 +21,5 @@ namespace LeaMaPortal.DBContext
         public Nullable<System.DateTime> Createddatetime { get; set; }
         public string Createduser { get; set; }
         public string Delmark { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_caretaker> tbl_caretaker { get; set; }
-        public virtual tbl_country tbl_country { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_propertiesmaster> tbl_propertiesmaster { get; set; }
     }
 }
