@@ -834,12 +834,11 @@
     <Content Include="Views\Master\SlabMaster\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\UserCreation\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\UserCreation\_List.cshtml" />
-    <Content Include="Views\Master\Payment\_AddOrUpdate.cshtml" />
-    <Content Include="Views\Master\Payment\_List.cshtml" />
     <Content Include="Views\Master\Supplier\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\Supplier\_List.cshtml" />
     <Content Include="Views\Payment\_List.cshtml" />
     <Content Include="Views\Invoice\_List.cshtml" />
+    <Content Include="Views\Receipts\_List.cshtml" />
     <Content Include="Views\Tca\_AgreementFacility.cshtml" />
     <Content Include="Views\Tca\_List.cshtml" />
   </ItemGroup>

@@ -7,355 +7,87 @@
 
 <hr />
 
-<div class="col-md-12 leama-fieldset ">
-    <div class="col-md-2 pull-left">
-        @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
+<div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
+    <div id="master-loader-list" class="fa hide">
     </div>
-    <div class="col-md-4">
-        <input type="text" class="leama-field form-control" name="Search" id="Search" value="@ViewData["Search"]" />
-    </div>
-    <div class="col-md-4">
-        <button type="button" id="btn-search" class="btn btn-info leama-search-btn col-md-4">Go</button>
-    </div>
-</div>
+    <div class="row" id="individual-list">
 
-<div class="col-md-12 leama-fieldset ">
-    &nbsp;
-</div>
-
-<div class="divTable leama-fieldset col-md-12">
-    <div class="divTableBody divFontBodyTable">
-        <div class="divTableHeading">
-            <div class="divTableCell">Tenant ID</div>
-            <div class="divTableCell">Title</div>
-            <div class="divTableCell">Name</div>
-            <div class="divTableCell">Company Name</div>
-            <div class="divTableCell">Profession</div>
-            <div class="divTableCell">Address</div>
-            <div class="divTableCell">City</div>
-            <div class="divTableCell">Action</div>
+        <div class="col-md-12 leama-fieldset ">
+            <div class="col-md-2 pull-left">
+                @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="leama-field form-control" name="Search" id="Search" value="@ViewData["Search"]" />
+            </div>
+            <div class="col-md-4">
+                <button type="button" id="btn-search" class="btn btn-info leama-search-btn col-md-4">Go</button>
+            </div>
         </div>
 
-        @foreach (var item in Model)
-        {
-            <div class="divTableRow">
-                <div class="divTableCell">@item.Id</div>
-                <div class="divTableCell">@item.Title</div>
-                <div class="divTableCell">@item.First_Name  @item.Last_Name</div>
-                <div class="divTableCell">@item.Company_Educational</div>
-                <div class="divTableCell">@item.Profession</div>
-                <div class="divTableCell">@item.address</div>
-                <div class="divTableCell">@item.City</div>
-                <div class="divTableCell">
-                    @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit tenant-individual-edit", title = "Edit", @data_id = @item.Tenant_Id, @data_type = @item.Type })  |
-                    @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash tenant-individual-delete", @style = "color:red", @title = "Delete", @data_id = @item.Tenant_Id, @data_type = @item.Type })
+        <div class="col-md-12 leama-fieldset ">
+            &nbsp;
+        </div>
 
+        <div class="divTable leama-fieldset col-md-12">
+            <div class="divTableBody divFontBodyTable">
+                <div class="divTableHeading">
+                    <div class="divTableCell">Tenant ID</div>
+                    <div class="divTableCell">Title</div>
+                    <div class="divTableCell">Name</div>
+                    <div class="divTableCell">Company Name</div>
+                    <div class="divTableCell">Profession</div>
+                    <div class="divTableCell">Address</div>
+                    <div class="divTableCell">City</div>
+                    <div class="divTableCell">Action</div>
                 </div>
 
-            </div>
-        }
-    </div>
-</div>
-
-@*<table class="table">
-    <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First_Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Middle_Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Last_Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Company_Educational)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Profession)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Marital_Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.address1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Emirate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PostboxNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mobile_Countrycode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mobile_Areacode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mobile_No)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Landline_Countrycode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Landline_Areacode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Landline_No)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fax_Countrycode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fax_Areacode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fax_No)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nationality)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Emiratesid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Emirate_issuedate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Emirate_expirydate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Passportno)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Placeofissuance)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Passport_Issuedate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Passport_Expirydate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VisaType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Visano)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Visa_IssueDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Visa_ExpiryDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dob)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Familyno)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Familybookcity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ADWEA_Regid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Accyear)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Createddatetime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Createduser)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Delmark)
-            </th>
-            <th></th>
-        </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
+                @foreach (var item in Model)
+        {
+        <div class="divTableRow">
+            <div class="divTableCell">@item.Id</div>
+            <div class="divTableCell">@item.Title</div>
+            <div class="divTableCell">@item.First_Name  @item.Last_Name</div>
+            <div class="divTableCell">@item.Company_Educational</div>
+            <div class="divTableCell">@item.Profession</div>
+            <div class="divTableCell">@item.address</div>
+            <div class="divTableCell">@item.City</div>
+            <div class="divTableCell">
                 @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit tenant-individual-edit", title = "Edit", @data_id = @item.Tenant_Id, @data_type = @item.Type })  |
                 @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash tenant-individual-delete", @style = "color:red", @title = "Delete", @data_id = @item.Tenant_Id, @data_type = @item.Type })
 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.First_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Middle_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Last_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Company_Educational)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Profession)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Marital_Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.address1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Emirate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PostboxNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mobile_Countrycode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mobile_Areacode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mobile_No)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Landline_Countrycode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Landline_Areacode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Landline_No)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fax_Countrycode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fax_Areacode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fax_No)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nationality)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Emiratesid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Emirate_issuedate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Emirate_expirydate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Passportno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Placeofissuance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Passport_Issuedate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Passport_Expirydate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VisaType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Visano)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Visa_IssueDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Visa_ExpiryDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dob)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Familyno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Familybookcity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ADWEA_Regid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Accyear)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Createddatetime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Createduser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Delmark)
-            </td>
+            </div>
 
-        </tr>
-    }
+        </div>
+        }
+            </div>
+        </div>
 
-</table>*@
-<div class="col-md-12">
-    <br />
-    @Html.HiddenFor(m => m.PageNumber)
-    <div class="col-md-2">
-        @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
-    </div>
-    <div class="col-lg-10 text-right">
-        @for (int i = 1; i <= Model.PageCount; i++)
+
+        <div class="col-md-12">
+            <br />
+            @Html.HiddenFor(m => m.PageNumber)
+            <div class="col-md-2">
+                @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="col-lg-10 text-right">
+                @for (int i = 1; i <= Model.PageCount; i++)
         {
             if (i == Model.PageNumber)
             {
-                <input type="button" data-id="@i" value="@i" class="pagination-btn" />
+        <input type="button" data-id="@i" value="@i" class="pagination-btn" />
             }
             else
             {
-                <input type="button" data-id="@i" value="@i" class="Page" />
+        <input type="button" data-id="@i" value="@i" class="Page" />
             }
 
         }
-    </div>
-</div>
-<script type="text/javascript">
+            </div>
+        </div>
+        <script type="text/javascript">
     $(".Page").click(function (e) {
+        $("#master-loader-list").removeClass("hide");
+        $("#individual-list").addClass("hide");
         var page = parseInt($(this).data("id"));
         var defaultPageSize = $("#defaultPageSize").val();
         var search = $("#Search").val();
@@ -363,11 +95,15 @@
         getTenantIndividualList(search, page, defaultPageSize)
     });
     $("#defaultPageSize").change(function () {
+        $("#master-loader-list").removeClass("hide");
+        $("#individual-list").addClass("hide");
         var search = $("#Search").val();
         var defaultPageSize = $("#defaultPageSize").val();
         getTenantIndividualList(search, 1, defaultPageSize)
     });
     $("#btn-search").click(function (e) {
+        $("#master-loader-list").removeClass("hide");
+        $("#individual-list").addClass("hide");
         var search = $("#Search").val();
         var defaultPageSize = $("#defaultPageSize").val();
         getTenantIndividualList(search, 1, defaultPageSize)
@@ -387,6 +123,8 @@
                },
                complete: function () {
                    //   $("#VerifyIdDetailsLoader").addClass("hide");
+                   //$("#master-loader-list").addClass("hide");
+                   //$("#individual-list").removeClass("hide");
                }
            });
     }
@@ -405,10 +143,17 @@
         alert("Could not retrieve list.");
     }
 
-</script>
+        </script>
+
+
+    </div>
+</div>
+
 <script>
     $(".tenant-individual-edit").click(function (e) {
         e.preventDefault();
+        $("#master-loader-edit").removeClass("hide");
+        $("#ContainerAddOrUpdate").hide();
         var tenantId = $(this).data("id");
         var type = $(this).data("type");
         //alert(tenantId + "-" + type);
@@ -425,6 +170,8 @@
                 },
                 complete: function () {
                     $("body").scrollTop(0);
+                    $("#master-loader-edit").addClass("hide");
+                    $("#ContainerAddOrUpdate").show();
                 }
             });
     });
