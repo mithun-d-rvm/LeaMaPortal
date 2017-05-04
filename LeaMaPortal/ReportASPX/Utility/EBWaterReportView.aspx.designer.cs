@@ -94,6 +94,15 @@ namespace LeaMaPortal.ReportASPX.Utility {
         protected global::System.Web.UI.WebControls.DropDownList dropDown_FilterBy;
         
         /// <summary>
+        /// Label8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label8;
+        
+        /// <summary>
         /// txt_filterBy control.
         /// </summary>
         /// <remarks>
@@ -121,6 +130,15 @@ namespace LeaMaPortal.ReportASPX.Utility {
         protected global::System.Web.UI.WebControls.DropDownList dropDown_AgingDays;
         
         /// <summary>
+        /// Label9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label9;
+        
+        /// <summary>
         /// txt_fromAging control.
         /// </summary>
         /// <remarks>
@@ -128,6 +146,15 @@ namespace LeaMaPortal.ReportASPX.Utility {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_fromAging;
+        
+        /// <summary>
+        /// Label10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label10;
         
         /// <summary>
         /// txt_toAging control.
@@ -157,6 +184,15 @@ namespace LeaMaPortal.ReportASPX.Utility {
         protected global::System.Web.UI.WebControls.DropDownList dropDown_ValueRange;
         
         /// <summary>
+        /// Label11 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label11;
+        
+        /// <summary>
         /// txt_fromValue control.
         /// </summary>
         /// <remarks>
@@ -164,6 +200,15 @@ namespace LeaMaPortal.ReportASPX.Utility {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_fromValue;
+        
+        /// <summary>
+        /// Label12 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label12;
         
         /// <summary>
         /// txt_toValue control.

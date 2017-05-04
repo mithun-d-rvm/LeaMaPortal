@@ -20,11 +20,12 @@ namespace LeaMaPortal.ReportASPX.Utility
         {
             if (dropDown_FilterBy.SelectedItem.Value == "--Select--")
             {
-                txt_filterBy.Visible = false;
+                txt_filterBy.Text = "";
+                txt_filterBy.ReadOnly = true;
             }
             else
             {
-                txt_filterBy.Visible = true;
+                txt_filterBy.ReadOnly = false;
             }
         }
         protected void groupDropdownChange(object sender, EventArgs e)
@@ -96,20 +97,21 @@ namespace LeaMaPortal.ReportASPX.Utility
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "Utility_Name", Value = "Utility_Name" });
             }
             txt_filterBy.Text = "";
-            txt_filterBy.Visible = false;
+            txt_filterBy.ReadOnly = true;
         }
 
         protected void agingDaysChange(object sender, EventArgs e)
         {
             if (dropDown_AgingDays.SelectedItem.Value != "others")
             {
-                txt_fromAging.Visible = false;
-                txt_toAging.Visible = false;
+                txt_fromAging.ReadOnly = true;
+                txt_toAging.ReadOnly = true;
             }
             else
             {
-                txt_fromAging.Visible = true;
-                txt_toAging.Visible = true;
+
+                txt_fromAging.ReadOnly = false;
+                txt_toAging.ReadOnly = false;
             }
         }
 
@@ -117,13 +119,13 @@ namespace LeaMaPortal.ReportASPX.Utility
         {
             if (dropDown_ValueRange.SelectedItem.Value != "others")
             {
-                txt_fromValue.Visible = false;
-                txt_toValue.Visible = false;
+                txt_fromValue.ReadOnly = true;
+                txt_toValue.ReadOnly = true;
             }
             else
             {
-                txt_fromValue.Visible = true;
-                txt_toValue.Visible = true;
+                txt_fromValue.ReadOnly = false;
+                txt_toValue.ReadOnly = false;
             }
         }
         protected void btn_showReport_Click(object sender, EventArgs e)
