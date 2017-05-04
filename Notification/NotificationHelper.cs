@@ -17,18 +17,18 @@ namespace Notification
             MailAddress from = new MailAddress(ConfigurationManager.AppSettings["FromEmail"]);
 
             MailMessage mail = new MailMessage();
-            List<string> toid = model.toList.Split(',').ToList();
+            List<string> toid = model.ToList.Split(',').ToList();
             foreach(var to in toid)
             {
                 mail.To.Add(to);
             }
-            List<string> ccid = model.ccList.Split(',').ToList();
+            List<string> ccid = model.CCList.Split(',').ToList();
             foreach (var cc in ccid)
             {
                 mail.CC.Add(cc);
             }
-            mail.Subject = model.sub;
-            mail.Body = model.body;
+            mail.Subject = model.Subject;
+            mail.Body = model.Body;
 
             SmtpClient smtp = new SmtpClient();
             smtp.Host = ConfigurationManager.AppSettings["SMTPHost"];
