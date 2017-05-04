@@ -45,6 +45,110 @@ namespace LeaMaPortal.Controllers
                 throw ex;
             }
         }
+        [HttpGet]
+        public async Task<JsonResult> GetPDCNotification()
+        {
+            try
+            {
+                string query = @"select count(*) as pdccount from (
+select 
+TemplateID
+,z.TemplateName
+,z.toid 
+,z.cc
+,z.bcc
+,Subject
+,Body
+,SubjectParameter
+,BodyParameter
+,toparameter
+,ccparameter
+,bccparameter
+,signature
+,Agreement_No 
+,y.Tenant_id 
+,Tenant_Name
+,ifnull(x.Property_id,'') as Property_id
+,ifnull(x.Property_Name,'') as Property_Name
+,ifnull(x.Unit_ID ,'') as Unit_ID
+,ifnull(x.unit_Name ,'') as unit_Name
+,pdc_Amount 
+,DDChequeNo 
+,DDChequedate 
+,z1.Caretaker_id
+,z1.Caretaker_Name
+,y.Emailid as Tenantemailid
+,z1.email as  caretakeremailid
+,ifnull(y1.address1,'') as address1
+,ifnull(y1.address2,'') as address2
+,ifnull(y1.address3,'') as address3
+,ifnull(y1.Region_Name ,'') as Region_Name
+,ifnull(y1.Country,'') as Country
+from view_pdc_pending x 
+inner join view_tenant y on x.Tenant_id=y.Tenant_id
+
+inner join tbl_propertiesmaster y1 on y1.Property_ID_Tawtheeq =ifnull(x.Property_ID,
+ (select  Ref_unit_Property_ID_Tawtheeq from
+ tbl_propertiesmaster where  x.Unit_ID=Unit_ID_Tawtheeq)
+ )
+ inner join tbl_caretaker z1 on z1.Caretaker_id=y1.Caretaker_id
+inner join tbl_emailtemplate z on z.templatename='Pdc pending'
+where current_date()+INTERVAL 5 DAY>=ddchequedate
+)x 
+";
+
+                var result = await db.Database.SqlQuery<int>(query).ToListAsync();
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetRenewals()
+        {
+            try
+            {
+                string query = @"select count(*) from(
+select Agreement_no from tbl_agreement where current_date() + INTERVAL Notice_Period DAY =agreement_End_date 
+union 
+select Agreement_no from tbl_agreement where current_date() + INTERVAL Notice_Period DAY >=agreement_End_date 
+union 
+select Agreement_no from tbl_agreement where agreement_End_date between current_date() and date_ADD(current_date(), INTERVAL 7 DAY)
+)x
+";
+
+                var result = await db.Database.SqlQuery<int>(query).ToListAsync();
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetContractExpiry()
+        {
+            try
+            {
+                string query = @"select count(*) from(
+select Agreement_no from tbl_agreement where current_date() + INTERVAL Notice_Period DAY =agreement_End_date 
+union 
+select Agreement_no from tbl_agreement where current_date() + INTERVAL Notice_Period DAY >=agreement_End_date 
+union 
+select Agreement_no from tbl_agreement where agreement_End_date between current_date() and date_ADD(current_date(), INTERVAL 7 DAY)
+)x
+";
+
+                var result = await db.Database.SqlQuery<int>(query).ToListAsync();
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         private async Task<List<DashboardModel>> GetDashboardSummaryByCategory(string category, string month = null, string year = null)
         {
             string query = "SELECT * FROM leama.dashboard_summary where category=" + category;
