@@ -59,12 +59,12 @@
                         <div class="vacant-total" id="VacantCount">
                             26
                         </div>
-                        <div class="vacant-not-occupied">
+                        @*<div class="vacant-not-occupied">
                             Not Occupied &gt; <span class="vacant-not-occupied-number">15</span>
                         </div>
                         <div class="vacant-lease">
                             Lease Expired &gt; <span class="vacant-lease-number">18</span>
-                        </div>
+                        </div>*@
                     </div>
                     <div class="col-md-6 text-center vacant-second-tab">
                         <div class="col-md-12 vacant-residential-div">
@@ -302,17 +302,17 @@
                     <div class="col-md-8 font-15">
                         <button data-toggle="modal" data-target="#myModal" class="notif-sub-text">
                             PDC Notification
-                            <span class="notif-total">12</span>
+                            <span class="notif-total" id="PDCNotification">12</span>
                         </button>
 
                         <button data-toggle="modal" data-target="#myModal" class="notif-sub-text">
                             Renewals
-                            <span class="notif-total">12</span>
+                            <span class="notif-total" id="RenewalsNotification">12</span>
                         </button>
 
                         <button data-toggle="modal" data-target="#myModal" class="notif-sub-text">
                             Contracts Expiry
-                            <span class="notif-total">12</span>
+                            <span class="notif-total" id="ContractExpiryNotification">12</span>
                         </button>
                     </div>
                 </div>
@@ -375,6 +375,9 @@
         GetVacantLoss("Vacancy Loss");
         GetVacantCount("Vacancy count");
         GetEarningHistory("Earning History", "N/A");
+        GetPDCNotification();
+        GetRenewals();
+        GetContractExpiry();
     });
 
     function GetDashboardData() {
@@ -524,6 +527,65 @@
                     $("#EarningHistoryMonth").text(el.Month);
                     $("#EarningHistoryYear").text(el.Year);
                 });
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+
+    function GetPDCNotification() {
+        $.ajax(
+        {
+            url: "Dashboard/GetPDCNotification",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+                $("#PDCNotification").text(response);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+    function GetRenewals() {
+        $.ajax(
+        {
+            url: "Dashboard/GetRenewals",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+                $("#RenewalsNotification").text(response);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+
+    function GetContractExpiry() {
+        $.ajax(
+        {
+            url: "Dashboard/GetContractExpiry",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+                $("#ContractExpiryNotification").text(response);
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
