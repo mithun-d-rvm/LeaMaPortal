@@ -19,8 +19,9 @@
     @Html.HiddenFor(x => x.Caretaker_Name)
     <div class="font-smaller">
         @Html.HiddenFor(m => m.New_Renewal_flag)
-        <div class="text-uppercase font-x-large">
-            <strong> Agreement Renewal </strong>
+        <button type="button" class="close font-40" data-dismiss="modal">x &times;</button>
+        <div class="text-uppercase popup-heading">
+            Contract Tenancy Agreement - Renewal
         </div>
         <div class="p-b-25"> &nbsp; </div>
         <div class="row">
