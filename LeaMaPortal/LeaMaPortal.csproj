@@ -216,7 +216,7 @@
     <Compile Include="DBContext\ebwater_report.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBContext\email_newagreement.cs">
+    <Compile Include="DBContext\email_output.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="DBContext\eventtest.cs">
@@ -460,6 +460,7 @@
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Models\CountryViewModel.cs" />
+    <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\EmailTemplateViewModel.cs" />
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\MasterViewModel.cs" />
@@ -833,12 +834,11 @@
     <Content Include="Views\Master\SlabMaster\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\UserCreation\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\UserCreation\_List.cshtml" />
-    <Content Include="Views\Master\Payment\_AddOrUpdate.cshtml" />
-    <Content Include="Views\Master\Payment\_List.cshtml" />
     <Content Include="Views\Master\Supplier\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\Supplier\_List.cshtml" />
     <Content Include="Views\Payment\_List.cshtml" />
     <Content Include="Views\Invoice\_List.cshtml" />
+    <Content Include="Views\Receipts\_List.cshtml" />
     <Content Include="Views\Tca\_AgreementFacility.cshtml" />
     <Content Include="Views\Tca\_List.cshtml" />
     <Content Include="Views\Tca\Agreement\_AgreementFormRenewal.cshtml" />

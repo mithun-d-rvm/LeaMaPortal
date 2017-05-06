@@ -53,6 +53,8 @@ namespace LeaMaPortal.Helpers
         public const string ACCOUNT_NUMBER_1 = "Name 1";
         public const string ACCOUNT_NUMBER_2 = "Name 2";
 
+        public const string MAIL_SENT = "sent";
+
         private static List<OptionModel> GetCheckListDropdown()
         {
             List<OptionModel> options = new List<OptionModel>();

@@ -29,8 +29,5 @@ namespace LeaMaPortal.DBContext
         public Nullable<System.DateTime> Createddatetime { get; set; }
         public string Createduser { get; set; }
         public string Delmark { get; set; }
-    
-        public virtual tbl_agreement tbl_agreement { get; set; }
-        public virtual tbl_agreement_closure tbl_agreement_closure { get; set; }
     }
 }

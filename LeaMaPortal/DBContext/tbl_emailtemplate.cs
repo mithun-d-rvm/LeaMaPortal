@@ -17,9 +17,15 @@ namespace LeaMaPortal.DBContext
         public int Id { get; set; }
         public Nullable<int> TemplateID { get; set; }
         public string TemplateName { get; set; }
+        public string toid { get; set; }
+        public string cc { get; set; }
+        public string bcc { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
         public string Bodytext { get; set; }
+        public string toparameter { get; set; }
+        public string ccparameter { get; set; }
+        public string bccparameter { get; set; }
         public string SubjectParameter { get; set; }
         public string BodyParameter { get; set; }
         public Nullable<bool> InActive { get; set; }
@@ -29,6 +35,7 @@ namespace LeaMaPortal.DBContext
         public string BodyTextParam { get; set; }
         public string SubjectParameterText { get; set; }
         public string BodyParameterText { get; set; }
+        public string signature { get; set; }
         public Nullable<int> Accyear { get; set; }
         public Nullable<System.DateTime> Createddatetime { get; set; }
         public string Createduser { get; set; }

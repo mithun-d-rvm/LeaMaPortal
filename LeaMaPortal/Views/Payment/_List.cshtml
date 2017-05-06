@@ -8,7 +8,9 @@
 <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
 <!DOCTYPE html>
 <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
-    <div class="row">
+    <div id="master-loader-list" class="fa hide">
+    </div>
+    <div class="row" id="payment-list">
         <div class="col-md-12 leama-fieldset ">
             <div class="col-md-2 pull-left">
                 @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
@@ -87,6 +89,8 @@
 <script type="text/javascript">
                 $(".Page").click(function(e)
                 {
+                    $("#master-loader-list").removeClass("hide");
+                    $("#payment-list").addClass("hide");
                     var page = parseInt($(this).data("id"));
                     var defaultPageSize = $("#defaultPageSize").val();
                     var search = $("#Search").val();
@@ -94,11 +98,15 @@
                     getPaymentList(search,page,defaultPageSize)
                 });
                 $("#defaultPageSize").change(function () {
+                    $("#master-loader-list").removeClass("hide");
+                    $("#payment-list").addClass("hide");
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
                     getPaymentList(search, 1, defaultPageSize)
                 });
                 $("#btn-search").click(function (e) {
+                    $("#master-loader-list").removeClass("hide");
+                    $("#payment-list").addClass("hide");
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
                     getPaymentList(search, 1, defaultPageSize)
@@ -119,6 +127,8 @@
                            },
                            complete: function () {
                                //   $("#VerifyIdDetailsLoader").addClass("hide");
+                               //$("#master-loader-list").addClass("hide");
+                               //$("#payment-list").removeClass("hide");
                            }
                        });
                 }
@@ -139,6 +149,8 @@
 
     $(".payment-edit").click(function (e) {
         e.preventDefault();
+        $("#master-loader-edit").removeClass("hide");
+        $("#ContainerAddOrUpdate").hide();
         var id = $(this).data("id");
         //var param = id.split('`');
         $.ajax(
@@ -154,6 +166,8 @@
                 },
                 complete: function () {
                     $("body").scrollTop(0);
+                    $("#master-loader-edit").addClass("hide");
+                    $("#ContainerAddOrUpdate").show();
                 }
             });
     });
