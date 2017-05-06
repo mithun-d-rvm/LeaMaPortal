@@ -86,6 +86,15 @@ namespace LeaMaPortal.Controllers
                     string PFlag = null;
                     if (model.Id == 0)
                     {
+                        var caretaker = db.tbl_caretaker.OrderByDescending(x => x.Caretaker_id).FirstOrDefault();
+                        if (caretaker != null)
+                        {
+                            model.Caretaker_id = caretaker.Caretaker_id + 1;
+                        }
+                        else
+                        {
+                            model.Caretaker_id = 1;
+                        }
                         PFlag = "INSERT";
                     }
                     else

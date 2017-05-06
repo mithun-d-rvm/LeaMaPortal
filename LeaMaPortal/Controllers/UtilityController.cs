@@ -30,7 +30,7 @@ namespace LeaMaPortal.Controllers
                 IList<UtilityViewModel> list;
                 if (string.IsNullOrWhiteSpace(Search))
                 {
-                    list = db.tbl_utilitiesmaster.Where(x => x.Delmark != "*").OrderBy(x => x.Utility_Name).Select(x => new UtilityViewModel()
+                    list = db.tbl_utilitiesmaster.Where(x => x.Delmark != "*").OrderByDescending(x=>x.id).Select(x => new UtilityViewModel()
                     {
                         Id = x.id,
                         Utility_id = x.Utility_id,
@@ -42,7 +42,7 @@ namespace LeaMaPortal.Controllers
                     list = db.tbl_utilitiesmaster.Where(x => x.Delmark != "*"
                                     && (x.Utility_id.ToLower().Contains(Search.ToLower())
                                     || x.Utility_Name.ToLower().Contains(Search.ToLower())))
-                                  .OrderBy(x => x.Utility_Name).Select(x => new UtilityViewModel()
+                                  .OrderByDescending(x => x.id).Select(x => new UtilityViewModel()
                                   {
                                       Id = x.id,
                                       Utility_id = x.Utility_id,

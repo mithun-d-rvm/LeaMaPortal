@@ -172,17 +172,19 @@
                     </div>*@
                 </div>
                 @Html.HiddenFor(m => m.MenuConfig, new { @id = "MenuConfig" })
-                @foreach (var menuItem in ViewBag.MenuRights)
+                @if (ViewBag.MenuRights != null)
                 {
-                    //if (menuItem.Id % 2 != 0)
-                    //{
+                    foreach (var menuItem in ViewBag.MenuRights)
+                    {
+                        //if (menuItem.Id % 2 != 0)
+                        //{
 
-                    //}
-                    //else
-                    //{
+                        //}
+                        //else
+                        //{
 
-                    //}
-                    @*<div class="col-md-7 p-b-10">*@
+                        //}
+                        @*<div class="col-md-7 p-b-10">*@
                         <div class="col-md-4 p-b-10">
                             <div class="col-md-12 report-form-row">
                                 <div class="col-md-1">@menuItem.Id</div>
@@ -190,7 +192,8 @@
                                 <div class="col-md-1 report-checkbox-align"> <input type="checkbox" checked="@menuItem.IsChecked" name="@menuItem.Id" class="input-checkbox menurights" /> </div>
                             </div>
                         </div>
-                    @*</div>*@
+                        @*</div>*@
+                    }
                 }
 
                 <div class="col-md-12 form-input-padding p-b-10">
