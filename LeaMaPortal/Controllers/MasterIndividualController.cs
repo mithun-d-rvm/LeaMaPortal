@@ -53,21 +53,36 @@ namespace LeaMaPortal.Controllers
         }
 
         // GET: MasterIndividual/Create
-        public PartialViewResult Create()
+        public async Task<PartialViewResult> Create()
         {
             try
             {
                 TenantIndividualViewModel model = new TenantIndividualViewModel();
                 model.Marital_Status = Common.DefaultMaridalStatus;
                 model.Title = Common.DefaultTitle;
-                var _titleResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
-                ViewBag.TitleDisplay = new SelectList(_titleResult, Common.DefaultTitle);
+                //var _titleResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
+                var _titleResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant individual" && x.comboname == "Title");
+                if (_titleResult != null)
+                {
+                    ViewBag.TitleDisplay = new SelectList(_titleResult.combovalue.Split(','), Common.DefaultTitle);
+                }
 
-                var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
-                ViewBag.Emirate = new SelectList(_emirateResult);
 
-                var _visaTypeResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','VisaType','!#',null)").ToList();
-                ViewBag.VisaType = new SelectList(_visaTypeResult);
+                //var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
+                var _emirateResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant Company" && x.comboname == "Emirate");
+                if (_emirateResult != null)
+                {
+                    ViewBag.Emirate = new SelectList(_emirateResult.combovalue.Split(','));
+                }
+
+
+                //var _visaTypeResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','VisaType','!#',null)").ToList();
+                var _visaTypeResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant individual" && x.comboname == "VisaType");
+                if (_visaTypeResult != null)
+                {
+                    ViewBag.VisaType = new SelectList(_visaTypeResult.combovalue.Split(','));
+                }
+                
 
                 //var region = .Select(x => x.Region_Name);
                 ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
@@ -190,14 +205,37 @@ namespace LeaMaPortal.Controllers
             {
                 var tenant =await db.tbl_tenant_individual.FindAsync(tenantId, type);
                 TenantIndividualViewModel model = Map(tenant);
-                var _result = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
-                ViewBag.TitleDisplay = new SelectList(_result, tenant.Title);
 
-                var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
-                ViewBag.Emirate = new SelectList(_emirateResult,tenant.Emirate);
+                var _titleResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant individual" && x.comboname == "Title");
+                if (_titleResult != null)
+                {
+                    ViewBag.TitleDisplay = new SelectList(_titleResult.combovalue.Split(','), tenant.Title);
+                }
 
-                var _visaTypeResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','VisaType','!#',null)").ToList();
-                ViewBag.VisaType = new SelectList(_visaTypeResult, tenant.VisaType);
+
+                //var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
+                var _emirateResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant Company" && x.comboname == "Emirate");
+                if (_emirateResult != null)
+                {
+                    ViewBag.Emirate = new SelectList(_emirateResult.combovalue.Split(','), tenant.Emirate);
+                }
+
+
+                //var _visaTypeResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','VisaType','!#',null)").ToList();
+                var _visaTypeResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant individual" && x.comboname == "VisaType");
+                if (_visaTypeResult != null)
+                {
+                    ViewBag.VisaType = new SelectList(_visaTypeResult.combovalue.Split(','), tenant.VisaType);
+                }
+
+                //var _result = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
+                //ViewBag.TitleDisplay = new SelectList(_result, tenant.Title);
+
+                //var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
+                //ViewBag.Emirate = new SelectList(_emirateResult,tenant.Emirate);
+
+                //var _visaTypeResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','VisaType','!#',null)").ToList();
+                //ViewBag.VisaType = new SelectList(_visaTypeResult, tenant.VisaType);
 
                 //var region = .Select(x => x.Region_Name);
                 ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name",tenant.City);

@@ -70,11 +70,11 @@ namespace LeaMaPortal.Controllers
             }
         }
         [HttpGet]
-        public PartialViewResult AddOrUpdate()
+        public async Task<PartialViewResult> AddOrUpdate()
         {
             MeterViewModel model = new MeterViewModel();
             ViewBag.Utility_Name = new SelectList(db.tbl_utilitiesmaster.OrderBy(o => o.Utility_Name).Distinct(), "Utility_Name", "Utility_Name");
-            ViewBag.Property_id = new SelectList(db.tbl_propertiesmaster.OrderBy(o => o.Property_Id).Distinct(), "Property_Id", "Property_Id");
+            ViewBag.Property_id = new SelectList(db.tbl_propertiesmaster.Where(x => x.Property_Flag == "Property").OrderBy(o => o.Property_Id).Distinct(), "Property_Id", "Property_ID_Tawtheeq");
             ViewBag.Unit_id = new SelectList(new List<OptionModel>());
             ViewBag.Dueday = new SelectList(StaticHelper.GetStaticData(StaticHelper.METER_DROPDOWN), "Id", "Id");
             return PartialView("../Master/MeterMaster/_AddOrUpdate", model);
@@ -209,7 +209,7 @@ namespace LeaMaPortal.Controllers
                 //return PartialView("../Master/MeterMaster/_AddOrUpdate", model);
                 List<OptionModel> model = new List<OptionModel>();
                 //var data = await db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Unit" && w.Ref_Unit_Property_ID == PropertyId).OrderBy(o => o.Property_Id).Select(s => s.Property_Id).ToListAsync();
-                return Json(new SelectList(db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Unit" && w.Ref_Unit_Property_ID == PropertyId).OrderBy(o => o.Ref_unit_Property_ID_Tawtheeq), "Ref_unit_Property_ID_Tawtheeq", "Ref_unit_Property_ID_Tawtheeq"));
+                return Json(new SelectList(db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Unit" && w.Ref_Unit_Property_ID == PropertyId).OrderBy(o => o.Ref_unit_Property_ID_Tawtheeq), "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq"));
             }
             catch (Exception ex)
             {
