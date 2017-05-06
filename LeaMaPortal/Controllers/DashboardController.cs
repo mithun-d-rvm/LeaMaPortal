@@ -19,6 +19,10 @@ namespace LeaMaPortal.Controllers
         {
             return View();
         }
+        public ActionResult IntialLoader()
+        {
+            return RedirectToAction("Index", "Dashboard");
+        }
         [HttpGet]
         public async Task<JsonResult> Summary()
         {
