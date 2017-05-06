@@ -106,7 +106,14 @@
                         </div>
                         <div class="col-md-1 w-md-14">
                             @*@Html.EditorFor(model => model.Cheque_Date, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                            @Model.AgreementPdcList[i].Cheque_Date
+                            @if (Model.AgreementPdcList[i].Cheque_Date.HasValue)
+                            {
+                                 <span>@Model.AgreementPdcList[i].Cheque_Date.Value.ToString("yyyy-MM-dd")</span>
+                            }
+                            else
+                            {
+
+                            }
                         </div>
                         <div class="col-md-1">
                             @Model.AgreementPdcList[i].Cheque_Amount
@@ -194,7 +201,7 @@
     "</div>" +
 "</td>" +
 "</tr>";
-        alert(html);
+        //alert(html);
 
         $("#AgreementPdcDetailsList-Renewal").append(html);
         AgreementPdCountRenewal++;

@@ -303,8 +303,9 @@ namespace LeaMaPortal.Controllers
                 Payment_Mode=x.Payment_Mode,
                 BankName=x.BankName,
                 Cheque_No=x.Cheque_No,
-                Cheque_Date=string.IsNullOrWhiteSpace(x.Cheque_Date.ToString())?DateTime.Parse(x.Cheque_Date.ToString()): (DateTime?)null,
-                Cheque_Amount=x.Cheque_Amount
+                //Cheque_Date=string.IsNullOrWhiteSpace(x.Cheque_Date.ToString())?DateTime.Parse(x.Cheque_Date.ToString()): (DateTime?)null,
+                Cheque_Date= x.Cheque_Date,
+                Cheque_Amount =x.Cheque_Amount
 
                 }).ToList();
                 return PartialView("../Tca/Renewal/_AgreementPdc", model);
@@ -485,15 +486,15 @@ namespace LeaMaPortal.Controllers
                     foreach (var item in model.AgreementPdcList)
                     {
                         
-                        var Cheque_Date = item.Cheque_Date != null ? item.Cheque_Date.Value.Date.ToString("yyyy-MM-dd") :"null";
+                        var Cheque_Date = item.Cheque_Date != null ? "'"+item.Cheque_Date.Value.Date.ToString("yyyy-MM-dd")+"'" :"null";
                         if (string.IsNullOrWhiteSpace(Agpdc))
                         {
-                            Agpdc = "(" + model.Agreement_No + ",'" + item.Month + "'," + item.Year + ",'" + item.BankName + "','" + item.Cheque_No +
+                            Agpdc = "(" + model.Agreement_No + ",'" + item.Month + "','" + item.Year + "','" + item.BankName + "','" + item.Cheque_No +
                                     "'," + Cheque_Date + ",'" + item.Cheque_Amount + "','" + item.Payment_Mode + "')";
                         }
                         else
                         {
-                            Agpdc += ",(" + model.Agreement_No + ",'" + item.Month + "'," + item.Year + ",'" + item.BankName + "','" + item.Cheque_No +
+                            Agpdc += ",(" + model.Agreement_No + ",'" + item.Month + "','" + item.Year + "','" + item.BankName + "','" + item.Cheque_No +
                                     "'," + Cheque_Date + ",'" + item.Cheque_Amount + "','" + item.Payment_Mode + "')";
                         }
                     }
@@ -619,12 +620,12 @@ namespace LeaMaPortal.Controllers
                         {
                             if (string.IsNullOrWhiteSpace(Agunit))
                             {
-                                Agunit = "(" + model.Agreement_No + ",'" + item.Property_ID + "'," + item.Property_ID_Tawtheeq + ",'" + item.Properties_Name + "','" + item.Unit_ID_Tawtheeq +
-                                        "','" + item.Unit_Property_Name + "')";
+                                Agunit = "(" + model.Agreement_No + ",'" + item.Property_ID + "','" + item.Property_ID_Tawtheeq + "','" + item.Properties_Name + "','" +
+                                    item.Unit_ID_Tawtheeq + "','" + item.Unit_Property_Name + "')";
                             }
                             else
                             {
-                                Agunit += ",(" + model.Agreement_No + ",'" + item.Property_ID + "'," + item.Property_ID_Tawtheeq + ",'" + item.Properties_Name + "','" + item.Unit_ID_Tawtheeq +
+                                Agunit += ",(" + model.Agreement_No + ",'" + item.Property_ID + "','" + item.Property_ID_Tawtheeq + "','" + item.Properties_Name + "','" + item.Unit_ID_Tawtheeq +
                                         "','" + item.Unit_Property_Name + "')";
                             }
                         }

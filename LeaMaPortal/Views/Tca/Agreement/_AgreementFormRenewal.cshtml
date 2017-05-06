@@ -10,7 +10,7 @@
 {
     @Html.HiddenFor(x => x.Ag_Tenant_id)
     @Html.HiddenFor(x => x.Ag_Tenant_Name)
-    @*@Html.HiddenFor(x=>x.property_id)*@
+    @Html.HiddenFor(x=>x.property_id)
     @Html.HiddenFor(x => x.Property_ID_Tawtheeq)
     @Html.HiddenFor(x => x.Properties_Name)
     @Html.HiddenFor(x => x.Unit_ID_Tawtheeq)
@@ -33,13 +33,13 @@
                         <span> Single Unit </span>
                     </div>
                     <div class="col-md-1">
-                        @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Single", new { @class = "input-checkbox", @required = "required", @id = "single", @disabled = "disabled" })
+                        @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Single", new { @class = "input-checkbox", @required = "required", @id = "single", @readonly = "readonly" })
                     </div>
                     <div class="col-md-4 m-t-3">
                         <span> Multiple Unit </span>
                     </div>
                     <div class="col-md-1 m-l-m-40">
-                        @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Multiple", new { @class = "input-checkbox", @required = "required", @id = "multiple", @disabled = "disabled" })
+                        @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Multiple", new { @class = "input-checkbox", @required = "required", @id = "multiple", @readonly = "readonly" })
                     </div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="col-md-6">
                        
-                        @*@Html.EditorFor(model => model.Agreement_No, new { htmlAttributes = new { @class = "master-form-input form-control",@disabled = "disabled"} })*@  
+                        @*@Html.EditorFor(model => model.Agreement_No, new { htmlAttributes = new { @class = "master-form-input form-control",@readonly = "readonly"} })*@  
                         <input type="text" value="@Model.Agreement_No"  class="master-form-input form-control" disabled />
                         @*@Html.EditorFor(model => model.Agreement_No, new { htmlAttributes = new { @class = "master-form-input" } })*@
                     </div>
@@ -84,7 +84,7 @@
                         @Html.LabelFor(model => model.Tenant_Type, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.DropDownList("Tenant_Type", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @disabled = "disabled" })
+                        @Html.DropDownList("Tenant_Type", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @readonly = "readonly" })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -94,7 +94,7 @@
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
                         @*@Html.DropDownList("Ag_Tenantid", null, "-- Select --", new { @class = "master-form-input form-control", @Name = "Ag_Tenant_id", @required = "required",@disabled= "disabled" })*@
-                        @Html.EditorFor(model => model.Ag_Tenant_id, new { htmlAttributes = new { @class = "master-form-input form-control", @disabled = "disabled" } })
+                        @Html.EditorFor(model => model.Ag_Tenant_id, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                       @Html.EditorFor(model => model.Ag_Tenant_Name, new { htmlAttributes = new { @class = "master-form-input form-control", @disabled = "disabled" } })
+                       @Html.EditorFor(model => model.Ag_Tenant_Name, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -112,7 +112,7 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("Caretakerid", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @disabled = "disabled" })
+                        @Html.DropDownList("Caretakerid", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @readonly = "readonly" })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -121,7 +121,7 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("CaretakerName", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @disabled = "disabled" })
+                        @Html.DropDownList("CaretakerName", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @readonly = "readonly" })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -129,14 +129,15 @@
                         @Html.LabelFor(model => model.property_id, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.EditorFor(model => model.property_id, new { htmlAttributes = new { @class = "master-form-input form-control", @disabled = "disabled" } })
+                        <input type="text" value="@Model.property_id" class="master-form-input form-control" disabled />
+                        
+                        @*@Html.EditorFor(model => model.property_id, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })*@
                         @*@Html.DropDownList("TcaPropertyId", null, "-- Select --", new { @class = "master-form-input" })*@
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
                     <div class="col-md-6">
-                        @Html.LabelFor(model => model.Property_ID_Tawtheeq, htmlAttributes: new { @class = "label-default-remove", @disabled = "disabled" })
+                        @Html.LabelFor(model => model.Property_ID_Tawtheeq, htmlAttributes: new { @class = "label-default-remove", @readonly = "readonly" })
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
@@ -158,7 +159,7 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("UnitIDTawtheeq", null, "-- Select --", new { @class = "master-form-input form-control", @disabled = "disabled" })
+                        @Html.DropDownList("UnitIDTawtheeq", null, "-- Select --", new { @class = "master-form-input form-control", @readonly = "readonly" })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7" id="Unitpropertyname">
@@ -167,7 +168,7 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("UnitPropertyName", null, "-- Select --", new { @class = "master-form-input form-control", @disabled = "disabled" })
+                        @Html.DropDownList("UnitPropertyName", null, "-- Select --", new { @class = "master-form-input form-control", @readonly = "readonly" })
                     </div>
                 </div>
             </div>
