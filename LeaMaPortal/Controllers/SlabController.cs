@@ -194,7 +194,7 @@ namespace LeaMaPortal.Controllers
                                             new MySqlParameter("@PResidence_type",tbl_slab.Residence_type),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
-                var spResult = await db.Database.SqlQuery<object>("Usp_Slabmaster_All(@PFlag,@PId,@PUtility_id,@PUtility_Name,@Pslabid,@PUnit_From,@PUnitto,@Prate,@PColour,@PResidence_type,@PCreateduser)", param).ToListAsync();
+                var RE = await db.Database.SqlQuery<object>("CALL Usp_Slabmaster_All(@PFlag,@Pslabid,@PUtility_id,@PUtility_Name,@PUnit_From,@PUnitto,@Prate,@PColour,@PResidence_type,@PCreateduser)", param).ToListAsync();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

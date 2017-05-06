@@ -83,12 +83,28 @@ namespace LeaMaPortal.Controllers
                 int paymentno = await db.tbl_paymenthd.Select(x => x.PaymentNo).DefaultIfEmpty(0).MaxAsync();
                 model.PaymentNo = paymentno == 0 ? 1 : paymentno + 1;
                 model.PaymentDate = DateTime.Now.Date;
-                var paymentType_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','Reccategory',',',null)").ToList();
-                ViewBag.PaymentType = new SelectList(paymentType_result, model.PaymentType);
-                var paymentMode_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','RecpType',',',null)").ToList();
-                ViewBag.PaymentMode = new SelectList(paymentMode_result, model.PaymentMode);
-                var PDCstatus_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','PDCstatus',',',null)").ToList();
-                ViewBag.PDCstatus = new SelectList(PDCstatus_result, model.PDCstatus);
+                //var paymentType_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','Reccategory',',',null)").ToList();
+
+                var paymentType_result = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Receipts" && x.comboname == "Reccategory");
+                if (paymentType_result != null)
+                {
+                    ViewBag.PaymentType = new SelectList(paymentType_result.combovalue.Split(','), model.PaymentType);
+                }
+
+                //var paymentMode_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','RecpType',',',null)").ToList();
+                var paymentMode_result = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Receipts" && x.comboname == "RecpType");
+                if (paymentMode_result != null)
+                {
+                    ViewBag.PaymentMode = new SelectList(paymentMode_result.combovalue.Split(','), model.PaymentMode);
+                }
+
+                //var PDCstatus_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','PDCstatus',',',null)").ToList();
+                var PDCstatus_result = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Receipts" && x.comboname == "PDCstatus");
+                if (PDCstatus_result != null)
+                {
+                    ViewBag.PDCstatus = new SelectList(PDCstatus_result.combovalue.Split(','), model.PDCstatus);
+                }
+                
                 var suppliers = await db.tbl_suppliermaster.Where(w => w.Delmark != "*").ToListAsync();
                 ViewBag.Supplierid = new SelectList(suppliers, "Supplier_Id", "Supplier_Id");
                 ViewBag.SupplierName = new SelectList(suppliers, "Supplier_Id", "Supplier_Name");
@@ -229,12 +245,37 @@ namespace LeaMaPortal.Controllers
                     }).ToList()
                 };
 
-                var paymentType_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','Reccategory',',',null)").ToList();
-                ViewBag.PaymentType = new SelectList(paymentType_result, model.PaymentType);
-                var paymentMode_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','RecpType',',',null)").ToList();
-                ViewBag.PaymentMode = new SelectList(paymentMode_result, model.PaymentMode);
-                var PDCstatus_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','PDCstatus',',',null)").ToList();
-                ViewBag.PDCstatus = new SelectList(PDCstatus_result, model.PDCstatus);
+                //var paymentType_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','Reccategory',',',null)").ToList();
+                //ViewBag.PaymentType = new SelectList(paymentType_result, model.PaymentType);
+                //var paymentMode_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','RecpType',',',null)").ToList();
+                //ViewBag.PaymentMode = new SelectList(paymentMode_result, model.PaymentMode);
+                //var PDCstatus_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','PDCstatus',',',null)").ToList();
+                //ViewBag.PDCstatus = new SelectList(PDCstatus_result, model.PDCstatus);
+
+
+                //var paymentType_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','Reccategory',',',null)").ToList();
+
+                var paymentType_result = await db.tbl_combo_master.FirstOrDefaultAsync(y => y.screen_name == "Receipts" && y.comboname == "Reccategory");
+                if (paymentType_result != null)
+                {
+                    ViewBag.PaymentType = new SelectList(paymentType_result.combovalue.Split(','), model.PaymentType);
+                }
+
+                //var paymentMode_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','RecpType',',',null)").ToList();
+                var paymentMode_result = await db.tbl_combo_master.FirstOrDefaultAsync(y => y.screen_name == "Receipts" && y.comboname == "RecpType");
+                if (paymentMode_result != null)
+                {
+                    ViewBag.PaymentMode = new SelectList(paymentMode_result.combovalue.Split(','), model.PaymentMode);
+                }
+
+                //var PDCstatus_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','PDCstatus',',',null)").ToList();
+                var PDCstatus_result = await db.tbl_combo_master.FirstOrDefaultAsync(y => y.screen_name == "Receipts" && y.comboname == "PDCstatus");
+                if (PDCstatus_result != null)
+                {
+                    ViewBag.PDCstatus = new SelectList(PDCstatus_result.combovalue.Split(','), model.PDCstatus);
+                }
+
+
                 var suppliers = await db.tbl_suppliermaster.Where(w => w.Delmark != "*").ToListAsync();
                 ViewBag.Supplierid = new SelectList(suppliers, "Supplier_Id", "Supplier_Id",model.Supplier_id);
                 ViewBag.SupplierName = new SelectList(suppliers, "Supplier_Id", "Supplier_Name",model.Supplier_id);
