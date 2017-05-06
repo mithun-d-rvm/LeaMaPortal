@@ -286,6 +286,17 @@ namespace LeaMaPortal.Controllers
             //ViewBag.AgreementPd = model.AgreementPd;
             if(AgreementNo!=0)
             {
+                var agreementPdcList = db.tbl_agreement_pdc.Where(x => x.Agreement_No == AgreementNo && x.Delmark != "*").Select(x => new AgreementPdcViewModel()
+                {
+                Id=x.id,
+                Month=x.Month,
+                Year=x.Year,
+                Payment_Mode=x.Payment_Mode,
+                BankName=x.BankName,
+                Cheque_No=x.Cheque_No,
+                //Cheque_Date=string.IsNullOrWhiteSpace(x.Cheque_Date)?DateTime.Parse(x.Cheque_Date):,
+
+                }).ToList();
                     return PartialView("../Tca/Renewal/_AgreementPdc", model);
             }
             return PartialView("../Tca/_AgreementPdc", model);
@@ -463,15 +474,17 @@ namespace LeaMaPortal.Controllers
                 {
                     foreach (var item in model.AgreementPdcList)
                     {
+                        
+                        var Cheque_Date = item.Cheque_Date != null ? item.Cheque_Date.Value.Date.ToString("yyyy-MM-dd") :"null";
                         if (string.IsNullOrWhiteSpace(Agpdc))
                         {
                             Agpdc = "(" + model.Agreement_No + ",'" + item.Month + "'," + item.Year + ",'" + item.BankName + "','" + item.Cheque_No +
-                                    "','" + item.Cheque_Date + "','" + item.Cheque_Amount + "''" + item.Payment_Mode + "')";
+                                    "'," + Cheque_Date + ",'" + item.Cheque_Amount + "','" + item.Payment_Mode + "')";
                         }
                         else
                         {
                             Agpdc += ",(" + model.Agreement_No + ",'" + item.Month + "'," + item.Year + ",'" + item.BankName + "','" + item.Cheque_No +
-                                    "','" + item.Cheque_Date + "','" + item.Cheque_Amount + "''" + item.Payment_Mode + "')";
+                                    "'," + Cheque_Date + ",'" + item.Cheque_Amount + "','" + item.Payment_Mode + "')";
                         }
                     }
                 }
@@ -613,7 +626,7 @@ namespace LeaMaPortal.Controllers
                // model.Ag_Tenant_Name = "ARUL";
                 object[] parameters = Helper.GetTcaMySqlParameters<AgreementFormViewModel>(model, PFlag, System.Web.HttpContext.Current.User.Identity.Name);
                 //string paramNames = Helper.GetTcaMySqlParametersNames<AgreementFormViewModel>(model, PFlag, user);
-                string paramNames = "@PFlag, @PSingle_Multiple_Flag, @PAgreement_Refno, @PNew_Renewal_flag, @PAgreement_No, @PAgreement_Date, @PAg_Tenant_id, @PAg_Tenant_Name, @Pproperty_id, @PProperty_ID_Tawtheeq, @PProperties_Name, @PUnit_ID_Tawtheeq, @PUnit_Property_Name, @PCaretaker_id, @PCaretaker_Name, @Ptenant_source, @PAgent_id, @PAgent_name, @PEmp_id, @PEmp_name, @PVacantstartdate, @PAgreement_Start_Date, @PAgreement_End_Date, @PTotal_Rental_amount, @PPerday_Rental, @PAdvance_Security_Amount, @PSecurity_Flag, @PSecurity_chequeno, @PSecurity_chequedate, @PNotice_Period, @Pnofopayments, @PApproval_Flag, @PApproved_By, @PApproved_Date, @PTenant_Type, @PCreateduser, @PAgpdc, @PAgdoc, @PAgfac, @PAguti, @PAgchk, @PAgunit";
+                string paramNames = "@PFlag, @PSingle_Multiple_Flag, @PAgreement_Refno, @PNew_Renewal_flag, @PAgreement_No, @PAgreement_Date, @PAg_Tenant_id, @PAg_Tenant_Name, @Pproperty_id, @PProperty_ID_Tawtheeq, @PProperties_Name, @PUnit_ID_Tawtheeq, @PUnit_Property_Name, @PCaretaker_id, @PCaretaker_Name, @PVacantstartdate, @PAgreement_Start_Date, @PAgreement_End_Date, @PTotal_Rental_amount, @PPerday_Rental, @PAdvance_Security_Amount, @PSecurity_Flag, @PSecurity_chequeno, @PSecurity_chequedate, @PNotice_Period, @Pnofopayments, @PApproval_Flag, @PApproved_By, @PApproved_Date, @PTenant_Type, @PCreateduser, @PAgpdc, @PAgdoc, @PAgfac, @PAguti, @PAgchk, @PAgunit";
                 var c = paramNames.Split(',').Count();
                 var tenantCompany = await db.Database.SqlQuery<object>("CALL Usp_Agreement_All(" + paramNames +")", parameters).ToListAsync();
                

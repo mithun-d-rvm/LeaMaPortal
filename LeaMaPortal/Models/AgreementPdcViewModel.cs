@@ -27,7 +27,7 @@ namespace LeaMaPortal.Models
         public string Cheque_No { get; set; }
         [DisplayName("Cheque Date")]
         [DataType(DataType.Date)]
-        public DateTime Cheque_Date { get; set; }
+        public DateTime? Cheque_Date { get; set; }
         [DisplayName("Amount")]
         public decimal Cheque_Amount { get; set; }
         public List<AgreementPdcViewModel> AgreementPdcList  { get; set; }

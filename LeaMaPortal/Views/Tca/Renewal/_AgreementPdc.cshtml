@@ -216,7 +216,7 @@
                     },
                     'name': function (_, name) {
                         //return name + iTenantDocument[0].Name
-                        return 'AgreementPdcDetailsList[' + newindex + '].' + dataname
+                        return 'AgreementPdcList[' + newindex + '].' + dataname
                     }
                 });
             });
@@ -245,7 +245,7 @@
                     },
                     'name': function (_, name) {
                         //return name + iTenantDocument[0].Name
-                        return 'AgreementPdcDetailsList[' + newindex + '].' + dataname
+                        return 'AgreementPdcList[' + newindex + '].' + dataname
                     }
                 });
             });
@@ -263,6 +263,8 @@
             $("#AgreementPdRenewal #Cheque_Date").attr("disabled", false);
         }
         else {
+            $("#AgreementPdRenewal #Cheque_No").val('');
+            $("#AgreementPdRenewal #Cheque_Date").val('NULL')
             $("#AgreementPdRenewal #Cheque_No").attr("disabled", true);
             $("#AgreementPdRenewal #Cheque_Date").attr("disabled", true);
         }
