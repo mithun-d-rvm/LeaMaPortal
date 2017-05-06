@@ -26,10 +26,11 @@ namespace LeaMaPortal.Models
         [DisplayName("Cheque No")]
         public string Cheque_No { get; set; }
         [DisplayName("Cheque Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime? Cheque_Date { get; set; }
         [DisplayName("Amount")]
-        public decimal Cheque_Amount { get; set; }
+        public float? Cheque_Amount { get; set; }
         public List<AgreementPdcViewModel> AgreementPdcList  { get; set; }
     }
 }

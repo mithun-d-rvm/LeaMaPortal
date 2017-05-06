@@ -112,7 +112,7 @@
 
     function addAgreementUnitListRenewal(event) {
         event.preventDefault();
-
+        //Property_ID_Tawtheeq
         var Property_ID = $("#AgreementUnit-Renewal #Property_ID").val();
         var Properties_Name = $("#AgreementUnit-Renewal #Properties_Name option:selected").text();
         var Property_ID_Tawtheeq = $("#AgreementUnit-Renewal #Property_ID_Tawtheeq option:selected").text();
@@ -122,7 +122,7 @@
         var html = "<tr><td>" +
                       "<input type='hidden' name='AgreementUnitList[" + AgreementUnitListCount + "].Property_ID' id='AgreementUnitList[" + AgreementUnitListCount + "].Property_ID' value='" + Property_ID + "' data-name='Property_ID' />" +
                       "<input type='hidden' name='AgreementUnitList[" + AgreementUnitListCount + "].Properties_Name' id='AgreementUnitList[" + AgreementUnitListCount + "].Properties_Name' value='" + Properties_Name + "' data-name='Properties_Name' />" +
-                      "<input type='hidden' name='AgreementUnitList[" + AgreementUnitListCount + "].Property_ID_Tawtheeq' id='AgreementUnitList[" + AgreementUnitListCount + "].Property_ID_Tawtheeq' value='" + Payment_Mode + "' data-name='Property_ID_Tawtheeq' />" +
+                      "<input type='hidden' name='AgreementUnitList[" + AgreementUnitListCount + "].Property_ID_Tawtheeq' id='AgreementUnitList[" + AgreementUnitListCount + "].Property_ID_Tawtheeq' value='" + Property_ID_Tawtheeq + "' data-name='Property_ID_Tawtheeq' />" +
                       "<input type='hidden' name='AgreementUnitList[" + AgreementUnitListCount + "].Unit_ID_Tawtheeq' id='AgreementUnitList[" + AgreementUnitListCount + "].Unit_ID_Tawtheeq' value='" + Unit_ID_Tawtheeq + "' data-name='Unit_ID_Tawtheeq' />" +
                       "<input type='hidden' name='AgreementUnitList[" + AgreementUnitListCount + "].Unit_Property_Name' id='AgreementUnitList[" + AgreementUnitListCount + "].Unit_Property_Name' value='" + Unit_Property_Name + "' data-name='Unit_Property_Name' />" +
                       

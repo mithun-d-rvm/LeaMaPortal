@@ -25,8 +25,9 @@ namespace LeaMaPortal.DBContext
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<dashboard_earning> dashboard_earning { get; set; }
+        public virtual DbSet<dashboard_expenses> dashboard_expenses { get; set; }
         public virtual DbSet<dashboard_rental> dashboard_rental { get; set; }
-        public virtual DbSet<dashboard_utility> dashboard_utility { get; set; }
         public virtual DbSet<dashboard_vacancy> dashboard_vacancy { get; set; }
         public virtual DbSet<ebwater_report> ebwater_report { get; set; }
         public virtual DbSet<email_output> email_output { get; set; }
