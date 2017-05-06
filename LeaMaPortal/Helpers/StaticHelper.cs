@@ -55,8 +55,15 @@ namespace LeaMaPortal.Helpers
 
         public const string MAIL_SENT = "sent";
 
+        public const string NOTIFICATION_ALL = "All";
+        public const string NOTIFICATION_PDC = "PDC Deposits";
+        public const string NOTIFICATION_RENEWAL = "Renewal";
+        public const string NOTIFICATION_RENTAL_DUE = "Rental Due";
+        public const string NOTIFICATION_UTILITY_DUES = "Utility Dues";
+        public const string NOTIFICATION_AGREEMENT_APPROVAL = "Agreement approval";
+
         private static List<OptionModel> GetCheckListDropdown()
-        {
+        {   
             List<OptionModel> options = new List<OptionModel>();
             options.Add(new OptionModel { Name = CHECKlIST_NEWCONTRACT });
             options.Add(new OptionModel { Name = CHECKlIST_CONTRACTRENEWAL });
