@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace LeaMaPortal.Controllers
 {
@@ -52,15 +53,24 @@ namespace LeaMaPortal.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult AddOrUpdate()
+        public async Task<PartialViewResult> AddOrUpdate()
         {
-            ViewBag.Category = new SelectList(Common.Role);
-            ViewBag.MenuRights = db.tbl_formmaster.OrderBy(x => x.Id).Select(x => new MenuRights()
+            try
             {
-                Id = x.Id,
-                MenuName = x.MenuName
-            });
-            return PartialView("../Master/UserCreation/_AddOrUpdate", new UserCreationViewModel());
+                ViewBag.Category = new SelectList(Common.Role);
+                var data1 = db.Database.SqlQuery<MenuRights>("Select Id,MenuName from tbl_formmaster").ToList();
+                var data = db.tbl_formmaster.ToList();
+                ViewBag.MenuRights = await db.tbl_formmaster.OrderBy(x => x.Id).Select(x => new MenuRights()
+                {
+                    Id = x.Id,
+                    MenuName = x.MenuName
+                }).ToListAsync();
+                return PartialView("../Master/UserCreation/_AddOrUpdate", new UserCreationViewModel());
+            }
+            catch(Exception e)
+            {
+                throw;
+            }
         }
 
         [HttpPost]
@@ -120,14 +130,27 @@ namespace LeaMaPortal.Controllers
                     //return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
                 }
                 ViewBag.Category = new SelectList(Common.Role, userRights.Category);
-                var menuRights = userRights.MenuConfig.Split(',').Select(int.Parse).ToArray();
+                var menuRights = userRights.MenuConfig != null ? userRights.MenuConfig.Split(',').Select(int.Parse).ToArray() : null;
                 //1,2,5,6,7,8,9
-                ViewBag.MenuRights = db.tbl_formmaster.OrderBy(x=>x.Id).ToList().Select(x => new MenuRights()
+                if (menuRights != null)
                 {
-                    Id = x.Id,
-                    MenuName = x.MenuName,
-                    IsChecked = menuRights.Contains(x.Id)
-                });
+                    ViewBag.MenuRights = db.tbl_formmaster.OrderBy(x => x.Id).ToList().Select(x => new MenuRights()
+                    {
+                        Id = x.Id,
+                        MenuName = x.MenuName,
+                        IsChecked = menuRights.Contains(x.Id)
+                    });
+                }
+                else
+                {
+                    ViewBag.MenuRights = db.tbl_formmaster.OrderBy(x => x.Id).ToList().Select(x => new MenuRights()
+                    {
+                        Id = x.Id,
+                        MenuName = x.MenuName,
+                        IsChecked = false
+                    });
+                }
+               
                 UserCreationViewModel model = new UserCreationViewModel()
                 {
                     AddConfig = userRights.AddConfig,

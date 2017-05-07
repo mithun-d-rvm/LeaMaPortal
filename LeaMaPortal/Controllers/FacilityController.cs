@@ -30,7 +30,7 @@ namespace LeaMaPortal.Controllers
                 IList<FacilityViewModel> list;
                 if (string.IsNullOrWhiteSpace(Search))
                 {
-                    list = db.tbl_facilitymaster.Where(x => x.Delmark != "*").OrderBy(x => x.Facility_Name).Select(x => new FacilityViewModel()
+                    list = db.tbl_facilitymaster.Where(x => x.Delmark != "*").OrderByDescending(x => x.Id).Select(x => new FacilityViewModel()
                     {
                         Id = x.Id,
                         Facility_id = x.Facility_id,
@@ -41,8 +41,8 @@ namespace LeaMaPortal.Controllers
                 {
                     list = db.tbl_facilitymaster.Where(x => x.Delmark != "*"
                                     && (x.Facility_id.ToLower().Contains(Search.ToLower())
-                                    || x.Facility_Name.ToLower().Contains(Search.ToLower())))
-                                  .OrderBy(x => x.Facility_Name).Select(x => new FacilityViewModel()
+                                    || x.Facility_Name.ToLower().Contains(Search.ToLower()))).OrderByDescending(x=>x.Id)
+                                  .Select(x => new FacilityViewModel()
                                   {
                                       Id = x.Id,
                                       Facility_id = x.Facility_id,
