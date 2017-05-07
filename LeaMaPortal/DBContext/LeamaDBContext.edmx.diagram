@@ -106,6 +106,13 @@
         <AssociationConnector Association="LeamaModel.FKrep1" />
         <AssociationConnector Association="LeamaModel.FKsup1" />
         <AssociationConnector Association="LeamaModel.FKsupdt1" />
+        <EntityTypeShape EntityType="LeamaModel.view_auto_receipt" Width="1.5" PointX="0.75" PointY="30.75" />
+        <EntityTypeShape EntityType="LeamaModel.view_find_pdcstatus" Width="1.5" PointX="2.75" PointY="30.75" />
+        <EntityTypeShape EntityType="LeamaModel.view_invoice_agreement" Width="1.5" PointX="30.75" PointY="0.75" />
+        <EntityTypeShape EntityType="LeamaModel.view_invoice_receipt_pending" Width="1.5" PointX="30.75" PointY="23.75" />
+        <EntityTypeShape EntityType="LeamaModel.view_tenant" Width="1.5" PointX="30.75" PointY="28.75" />
+        <EntityTypeShape EntityType="LeamaModel.dashboard_earning" Width="1.5" PointX="31.375" PointY="4.75" />
+        <EntityTypeShape EntityType="LeamaModel.dashboard_expenses" Width="1.5" PointX="10.375" PointY="31.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
