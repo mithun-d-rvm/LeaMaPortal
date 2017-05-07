@@ -68,7 +68,7 @@ namespace LeaMaPortal.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult AddorUpdate(int? DropDownValue)
+        public async Task<PartialViewResult> AddorUpdate(int? DropDownValue)
         {
 
             //var InvType = db.Database.SqlQuery<string>(@"call usp_split('Invoice','invtype',',',null);").ToList();
@@ -89,8 +89,8 @@ namespace LeaMaPortal.Controllers
             ViewBag.Agreement_No = new SelectList(db.tbl_agreement.Where(x => x.Delmark != "*").OrderBy(x => x.Agreement_No).Select(x=>x.Agreement_No));
             ViewBag.invtype = new SelectList(Common.InvoiceType);
             ViewBag.month = new SelectList(Common.Month, "Value", "Text");
-            var invoice = db.tbl_invoicehd.Max(x => x.incno);
-            model.invno = (invoice != 0 ? invoice + 1 : 1) + DateTime.Now.Year.ToString();
+            var invoice = await db.tbl_invoicehd.Select(x => x.incno).DefaultIfEmpty(0).MaxAsync();
+            model.invno = (invoice != null ? invoice + 1 : 1) + DateTime.Now.Year.ToString();
             model.incno = invoice != null ? invoice + 1 : 1;
             model.bank_details = Common.Bank_number;
             model.year = DateTime.Now.Year;

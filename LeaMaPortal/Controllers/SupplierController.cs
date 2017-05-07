@@ -72,8 +72,13 @@ namespace LeaMaPortal.Controllers
         [HttpGet]
         public async Task<PartialViewResult> AddOrUpdate()
         {
-            var supplierId = await db.tbl_suppliermaster.Select(x => x.Supplier_Id).DefaultIfEmpty(0).MaxAsync();
-            ViewBag.SupplierId = supplierId == 0 ? 1 : supplierId + 1;
+            //var supplierId = await db.tbl_suppliermaster.Select(x => x.Supplier_Id).DefaultIfEmpty(0).MaxAsync();
+            var supplierId = db.tbl_suppliermaster.OrderByDescending(x => x.id).FirstOrDefault();
+            ViewBag.SupplierId = supplierId != null ? supplierId.Supplier_Id + 1 : 1;
+
+
+            //int? supplierId = await db.tbl_suppliermaster.MaxAsync(x => (int?)x.Supplier_Id);
+            //ViewBag.SupplierId = supplierId == null ? 1 : supplierId + 1;
 
             ViewBag.Type = new SelectList(Common.TenantType);
 
