@@ -37,7 +37,7 @@
             @Html.DropDownList("Month", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
         </div>
         <div class="col-md-1 w-md-10">
-            @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+            @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);" } })
         </div>
         <div class="col-md-1 w-md-13">
             @Html.DropDownList("Payment_Mode", null,"--Select--", new { @class = "form-control master-form-input AgreementPdPaymentMode" })
@@ -52,7 +52,7 @@
             @Html.EditorFor(model => model.Cheque_Date, new { htmlAttributes = new { @class = "master-form-input form-control" } })
         </div>
         <div class="col-md-1 w-md-10">
-            @Html.EditorFor(model => model.Cheque_Amount, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+            @Html.EditorFor(model => model.Cheque_Amount, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'Cheque_Amount');" } })
         </div>
         <div class="col-md-1 w-md-10">
             <button class="document-btn" onclick="addAgreementPdcDetails(event);">Add</button>
@@ -153,7 +153,7 @@
                     },
                     'name': function (_, name) {
                         //return name + iTenantDocument[0].Name
-                        return 'AgreementPdcDetailsList[' + newindex + '].' + dataname
+                        return 'AgreementPdcList[' + newindex + '].' + dataname
                     }
                 });
             });
@@ -182,7 +182,7 @@
                     },
                     'name': function (_, name) {
                         //return name + iTenantDocument[0].Name
-                        return 'AgreementPdcDetailsList[' + newindex + '].' + dataname
+                        return 'AgreementPdcList[' + newindex + '].' + dataname
                     }
                 });
             });
@@ -200,6 +200,8 @@
             $("#Cheque_Date").attr("disabled", false);
         }
         else {
+            $("#Cheque_No").val('');
+            $("#Cheque_Date").val('');
             $("#Cheque_No").attr("disabled", true);
             $("#Cheque_Date").attr("disabled", true);
         }

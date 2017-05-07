@@ -1,0 +1,281 @@
+﻿
+
+@model LeaMaPortal.Models.AgreementPdcViewModel
+<div class="row p-b-25 text-uppercase">
+    <span> <strong> Agreement PDC </strong> </span>
+</div>
+
+<div class="row" id="AgreementPdRenewal">
+    <div class="col-md-12 document-row">
+        <div class="col-md-1 w-md-10">
+            @*@Html.EditorFor(model => model.AgreementPd.Month, new { @class = "label-default-remove AgreementPdMonth" })*@
+            @Html.LabelFor(m=>m.Month, new { @class = "label-default-remove " })
+        </div>
+        <div class="col-md-1 w-md-10">
+            @Html.LabelFor(model => model.Year, new { @class = "label-default-remove " })
+        </div>
+        <div class="col-md-1 w-md-13">
+            @Html.LabelFor(model => model.Payment_Mode, new { @class = "label-default-remove " })
+        </div>
+        <div class="col-md-1 w-md-15">
+            @Html.LabelFor(model => model.BankName, new { @class = "label-default-remove " })
+        </div>
+        <div class="col-md-1 w-md-14">
+            @Html.LabelFor(model => model.Cheque_No, new { @class = "label-default-remove " })
+        </div>
+        <div class="col-md-1 w-md-16">
+            @Html.LabelFor(model => model.Cheque_Date, new { @class = "label-default-remove " })
+        </div>
+        <div class="col-md-1 w-md-14">
+            @Html.LabelFor(model => model.Cheque_Amount, new { @class = "label-default-remove" })
+        </div>
+       
+    </div>
+    <div class="col-md-12 document-row">
+        <div class="col-md-1 w-md-10">
+            @*@Html.EditorFor(model => model.AgreementPd.Month, new { @class = "label-default-remove AgreementPdMonth" })*@
+            @Html.DropDownList("Month", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
+        </div>
+        <div class="col-md-1 w-md-10">
+            @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);" } })
+        </div>
+        <div class="col-md-1 w-md-13">
+            @Html.DropDownList("Payment_Mode", null,"--Select--", new { @class = "form-control master-form-input AgreementPdPaymentMode" })
+        </div>
+        <div class="col-md-1 w-md-15">
+            @Html.EditorFor(model => model.BankName, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+        </div>
+        <div class="col-md-1 w-md-14">
+            @Html.EditorFor(model => model.Cheque_No, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+        </div>
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.Cheque_Date, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+        </div>
+        <div class="col-md-1 w-md-10">
+            @Html.EditorFor(model => model.Cheque_Amount, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'AgreementPdRenewal #Cheque_Amount');" } })
+        </div>
+        <div class="col-md-1 w-md-10">
+            <button class="document-btn" onclick="addAgreementPdcDetailsRenewal(event);">Add</button>
+        </div>
+    </div>
+</div>
+<div class="row ht-5">
+    &nbsp;
+</div>
+<input type="hidden" id="AgreementPdcListCountRenewal" value="@Model.AgreementPdcList.Count" />
+<div class="row">
+
+    <table id="AgreementPdcDetailsList-Renewal" class="col-md-12 document-row">
+
+        @for (int i = 0; i < Model.AgreementPdcList.Count; i++)
+            {
+
+            <tr>
+                <td>
+                    <input type="hidden" name="AgreementPdcList[@i].Month" id="AgreementPdcList[@i].Month" value="@Model.AgreementPdcList[i].Month" data-name="Month" />
+                    <input type="hidden" name="AgreementPdcList[@i].Year" id="AgreementPdcList[@i].Year" value="@Model.AgreementPdcList[i].Year" data-name="Year" />
+                    <input type="hidden" name="AgreementPdcList[@i].Payment_Mode" id="AgreementPdcList[@i].Payment_Mode" value="@Model.AgreementPdcList[i].Payment_Mode" data-name="Payment_Mode" />
+
+                    <input type="hidden" name="AgreementPdcList[@i].BankName" id="AgreementPdcList[@i].BankName" value="@Model.AgreementPdcList[i].BankName" data-name="BankName" />
+                    <input type="hidden" name="AgreementPdcList[@i].Cheque_No" id="AgreementPdcList[@i].Cheque_No" value="@Model.AgreementPdcList[i].Cheque_No" data-name="Cheque_No" />
+                    <input type="hidden" name="AgreementPdcList[@i].Cheque_Date" id="AgreementPdcList[@i].Cheque_Date" value="@Model.AgreementPdcList[i].Cheque_Date" data-name="Cheque_Date" />
+                    <input type="hidden" name="AgreementPdcList[@i].Cheque_Amount" id="AgreementPdcList[@i].Cheque_Amount" value="@Model.AgreementPdcList[i].Cheque_Amount" data-name="Cheque_Amount" />
+                    <div class="col-md-12 document-row">
+                        <div class="col-md-1 col-md-1 w-md-13">
+                            @Model.AgreementPdcList[i].Month
+                        </div>
+                        <div class="col-md-1 w-md-14">
+                            @Model.AgreementPdcList[i].Year
+                            @*@Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        </div>
+                        <div class="col-md-1">
+                            @Model.AgreementPdcList[i].Payment_Mode
+                            @*<select class="form-control master-form-input">
+                                    <option> Cash </option>
+                                    <option> Cheque </option>
+                                    <option> Card </option>
+                                </select>*@
+                        </div>
+                        <div class="col-md-1 w-md-15">
+                            @Model.AgreementPdcList[i].BankName
+                            @*@Html.EditorFor(model => model.BankName, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        </div>
+                        <div class="col-md-1 w-md-14">
+                            @*@Html.EditorFor(model => model.Cheque_No, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                            @Model.AgreementPdcList[i].Cheque_No
+                        </div>
+                        <div class="col-md-1 w-md-14">
+                            @*@Html.EditorFor(model => model.Cheque_Date, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                            @if (Model.AgreementPdcList[i].Cheque_Date.HasValue)
+                            {
+                                 <span>@Model.AgreementPdcList[i].Cheque_Date.Value.ToString("yyyy-MM-dd")</span>
+                            }
+                            else
+                            {
+
+                            }
+                        </div>
+                        <div class="col-md-1">
+                            @Model.AgreementPdcList[i].Cheque_Amount
+                            @*@Html.EditorFor(model => model.Cheque_Amount, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn agreementpdclistRenewal-remove">X</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>
+<div class="row ht-5">
+    &nbsp;
+</div>
+
+
+<div class="row">
+    @*<div class="col-md-1 w-md-10 pull-right">
+            <button class="document-btn">Delete</button>
+        </div>*@
+
+</div>
+<div class="row ht-5">
+    &nbsp;
+</div>
+<script>
+    var AgreementPdCountRenewal = parseInt($("#AgreementPdcListCountRenewal").val());
+
+    function addAgreementPdcDetailsRenewal(event) {
+        event.preventDefault();
+
+        var Month =$("#AgreementPdRenewal #Month").val();
+        var Year =parseInt($("#AgreementPdRenewal #Year").val());
+        var Payment_Mode = $("#AgreementPdRenewal #Payment_Mode").val();
+        var BankName = $("#AgreementPdRenewal #BankName").val();
+        var Cheque_No = $("#AgreementPdRenewal #Cheque_No").val();
+        var Cheque_Date = $("#AgreementPdRenewal #Cheque_Date").val();
+        var Cheque_Amount =parseFloat($("#AgreementPdRenewal #Cheque_Amount").val());
+
+        var html = "<tr><td>" +
+                      "<input type='hidden' name='AgreementPdcList[" + AgreementPdCountRenewal + "].Month' id='AgreementPdcList[" + AgreementPdCountRenewal + "].Month' value='" + Month + "' data-name='Month' />" +
+                      "<input type='hidden' name='AgreementPdcList[" + AgreementPdCountRenewal + "].Year' id='AgreementPdcList[" + AgreementPdCountRenewal + "].Year' value='" + Year + "' data-name='Year' />" +
+                      "<input type='hidden' name='AgreementPdcList[" + AgreementPdCountRenewal + "].Payment_Mode' id='AgreementPdcList[" + AgreementPdCountRenewal + "].Payment_Mode' value='" + Payment_Mode + "' data-name='Payment_Mode' />" +
+                      "<input type='hidden' name='AgreementPdcList[" + AgreementPdCountRenewal + "].BankName' id='AgreementPdcList[" + AgreementPdCountRenewal + "].BankName' value='" + BankName + "' data-name='BankName' />" +
+                      "<input type='hidden' name='AgreementPdcList[" + AgreementPdCountRenewal + "].Cheque_No' id='AgreementPdcList[" + AgreementPdCountRenewal + "].Cheque_No' value='" + Cheque_No + "' data-name='Cheque_No' />" +
+                      "<input type='hidden' name='AgreementPdcList[" + AgreementPdCountRenewal + "].Cheque_Date' id='AgreementPdcList[" + AgreementPdCountRenewal + "].Cheque_Date' value='" + Cheque_Date + "' data-name='Cheque_Date' />" +
+                      "<input type='hidden' name='AgreementPdcList[" + AgreementPdCountRenewal + "].Cheque_Amount' id='AgreementPdcList[" + AgreementPdCountRenewal + "].Cheque_Amount' value='" + Cheque_Amount + "' data-name='Cheque_Amount' />" +
+
+                      "<div class='col-md-12 document-row'>" +
+                          "<div class='col-md-1 col-md-1 w-md-13'>" + Month + "</div>" +
+
+
+                          "<div class='col-md-1 w-md-14'>" +
+
+                          Year +
+
+        "</div>" +
+        "<div class='col-md-1'>" +
+        Payment_Mode +
+        "</div>" +
+        "<div class='col-md-1 w-md-15'>" +
+
+        BankName +
+
+        "</div>" +
+        "<div class='col-md-1 w-md-14'>" +
+            Cheque_No +
+        "</div>" +
+        "<div class='col-md-1 w-md-14'>" +
+
+            Cheque_Date +
+        "</div>" +
+        "<div class='col-md-1'>" +
+            Cheque_Amount +
+
+        "</div>" +
+        "<div class='col-md-1'>" +
+           "<button class='btn agreementpdclistRenewal-remove'>X</button>" +
+        "</div>" +
+    "</div>" +
+"</td>" +
+"</tr>";
+        //alert(html);
+
+        $("#AgreementPdcDetailsList-Renewal").append(html);
+        AgreementPdCountRenewal++;
+    }
+
+    function removeAgreementPdcDetails() {
+        debugger;
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('AgreementPdcDetailsList-Renewal');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'AgreementPdcList[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+        k = newindex;
+    };
+
+
+
+
+    $(document).on('click', 'button.agreementpdclistRenewal-remove', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('AgreementPdcDetailsList-Renewal');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'AgreementPdcList[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+        AgreementPdCountRenewal = newindex;
+    });
+    $("#AgreementPdRenewal #Payment_Mode").change(function () {
+        debugger;
+        var type = $("#AgreementPdRenewal #Payment_Mode").val();
+        if (type == "Cheque") {
+            $("#AgreementPdRenewal #Cheque_No").attr("disabled", false);
+            $("#AgreementPdRenewal #Cheque_Date").attr("disabled", false);
+        }
+        else {
+            $("#AgreementPdRenewal #Cheque_No").val('');
+            $("#AgreementPdRenewal #Cheque_Date").val('NULL')
+            $("#AgreementPdRenewal #Cheque_No").attr("disabled", true);
+            $("#AgreementPdRenewal #Cheque_Date").attr("disabled", true);
+        }
+        return;
+    });
+    
+</script>
