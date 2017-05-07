@@ -10,7 +10,45 @@
 <div class="row">
    
     <table id="AgreementPdcDetailsList" class="col-md-12 document-row">
-        
+                 <tr>
+                     <td>
+                         <div class="col-md-12 document-row">
+                             <div class="col-md-1 ">
+                                 Month
+                             </div>
+                             <div class="col-md-1 ">
+                                 Year
+                                 
+                             </div>
+                             <div class="col-md-1">
+                               Payment Mode
+                      
+                             </div>
+                             <div class="col-md-1 w-md-15">
+                                Bank Name
+                                 
+                             </div>
+                             <div class="col-md-1 w-md-14">
+                               
+                                 Cheque No
+                             </div>
+                             <div class="col-md-1">
+                                 @*@Html.EditorFor(model => model.Cheque_Date, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                                 Date
+                             </div>
+                             <div class="col-md-1">
+                                Amount
+                                 
+                             </div>
+                             <div class="col-md-1">
+                                 Status
+                             </div>
+                             <div class="col-md-1">
+                                 Remove
+                             </div>
+                         </div>
+                     </td>
+                 </tr>
             @for (int i = 0; i < Model.AgreementPdcList.Count; i++)
             {
 
@@ -25,10 +63,10 @@
                     <input type="hidden" name="AgreementPdcList[@i].Cheque_Date" id="AgreementPdcList[@i].Cheque_Date" value="@Model.AgreementPdcList[i].Cheque_Date" data-name="Cheque_Date" />
                     <input type="hidden" name="AgreementPdcList[@i].Cheque_Amount" id="AgreementPdcList[@i].Cheque_Amount" value="@Model.AgreementPdcList[i].Cheque_Amount" data-name="Cheque_Amount" />
                     <div class="col-md-12 document-row">
-                        <div class="col-md-1 col-md-1 w-md-13">
+                        <div class="col-md-1 ">
                             @Model.AgreementPdcList[i].Month
                         </div>
-                        <div class="col-md-1 w-md-14">
+                        <div class="col-md-1 ">
                             @Model.AgreementPdcList[i].Year
                             @*@Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input" } })*@
                         </div>
@@ -48,13 +86,16 @@
                             @*@Html.EditorFor(model => model.Cheque_No, new { htmlAttributes = new { @class = "master-form-input" } })*@
                             @Model.AgreementPdcList[i].Cheque_No
                         </div>
-                        <div class="col-md-1 w-md-14">
+                        <div class="col-md-1">
                             @*@Html.EditorFor(model => model.Cheque_Date, new { htmlAttributes = new { @class = "master-form-input" } })*@
                             @Model.AgreementPdcList[i].Cheque_Date
                         </div>
                         <div class="col-md-1">
                             @Model.AgreementPdcList[i].Cheque_Amount
                             @*@Html.EditorFor(model => model.Cheque_Amount, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        </div>
+                        <div class="col-md-1">
+                            <input type="text" name="AgreementPdcList[@i].status" class="form-control" maxlength="20" />
                         </div>
                         <div class="col-md-1">
                            <button class="btn agreementpdclist-remove">X</button>

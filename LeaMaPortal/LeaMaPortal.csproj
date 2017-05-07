@@ -213,9 +213,6 @@
     <Compile Include="DBContext\dashboard_rental.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBContext\dashboard_utility.cs">
-      <DependentUpon>LeamaDBContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="DBContext\dashboard_vacancy.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
@@ -429,6 +426,9 @@
     <Compile Include="DBContext\vacancy_report.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBContext\view_agreement_close_pending.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBContext\view_auto_receipt.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
@@ -522,6 +522,10 @@
       <DependentUpon>LeamaDBContext.edmx</DependentUpon>
       <LastGenOutput>LeamaDBContext.cs</LastGenOutput>
     </Content>
+    <Content Include="Documents\AgreementDocument\e5b143d4-dad7-4adc-af96-b290b1b8381ePenguins.jpg" />
+    <Content Include="Documents\AgreementDocument\f4a02006-1149-4d8c-b23d-19eac7e48ae6Penguins.jpg" />
+    <Content Include="Documents\TenantCompany\49abe8b9-7733-4443-86d0-1a710ece4c74Event.png" />
+    <Content Include="Documents\TenantCompany\73710731-c90c-4ea9-a47b-db252bd9850f00000000f9c17368_01032017110049.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -565,6 +569,7 @@
     <Content Include="Content\bootstrap-datepicker.css.map" />
     <None Include="Properties\PublishProfiles\leamaportal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\inputvalidations.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -847,9 +852,23 @@
     <Content Include="Views\Receipts\_List.cshtml" />
     <Content Include="Views\Tca\_AgreementFacility.cshtml" />
     <Content Include="Views\Tca\_List.cshtml" />
+    <Content Include="Views\Tca\Agreement\_AgreementFormRenewal.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementCheckList.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementCheckListDetails.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementDocument.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementDocumentDetails.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementFacility.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementPdc.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementPdcDetails.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementUnit.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementUnitDetails.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementUtility.cshtml" />
+    <Content Include="Views\Tca\Renewal\_AgreementUtilityDetails.cshtml" />
+    <Content Include="Views\Tca\Closure\_AgreementPdcDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Documents\TenantIndividual\" />
     <Folder Include="Models\DBContext\" />
     <Folder Include="Views\PropertyMaster\" />
     <Folder Include="Views\Supplier\" />

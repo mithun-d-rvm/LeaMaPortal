@@ -1,0 +1,177 @@
+﻿@model LeaMaPortal.Models.AgreementFacilityViewModel
+
+<div class="row p-b-25 text-uppercase">
+    <span> <strong> Agreement Facility </strong> </span>
+</div>
+
+<div class="row" id="agreementFacilityRenewal">
+    <div class="col-md-12 document-row">
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.Facility_id, htmlAttributes: new { @class = "label-default-remove" })
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Facility_Name, htmlAttributes: new { @class = "label-default-remove" })
+        </div>
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.Numbers_available, htmlAttributes: new { @class = "label-default-remove" })
+        </div>
+        <div class="col-md-12 document-row">
+            <div class="col-md-2">
+                @Html.DropDownList("Facility_id", null,"--Select--", new { @class = "form-control master-form-input" })
+            </div>
+            <div class="col-md-4">
+                @Html.DropDownList("Facility_Name", null, "--Select--", new { @class = "form-control master-form-input" })
+            </div>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Numbers_available, new { htmlAttributes = new { @class = "master-form-input" } })
+            </div>
+            <div class="col-md-1">
+                &nbsp;
+            </div>
+            <div class="col-md-1 w-md-10 ">
+                <button type="button" class="document-btn agreementdoc" onclick="agreementfacilityRenewal(event);" id="addagreementFacilitydetails">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row ht-5">
+    &nbsp;
+</div>
+
+@*@Html.Partial("_AgreementFacilityDetails")*@
+<input type="hidden" value="@Model.agreementFacilityList.Count" id="agreementFacilityListCountRenewal" />
+<div class="row">
+
+
+    <table id="AgreementFacilityListRenewal" class="col-md-12 document-row">
+
+        @for (int i = 0; i < Model.agreementFacilityList.Count; i++)
+            {
+
+            <tr class="col-md-12 document-row">
+                <td>
+                    <input type="hidden" name="agreementFacilityList[@i].Facility_id" id="agreementFacilityList[@i].Facility_id" value="@Model.agreementFacilityList[i].Facility_id" data-name="Facility_id" />
+                    <input type="hidden" name="agreementFacilityList[@i].Facility_Name" id="agreementFacilityList[@i].Facility_Name" value="@Model.agreementFacilityList[i].Facility_Name" data-name="Facility_Name" />
+                    <input type="hidden" name="agreementFacilityList[@i].Numbers_available" id="agreementFacilityList[@i].Numbers_available" value="@Model.agreementFacilityList[i].Numbers_available" data-name="Numbers_available" />
+
+                    <input type="hidden" name="agreementFacilityList[@i].Id" id="agreementFacilityList[@i].Id" value="@Model.agreementFacilityList[i].Id" data-name="Id" />
+
+                    <div class="col-md-12 Facility-row">
+                        <div class="col-md-2 col-md-1 w-md-13">
+                            @Model.agreementFacilityList[i].Facility_id
+                        </div>
+                        <div class="col-md-4 w-md-14">
+                            @Model.agreementFacilityList[i].Facility_Name
+                            @*@Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        </div>
+                        <div class="col-md-2 w-md-16">
+                            @Model.agreementFacilityList[i].Numbers_available
+
+                        </div>
+
+                        <div class="col-md-1 w-md-14">
+                            <button class="btn agreementFacilitylist-remove">X</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+</div>
+
+
+<div class="row ht-5">
+    &nbsp;
+</div>
+
+<script>
+    $("#agreementFacilityRenewal #Facility_Name").change(function () {
+       // alert($("#Facility_Name option:selected").val());
+       // $("#Facility_id option:selected").select($("#Facility_Name option:selected").val());
+        return;
+    });
+    $("#agreementFacilityRenewal #Facility_id").change(function () {
+      //  $("#Facility_Name option:selected").val($("#Facility_id").val());
+
+        return;
+    });
+    var aFacilityListRenewalCount = parseInt($("#agreementFacilityListCountRenewal").val());
+    function agreementfacilityRenewal(e) {
+        e.preventDefault();
+        var Facility_id = $("#agreementFacilityRenewal #Facility_Name").val();
+        var Facility_Name = $("#agreementFacilityRenewal #Facility_Name option:selected").text();
+        var Numbers_available = $("#agreementFacilityRenewal #Numbers_available").val();
+
+        var html="<tr><td>"+
+        "<input type='hidden' name='agreementFacilityList["+aFacilityListRenewalCount+"].Facility_id' id='agreementFacilityList["+aFacilityListRenewalCount+"].Facility_id'"+
+        "value='"+Facility_id+"' data-name='Facility_id' />" +
+        "<input type='hidden' name='agreementFacilityList["+aFacilityListRenewalCount+"].Facility_Name' id='agreementFacilityList["+aFacilityListRenewalCount+"].Facility_Name'"+
+        "value='"+Facility_Name+"' data-name='Facility_Name' />"+
+        " <input type='hidden' name='agreementFacilityList["+aFacilityListRenewalCount+"].Numbers_available' id='agreementFacilityList["+aFacilityListRenewalCount+"].Numbers_available'"+
+        "value='"+Numbers_available+"' data-name='Numbers_available' />"+
+
+        "<input type='hidden' name='agreementFacilityList["+aFacilityListRenewalCount+"].Id' id='agreementFacilityList["+aFacilityListRenewalCount+"].Id' value='0' data-name='Id' />"+
+
+        "<div class='col-md-12 document-row'>"+
+        " <div class='col-md-2 col-md-1 w-md-13'>"+
+                                   Facility_id +
+        "</div>"+
+        "<div class='col-md-4 w-md-14'>"+
+                                   Facility_Name +
+
+        "</div>"+
+                                "<div class='col-md-2 w-md-16'>"+
+                                   Numbers_available+
+
+        "</div>"+
+
+        "<div class='col-md-1 w-md-14'>"+
+                                 "<button class='btn agreementFacilitylist-remove'>X</button>" +
+                                 "</div></div></td></tr>";
+        $("#AgreementFacilityListRenewal").append(html);
+
+        aFacilityListRenewalCount++;
+        return;
+    }
+
+    $(document).on('click', 'button.agreementFacilitylist-remove', function (e) {
+        e.preventDefault();
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('AgreementFacilityList');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantFacility[0].Name
+                        return 'agreementFacilityList[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+        aFacilityListRenewalCount = newindex;
+    });
+    $("#agreementFacilityRenewal #Facility_id").change(function () {
+        debugger;
+        var facility_id = $("#agreementFacilityRenewal #Facility_id").val();
+        $("#agreementFacilityRenewal #Facility_Name").val(facility_id);
+        return;
+    });
+    $("#agreementFacilityRenewal #Facility_Name").change(function () {
+        var facility_id = $("#agreementFacilityRenewal #Facility_Name").val();
+        $("#agreementFacilityRenewal #Facility_id").val(facility_id);
+        return;
+    });
+</script>
