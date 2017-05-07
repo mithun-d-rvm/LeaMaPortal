@@ -204,6 +204,12 @@
     <Compile Include="DBContext\collection_summary.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBContext\dashboard_earning.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\dashboard_expenses.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBContext\dashboard_rental.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>

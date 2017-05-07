@@ -117,10 +117,13 @@ namespace LeaMaPortal.Controllers
                          new MySqlParameter("@PActive", model.Active),
                          new MySqlParameter("@PCreatedUser",System.Web.HttpContext.Current.User.Identity.Name)
                     };
-
                     var userCreation = await db.Database.SqlQuery<object>("call Usp_Userrights_All(@PFlag, @Pid, @PName, @PUserid, @PPwd, @PCnfpwd, @PCategory, @PEmail, @PPhoneno, @PAddConfig, @PEditConfig, @PDeleteConfig, @PMenuConfig, @PActive, @PCreateduser)", parameters).ToListAsync();
+                    return Json(result, JsonRequestBehavior.AllowGet);
                 }
-                return Json(result, JsonRequestBehavior.AllowGet);
+                else
+                {
+                    return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception e)
             {
