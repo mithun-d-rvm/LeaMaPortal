@@ -58,8 +58,6 @@ namespace LeaMaPortal.Controllers
             try
             {
                 ViewBag.Category = new SelectList(Common.Role);
-                var data1 = db.Database.SqlQuery<MenuRights>("Select Id,MenuName from tbl_formmaster").ToList();
-                var data = db.tbl_formmaster.ToList();
                 ViewBag.MenuRights = await db.tbl_formmaster.OrderBy(x => x.Id).Select(x => new MenuRights()
                 {
                     Id = x.Id,
@@ -90,6 +88,17 @@ namespace LeaMaPortal.Controllers
                     else
                     {
                         PFlag = "UPDATE";
+                        if (string.IsNullOrWhiteSpace(model.Pwd))
+                        {
+                            var userRights = db.tbl_userrights.FirstOrDefault(x => x.Delmark != "*" && x.id == model.id);
+                            if (userRights != null)
+                            {
+                                model.Pwd = userRights.Pwd;
+                                model.Cnfpwd = userRights.Cnfpwd;
+                            }
+                        }
+                        
+                        
                     }
                     object[] parameters = {
                          new MySqlParameter("@PFlag", PFlag),
@@ -108,10 +117,13 @@ namespace LeaMaPortal.Controllers
                          new MySqlParameter("@PActive", model.Active),
                          new MySqlParameter("@PCreatedUser",System.Web.HttpContext.Current.User.Identity.Name)
                     };
-
-                    var userCreation = await db.Database.SqlQuery<object>("call leama.Usp_Userrights_All(@PFlag, @Pid, @PName, @PUserid, @PPwd, @PCnfpwd, @PCategory, @PEmail, @PPhoneno, @PAddConfig, @PEditConfig, @PDeleteConfig, @PMenuConfig, @PActive, @PCreateduser)", parameters).ToListAsync();
+                    var userCreation = await db.Database.SqlQuery<object>("call Usp_Userrights_All(@PFlag, @Pid, @PName, @PUserid, @PPwd, @PCnfpwd, @PCategory, @PEmail, @PPhoneno, @PAddConfig, @PEditConfig, @PDeleteConfig, @PMenuConfig, @PActive, @PCreateduser)", parameters).ToListAsync();
+                    return Json(result, JsonRequestBehavior.AllowGet);
                 }
-                return Json(result, JsonRequestBehavior.AllowGet);
+                else
+                {
+                    return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception e)
             {
@@ -200,7 +212,7 @@ namespace LeaMaPortal.Controllers
                          new MySqlParameter("@PCreatedUser",System.Web.HttpContext.Current.User.Identity.Name)
                     };
 
-            var userCreation = await db.Database.SqlQuery<object>("call leama.Usp_Userrights_All(@PFlag, @Pid, @PName, @PUserid, @PPwd, @PCnfpwd, @PCategory, @PEmail, @PPhoneno, @PAddConfig, @PEditConfig, @PDeleteConfig, @PMenuConfig, @PActive, @PCreateduser)", parameters).ToListAsync();
+            var userCreation = await db.Database.SqlQuery<object>("call Usp_Userrights_All(@PFlag, @Pid, @PName, @PUserid, @PPwd, @PCnfpwd, @PCategory, @PEmail, @PPhoneno, @PAddConfig, @PEditConfig, @PDeleteConfig, @PMenuConfig, @PActive, @PCreateduser)", parameters).ToListAsync();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

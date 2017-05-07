@@ -102,6 +102,8 @@ namespace LeaMaPortal.DBContext
         public virtual DbSet<view_invoice_agreement> view_invoice_agreement { get; set; }
         public virtual DbSet<view_invoice_receipt_pending> view_invoice_receipt_pending { get; set; }
         public virtual DbSet<view_tenant> view_tenant { get; set; }
+        public virtual DbSet<dashboard_earning> dashboard_earning { get; set; }
+        public virtual DbSet<dashboard_expenses> dashboard_expenses { get; set; }
     
         public virtual ObjectResult<string> Usp_split(string screen_name, string combo_name, string deli, string target)
         {

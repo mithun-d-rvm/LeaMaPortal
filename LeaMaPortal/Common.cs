@@ -23,7 +23,8 @@ namespace LeaMaPortal
         public const int DefaultMaster = 9;
         public const string Bank_number = "XXXXYYYYZZZZ";
         public const string TenantIndividualDocumentContainer = "Documents/TenantIndividual/";
-        
+        public const string TenantIndividualDocumentDirectoryName = "TenantIndividual";
+
         public static List<FormMaster> FormMasterList = new List<FormMaster>()
         {
            //new FormMaster() {Id=1,FormName="" },
@@ -54,6 +55,8 @@ namespace LeaMaPortal
         public static List<string> ComapanyActivity = new List<string>() { "Activity1" };
         public static List<string> Issuance_authority = new List<string>() { "List-1" };
         public const string TenantCompanyDocumentContainer = "Documents/TenantCompany/";
+        public const string TenantCompanyDocumentDirectoryName = "TenantCompany";
+        
         public static List<string> Nationality = new List<string>() { "UAE", "Non-UAE" };
         public static string DefaultNationality = "UAE";
         public static string DefaultMaridalStatus = "Family";
@@ -61,10 +64,12 @@ namespace LeaMaPortal
 
         //agreement
         public const string AgreementDocumentContainer = "Documents/AgreementDocument/";
+        public const string AgreementDocumentDirectoryName = "AgreementDocument";
+        
         public const string AgreementCheck_type= "New Contract";
         public const string NewAgreement = "New";
         public const string Renewal = "Renewal";
-
+        
         public static List<MonthField> Month = new List<MonthField>()
         {
             new MonthField

@@ -243,8 +243,6 @@
                 $("#hdnDeleteConfig").val(1);
             }
 
-             //var form = $('"form#VerifyId')[0]; // You need to use standart javascript object here
-            var formData = new FormData(form);
             $.ajax(
                 {
                     url: "../UserCreation/AddOrUpdate",
@@ -254,11 +252,20 @@
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
-                        GetUserCreation();
-                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
-                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
-                        $(".result-title").text("Success");
-                        $(".result-modal-body span").text(userRightsAdded);
+                        if (response.Errors != null) {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(masterResultError);
+                        }
+                        else {
+                            GetUserCreation();
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(userRightsAdded);
+                        }
+                        
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");

@@ -213,6 +213,9 @@
     <Compile Include="DBContext\dashboard_rental.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBContext\dashboard_utility.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBContext\dashboard_vacancy.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
@@ -861,9 +864,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Documents\AgreementDocument\" />
-    <Folder Include="Documents\TenantCompany\" />
-    <Folder Include="Documents\TenantIndividual\" />
     <Folder Include="Models\DBContext\" />
     <Folder Include="Views\PropertyMaster\" />
     <Folder Include="Views\Supplier\" />

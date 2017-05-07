@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.IO;
 
 namespace LeaMaPortal
 {
@@ -64,5 +65,27 @@ namespace LeaMaPortal
             return parameters.ToArray();
         }
 
+
+        public static bool CheckDirectory(string name)
+        {
+            try
+            {
+                var path = string.Format("{0}Documents", AppDomain.CurrentDomain.BaseDirectory);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                path = string.Format("{0}Documents\\" + name, AppDomain.CurrentDomain.BaseDirectory);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
