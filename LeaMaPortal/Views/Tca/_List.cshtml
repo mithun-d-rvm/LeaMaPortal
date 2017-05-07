@@ -45,11 +45,11 @@
                     <div class="divTableCell">@item.Ag_Tenant_Name</div>
                     <div class="divTableCell">@item.Unit_Property_Name</div>
                     <div class="divTableCell">
-                        @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-open agreement-renewal", title = "Renewal",@data_agreementno=@item.Agreement_No })  |
-                        @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-save agreement-closure", title = "Closure", @data_toggle = "modal", @data_target = "#closureModal", @data_agreementno = @item.Agreement_No })  |
-                        @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-stats", title = "Status", @data_toggle = "modal", @data_target = "#statusModal", @data_agreementno = @item.Agreement_No })  |
-                        @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit", @data_agreementno = @item.Agreement_No })  |
-                        @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-trash", @style = "color:red", title = "Delete", @data_agreementno = @item.Agreement_No })
+                        @Html.ActionLink(" ", "Renewal", null, new { @class = "glyphicon glyphicon-open agreement-renewal", title = "Renewal",@data_agreementno=@item.Agreement_No })  |
+                        @Html.ActionLink(" ", "Closue", null, new { @class = "glyphicon glyphicon-save agreement-closure", title = "Closure", @data_toggle = "modal", @data_target = "#closureModal", @data_agreementno = @item.Agreement_No })  |
+                        @*@Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-stats", title = "Status", @data_toggle = "modal", @data_target = "#statusModal", @data_agreementno = @item.Agreement_No })  |
+                        @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit", title = "Edit", @data_agreementno = @item.Agreement_No })  |*@
+                        @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash agreement-delete", @style = "color:red", title = "Delete", @data_agreementno = @item.Agreement_No })
                     </div>
                 </div>
             }
@@ -163,7 +163,7 @@
                 },
                 complete: function () {
                     var AgreementNo = id;
-                    AgreementPdc(AgreementNo);
+                    AgreementClosurePdc(AgreementNo);
                     AgreementFacility(AgreementNo);
                     //AgreementDocument(AgreementNo);
                     AgreementUtility(AgreementNo);
@@ -213,6 +213,28 @@
                        }
                    });
            });
+           
+           function AgreementClosurePdc(AgreementNo) {
+               debugger;
+               $("#img-loader").removeClass("hide");
+               $.ajax(
+               {
+                   url: "../Tca/AgreementClosurePdc",
+                   type: "Get",
+                   data: { AgreementNo: AgreementNo },
+                   // contentType: "application/json",
+                   // processData: false,
+                   success: function (html) {
+                       $("#TcaRenewal #AgreementPdcR").html(html);
+                   },
+                   error: function (jqXhr, textStatus, errorThrown) {
+                       alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   },
+                   complete: function () {
+                       $("#img-loader").addClass("hide");
+                   }
+               });
+           }
            function AgreementPdc(AgreementNo) {
                debugger;
                $("#img-loader").removeClass("hide");
@@ -343,6 +365,7 @@
                       type: "Get",
                       data: { Search: "", page: 1 },
                       success: function (html) {
+                          $("#agreementList").empty();
                           $("#agreementList").html(html);
                       },
                       error: function (jqXhr, textStatus, errorThrown) {
@@ -353,4 +376,34 @@
                       }
                   });
            }
+           $(".agreement-delete").click(function (e) {
+               e.preventDefault();
+               var id = $(this).data("agreementno");
+               var r = confirm("Are you sure want to delete?");
+               if (r == false) {
+                   return;
+               }
+               else {
+                   $.ajax(
+                       {
+                           url: "../Tca/Delete",
+                           type: "Get",
+
+                           data: { AgreementNo: id },
+
+                           success: function (response) {
+
+                               getAgreementList();
+                           },
+                           error: function (jqXhr, textStatus, errorThrown) {
+
+                               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                           },
+                           complete: function () {
+                               //GetCountry();
+                               // $("#").addClass("hide");
+                           }
+                       });
+               }
+           });
 </script>

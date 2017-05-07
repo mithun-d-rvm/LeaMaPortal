@@ -31,6 +31,8 @@ namespace LeaMaPortal.Models
         public DateTime? Cheque_Date { get; set; }
         [DisplayName("Amount")]
         public float? Cheque_Amount { get; set; }
+        [StringLength(20)]
+        public string status { get; set; }
         public List<AgreementPdcViewModel> AgreementPdcList  { get; set; }
     }
 }

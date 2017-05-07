@@ -205,7 +205,7 @@
                         @Html.LabelFor(model => model.Total_Rental_amount, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Total_Rental_amount, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Total_Rental_amount, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'TcaRenewal #Total_Rental_amount');" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -213,7 +213,7 @@
                         @Html.LabelFor(model => model.Perday_Rental, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Perday_Rental, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Perday_Rental, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'TcaRenewal #Perday_Rental');" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -221,7 +221,7 @@
                         @Html.LabelFor(model => model.nofopayments, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -266,7 +266,7 @@
                         @Html.LabelFor(model => model.Notice_Period, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Notice_Period, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Notice_Period, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);" } })
                     </div>
                 </div>
 

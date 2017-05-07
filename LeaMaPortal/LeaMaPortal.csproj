@@ -562,6 +562,7 @@
     <Content Include="Content\bootstrap-datepicker.css.map" />
     <None Include="Properties\PublishProfiles\leamaportal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\inputvalidations.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -856,6 +857,7 @@
     <Content Include="Views\Tca\Renewal\_AgreementUnitDetails.cshtml" />
     <Content Include="Views\Tca\Renewal\_AgreementUtility.cshtml" />
     <Content Include="Views\Tca\Renewal\_AgreementUtilityDetails.cshtml" />
+    <Content Include="Views\Tca\Closure\_AgreementPdcDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -95,9 +95,13 @@
         </div>
 
         <div id="closureModal" class="modal fade" role="dialog">
-            <div class="modal-dialog tca-modal-md" id="closureContainer" style="background-color: white;">
-
+           @using (Html.BeginForm("Closure", "Tca", FormMethod.Post, new { @id = "Closure", @enctype = "multipart/form-data" }))
+           {
+             <div class="modal-dialog tca-modal-md" id="closureContainer" style="background-color: white;">
+               
+                
             </div>
+           }
         </div>
         <!-- End Grid view -->
         <!-- Trigger the modal with a button -->
@@ -374,4 +378,5 @@
                }
            });
     }
+
 </script>
