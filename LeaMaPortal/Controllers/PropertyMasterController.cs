@@ -45,8 +45,10 @@ namespace LeaMaPortal.Controllers
             PropertyViewModel model = new PropertyViewModel();
             ViewBag.TitleDisplay = new SelectList(Common.Title, Common.DefaultTitle);
 
-            int propertyid = await db.tbl_propertiesmaster.Select(x => x.Property_Id).DefaultIfEmpty(0).MaxAsync();
-            ViewBag.PropertyId = propertyid == 0 ? 1 : propertyid + 1;
+            int? propertyid = await db.tbl_propertiesmaster.MaxAsync(x => (int?)x.Property_Id);
+
+            //int propertyid = await db.tbl_propertiesmaster.Select(x => x.Property_Id).DefaultIfEmpty(0).MaxAsync();
+            ViewBag.PropertyId = propertyid == null ? 1 : propertyid + 1;
 
             //var region = .Select(x => x.Region_Name);
 
@@ -76,7 +78,7 @@ namespace LeaMaPortal.Controllers
             //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
             ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
             ViewBag.Profession = new SelectList(Common.Profession);
-            ViewBag.PropertyId = db.tbl_propertiesmaster.OrderByDescending(x => x.Property_Id).FirstOrDefault()?.Property_Id + 1;
+            //ViewBag.PropertyId = db.tbl_propertiesmaster.OrderByDescending(x => x.Property_Id).FirstOrDefault()?.Property_Id + 1;
             ViewBag.Utility_Name = new SelectList(db.tbl_utilitiesmaster.Where(x => x.Delmark != "*").OrderBy(x => x.Utility_id), "Utility_id", "Utility_Name");
             ViewBag.Utility_ID  = new SelectList(db.tbl_utilitiesmaster.Where(x => x.Delmark != "*").OrderBy(x => x.Utility_id), "Utility_Name", "Utility_id");
 

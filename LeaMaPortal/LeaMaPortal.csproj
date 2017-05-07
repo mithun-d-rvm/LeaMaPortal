@@ -913,9 +913,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Documents\AgreementDocument\" />
-    <Folder Include="Documents\TenantCompany\" />
-    <Folder Include="Documents\TenantIndividual\" />
     <Folder Include="Models\DBContext\" />
     <Folder Include="Views\PropertyMaster\" />
     <Folder Include="Views\Supplier\" />
