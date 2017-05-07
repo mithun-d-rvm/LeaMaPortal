@@ -148,6 +148,7 @@ namespace LeaMaPortal.Controllers
                                     string mimeType = file.ContentType;
                                     //System.IO.Stream fileContent = file.InputStream;
                                     fileName = guid + fileName;
+                                    Helper.CheckDirectory(Common.TenantIndividualDocumentDirectoryName);
                                     //To save file, use SaveAs method
                                     file.SaveAs(Server.MapPath("~/" + Common.TenantIndividualDocumentContainer) + fileName); //File will be saved in application root
                                     if (string.IsNullOrWhiteSpace(tenantDoc))

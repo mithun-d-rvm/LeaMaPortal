@@ -80,8 +80,9 @@ namespace LeaMaPortal.Controllers
             try
             {
                 PaymentViewModel model = new PaymentViewModel();
-                int paymentno = await db.tbl_paymenthd.Select(x => x.PaymentNo).DefaultIfEmpty(0).MaxAsync();
-                model.PaymentNo = paymentno == 0 ? 1 : paymentno + 1;
+                int? paymentno = await db.tbl_paymenthd.MaxAsync(x => (int?)x.PaymentNo);
+                //int paymentno = await db.tbl_paymenthd.Select(x => x.PaymentNo).DefaultIfEmpty(0).MaxAsync();
+                model.PaymentNo = paymentno == null ? 1 : paymentno.Value + 1;
                 model.PaymentDate = DateTime.Now.Date;
                 //var paymentType_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','Reccategory',',',null)").ToList();
 
@@ -154,16 +155,17 @@ namespace LeaMaPortal.Controllers
                     {
                         foreach (var item in model.PaymentDetailsViewModel)
                         {
+                            var invoicedate = item.InvoiceDate.HasValue ? "'"+item.InvoiceDate.Value.Date.ToString("yyyy-MM-dd")+ "'" : "null";
                             if (string.IsNullOrWhiteSpace(invoice))
                             {
                                 invoice = "(" + model.PaymentNo + ",'" + item.Invtype + "','" + item.Description +
-                                    "','" + item.Invno + "','" + item.InvoiceDate + "','" + item.InvoiceAmount + "','" + item.PaidAmount + "','" + item.DebitAmount
+                                    "','" + item.Invno + "'," + invoicedate + ",'" + item.InvoiceAmount + "','" + item.PaidAmount + "','" + item.DebitAmount
                                     + "','" + item.Remarks + "')";
                             }
                             else
                             {
                                 invoice += ",(" + model.PaymentNo + ",'" + item.Invtype + "','" + item.Description +
-                                    "','" + item.Invno + "','" + item.InvoiceDate + "','" + item.InvoiceAmount + "','" + item.PaidAmount + "','" + item.DebitAmount
+                                    "','" + item.Invno + "'," + invoicedate + ",'" + item.InvoiceAmount + "','" + item.PaidAmount + "','" + item.DebitAmount
                                     + "','" + item.Remarks + "')";
                             }
                         }

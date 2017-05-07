@@ -60,7 +60,7 @@ namespace LeaMaPortal.Controllers
         [HttpGet]
         public PartialViewResult AddOrUpdate()
         {
-            ViewBag.Region = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
+            ViewBag.Region_Name = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
             var caretaker = db.tbl_caretaker.OrderByDescending(x => x.Caretaker_id).FirstOrDefault();
             if (caretaker != null)
             {
@@ -119,7 +119,7 @@ namespace LeaMaPortal.Controllers
                          new MySqlParameter("@PDoj", model.Doj),
                          new MySqlParameter("@PCreatedUser",System.Web.HttpContext.Current.User.Identity.Name)
                     };
-                    var tenantCompany = await db.Database.SqlQuery<object>("call leama.Usp_Caretaker_All(@PFlag, @PId, @PCaretaker_id, @PCaretaker_Name, @PDob, @PAddress1, @PAddress2, @PRegion_Name, @PCountry, @PCity, @PState, @PPincode, @PPhoneno, @PEmail, @PDoj, @PCreateduser)", parameters).ToListAsync();
+                    var tenantCompany = await db.Database.SqlQuery<object>("call Usp_Caretaker_All(@PFlag, @PId, @PCaretaker_id, @PCaretaker_Name, @PDob, @PAddress1, @PAddress2, @PRegion_Name, @PCountry, @PCity, @PState, @PPincode, @PPhoneno, @PEmail, @PDoj, @PCreateduser)", parameters).ToListAsync();
                 }
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -140,7 +140,7 @@ namespace LeaMaPortal.Controllers
                     return PartialView("../Master/Caretaker/_AddOrUpdate", new CaretakerViewModel());
                     //return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
                 }
-                ViewBag.Region = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name",caretaker.Region_Name);
+                ViewBag.Region_Name = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name",caretaker.Region_Name);
                 ViewBag.CaretakerId = caretaker.Caretaker_id;
                 CaretakerViewModel model = new CaretakerViewModel()
                 {
@@ -234,7 +234,7 @@ namespace LeaMaPortal.Controllers
                          new MySqlParameter("@PDoj", "01-01-0001"),
                          new MySqlParameter("@PCreatedUser",System.Web.HttpContext.Current.User.Identity.Name)
                     };
-            var spresult = await db.Database.SqlQuery<object>("call leama.Usp_Caretaker_All(@PFlag, @PId, @PCaretaker_id, @PCaretaker_Name, @PDob, @PAddress1, @PAddress2, @PRegion_Name, @PCountry, @PCity, @PState, @PPincode, @PPhoneno, @PEmail, @PDoj, @PCreateduser)", parameters).ToListAsync();
+            var spresult = await db.Database.SqlQuery<object>("call Usp_Caretaker_All(@PFlag, @PId, @PCaretaker_id, @PCaretaker_Name, @PDob, @PAddress1, @PAddress2, @PRegion_Name, @PCountry, @PCity, @PState, @PPincode, @PPhoneno, @PEmail, @PDoj, @PCreateduser)", parameters).ToListAsync();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

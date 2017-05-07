@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.IO;
 
 namespace LeaMaPortal.Controllers
 {
@@ -433,7 +434,18 @@ namespace LeaMaPortal.Controllers
                                     //System.IO.Stream fileContent = file.InputStream;
                                     fileName = guid + fileName;
                                     //To save file, use SaveAs method
-                                    file.SaveAs(Server.MapPath("~/" + Common.TenantCompanyDocumentContainer) + fileName); //File will be saved in application root
+                                    //var path = string.Format("{0}Documents", AppDomain.CurrentDomain.BaseDirectory);
+                                    //if (!Directory.Exists(path))
+                                    //{
+                                    //    Directory.CreateDirectory(path);
+                                    //}
+                                    var path = string.Format("{0}Documents\\TenantCompany", AppDomain.CurrentDomain.BaseDirectory);
+                                    //if (!Directory.Exists(path))
+                                    //{
+                                    //    Directory.CreateDirectory(path);
+                                    //}
+                                    Helper.CheckDirectory(Common.TenantCompanyDocumentDirectoryName);
+                                    file.SaveAs(path+"\\" + fileName); //File will be saved in application root
 
 
                                     companyDoc += !string.IsNullOrWhiteSpace(companyDoc) ?
@@ -442,7 +454,7 @@ namespace LeaMaPortal.Controllers
 
                                 }
                             }
-                            catch
+                            catch(Exception e)
                             {
 
                             }

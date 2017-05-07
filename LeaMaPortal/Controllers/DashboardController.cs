@@ -155,11 +155,11 @@ select Agreement_no from tbl_agreement where agreement_End_date between current_
         }
         private async Task<List<DashboardModel>> GetDashboardSummaryByCategory(string category, string month = null, string year = null)
         {
-            string query = "SELECT * FROM leama.dashboard_summary where category=" + category;
+            string query = "SELECT * FROM dashboard_summary where category=" + category+"";
             if (!string.IsNullOrEmpty(month))
-                query += "&Month=" + month;
+                query += " and Month=" + month;
             if (!string.IsNullOrEmpty(year))
-                query += "&Year=" + year;
+                query += " and Year=" + year;
             var result = await db.Database.SqlQuery<DashboardModel>(query).ToListAsync();
             return result;
         }

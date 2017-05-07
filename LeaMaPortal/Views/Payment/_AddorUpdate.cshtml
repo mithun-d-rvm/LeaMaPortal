@@ -291,7 +291,7 @@
             <table class="row m-t-20" id="PaymentDetailsForm">
                 @if (Model.PaymentDetailsViewModel != null)
                 {
-                    for (int j = 0; j < Model.PaymentDetailsViewModel.Count - 1; j++)
+                    for (int j = 0; j < Model.PaymentDetailsViewModel.Count; j++)
                     {
                         var html = "<div class='row'><div class='col-md-12 document-row' id='GridView" + @j + "'>";
                         html += "<div class='col-md-2'>Invoice Type</div>";
