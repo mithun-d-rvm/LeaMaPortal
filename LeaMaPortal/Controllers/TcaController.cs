@@ -101,7 +101,8 @@ namespace LeaMaPortal.Controllers
                 ViewBag.UnitIDTawtheeq = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
                 ViewBag.UnitPropertyName = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_Property_Name");
                 ViewBag.SecurityFlag = new SelectList(Common.SecurityFlag);
-                ViewBag.Agreement_No = db.tbl_agreement.OrderByDescending(x=> x.Agreement_No).FirstOrDefault()?.Agreement_No + 1;
+                var agreement = db.tbl_agreement.OrderByDescending(x => x.Agreement_No).FirstOrDefault();
+                ViewBag.Agreement_No = agreement == null ? 1 : agreement.Agreement_No + 1;
                 var caretaker=await db.tbl_caretaker.Where(x=> x.Delmark != "*").ToListAsync();
                 ViewBag.Caretakerid = new SelectList(caretaker, "Caretaker_id", "Caretaker_id");
                 ViewBag.CaretakerName = new SelectList(caretaker, "Caretaker_id", "Caretaker_Name");
