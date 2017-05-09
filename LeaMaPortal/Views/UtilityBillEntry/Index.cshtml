@@ -1,0 +1,189 @@
+﻿@{
+    ViewBag.Title = "Utility Billing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="inner-block">
+    <div class="blank">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        Bill Entry Number
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control master-form-input" />
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        Bill Entry Date
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control master-form-input" />
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        Utility ID
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control master-form-input">
+                            <option> 1 </option>
+                            <option> 2 </option>
+                            <option> 3 </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        Utility Name
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control master-form-input">
+                            <option> 1 </option>
+                            <option> 2 </option>
+                            <option> 3 </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        Supplier ID
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control master-form-input">
+                            <option> 1 </option>
+                            <option> 2 </option>
+                            <option> 3 </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        Supplier Name
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control master-form-input">
+                            <option> 1 </option>
+                            <option> 2 </option>
+                            <option> 3 </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="m-t-5-p col-md-12 document-row" id="GridView">
+
+                <div class="p-b-25">
+                    <h3>EB Water Bill Entry Details</h3>
+                </div>
+                <div class="">
+                    <div id="Gridview" class="row document-row">
+                        <div class="col-md-12">
+                            <div class="col-md-1 form-group">
+                                <label for="itemtype">ID</label>
+                                <input type="text" readonly class="form-control master-form-input" id="item" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="description">Meter Number</label>
+                                <input type="text" class="form-control master-form-input" />
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="quantity">Property ID</label>
+                                <input type="text" class="form-control master-form-input" />
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="amount">Unit ID</label>
+                                <input type="text" class="form-control master-form-input" />
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="amount">Reading Date</label>
+                                <input type="text" class="form-control master-form-input" />
+                            </div>
+                            @*<div class="col-md-2 btn-group">
+                                <br />
+                                <input type="button" class="document-btn" id="AddInvoice" value="Add" onclick='add(this);' />
+                            </div>*@
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-1 form-group">
+                                &nbsp;
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="description">Bill Number</label>
+                                <input type="text" class="form-control master-form-input" />
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="quantity">Bill Date</label>
+                                <input type="text" class="form-control master-form-input" />
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="amount">Due Date</label>
+                                <input type="text" class="form-control master-form-input" />
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="amount">Meter Reading Number</label>
+                                <input type="text" class="form-control master-form-input" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-1 form-group">
+                                &nbsp;
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="description">Total Units</label>
+                                <input type="text" class="form-control master-form-input" />
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="quantity">Days of Use</label>
+                                <input type="text" class="form-control master-form-input" />
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="amount">Rate</label>
+                                <input type="text" class="form-control master-form-input" />
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="amount">Amount</label>
+                                <input type="text" class="form-control master-form-input" />
+                            </div>
+                            @*<div class="col-md-2 btn-group">
+                                <br />
+                                <input type="button" class="document-btn" id="AddInvoice" value="Add" onclick='add(this);' />
+                            </div>*@
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-2 form-group pull-right">
+                                <input type="button" class="document-btn" value="Delete" />
+                            </div>
+                            <div class="col-md-2 form-group pull-right">
+                                <input type="button" class="document-btn" value="Add" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+
+            </div>
+        </div>
+        <div class="row ht-5">
+            &nbsp;
+        </div>
+        <div class="col-md-12 form-input-padding">
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+            <div class="col-md-4">
+                <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
+            </div>
+        </div>
+    </div>
+
+</div>
