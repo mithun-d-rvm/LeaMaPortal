@@ -6,8 +6,8 @@
 -->
 
 @model LeaMaPortal.Models.AgreementFormViewModel
-@using (Html.BeginForm("AddOrUpdate", "Tca", FormMethod.Post, new { @id = "Tca", @enctype = "multipart/form-data" }))
-{
+@*@using (Html.BeginForm("AddOrUpdate", "Tca", FormMethod.Post, new { @id = "Tca", @enctype = "multipart/form-data" }))*@
+@{
     @Html.HiddenFor(x=>x.Ag_Tenant_id)
     @Html.HiddenFor(x => x.Ag_Tenant_Name)
     @*@Html.HiddenFor(x=>x.property_id)*@
@@ -80,7 +80,7 @@
                         @Html.LabelFor(model => model.Tenant_Type, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.DropDownList("TenantType", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required" })
+                        @Html.DropDownList("Tenant_Type", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -199,7 +199,7 @@
                         @Html.LabelFor(model => model.Total_Rental_amount, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Total_Rental_amount, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Total_Rental_amount, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'Total_Rental_amount');" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -207,7 +207,7 @@
                         @Html.LabelFor(model => model.Perday_Rental, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Perday_Rental, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Perday_Rental, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'Perday_Rental');" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -215,7 +215,7 @@
                         @Html.LabelFor(model => model.nofopayments, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -223,7 +223,7 @@
                         @Html.LabelFor(model => model.Advance_Security_Amount, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Advance_Security_Amount, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Advance_Security_Amount, new { htmlAttributes = new { @class = "master-form-input form-control",@onkeypress = "allow_only_Float(event,'Advance_Security_Amount');"} })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -260,7 +260,7 @@
                         @Html.LabelFor(model => model.Notice_Period, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Notice_Period, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Notice_Period, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);" } })  
                     </div>
                 </div>
 
@@ -269,63 +269,8 @@
         <div class="p-t-5-p">
             &nbsp;
         </div>
-        <!-- BEGIN AGREEMENT PDC -->
-        <div class="p-lr-20" id="AgreementPdc">
-            @*@Html.Partial("_AgreementPdc")*@
-        </div>
-        <!-- END AGREEMENT Facility -->
-        <div class="row ht-5">
-            &nbsp;
-        </div>
-        <!-- BEGIN AGREEMENT Facility -->
-        <div class="p-lr-20" id="AgreementFacility">
-            @*@Html.Partial("_AgreementDocument")*@
-        </div>
-        <!-- END AGREEMENT Facility -->
-        <!-- END AGREEMENT PDC -->
-        <div class="row ht-5">
-            &nbsp;
-        </div>
-        <!-- BEGIN AGREEMENT DOCUMENT -->
-        <div class="p-lr-20" id="AgreementDocument">
-            @*@Html.Partial("_AgreementDocument")*@
-        </div>
-        <!-- END AGREEMENT DOCUMENT -->
-        <div class="row ht-5">
-            &nbsp;
-        </div>
-        <!-- BEGIN AGREEMENT UTILITY -->
-        <div class="p-lr-20" id="AgreementUtility">
-            @*@Html.Partial("_AgreementUtility")*@
-        </div>
-        <!-- END AGREEMENT UTILITY -->
-        <div class="row ht-5">
-            &nbsp;
-        </div>
-        <!-- BEGIN AGREEMENT UNIT -->
-        <div class="p-lr-20" id="AgreementUnit">
-            @*@Html.Partial("_AgreementUnit")*@
-        </div>
-        <!-- END AGREEMENT UNIT -->
-        <div class="row ht-5">
-            &nbsp;
-        </div>
-        <!-- BEGIN AGREEMENT UNIT -->
-        <div class="p-lr-20" id="AgreementCheckList">
-            @*@Html.Partial("_AgreementCheckList")*@
-        </div>
-        @*END AGREEMENT UNIT*@
-        <div class="p-b-10">
-            &nbsp;
-        </div>
-        <div class="col-md-12 form-input-padding">
-            <div class="col-md-6">
-                &nbsp;
-            </div>
-            <div class="col-md-4">
-                <input type="submit" class="btn master-form-btn" value="Submit" />
-            </div>
-        </div>
+        
+     
     </div>
 }
 <script>
@@ -396,18 +341,18 @@
                });
     });
 
-    $("#TenantType").on('change', function (e) {
+    $("#Tenant_Type").on('change', function (e) {
         debugger;
-        var TenantType = $("#TenantType").val();
+        var Tenant_Type = $("#Tenant_Type").val();
         $("#Ag_Tenant_id").val(null);
         $("#Ag_Tenant_Name").val(null);
-        if (TenantType != "" && TenantType != null) {
+        if (Tenant_Type != "" && Tenant_Type != null) {
             $.ajax(
                 {
                     url: "../Tca/GetTenentDetails",
                     // dataType: "jsonp",
                     method: "GET",
-                    data: { Type: $("#TenantType").val() }, //FormData(form.get(0)),
+                    data: { Type: $("#Tenant_Type").val() }, //FormData(form.get(0)),
                     contentType: "application/json",
 
                     success: function (response) {

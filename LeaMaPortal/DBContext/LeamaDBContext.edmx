@@ -39,6 +39,65 @@ warning 6002: The table/view 'def.leama.collection_summary' does not have a prim
           <Property Name="Createduser" Type="varchar" MaxLength="150" />
           <Property Name="Delmark" Type="varchar" MaxLength="1" />
         </EntityType>
+        <EntityType Name="dashboard_earning">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reccategory" Type="varchar" MaxLength="50" />
+          <Property Name="RecpType" Type="varchar" MaxLength="20" />
+          <Property Name="ReceiptNo" Type="int" Nullable="false" />
+          <Property Name="ReceiptDate" Type="datetime" Precision="0" />
+          <Property Name="agreement_no" Type="int" />
+          <Property Name="Property_id" Type="varchar" MaxLength="100" />
+          <Property Name="Property_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Unit_ID" Type="varchar" MaxLength="100" />
+          <Property Name="unit_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Tenant_id" Type="int" />
+          <Property Name="Tenant_Name" Type="varchar" MaxLength="100" />
+          <Property Name="TotalAmount" Type="float" />
+          <Property Name="AmtInWords" Type="text" />
+          <Property Name="DDChequeNo" Type="varchar" MaxLength="50" />
+          <Property Name="PDCstatus" Type="varchar" MaxLength="20" />
+          <Property Name="BankAcCode" Type="varchar" MaxLength="50" />
+          <Property Name="BankAcName" Type="varchar" MaxLength="100" />
+          <Property Name="AdvAcCode" Type="varchar" MaxLength="100" />
+          <Property Name="DDChequeDate" Type="date" />
+          <Property Name="Narration" Type="text" />
+          <Property Name="Accyear" Type="int" />
+          <Property Name="Createddatetime" Type="datetime" Precision="0" />
+          <Property Name="Createduser" Type="varchar" MaxLength="150" />
+          <Property Name="Delmark" Type="varchar" MaxLength="1" />
+          <Property Name="Month" Type="mediumtext" />
+          <Property Name="year" Type="bigint" />
+        </EntityType>
+        <EntityType Name="dashboard_expenses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentNo" Type="int" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" Precision="0" />
+          <Property Name="Utility_id" Type="varchar" MaxLength="100" />
+          <Property Name="Utiltiy_name" Type="varchar" MaxLength="100" />
+          <Property Name="Supplier_id" Type="int" />
+          <Property Name="Supplier_name" Type="varchar" MaxLength="200" />
+          <Property Name="PaymentType" Type="varchar" MaxLength="25" />
+          <Property Name="PaymentMode" Type="varchar" MaxLength="25" />
+          <Property Name="TotalAmount" Type="float" />
+          <Property Name="AmtInWords" Type="text" />
+          <Property Name="DDChequeNo" Type="varchar" MaxLength="100" />
+          <Property Name="Cheqdate" Type="datetime" Precision="0" />
+          <Property Name="pdcstatus" Type="varchar" MaxLength="20" />
+          <Property Name="BankAcCode" Type="varchar" MaxLength="50" />
+          <Property Name="BankAcName" Type="varchar" MaxLength="100" />
+          <Property Name="AdvAcCode" Type="varchar" MaxLength="100" />
+          <Property Name="Narration" Type="text" />
+          <Property Name="Accyear" Type="int" />
+          <Property Name="Createddatetime" Type="datetime" Precision="0" />
+          <Property Name="Createduser" Type="varchar" MaxLength="150" />
+          <Property Name="Delmark" Type="varchar" MaxLength="1" />
+        </EntityType>
         <EntityType Name="dashboard_rental">
           <Key>
             <PropertyRef Name="id" />
@@ -79,17 +138,6 @@ warning 6013: The table/view 'def.leama.dashboard_summary' does not have a prima
           <Property Name="Month" Type="varchar" MaxLength="45" />
           <Property Name="Year" Type="int" />
         </EntityType>-->
-        <EntityType Name="dashboard_utility">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="refno" Type="int" />
-          <Property Name="meterno" Type="varchar" MaxLength="100" />
-          <Property Name="billno" Type="varchar" MaxLength="100" />
-          <Property Name="amount" Type="double" />
-          <Property Name="utility_name" Type="varchar" MaxLength="100" />
-        </EntityType>
         <EntityType Name="dashboard_vacancy">
           <Key>
             <PropertyRef Name="id" />
@@ -191,11 +239,6 @@ warning 6013: The table/view 'def.leama.ebwater_region_report' does not have a p
           <Property Name="Mailstatus" Type="varchar" MaxLength="45" />
           <Property Name="createddate" Type="datetime" Precision="0" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.leama.email_report' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="email_report">
-          <Property Name="Emailtext" Type="text" />
-        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6013: The table/view 'def.leama.esplit' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="esplit">
@@ -1669,6 +1712,18 @@ warning 6013: The table/view 'def.leama.view_advance_pending_payment' does not h
           <Property Name="TotalAmount" Type="double" />
         </EntityType>-->
         <!--Errors Found During Generation:
+warning 6002: The table/view 'def.leama.view_agreement_close_pending' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_agreement_close_pending">
+          <Key>
+            <PropertyRef Name="paidamount" />
+            <PropertyRef Name="advancepending" />
+          </Key>
+          <Property Name="agreement_no" Type="int" />
+          <Property Name="totalamount" Type="double" />
+          <Property Name="paidamount" Type="double" Nullable="false" />
+          <Property Name="advancepending" Type="double" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6013: The table/view 'def.leama.view_agreement_to_receipt' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="view_agreement_to_receipt">
           <Property Name="Agreement_No" Type="int" />
@@ -2246,9 +2301,16 @@ warning 6035: The relationship 'FKtenantind1' has columns that are not part of t
         <!--Errors Found During Generation:
 warning 6035: The relationship 'FKtenantinddt' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FKtenantinddt" />-->
+        <Function Name="Usp_split" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="leama">
+          <Parameter Name="Screen_name" Type="longtext" Mode="In" />
+          <Parameter Name="combo_name" Type="text" Mode="In" />
+          <Parameter Name="deli" Type="text" Mode="In" />
+          <Parameter Name="target" Type="char" Mode="In" />
+        </Function>
         <EntityContainer Name="LeamaModelStoreContainer">
+          <EntitySet Name="dashboard_earning" EntityType="Self.dashboard_earning" Schema="leama" store:Type="Tables" />
+          <EntitySet Name="dashboard_expenses" EntityType="Self.dashboard_expenses" Schema="leama" store:Type="Tables" />
           <EntitySet Name="dashboard_rental" EntityType="Self.dashboard_rental" Schema="leama" store:Type="Tables" />
-          <EntitySet Name="dashboard_utility" EntityType="Self.dashboard_utility" Schema="leama" store:Type="Tables" />
           <EntitySet Name="dashboard_vacancy" EntityType="Self.dashboard_vacancy" Schema="leama" store:Type="Tables" />
           <EntitySet Name="ebwater_report" EntityType="Self.ebwater_report" Schema="leama" store:Type="Tables" />
           <EntitySet Name="email_output" EntityType="Self.email_output" Schema="leama" store:Type="Tables" />
@@ -2396,6 +2458,14 @@ FROM `test_report2` AS `test_report2`</DefiningQuery>
 `vacancy_caretaker_report`.`Loss_Amt`, 
 `vacancy_caretaker_report`.`user`
 FROM `vacancy_caretaker_report` AS `vacancy_caretaker_report`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="view_agreement_close_pending" EntityType="Self.view_agreement_close_pending" store:Type="Views" store:Schema="leama">
+            <DefiningQuery>SELECT
+`view_agreement_close_pending`.`agreement_no`, 
+`view_agreement_close_pending`.`totalamount`, 
+`view_agreement_close_pending`.`paidamount`, 
+`view_agreement_close_pending`.`advancepending`
+FROM `view_agreement_close_pending` AS `view_agreement_close_pending`</DefiningQuery>
           </EntitySet>
           <EntitySet Name="view_auto_receipt" EntityType="Self.view_auto_receipt" store:Type="Views" store:Schema="leama">
             <DefiningQuery>SELECT
@@ -2601,8 +2671,15 @@ FROM `view_tenant` AS `view_tenant`</DefiningQuery>
     <edmx:ConceptualModels>
       <Schema Namespace="LeamaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="LeamaEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="Usp_split" ReturnType="Collection(String)">
+            <Parameter Name="Screen_name" Mode="In" Type="String" />
+            <Parameter Name="combo_name" Mode="In" Type="String" />
+            <Parameter Name="deli" Mode="In" Type="String" />
+            <Parameter Name="target" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="dashboard_earning" EntityType="LeamaModel.dashboard_earning" />
+          <EntitySet Name="dashboard_expenses" EntityType="LeamaModel.dashboard_expenses" />
           <EntitySet Name="dashboard_rental" EntityType="LeamaModel.dashboard_rental" />
-          <EntitySet Name="dashboard_utility" EntityType="LeamaModel.dashboard_utility" />
           <EntitySet Name="dashboard_vacancy" EntityType="LeamaModel.dashboard_vacancy" />
           <EntitySet Name="ebwater_report" EntityType="LeamaModel.ebwater_report" />
           <EntitySet Name="email_output" EntityType="LeamaModel.email_output" />
@@ -2670,6 +2747,12 @@ FROM `view_tenant` AS `view_tenant`</DefiningQuery>
           <EntitySet Name="test_report1" EntityType="LeamaModel.test_report1" />
           <EntitySet Name="test_report2" EntityType="LeamaModel.test_report2" />
           <EntitySet Name="vacancy_caretaker_report" EntityType="LeamaModel.vacancy_caretaker_report" />
+          <EntitySet Name="view_agreement_close_pending" EntityType="LeamaModel.view_agreement_close_pending" />
+          <EntitySet Name="view_auto_receipt" EntityType="LeamaModel.view_auto_receipt" />
+          <EntitySet Name="view_find_pdcstatus" EntityType="LeamaModel.view_find_pdcstatus" />
+          <EntitySet Name="view_invoice_agreement" EntityType="LeamaModel.view_invoice_agreement" />
+          <EntitySet Name="view_invoice_receipt_pending" EntityType="LeamaModel.view_invoice_receipt_pending" />
+          <EntitySet Name="view_tenant" EntityType="LeamaModel.view_tenant" />
           <AssociationSet Name="FKagfa2" Association="LeamaModel.FKagfa2">
             <End Role="tbl_agreement" EntitySet="tbl_agreement" />
             <End Role="tbl_agreement_facility" EntitySet="tbl_agreement_facility" />
@@ -2778,12 +2861,66 @@ FROM `view_tenant` AS `view_tenant`</DefiningQuery>
             <End Role="tbl_suppliermaster" EntitySet="tbl_suppliermaster" />
             <End Role="tbl_supplierdt1" EntitySet="tbl_supplierdt1" />
           </AssociationSet>
-          <EntitySet Name="view_auto_receipt" EntityType="LeamaModel.view_auto_receipt" />
-          <EntitySet Name="view_find_pdcstatus" EntityType="LeamaModel.view_find_pdcstatus" />
-          <EntitySet Name="view_invoice_agreement" EntityType="LeamaModel.view_invoice_agreement" />
-          <EntitySet Name="view_invoice_receipt_pending" EntityType="LeamaModel.view_invoice_receipt_pending" />
-          <EntitySet Name="view_tenant" EntityType="LeamaModel.view_tenant" />
-        </EntityContainer>
+          </EntityContainer>
+        <EntityType Name="dashboard_earning">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reccategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RecpType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ReceiptNo" Type="Int32" Nullable="false" />
+          <Property Name="ReceiptDate" Type="DateTime" />
+          <Property Name="agreement_no" Type="Int32" />
+          <Property Name="Property_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Unit_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="unit_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tenant_id" Type="Int32" />
+          <Property Name="Tenant_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TotalAmount" Type="Single" />
+          <Property Name="AmtInWords" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="DDChequeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PDCstatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BankAcCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BankAcName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AdvAcCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DDChequeDate" Type="DateTime" />
+          <Property Name="Narration" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="Accyear" Type="Int32" />
+          <Property Name="Createddatetime" Type="DateTime" />
+          <Property Name="Createduser" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Delmark" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Month" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="year" Type="Int64" />
+        </EntityType>
+        <EntityType Name="dashboard_expenses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentNo" Type="Int32" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" />
+          <Property Name="Utility_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Utiltiy_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Supplier_id" Type="Int32" />
+          <Property Name="Supplier_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentType" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentMode" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="TotalAmount" Type="Single" />
+          <Property Name="AmtInWords" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="DDChequeNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cheqdate" Type="DateTime" />
+          <Property Name="pdcstatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BankAcCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BankAcName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AdvAcCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Narration" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="Accyear" Type="Int32" />
+          <Property Name="Createddatetime" Type="DateTime" />
+          <Property Name="Createduser" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Delmark" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="dashboard_rental">
           <Key>
             <PropertyRef Name="id" />
@@ -2808,17 +2945,6 @@ FROM `view_tenant` AS `view_tenant`</DefiningQuery>
           <Property Name="user" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="Cheque_Amount" Type="Single" />
           <Property Name="totalamount" Type="Single" Nullable="false" />
-        </EntityType>
-        <EntityType Name="dashboard_utility">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="refno" Type="Int32" />
-          <Property Name="meterno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="billno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="amount" Type="Double" />
-          <Property Name="utility_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="dashboard_vacancy">
           <Key>
@@ -4225,6 +4351,115 @@ FROM `view_tenant` AS `view_tenant`</DefiningQuery>
           <Property Name="Loss_Amt" Type="Double" />
           <Property Name="user" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="view_agreement_close_pending">
+          <Key>
+            <PropertyRef Name="paidamount" />
+            <PropertyRef Name="advancepending" />
+          </Key>
+          <Property Name="agreement_no" Type="Int32" />
+          <Property Name="totalamount" Type="Double" />
+          <Property Name="paidamount" Type="Double" Nullable="false" />
+          <Property Name="advancepending" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="view_auto_receipt">
+          <Key>
+            <PropertyRef Name="invno" />
+          </Key>
+          <Property Name="invno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Agreement_No" Type="Int32" />
+          <Property Name="Property_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Unit_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="unit_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tenant_id" Type="Int32" />
+          <Property Name="Tenant_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="date" Type="DateTime" />
+          <Property Name="InvoiceAmount" Type="Double" />
+          <Property Name="incno" Type="Int32" />
+          <Property Name="invamt" Type="Single" />
+        </EntityType>
+        <EntityType Name="view_find_pdcstatus">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ReceiptNo" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Reccategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RecpType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ReceiptNo" Type="Int32" Nullable="false" />
+          <Property Name="ReceiptDate" Type="DateTime" />
+          <Property Name="agreement_no" Type="Int32" />
+          <Property Name="Property_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Unit_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="unit_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tenant_id" Type="Int32" />
+          <Property Name="Tenant_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TotalAmount" Type="Single" />
+          <Property Name="AmtInWords" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="DDChequeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PDCstatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BankAcCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BankAcName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AdvAcCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DDChequeDate" Type="DateTime" />
+          <Property Name="Narration" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Accyear" Type="Int32" />
+          <Property Name="Createddatetime" Type="DateTime" />
+          <Property Name="Createduser" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Delmark" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="view_invoice_agreement">
+          <Key>
+            <PropertyRef Name="Agreement_No" />
+            <PropertyRef Name="Ag_Tenant_id" />
+            <PropertyRef Name="Ag_Tenant_Name" />
+          </Key>
+          <Property Name="Agreement_No" Type="Int32" Nullable="false" />
+          <Property Name="Ag_Tenant_id" Type="Int32" Nullable="false" />
+          <Property Name="Ag_Tenant_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Property_ID_Tawtheeq" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Properties_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Unit_ID_Tawtheeq" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Unit_Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Perday_Rental" Type="Single" />
+          <Property Name="Agreement_Start_Date" Type="DateTime" />
+          <Property Name="Agreement_End_Date" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="view_invoice_receipt_pending">
+          <Key>
+            <PropertyRef Name="invno" />
+          </Key>
+          <Property Name="invno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Agreement_No" Type="Int32" />
+          <Property Name="Property_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Unit_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="unit_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tenant_id" Type="Int32" />
+          <Property Name="Tenant_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="date" Type="DateTime" />
+          <Property Name="incno" Type="Int32" />
+          <Property Name="invtype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="totalamt" Type="Single" />
+          <Property Name="InvoiceAmount" Type="Double" />
+        </EntityType>
+        <EntityType Name="view_tenant">
+          <Key>
+            <PropertyRef Name="Tenant_id" />
+            <PropertyRef Name="type" />
+          </Key>
+          <Property Name="Tenant_id" Type="Int32" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Middle_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Emailid" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <Association Name="FKagfa2">
           <End Type="LeamaModel.tbl_agreement" Role="tbl_agreement" Multiplicity="0..1" />
           <End Type="LeamaModel.tbl_agreement_facility" Role="tbl_agreement_facility" Multiplicity="*" />
@@ -4561,111 +4796,74 @@ FROM `view_tenant` AS `view_tenant`</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="view_auto_receipt">
-          <Key>
-            <PropertyRef Name="invno" />
-          </Key>
-          <Property Name="invno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Agreement_No" Type="Int32" />
-          <Property Name="Property_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Unit_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="unit_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Tenant_id" Type="Int32" />
-          <Property Name="Tenant_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="month" Type="Int32" />
-          <Property Name="year" Type="Int32" />
-          <Property Name="date" Type="DateTime" />
-          <Property Name="InvoiceAmount" Type="Double" />
-          <Property Name="incno" Type="Int32" />
-          <Property Name="invamt" Type="Single" />
-        </EntityType>
-        <EntityType Name="view_find_pdcstatus">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="ReceiptNo" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="Reccategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RecpType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ReceiptNo" Type="Int32" Nullable="false" />
-          <Property Name="ReceiptDate" Type="DateTime" />
-          <Property Name="agreement_no" Type="Int32" />
-          <Property Name="Property_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Unit_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="unit_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Tenant_id" Type="Int32" />
-          <Property Name="Tenant_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="TotalAmount" Type="Single" />
-          <Property Name="AmtInWords" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="DDChequeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PDCstatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="BankAcCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="BankAcName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="AdvAcCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DDChequeDate" Type="DateTime" />
-          <Property Name="Narration" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Accyear" Type="Int32" />
-          <Property Name="Createddatetime" Type="DateTime" />
-          <Property Name="Createduser" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Delmark" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="view_invoice_agreement">
-          <Key>
-            <PropertyRef Name="Agreement_No" />
-            <PropertyRef Name="Ag_Tenant_id" />
-            <PropertyRef Name="Ag_Tenant_Name" />
-          </Key>
-          <Property Name="Agreement_No" Type="Int32" Nullable="false" />
-          <Property Name="Ag_Tenant_id" Type="Int32" Nullable="false" />
-          <Property Name="Ag_Tenant_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Property_ID_Tawtheeq" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Properties_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Unit_ID_Tawtheeq" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Unit_Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Perday_Rental" Type="Single" />
-          <Property Name="Agreement_Start_Date" Type="DateTime" />
-          <Property Name="Agreement_End_Date" Type="DateTime" />
-        </EntityType>
-        <EntityType Name="view_invoice_receipt_pending">
-          <Key>
-            <PropertyRef Name="invno" />
-          </Key>
-          <Property Name="invno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Agreement_No" Type="Int32" />
-          <Property Name="Property_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Property_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Unit_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="unit_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Tenant_id" Type="Int32" />
-          <Property Name="Tenant_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="month" Type="Int32" />
-          <Property Name="year" Type="Int32" />
-          <Property Name="date" Type="DateTime" />
-          <Property Name="incno" Type="Int32" />
-          <Property Name="invtype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="totalamt" Type="Single" />
-          <Property Name="InvoiceAmount" Type="Double" />
-        </EntityType>
-        <EntityType Name="view_tenant">
-          <Key>
-            <PropertyRef Name="Tenant_id" />
-            <PropertyRef Name="type" />
-          </Key>
-          <Property Name="Tenant_id" Type="Int32" Nullable="false" />
-          <Property Name="First_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Middle_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Last_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Emailid" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="LeamaModelStoreContainer" CdmEntityContainer="LeamaEntities">
+          <FunctionImportMapping FunctionImportName="Usp_split" FunctionName="LeamaModel.Store.Usp_split" />
+          <EntitySetMapping Name="dashboard_earning">
+            <EntityTypeMapping TypeName="LeamaModel.dashboard_earning">
+              <MappingFragment StoreEntitySet="dashboard_earning">
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Delmark" ColumnName="Delmark" />
+                <ScalarProperty Name="Createduser" ColumnName="Createduser" />
+                <ScalarProperty Name="Createddatetime" ColumnName="Createddatetime" />
+                <ScalarProperty Name="Accyear" ColumnName="Accyear" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="DDChequeDate" ColumnName="DDChequeDate" />
+                <ScalarProperty Name="AdvAcCode" ColumnName="AdvAcCode" />
+                <ScalarProperty Name="BankAcName" ColumnName="BankAcName" />
+                <ScalarProperty Name="BankAcCode" ColumnName="BankAcCode" />
+                <ScalarProperty Name="PDCstatus" ColumnName="PDCstatus" />
+                <ScalarProperty Name="DDChequeNo" ColumnName="DDChequeNo" />
+                <ScalarProperty Name="AmtInWords" ColumnName="AmtInWords" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="Tenant_Name" ColumnName="Tenant_Name" />
+                <ScalarProperty Name="Tenant_id" ColumnName="Tenant_id" />
+                <ScalarProperty Name="unit_Name" ColumnName="unit_Name" />
+                <ScalarProperty Name="Unit_ID" ColumnName="Unit_ID" />
+                <ScalarProperty Name="Property_Name" ColumnName="Property_Name" />
+                <ScalarProperty Name="Property_id" ColumnName="Property_id" />
+                <ScalarProperty Name="agreement_no" ColumnName="agreement_no" />
+                <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+                <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
+                <ScalarProperty Name="RecpType" ColumnName="RecpType" />
+                <ScalarProperty Name="Reccategory" ColumnName="Reccategory" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dashboard_expenses">
+            <EntityTypeMapping TypeName="LeamaModel.dashboard_expenses">
+              <MappingFragment StoreEntitySet="dashboard_expenses">
+                <ScalarProperty Name="Delmark" ColumnName="Delmark" />
+                <ScalarProperty Name="Createduser" ColumnName="Createduser" />
+                <ScalarProperty Name="Createddatetime" ColumnName="Createddatetime" />
+                <ScalarProperty Name="Accyear" ColumnName="Accyear" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="AdvAcCode" ColumnName="AdvAcCode" />
+                <ScalarProperty Name="BankAcName" ColumnName="BankAcName" />
+                <ScalarProperty Name="BankAcCode" ColumnName="BankAcCode" />
+                <ScalarProperty Name="pdcstatus" ColumnName="pdcstatus" />
+                <ScalarProperty Name="Cheqdate" ColumnName="Cheqdate" />
+                <ScalarProperty Name="DDChequeNo" ColumnName="DDChequeNo" />
+                <ScalarProperty Name="AmtInWords" ColumnName="AmtInWords" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="Supplier_name" ColumnName="Supplier_name" />
+                <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
+                <ScalarProperty Name="Utiltiy_name" ColumnName="Utiltiy_name" />
+                <ScalarProperty Name="Utility_id" ColumnName="Utility_id" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="PaymentNo" ColumnName="PaymentNo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="dashboard_rental">
             <EntityTypeMapping TypeName="LeamaModel.dashboard_rental">
               <MappingFragment StoreEntitySet="dashboard_rental">
@@ -4688,18 +4886,6 @@ FROM `view_tenant` AS `view_tenant`</DefiningQuery>
                 <ScalarProperty Name="Property_name" ColumnName="Property_name" />
                 <ScalarProperty Name="Prperty_id" ColumnName="Prperty_id" />
                 <ScalarProperty Name="Agreement_No" ColumnName="Agreement_No" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dashboard_utility">
-            <EntityTypeMapping TypeName="LeamaModel.dashboard_utility">
-              <MappingFragment StoreEntitySet="dashboard_utility">
-                <ScalarProperty Name="utility_name" ColumnName="utility_name" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="billno" ColumnName="billno" />
-                <ScalarProperty Name="meterno" ColumnName="meterno" />
-                <ScalarProperty Name="refno" ColumnName="refno" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -6101,6 +6287,16 @@ FROM `view_tenant` AS `view_tenant`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="view_agreement_close_pending">
+            <EntityTypeMapping TypeName="LeamaModel.view_agreement_close_pending">
+              <MappingFragment StoreEntitySet="view_agreement_close_pending">
+                <ScalarProperty Name="advancepending" ColumnName="advancepending" />
+                <ScalarProperty Name="paidamount" ColumnName="paidamount" />
+                <ScalarProperty Name="totalamount" ColumnName="totalamount" />
+                <ScalarProperty Name="agreement_no" ColumnName="agreement_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="view_auto_receipt">
             <EntityTypeMapping TypeName="LeamaModel.view_auto_receipt">
               <MappingFragment StoreEntitySet="view_auto_receipt">
@@ -6201,7 +6397,7 @@ FROM `view_tenant` AS `view_tenant`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

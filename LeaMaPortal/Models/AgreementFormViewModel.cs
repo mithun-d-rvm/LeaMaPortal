@@ -33,7 +33,7 @@ namespace LeaMaPortal.Models
         public int Agreement_No { get; set; }
         [DisplayName("Contract Agreement Date")]
 
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime Agreement_Date { get; set; }
         [DisplayName("Contract Tenant Type")]
@@ -53,15 +53,15 @@ namespace LeaMaPortal.Models
         [DisplayName("Unit Name")]
         public string Unit_Property_Name { get; set; }
         [DisplayName("Property Available From")]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime Vacantstartdate { get; set; }
         [DisplayName("Contract Agreement Start Date")]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime Agreement_Start_Date { get; set; }
         [DisplayName("Contract Agreement End Date")]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime Agreement_End_Date { get; set; }
         [DisplayName("Contract Total Rental amount")]
@@ -77,7 +77,7 @@ namespace LeaMaPortal.Models
         [DisplayName("Security Deposit cheque/Ref no")]
         public string Security_chequeno { get; set; }
         [DisplayName("Security Cheque date")]
-       // [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime Security_chequedate { get; set; }
         [DisplayName("Contract Notice Period Days")]
@@ -99,6 +99,7 @@ namespace LeaMaPortal.Models
         public string Emp_name { get; set; }
         public int Approval_Flag { get; set; }
         public string Approved_By { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Approved_Date { get; set; }
         [StringLength(150)]                                                    
         public string Createduser { get; set; }

@@ -135,7 +135,8 @@ namespace LeaMaPortal.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Dashboard");
+                return Redirect("../Dashboard/Index");
+                //return RedirectToAction("Index", "Dashboard");
             }
         }
     }
