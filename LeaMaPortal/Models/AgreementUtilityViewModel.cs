@@ -22,7 +22,7 @@ namespace LeaMaPortal.Models
         [DisplayName("Amount Type")]
         public string Amount_Type { get; set; }
         [DisplayName("Amount")]
-        public decimal Amount { get; set; } 
+        public float Amount { get; set; } 
         public List<AgreementUtilityViewModel> AgreementUtilityList { get; set; }
 
     }
