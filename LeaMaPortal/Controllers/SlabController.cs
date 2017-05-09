@@ -80,7 +80,8 @@ namespace LeaMaPortal.Controllers
             //ViewBag.Unit_id = new SelectList(db.tbl_propertiesmaster.OrderBy(o => o.Unit_Property_Name).Distinct(), "Unit_Property_Name", "Unit_Property_Name");
             ViewBag.Residence_type = new SelectList(StaticHelper.GetStaticData(StaticHelper.SLAB_RESIDENCE_DROPDOWN), "Name", "Name");
             model.SlabId = db.tbl_slabmaster.OrderByDescending(o => o.id).Select(s => s.slabid).FirstOrDefault();
-            model.SlabId = Convert.ToInt32(model.SlabId) + 1;
+            model.SlabId = model.SlabId ==null ? 1 : model.SlabId +1;
+            //model.SlabId = Convert.ToInt32(model.SlabId) + 1;
             return PartialView("../Master/SlabMaster/_AddOrUpdate", model);
         }
         // POST: CheckList/Create
@@ -99,7 +100,8 @@ namespace LeaMaPortal.Controllers
 
                     if (model.Id == 0)
                     {
-
+                        model.SlabId = db.tbl_slabmaster.OrderByDescending(o => o.id).Select(s => s.slabid).FirstOrDefault();
+                        model.SlabId = model.SlabId == null ? 1 : model.SlabId + 1;
                     }
                     else
                     {
@@ -194,7 +196,7 @@ namespace LeaMaPortal.Controllers
                                             new MySqlParameter("@PResidence_type",tbl_slab.Residence_type),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
-                var spResult = await db.Database.SqlQuery<object>("Usp_Slabmaster_All(@PFlag,@PId,@PUtility_id,@PUtility_Name,@Pslabid,@PUnit_From,@PUnitto,@Prate,@PColour,@PResidence_type,@PCreateduser)", param).ToListAsync();
+                var RE = await db.Database.SqlQuery<object>("CALL Usp_Slabmaster_All(@PFlag,@Pslabid,@PUtility_id,@PUtility_Name,@PUnit_From,@PUnitto,@Prate,@PColour,@PResidence_type,@PCreateduser)", param).ToListAsync();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -208,7 +210,7 @@ namespace LeaMaPortal.Controllers
             try
             {
                 var utility = await db.tbl_utilitiesmaster.FirstOrDefaultAsync(f => f.Utility_Name == UtilityName);
-                return utility.Utility_id;
+                return utility == null ? string.Empty : utility.Utility_id;
             }
             catch (Exception ex)
             {

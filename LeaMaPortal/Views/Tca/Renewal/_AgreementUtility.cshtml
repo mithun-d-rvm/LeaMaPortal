@@ -4,7 +4,7 @@
     <span> <strong> Agreement utility </strong> </span>
 </div>
 
-<div class="row" id="AgreementUtilityDiv">
+<div class="row" id="AgreementUtilityDivRenewal">
     <div class="col-md-12 document-row">
         <div class="col-md-2">
             @Html.LabelFor(model => model.Utility_id, htmlAttributes: new { @class = "label-default-remove" })
@@ -37,21 +37,21 @@
             @Html.DropDownList("Amount_Type", null, "--Select--", new { @class = "form-control master-form-input" })
         </div>
         <div class="col-md-2">
-            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "master-form-input text-box single-line", @onkeypress = "allow_only_Float(event,'AgreementUtilityDiv #Amount');" } })
+            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "master-form-input text-box single-line", @onkeypress = "allow_only_Float(event,'AgreementUtilityDivRenewal #Amount');" } })
         </div>
         <div class="col-md-1">
-            <button type="button" class="document-btn" onclick="addAgreementUtilityDetails(event);">Add</button>
+            <button type="button" class="document-btn" onclick="addAgreementUtilityDetailsRenewal(event);">Add</button>
         </div>
     </div>
 </div>
 <div class="row ht-5">
     &nbsp;
 </div>
-<input type="hidden" id="AgreementUtilityListCount" value="@Model.AgreementUtilityList.Count" />
+<input type="hidden" id="AgreementUtilityListCountRenewal" value="@Model.AgreementUtilityList.Count" />
 @*@Html.Partial("_AgreementUtilityDetails")*@
 
 <div class="row">
-    <table id="AgreementUtilityList" class="col-md-12 document-row">
+    <table id="AgreementUtilityListRenewal" class="col-md-12 document-row">
 
         @for (int i = 0; i < Model.AgreementUtilityList.Count; i++)
             {
@@ -74,14 +74,7 @@
                             @Model.AgreementUtilityList[i].Utility_Name
                             @*@Html.EditorFor(model => model.Utility_id, new { htmlAttributes = new { @class = "master-form-input" } })*@
                         </div>
-                        <div class="col-md-1">
-                            @Model.AgreementUtilityList[i].Utility_Name
-                            @*<select class="form-control master-form-input">
-                                    <option> Cash </option>
-                                    <option> Cheque </option>
-                                    <option> Card </option>
-                                </select>*@
-                        </div>
+                        
                         <div class="col-md-1 w-md-15">
                             @Model.AgreementUtilityList[i].Payable
                             @*@Html.EditorFor(model => model.Payable, new { htmlAttributes = new { @class = "master-form-input" } })*@
@@ -96,7 +89,7 @@
                         </div>
                         
                         <div class="col-md-1">
-                            <button class="btn AgreementUtilityList-remove">X</button>
+                            <button class="btn AgreementUtilityListRenewal-remove">X</button>
                         </div>
                     </div>
                 </td>
@@ -110,22 +103,22 @@
     &nbsp;
 </div>
 <script>
-    var AgreementUtilityCount = parseInt($("#AgreementUtilityListCount").val());
+    var AgreementUtilityCountRenewal = parseInt($("#AgreementUtilityListCountRenewal").val());
 
-    function addAgreementUtilityDetails(event) {
+    function addAgreementUtilityDetailsRenewal(event) {
         
-        var Utility_Name = $("#Utility_id").val();
-        var Utility_id = $("#Utility_Name option:selected").text();
-        var Payable = $("#Payable").val();
-        var Amount_Type = $("#Amount_Type").val();
-        var Amount = $("#AgreementUtilityDiv #Amount").val();
+        var Utility_Name = $("#AgreementUtilityDivRenewal #Utility_id").val();
+        var Utility_id = $("#AgreementUtilityDivRenewal #Utility_Name option:selected").text();
+        var Payable = $("#AgreementUtilityDivRenewal #Payable").val();
+        var Amount_Type = $("#AgreementUtilityDivRenewal #Amount_Type").val();
+        var Amount = $("#AgreementUtilityDivRenewal #Amount").val();
 
         var html = "<tr><td>" +
-                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Utility_id' id='AgreementUtilityList[" + AgreementUtilityCount + "].Utility_id' value='" + Utility_id + "' data-name='Utility_id' />" +
-                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Utility_Name' id='AgreementUtilityList[" + AgreementUtilityCount + "].Utility_Name' value='" + Utility_Name + "' data-name='Utility_Name' />" +
-                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Payable' id='AgreementUtilityList[" + AgreementUtilityCount + "].Payable' value='" + Payable + "' data-name='Payable' />" +
-                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Amount_Type' id='AgreementUtilityList[" + AgreementUtilityCount + "].Amount_Type' value='" + Amount_Type + "' data-name='Amount_Type' />" +
-                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Amount' id='AgreementUtilityList[" + AgreementUtilityCount + "].Amount' value='" + Amount + "' data-name='Amount' />" +
+                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCountRenewal + "].Utility_id' id='AgreementUtilityList[" + AgreementUtilityCountRenewal + "].Utility_id' value='" + Utility_id + "' data-name='Utility_id' />" +
+                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCountRenewal + "].Utility_Name' id='AgreementUtilityList[" + AgreementUtilityCountRenewal + "].Utility_Name' value='" + Utility_Name + "' data-name='Utility_Name' />" +
+                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCountRenewal + "].Payable' id='AgreementUtilityList[" + AgreementUtilityCountRenewal + "].Payable' value='" + Payable + "' data-name='Payable' />" +
+                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCountRenewal + "].Amount_Type' id='AgreementUtilityList[" + AgreementUtilityCountRenewal + "].Amount_Type' value='" + Amount_Type + "' data-name='Amount_Type' />" +
+                      "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCountRenewal + "].Amount' id='AgreementUtilityList[" + AgreementUtilityCountRenewal + "].Amount' value='" + Amount + "' data-name='Amount' />" +
 
 
                       "<div class='col-md-12 document-row'>" +
@@ -149,20 +142,20 @@
             Amount +
         "</div>" +
         "<div class='col-md-1 w-md-14'>" +
-           "<button class='btn AgreementUtilityList-remove' onclick='removeAgreementUtilityDetails(event);'>X</button>" +
+           "<button class='btn AgreementUtilityListRenewal-remove'>X</button>" +
         "</div>" +
     "</div>" +
 "</td>" +
 "</tr>";
        // alert(html);
 
-        $("#AgreementUtilityList").append(html);
-        AgreementUtilityCount++;
+        $("#AgreementUtilityListRenewal").append(html);
+        AgreementUtilityCountRenewal++;
     }
     
-    $(document).on('click', 'button.AgreementUtilityList-remove', function () {
+    $(document).on('click', 'button.AgreementUtilityListRenewal-remove', function () {
         $(this).closest('tr').remove();
-        var existfilelist = document.getElementById('AgreementUtilityList');
+        var existfilelist = document.getElementById('AgreementUtilityListRenewal');
         var newindex = 0;
         $(existfilelist).find('> tbody > tr').each(function () {
 
@@ -175,7 +168,7 @@
                     },
                     'name': function (_, name) {
                         //return name + iTenantDocument[0].Name
-                        return 'AgreementUnitList[' + newindex + '].' + dataname
+                        return 'AgreementUtilityDetailsList[' + newindex + '].' + dataname
                     }
                 });
             });
@@ -183,18 +176,18 @@
             newindex++;
 
         });
-        AgreementUtilityCount = newindex;
+        AgreementUtilityCountRenewal = newindex;
     });
 
-    $("#Utility_id").change(function () {
+    $("#AgreementUtilityDivRenewal #Utility_id").change(function () {
         debugger;
-        var utility_id = $("#Utility_id").val();
-        $("#Utility_Name").val(utility_id);
+        var utility_id = $("#AgreementUtilityDivRenewal #Utility_id").val();
+        $("#AgreementUtilityDivRenewal #Utility_Name").val(utility_id);
         return;
     });
-    $("#Utility_Name").change(function () {
-        var utility_id = $("#Utility_Name").val();
-        $("#Utility_id").val(utility_id);
+    $("#AgreementUtilityDivRenewal #Utility_Name").change(function () {
+        var utility_id = $("#AgreementUtilityDivRenewal #Utility_Name").val();
+        $("#AgreementUtilityDivRenewal #Utility_id").val(utility_id);
         return;
     });
 </script>

@@ -12,6 +12,8 @@ namespace LeaMaPortal.DBContext
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class LeamaEntities : DbContext
     {
@@ -25,8 +27,9 @@ namespace LeaMaPortal.DBContext
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<dashboard_earning> dashboard_earning { get; set; }
+        public virtual DbSet<dashboard_expenses> dashboard_expenses { get; set; }
         public virtual DbSet<dashboard_rental> dashboard_rental { get; set; }
-        public virtual DbSet<dashboard_utility> dashboard_utility { get; set; }
         public virtual DbSet<dashboard_vacancy> dashboard_vacancy { get; set; }
         public virtual DbSet<ebwater_report> ebwater_report { get; set; }
         public virtual DbSet<email_output> email_output { get; set; }
@@ -94,10 +97,32 @@ namespace LeaMaPortal.DBContext
         public virtual DbSet<test_report1> test_report1 { get; set; }
         public virtual DbSet<test_report2> test_report2 { get; set; }
         public virtual DbSet<vacancy_caretaker_report> vacancy_caretaker_report { get; set; }
+        public virtual DbSet<view_agreement_close_pending> view_agreement_close_pending { get; set; }
         public virtual DbSet<view_auto_receipt> view_auto_receipt { get; set; }
         public virtual DbSet<view_find_pdcstatus> view_find_pdcstatus { get; set; }
         public virtual DbSet<view_invoice_agreement> view_invoice_agreement { get; set; }
         public virtual DbSet<view_invoice_receipt_pending> view_invoice_receipt_pending { get; set; }
         public virtual DbSet<view_tenant> view_tenant { get; set; }
+    
+        public virtual ObjectResult<string> Usp_split(string screen_name, string combo_name, string deli, string target)
+        {
+            var screen_nameParameter = screen_name != null ?
+                new ObjectParameter("Screen_name", screen_name) :
+                new ObjectParameter("Screen_name", typeof(string));
+    
+            var combo_nameParameter = combo_name != null ?
+                new ObjectParameter("combo_name", combo_name) :
+                new ObjectParameter("combo_name", typeof(string));
+    
+            var deliParameter = deli != null ?
+                new ObjectParameter("deli", deli) :
+                new ObjectParameter("deli", typeof(string));
+    
+            var targetParameter = target != null ?
+                new ObjectParameter("target", target) :
+                new ObjectParameter("target", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Usp_split", screen_nameParameter, combo_nameParameter, deliParameter, targetParameter);
+        }
     }
 }
