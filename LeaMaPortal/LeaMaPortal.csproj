@@ -197,10 +197,12 @@
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\SlabController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
+    <Compile Include="Controllers\UtilityBillEntryController.cs" />
     <Compile Include="Controllers\UtilityController.cs" />
     <Compile Include="Controllers\TenantCompanyController.cs" />
     <Compile Include="Controllers\TcaController.cs" />
     <Compile Include="Controllers\UserCreationController.cs" />
+    <Compile Include="Controllers\UtilityPaymentController.cs" />
     <Compile Include="DBContext\collection_summary.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
@@ -843,6 +845,8 @@
     <Content Include="Views\Tca\_List.cshtml" />
     <Content Include="Views\EbWater\Billing.cshtml" />
     <Content Include="Views\EbWater\Payment.cshtml" />
+    <Content Include="Views\UtilityBillEntry\Index.cshtml" />
+    <Content Include="Views\UtilityPayment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
