@@ -56,6 +56,19 @@ namespace LeaMaPortal.Controllers
                 return Json(new MessageResult() { Errors = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
+        [HttpGet]
+        public ActionResult getNotificationMenu()
+        {
+            try
+            {
+                var data = StaticHelper.GetStaticData(StaticHelper.NOTIFICATION_MENU);
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+         }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -15,5 +15,6 @@ namespace LeaMaPortal.Models
         public string Cheque_No { get; set; }
         public DateTime cheque_date { get; set; }
         public float Cheque_Amount { get; set; }
+        public string ChequeDate { get; set; }
     }
 }

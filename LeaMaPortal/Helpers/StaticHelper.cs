@@ -33,6 +33,7 @@ namespace LeaMaPortal.Helpers
         public const byte PROPERTYCATEGORY_DROPDOWN = 8;
         public const byte ACCOUNT_NAME = 9;
         public const byte ACCOUNT_NUMBER = 10;
+        public const byte NOTIFICATION_MENU = 11;
 
         public const string PROPERTY_RESIDENTIAL = "residential";
         public const string PROPERTY_COMMERCIAL = "commercial";
@@ -57,7 +58,7 @@ namespace LeaMaPortal.Helpers
 
         public const string NOTIFICATION_ALL = "All";
         public const string NOTIFICATION_PDC = "PDC Deposits";
-        public const string NOTIFICATION_RENEWAL = "Renewal";
+        public const string NOTIFICATION_RENEWAL = "Renewals";
         public const string NOTIFICATION_RENTAL_DUE = "Rental Due";
         public const string NOTIFICATION_UTILITY_DUES = "Utility Dues";
         public const string NOTIFICATION_AGREEMENT_APPROVAL = "Agreement approval";
@@ -140,6 +141,17 @@ namespace LeaMaPortal.Helpers
             options.Add(new OptionModel { Name = StaticHelper.ACCOUNT_NUMBER_2 });
             return options;
         }
+
+        private static List<OptionModel> GetNotificationMenu()
+        {
+            List<OptionModel> options = new List<OptionModel>();
+            options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_AGREEMENT_APPROVAL });
+            options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_PDC });
+            options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_RENEWAL });
+            options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_RENTAL_DUE });
+            options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_UTILITY_DUES });
+            return options;
+        }
         public static List<OptionModel> GetStaticData(byte dataModelType)
         {
             switch (dataModelType)
@@ -164,6 +176,8 @@ namespace LeaMaPortal.Helpers
                     return GetAccountName();
                 case ACCOUNT_NUMBER:
                     return GetAccountNumber();
+                case NOTIFICATION_MENU:
+                    return GetNotificationMenu();
                 default:
                     return new List<OptionModel>();
             }

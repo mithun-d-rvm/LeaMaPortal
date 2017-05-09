@@ -14,5 +14,7 @@ namespace LeaMaPortal.Models
         public int Agreement_No { get; set; }
         public DateTime Agreement_Start_Date { get; set; }
         public DateTime Agreement_End_Date { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
     }
 }

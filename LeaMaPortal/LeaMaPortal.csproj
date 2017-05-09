@@ -466,12 +466,16 @@
     <Compile Include="Models\EmailTemplateViewModel.cs" />
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\MasterViewModel.cs" />
+    <Compile Include="Models\NotificationAgreementApprovalModel.cs" />
+    <Compile Include="Models\NotificationPdcModel.cs" />
+    <Compile Include="Models\NotificationRenewalModel.cs" />
+    <Compile Include="Models\NotificationRentalDueModel.cs" />
+    <Compile Include="Models\NotificationUtilityDuesModel.cs" />
     <Compile Include="Models\PaymentViewModel.cs" />
     <Compile Include="Models\OptionModel.cs" />
     <Compile Include="Models\PropertyTypeViewModel.cs" />
     <Compile Include="Models\ReceiptViewModel.cs" />
     <Compile Include="Models\PropertyViewModel.cs" />
-    <Compile Include="Models\RenewalModel.cs" />
     <Compile Include="Models\SlabViewModel.cs" />
     <Compile Include="Models\SupplierViewModel.cs" />
     <Compile Include="Models\UserCreationViewModel.cs" />

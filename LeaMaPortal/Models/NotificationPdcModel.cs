@@ -15,5 +15,6 @@ namespace LeaMaPortal.Models
         public string DDChequeNo { get; set; }
         public DateTime DDChequedate { get; set; }
         public float pdc_Amount { get; set; }
+        public string DDDate { get; set; }
     }
 }
