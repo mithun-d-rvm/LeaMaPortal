@@ -60,11 +60,11 @@
                             26
                         </div>
                         @*<div class="vacant-not-occupied">
-                            Not Occupied &gt; <span class="vacant-not-occupied-number">15</span>
-                        </div>
-                        <div class="vacant-lease">
-                            Lease Expired &gt; <span class="vacant-lease-number">18</span>
-                        </div>*@
+                                Not Occupied &gt; <span class="vacant-not-occupied-number">15</span>
+                            </div>
+                            <div class="vacant-lease">
+                                Lease Expired &gt; <span class="vacant-lease-number">18</span>
+                            </div>*@
                     </div>
                     <div class="col-md-6 text-center vacant-second-tab">
                         <div class="col-md-12 vacant-residential-div">
@@ -124,96 +124,101 @@
             <!-- Begin Grid View -->
 
             <div class="portlet-grid" style="width:98%;" id="earning-table">
-                <div class="panel-body">
-                    @*<div class="col-md-12" style="background-color:white;">*@
-                    <div class="divTable leama-fieldset">
-                        <div class="divTableBody divFontBodyTable">
-                            <div class="divTableHeading">
-                                <div class="divTableCell">Tenant ID</div>
-                                <div class="divTableCell">Company Name</div>
-                                <div class="divTableCell">Tenant Type</div>
-                                <div class="divTableCell">Trade License Number</div>
-                                <div class="divTableCell">Action</div>
-
-                            </div>
-
-                            <div class="divTableRow">
-                                <div class="divTableCell">TenantId</div>
-                                <div class="divTableCell">CompanyName</div>
-                                <div class="divTableCell">TenantType</div>
-                                <div class="divTableCell">TradelicenseNo</div>
-                                <div class="divTableCell">
-                                    <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
-                                    <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
+                @*<div class="panel-body">
+                        @*<div class="col-md-12" style="background-color:white;">
+                        <div class="divTable leama-fieldset">
+                            <div class="divTableBody divFontBodyTable">
+                                <div class="divTableHeading">
+                                    <div class="divTableCell">ReceiptNo</div>
+                                    <div class="divTableCell">ReceiptDate</div>
+                                    <div class="divTableCell">Property_Name</div>
+                                    <div class="divTableCell">unit_Name</div>
+                                    <div class="divTableCell">Tenant_Name</div>
+                                    <div class="divTableCell">TotalAmount</div>
                                 </div>
+                                <div class="divTableRow" id="earning-table-row">
 
-                            </div>
-                            <div class="divTableRow">
-                                <div class="divTableCell">TenantId</div>
-                                <div class="divTableCell">CompanyName</div>
-                                <div class="divTableCell">TenantType</div>
-                                <div class="divTableCell">TradelicenseNo</div>
-                                <div class="divTableCell">
-                                    <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
-                                    <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
                                 </div>
+                                @*<div class="divTableRow">
+                                        <div class="divTableCell">TenantId</div>
+                                        <div class="divTableCell">CompanyName</div>
+                                        <div class="divTableCell">TenantType</div>
+                                        <div class="divTableCell">TradelicenseNo</div>
+                                        <div class="divTableCell">
+                                            <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
+                                            <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
+                                        </div>
+
+                                    </div>
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">TenantId</div>
+                                        <div class="divTableCell">CompanyName</div>
+                                        <div class="divTableCell">TenantType</div>
+                                        <div class="divTableCell">TradelicenseNo</div>
+                                        <div class="divTableCell">
+                                            <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
+                                            <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
+                                        </div>
+
+                                    </div>
+
 
                             </div>
-
-
                         </div>
-                    </div>
-                    @*</div>*@
-                </div>
+                        @*</div>
+                    </div>*@
             </div>
 
             <div class="portlet-grid" style="width:98%;" id="vacant-table">
-                <div class="panel-body">
-                    @*<div class="col-md-12" style="background-color:white;">*@
-                    <div class="divTable leama-fieldset">
-                        <div class="divTableBody divFontBodyTable">
-                            <div class="divTableHeading">
-                                <div class="divTableCell">Vacant ID</div>
-                                <div class="divTableCell">Company Name</div>
-                                <div class="divTableCell">Tenant Type</div>
-                                <div class="divTableCell">Trade License Number</div>
-                                <div class="divTableCell">Action</div>
-
-                            </div>
-
-                            <div class="divTableRow">
-                                <div class="divTableCell">TenantId</div>
-                                <div class="divTableCell">CompanyName</div>
-                                <div class="divTableCell">TenantType</div>
-                                <div class="divTableCell">TradelicenseNo</div>
-                                <div class="divTableCell">
-                                    <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
-                                    <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
+                @*<div class="panel-body">
+                        @*<div class="col-md-12" style="background-color:white;">
+                        <div class="divTable leama-fieldset">
+                            <div class="divTableBody divFontBodyTable">
+                                <div class="divTableHeading">
+                                    <div class="divTableCell">Property Name </div>
+                                    <div class="divTableCell">Unit Name</div>
+                                    <div class="divTableCell">Property Usage</div>
+                                    <div class="divTableCell">Region Name</div>
+                                    <div class="divTableCell">Caretaker Name</div>
+                                    <div class="divTableCell">Country</div>
+                                    <div class="divTableCell">Rental Rate Month</div>
+                                    <div class="divTableCell">Vacant Start Date</div>
+                                    <div class="divTableCell">Aging Days</div>
                                 </div>
 
-                            </div>
-                            <div class="divTableRow">
-                                <div class="divTableCell">TenantId</div>
-                                <div class="divTableCell">CompanyName</div>
-                                <div class="divTableCell">TenantType</div>
-                                <div class="divTableCell">TradelicenseNo</div>
-                                <div class="divTableCell">
-                                    <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
-                                    <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
+                                @*<div class="divTableRow">
+                                    <div class="divTableCell">TenantId</div>
+                                    <div class="divTableCell">CompanyName</div>
+                                    <div class="divTableCell">TenantType</div>
+                                    <div class="divTableCell">TradelicenseNo</div>
+                                    <div class="divTableCell">
+                                        <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
+                                        <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
+                                    </div>
+
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell">TenantId</div>
+                                    <div class="divTableCell">CompanyName</div>
+                                    <div class="divTableCell">TenantType</div>
+                                    <div class="divTableCell">TradelicenseNo</div>
+                                    <div class="divTableCell">
+                                        <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
+                                        <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
+                                    </div>
+
                                 </div>
 
+
                             </div>
-
-
                         </div>
-                    </div>
-                    @*</div>*@
-                </div>
+                        @*</div>
+                    </div>*@
             </div>
 
             <div class="portlet-grid" style="width:98%;" id="loss-table">
-                <div class="panel-body">
-                    @*<div class="col-md-12" style="background-color:white;">*@
+                @*<div class="panel-body">
+                    @*<div class="col-md-12" style="background-color:white;">
                     <div class="divTable leama-fieldset">
                         <div class="divTableBody divFontBodyTable">
                             <div class="divTableHeading">
@@ -251,8 +256,8 @@
 
                         </div>
                     </div>
-                    @*</div>*@
-                </div>
+                    @*</div>
+                </div>*@
             </div>
 
             <!-- End Grid View -->
@@ -353,16 +358,19 @@
         $("#vacant-table").hide();
         $("#loss-table").hide();
         $("#earning-div").click(function () {
+            GetEarningDataSet();
             $("#earning-table").toggle();
             $("#vacant-table").hide();
             $("#loss-table").hide();
         });
         $("#vacant-div").click(function () {
+            GetVacantDataSet();
             $("#vacant-table").toggle();
             $("#earning-table").hide();
             $("#loss-table").hide();
         });
         $("#total-loss-div").click(function () {
+            GetVacantLossDataSet();
             $("#loss-table").toggle();
             $("#vacant-table").hide();
             $("#earning-table").hide();
@@ -586,6 +594,167 @@
             processData: false,
             success: function (response) {
                 $("#ContractExpiryNotification").text(response);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+    function GetEarningDataSet() {
+        debugger;
+        $.ajax(
+        {
+            url: "Dashboard/GetEarningDataSet",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+                $('#earning-table').empty();
+                debugger;
+                var header = "";
+                header += "<div class='panel-body'>";
+                header += "<div class='divTable leama-fieldset'>";
+                header += "<div class='divTableBody divFontBodyTable'>";
+                header += "<div class='divTableHeading'>";
+                header += "<div class='divTableCell'>Receipt No</div>";
+                header += "<div class='divTableCell'>Receipt Date</div>";
+                header += "<div class='divTableCell'>Property Name</div>";
+                header += "<div class='divTableCell'>Unit Name</div>";
+                header += "<div class='divTableCell'>Tenant Name</div>";
+                header += "<div class='divTableCell'>Total Amount</div>";
+                header += "</div>";
+                $('#earning-table').append(header);
+                var html = "";
+                $.each(response, function (index, data) {
+                    debugger;
+
+                    html += "<div class='divTableRow'>";
+                    html += "<div class='divTableCell'>" + response[index].ReceiptNo + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].ReceiptDate + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Property_Name + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].unit_Name + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Tenant_Name + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].TotalAmount + "</div></div>";
+
+                });
+                html += "</div></div></div>";
+                $('#earning-table').append(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+    function GetVacantDataSet() {
+        $.ajax(
+        {
+            url: "Dashboard/GetVacantDataSet",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+                $('#vacant-table').empty();
+                debugger;
+                var header = "";
+                header += "<div class='panel-body'>";
+                header += "<div class='divTable leama-fieldset'>";
+                header += "<div class='divTableBody divFontBodyTable'>";
+                header += "<div class='divTableHeading'>";
+                header += "<div class='divTableCell'>Property Name</div>";
+                header += "<div class='divTableCell'>Unit Name</div>";
+                header += "<div class='divTableCell'>Property Usage</div>";
+                header += "<div class='divTableCell'>Region Name</div>";
+                header += "<div class='divTableCell'>Caretaker Name</div>";
+                header += "<div class='divTableCell'>Country</div>";
+                header += "<div class='divTableCell'>Rental Rate Month</div>";
+                header += "<div class='divTableCell'>Vacant Start Date</div>";
+                header += "<div class='divTableCell'>Aging Days</div>";
+                header += "</div>";
+                $('#vacant-table').append(header);
+                var html = "";
+                $.each(response, function (index, data) {
+                    debugger;
+
+                    html += "<div class='divTableRow'>";
+                    html += "<div class='divTableCell'>" + response[index].Property_Name + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].unit_Name + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Property_Usage + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Region_Name + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Caretaker_Name + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Country + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Rental_Rate_Month + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Vacant_Start_Date + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Aging_Days + "</div></div>";
+
+                });
+                html += "</div></div></div>";
+                $('#vacant-table').append(html);
+
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+    function GetVacantLossDataSet() {
+        $.ajax(
+        {
+            url: "Dashboard/GetVacantLossDataSet",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+                $('#loss-table').empty();
+                debugger;
+                var header = "";
+                header += "<div class='panel-body'>";
+                header += "<div class='divTable leama-fieldset'>";
+                header += "<div class='divTableBody divFontBodyTable'>";
+                header += "<div class='divTableHeading'>";
+                header += "<div class='divTableCell'>Property Name</div>";
+                header += "<div class='divTableCell'>Unit Name</div>";
+                header += "<div class='divTableCell'>Property Usage</div>";
+                header += "<div class='divTableCell'>Region Name</div>";
+                header += "<div class='divTableCell'>Caretaker Name</div>";
+                header += "<div class='divTableCell'>Country</div>";
+                header += "<div class='divTableCell'>Rental Rate Month</div>";
+                header += "<div class='divTableCell'>Vacant Start Date</div>";
+                header += "<div class='divTableCell'>Aging Days</div>";
+                header += "<div class='divTableCell'>Loss Amount</div>";
+                header += "</div>";
+                $('#loss-table').append(header);
+                var html = "";
+                $.each(response, function (index, data) {
+                    debugger;
+
+                    html += "<div class='divTableRow'>";
+                    html += "<div class='divTableCell'>" + response[index].Property_Name + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].unit_Name + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Property_Usage + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Region_Name + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Caretaker_Name + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Country + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Rental_Rate_Month + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Vacant_Start_Date + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Aging_Days + "</div>";
+                    html += "<div class='divTableCell'>" + response[index].Loss_Amt + "</div></div>";
+
+                });
+                html += "</div></div></div>";
+                $('#loss-table').append(html);
+
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");

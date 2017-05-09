@@ -34,4 +34,38 @@ namespace LeaMaPortal.Models
 
     }
 
+    public class DashboardEarningModel
+    {
+        public string ReceiptNo { get; set; }
+        public string ReceiptDate { get; set; }
+        public string Property_Name { get; set; }
+        public string unit_Name { get; set; }
+        public string Tenant_Name { get; set; }
+        public string TotalAmount { get; set; }
+    }
+    public class DashboardVacancyModel
+    {
+        public string Property_Name { get; set; }
+        public string unit_Name { get; set; }
+        public string Property_Usage { get; set; }
+        public string Region_Name { get; set; }
+        public string Caretaker_Name { get; set; }
+        public string Country { get; set; }
+        public string Rental_Rate_Month { get; set; }
+        public string Vacant_Start_Date { get; set; }
+        public string Aging_Days { get; set; }
+    }
+    public class DashboardVacancyLossModel
+    {
+        public string Property_Name { get; set; }
+        public string unit_Name { get; set; }
+        public string Property_Usage { get; set; }
+        public string Region_Name { get; set; }
+        public string Caretaker_Name { get; set; }
+        public string Country { get; set; }
+        public string Rental_Rate_Month { get; set; }
+        public string Vacant_Start_Date { get; set; }
+        public string Aging_Days { get; set; }
+        public string Loss_Amt { get; set; }
+    }
 }

@@ -159,6 +159,54 @@ select Agreement_no from tbl_agreement where agreement_End_date between current_
             var result = await db.Database.SqlQuery<DashboardModel>(query).ToListAsync();
             return result;
         }
+        [HttpGet]
+        public async Task<JsonResult> GetEarningDataSet()
+        {
+            string query = @"select * from dashboard_earning";
+            var result = await GetResultSet<DashboardEarningModel>(query);
+            return Json(result,JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetVacantDataSet()
+        {
+            string query = @"select * from dashboard_vacancy";
+            var result = await GetResultSet<DashboardVacancyModel>(query);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetVacantLossDataSet()
+        {
+            string query = @"select * from dashboard_vacancy";
+            var result = await GetResultSet<DashboardVacancyLossModel>(query);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetUtilityDataSet()
+        {
+            string query = @"select * from dashboard_utility";
+            var result = await GetResultSet<DashboardVacancyLossModel>(query);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetRentalDataSet()
+        {
+            string query = @"select * from dashboard_rental";
+            var result = await GetResultSet<DashboardVacancyLossModel>(query);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetExpensesDataSet()
+        {
+            string query = @"select * from dashboard_expenses";
+            var result = await GetResultSet<DashboardVacancyLossModel>(query);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        private async Task<List<T>> GetResultSet<T>(string Query)
+        {
+            var result = await db.Database.SqlQuery<T>(Query).ToListAsync();
+            return result;
+        }
         //[HttpGet]
         //public async Task<JsonResult> GetRentDues()
         //{
