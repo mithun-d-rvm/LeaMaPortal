@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.IO;
 
 namespace LeaMaPortal.Controllers
 {
@@ -183,51 +184,55 @@ namespace LeaMaPortal.Controllers
         //}
 
         [HttpGet]
-        public PartialViewResult AddOrUpdate()
+        public async Task<PartialViewResult> AddOrUpdate()
         {
-            //var tenantCompanies = new TenantCompanyViewModel();
-            //tenantCompanies.CompanyDetails.Add(new CompanyDetail()
-            //{
-            //    Branch = "",
-            //    BranchAddress = "",
-            //    BranchAddress1 = "",
-            //    City = "",
-            //    Country = "",
-            //    EmailId = "",
-            //    FaxNo = "",
-            //    Id = 0,
-            //    Phoneno = "",
-            //    Pincode = "",
-            //    Remarks = "",
-            //    State = "",
-            //    TenantId = 0
-            //});
-            TenantCompanyViewModel model = new TenantCompanyViewModel();
-            model.MaritalStatus = Common.DefaultMaridalStatus;
-            var tenantId = db.tbl_tenant_company.OrderByDescending(x => x.Id).FirstOrDefault();
-            ViewBag.TenantId = tenantId!=null? tenantId.Tenant_Id+1: 1;
-            ViewBag.TenantType= new SelectList(Common.TenantType);
+            try
+            {
+                TenantCompanyViewModel model = new TenantCompanyViewModel();
+                model.MaritalStatus = Common.DefaultMaridalStatus;
+                var tenantId = await db.tbl_tenant_company.OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+                ViewBag.TenantId = tenantId != null ? tenantId.Tenant_Id + 1 : 1;
+                ViewBag.TenantType = new SelectList(Common.TenantType);
 
-            var _titleResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
-            ViewBag.TitleDisplay = new SelectList(_titleResult, Common.DefaultTitle);
+                //var _titleResult = db.Usp_split("Tenant individual", "Title", ",", null).ToList();
+                var _titleResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant individual" && x.comboname == "Title");
+                if (_titleResult != null)
+                {
+                    ViewBag.TitleDisplay = new SelectList(_titleResult.combovalue.Split(','), Common.DefaultTitle);
+                }
+                //var _titleResult = await db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToListAsync();
+                
+                //var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
+                var _emirateResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant Company" && x.comboname == "Emirate");
+                if (_emirateResult != null)
+                {
+                    ViewBag.Emirate = new SelectList(_emirateResult.combovalue.Split(','));
+                }
 
-            var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
-            ViewBag.Emirate = new SelectList(_emirateResult);
+                //var _companyActivity = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Actitvity',',',null);").ToList();
+                var _companyActivity = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant Company" && x.comboname == "Actitvity");
+                if (_companyActivity != null)
+                {
+                    ViewBag.ComapanyActivity = new SelectList(_companyActivity.combovalue.Split(','));
+                }
 
-            var _companyActivity= db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Actitvity',',',null);").ToList();
-            ViewBag.ComapanyActivity = new SelectList(_companyActivity);
-
-            ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
-            //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
-            ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
-            //ViewBag.Emirate = new SelectList(Common.Emirate);
-            //ViewBag.ComapanyActivity = new SelectList(Common.ComapanyActivity);
-            ViewBag.Issuance_authority = new SelectList(Common.Issuance_authority);
-            return PartialView("../Master/TenantCompany/_AddOrUpdate",model );
+                ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
+                //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
+                ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
+                //ViewBag.Emirate = new SelectList(Common.Emirate);
+                //ViewBag.ComapanyActivity = new SelectList(Common.ComapanyActivity);
+                ViewBag.Issuance_authority = new SelectList(Common.Issuance_authority);
+                return PartialView("../Master/TenantCompany/_AddOrUpdate", model);
+            }
+            catch(Exception e)
+            {
+                throw;
+            }
+            
         }
 
         [HttpGet]
-        public PartialViewResult Edit(int id)
+        public async Task<PartialViewResult> Edit(int id)
         {
             var tenantCompany = db.tbl_tenant_company.Where(x => x.Delmark != "*" && x.Tenant_Id == id).FirstOrDefault();
             if (tenantCompany == null)
@@ -236,14 +241,37 @@ namespace LeaMaPortal.Controllers
             }
             ViewBag.TenantId = tenantCompany.Tenant_Id;
             ViewBag.TenantType = new SelectList(Common.TenantType, tenantCompany.Type);
-            var _titleResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
-            ViewBag.TitleDisplay = new SelectList(_titleResult, tenantCompany.Title);
 
-            var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
-            ViewBag.Emirate = new SelectList(_emirateResult, tenantCompany.Emirate);
+            var _titleResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant individual" && x.comboname == "Title");
+            if (_titleResult != null)
+            {
+                ViewBag.TitleDisplay = new SelectList(_titleResult.combovalue.Split(','), tenantCompany.Title);
+            }
+            //var _titleResult = await db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToListAsync();
 
-            var _companyActivity = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Actitvity',',',null);").ToList();
-            ViewBag.ComapanyActivity = new SelectList(_companyActivity, tenantCompany.Actitvity);
+            //var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
+            var _emirateResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant Company" && x.comboname == "Emirate");
+            if (_emirateResult != null)
+            {
+                ViewBag.Emirate = new SelectList(_emirateResult.combovalue.Split(','), tenantCompany.Emirate);
+            }
+
+            //var _companyActivity = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Actitvity',',',null);").ToList();
+            var _companyActivity = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant Company" && x.comboname == "Actitvity");
+            if (_companyActivity != null)
+            {
+                ViewBag.ComapanyActivity = new SelectList(_companyActivity.combovalue.Split(','), tenantCompany.Actitvity);
+            }
+
+
+            //var _titleResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
+            //ViewBag.TitleDisplay = new SelectList(_titleResult, tenantCompany.Title);
+
+            //var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
+            //ViewBag.Emirate = new SelectList(_emirateResult, tenantCompany.Emirate);
+
+            //var _companyActivity = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Actitvity',',',null);").ToList();
+            //ViewBag.ComapanyActivity = new SelectList(_companyActivity, tenantCompany.Actitvity);
 
             ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name",tenantCompany.City);
             //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
@@ -343,26 +371,23 @@ namespace LeaMaPortal.Controllers
                         PFlag = "UPDATE";
                     }
                     
-                    string companyDet = "";
-                    if (model.CompanyDetails != null)
+                    string companyDet = null;
+                    foreach (var item in model.CompanyDetails)
                     {
-                        foreach (var item in model.CompanyDetails)
+                        if (string.IsNullOrWhiteSpace(companyDet))
                         {
-                                if (string.IsNullOrWhiteSpace(companyDet))
-                                {
-                                    companyDet = "(" + model.TenantId + ",'" + item.Branch + "','" + item.BranchAddress +
-                                        "','" + item.BranchAddress1 + "','" + item.City + "','" + item.State + "','" + item.Country + "','" + item.Pincode
-                                        + "','" + item.Phoneno + "','" + item.EmailId + "','" + item.FaxNo + "','" + item.Remarks + "','" + DateTime.Now.Year + "')";
-                                }
-                                else
-                                {
-                                    companyDet += ",(" + model.TenantId + ",'" + item.Branch + "','" + item.BranchAddress +
-                                       "','" + item.BranchAddress1 + "','" + item.City + "','" + item.State + "','" + item.Country + "','" + item.Pincode
-                                       + "','" + item.Phoneno + "','" + item.EmailId + "','" + item.FaxNo + "','" + item.Remarks + "','" + DateTime.Now.Year + "')";
-                                }
+                            companyDet = "(" + model.TenantId + ",'" + item.Branch + "','" + item.BranchAddress +
+                                "','" + item.BranchAddress1 + "','" + item.City + "','" + item.State + "','" + item.Country + "','" + item.Pincode
+                                + "','" + item.Phoneno + "','" + item.EmailId + "','" + item.FaxNo + "','" + item.Remarks + "','" + DateTime.Now.Year + "')";
+                        }
+                        else
+                        {
+                            companyDet += ",(" + model.TenantId + ",'" + item.Branch + "','" + item.BranchAddress +
+                               "','" + item.BranchAddress1 + "','" + item.City + "','" + item.State + "','" + item.Country + "','" + item.Pincode
+                               + "','" + item.Phoneno + "','" + item.EmailId + "','" + item.FaxNo + "','" + item.Remarks + "','" + DateTime.Now.Year + "')";
                         }
                     }
-                    string companyContactDetails = "";
+                    string companyContactDetails = null;
                     if (model.CompanyContactDetails != null)
                     {
                         foreach (var item in model.CompanyContactDetails)
@@ -382,7 +407,7 @@ namespace LeaMaPortal.Controllers
                             }
                         }
                     }
-                    string companyDoc = "";
+                    string companyDoc = null;
                     if(model.CompanyDocumentsExist!=null)
                     {
                         foreach(var item in model.CompanyDocumentsExist)
@@ -409,7 +434,18 @@ namespace LeaMaPortal.Controllers
                                     //System.IO.Stream fileContent = file.InputStream;
                                     fileName = guid + fileName;
                                     //To save file, use SaveAs method
-                                    file.SaveAs(Server.MapPath("~/" + Common.TenantCompanyDocumentContainer) + fileName); //File will be saved in application root
+                                    //var path = string.Format("{0}Documents", AppDomain.CurrentDomain.BaseDirectory);
+                                    //if (!Directory.Exists(path))
+                                    //{
+                                    //    Directory.CreateDirectory(path);
+                                    //}
+                                    var path = string.Format("{0}Documents\\TenantCompany", AppDomain.CurrentDomain.BaseDirectory);
+                                    //if (!Directory.Exists(path))
+                                    //{
+                                    //    Directory.CreateDirectory(path);
+                                    //}
+                                    Helper.CheckDirectory(Common.TenantCompanyDocumentDirectoryName);
+                                    file.SaveAs(path+"\\" + fileName); //File will be saved in application root
 
 
                                     companyDoc += !string.IsNullOrWhiteSpace(companyDoc) ?
@@ -418,7 +454,7 @@ namespace LeaMaPortal.Controllers
 
                                 }
                             }
-                            catch
+                            catch(Exception e)
                             {
 
                             }

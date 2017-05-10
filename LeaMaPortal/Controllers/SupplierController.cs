@@ -70,21 +70,40 @@ namespace LeaMaPortal.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult AddOrUpdate()
+        public async Task<PartialViewResult> AddOrUpdate()
         {
-            var supplierId = db.tbl_suppliermaster.Max(x => x.Supplier_Id);
-            ViewBag.SupplierId = supplierId == 0 ? 1 : supplierId + 1;
+            //var supplierId = await db.tbl_suppliermaster.Select(x => x.Supplier_Id).DefaultIfEmpty(0).MaxAsync();
+            var supplierId = db.tbl_suppliermaster.OrderByDescending(x => x.id).FirstOrDefault();
+            ViewBag.SupplierId = supplierId != null ? supplierId.Supplier_Id + 1 : 1;
+
+
+            //int? supplierId = await db.tbl_suppliermaster.MaxAsync(x => (int?)x.Supplier_Id);
+            //ViewBag.SupplierId = supplierId == null ? 1 : supplierId + 1;
 
             ViewBag.Type = new SelectList(Common.TenantType);
 
-            var _titleResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
-            ViewBag.Title = new SelectList(_titleResult, Common.DefaultTitle);
+            //var _titleResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
+            var _titleResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant individual" && x.comboname == "Title");
+            if (_titleResult != null)
+            {
+                ViewBag.Title = new SelectList(_titleResult.combovalue.Split(','), Common.DefaultTitle);
+            }
 
-            var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
-            ViewBag.Emirate = new SelectList(_emirateResult);
+            //var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
+            var _emirateResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant Company" && x.comboname == "Emirate");
+            if (_emirateResult != null)
+            {
+                ViewBag.Emirate = new SelectList(_emirateResult.combovalue.Split(','));
+            }
+            //ViewBag.Emirate = new SelectList(_emirateResult);
 
-            var _companyActivity = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Actitvity',',',null);").ToList();
-            ViewBag.Actitvity = new SelectList(_companyActivity);
+            //var _companyActivity = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Actitvity',',',null);").ToList();
+            var _companyActivity = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant Company" && x.comboname == "Actitvity");
+            if (_companyActivity != null)
+            {
+                ViewBag.Actitvity = new SelectList(_companyActivity.combovalue.Split(','));
+            }
+            //ViewBag.Actitvity = new SelectList(_companyActivity);
 
             ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
             
@@ -286,14 +305,37 @@ namespace LeaMaPortal.Controllers
 
                 ViewBag.Type = new SelectList(Common.TenantType, supplierViewData.Type);
 
-                var _titleResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
-                ViewBag.Title = new SelectList(_titleResult, supplierViewData.Title);
+                var _titleResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant individual" && x.comboname == "Title");
+                if (_titleResult != null)
+                {
+                    ViewBag.Title = new SelectList(_titleResult.combovalue.Split(','), supplierViewData.Title);
+                }
 
-                var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
-                ViewBag.Emirate = new SelectList(_emirateResult, supplierViewData.Emirate);
+                //var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
+                var _emirateResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant Company" && x.comboname == "Emirate");
+                if (_emirateResult != null)
+                {
+                    ViewBag.Emirate = new SelectList(_emirateResult.combovalue.Split(','), supplierViewData.Emirate);
+                }
+                //ViewBag.Emirate = new SelectList(_emirateResult);
 
-                var _companyActivity = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Actitvity',',',null);").ToList();
-                ViewBag.Actitvity = new SelectList(_companyActivity, supplierViewData.Actitvity);
+                //var _companyActivity = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Actitvity',',',null);").ToList();
+                var _companyActivity = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant Company" && x.comboname == "Actitvity");
+                if (_companyActivity != null)
+                {
+                    ViewBag.Actitvity = new SelectList(_companyActivity.combovalue.Split(','), supplierViewData.Actitvity);
+                }
+                //ViewBag.Actitvity = new SelectList(_companyActivity);
+
+
+                //var _titleResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
+                //ViewBag.Title = new SelectList(_titleResult, supplierViewData.Title);
+
+                //var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
+                //ViewBag.Emirate = new SelectList(_emirateResult, supplierViewData.Emirate);
+
+                //var _companyActivity = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Actitvity',',',null);").ToList();
+                //ViewBag.Actitvity = new SelectList(_companyActivity, supplierViewData.Actitvity);
 
                 ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name", supplierViewData.City);
 

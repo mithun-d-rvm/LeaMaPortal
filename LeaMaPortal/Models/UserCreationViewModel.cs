@@ -49,7 +49,6 @@ namespace LeaMaPortal.Models
         public int? DeleteConfig { get; set; }
 
         [DisplayName("Menu Names")]
-        [StringLength(50)]
         public string MenuConfig { get; set; }
         
         [StringLength(150)]

@@ -1,0 +1,52 @@
+﻿@model LeaMaPortal.Models.AgreementUnitViewModel
+<div class="row">
+
+    <table id="AgreementUnitList-Renewal" class="col-md-12 document-row">
+
+        @for (int i = 0; i < Model.AgreementUnitList.Count; i++)
+            {
+
+            <tr>
+                <td>
+                    <input type="hidden" name="AgreementUnitList[@i].Property_ID" id="AgreementUnitList[@i].Property_ID" value="@Model.AgreementUnitList[i].Property_ID" data-name="Property_ID" />
+                    <input type="hidden" name="AgreementUnitList[@i].Properties_Name" id="AgreementUnitList[@i].Properties_Name" value="@Model.AgreementUnitList[i].Properties_Name" data-name="Properties_Name" />
+                    <input type="hidden" name="AgreementUnitList[@i].Property_ID_Tawtheeq" id="AgreementUnitList[@i].Property_ID_Tawtheeq" value="@Model.AgreementUnitList[i].Property_ID_Tawtheeq" data-name="Property_ID_Tawtheeq" />
+
+                    <input type="hidden" name="AgreementUnitList[@i].Unit_ID_Tawtheeq" id="AgreementUnitList[@i].Unit_ID_Tawtheeq" value="@Model.AgreementUnitList[i].Unit_ID_Tawtheeq" data-name="Unit_ID_Tawtheeq" />
+                    <input type="hidden" name="AgreementUnitList[@i].Unit_Property_Name" id="AgreementUnitList[@i].Unit_Property_Name" value="@Model.AgreementUnitList[i].Unit_Property_Name" data-name="Unit_Property_Name" />
+                    <div class="col-md-12 document-row">
+                        <div class="col-md-1 col-md-1 w-md-13">
+                            @Model.AgreementUnitList[i].Property_ID
+                        </div>
+                        <div class="col-md-1 w-md-14">
+                            @Model.AgreementUnitList[i].Properties_Name
+                            @*@Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        </div>
+                        <div class="col-md-1">
+                            @Model.AgreementUnitList[i].Property_ID_Tawtheeq
+                           
+                        </div>
+                        <div class="col-md-1 w-md-15">
+                            @Model.AgreementUnitList[i].Unit_ID_Tawtheeq
+                            @*@Html.EditorFor(model => model.BankName, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        </div>
+                        <div class="col-md-1 w-md-14">
+                            @*@Html.EditorFor(model => model.Cheque_No, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                            @Model.AgreementUnitList[i].Unit_Property_Name
+                        </div>
+                       
+                        <div class="col-md-1">
+                            <button class="btn AgreementUnitList-Renewal-remove">X</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>
+
+<div class="row ht-5">
+    &nbsp;
+</div>
