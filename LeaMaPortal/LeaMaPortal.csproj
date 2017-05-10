@@ -182,6 +182,7 @@
     <Compile Include="Controllers\ContractApprovalSettingController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\EBWaterController.cs" />
     <Compile Include="Controllers\EmailTemplateController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FacilityController.cs" />
@@ -469,6 +470,7 @@
     <Compile Include="Helper.cs" />
     <Compile Include="Models\CountryViewModel.cs" />
     <Compile Include="Models\DashboardModel.cs" />
+    <Compile Include="Models\EBWaterModel.cs" />
     <Compile Include="Models\EmailTemplateViewModel.cs" />
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\MasterViewModel.cs" />
