@@ -101,7 +101,7 @@
                     <div class="row">
                         <div class="col-md-6 total-loss-resid-div">
                             <div class="m-t-16">
-                                <span class="total-loss-res-text">RES</span> 0
+                                <span class="total-loss-res-text" id="VacantLossRes-count">RES</span> 0
                             </div>
                             <div class="total-loss-res-amt">
                                 <span id="VacantLossRes"> 0</span>
@@ -110,7 +110,7 @@
                         </div>
                         <div class="col-md-6 total-loss-comm-div">
                             <div class="m-t-16">
-                                <span class="total-loss-comm-text">COM</span> 0
+                                <span class="total-loss-comm-text" id="VacantLossCom-count">COM</span> 0
                             </div>
                             <div class="total-loss-res-amt">
                                 <span id="VacantLossCom"> 0</span>
@@ -323,7 +323,7 @@
             <!-- Begin Grid View -->
 
             <div class="home-common-table" id="utility-table">
-                <table class="table table-responsive tbl-dahboard">
+                @*<table class="table table-responsive tbl-dahboard">
                     <tr class="tbl-head">
                         <th class="p-15"> Receipt No </th>
                         <th class="p-15"> Receipt Date </th>
@@ -340,11 +340,11 @@
                         <td class="p-15"> test 1 </td>
                         <td class="p-15"> test 1 </td>
                     </tr>
-                </table>
+                </table>*@
             </div>
 
             <div class="home-common-table" id="rent-table">
-                <table class="table table-responsive tbl-dahboard">
+                @*<table class="table table-responsive tbl-dahboard">
                     <tr class="tbl-head">
                         <th class="p-15"> Receipt Name </th>
                         <th class="p-15"> Receipt Date </th>
@@ -361,11 +361,11 @@
                         <td class="p-15"> test 1 </td>
                         <td class="p-15"> test 1 </td>
                     </tr>
-                </table>
+                </table>*@
             </div>
 
             <div class="home-common-table" id="expense-table">
-                <table class="table table-responsive tbl-dahboard">
+                @*<table class="table table-responsive tbl-dahboard">
                     <tr class="tbl-head">
                         <th class="p-15"> Receipt Desc </th>
                         <th class="p-15"> Receipt Date </th>
@@ -382,7 +382,7 @@
                         <td class="p-15"> test 1 </td>
                         <td class="p-15"> test 1 </td>
                     </tr>
-                </table>
+                </table>*@
             </div>
 
             <!-- End Grid View -->
@@ -475,7 +475,7 @@
             $("#expense-table").hide();
         });
         $("#utility-div").click(function () {
-            GetVacantLossDataSet();
+            GetUtilityDataSet();
             $("#utility-table").toggle();
             $("#vacant-table").hide();
             $("#earning-table").hide();
@@ -484,7 +484,7 @@
             $("#expense-table").hide();
         });
         $("#rent-div").click(function () {
-            GetVacantDataSet();
+            GetRentalDataSet();
             $("#rent-table").toggle();
             $("#earning-table").hide();
             $("#loss-table").hide();
@@ -493,7 +493,7 @@
             $("#expense-table").hide();
         });
         $("#expense-div").click(function () {
-            GetVacantDataSet();
+            GetExpensesDataSet();
             $("#expense-table").toggle();
             $("#earning-table").hide();
             $("#loss-table").hide();
@@ -639,6 +639,8 @@
                     $("#VacantCount").text(el.Total_Value);
                     $("#VacantCountRes").text(el.Residential);
                     $("#VacantcountCom").text(el.Commercial);
+                    $("#VacantLossRes-count").text(el.Residential);
+                    $("#VacantLossCom-count").text(el.Commercial);
                 });
             },
             error: function (jqXhr, textStatus, errorThrown) {
@@ -945,6 +947,157 @@
                 });
                 html += "</table>";
                 $('#loss-table').append(html);
+
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+
+    function GetUtilityDataSet() {
+        $.ajax(
+        {
+            url: "../Dashboard/GetUtilityDataSet",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+                $('#utility-table').empty();
+                debugger;
+                var html = "";
+                
+                html += "<table class='table table-responsive tbl-dahboard'>";
+                html += "<tr class='tbl-head'>";
+                html += "<th class='p-15'> Ref No </th>";
+                html += "<th class='p-15'> Meter No</th>";
+                html += "<th class='p-15'> Bill No </th>";
+                html += "<th class='p-15'> Amount</th>";
+                html += "<th class='p-15'> Utility Name</th>";
+                html += "</tr>";
+
+                //$('#loss-table').append(header);
+                //var html = "";
+                $.each(response, function (index, data) {
+                    debugger;
+
+                    html += "<tr>";
+                    html += "<td class='p-15'>" + response[index].refno + "</td>";
+                    html += "<td class='p-15'>" + response[index].meterno + "</td>";
+                    html += "<td class='p-15'>" + response[index].billno + "</td>";
+                    html += "<td class='p-15'>" + response[index].amount + "</td>";
+                    html += "<td class='p-15'>" + response[index].utility_name + "</td>";
+                });
+                html += "</table>";
+                $('#utility-table').append(html);
+
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+    function GetRentalDataSet() {
+        $.ajax(
+        {
+            url: "../Dashboard/GetRentalDataSet",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+                $('#rent-table').empty();
+                debugger;
+                var html = "";
+                
+                html += "<table class='table table-responsive tbl-dahboard'>";
+                html += "<tr class='tbl-head'>";
+                html += "<th class='p-15'> Agreement No </th>";
+                html += "<th class='p-15'> Property Name </th>";
+                html += "<th class='p-15'> Unit Name </th>";
+                html += "<th class='p-15'> Region Name </th>";
+                html += "<th class='p-15'> Caretaker Name </th>";
+                html += "<th class='p-15'> Country </th>";
+                html += "<th class='p-15'> Payment Mode</th>";
+                html += "<th class='p-15'> Total Amount </th>";
+                html += "</tr>";
+
+                //$('#loss-table').append(header);
+                //var html = "";
+                $.each(response, function (index, data) {
+                    debugger;
+
+                    html += "<tr>";
+                    html += "<td class='p-15'>" + response[index].Agreement_No + "</td>";
+                    html += "<td class='p-15'>" + response[index].Property_Name + "</td>";
+                    html += "<td class='p-15'>" + response[index].unit_Name + "</td>";
+                    html += "<td class='p-15'>" + response[index].Region_Name + "</td>";
+                    html += "<td class='p-15'>" + response[index].Caretaker_Name + "</td>";
+                    html += "<td class='p-15'>" + response[index].Country + "</td>";
+                    html += "<td class='p-15'>" + response[index].payment_mode+ "</td>";
+                    html += "<td class='p-15'>" + response[index].totalamount + "</td>";
+                    
+                });
+                html += "</table>";
+                $('#rent-table').append(html);
+
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+    function GetExpensesDataSet() {
+        $.ajax(
+        {
+            url: "../Dashboard/GetExpensesDataSet",
+            type: "Get",
+            contentType: "application/json",
+            processData: false,
+            success: function (response) {
+                $('#expense-table').empty();
+                debugger;
+                var html = "";
+                
+
+                html += "<table class='table table-responsive tbl-dahboard'>";
+                html += "<tr class='tbl-head'>";
+                html += "<th class='p-15'> Payment No </th>";
+                html += "<th class='p-15'> Payment Date </th>";
+                html += "<th class='p-15'> Utility Name</th>";
+                html += "<th class='p-15'> Supplier Name</th>";
+                html += "<th class='p-15'> Payment Type</th>";
+                html += "<th class='p-15'> Payment Mode </th>";
+                html += "<th class='p-15'> Total Amount</th>";
+                html += "</tr>";
+
+                //$('#loss-table').append(header);
+                //var html = "";
+                $.each(response, function (index, data) {
+                    debugger;
+
+                    html += "<tr>";
+                    html += "<td class='p-15'>" + response[index].PaymentNo + "</td>";
+                    html += "<td class='p-15'>" + response[index].PaymentDate + "</td>";
+                    html += "<td class='p-15'>" + response[index].Utility_name + "</td>";
+                    html += "<td class='p-15'>" + response[index].Supplier_name + "</td>";
+                    html += "<td class='p-15'>" + response[index].PaymentType + "</td>";
+                    html += "<td class='p-15'>" + response[index].PaymentMode + "</td>";
+                    html += "<td class='p-15'>" + response[index].TotalAmount+ "</td>";
+                });
+                html += "</table>";
+                $('#expense-table').append(html);
 
             },
             error: function (jqXhr, textStatus, errorThrown) {

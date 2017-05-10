@@ -155,7 +155,7 @@ select Agreement_no from tbl_agreement where agreement_End_date between current_
         }
         private async Task<List<DashboardModel>> GetDashboardSummaryByCategory(string category, string month = null, string year = null)
         {
-            string query = "SELECT * FROM dashboard_summary where category=" + category+"";
+            string query = "SELECT * FROM dashboard_summary where category=" + category + "";
             if (!string.IsNullOrEmpty(month))
                 query += " and Month=" + month;
             if (!string.IsNullOrEmpty(year))
@@ -168,7 +168,7 @@ select Agreement_no from tbl_agreement where agreement_End_date between current_
         {
             string query = @"select * from dashboard_earning";
             var result = await GetResultSet<DashboardEarningModel>(query);
-            return Json(result,JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -189,21 +189,21 @@ select Agreement_no from tbl_agreement where agreement_End_date between current_
         public async Task<JsonResult> GetUtilityDataSet()
         {
             string query = @"select * from dashboard_utility";
-            var result = await GetResultSet<DashboardVacancyLossModel>(query);
+            var result = await GetResultSet<DashboardUtilityModel>(query);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public async Task<JsonResult> GetRentalDataSet()
         {
             string query = @"select * from dashboard_rental";
-            var result = await GetResultSet<DashboardVacancyLossModel>(query);
+            var result = await GetResultSet<DashboardRentalModel>(query);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public async Task<JsonResult> GetExpensesDataSet()
         {
             string query = @"select * from dashboard_expenses";
-            var result = await GetResultSet<DashboardVacancyLossModel>(query);
+            var result = await GetResultSet<DashboardExpensesModel>(query);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         private async Task<List<T>> GetResultSet<T>(string Query)
