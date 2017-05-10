@@ -216,28 +216,44 @@
                 <div class="p-b-25">
                     <h3>Utility Payment Details</h3>
                 </div>
-                <div class="" id="invoice-details">
+                <div class="" id="utility-payment-details">
                     <div id="Gridview" class="row document-row">
                         <div class="col-md-12">
-                            <div class="col-md-2 form-group">
+                            <div class="col-md-3 form-group">
                                 <label for="Billno">Bill Entry Number</label>
                                 @Html.DropDownList("Refno", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                             </div>
-                            <div class="col-md-2 form-group">
+                            <div class="col-md-3 form-group">
                                 <label for="description">Meter Number</label>
                                 @Html.DropDownList("Meterno", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                             </div>
-                            <div class="col-md-2 form-group">
+                            <div class="col-md-3 form-group">
                                 <label for="description">Bill Number</label>
                                 @Html.DropDownList("billNo", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                             </div>
-                            <div class="col-md-2 form-group">
+                            <div class="col-md-3 form-group">
                                 <label for="quantity">Bill Date</label>
-                                <input type="date" class="form-control master-form-input" id="billDate" />
+                                <input type="date" class="form-control master-form-input" id="billDate" readonly/>
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="amount">Bill Amount</label>
-                                <input id="InvoiceDescription" type="text" class="form-control master-form-input" readonly />
+                                <input id="BillAmount" type="text" class="form-control master-form-input" readonly />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="amount">Received Amount</label>
+                                <input id="ReceivedAmount" type="text" class="form-control master-form-input" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="DebitAmount">Debit Amount</label>
+                                <input id="DebitAmount" type="text" class="form-control master-form-input" />
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="Remarks">Remarks</label>
+                                <input id="Remarks" type="text" class="form-control master-form-input" />
+                            </div>
+                            <div class="col-md-3 btn-group">
+                                <br />
+                                <input type="button" class="document-btn" id="AddUtilityPayment" value="Add" onclick='add(this);' />
                             </div>
                         </div>
                     </div>
@@ -273,7 +289,7 @@
 
             </div>
 
-            <table class="row m-t-20" id="ReceiptDetailsListForms">
+            <table class="row m-t-20" id="UtilityPaymentDetailsListForms">
 
 
                 @if (Model.UtilityPaymentDetails != null)
@@ -282,7 +298,7 @@
                     for (int j = 0; j < Model.UtilityPaymentDetails.Count; j++)
                     {
                         // <script>
-                        var html = "<div class='col-md-12 document-row' id='GridViewCompanyContact" + @j + "'>";
+                        var html = "<div class='col-md-12 document-row' id='GridViewUtilitypayment" + @j + "'>";
 
                         html = html + "<div class='col-md-12'>";
                         html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='Refno" + @j + "'  type='text' value='" + Model.UtilityPaymentDetails[@j].Refno + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + j + "].Refno' data-name='Ref number'/></div>";
@@ -332,65 +348,42 @@
 }
 
 <script>
-    function myFunction() {
-        var val = $("#dropDownId option:selected").val();
-        alert(val);
-
-        $.ajax(
-       {
-           url: "../Invoice/AddOrUpdate/?DropDownValue=1",
-           type: "Get",
-           data: {},
-           contentType: "application/json",
-           processData: false,
-           success: function (html) {
-               $("#ContainerAddOrUpdate").html(html);
-           },
-           error: function (jqXhr, textStatus, errorThrown) {
-               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-           },
-           complete: function () {
-               $("#img-loader").addClass("hide");
-           }
-       });
-
-    }
-    $('#dropDownId').change(function () {
-        var val = $("#dropDownId option:selected").val();
-        alert(val);
-
-    });
-    $('#model-close').click(function () {
-        $("#myModal").modal('hide');
-    });
-    var i = 0;
+    
     function add() {
-
-        var item = document.getElementById("item").value;
-        var description = document.getElementById("description").value;
-        var qty = document.getElementById("qty").value;
-        var amount = document.getElementById("amount").value;
-
+        var refno = $("#Refno option:selected").text();
+        var meterno = $("#Meterno option:selected").text();
+        var billNo = $("#billNo option:selected").text();
+        var billDate = document.getElementById("billDate").value;
+        var BillAmount = document.getElementById("BillAmount").value;
+        var ReceivedAmount = document.getElementById("ReceivedAmount").value;
+        var DebitAmount = document.getElementById("DebitAmount").value;
 
         var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + i + "'>";
 
         html = html + "<div class='col-md-12'>";
-        html = html + " <div class='col-md-3 form-group'> <label for='item'>Item Type</label><input id='item" + i + "'  type='text' value='" + item + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].item' data-name='Item Type' readonly /></div>";
-        html = html + " <div class='col-md-3 form-group'> <label for='branch'>Item Description</label> <input id='description" +i + "'  type='text' value='" + description + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].description' data-name='description' /></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='qty'>Quantity</label><input type='text' id='qty" + i + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].qty' data-name='qty' value='" + qty + "'/></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='amount'>Amount</label><input type='text' id='amount" + i + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].amount' data-name='amount' value='" + amount + "'/></div>";
-        html = html + "<div class='col-md-2 form-group'></br>  <button class='document-btn removebutton' id='Delete" + i + "'> Delete </button></div>";
+        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='Refno" + i + "'  type='text' value='" + refno + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + i + "].Refno' data-name='Ref no'/></div>";
+        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='Meterno" + i + "'  type='text' value='" + meterno + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + i + "].Meterno' data-name='Meter Number' /></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='billNo" + i + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + i + "].billNo' data-name='Bill Number' value='" + billNo + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='date' id='billDate" + i + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + i + "].billDate' data-name='Bill Date' value='" + billDate + "'/></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='BillAmount" + i + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + i + "].Remarks' data-name='Bill Amount' value='" + BillAmount + "'/></div></div><div class='col-md-12'>";
+        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='ReceivedAmount" + i + "'  type='text' value='" + ReceivedAmount + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + i + "].PaidAmount' data-name='Received Amount'/></div>";
+        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='DebitAmount" + i + "'  type='text' value='" + DebitAmount + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + i + "].Debitamt' data-name='Debit Amount' /></div>";
+        html = html + "<div class='col-md-2 form-group'></br><Input type='button' class='document-btn removebutton' id='Delete" + i + "'value='Delete' /> </div>";
         html = html + "</div>";
 
         html = html + "</div>";
         html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
-        $('#invoiceDetailsForms').append(html);
+        $('#UtilityPaymentDetailsListForms').append(html);
         i++;
 
         //$("#item").val('');
-        $("#description").val('');
-        $("#qty").val('');
-        $("#amount").val('');
+        $("#Refno option:selected").prop("selected", false);
+        $("#Meterno option:selected").prop("selected", false);
+        $("#billNo option:selected").prop("selected", false);
+        $("#billDate").val('');
+        $("#BillAmount").val('');
+        $("#ReceivedAmount").val('');
+        $("#DebitAmount").val('');
         return false;
       //  var html = " <div class='col-md-12 document-row' id='GridView"+count+"'>";
       //  html=html+" <div class='col-md-1'>"+count+"</div>";
@@ -412,7 +405,7 @@
     }
     $(document).on('click', 'button.removebutton', function () {
         $(this).closest('tr').remove();
-        var existfilelist = document.getElementById('invoiceDetailsForms');
+        var existfilelist = document.getElementById('UtilityPaymentDetailsListForms');
         var newindex = 0;
         $(existfilelist).find('> tbody > tr').each(function () {
 
@@ -425,7 +418,7 @@
                     },
                     'name': function (_, name) {
                         //return name + iTenantDocument[0].Name
-                        return 'InvoiceDetails[' + newindex + '].' + dataname
+                        return 'UtilityPaymentDetails[' + newindex + '].' + dataname
                     }
                 });
             });
@@ -436,49 +429,70 @@
 
         i = newindex;
     });
-    $("#Tenantid").on('change', function (e) {
+    $("#Utiltiy_name").on('change', function (e) {
         debugger;
-        var tenantid = $("#Tenantid").val();
-        $("#TenantName").val($("#Tenantid option:selected").val());
-        //$("#Tenant_id").val($("#Tenantid option:selected").text() == "--Select--" ? null : $("#Tenantid option:selected").text());
-        //$("#Tenant_Name").val($("#TenantName option:selected").text() == "--Select--" ? null : $("#TenantName option:selected").text());
-
-        //$("#TenantName").prop('selected', true).change();
-    });
-    $("#TenantName").on('change', function (e) {
-        debugger;
-        var tenantid = $("#TenantName").val();
-        $("#Tenantid").val($("#TenantName option:selected").val());
-        //$("#Tenant_Name").val($("#TenantName option:selected").text() == "--Select--" ? null : $("#TenantName option:selected").text());
-        //$("#Tenant_id").val($("#Tenantid option:selected").text() == "--Select--" ? null : $("#Tenantid option:selected").text());
+        var utilityid = $("#Utiltiy_name").val();
+        $("#Utility_id").val(utilityid);
     });
 
-    $("#PropertyId").on('change', function (e) {
+    $("#Supplier_name").on('change', function (e) {
         debugger;
-        var propertyid = $("#PropertyId").val();
-        $("#PropertyName").val($("#PropertyId option:selected").val());
-
-        //document.getElementById("#Property_Id").value = propertyid;
-
-        //$('#Property_Id').attr("value", $("#PropertyId option:selected").text() == "--Select--" ? null : $("#PropertyId option:selected").text());
-        //$('#Property_Name').attr("value", $("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
-
-        $("input#Property_ID").val(propertyid);
-        $("#Property_Name").val($("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
-
-        var id = $("#PropertyId option:selected").text() == "--Select--" ? null : propertyid;
-        getunits(id);
-        //$("#TenantName").prop('selected', true).change();
+        var Supplierid = $("#Supplier_name").val();
+        $("#Supplier_id").val(Supplierid);
     });
-    $("#PropertyName").on('change', function (e) {
+
+    //$("#PaymentType").on('change', function (e) {
+    //    debugger;
+    //    var paymentType = $("#PaymentType").val();
+    //    if (paymentType == "advance") {
+    //        $("#AdvAcCode").show();
+    //    }
+    //});
+    $("#PaymentMode").on('change', function (e) {
         debugger;
-        var propertyid = $("#PropertyName").val();
-        $("#PropertyId").val($("#PropertyName option:selected").val());
-        //$("#Property_Name").val($("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
-        //$("#Property_Id").val($("#PropertyId option:selected").text() == "--Select--" ? null : $("#PropertyId option:selected").text());
-        //$("input#Property_ID").val(propertyid);
-        var id = $("#PropertyName option:selected").text() == "--Select--" ? null : propertyid;
-        getunits(id);
+        var paymentMode = $("#PaymentMode").val();
+        if (paymentMode == "cheque") {
+            document.getElementById('DDChequeNo').style.display = "block";
+            document.getElementById('Cheqdate').style.display = "block";
+        }
+        else {
+            document.getElementById('DDChequeNo').style.display = "none";
+            document.getElementById('Cheqdate').style.display = "none";
+        }
+        if (paymentMode == "Advance adjust") {
+            $("#AdvAcCode").show();
+        }
+    });
+    
+    $("#BankAcCode").on('change', function (e) {
+        debugger;
+        var bankAcCode = $("#BankAcCode").val();
+        $("#BankAcName").val(bankAcCode);
+    });
+    $("#BankAcName").on('change', function (e) {
+        debugger;
+        var bankAcCode = $("#BankAcName").val();
+        $("#BankAcCode").val(bankAcCode);
+    });
+    $("#Refno").on('change', function (e) {
+        debugger;
+        var refno = $("#Refno").val();
+        $("#Meterno").val(refno);
+        $("#billNo").val(refno);
+    });
+
+    $("#Meterno").on('change', function (e) {
+        debugger;
+        var refno = $("#Meterno").val();
+        $("#Refno").val(refno);
+        $("#billNo").val(refno);
+    });
+
+    $("#billNo").on('change', function (e) {
+        debugger;
+        var refno = $("#billNo").val();
+        $("#Meterno").val(refno);
+        $("#Refno").val(refno);
     });
 
 
@@ -841,9 +855,8 @@
     };
     $(document).ready(function () {
         debugger;
-        if ($("#invtype").val() != null && $("#invtype").val() != "") {
-            $("#item").val($("#invtype").val());
-        }
+        $("#AdvAcCode").hide();
     });
+
 </script>
 

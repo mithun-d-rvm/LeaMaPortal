@@ -142,6 +142,20 @@ namespace LeaMaPortal
         public static List<string> BankAccountName = new List<string>() { "Axis Bank", "ICICI Bank", "HDFC Bank", "SBI Bank" };
 
         public static List<string> Receipts_PDCStatus = new List<string>() { "Received", "Cleared", "Bounced", "Cancelled" };
+
+        public static List<BankDetails> BankDetails = new List<BankDetails>()
+        {
+            new BankDetails()
+            {
+                BankName="Axis",
+                AccountNumber="Account1"
+            },
+            new BankDetails()
+            {
+                BankName="ICCI",
+                AccountNumber="Account 2"
+            }
+        };
     }
     public class FormMaster
     {
@@ -153,6 +167,11 @@ namespace LeaMaPortal
         public string Text { get; set; }
         public int Value { get; set; }
     }
-    
+    public class BankDetails
+    {
+        public string BankName { get; set; }
+        public string AccountNumber { get; set; }
+    }
+
 
 }

@@ -80,4 +80,11 @@ namespace LeaMaPortal.Models
         public Nullable<float> Debitamt { get; set; }
         public string Remarks { get; set; }
     }
+    public class EBBillPaymentPending
+    {
+        public int refno { get; set; }
+        public string meterno { get; set; }
+        public int billno { get; set; }
+        public int amount { get; set; }
+    }
 }
