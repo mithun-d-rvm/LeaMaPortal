@@ -1,0 +1,417 @@
+﻿
+@model LeaMaPortal.Models.EBWaterModel
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "EbWater" }))
+{
+    @*@Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+    @Html.HiddenFor(model => model.Id, new { @id = "Id" })
+    @Html.HiddenFor(model => model.SupplierId)
+    @Html.HiddenFor(model => model.UtilityId)
+    <div class="inner-block">
+        <div class="blank">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.BillEnteryNo, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+
+                            @Html.EditorFor(model => model.BillEnteryNo, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.BillEntryDate, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.BillEntryDate, new { htmlAttributes = new { @class = "master-form-input form-control", @type="date" } })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.SupplierName, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownList("SupplierName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.UtilityName, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownList("UtilityName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+            <div class="row" id="billDetail">
+                <div class="p-b-25">
+                    <h3>Bill Details</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 document-row" id="GridView">
+                        <div class="col-md-2">
+                            Meter Number
+                        </div>
+                        <div class="col-md-2">
+                            Property ID
+                        </div>
+                        <div class="col-md-2">
+                            Unit ID
+                        </div>
+                        <div class="col-md-2">
+                            Reading Date
+                        </div>
+                        <div class="col-md-2">
+                            Bill No
+                        </div>
+                    </div>
+                </div>
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-12 document-row" id="GridView">
+                        <div class="col-md-2">
+                            @Html.DropDownList("MeterNo", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="PropertyId" readonly/>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="UnitId" readonly/>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="date" class="form-control master-form-input" id="ReadingDate" />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="BillNo" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 document-row" id="GridView">
+                        <div class="col-md-2">
+                            Bill Date
+                        </div>
+                        <div class="col-md-2">
+                            Due Date
+                        </div>
+                        <div class="col-md-2">
+                            Meter Reading Number
+                        </div>
+                        <div class="col-md-2">
+                            Total Units
+                        </div>
+                        <div class="col-md-2">
+                            Day of Use
+                        </div>
+                    </div>
+                </div>
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-12 document-row" id="GridView">
+                        <div class="col-md-2">
+                            <input type="date" class="form-control master-form-input" id="BillDate" onchange="calculateBalance('')" />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="date" class="form-control master-form-input" id="DueDate" onchange="calculateBalance('')" />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="MeterReadingNo" onchange="calculateBalance('')" />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="TotalUnits" />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="DayOfUse" />
+                        </div>
+                    </div>
+                    <div class="col-md-12 document-row" id="GridView">
+                        <div class="col-md-2">
+                            Rate
+                        </div>
+                        <div class="col-md-2">
+                            Amount
+                        </div>
+                    </div>
+                </div>
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-12 document-row" id="GridView">
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="Rate" />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control master-form-input" id="Amount" />
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="document-btn" onclick="Add()">Add</button>
+                        </div>
+                    </div>
+
+                </div>    
+            </div>
+            
+
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+                <table class="row m-t-20" id="EbWaterDetailsForm">
+                    @if (Model.Details != null)
+                    {
+                        for (int j = 0; j < Model.Details.Count; j++)
+                        {
+                            var html = "<div class='row'><div class='col-md-12 document-row' id='GridView" + @j + "'>";
+                            html += "<div class='col-md-2'>Meter Number</div>";
+                            html += "<div class='col-md-2'>Property ID</div>";
+                            html += "<div class='col-md-2'>Unit ID</div>";
+                            html += "<div class='col-md-2'>Reading Date</div>";
+                            html += "<div class='col-md-2'>Bill Number</div>";
+                            html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+
+                            html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].MeterNo + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invtype' data-name='Inv type' id='Invtype" + @j + "' /></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].PropertyId + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invno' data-name='Inv no' id='Invno" + @j + "' /></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].UnitId + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceDate' data-name='Invoice Date' id='InvoiceDate" + @j + "' /></div>";
+                            html += "<div class='col-md-2'><input type='date' value='" + @Model.Details[j].ReadingDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Description' data-name='Description' id='Description" + @j + "' /></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].BillNo + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Remarks' data-name='Remarks' id='Remarks" + @j + "' /></div>";
+                            html += "</div><div class='col-md-12 document-row' id='GridView'>";
+                            html += "<div class='col-md-2'>Bill Date</div>";
+                            html += "<div class='col-md-2'>Due Date</div>";
+                            html += "<div class='col-md-2'>Meter Reading Number</div>";
+                            html += "<div class='col-md-2'>Total Units</div>";
+                            html += "<div class='col-md-2'>Day of Use</div>";
+                            html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+
+                            html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+                            html += "<div class='col-md-2'><input type='date' value='" + @Model.Details[j].BillDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceAmount' data-name='Invoice Amount' id='InvoiceAmount" + @j + "' onchange='calculateBalance(" + @j + ")' /></div>";
+                            html += "<div class='col-md-2'><input type='date' value='" + @Model.Details[j].DueDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].DebitAmount' data-name='Debit Amount' id='DebitAmount" + @j + "' onchange='calculateBalance(" + @j + ")' /></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].MeterReadingNo + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PaidAmount' data-name='Paid Amount' id='PaidAmount" + @j + "' onchange='calculateBalance(" + @j + ")' /></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].TotalUnits + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Balance' data-name='Balance' id='Balance" + @j + "' /></div>";
+                            html += "</div><div class='col-md-12 document-row' id='GridView'>";
+                            html += "<div class='col-md-2'>Rate</div>";
+                            html += "<div class='col-md-2'>Amount</div>";
+                            html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+
+                            html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].Rate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PaidAmount' data-name='Paid Amount' id='PaidAmount" + @j + "' onchange='calculateBalance(" + @j + ")' /></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].Amount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Balance' data-name='Balance' id='Balance" + @j + "' /></div>";
+                            html += "<div class='col-md-2'><button type='button' id='Deleter" + @j + "' class='document-btn removebutton'>Delete</button></div>";
+                            html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+                            <tr>
+                                <td>
+                                    @Html.Raw(html)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+
+
+            </div>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-4">
+                    &nbsp;
+                </div>
+                <div class="col-md-4">
+                    <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+}
+<script>
+    $("#MeterNo").change(function () {
+        getMeterDetails();
+    });
+    function getMeterDetails() {
+        var MeterNo = $("#MeterNo").val();
+        debugger;
+        $.ajax(
+                {
+                    url: "../EbWater/getMeterDetails",
+                    // dataType: "jsonp",
+                    method: "GET",
+                    data: { MeterNo: MeterNo }, //FormData(form.get(0)),
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        $("#PropertyId").val(response.Property_id);
+                        $("#UnitId").val(response.unit_id);
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+                });
+       
+    }
+    //$("#agreement_no").change(function () { debugger; getAgreementDetails() });
+    var j = 0;
+    function Add() {
+        debugger;
+        var MeterNo = document.getElementById("MeterNo").value;
+        var PropertyId = document.getElementById("PropertyId").value;
+        var UnitId = document.getElementById("UnitId").value;
+        var ReadingDate = document.getElementById("ReadingDate").value;
+        var BillNo = document.getElementById("BillNo").value;
+        var BillDate = document.getElementById("BillDate").value;
+        var DueDate = document.getElementById("DueDate").value;
+        var MeterReadingNo = document.getElementById("MeterReadingNo").value;
+        var TotalUnits = document.getElementById("TotalUnits").value;
+        var DayOfUse = document.getElementById("DayOfUse").value;
+        var Rate = document.getElementById("Rate").value;
+        var Amount = document.getElementById("Amount").value;
+
+        var html = "<tr><td><div class='row'><div class='col-md-12 document-row' id='GridView" + j + "'>";
+        html += "<div class='col-md-2'>Meter Number</div>";
+        html += "<div class='col-md-2'>Property Id</div>";
+        html += "<div class='col-md-2'>Unit Id</div>";
+        html += "<div class='col-md-2'>Reading Date</div>";
+        html += "<div class='col-md-2'>Bill No</div>";
+        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+
+        html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+        html += "<div class='col-md-2'><input type='text' value='" + MeterNo + "' class='form-control master-form-input' name='Details[" + j + "].MeterNo' data-name='Meter No' id='MeterNo" + j + "' /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + PropertyId + "' class='form-control master-form-input' name='Details[" + j + "].PropertyId' data-name='Property Id' id='PropertyId" + j + "' /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + UnitId + "' class='form-control master-form-input' name='Details[" + j + "].UnitId' data-name='UnitId' id='Unit Id" + j + "' /></div>";
+        html += "<div class='col-md-2'><input type='date' value='" + ReadingDate + "' class='form-control master-form-input' name='Details[" + j + "].ReadingDate' data-name='Reading Date' id='ReadingDate" + j + "' /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + BillNo + "' class='form-control master-form-input' name='Details[" + j + "].BillNo' data-name='BillNo' id='Bill No" + j + "' /></div>";
+        html += "</div><div class='col-md-12 document-row' id='GridView'>";
+        html += "<div class='col-md-2'>Bill Date</div>";
+        html += "<div class='col-md-2'>Due Date</div>";
+        html += "<div class='col-md-2'>Meter Reading Number</div>";
+        html += "<div class='col-md-2'>Total Units</div>";
+        html += "<div class='col-md-2'>Day of Use</div>";
+        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+
+        html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+        html += "<div class='col-md-2'><input type='date' value='" + BillDate + "' class='form-control master-form-input' name='Details[" + j + "].BillDate' data-name='Bill Date' id='BillDate" + j + "'  /></div>";
+        html += "<div class='col-md-2'><input type='date' value='" + DueDate + "' class='form-control master-form-input' name='Details[" + j + "].DueDate' data-name='Due Date' id='DueDate" + j + "'  /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + MeterReadingNo + "' class='form-control master-form-input' name='Details[" + j + "].MeterReadingNo' data-name='Meter Reading No' id='MeterReadingNo" + j + "'  /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + TotalUnits + "' class='form-control master-form-input' name='Details[" + j + "].TotalUnits' data-name='Total Units' id='TotalUnits" + j + "' /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + DayOfUse + "' class='form-control master-form-input' name='Details[" + j + "].DayOfUse' data-name='Day Of Use' id='DayOfUse" + j + "' /></div>";
+        html += "</div><div class='col-md-12 document-row' id='GridView'>";
+        html += "<div class='col-md-2'>Rate</div>";
+        html += "<div class='col-md-2'>Amount</div>";
+        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+
+        html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+        html += "<div class='col-md-2'><input type='date' value='" + Rate + "' class='form-control master-form-input' name='Details[" + j + "].Rate' data-name='Rate' id='Amount" + j + "'  /></div>";
+        html += "<div class='col-md-2'><input type='date' value='" + Amount + "' class='form-control master-form-input' name='Details[" + j + "].Amount' data-name='Amount' id='Amount" + j + "'  /></div>";
+        html += "<div class='col-md-2'><button type='button' id='Delete" + j + "' class='document-btn removebutton'>Delete</button></div>";
+        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+        html = html + "</td></tr><tr><td>&nbsp;</td></tr>"
+        j++;
+        $("#EbWaterDetailsForm").append(html);
+        document.getElementById("MeterNo").value = "";
+        document.getElementById("PropertyId").value = "";
+        document.getElementById("UnitId").value ="" ;
+        document.getElementById("ReadingDate").value ="";
+        document.getElementById("BillNo").value = "";
+        document.getElementById("BillDate").value = "";
+        document.getElementById("DueDate").value = "";
+        document.getElementById("MeterReadingNo").value = "";
+        document.getElementById("TotalUnits").value = "";
+        document.getElementById("DayOfUse").value = "";
+        document.getElementById("Rate").value = "";
+        document.getElementById("Amount").value = "";
+    }
+
+    $(document).on('click', 'button.removebutton', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('EbWaterDetailsForm');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                // alert(dataname + $(this) .val()+ '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'Details[' + newindex + '].' + dataname
+                    }
+                });
+            });
+            newindex++;
+        });
+        j = newindex;
+    });
+    $("form#EbWater").off("submit").on("submit", function (e) {
+        debugger;
+        e.preventDefault();
+        try {
+
+            var form = $("form#EbWater");            
+            $.ajax(
+                {
+                    url: "../EbWater/AddOrUpdate",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        debugger;
+                        GetEbWater();
+                        //$("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                        //$("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                        //$(".result-title").text("Success");
+                        //$(".result-modal-body span").text(paymentAdded);
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        //$("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        //$("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        //$(".result-title").text("Failure");
+                        //$(".result-modal-body span").text(masterResultError);
+                    },
+                    complete: function () {
+                        //$('#masterResultModal').modal('show');
+                    }
+                });
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+</script>

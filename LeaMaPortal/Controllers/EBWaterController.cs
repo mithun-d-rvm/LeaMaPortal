@@ -5,6 +5,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -12,7 +13,7 @@ using System.Web.Mvc;
 
 namespace LeaMaPortal.Controllers
 {
-    public class EBWaterController : Controller
+    public class EbWaterController : Controller
     {
         private LeamaEntities db = new LeamaEntities();
         // GET: EBWater
@@ -57,7 +58,7 @@ namespace LeaMaPortal.Controllers
                     UnitId = z.Unit_id
                 }).ToList()
             }).ToPagedList(currentPageIndex, PageSize);
-            return PartialView("../EBWater/_List", invoice);
+            return PartialView("../EbWater/_List", invoice);
         }
 
         [HttpGet]
@@ -69,17 +70,21 @@ namespace LeaMaPortal.Controllers
                 int? refNo = await db.tbl_eb_water_billentryhd.MaxAsync(x => (int?)x.Refno);
                 //int paymentno = await db.tbl_paymenthd.Select(x => x.PaymentNo).DefaultIfEmpty(0).MaxAsync();
                 model.BillEnteryNo = refNo == null ? 1 : refNo.Value + 1;
-                model.BillEntryDate = DateTime.Now.Date;
+                //model.BillEntryDate = DateTime.ParseExact(DateTime.Now.ToString(), "yyyy/MM/dd", CultureInfo.InvariantCulture);
+                model.BillEntryDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy/MM/dd"));
                 //var paymentType_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','Reccategory',',',null)").ToList();
                 var utilities = await db.tbl_utilitiesmaster.Where(w => w.Delmark != "*").ToListAsync();
                 ViewBag.UtilityId = new SelectList(utilities, "Utility_id", "Utility_id");
                 ViewBag.UtilityName = new SelectList(utilities, "Utility_id", "Utility_Name");
 
                 var suppliers = await db.tbl_suppliermaster.Where(w => w.Delmark != "*").ToListAsync();
-                ViewBag.Supplierid = new SelectList(suppliers, "Supplier_Id", "Supplier_Id");
+                ViewBag.SupplierId = new SelectList(suppliers, "Supplier_Id", "Supplier_Id");
                 ViewBag.SupplierName = new SelectList(suppliers, "Supplier_Id", "Supplier_Name");
-                
-                return PartialView("../EBWater/_AddOrUpdate", model);
+
+                var meters = await db.tbl_metermaster.Where(w => w.Delmark != "*").ToListAsync();
+                ViewBag.MeterNo = new SelectList(meters, "Meter_no", "Meter_no");
+
+                return PartialView("../EbWater/_AddOrUpdate", model);
             }
             catch (Exception ex)
             {
@@ -184,7 +189,7 @@ namespace LeaMaPortal.Controllers
                 ViewBag.UtilityId = new SelectList(utilities, "Utility_id", "Utility_id", model.UtilityId);
                 ViewBag.UtilityName = new SelectList(utilities, "Utility_id", "Utility_Name", model.UtilityId);
 
-                return PartialView("../EBWater/_AddorUpdate", model);
+                return PartialView("../EbWater/_AddorUpdate", model);
             }
             catch (Exception e)
             {
@@ -244,12 +249,12 @@ namespace LeaMaPortal.Controllers
             }
         }
         [HttpGet]
-        public JsonResult getMeterDetails(int MeterId)
+        public JsonResult getMeterDetails(string MeterNo)
         {
             try
             {
-                var data = db.tbl_metermaster.FirstOrDefault(f => f.id == MeterId);
-                return Json(data, JsonRequestBehavior.AllowGet);
+                var data = db.tbl_metermaster.FirstOrDefault(f => f.Meter_no == MeterNo);
+                return Json(new { Property_id = data.Property_id, unit_id = data.unit_id}, JsonRequestBehavior.AllowGet);
             }
             catch(Exception ex)
             {

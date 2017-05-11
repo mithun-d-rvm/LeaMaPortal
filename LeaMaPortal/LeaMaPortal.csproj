@@ -182,7 +182,7 @@
     <Compile Include="Controllers\ContractApprovalSettingController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\EBWaterController.cs" />
+    <Compile Include="Controllers\EbWaterController.cs" />
     <Compile Include="Controllers\EmailTemplateController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FacilityController.cs" />
@@ -873,6 +873,9 @@
     <Content Include="Views\EbWater\Payment.cshtml" />
     <Content Include="Views\UtilityBillEntry\Index.cshtml" />
     <Content Include="Views\UtilityPayment\Index.cshtml" />
+    <Content Include="Views\EbWater\Index.cshtml" />
+    <Content Include="Views\EbWater\_List.cshtml" />
+    <Content Include="Views\EbWater\_AddorUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
