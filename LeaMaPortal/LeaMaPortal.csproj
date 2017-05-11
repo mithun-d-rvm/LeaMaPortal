@@ -871,6 +871,7 @@
     <Content Include="Views\EbWater\Payment.cshtml" />
     <Content Include="Views\UtilityBillEntry\Index.cshtml" />
     <Content Include="Views\UtilityPayment\Index.cshtml" />
+    <Content Include="Views\Tca\Contract\_ContractDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
