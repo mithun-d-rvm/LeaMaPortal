@@ -1,7 +1,7 @@
 ﻿
 
 @using MvcPaging
-@model IPagedList<LeaMaPortal.Models.InvoiceViewModel>
+@model IPagedList<LeaMaPortal.Models.UtilityPaymentModel>
 @{
     Layout = null;
 }
@@ -12,7 +12,7 @@
 <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
     <div id="master-loader-list" class="fa hide">
     </div>
-    <div class="row" id="invoice-list">
+    <div class="row" id="utility-payment-list">
         <div class="col-md-12 leama-fieldset ">
             <div class="col-md-2 pull-left">
                 @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
@@ -34,12 +34,11 @@
 
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
-                    <div class="divTableCell">Invoice number</div>
-                    <div class="divTableCell">Property Name</div>
-                    <div class="divTableCell">Unit Name</div>
-                    <div class="divTableCell">Tenant Name</div>
-                    <div class="divTableCell">Agreement Number</div>
-                    <div class="divTableCell">Invoice Type</div>
+                    <div class="divTableCell">Payment Number</div>
+                    <div class="divTableCell">Payment Date</div>
+                    <div class="divTableCell">Payment Mode</div>
+                    <div class="divTableCell">Utility Name</div>
+                    <div class="divTableCell">Supplier Nmae</div>
                     <div class="divTableCell">Total Amount</div>
                     <div class="divTableCell">Action</div>
 
@@ -47,16 +46,15 @@
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
-                        <div class="divTableCell">@item.invno</div>
-                        <div class="divTableCell">@item.Property_Name</div>
-                        <div class="divTableCell">@item.unit_Name</div>
-                        <div class="divTableCell">@item.Tenant_Name</div>
-                        <div class="divTableCell">@item.Agreement_No</div>
-                        <div class="divTableCell">@item.invtype</div>
-                        <div class="divTableCell">@item.totalamt</div>
+                        <div class="divTableCell">@item.PaymentNo</div>
+                        <div class="divTableCell">@item.PaymentDate</div>
+                        <div class="divTableCell">@item.PaymentMode</div>
+                        <div class="divTableCell">@item.Utiltiy_name</div>
+                        <div class="divTableCell">@item.Supplier_name</div>
+                        <div class="divTableCell">@item.TotalAmount</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit invoice-edit", title = "Edit", @data_id = @item.invno })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash invoice-delete", @style = "color:red", @title = "Delete", @data_id = @item.invno })
+                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit utility-payment-edit", title = "Edit", @data_id = @item.id })  |
+                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash utility-payment-delete", @style = "color:red", @title = "Delete", @data_id = @item.id })
 
                         </div>
 
@@ -98,33 +96,33 @@
                 $(".Page").click(function(e)
                 {
                     $("#master-loader-list").removeClass("hide");
-                    $("#invoice-list").addClass("hide");
+                    $("#utility-payment-list").addClass("hide");
                     var page = parseInt($(this).data("id"));
                     var defaultPageSize = $("#defaultPageSize").val();
                     var search = $("#Search").val();
                     //alert(page);
-                    getInvoiceList(search,page,defaultPageSize)
+                    getUtilityPaymentList(search, page, defaultPageSize)
                 });
                 $("#defaultPageSize").change(function () {
                     $("#master-loader-list").removeClass("hide");
-                    $("#invoice-list").addClass("hide");
+                    $("#utility-payment-list").addClass("hide");
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getInvoiceList(search, 1, defaultPageSize)
+                    getUtilityPaymentList(search, 1, defaultPageSize)
                 });
                 $("#btn-search").click(function (e) {
                     $("#master-loader-list").removeClass("hide");
-                    $("#invoice-list").addClass("hide");
+                    $("#utility-payment-list").addClass("hide");
                     var search = $("#Search").val();
                     var defaultPageSize = $("#defaultPageSize").val();
-                    getInvoiceList(search, 1, defaultPageSize)
+                    getUtilityPaymentList(search, 1, defaultPageSize)
                 });
 
-                function getInvoiceList(search, page, defaultPageSize)
+                function getUtilityPaymentList(search, page, defaultPageSize)
                 {
                     $.ajax(
                        {
-                           url: "../Invoice/List",
+                           url: "../UtilityPayment/List",
                            type: "Get",
                            data: { Search: search, page: page, defaultPageSize: defaultPageSize },
                            success: function (html) {
@@ -136,7 +134,7 @@
                            complete: function () {
                                //   $("#VerifyIdDetailsLoader").addClass("hide");
                                //$("#master-loader-list").addClass("hide");
-                               //$("#invoice-list").removeClass("hide");
+                               //$("#utility-payment-list").removeClass("hide");
                            }
                        });
                 }
@@ -155,7 +153,7 @@
         alert("Could not retrieve list.");
     }
 
-    $(".invoice-edit").click(function (e) {
+    $(".utility-payment-edit").click(function (e) {
         e.preventDefault();
         $("#master-loader-edit").removeClass("hide");
         $("#ContainerAddOrUpdate").hide();
@@ -163,9 +161,9 @@
         //var param = id.split('`');
         $.ajax(
             {
-                url: "../Invoice/Edit",
+                url: "../UtilityPayment/Edit",
                 type: "Get",
-                data: { Invoice_No: id },
+                data: { id: id },
                 success: function (html) {
                     $("#ContainerAddOrUpdate").html(html);
                 },
@@ -181,7 +179,7 @@
     });
 
     // delete
-    $(".invoice-delete").click(function (e) {
+    $(".utility-payment-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("id");
         //var param = id.split('`');
@@ -192,11 +190,11 @@
         else {
             $.ajax(
                 {
-                    url: "../Invoice/Delete",
+                    url: "../UtilityPayment/Delete",
                     type: "post",
-                    data: { Invoice_No: id },
+                    data: { id: id },
                     success: function (response) {
-                        GetInvoice();
+                        getUtilityPayment();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
