@@ -9,12 +9,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Security;
+using Newtonsoft.Json;
 
 namespace LeaMaPortal.Helpers
 {
     public static class AuthenticationHelper
     {
-        public static async Task<LoggedinUser> GetLoggedinUserDetails()
+        public static async Task<LoggedinUser> GetLoggedinUserDetails(HttpContext context)
         {
             try
             {
@@ -39,21 +40,21 @@ namespace LeaMaPortal.Helpers
                 //    };
                 //var userrights =await db.Database.SqlQuery<tbl_userrights>("CALL Usp_Userrights_All(@PFlag,@Pid,@PName,@PUserid,@PPwd,@PCnfpwd,@PCategory,@PEmail,@PPhoneno,@PAddConfig,@PEditConfig,@PDeleteConfig,@PMenuConfig,@PActive,@PCreateduser)", parameters).FirstOrDefaultAsync();
                 var userrights = await db.tbl_userrights.FirstOrDefaultAsync(x => x.Userid == HttpContext.Current.User.Identity.Name && x.Delmark == null);
-                if (userrights == null)
+                var user = new LoggedinUser();
+                if (userrights != null)
                 {
-                    return new LoggedinUser();
+                    user.Userid = userrights.Userid;
+                    user.AddConfig = userrights.AddConfig;
+                    user.DeleteConfig = userrights.DeleteConfig;
+                    user.EditConfig = userrights.EditConfig;
+                    user.Email = userrights.Email;
+                    user.Category = userrights.Category;
+                    user.MenuConfig = userrights.MenuConfig;
+                    user.Name = userrights.Name;
                 }
-                return new LoggedinUser()
-                {
-                    Userid = userrights.Userid,
-                    AddConfig = userrights.AddConfig,
-                    DeleteConfig = userrights.DeleteConfig,
-                    EditConfig = userrights.EditConfig,
-                    Email = userrights.Email,
-                    Category = userrights.Category,
-                    MenuConfig = userrights.MenuConfig,
-                    Name = userrights.Name
-                };
+                string loggedUser = JsonConvert.SerializeObject(user);
+                context.Response.Cookies["CurrentUser"].Value = loggedUser;
+                return user;
             }
             catch
             {
