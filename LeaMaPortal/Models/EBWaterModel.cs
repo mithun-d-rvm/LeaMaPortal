@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,6 +10,8 @@ namespace LeaMaPortal.Models
     {
         public int Id { get; set; }
         public int BillEnteryNo { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? BillEntryDate { get; set; }
         public string UtilityId { get; set; }
         public string UtilityName { get; set; }
@@ -23,9 +26,15 @@ namespace LeaMaPortal.Models
         public string MeterNo { get; set; }
         public string PropertyId { get; set; }
         public string UnitId { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? ReadingDate { get; set; }
         public int? BillNo { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? BillDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? DueDate { get; set; }
         public string MeterReadingNo { get; set; }
         public float? TotalUnits { get; set; }

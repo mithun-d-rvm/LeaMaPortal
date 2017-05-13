@@ -29,7 +29,6 @@
 
         <div class="divTable leama-fieldset col-md-12">
 
-
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
                     <div class="divTableCell">Bill Entry No</div>
@@ -71,7 +70,6 @@
                     {
                         <input type="button" data-id="@i" value="@i" class="Page" />
                     }
-
                 }
             </div>
         </div>
@@ -151,7 +149,7 @@
             {
                 url: "../EbWater/Edit",
                 type: "Get",
-                data: { Payment_No: id },
+                data: { BillEntryNo : id },
                 success: function (html) {
                     $("#ContainerAddOrUpdate").html(html);
                 },
@@ -180,7 +178,7 @@
                 {
                     url: "../EbWater/Delete",
                     type: "post",
-                    data: { Payment_No: id },
+                    data: { BillEntryNo : id },
                     success: function (response) {
                         GetEbWater();
                     },

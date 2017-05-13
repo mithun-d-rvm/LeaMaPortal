@@ -71,15 +71,15 @@ namespace LeaMaPortal.Controllers
                 //int paymentno = await db.tbl_paymenthd.Select(x => x.PaymentNo).DefaultIfEmpty(0).MaxAsync();
                 model.BillEnteryNo = refNo == null ? 1 : refNo.Value + 1;
                 //model.BillEntryDate = DateTime.ParseExact(DateTime.Now.ToString(), "yyyy/MM/dd", CultureInfo.InvariantCulture);
-                model.BillEntryDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy/MM/dd"));
+                model.BillEntryDate = DateTime.UtcNow;
                 //var paymentType_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','Reccategory',',',null)").ToList();
                 var utilities = await db.tbl_utilitiesmaster.Where(w => w.Delmark != "*").ToListAsync();
-                ViewBag.UtilityId = new SelectList(utilities, "Utility_id", "Utility_id");
-                ViewBag.UtilityName = new SelectList(utilities, "Utility_id", "Utility_Name");
+                //ViewBag.UtilityId = new SelectList(utilities, "Utility_id", "Utility_id");
+                ViewBag.Utility_Name = new SelectList(utilities, "Utility_id", "Utility_Name");
 
                 var suppliers = await db.tbl_suppliermaster.Where(w => w.Delmark != "*").ToListAsync();
-                ViewBag.SupplierId = new SelectList(suppliers, "Supplier_Id", "Supplier_Id");
-                ViewBag.SupplierName = new SelectList(suppliers, "Supplier_Id", "Supplier_Name");
+                //ViewBag.SupplierId = new SelectList(suppliers, "Supplier_Id", "Supplier_Id");
+                ViewBag.Supplier_Name = new SelectList(suppliers, "Supplier_Id", "Supplier_Name");
 
                 var meters = await db.tbl_metermaster.Where(w => w.Delmark != "*").ToListAsync();
                 ViewBag.MeterNo = new SelectList(meters, "Meter_no", "Meter_no");
@@ -118,14 +118,14 @@ namespace LeaMaPortal.Controllers
                             if (string.IsNullOrWhiteSpace(billEntries))
                             {
                                 billEntries = "(" + model.BillEnteryNo + ",'" + item.MeterNo + "','" + item.PropertyId +
-                                    "','" + item.UnitId + "'," + item.TotalUnits + ",'" + readingDate + "','" + billDate + "','" + item.BillNo
-                                    + "','" + item.DueDate + "','" + item.DayOfUse + "','" + item.Rate + "','" + item.Amount + "')";
+                                    "','" + item.UnitId + "'," + item.TotalUnits + "," + item.MeterReadingNo + "," + readingDate + "," + billDate + ",'" + item.BillNo
+                                    + "'," + dueDate + ",'" + item.DayOfUse + "','" + item.Rate + "','" + item.Amount + "')";
                             }
                             else
                             {
                                 billEntries += ",(" + model.BillEnteryNo + ",'" + item.MeterNo + "','" + item.PropertyId +
-                                    "','" + item.UnitId + "'," + item.TotalUnits + ",'" + readingDate + "','" + billDate + "','" + item.BillNo
-                                    + "','" + item.DueDate + "','" + item.DayOfUse + "','" + item.Rate + "','" + item.Amount + "')";
+                                    "','" + item.UnitId + "'," + item.TotalUnits + "," + item.MeterReadingNo + "," + readingDate + ",'" + billDate + "','" + item.BillNo
+                                    + "'," + dueDate + ",'" + item.DayOfUse + "','" + item.Rate + "','" + item.Amount + "')";
                             }
                         }
                     }
@@ -182,12 +182,15 @@ namespace LeaMaPortal.Controllers
                 };
                 
                 var suppliers = await db.tbl_suppliermaster.Where(w => w.Delmark != "*").ToListAsync();
-                ViewBag.Supplierid = new SelectList(suppliers, "Supplier_Id", "Supplier_Id", model.SupplierId);
-                ViewBag.SupplierName = new SelectList(suppliers, "Supplier_Id", "Supplier_Name", model.SupplierId);
+                //ViewBag.Supplierid = new SelectList(suppliers, "Supplier_Id", "Supplier_Id", model.SupplierId);
+                ViewBag.Supplier_Name = new SelectList(suppliers, "Supplier_Id", "Supplier_Name", model.SupplierId);
 
                 var utilities = await db.tbl_utilitiesmaster.Where(w => w.Delmark != "*").ToListAsync();
-                ViewBag.UtilityId = new SelectList(utilities, "Utility_id", "Utility_id", model.UtilityId);
-                ViewBag.UtilityName = new SelectList(utilities, "Utility_id", "Utility_Name", model.UtilityId);
+                //ViewBag.UtilityId = new SelectList(utilities, "Utility_id", "Utility_id", model.UtilityId);
+                ViewBag.Utility_Name = new SelectList(utilities, "Utility_id", "Utility_Name", model.UtilityId);
+
+                var meters = await db.tbl_metermaster.Where(w => w.Delmark != "*").ToListAsync();
+                ViewBag.MeterNo = new SelectList(meters, "Meter_no", "Meter_no");
 
                 return PartialView("../EbWater/_AddorUpdate", model);
             }

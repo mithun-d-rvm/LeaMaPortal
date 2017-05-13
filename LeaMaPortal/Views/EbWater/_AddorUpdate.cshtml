@@ -12,6 +12,8 @@
     @Html.HiddenFor(model => model.Id, new { @id = "Id" })
     @Html.HiddenFor(model => model.SupplierId)
     @Html.HiddenFor(model => model.UtilityId)
+    @Html.HiddenFor(model => model.SupplierName)
+    @Html.HiddenFor(model => model.UtilityName)
     <div class="inner-block">
         <div class="blank">
             <div class="row">
@@ -38,7 +40,7 @@
                             @Html.LabelFor(model => model.SupplierName, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.DropDownList("SupplierName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                            @Html.DropDownList("Supplier_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -46,7 +48,7 @@
                             @Html.LabelFor(model => model.UtilityName, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.DropDownList("UtilityName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                            @Html.DropDownList("Utility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                         </div>
                     </div>
                 </div>
@@ -183,11 +185,11 @@
                             html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
                             html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].MeterNo + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invtype' data-name='Inv type' id='Invtype" + @j + "' /></div>";
-                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].PropertyId + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invno' data-name='Inv no' id='Invno" + @j + "' /></div>";
-                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].UnitId + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceDate' data-name='Invoice Date' id='InvoiceDate" + @j + "' /></div>";
-                            html += "<div class='col-md-2'><input type='date' value='" + @Model.Details[j].ReadingDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Description' data-name='Description' id='Description" + @j + "' /></div>";
-                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].BillNo + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Remarks' data-name='Remarks' id='Remarks" + @j + "' /></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].MeterNo + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].MeterNo' data-name='Meter No' id='MeterNo" + @j + "' /></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].PropertyId + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PropertyId' data-name='Property Id' id='PropertyId" + @j + "' /></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].UnitId + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].UnitId' data-name='Unit Id' id='UnitId" + @j + "' /></div>";
+                            html += "<div class='col-md-2'><input type='date' value='" + @Model.Details[j].ReadingDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].ReadingDate' data-name='Reading Date' id='ReadingDate" + @j + "' /></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].BillNo + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].BillNo' data-name='Bill No' id='BillNo" + @j + "' /></div>";
                             html += "</div><div class='col-md-12 document-row' id='GridView'>";
                             html += "<div class='col-md-2'>Bill Date</div>";
                             html += "<div class='col-md-2'>Due Date</div>";
@@ -197,18 +199,19 @@
                             html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
                             html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-                            html += "<div class='col-md-2'><input type='date' value='" + @Model.Details[j].BillDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceAmount' data-name='Invoice Amount' id='InvoiceAmount" + @j + "' onchange='calculateBalance(" + @j + ")' /></div>";
-                            html += "<div class='col-md-2'><input type='date' value='" + @Model.Details[j].DueDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].DebitAmount' data-name='Debit Amount' id='DebitAmount" + @j + "' onchange='calculateBalance(" + @j + ")' /></div>";
-                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].MeterReadingNo + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PaidAmount' data-name='Paid Amount' id='PaidAmount" + @j + "' onchange='calculateBalance(" + @j + ")' /></div>";
-                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].TotalUnits + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Balance' data-name='Balance' id='Balance" + @j + "' /></div>";
+                            html += "<div class='col-md-2'><input type='date' value='" + @Model.Details[j].BillDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].BillDate' data-name='Bill Date' id='BillDate" + @j + "'  /></div>";
+                            html += "<div class='col-md-2'><input type='date' value='" + @Model.Details[j].DueDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].DueDate' data-name='Due Date' id='DueDate" + @j + "'  /></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].MeterReadingNo + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].MeterReadingNo' data-name='Meter Reading No' id='MeterReadingNo" + @j + "'  /></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].TotalUnits + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].TotalUnits' data-name='Total Units' id='TotalUnits" + @j + "' /></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].DayOfUse + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].DayOfUse' data-name='Day Of Use' id='DayOfUse" + @j + "' /></div>";
                             html += "</div><div class='col-md-12 document-row' id='GridView'>";
                             html += "<div class='col-md-2'>Rate</div>";
                             html += "<div class='col-md-2'>Amount</div>";
                             html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
                             html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].Rate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PaidAmount' data-name='Paid Amount' id='PaidAmount" + @j + "' onchange='calculateBalance(" + @j + ")' /></div>";
-                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].Amount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Balance' data-name='Balance' id='Balance" + @j + "' /></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].Rate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Rate' data-name='Rate' id='Rate" + @j + "' onchange='calculateBalance(" + @j + ")' /></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.Details[j].Amount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Amount' data-name='Amount' id='Amount" + @j + "' /></div>";
                             html += "<div class='col-md-2'><button type='button' id='Deleter" + @j + "' class='document-btn removebutton'>Delete</button></div>";
                             html += "</div></div><div class='row ht-5'>&nbsp;</div>";
                             <tr>
@@ -240,6 +243,14 @@
 <script>
     $("#MeterNo").change(function () {
         getMeterDetails();
+    });
+    $("#Supplier_Name").change(function () {
+        $("#SupplierName").val($("#Supplier_Name option:selected").text());
+        $("#SupplierId").val($("#Supplier_Name").val());
+    });
+    $("#Utility_Name").change(function () {
+        $("#UtilityName").val($("#Utility_Name option:selected").text());
+        $("#UtilityId").val($("#Utility_Name").val());
     });
     function getMeterDetails() {
         var MeterNo = $("#MeterNo").val();
@@ -317,8 +328,8 @@
         html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
         html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-        html += "<div class='col-md-2'><input type='date' value='" + Rate + "' class='form-control master-form-input' name='Details[" + j + "].Rate' data-name='Rate' id='Amount" + j + "'  /></div>";
-        html += "<div class='col-md-2'><input type='date' value='" + Amount + "' class='form-control master-form-input' name='Details[" + j + "].Amount' data-name='Amount' id='Amount" + j + "'  /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + Rate + "' class='form-control master-form-input' name='Details[" + j + "].Rate' data-name='Rate' id='Amount" + j + "'  /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + Amount + "' class='form-control master-form-input' name='Details[" + j + "].Amount' data-name='Amount' id='Amount" + j + "'  /></div>";
         html += "<div class='col-md-2'><button type='button' id='Delete" + j + "' class='document-btn removebutton'>Delete</button></div>";
         html += "</div></div><div class='row ht-5'>&nbsp;</div>";
         html = html + "</td></tr><tr><td>&nbsp;</td></tr>"
