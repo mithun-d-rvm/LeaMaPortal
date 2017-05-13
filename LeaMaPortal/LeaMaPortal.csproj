@@ -487,6 +487,7 @@
     <Compile Include="Models\SlabViewModel.cs" />
     <Compile Include="Models\SupplierViewModel.cs" />
     <Compile Include="Models\UserCreationViewModel.cs" />
+    <Compile Include="Models\UtilityPaymentModel.cs" />
     <Compile Include="PagingProperty.cs" />
     <Compile Include="Models\FacilityViewModel.cs" />
     <Compile Include="Models\MeterViewModel.cs" />
@@ -878,6 +879,8 @@
     <Content Include="Views\EbWater\Payment.cshtml" />
     <Content Include="Views\UtilityBillEntry\Index.cshtml" />
     <Content Include="Views\UtilityPayment\Index.cshtml" />
+    <Content Include="Views\UtilityPayment\_AddOrUpdate.cshtml" />
+    <Content Include="Views\UtilityPayment\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
