@@ -9,12 +9,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Security;
+using Newtonsoft.Json;
 
 namespace LeaMaPortal.Helpers
 {
     public static class AuthenticationHelper
     {
-        public static async Task<LoggedinUser> GetLoggedinUserDetails()
+        public static async Task<LoggedinUser> GetLoggedinUserDetails(HttpContext context)
         {
             try
             {
@@ -42,7 +43,6 @@ namespace LeaMaPortal.Helpers
                 var user = new LoggedinUser();
                 if (userrights != null)
                 {
-
                     user.Userid = userrights.Userid;
                     user.AddConfig = userrights.AddConfig;
                     user.DeleteConfig = userrights.DeleteConfig;
@@ -52,7 +52,8 @@ namespace LeaMaPortal.Helpers
                     user.MenuConfig = userrights.MenuConfig;
                     user.Name = userrights.Name;
                 }
-                HttpContext.Current.Session["user"] = user;
+                string loggedUser = JsonConvert.SerializeObject(user);
+                context.Response.Cookies["CurrentUser"].Value = loggedUser;
                 return user;
             }
             catch

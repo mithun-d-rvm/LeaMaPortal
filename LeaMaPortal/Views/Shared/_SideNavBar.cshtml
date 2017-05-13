@@ -6,7 +6,7 @@
 -->
 <!-- Side bar -->
 @{
-    var user = LeaMaPortal.Helpers.AuthenticationHelper.GetLoggedinUserDetails().GetAwaiter().GetResult();
+    var user = LeaMaPortal.Helpers.AuthenticationHelper.GetLoggedinUserDetails(HttpContext.Current).GetAwaiter().GetResult();
 
 }
 <input type="hidden" id="hdnMenuConfig" value="@user.MenuConfig.To‌​String()" />
@@ -82,7 +82,7 @@
                     <div class="p-t-17">REPORTING</div>
                 </a>
             </li>
-            <li id="menu-home">
+            <li id="menu-home-utility-billentry">
                 <a href="~/UtilityBillEntry/Index">
                     <img src="~/Images/Reciepts.png" /><br />
                     <div class="p-t-17">
@@ -90,7 +90,7 @@
                     </div>
                 </a>
             </li>
-            <li id="menu-home">
+            <li id="menu-home-utility-payments">
                 <a href="~/UtilityPayment/Index">
                     <img src="~/Images/Reciepts.png" /><br />
                     <div class="p-t-17">
@@ -198,30 +198,58 @@
             $('.modal-backdrop').css('opacity', 0);
         }, 10);
     });
+    DisableMenus();
     GetMenuRights();
+    function DisableMenus() {
+        $("#menu-home-notification").hide();
+        $("#menu-home-tca").hide();
+        $("#menu-home-invoice").hide();
+        $("#menu-home-payments").hide();
+        $("#menu-home-receipts").hide();
+        $("#menu-home-reporting").hide();
+        $("#menu-home-master").hide();
+        $("#menu-home-utility-billentry").hide();
+        $("#menu-home-utility-payments").hide();
+
+        //EB-Water Receipts -utility bill entry
+        //EB-Water Payments - utility payments
+
+    }
     function GetMenuRights() {
         debugger;
-        var sessionMenuConfig = $("#hdnMenuConfig").val();
-        var menus = sessionMenuConfig.split(",");
-        alert(menus);
+        //var sessionMenuConfig = $("#hdnMenuConfig").val();
+        //var menus = sessionMenuConfig.split(",");
+        var cookie = document.cookie.split("=");
+        var currentUser = JSON.parse(cookie[1]);
+        //alert(currentUser);
+        //alert(menus);
+        menus = currentUser.MenuConfig.split(",");
         jQuery.each(menus, function (index, item) {
             debugger;
             if (item == 2) {
-                $("#menu-home-notification").hide();
+                $("#menu-home-notification").show();
             }
             if (item == 2) {
-                $("#menu-home-tca").hide();
+                $("#menu-home-tca").show();
             } if (item == 24) {
-                $("#menu-home-invoice").hide();
+                $("#menu-home-invoice").show();
             } if (item == 26) {
-                $("#menu-home-payments").hide();
+                $("#menu-home-payments").show();
             } if (item == 25) {
-                $("#menu-home-receipts").hide();
+                $("#menu-home-receipts").show();
             } if (item == 2) {
-                $("#menu-home-reporting").hide();
+                $("#menu-home-reporting").show();
             } if (item == 2) {
-                $("#menu-home-master").hide();
+                $("#menu-home-master").show();
             }
+            if (item == 27) {
+                $("#menu-home-utility-billentry").show();
+            }
+            if (item == 28) {
+                $("#menu-home-utility-payments").show();
+            }
+
+
         });
         // $.ajax(
         //{
@@ -240,5 +268,20 @@
         //        $("#master-loader").addClass("hide");
         //    }
         //});
+    }
+
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            c_start = document.cookie.indexOf(c_name + "=");
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1;
+                c_end = document.cookie.indexOf(";", c_start);
+                if (c_end == -1) {
+                    c_end = document.cookie.length;
+                }
+                return unescape(document.cookie.substring(c_start, c_end));
+            }
+        }
+        return "";
     }
 </script>
