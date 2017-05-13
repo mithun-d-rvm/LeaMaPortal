@@ -452,25 +452,6 @@
         "<div class='col-md-1 w-md-14'>" +
                                  "<button class='btn utilitypayment-remove'>X</button>" +
                                  "</div></div></td></tr>";
-
-
-
-
-        //var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + i + "'>";
-
-        //html = html + "<div class='col-md-12'>";
-        //html = html + " <div class='col-md-1 form-group'><input style='border: none;background: none;box-shadow: none;' id='Refno" + i + "'  type='text' value='" + refno + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + i + "].Refno' data-name='Ref no'/></div>";
-        //html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' id='Meterno" + i + "'  type='text' value='" + meterno + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + i + "].Meterno' data-name='Meter Number' /></div>";
-        //html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='billNo" + i + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + i + "].billNo' data-name='Bill Number' value='" + billNo + "'/></div>";
-        //html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='date' id='billDate" + i + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + i + "].billDate' data-name='Bill Date' value='" + billDate + "'/></div>";
-        //html = html + " <div class='col-md-1 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='BillAmount" + i + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + i + "].Remarks' data-name='Bill Amount' value='" + BillAmount + "'/></div></div><div class='col-md-12'>";
-        //html = html + " <div class='col-md-1 form-group'><input style='border: none;background: none;box-shadow: none;' id='ReceivedAmount" + i + "'  type='text' value='" + ReceivedAmount + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + i + "].PaidAmount' data-name='Received Amount'/></div>";
-        //html = html + " <div class='col-md-1 form-group'><input style='border: none;background: none;box-shadow: none;' id='DebitAmount" + i + "'  type='text' value='" + DebitAmount + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + i + "].Debitamt' data-name='Debit Amount' /></div>";
-        //html = html + "<div class='col-md-1 form-group'></br><Input type='button' class='document-btn removebutton' id='Delete" + i + "'value='X' /> </div>";
-        //html = html + "</div>";
-
-        //html = html + "</div>";
-        //html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
         $('#UtilityPaymentDetailsListForms').append(html);
         i++;
 
@@ -485,23 +466,6 @@
         $("#Remarks").val('');
         
         return false;
-      //  var html = " <div class='col-md-12 document-row' id='GridView"+count+"'>";
-      //  html=html+" <div class='col-md-1'>"+count+"</div>";
-      //  html = html + " <div class='col-md-2'> <input id='item-id_" +count+"'  type='text' value='" +item+ "' class='master-form-input' /></div>";
-      //  html = html + " <div class='col-md-2'> <input id='description_" + count + "' type='text'  value='" + description + "' class='master-form-input' /></div>";
-      //  html = html + " <div class='col-md-2'> <input id='qty_" + count + "'  type='text' value='" + qty + "' class='master-form-input' /></div>";
-      //  html = html + " <div class='col-md-2'> <input id='amount_" + count + "' type='text'  value='" + amount + "' class='master-form-input' /></div>";
-      ////  html=html+ "<div class='col-md-2'><button class='document-btn'>Add</button> </div>";
-      //  html = html + " <div class='col-md-2'>  <button class='document-btn' id='Delete"+count+"' onclick='Delete(this)'>Delete</button></div>";
-      //  html=html+" </div>";
-      //  $('#invoice-details').append(html);
-
-      //  document.getElementById("item").value = "";
-      //  document.getElementById("description").value = "";
-      //  document.getElementById("qty").value = "";
-      //  document.getElementById("amount").value = ""
-      // count = count + 1;
-
     }
     $(document).on('click', 'button.utilitypayment-remove', function () {
         debugger;
