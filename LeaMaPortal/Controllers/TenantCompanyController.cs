@@ -13,7 +13,7 @@ using System.IO;
 
 namespace LeaMaPortal.Controllers
 {
-    public class TenantCompanyController : Controller
+    public class TenantCompanyController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
         // GET: TenantCompany
@@ -195,13 +195,14 @@ namespace LeaMaPortal.Controllers
                 ViewBag.TenantType = new SelectList(Common.TenantType);
 
                 //var _titleResult = db.Usp_split("Tenant individual", "Title", ",", null).ToList();
-                var _titleResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant individual" && x.comboname == "Title");
-                if (_titleResult != null)
-                {
-                    ViewBag.TitleDisplay = new SelectList(_titleResult.combovalue.Split(','), Common.DefaultTitle);
-                }
+                //var _titleResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant individual" && x.comboname == "Title");
+                //if (_titleResult != null)
+                //{
+                //    ViewBag.TitleDisplay = new SelectList(_titleResult.combovalue.Split(','));
+                //}
+                ViewBag.TitleDisplay = new SelectList(Common.Title);
                 //var _titleResult = await db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToListAsync();
-                
+
                 //var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();
                 var _emirateResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant Company" && x.comboname == "Emirate");
                 if (_emirateResult != null)

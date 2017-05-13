@@ -54,9 +54,19 @@
                         <div class="divTableCell">@item.RecpType</div>
                         <div class="divTableCell">@item.TotalAmount</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit receipt-edit", title = "Edit", @data_id = @item.Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash receipt-delete", @style = "color:red", @title = "Delete", @data_id = @item.Id })
-                        </div>
+                            @if (@ViewBag.IsEditable == 1)
+                            {
+                                <span>
+                                    @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit receipt-edit", title = "Edit", @data_id = @item.Id })
+                                </span>
+                            }
+                            @if (@ViewBag.IsDeletable == 1)
+                            {
+                                <span>
+                                    | @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash receipt-delete", @style = "color:red", @title = "Delete", @data_id = @item.Id })
+                                </span>
+                            }
+</div>
                     </div>
                 }
             </div>

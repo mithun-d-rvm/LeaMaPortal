@@ -3,233 +3,98 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    #master-loader {
+        background: url("../Images/loader.gif") no-repeat scroll center center #FFF;
+        position: absolute;
+        height: 30%;
+        width: 85%;
+    }
 
+    #master-loader-list {
+        background: url("../Images/loader.gif") no-repeat scroll center center #FFF;
+        width: 98%;
+        height: 500px;
+        /*position: absolute;*/
+    }
+
+    #master-loader-edit {
+        background: url(../Images/loader.gif) no-repeat scroll center center #FFF;
+        /* position: absolute; */
+        height: 100px;
+        width: 90%;
+    }
+</style>
+<div id="master-loader" class="fa hide">
+</div>
+<div id="master-loader-edit" class="fa hide">
+</div>
 <div class="inner-block">
     <div class="blank">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        Payments Number
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control master-form-input" />
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        Payment Date
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control master-form-input" />
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        Utility ID
-                    </div>
-                    <div class="col-md-8">
-                        <select class="form-control master-form-input">
-                            <option> 1 </option>
-                            <option> 2 </option>
-                            <option> 3 </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        Utility Name
-                    </div>
-                    <div class="col-md-8">
-                        <select class="form-control master-form-input">
-                            <option> 1 </option>
-                            <option> 2 </option>
-                            <option> 3 </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        Supplier ID
-                    </div>
-                    <div class="col-md-8">
-                        <select class="form-control master-form-input">
-                            <option> 1 </option>
-                            <option> 2 </option>
-                            <option> 3 </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        Supplier Name
-                    </div>
-                    <div class="col-md-8">
-                        <select class="form-control master-form-input">
-                            <option> 1 </option>
-                            <option> 2 </option>
-                            <option> 3 </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        Advance Payment Number
-                    </div>
-                    <div class="col-md-8">
-                        <select class="form-control master-form-input">
-                            <option> 1 </option>
-                            <option> 2 </option>
-                            <option> 3 </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        DD / Cheque Number
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control master-form-input" />
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        DD / Cheque Date
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control master-form-input" />
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        PDC Status
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control master-form-input" />
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        Bank Account Number
-                    </div>
-                    <div class="col-md-8">
-                        <select class="form-control master-form-input">
-                            <option> 1 </option>
-                            <option> 2 </option>
-                            <option> 3 </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        Bank Account Name
-                    </div>
-                    <div class="col-md-8">
-                        <select class="form-control master-form-input">
-                            <option> 1 </option>
-                            <option> 2 </option>
-                            <option> 3 </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        Narration
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control master-form-input" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="m-t-5-p col-md-12 document-row" id="GridView">
-
-                <div class="p-b-25">
-                    <h3>EB Water Bill Payment Details</h3>
-                </div>
-                <div class="">
-                    <div id="Gridview" class="row document-row">
-                        <div class="col-md-12">
-                            <div class="col-md-1 form-group">
-                                <label for="itemtype">ID</label>
-                                <input type="text" readonly class="form-control master-form-input" id="item" />
-                            </div>
-                            <div class="col-md-2 form-group">
-                                <label for="description">Bill Entry Number</label>
-                                <input type="text" class="form-control master-form-input" />
-                            </div>
-                            <div class="col-md-3 form-group">
-                                <label for="quantity">Meter Number</label>
-                                <input type="text" class="form-control master-form-input" />
-                            </div>
-                            <div class="col-md-3 form-group">
-                                <label for="amount">Bill Number</label>
-                                <input type="text" class="form-control master-form-input" />
-                            </div>
-                            <div class="col-md-3 form-group">
-                                <label for="amount">Bill Date</label>
-                                <input type="text" class="form-control master-form-input" />
-                            </div>
-                            @*<div class="col-md-2 btn-group">
-                                <br />
-                                <input type="button" class="document-btn" id="AddInvoice" value="Add" onclick='add(this);' />
-                            </div>*@
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-1 form-group">
-                                &nbsp;
-                            </div>
-                            <div class="col-md-2 form-group">
-                                <label for="description">Bill Amount</label>
-                                <input type="text" class="form-control master-form-input" />
-                            </div>
-                            <div class="col-md-3 form-group">
-                                <label for="quantity">Paid Amount</label>
-                                <input type="text" class="form-control master-form-input" />
-                            </div>
-                            <div class="col-md-3 form-group">
-                                <label for="amount">Debit Amount</label>
-                                <input type="text" class="form-control master-form-input" />
-                            </div>
-                            <div class="col-md-3 form-group">
-                                <label for="amount">Remarks</label>
-                                <input type="text" class="form-control master-form-input" />
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-2 form-group pull-right">
-                                <input type="button" class="document-btn" value="Delete" />
-                            </div>
-                            <div class="col-md-2 form-group pull-right">
-                                <input type="button" class="document-btn" value="Add" />
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="row ht-5">
-                    &nbsp;
-                </div>
-
-            </div>
-        </div>
-        <div class="row ht-5">
-            &nbsp;
-        </div>
-        <div class="col-md-12 form-input-padding">
-            <div class="col-md-4">
-                &nbsp;
-            </div>
-            <div class="col-md-4">
-                <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
-            </div>
-        </div>
+        <div id="ContainerAddOrUpdate"></div>
+        <div class="row" id="ContainerList"></div>
+        <input type="hidden" id="IsAllowAdd" value="@ViewBag.IsAdd" />
     </div>
-
 </div>
+
+<script>
+    IsAddAllow();
+    function IsAddAllow() {
+        var isAllow = $("#IsAllowAdd").val();
+        if (isAllow == 1)
+            $("#ContainerAddOrUpdate").show();
+        else
+            $("#ContainerAddOrUpdate").hide();
+    }
+    $("#TopNavBarFilter").empty();
+    getUtilityPayment();
+    function getUtilityAddOrUpdate() {
+        $("#ContainerAddOrUpdate").empty();
+        //$("#ContainerList").empty();
+        $.ajax(
+        {
+            url: "../UtilityPayment/AddOrUpdate",
+            type: "Get",
+            data: {},
+            //contentType: "application/json",
+            //processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+    function getUtilityPayment() {
+        debugger;
+        getUtilityAddOrUpdate();
+        //$("#img-loader").removeClass("hide");
+        //$("#master-loader").removeClass("hide");
+
+        //$("#img-loader").removeClass("hide");
+        //$("#master-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../UtilityPayment/List",
+            type: "Get",
+            data: {},
+            //contentType: "application/json",
+            //processData: false,
+            success: function (html) {
+                $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    };
+</script>

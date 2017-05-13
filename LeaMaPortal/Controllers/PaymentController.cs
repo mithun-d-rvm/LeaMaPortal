@@ -15,7 +15,7 @@ using LeaMaPortal.Helpers;
 
 namespace LeaMaPortal.Controllers
 {
-    public class PaymentController : Controller
+    public class PaymentController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
         // GET: Payments
@@ -105,7 +105,7 @@ namespace LeaMaPortal.Controllers
                 {
                     ViewBag.PDCstatus = new SelectList(PDCstatus_result.combovalue.Split(','), model.PDCstatus);
                 }
-                
+
                 var suppliers = await db.tbl_suppliermaster.Where(w => w.Delmark != "*").ToListAsync();
                 ViewBag.Supplierid = new SelectList(suppliers, "Supplier_Id", "Supplier_Id");
                 ViewBag.SupplierName = new SelectList(suppliers, "Supplier_Id", "Supplier_Name");
@@ -120,7 +120,7 @@ namespace LeaMaPortal.Controllers
                 ViewBag.UnitID = new SelectList(units, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
                 ViewBag.unitName = new SelectList(units, "Unit_ID_Tawtheeq", "Unit_Property_Name");
 
-                
+
                 ViewBag.agreement_no = new SelectList(db.tbl_agreement.Where(w => w.Delmark != "*").OrderBy(o => o.id).Distinct(), "Agreement_No", "Agreement_No");
                 ViewBag.BankAcName = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NAME), "Name", "Name");
                 ViewBag.BankAcCode = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NUMBER), "Name", "Name");
@@ -155,7 +155,7 @@ namespace LeaMaPortal.Controllers
                     {
                         foreach (var item in model.PaymentDetailsViewModel)
                         {
-                            var invoicedate = item.InvoiceDate.HasValue ? "'"+item.InvoiceDate.Value.Date.ToString("yyyy-MM-dd")+ "'" : "null";
+                            var invoicedate = item.InvoiceDate.HasValue ? "'" + item.InvoiceDate.Value.Date.ToString("yyyy-MM-dd") + "'" : "null";
                             if (string.IsNullOrWhiteSpace(invoice))
                             {
                                 invoice = "(" + model.PaymentNo + ",'" + item.Invtype + "','" + item.Description +
@@ -279,13 +279,13 @@ namespace LeaMaPortal.Controllers
 
 
                 var suppliers = await db.tbl_suppliermaster.Where(w => w.Delmark != "*").ToListAsync();
-                ViewBag.Supplierid = new SelectList(suppliers, "Supplier_Id", "Supplier_Id",model.Supplier_id);
-                ViewBag.SupplierName = new SelectList(suppliers, "Supplier_Id", "Supplier_Name",model.Supplier_id);
+                ViewBag.Supplierid = new SelectList(suppliers, "Supplier_Id", "Supplier_Id", model.Supplier_id);
+                ViewBag.SupplierName = new SelectList(suppliers, "Supplier_Id", "Supplier_Name", model.Supplier_id);
                 var agreements = db.tbl_agreement.Where(w => w.Delmark != "*").OrderBy(o => o.id);
                 ViewBag.agreement_no = new SelectList(agreements, "Agreement_No", "Agreement_No", model.agreement_no);
                 ViewBag.BankAcName = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NAME), "Name", "Name", model.BankAcName);
                 ViewBag.BankAcCode = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NUMBER), "Name", "Name", model.BankAcCode);
-                if (model.agreement_no==null || model.agreement_no == 0)
+                if (model.agreement_no == null || model.agreement_no == 0)
                 {
                     var properties = db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Property" && w.Delmark != "*").OrderBy(o => o.id);
 
@@ -319,7 +319,7 @@ namespace LeaMaPortal.Controllers
                     ViewBag.PropertyName = new SelectList(propertyDropdown, "Propertyid", "PropertyName", model.Property_id);
                 }
                 var advancepaymentnumber = await db.Database.SqlQuery<int>("Select PaymentNo from view_advance_pending_payment").ToListAsync();
-                ViewBag.AdvAcCode = new SelectList(advancepaymentnumber,model.AdvAcCode);
+                ViewBag.AdvAcCode = new SelectList(advancepaymentnumber, model.AdvAcCode);
                 return PartialView("../Payment/_AddorUpdate", model);
             }
             catch (Exception e)

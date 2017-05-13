@@ -4,9 +4,12 @@
   Created Date   : 03-Mar-2017
   Notes          : <Notes>
 -->
-
 <!-- Side bar -->
+@{
+    var user = LeaMaPortal.Helpers.AuthenticationHelper.GetLoggedinUserDetails(HttpContext.Current).GetAwaiter().GetResult();
 
+}
+<input type="hidden" id="hdnMenuConfig" value="@user.MenuConfig.To‌​String()" />
 <div class="sidebar-menu">
     <div class="menu">
         <a href="~/Dashboard/Index">
@@ -16,36 +19,36 @@
         </a>
         <ul id="menu">
             @*<li id="menu-home">
-                <div class="header-right">
-                    <a href="index.html">
-                        <i class="fa fa-bell"></i>
-                        <span class="badge">3</span>
-                        @*<img src="~/Images/Notification.png" /> <br />
-                        <div class="p-t-17"> &nbsp; </div>
-                    </a>
-                </div>
-            </li>*@
-            <li id="menu-home" data-toggle="modal" data-target="#myModal">
+                    <div class="header-right">
+                        <a href="index.html">
+                            <i class="fa fa-bell"></i>
+                            <span class="badge">3</span>
+                            @*<img src="~/Images/Notification.png" /> <br />
+                            <div class="p-t-17"> &nbsp; </div>
+                        </a>
+                    </div>
+                </li>*@
+            <li id="menu-home-notification" data-toggle="modal" data-target="#myModal">
                 <a href="#">
                     <i class="fa fa-bell" style="color:white;"></i> <br />
                     <div class="p-t-17">NOTIFICATION</div>
                 </a>
             </li>
-            <li id="menu-home">
+            <li id="menu-home-tca">
                 <a href="~/Tca/Index">
                     <img src="~/Images/PropertyProf.png" /><br />
                     <div class="p-t-17">TCA</div>
                 </a>
             </li>
-            <li id="menu-home">
+            <li id="menu-home-invoice">
                 <a href="~/Invoice/Index">
                     <img src="~/Images/invoice.png" /><br />
                     <div class="p-t-17">
-                      INVOICE
+                        INVOICE
                     </div>
                 </a>
-            </li>            
-            <li id="menu-home">
+            </li>
+            <li id="menu-home-payments">
                 <a href="~/Payment/Index">
                     <img src="~/Images/Payments.png" /><br />
                     <div class="p-t-17">
@@ -53,7 +56,7 @@
                     </div>
                 </a>
             </li>
-            <li id="menu-home">
+            <li id="menu-home-receipts">
                 <a href="~/Receipts/Index">
                     <img src="~/Images/Reciepts.png" /><br />
                     <div class="p-t-17">
@@ -62,32 +65,32 @@
                 </a>
             </li>
             @*<li id="menu-home">
-                <a href="index.html">
-                    <img src="~/Images/RenewContract.png" /><br />
-                    <div class="p-t-17">RENEW CONTRACT</div>
-                </a>
-            </li>
-            <li id="menu-home">
-                <a href="index.html">
-                    <img src="~/Images/CloseCont.png" /><br />
-                    <div class="p-t-17">CLOSE CONTRACT</div>
-                </a>
-            </li>*@
-            <li id="menu-home">
+                    <a href="index.html">
+                        <img src="~/Images/RenewContract.png" /><br />
+                        <div class="p-t-17">RENEW CONTRACT</div>
+                    </a>
+                </li>
+                <li id="menu-home">
+                    <a href="index.html">
+                        <img src="~/Images/CloseCont.png" /><br />
+                        <div class="p-t-17">CLOSE CONTRACT</div>
+                    </a>
+                </li>*@
+            <li id="menu-home-reporting">
                 <a href="#">
                     <img src="~/Images/REPORTING.png" /><br />
                     <div class="p-t-17">REPORTING</div>
                 </a>
             </li>
-            <li id="menu-home">
-                <a href="~/UtilityBillEntry/Index">
+            <li id="menu-home-utility-billentry">
+                <a href="~/EbWater/Index">
                     <img src="~/Images/Reciepts.png" /><br />
                     <div class="p-t-17">
                         UTILITY BILL ENTRY
                     </div>
                 </a>
             </li>
-            <li id="menu-home">
+            <li id="menu-home-utility-payments">
                 <a href="~/UtilityPayment/Index">
                     <img src="~/Images/Reciepts.png" /><br />
                     <div class="p-t-17">
@@ -112,9 +115,9 @@
         <!-- Modal content-->
         <div class="modal-content notification-modal-content">
             @*<div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-            </div>*@
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>*@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-3 notification-tab-1">
@@ -122,67 +125,35 @@
                             Notifications
                         </div>
                         <div class="notification-number">
-                            46
+                            <label id="count">0</label>
                         </div>
                         <div class="notification-down-arrow">
                             <i class="fa fa-chevron-down"></i>
                         </div>
                     </div>
                     <div class="col-md-9 notification-filter-div">
-                        <div class="p-b-25">
+                        <div class="p-b-25 notification-menu">
                             <span class="color-f5a623">Filter notifications by</span>
-                            <span class="notification-filter"> All </span>
+                            <span class="notification-filter" onclick="getMenu()">All</span>
                             <span class="notification-filter-line"> &nbsp; </span>
-                            <span class="notification-filter active"> Pdc </span>
+                            <span class="notification-filter notify-menu active ">PDC Deposits</span>
                             <span class="notification-filter-line"> &nbsp; </span>
-                            <span class="notification-filter"> Renewals </span>
+                            <span class="notification-filter notify-menu">Renewals</span>
                             <span class="notification-filter-line"> &nbsp; </span>
-                            <span class="notification-filter"> Expiring </span>
+                            <span class="notification-filter notify-menu">Rental Due</span>
+                            <span class="notification-filter-line"> &nbsp; </span>
+                            <span class="notification-filter notify-menu">Utility Dues</span>
+                            <span class="notification-filter-line"> &nbsp; </span>
+                            <span class="notification-filter notify-menu">Agreement approval</span>
                             <span class="pull-right"> Expand to page </span>
                         </div>
-                        <div>
-                            <span class="notification-vr-1"> Lease expiring for Palms Apartments Block 3A/124 </span>
-                            <span class="notification-vr-2">Mr.Ananth Karthik</span>
-                            <span class="notification-vr-3">Last date:30-03-2017</span>
-                        </div>
-                        <hr class="notification-hr" />
-                        <div>
-                            <span>Approve New Caretaker request from Mr.Salman Amin</span>
-                            <span class="pull-right">
-                                <a href="#">
-                                    <span class="notification-approve">Approve</span>
-                                </a>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a href="#">
-                                    <span class="notification-reject">Reject</span>
-                                </a>
-                            </span>
-                        </div>
-                        <hr class="notification-hr" />
-                        <div>
-                            <span class="notification-vr-1">Lease renewal for Palms Apartments Block 3A/124 post due date has been requested</span>
-                            <span class="notification-vr-2">Mr.Sam Karthik</span>
-                            <span class="notification-vr-3">Assigned date:30-03-2017</span>
-                        </div>
-                        <hr class="notification-hr" />
-                        <div>
-                            <span class="notification-vr-1">Rent overdue timeline extended for Finsand Storage Facility on request</span>
-                            <span class="notification-vr-2">Mechano Corp LLC</span>
-                            <span class="notification-vr-3">Assigned date:30-03-2017</span>
-                        </div>
-                        <hr class="notification-hr" />
-                        <div>
-                            <span class="notification-vr-1">Lease renewed for Sunbay Apartments Block 45/33A</span>
-                            <span class="notification-vr-2">Mr.Ananth</span>
-                            <span class="notification-vr-3">Completed on:30-03-2017</span>
-                        </div>
-                        <hr class="notification-hr" />
+                        <div class="notification-filter-content"></div>
                     </div>
                 </div>
             </div>
             @*<div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>*@
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>*@
         </div>
 
     </div>
@@ -195,4 +166,196 @@
             $('.modal-backdrop').css('opacity', 0);
         }, 10);
     });
+    $(".notification-filter").click(function () {
+        $(".notification-filter").removeClass('active');
+        $(this).addClass('active');
+        var filter = $(this).text();
+        $(".notification-filter-content").empty();
+        allRecordCount = 0;
+        getData(filter);
+    });
+    $(".notification-filter-content").empty();
+    getData("PDC Deposits");
+    function getData(filter) {
+        $.ajax(
+                {
+                    url: "../Notification/getNotifications",
+                    type: "GET",
+                    data: { filter: filter },
+                    contentType: "application/json",
+                    success: function (response) {
+                        debugger;
+                        var data = "";
+                        allRecordCount = allRecordCount + (response ? response.length : 0);
+                        $("#count").text(allRecordCount);
+                        $.each(response, function (index, obj) {
+                            data = "<div>";
+                            debugger;
+                            if (filter == "Renewals") {
+                                data += '<span class="notification-vr-1"> ' + obj.region_name + ' </span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Properties_Name + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Unit_Property_Name + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Agreement_No + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.StartDate + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.EndDate + '</span>';
+                            }
+                            else if (filter == "PDC Deposits") {
+                                data += '<span class="notification-vr-1"> ' + obj.Region_Name + ' </span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Property_Name + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.unit_Name + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Tenant_Name + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Agreement_No + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.DDChequeNo + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.DDDate + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.pdc_Amount + '</span>';
+                            }
+                            else if (filter == "Rental Due") {
+                                data += '<span class="notification-vr-1"> ' + obj.Region_Name + ' </span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Properties_Name + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Ag_Tenant_Name + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Agreement_No + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.payment_mode + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Cheque_No + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.ChequeDate + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Cheque_Amount + '</span>';
+                            }
+                            else if (filter == "Utility Dues") {
+                                data += '<span class="notification-vr-1"> ' + obj.Region_Name + ' </span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Property_Name + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Unit_Property_Name + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Utility_Name + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Meterno + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.billno + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.BDate + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Billamount + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.DDate + '</span>';
+                            }
+                            else if (filter == "Agreement approval") {
+                                data += '<span class="notification-vr-1"> ' + obj.Region_Name + ' </span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Properties_Name + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Unit_Property_Name + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Ag_Tenant_Name + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Agreement_No + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Total_Rental_amount + '</span>';
+                            }
+                            data += '</div><hr class="notification-hr" />';
+                            $(".notification-filter-content").append(data);
+                        });
+
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+                });
+    }
+    var allRecordCount = 0;
+    function getMenu() {
+        $.ajax(
+                {
+                    url: "../Notification/getNotificationMenu",
+                    type: "GET",
+                    contentType: "application/json",
+                    success: function (response) {
+                        debugger;
+                        var data = "";
+                        $(".notification-filter-content").empty();
+                        $.each(response, function (index, obj) {
+                            getData(obj.Name);
+                        });
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+                });
+    }
+    DisableMenus();
+    GetMenuRights();
+    function DisableMenus() {
+        $("#menu-home-notification").hide();
+        $("#menu-home-tca").hide();
+        $("#menu-home-invoice").hide();
+        $("#menu-home-payments").hide();
+        $("#menu-home-receipts").hide();
+        $("#menu-home-reporting").hide();
+        $("#menu-home-master").hide();
+        $("#menu-home-utility-billentry").hide();
+        $("#menu-home-utility-payments").hide();
+
+        //EB-Water Receipts -utility bill entry
+        //EB-Water Payments - utility payments
+
+    }
+    function GetMenuRights() {
+        debugger;
+        //var sessionMenuConfig = $("#hdnMenuConfig").val();
+        //var menus = sessionMenuConfig.split(",");
+        var cookie = document.cookie.split("=");
+        var currentUser = JSON.parse(cookie[1]);
+        //alert(currentUser);
+        //alert(menus);
+        menus = currentUser.MenuConfig.split(",");
+        jQuery.each(menus, function (index, item) {
+            debugger;
+            if (item == 2) {
+                $("#menu-home-notification").show();
+            }
+            if (item == 2) {
+                $("#menu-home-tca").show();
+            } if (item == 24) {
+                $("#menu-home-invoice").show();
+            } if (item == 26) {
+                $("#menu-home-payments").show();
+            } if (item == 25) {
+                $("#menu-home-receipts").show();
+            } if (item == 2) {
+                $("#menu-home-reporting").show();
+            } if (item == 2) {
+                $("#menu-home-master").show();
+            }
+            if (item == 27) {
+                $("#menu-home-utility-billentry").show();
+            }
+            if (item == 28) {
+                $("#menu-home-utility-payments").show();
+            }
+
+
+        });
+        // $.ajax(
+        //{
+        //    url: "../Dashboard/GetPDCNotification",
+        //    type: "Get",
+        //    contentType: "application/json",
+        //    processData: false,
+        //    success: function (response) {
+        //        $("#PDCNotification").text(response);
+        //    },
+        //    error: function (jqXhr, textStatus, errorThrown) {
+        //        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+        //    },
+        //    complete: function () {
+        //        //$("#img-loader").addClass("hide");
+        //        $("#master-loader").addClass("hide");
+        //    }
+        //});
+    }
+
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            c_start = document.cookie.indexOf(c_name + "=");
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1;
+                c_end = document.cookie.indexOf(";", c_start);
+                if (c_end == -1) {
+                    c_end = document.cookie.length;
+                }
+                return unescape(document.cookie.substring(c_start, c_end));
+            }
+        }
+        return "";
+    }
 </script>

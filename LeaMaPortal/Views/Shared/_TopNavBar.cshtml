@@ -6,7 +6,7 @@
 -->
 <!--header start here-->
 @{
-    var user = LeaMaPortal.Helpers.AuthenticationHelper.GetLoggedinUserDetails().GetAwaiter().GetResult();
+    var user = LeaMaPortal.Helpers.AuthenticationHelper.GetLoggedinUserDetails(HttpContext.Current).GetAwaiter().GetResult();
 }
 
 <!-- Include Bootstrap Datepicker -->
@@ -26,7 +26,7 @@
         cursor: pointer;
     }
 
-        /*.regionDropBtn:hover, .regionDropBtn:focus {
+    /*.regionDropBtn:hover, .regionDropBtn:focus {
             background-color: #3e8e41;
         }*/
 
@@ -100,22 +100,24 @@
             </span>
         </span>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span class="regionDropdown"> By Region <i class="fa fa-angle-down regionDropBtn" onclick="showRegionList()"></i>
-            
-                <span id="dropDownRegion" class="region-dropdown-content">
-                    <input type="text" placeholder="Search.." id="regionInput" onkeyup="filterRegion()">
-                    <a href="#about">About</a>
-                    <a href="#base">Base</a>
-                    <a href="#blog">Blog</a>
-                    <a href="#contact">Contact</a>
-                    <a href="#custom">Custom</a>
-                    <a href="#support">Support</a>
-                    <a href="#tools">Tools</a>
-                </span>
+        <span class="regionDropdown">
+            By Region <i class="fa fa-angle-down regionDropBtn" onclick="showRegionList()"></i>
+
+            <span id="dropDownRegion" class="region-dropdown-content">
+                <input type="text" placeholder="Search.." id="regionInput" onkeyup="filterRegion()">
+                <a href="#about">About</a>
+                <a href="#base">Base</a>
+                <a href="#blog">Blog</a>
+                <a href="#contact">Contact</a>
+                <a href="#custom">Custom</a>
+                <a href="#support">Support</a>
+                <a href="#tools">Tools</a>
+            </span>
 
         </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span class="propDropdown"> By Property <i class="fa fa-angle-down propDropBtn" onclick="showPropList()"></i> 
-        
+        <span class="propDropdown">
+            By Property <i class="fa fa-angle-down propDropBtn" onclick="showPropList()"></i>
+
             <span id="dropDownProp" class="prop-dropdown-content">
                 <input type="text" placeholder="Search.." id="propInput" onkeyup="filterProp()">
                 <a href="#about">Prop 1</a>
@@ -126,7 +128,7 @@
                 <a href="#support">Support</a>
                 <a href="#tools">Tools</a>
             </span>
-        
+
         </span>
 
         <div class="clearfix"> </div>

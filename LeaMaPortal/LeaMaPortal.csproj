@@ -177,11 +177,13 @@
     <Compile Include="Common.cs" />
     <Compile Include="Controllers\ApprovalSettingsController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CaretakerController.cs" />
     <Compile Include="Controllers\ChecklistController.cs" />
     <Compile Include="Controllers\ContractApprovalSettingController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\EbWaterController.cs" />
     <Compile Include="Controllers\EmailTemplateController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FacilityController.cs" />
@@ -189,6 +191,7 @@
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\MasterIndividualController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\PropertyMasterController.cs" />
     <Compile Include="Controllers\MeterController.cs" />
@@ -449,6 +452,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\NotificationHelper.cs" />
     <Compile Include="Helpers\NumberToText.cs" />
     <Compile Include="Helpers\StaticHelper.cs" />
     <Compile Include="Models\AgreementFacilityViewModel.cs" />
@@ -469,9 +473,15 @@
     <Compile Include="Helper.cs" />
     <Compile Include="Models\CountryViewModel.cs" />
     <Compile Include="Models\DashboardModel.cs" />
+    <Compile Include="Models\EBWaterModel.cs" />
     <Compile Include="Models\EmailTemplateViewModel.cs" />
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\MasterViewModel.cs" />
+    <Compile Include="Models\NotificationAgreementApprovalModel.cs" />
+    <Compile Include="Models\NotificationPdcModel.cs" />
+    <Compile Include="Models\NotificationRenewalModel.cs" />
+    <Compile Include="Models\NotificationRentalDueModel.cs" />
+    <Compile Include="Models\NotificationUtilityDuesModel.cs" />
     <Compile Include="Models\PaymentViewModel.cs" />
     <Compile Include="Models\OptionModel.cs" />
     <Compile Include="Models\PropertyTypeViewModel.cs" />
@@ -480,6 +490,7 @@
     <Compile Include="Models\SlabViewModel.cs" />
     <Compile Include="Models\SupplierViewModel.cs" />
     <Compile Include="Models\UserCreationViewModel.cs" />
+    <Compile Include="Models\UtilityPaymentModel.cs" />
     <Compile Include="PagingProperty.cs" />
     <Compile Include="Models\FacilityViewModel.cs" />
     <Compile Include="Models\MeterViewModel.cs" />
@@ -871,12 +882,19 @@
     <Content Include="Views\EbWater\Payment.cshtml" />
     <Content Include="Views\UtilityBillEntry\Index.cshtml" />
     <Content Include="Views\UtilityPayment\Index.cshtml" />
+    <Content Include="Views\UtilityPayment\_AddOrUpdate.cshtml" />
+    <Content Include="Views\UtilityPayment\_List.cshtml" />
+    <Content Include="Views\EbWater\Index.cshtml" />
+    <Content Include="Views\EbWater\_List.cshtml" />
+    <Content Include="Views\EbWater\_AddorUpdate.cshtml" />
     <Content Include="Views\Tca\Contract\_ContractDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Documents\TenantIndividual\" />
     <Folder Include="Models\DBContext\" />
+    <Folder Include="Views\Notification\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\PropertyMaster\" />
     <Folder Include="Views\Supplier\" />
   </ItemGroup>
