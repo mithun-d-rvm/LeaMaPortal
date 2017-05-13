@@ -888,6 +888,7 @@
     <Content Include="Views\EbWater\Index.cshtml" />
     <Content Include="Views\EbWater\_List.cshtml" />
     <Content Include="Views\EbWater\_AddorUpdate.cshtml" />
+    <Content Include="Views\Tca\Contract\_ContractDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
