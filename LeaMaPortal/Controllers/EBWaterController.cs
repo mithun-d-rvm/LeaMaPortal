@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace LeaMaPortal.Controllers
 {
-    public class EbWaterController : Controller
+    public class EbWaterController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
         // GET: EBWater

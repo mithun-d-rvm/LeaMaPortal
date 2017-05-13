@@ -83,7 +83,7 @@
                 </a>
             </li>
             <li id="menu-home-utility-billentry">
-                <a href="~/UtilityBillEntry/Index">
+                <a href="~/EbWater/Index">
                     <img src="~/Images/Reciepts.png" /><br />
                     <div class="p-t-17">
                         UTILITY BILL ENTRY
@@ -174,10 +174,9 @@
         allRecordCount = 0;
         getData(filter);
     });
-    $(".notification-filter-content").empty();    
+    $(".notification-filter-content").empty();
     getData("PDC Deposits");
-    function getData(filter)
-    {
+    function getData(filter) {
         $.ajax(
                 {
                     url: "../Notification/getNotifications",
