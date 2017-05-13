@@ -124,7 +124,7 @@ namespace LeaMaPortal.Controllers
                             else
                             {
                                 billEntries += ",(" + model.BillEnteryNo + ",'" + item.MeterNo + "','" + item.PropertyId +
-                                    "','" + item.UnitId + "'," + item.TotalUnits + "," + item.MeterReadingNo + "," + readingDate + ",'" + billDate + "','" + item.BillNo
+                                    "','" + item.UnitId + "'," + item.TotalUnits + "," + item.MeterReadingNo + "," + readingDate + "," + billDate + ",'" + item.BillNo
                                     + "'," + dueDate + ",'" + item.DayOfUse + "','" + item.Rate + "','" + item.Amount + "')";
                             }
                         }
@@ -155,8 +155,11 @@ namespace LeaMaPortal.Controllers
             try
             {
                 var x = await db.tbl_eb_water_billentryhd.FirstOrDefaultAsync(f => f.Refno == BillEntryNo);
-                EBWaterModel model = new EBWaterModel()
+                EBWaterModel model = new EBWaterModel();
+
+                model = new EBWaterModel()
                 {
+                    Id = x.id,
                     BillEnteryNo = x.Refno,
                     BillEntryDate = x.refdate,
                     UtilityId = x.Utility_id,
