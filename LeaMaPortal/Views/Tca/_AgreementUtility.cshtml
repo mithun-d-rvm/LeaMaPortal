@@ -37,7 +37,7 @@
             @Html.DropDownList("Amount_Type", null, "--Select--", new { @class = "form-control master-form-input" })
         </div>
         <div class="col-md-2">
-            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "master-form-input text-box single-line" } })
+            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "master-form-input text-box single-line", @onkeypress = "allow_only_Float(event,'AgreementUtilityDiv #Amount');" } })
         </div>
         <div class="col-md-1">
             <button type="button" class="document-btn" onclick="addAgreementUtilityDetails(event);">Add</button>
@@ -175,7 +175,7 @@
                     },
                     'name': function (_, name) {
                         //return name + iTenantDocument[0].Name
-                        return 'AgreementUtilityDetailsList[' + newindex + '].' + dataname
+                        return 'AgreementUnitList[' + newindex + '].' + dataname
                     }
                 });
             });

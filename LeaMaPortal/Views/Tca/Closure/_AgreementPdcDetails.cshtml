@@ -1,0 +1,113 @@
+﻿<!--
+  File Name      : _AgreementPdcForm.cshtml
+  Description    : Agreement Details partial view
+  Created Date   : 25-Mar-2017
+  Notes          : <Notes>
+-->
+
+@model LeaMaPortal.Models.AgreementPdcViewModel
+
+<div class="row">
+   
+    <table id="AgreementPdcDetailsList" class="col-md-12 document-row">
+                 <tr>
+                     <td>
+                         <div class="col-md-12 document-row">
+                             <div class="col-md-1 ">
+                                 Month
+                             </div>
+                             <div class="col-md-1 ">
+                                 Year
+                                 
+                             </div>
+                             <div class="col-md-1">
+                               Payment Mode
+                      
+                             </div>
+                             <div class="col-md-1 w-md-15">
+                                Bank Name
+                                 
+                             </div>
+                             <div class="col-md-1 w-md-14">
+                               
+                                 Cheque No
+                             </div>
+                             <div class="col-md-1">
+                                 @*@Html.EditorFor(model => model.Cheque_Date, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                                 Date
+                             </div>
+                             <div class="col-md-1">
+                                Amount
+                                 
+                             </div>
+                             <div class="col-md-1">
+                                 Status
+                             </div>
+                             <div class="col-md-1">
+                                 Remove
+                             </div>
+                         </div>
+                     </td>
+                 </tr>
+            @for (int i = 0; i < Model.AgreementPdcList.Count; i++)
+            {
+
+            <tr>
+                <td>
+                    <input type="hidden" name="AgreementPdcList[@i].Month" id="AgreementPdcList[@i].Month" value="@Model.AgreementPdcList[i].Month" data-name="Month" />
+                    <input type="hidden" name="AgreementPdcList[@i].Year" id="AgreementPdcList[@i].Year" value="@Model.AgreementPdcList[i].Year" data-name="Year" />
+                    <input type="hidden" name="AgreementPdcList[@i].Payment_Mode" id="AgreementPdcList[@i].Payment_Mode" value="@Model.AgreementPdcList[i].Payment_Mode" data-name="Payment_Mode" />
+
+                    <input type="hidden" name="AgreementPdcList[@i].BankName" id="AgreementPdcList[@i].BankName" value="@Model.AgreementPdcList[i].BankName" data-name="BankName" />
+                    <input type="hidden" name="AgreementPdcList[@i].Cheque_No" id="AgreementPdcList[@i].Cheque_No" value="@Model.AgreementPdcList[i].Cheque_No" data-name="Cheque_No" />
+                    <input type="hidden" name="AgreementPdcList[@i].Cheque_Date" id="AgreementPdcList[@i].Cheque_Date" value="@Model.AgreementPdcList[i].Cheque_Date" data-name="Cheque_Date" />
+                    <input type="hidden" name="AgreementPdcList[@i].Cheque_Amount" id="AgreementPdcList[@i].Cheque_Amount" value="@Model.AgreementPdcList[i].Cheque_Amount" data-name="Cheque_Amount" />
+                    <div class="col-md-12 document-row">
+                        <div class="col-md-1 ">
+                            @Model.AgreementPdcList[i].Month
+                        </div>
+                        <div class="col-md-1 ">
+                            @Model.AgreementPdcList[i].Year
+                            @*@Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        </div>
+                        <div class="col-md-1">
+                            @Model.AgreementPdcList[i].Payment_Mode
+                            @*<select class="form-control master-form-input">
+                                <option> Cash </option>
+                                <option> Cheque </option>
+                                <option> Card </option>
+                            </select>*@
+                        </div>
+                        <div class="col-md-1 w-md-15">
+                            @Model.AgreementPdcList[i].BankName
+                            @*@Html.EditorFor(model => model.BankName, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        </div>
+                        <div class="col-md-1 w-md-14">
+                            @*@Html.EditorFor(model => model.Cheque_No, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                            @Model.AgreementPdcList[i].Cheque_No
+                        </div>
+                        <div class="col-md-1">
+                            @*@Html.EditorFor(model => model.Cheque_Date, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                            @Model.AgreementPdcList[i].Cheque_Date
+                        </div>
+                        <div class="col-md-1">
+                            @Model.AgreementPdcList[i].Cheque_Amount
+                            @*@Html.EditorFor(model => model.Cheque_Amount, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        </div>
+                        <div class="col-md-1">
+                            <input type="text" name="AgreementPdcList[@i].status" class="form-control" maxlength="20" />
+                        </div>
+                        <div class="col-md-1">
+                           <button class="btn agreementpdclist-remove">X</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            }
+       
+    </table>
+
+</div>
+<div class="row ht-5">
+    &nbsp;
+</div>

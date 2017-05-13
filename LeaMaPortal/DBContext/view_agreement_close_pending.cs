@@ -12,13 +12,11 @@ namespace LeaMaPortal.DBContext
     using System;
     using System.Collections.Generic;
     
-    public partial class dashboard_utility
+    public partial class view_agreement_close_pending
     {
-        public int id { get; set; }
-        public Nullable<int> refno { get; set; }
-        public string meterno { get; set; }
-        public string billno { get; set; }
-        public Nullable<double> amount { get; set; }
-        public string utility_name { get; set; }
+        public Nullable<int> agreement_no { get; set; }
+        public Nullable<double> totalamount { get; set; }
+        public double paidamount { get; set; }
+        public double advancepending { get; set; }
     }
 }

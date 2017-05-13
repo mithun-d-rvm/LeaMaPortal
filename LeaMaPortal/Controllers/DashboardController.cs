@@ -155,12 +155,60 @@ select Agreement_no from tbl_agreement where agreement_End_date between current_
         }
         private async Task<List<DashboardModel>> GetDashboardSummaryByCategory(string category, string month = null, string year = null)
         {
-            string query = "SELECT * FROM leama.dashboard_summary where category=" + category;
+            string query = "SELECT * FROM dashboard_summary where category=" + category + "";
             if (!string.IsNullOrEmpty(month))
-                query += "&Month=" + month;
+                query += " and Month=" + month;
             if (!string.IsNullOrEmpty(year))
-                query += "&Year=" + year;
+                query += " and Year=" + year;
             var result = await db.Database.SqlQuery<DashboardModel>(query).ToListAsync();
+            return result;
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetEarningDataSet()
+        {
+            string query = @"select * from dashboard_earning";
+            var result = await GetResultSet<DashboardEarningModel>(query);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetVacantDataSet()
+        {
+            string query = @"select * from dashboard_vacancy";
+            var result = await GetResultSet<DashboardVacancyModel>(query);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetVacantLossDataSet()
+        {
+            string query = @"select * from dashboard_vacancy";
+            var result = await GetResultSet<DashboardVacancyLossModel>(query);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetUtilityDataSet()
+        {
+            string query = @"select * from dashboard_utility";
+            var result = await GetResultSet<DashboardUtilityModel>(query);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetRentalDataSet()
+        {
+            string query = @"select * from dashboard_rental";
+            var result = await GetResultSet<DashboardRentalModel>(query);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetExpensesDataSet()
+        {
+            string query = @"select * from dashboard_expenses";
+            var result = await GetResultSet<DashboardExpensesModel>(query);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        private async Task<List<T>> GetResultSet<T>(string Query)
+        {
+            var result = await db.Database.SqlQuery<T>(Query).ToListAsync();
             return result;
         }
         //[HttpGet]

@@ -106,15 +106,15 @@ namespace LeaMaPortal.Controllers
                 throw ex;
             }
         }
-        public async Task<ActionResult> Edit(string PropertyType, string PropertyCategory, string Usage_name)
+        public async Task<ActionResult> Edit(int? id)
         {
             try
             {
-                if (PropertyType == null && PropertyCategory != null && Usage_name != null)
+                if (id==null)
                 {
                     return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
                 }
-                tbl_propertytypemaster tbl_propertytype = await db.tbl_propertytypemaster.FindAsync(PropertyType, PropertyCategory, Usage_name);
+                tbl_propertytypemaster tbl_propertytype = await db.tbl_propertytypemaster.FirstOrDefaultAsync(x => x.Id == id);
                 if (tbl_propertytype == null)
                 {
                     return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
@@ -122,8 +122,8 @@ namespace LeaMaPortal.Controllers
                 PropertyTypeViewModel model = new PropertyTypeViewModel()
                 {
                     Id = tbl_propertytype.Id,
-                    PropertyType = tbl_propertytype.Type_name,
-                    PropertyCategory = tbl_propertytype.Type_Flag,
+                    PropertyType = tbl_propertytype.Type_Flag,
+                    PropertyCategory = tbl_propertytype.Type_name,
                     Usage_name = tbl_propertytype.Usage_name
                 };
                 return Json(model, JsonRequestBehavior.AllowGet);
@@ -134,16 +134,16 @@ namespace LeaMaPortal.Controllers
             }
         }
 
-        public async Task<ActionResult> Delete(string PropertyType, string PropertyCategory, string Usage_name)
+        public async Task<ActionResult> Delete(int? id)
         {
             MessageResult result = new MessageResult();
             try
             {
-                if (PropertyType == null && PropertyCategory != null && Usage_name != null)
+                if (id== null)
                 {
                     return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
                 }
-                tbl_propertytypemaster tbl_propertytype = await db.tbl_propertytypemaster.FindAsync(PropertyType, PropertyCategory, Usage_name);
+                tbl_propertytypemaster tbl_propertytype = await db.tbl_propertytypemaster.FirstOrDefaultAsync(x => x.Id == id);
                 if (tbl_propertytype == null)
                 {
                     return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
