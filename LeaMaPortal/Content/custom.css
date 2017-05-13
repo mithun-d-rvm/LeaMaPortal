@@ -37,3 +37,7 @@ background-color: #eff3f6;
 label{
     font-weight:normal !important;
 }
+
+.tbl-dahboard .table > tbody > tr > th{
+    padding:15px;
+}
