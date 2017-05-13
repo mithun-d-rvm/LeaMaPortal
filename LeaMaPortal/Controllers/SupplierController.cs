@@ -12,7 +12,7 @@ using System.Data.Entity;
 
 namespace LeaMaPortal.Controllers
 {
-    public class SupplierController : Controller
+    public class SupplierController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
         // GET: Supplier

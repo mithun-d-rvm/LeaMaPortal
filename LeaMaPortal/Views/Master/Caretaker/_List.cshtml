@@ -73,12 +73,14 @@
                             @if (@ViewBag.IsEditable == 1)
                             {
                                 <span>
-                                    @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit caretaker-edit", title = "Edit", @data_id = @item.Id })  |
+                                    @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit caretaker-edit", title = "Edit", @data_id = @item.Id })
                                 </span>
                             }
                             @if (@ViewBag.IsDeletable == 1)
                             {
-                                @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash caretaker-delete", @style = "color:red", @title = "Delete", @data_id = @item.Id })
+                                <span>
+                                    | @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash caretaker-delete", @style = "color:red", @title = "Delete", @data_id = @item.Id })
+                                </span>
                             }
 
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@

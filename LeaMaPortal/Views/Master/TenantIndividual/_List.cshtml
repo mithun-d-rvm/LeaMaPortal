@@ -42,23 +42,33 @@
                 </div>
 
                 @foreach (var item in Model)
-        {
-        <div class="divTableRow">
-            <div class="divTableCell">@item.Id</div>
-            <div class="divTableCell">@item.Title</div>
-            <div class="divTableCell">@item.First_Name  @item.Last_Name</div>
-            <div class="divTableCell">@item.Company_Educational</div>
-            <div class="divTableCell">@item.Profession</div>
-            <div class="divTableCell">@item.address</div>
-            <div class="divTableCell">@item.City</div>
-            <div class="divTableCell">
-                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit tenant-individual-edit", title = "Edit", @data_id = @item.Tenant_Id, @data_type = @item.Type })  |
-                @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash tenant-individual-delete", @style = "color:red", @title = "Delete", @data_id = @item.Tenant_Id, @data_type = @item.Type })
+                {
+                    <div class="divTableRow">
+                        <div class="divTableCell">@item.Id</div>
+                        <div class="divTableCell">@item.Title</div>
+                        <div class="divTableCell">@item.First_Name  @item.Last_Name</div>
+                        <div class="divTableCell">@item.Company_Educational</div>
+                        <div class="divTableCell">@item.Profession</div>
+                        <div class="divTableCell">@item.address</div>
+                        <div class="divTableCell">@item.City</div>
+                        <div class="divTableCell">
+                            @if (@ViewBag.IsEditable == 1)
+                {
+                                <span>
+                                    @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit tenant-individual-edit", title = "Edit", @data_id = @item.Tenant_Id, @data_type = @item.Type })
+                                </span>
+                            }
+                            @if (@ViewBag.IsDeletable == 1)
+                {
+                                <span>
+                                    | @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash tenant-individual-delete", @style = "color:red", @title = "Delete", @data_id = @item.Tenant_Id, @data_type = @item.Type })
+                                </span>
+                            }
 
-            </div>
+                        </div>
 
-        </div>
-        }
+                    </div>
+                }
             </div>
         </div>
 
@@ -71,77 +81,77 @@
             </div>
             <div class="col-lg-10 text-right">
                 @for (int i = 1; i <= Model.PageCount; i++)
-        {
-            if (i == Model.PageNumber)
-            {
-        <input type="button" data-id="@i" value="@i" class="pagination-btn" />
-            }
-            else
-            {
-        <input type="button" data-id="@i" value="@i" class="Page" />
-            }
+                {
+                    if (i == Model.PageNumber)
+                    {
+                        <input type="button" data-id="@i" value="@i" class="pagination-btn" />
+                    }
+                    else
+                    {
+                        <input type="button" data-id="@i" value="@i" class="Page" />
+                    }
 
-        }
+                }
             </div>
         </div>
         <script type="text/javascript">
-    $(".Page").click(function (e) {
-        $("#master-loader-list").removeClass("hide");
-        $("#individual-list").addClass("hide");
-        var page = parseInt($(this).data("id"));
-        var defaultPageSize = $("#defaultPageSize").val();
-        var search = $("#Search").val();
-        //alert(page);
-        getTenantIndividualList(search, page, defaultPageSize)
-    });
-    $("#defaultPageSize").change(function () {
-        $("#master-loader-list").removeClass("hide");
-        $("#individual-list").addClass("hide");
-        var search = $("#Search").val();
-        var defaultPageSize = $("#defaultPageSize").val();
-        getTenantIndividualList(search, 1, defaultPageSize)
-    });
-    $("#btn-search").click(function (e) {
-        $("#master-loader-list").removeClass("hide");
-        $("#individual-list").addClass("hide");
-        var search = $("#Search").val();
-        var defaultPageSize = $("#defaultPageSize").val();
-        getTenantIndividualList(search, 1, defaultPageSize)
-    });
+            $(".Page").click(function (e) {
+                $("#master-loader-list").removeClass("hide");
+                $("#individual-list").addClass("hide");
+                var page = parseInt($(this).data("id"));
+                var defaultPageSize = $("#defaultPageSize").val();
+                var search = $("#Search").val();
+                //alert(page);
+                getTenantIndividualList(search, page, defaultPageSize)
+            });
+            $("#defaultPageSize").change(function () {
+                $("#master-loader-list").removeClass("hide");
+                $("#individual-list").addClass("hide");
+                var search = $("#Search").val();
+                var defaultPageSize = $("#defaultPageSize").val();
+                getTenantIndividualList(search, 1, defaultPageSize)
+            });
+            $("#btn-search").click(function (e) {
+                $("#master-loader-list").removeClass("hide");
+                $("#individual-list").addClass("hide");
+                var search = $("#Search").val();
+                var defaultPageSize = $("#defaultPageSize").val();
+                getTenantIndividualList(search, 1, defaultPageSize)
+            });
 
-    function getTenantIndividualList(search, page, defaultPageSize) {
-        $.ajax(
-           {
-               url: "../MasterIndividual/Index",
-               type: "Get",
-               data: { Search: search, page: page, defaultPageSize: defaultPageSize },
-               success: function (html) {
-                   $("#ContainerList").html(html);
-               },
-               error: function (jqXhr, textStatus, errorThrown) {
-                   alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-               },
-               complete: function () {
-                   //   $("#VerifyIdDetailsLoader").addClass("hide");
-                   //$("#master-loader-list").addClass("hide");
-                   //$("#individual-list").removeClass("hide");
-               }
-           });
-    }
-    function beginPaging(args) {
-        // Animate
-        $('#grid-list').fadeOut('normal');
-    }
+            function getTenantIndividualList(search, page, defaultPageSize) {
+                $.ajax(
+                   {
+                       url: "../MasterIndividual/Index",
+                       type: "Get",
+                       data: { Search: search, page: page, defaultPageSize: defaultPageSize },
+                       success: function (html) {
+                           $("#ContainerList").html(html);
+                       },
+                       error: function (jqXhr, textStatus, errorThrown) {
+                           alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                       },
+                       complete: function () {
+                           //   $("#VerifyIdDetailsLoader").addClass("hide");
+                           //$("#master-loader-list").addClass("hide");
+                           //$("#individual-list").removeClass("hide");
+                       }
+                   });
+            }
+            function beginPaging(args) {
+                // Animate
+                $('#grid-list').fadeOut('normal');
+            }
 
-    function successPaging() {
-        // Animate
-        $('#grid-list').fadeIn('normal');
-        $('a').tooltip();
-    }
+            function successPaging() {
+                // Animate
+                $('#grid-list').fadeIn('normal');
+                $('a').tooltip();
+            }
 
-    function failurePaging() {
-        alert("Could not retrieve list.");
-    }
+            function failurePaging() {
+                alert("Could not retrieve list.");
+            }
 
         </script>
 
