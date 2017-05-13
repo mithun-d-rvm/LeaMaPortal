@@ -307,7 +307,7 @@ namespace LeaMaPortal
                 AccountNumber="Account 2"
             }
         };
-        public static List<string> Receipts_PDCStatus = new List<string>() { "Received", "Cleared", "Bounced", "Cancelled" };
+        //public static List<string> Receipts_PDCStatus = new List<string>() { "Received", "Cleared", "Bounced", "Cancelled" };
 
         public static List<string> ReportGroup = new List<string>() { "Property", "Region", "Caretaker" };
         public static List<string> AgingDaysFilter = new List<string>() { "All", "Others" };
