@@ -301,6 +301,77 @@ namespace LeaMaPortal.Controllers
             return View("Index");
         }
 
+        public async Task<PartialViewResult> Edit(int AgreementNo)
+        {
+            try
+            {
+                AgreementFormViewModel model = new AgreementFormViewModel();
+                var agreementDet = await db.tbl_agreement.FirstOrDefaultAsync(x => x.Agreement_No == AgreementNo && x.Delmark != "*");
+                AgreementRenwalMap(agreementDet, model);
+                //ViewBag.Tenant_Type = new SelectList(Common.TcaTenantType);
+                //ViewBag.Ag_Tenantid = new SelectList("", "");
+                //ViewBag.Ag_TenantName = new SelectList("", "");
+                //var property = await db.tbl_propertiesmaster.Where(x => x.Delmark != "*").ToListAsync();
+                //ViewBag.TcaPropertyId = new SelectList(property, "Property_Id", "Property_Id");
+                //ViewBag.TcaPropertyIDTawtheeq = new SelectList(property, "Property_Id", "Property_ID_Tawtheeq");
+                //ViewBag.TcaPropertyName = new SelectList(property, "Property_Id", "Property_Name");
+                ////var unit = property.Where(x => x.Property_Flag == "Unit").ToList();
+                //ViewBag.UnitIDTawtheeq = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
+                //ViewBag.UnitPropertyName = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_Property_Name");
+                //ViewBag.SecurityFlag = new SelectList(Common.SecurityFlag);
+                //ViewBag.Agreement_No = db.tbl_agreement.OrderByDescending(x => x.Agreement_No).FirstOrDefault()?.Agreement_No + 1;
+                //var caretaker = await db.tbl_caretaker.Where(x => x.Delmark != "*").ToListAsync();
+                //ViewBag.Caretakerid = new SelectList(caretaker, "Caretaker_id", "Caretaker_id");
+                //ViewBag.CaretakerName = new SelectList(caretaker, "Caretaker_id", "Caretaker_Name");
+
+                ViewBag.Tenant_Type = new SelectList(Common.TcaTenantType, agreementDet.Tenant_Type);
+                if (agreementDet.Tenant_Type == "Company")
+                {
+                    var query = await db.tbl_tenant_company.Where(x => x.Delmark != "*").OrderBy(x => x.Tenant_Id).Select(x => new { Tenant_Id = x.Tenant_Id, Tenant_Name = x.First_Name }).ToListAsync();
+                    ViewBag.Ag_Tenantid = new SelectList(query, "Tenant_Id", "Tenant_Id",agreementDet.Ag_Tenant_id);
+                    ViewBag.Ag_TenantName = new SelectList(query, "Tenant_Id", "Tenant_Name", agreementDet.Ag_Tenant_id);
+                }
+                else
+                {
+                    var query = await db.tbl_tenant_individual.Where(x => x.Delmark != "*").OrderBy(x => x.Tenant_Id).Select(x => new { Tenant_Id = x.Tenant_Id, Tenant_Name = x.First_Name }).ToListAsync();
+                    ViewBag.Ag_Tenantid = new SelectList(query, "Tenant_Id", "Tenant_Id", agreementDet.Ag_Tenant_id);
+                    ViewBag.Ag_TenantName = new SelectList(query, "Tenant_Id", "Tenant_Name", agreementDet.Ag_Tenant_id);
+                }
+                model.Tenant_Type = agreementDet.Tenant_Type;
+                model.Ag_Tenant_id = agreementDet.Ag_Tenant_id;
+                model.Ag_Tenant_Name = agreementDet.Ag_Tenant_Name;
+                
+                var property = await db.tbl_propertiesmaster.Where(x => x.Delmark != "*").ToListAsync();
+                model.property_id = agreementDet.property_id;
+                model.Property_ID_Tawtheeq = agreementDet.Property_ID_Tawtheeq;
+                model.Properties_Name = agreementDet.Properties_Name;
+                ViewBag.TcaPropertyId = new SelectList(property, "Property_Id", "Property_Id",agreementDet.property_id);
+                ViewBag.TcaPropertyIDTawtheeq = new SelectList(property, "Property_Id", "Property_ID_Tawtheeq", agreementDet.property_id);
+                ViewBag.TcaPropertyName = new SelectList(property, "Property_Id", "Property_Name", agreementDet.property_id);
+                //var unit = property.Where(x => x.Property_Flag == "Unit").ToList();
+                var unit = property.Where(x => x.Ref_Unit_Property_ID == agreementDet.property_id).ToList();
+                ViewBag.UnitIDTawtheeq = new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq",agreementDet.Unit_ID_Tawtheeq);
+                ViewBag.UnitPropertyName = new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_Property_Name", agreementDet.Unit_ID_Tawtheeq);
+                ViewBag.SecurityFlag = new SelectList(Common.SecurityFlag, agreementDet.Security_Flag);
+                ViewBag.Agreement_No = AgreementNo; //db.tbl_agreement.OrderByDescending(x => x.Agreement_No).FirstOrDefault()?.Agreement_No + 1;
+                var caretaker = await db.tbl_caretaker.Where(x => x.Delmark != "*").ToListAsync();
+                model.Caretaker_id = agreementDet.Caretaker_id;
+                model.Caretaker_Name = agreementDet.Caretaker_Name;
+                ViewBag.Caretakerid = new SelectList(caretaker, "Caretaker_id", "Caretaker_id", agreementDet.Caretaker_id);
+                ViewBag.CaretakerName = new SelectList(caretaker, "Caretaker_id", "Caretaker_Name", agreementDet.Caretaker_id);
+                model.New_Renewal_flag = agreementDet.New_Renewal_flag;
+                model.Agreement_No = AgreementNo;
+                model.Agreement_Refno = AgreementNo;
+
+                //model.AgreementPd = new AgreementPdcViewModel();
+                return PartialView("../Tca/Agreement/_AgreementFormEdit", model);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
         public async Task<PartialViewResult> Renewal(int AgreementNo)
         {
             try
@@ -338,8 +409,9 @@ namespace LeaMaPortal.Controllers
                 ViewBag.TcaPropertyIDTawtheeq = new SelectList(property, "Property_ID_Tawtheeq", "Property_ID_Tawtheeq", agreementDet.Property_ID_Tawtheeq);
                 ViewBag.TcaPropertyName = new SelectList(property, "Property_Name", "Property_Name",agreementDet.Properties_Name);
                 //var unit = property.Where(x => x.Property_Flag == "Unit").ToList();
-                ViewBag.UnitIDTawtheeq = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq",agreementDet.Unit_ID_Tawtheeq);
-                ViewBag.UnitPropertyName = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_Property_Name",agreementDet.Unit_Property_Name);
+                var unit = property.Where(x => x.Ref_Unit_Property_ID == agreementDet.property_id).ToList();
+                ViewBag.UnitIDTawtheeq = new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq",agreementDet.Unit_ID_Tawtheeq);
+                ViewBag.UnitPropertyName = new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_Property_Name",agreementDet.Unit_Property_Name);
                 ViewBag.SecurityFlag = new SelectList(Common.SecurityFlag, agreementDet.Security_Flag);
                 ViewBag.Agreement_No = AgreementNo; //db.tbl_agreement.OrderByDescending(x => x.Agreement_No).FirstOrDefault()?.Agreement_No + 1;
                 var caretaker = await db.tbl_caretaker.Where(x => x.Delmark != "*").ToListAsync();
@@ -359,6 +431,89 @@ namespace LeaMaPortal.Controllers
                 throw;
             }
         }
+        public async Task<PartialViewResult> Status(int AgreementNo)
+        {
+            try
+            {
+                TcaStatusDisplayModel model = new TcaStatusDisplayModel();
+                var agreementDet = await db.tbl_agreement.FirstOrDefaultAsync(x => x.Agreement_No == AgreementNo && x.Delmark != "*");
+               
+                ViewBag.Renewal_Close_Flag = new SelectList(Common.Renewal_Close_Flag);
+                model.Tenant_Type = agreementDet.Tenant_Type;
+                model.Ag_Tenant_id = agreementDet.Ag_Tenant_id;
+                model.Ag_Tenant_Name = agreementDet.Ag_Tenant_Name;
+              
+                model.Properties_ID = agreementDet.property_id;
+                //model.Property_ID_Tawtheeq = agreementDet.Property_ID_Tawtheeq;
+                model.Properties_Name = agreementDet.Properties_Name;
+
+                //var unit = property.Where(x => x.Property_Flag == "Unit").ToList();
+                model.Unit_ID_Tawtheeq = agreementDet.Unit_ID_Tawtheeq;
+                model.Unit_Property_Name = agreementDet.Unit_Property_Name;
+               
+                model.Caretaker_id = agreementDet.Caretaker_id;
+                model.Caretaker_Name = agreementDet.Caretaker_Name;
+                model.AgreementDate = agreementDet.Agreement_Date.HasValue? agreementDet.Agreement_Date.Value.ToString("dd-MM-yyyy"):"";
+               
+                model.Agreement_No = AgreementNo;
+               
+
+                //model.AgreementPd = new AgreementPdcViewModel();
+                return PartialView("../Tca/Status/_StatusDetails", model);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+        [HttpPost]
+        public async Task<ActionResult> Status(TcaStatusViewModel model)
+        {
+            MessageResult result = new MessageResult();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if(string.IsNullOrWhiteSpace(model.Renewal_Close_Flag))
+                    {
+                        result.Errors = "Renewal Status mandatory";
+                        return Json(result, JsonRequestBehavior.AllowGet);
+                    }
+                    MySqlParameter pa = new MySqlParameter();               
+                    string PFlag = Common.INSERT;
+                    var tbl_agreement_status = await db.tbl_agreement_status.FirstOrDefaultAsync(m=>m.Agreement_No==model.Agreement_No);
+                        if (tbl_agreement_status != null)
+                        {
+                            PFlag = Common.UPDATE;
+                            model.Id = tbl_agreement_status.id;
+                        }
+                    object[] param = { new MySqlParameter("@PFlag", PFlag),
+                                           new MySqlParameter("@PId", model.Id),
+                                           new MySqlParameter("@PAgreement_No",model.Agreement_No),
+                                            new MySqlParameter("@PAg_Tenant_id",model.Ag_Tenant_id),
+                                             new MySqlParameter("@PAg_Tenant_Name",model.Ag_Tenant_Name),
+                                              new MySqlParameter("@PProperties_ID",model.Properties_ID),
+                                               new MySqlParameter("@PProperties_Name",model.Properties_Name),
+                                               new MySqlParameter("@PCaretaker_id",model.Caretaker_id),
+                                               new MySqlParameter("@PCaretaker_Name",model.Caretaker_Name),
+                                               new MySqlParameter("@PRenewal_Close_Flag",model.Renewal_Close_Flag),
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                         };
+                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Agreement_Status_All(@PFlag, @PId, @PAgreement_No, @PAg_Tenant_id, @PAg_Tenant_Name, @PProperties_ID, @PProperties_Name, @PCaretaker_id, @PCaretaker_Name, @PRenewal_Close_Flag, @PCreateduser)", param).ToListAsync();
+                    return Json(result, JsonRequestBehavior.AllowGet);
+
+                }
+                result.Errors = "Bad request";
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                throw;
+            }
+
+
+        }
+
         #region closure
         public async Task<PartialViewResult> Closure(int AgreementNo)
         {
@@ -832,6 +987,22 @@ namespace LeaMaPortal.Controllers
                 throw;
             }
         }
+        [HttpGet]
+        public async Task<ActionResult> GetPropertiesUnitDetails(int propertyId)
+        {
+            try
+            {
+                var unit =await db.tbl_propertiesmaster.Where(x => x.Ref_Unit_Property_ID == propertyId).ToListAsync();
+                //ViewBag.UnitIDTawtheeq = new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
+                //ViewBag.UnitPropertyName = new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_Property_Name");
+                
+                    return Json(new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_Property_Name"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
 
 
         [HttpGet]
@@ -874,6 +1045,20 @@ namespace LeaMaPortal.Controllers
             catch (Exception e)
             {
                 throw;
+            }
+        }
+         [HttpGet]
+        public async Task<ActionResult>PrintAgreement(int AgreementNo)
+        {
+            AgreementFormViewModel model = new AgreementFormViewModel();
+            try
+            {
+                
+                return View(model);
+            }
+            catch
+            {
+                return View(model);
             }
         }
 

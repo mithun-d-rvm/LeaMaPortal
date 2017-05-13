@@ -10,6 +10,8 @@ namespace LeaMaPortal
     {
         public static List<string> Title = new List<string>() { "MR.", "MRS.", "MS." };
         public static List<string> TcaTenantType = new List<string>() { "Company", "Individual" };
+        public static List<string> Renewal_Close_Flag = new List<string>() { "Renewal", "Close" };
+        
         public static List<string> SecurityFlag = new List<string>() { "Cash", "Cheque", "Online", "Cheque without date", "DD" };
 
         public static List<string> Months= new List<string>() { "Jan", "Feb", "Mar", "April", "May","June","July","Aug","Sep","Oct","Nov","Dec" };

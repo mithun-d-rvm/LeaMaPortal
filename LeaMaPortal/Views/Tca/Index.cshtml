@@ -93,6 +93,13 @@
 
             </div>
         </div>
+        <div id="renewalModal" class="modal fade" role="dialog">
+
+            <div class="modal-dialog tca-modal-md" id="editAddOrUpdateContainer" style="background-color: white;">
+
+            </div>
+
+        </div>
 
         <div id="closureModal" class="modal fade" role="dialog">
            @using (Html.BeginForm("Closure", "Tca", FormMethod.Post, new { @id = "Closure", @enctype = "multipart/form-data" }))
@@ -102,6 +109,15 @@
                 
             </div>
            }
+        </div>
+        <div id="statusModal" class="modal fade" role="dialog">
+            @using (Html.BeginForm("Status", "Tca", FormMethod.Post, new { @id = "Status", @enctype = "multipart/form-data" }))
+            {
+                <div class="modal-dialog tca-modal-md" id="StatusContainer" style="background-color: white;">
+
+
+                </div>
+            }
         </div>
         <!-- End Grid view -->
         <!-- Trigger the modal with a button -->
