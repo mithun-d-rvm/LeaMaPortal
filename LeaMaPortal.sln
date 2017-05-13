@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeaMaPortal", "LeaMaPortal\LeaMaPortal.csproj", "{3EF5608D-FCB1-4AA7-9D6C-25C03446F685}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification", "Notification\Notification.csproj", "{36E15E1C-283F-47C6-AF18-916359E4B482}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailNotification", "EmailNotification\EmailNotification.csproj", "{EBFD5966-9A69-478D-8724-CF46E1628190}"
 EndProject
@@ -19,10 +17,6 @@ Global
 		{3EF5608D-FCB1-4AA7-9D6C-25C03446F685}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EF5608D-FCB1-4AA7-9D6C-25C03446F685}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EF5608D-FCB1-4AA7-9D6C-25C03446F685}.Release|Any CPU.Build.0 = Release|Any CPU
-		{36E15E1C-283F-47C6-AF18-916359E4B482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36E15E1C-283F-47C6-AF18-916359E4B482}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36E15E1C-283F-47C6-AF18-916359E4B482}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36E15E1C-283F-47C6-AF18-916359E4B482}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EBFD5966-9A69-478D-8724-CF46E1628190}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EBFD5966-9A69-478D-8724-CF46E1628190}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBFD5966-9A69-478D-8724-CF46E1628190}.Release|Any CPU.ActiveCfg = Release|Any CPU
