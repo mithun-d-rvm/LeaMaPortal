@@ -293,10 +293,13 @@
         debugger;
         //var sessionMenuConfig = $("#hdnMenuConfig").val();
         //var menus = sessionMenuConfig.split(",");
-        var cookie = document.cookie.split("=");
-        var currentUser = JSON.parse(cookie[1]);
-        //alert(currentUser);
-        //alert(menus);
+        //var cookie = document.cookie.split("=");
+        //var currentUser = JSON.parse(cookie[1]);
+        ////alert(currentUser);
+        ////alert(menus);
+        //menus = currentUser.MenuConfig.split(",");
+        var currentUser = $.cookie("CurrentUser");
+        var currentUser = JSON.parse(currentUser);
         menus = currentUser.MenuConfig.split(",");
         jQuery.each(menus, function (index, item) {
             debugger;
