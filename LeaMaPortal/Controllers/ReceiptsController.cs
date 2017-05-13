@@ -224,8 +224,8 @@ namespace LeaMaPortal.Controllers
             var tenant = db.view_tenant.Select(x => new { TenantId = x.Tenant_id, TenantName = x.First_Name, Type = x.type, GroupedValue = x.Tenant_id + ":" + x.First_Name + ":" + x.type });
             ViewBag.Tenant_id = new SelectList(items: tenant, dataValueField: "TenantId", dataTextField: "TenantId", selectedValue: data.Tenant_id);
             ViewBag.Tenant_Name = new SelectList(items: tenant, dataValueField: "TenantId", dataTextField: "TenantName", selectedValue: data.Tenant_id);
-            ViewBag.BankAcCode = new SelectList(Common.BankAccountNumber, data.BankAcCode);
-            ViewBag.BankAcName = new SelectList(Common.BankAccountName, data.BankAcName);
+            ViewBag.BankAcCode = new SelectList(Common.BankDetails, "AccountNumber", "AccountNumber", data.BankAcCode);
+            ViewBag.BankAcName = new SelectList(Common.BankDetails, "AccountNumber", "BankName", data.BankAcCode);
             ViewBag.PDCstatus = new SelectList(Common.Receipts_PDCStatus, data.PDCstatus);
             ViewBag.InvoiceNumber = new SelectList(db.view_invoice_receipt_pending.OrderBy(o => o.invno).Distinct(), "invno", "invno");
 
@@ -378,8 +378,8 @@ namespace LeaMaPortal.Controllers
             var tenant = db.view_tenant.Select(x => new { TenantId = x.Tenant_id, TenantName = x.First_Name, Type = x.type, GroupedValue = x.Tenant_id + ":" + x.First_Name + ":" + x.type });
             ViewBag.Tenant_id = new SelectList(items: tenant, dataValueField: "TenantId", dataTextField: "TenantId", selectedValue: null);
             ViewBag.Tenant_Name = new SelectList(items: tenant, dataValueField: "TenantId", dataTextField: "TenantName", selectedValue: null);
-            ViewBag.BankAcCode = new SelectList(Common.BankAccountNumber);
-            ViewBag.BankAcName = new SelectList(Common.BankAccountName);
+            ViewBag.BankAcCode = new SelectList(Common.BankDetails, "AccountNumber", "AccountNumber");
+            ViewBag.BankAcName = new SelectList(Common.BankDetails, "AccountNumber", "BankName");
             ViewBag.PDCstatus = new SelectList(Common.Receipts_PDCStatus);
             ViewBag.InvoiceNumber = new SelectList(db.view_invoice_receipt_pending.OrderBy(o => o.invno).Distinct(), "invno", "invno");
             return PartialView("../Receipts/_AddorUpdate", model);
