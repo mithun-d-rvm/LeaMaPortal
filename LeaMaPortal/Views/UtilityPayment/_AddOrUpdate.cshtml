@@ -198,6 +198,14 @@
                     </div>
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
+                            @Html.LabelFor(model => model.Narration, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
                             &nbsp;
                         </div>
                     </div>
@@ -363,13 +371,20 @@
             <div class="row ht-5">
                 &nbsp;
             </div>
-            <div class="col-md-12 form-input-padding">
-                <div class="col-md-4">
-                    &nbsp;
+            <div class="col-md-12 form-input-padding btn-group-justified">
+                <div class="col-md-3">
+
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
                 </div>
+                <div class="col-md-3">
+                    <button class="btn master-form-btn" id="btnCancel" type="reset" onclick="formReset()">Cancel</button>
+                </div>
+                <div class="col-md-3">
+                    
+                </div>
+                
             </div>
         </div>
 
@@ -377,6 +392,9 @@
 }
 
 <script>
+    function formReset() {
+        getUtilityAddOrUpdate();
+    }
     var i = 0;
     function add() {
         debugger;
@@ -654,7 +672,7 @@
                         $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
                         $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
                         $(".result-title").text("Success");
-                        $(".result-modal-body span").text(invoiceAdded);
+                        $(".result-modal-body span").text(response.Message);
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -709,6 +727,12 @@
             $("#advanceAcCode").hide();
         }
         $("#AddUtilityPayment").prop('disabled', false);
+
+        var id = $("#id").val();
+        if (id != 0) {
+            document.getElementById("btnSubmit").innerHTML = 'Update';
+        }
+        
     });
 
 </script>

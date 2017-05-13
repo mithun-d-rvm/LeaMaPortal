@@ -144,10 +144,12 @@ namespace LeaMaPortal.Controllers
                     int? paymentno = await db.tbl_eb_water_paymenthd.Select(x => x.PaymentNo).OrderByDescending(x => x).FirstOrDefaultAsync();
                     model.PaymentNo = paymentno == null ? 1 : paymentno.Value + 1;
                     PFlag = "INSERT";
+                    result.Message = "Utlity payment added successfully";
                 }
                 else
                 {
                     PFlag = "UPDATE";
+                    result.Message = "Utlity payment updated successfully";
                 }
                 string utilityPayment = null;
                 if (model.UtilityPaymentDetails != null)
