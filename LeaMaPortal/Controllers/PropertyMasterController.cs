@@ -43,7 +43,7 @@ namespace LeaMaPortal.Controllers
         public async Task<PartialViewResult> AddOrUpdate()
         {
             PropertyViewModel model = new PropertyViewModel();
-            ViewBag.TitleDisplay = new SelectList(Common.Title, Common.DefaultTitle);
+            ViewBag.TitleDisplay = new SelectList(Common.Title);
 
             int? propertyid = await db.tbl_propertiesmaster.MaxAsync(x => (int?)x.Property_Id);
 
@@ -103,7 +103,7 @@ namespace LeaMaPortal.Controllers
             {
                 PropertyViewModel model = new PropertyViewModel();
                 //model.Title = Common.DefaultTitle;
-                ViewBag.TitleDisplay = new SelectList(Common.Title, Common.DefaultTitle);
+                ViewBag.TitleDisplay = new SelectList(Common.Title);
                 //var region = .Select(x => x.Region_Name);
                 ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
                 //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
