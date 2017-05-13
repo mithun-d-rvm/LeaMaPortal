@@ -76,26 +76,32 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    MySqlParameter pa = new MySqlParameter();
-                    string PFlag = "INSERT";
-
-                    if (model.Id == 0)
+                    if (db.tbl_facilitymaster.Any(a => a.Facility_Name == model.Facility_Name && a.Delmark != "*"))
                     {
-                        
+                        result.Errors = "Facility name already exists";
                     }
                     else
                     {
-                        PFlag = "UPDATE";
-                    }
-                    object[] param = { new MySqlParameter("@PFlag", PFlag),
+                        MySqlParameter pa = new MySqlParameter();
+                        string PFlag = "INSERT";
+
+                        if (model.Id == 0)
+                        {
+
+                        }
+                        else
+                        {
+                            PFlag = "UPDATE";
+                        }
+                        object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PId", model.Id),
                                            new MySqlParameter("@PFacility_id",model.Facility_id),
                                             new MySqlParameter("@PFacility_Name",model.Facility_Name),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
-                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Facility_All(@PFlag,@PId,@PFacility_id,@PFacility_Name,@PCreateduser)", param).ToListAsync();
-                    await db.SaveChangesAsync();
-
+                        var RE = await db.Database.SqlQuery<object>("CALL Usp_Facility_All(@PFlag,@PId,@PFacility_id,@PFacility_Name,@PCreateduser)", param).ToListAsync();
+                        await db.SaveChangesAsync();
+                    }
                 }
                 return Json(result, JsonRequestBehavior.AllowGet);
             }

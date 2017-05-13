@@ -16,7 +16,7 @@
                     @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "CountryName" } })
+                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "CountryName", @pattern = "[a-zA-Z0-9\\s]+" } })
                 </div>
                 <div class="col-md-4">
                     <button type="submit" class="leama-btn">Submit</button>

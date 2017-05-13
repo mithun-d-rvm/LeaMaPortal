@@ -18,7 +18,7 @@
                     @Html.LabelFor(model => model.Region_Name, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Region_Name, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "RegionName" } })
+                    @Html.EditorFor(model => model.Region_Name, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "RegionName", @pattern = "[a-zA-Z0-9\\s]+" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -26,7 +26,7 @@
                     @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4 ">
-                    @Html.DropDownList("Country", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Country" })
+                    @Html.DropDownList("Country", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Country", @pattern = "[a-zA-Z0-9\\s]+" })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
