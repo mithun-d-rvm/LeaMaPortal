@@ -862,7 +862,7 @@ namespace LeaMaPortal.Controllers
             try
             {
                 AgreementFormViewModel model = new AgreementFormViewModel();
-                ViewBag.TitleDisplay = new SelectList(Common.Title, Common.DefaultTitle);
+                ViewBag.TitleDisplay = new SelectList(Common.Title);
 
                 ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
                 //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
