@@ -189,6 +189,7 @@
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\MasterIndividualController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\PropertyMasterController.cs" />
     <Compile Include="Controllers\MeterController.cs" />
@@ -449,6 +450,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\NotificationHelper.cs" />
     <Compile Include="Helpers\NumberToText.cs" />
     <Compile Include="Helpers\StaticHelper.cs" />
     <Compile Include="Models\AgreementFacilityViewModel.cs" />
@@ -472,6 +474,11 @@
     <Compile Include="Models\EmailTemplateViewModel.cs" />
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\MasterViewModel.cs" />
+    <Compile Include="Models\NotificationAgreementApprovalModel.cs" />
+    <Compile Include="Models\NotificationPdcModel.cs" />
+    <Compile Include="Models\NotificationRenewalModel.cs" />
+    <Compile Include="Models\NotificationRentalDueModel.cs" />
+    <Compile Include="Models\NotificationUtilityDuesModel.cs" />
     <Compile Include="Models\PaymentViewModel.cs" />
     <Compile Include="Models\OptionModel.cs" />
     <Compile Include="Models\PropertyTypeViewModel.cs" />
@@ -879,6 +886,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Documents\TenantIndividual\" />
     <Folder Include="Models\DBContext\" />
+    <Folder Include="Views\Notification\" />
     <Folder Include="Views\PropertyMaster\" />
     <Folder Include="Views\Supplier\" />
   </ItemGroup>
