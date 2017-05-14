@@ -160,7 +160,7 @@ namespace LeaMaPortal
         public static List<string> Profession = new List<string>() { "Engineer", "Teacher", "Shop keeper", "Doctor", "Farmer" };
 
         public const string INSERT = "INSERT", UPDATE = "UPDATE", DELETE = "DELETE", SELECT = "SELECT", View = "View";
-        public const int DefaultMaster = 9;
+        public const int DefaultMaster = 2;
         public const string Bank_number = "XXXXYYYYZZZZ";
         public const string TenantIndividualDocumentContainer = "Documents/TenantIndividual/";
         public const string TenantIndividualDocumentDirectoryName = "TenantIndividual";

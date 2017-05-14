@@ -599,11 +599,8 @@
             }
         });
     }
-    function GetUserCreation() {
-        //$("#img-loader").removeClass("hide");
+    function getUserCreationAddOrUpdate() {
         $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
         $.ajax(
         {
             url: "../UserCreation/AddOrUpdate",
@@ -615,15 +612,23 @@
                 $("#ContainerAddOrUpdate").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                // alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text(masterResultError);
             },
             complete: function () {
                 //$("#img-loader").addClass("hide");
                 $("#master-loader").addClass("hide");
             }
         });
+    }
+    function GetUserCreation() {
         //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
+        getUserCreationAddOrUpdate();
         $.ajax(
         {
             url: "../UserCreation/Index",
@@ -635,7 +640,11 @@
                 $("#ContainerList").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                // alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text(masterResultError);
             },
             complete: function () {
                 //$("#img-loader").addClass("hide");
