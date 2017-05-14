@@ -27,7 +27,7 @@
                     @Html.LabelFor(model => model.Caretaker_Name, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Caretaker_Name, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                    @Html.EditorFor(model => model.Caretaker_Name, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -35,13 +35,13 @@
                     @Html.LabelFor(model => model.Dob, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Dob, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                    @Html.EditorFor(model => model.Dob, new { htmlAttributes = new { @class = "leama-field form-control" , @required = "required" } })
                 </div>
                 <div class="col-md-2 pull-left">
                     @Html.LabelFor(model => model.Doj, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Doj, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                    @Html.EditorFor(model => model.Doj, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required" } })
                 </div>
             </div>
 
@@ -62,18 +62,18 @@
             <div class="col-md-12 leama-fieldset ">
 
                 @*<div class="col-md-2 pull-left">
-                    @Html.LabelFor(model => model.Address3, htmlAttributes: new { @class = "leama-field-name" })
-                </div>
-                <div class="col-sm-4">
-                    @Html.TextAreaFor(model => model.Address3, new { @class = "form-control", @rows = 4 })
-                </div>
+                        @Html.LabelFor(model => model.Address3, htmlAttributes: new { @class = "leama-field-name" })
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(model => model.Address3, new { @class = "form-control", @rows = 4 })
+                    </div>
 
-                <div class="col-md-2 pull-left">
-                    @Html.LabelFor(model => model.Area, htmlAttributes: new { @class = "leama-field-name" })
-                </div>
-                <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Area, new { htmlAttributes = new { @class = "leama-field form-control" } })
-                </div> &nbsp;*@
+                    <div class="col-md-2 pull-left">
+                        @Html.LabelFor(model => model.Area, htmlAttributes: new { @class = "leama-field-name" })
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.Area, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                    </div> &nbsp;*@
 
 
 
@@ -82,14 +82,14 @@
                     @Html.LabelFor(model => model.Pincode, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                    @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "leama-field form-control", @min = "0", @type = "number" } })
 
                 </div>
                 <div class="col-md-2 pull-left">
                     @Html.LabelFor(model => model.Region_Name, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.DropDownList("Region_Name", null,"-Select-", htmlAttributes: new { @class = "form-control", @placeholder = "-Select-", })
+                    @Html.DropDownList("Region_Name", null, "-Select-", htmlAttributes: new { @class = "form-control", @placeholder = "-Select-", @required = "required" })
                     @*@Html.EditorFor(model => model.Region_Name, new { htmlAttributes = new { @class = "leama-field form-control" } })*@
 
 
@@ -104,7 +104,7 @@
                 </div>
                 <div class="col-sm-4">
 
-                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "leama-field form-control", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" } })
 
 
                 </div>
@@ -112,25 +112,22 @@
                     @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-
-                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "leama-field form-control" } })
-
-
+                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
-                
+
                 <div class="col-md-2 pull-left">
                     @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "leama-field form-control", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" } })
                 </div>
                 <div class="col-md-2 pull-left">
                     @Html.LabelFor(model => model.Phoneno, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Phoneno, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                    @Html.EditorFor(model => model.Phoneno, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @pattern = "^\\+?\\d{0,13}", title = "Enter 15 digit valid phone number" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -138,19 +135,19 @@
                     @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "leama-field form-control" } })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @pattern = "^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", title = "Enter valid email id" } })
                 </div>
                 <div class="col-md-2">
-                    
+
                 </div>
                 <div class="col-md-4">
                     <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
                 </div>
             </div>
             @*<div class="col-md-12 leama-fieldset ">
-                
 
-            </div>*@
+
+                </div>*@
             @*<div class="col-md-12 leama-fieldset ">
                 <div class="col-md-2 pull-left">
                     @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "leama-field-name" })
@@ -165,10 +162,10 @@
                     </div>*@
         </div>
         @*<div class="col-md-12 leama-fieldset ">
-            <div class="col-md-12">
-                <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
-            </div>
-        </div>*@
+                <div class="col-md-12">
+                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                </div>
+            </div>*@
     </div>
 
 }
@@ -259,7 +256,7 @@
 
                 });
         }
-       // $("#Title").val($("#TitleDisplay").val());
+        // $("#Title").val($("#TitleDisplay").val());
     });
 
 </script>
