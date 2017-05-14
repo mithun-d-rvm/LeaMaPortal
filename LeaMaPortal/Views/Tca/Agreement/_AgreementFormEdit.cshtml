@@ -85,7 +85,7 @@
                             @Html.LabelFor(model => model.Tenant_Type, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-6">
-                            @Html.DropDownList("Tenant_Type", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @readonly = "readonly" })
+                            @Html.DropDownList("Tenant_Type", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
                     <div class="col-md-12 p-b-7">
@@ -214,7 +214,7 @@
                             @Html.LabelFor(model => model.Perday_Rental, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.Perday_Rental, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'editAgreementForm #Perday_Rental');" } })
+                            @Html.EditorFor(model => model.Perday_Rental, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'editAgreementForm #Perday_Rental');", @readonly = "readonly" } })
                         </div>
                     </div>
                     <div class="col-md-12 p-b-7">
@@ -670,6 +670,34 @@
     function setunitFields() {
         $("#editAgreementForm #Unit_ID_Tawtheeq").val($("#editAgreementForm #UnitIDTawtheeq option:selected").text() == "--Select--" ? null : $("#editAgreementForm #UnitIDTawtheeq option:selected").text());
         $("#editAgreementForm #Unit_Property_Name").val($("#editAgreementForm #UnitPropertyName option:selected").text() == "--Select--" ? null : $("#editAgreementForm #UnitIDTawtheeq option:selected").text());
+    }
+    $("#editAgreementForm #Agreement_Start_Date").change(function () {
+        setContractAmountPerDayEdit();
+    });
+    $("#editAgreementForm #Agreement_End_Date").change(function () {
+        setContractAmountPerDayEdit();
+    });
+    $("#editAgreementForm #Total_Rental_amount").change(function () {
+        setContractAmountPerDayEdit();
+    });
+    setContractAmountPerDayEdit();
+    function setContractAmountPerDayEdit() {
+        var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+        var firstDate = new Date($("#editAgreementForm #Agreement_Start_Date").val());
+        var secondDate = new Date($("#editAgreementForm #Agreement_End_Date").val());
+        var Total_Rental_amount = parseFloat($("#editAgreementForm #Total_Rental_amount").val());
+        var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
+        var amountperday = 0.0;
+        if (firstDate < secondDate) {
+            if (diffDays > 0) {
+                amountperday = (Total_Rental_amount / (diffDays + 1)).toFixed(2);
+            }
+        }
+        else if (firstDate.getDate() == secondDate.getDate()) {
+            amountperday = Total_Rental_amount;
+        }
+
+        $("#editAgreementForm #Perday_Rental").val(amountperday);
     }
 </script>
 

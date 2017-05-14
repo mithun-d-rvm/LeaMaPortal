@@ -1003,7 +1003,22 @@ namespace LeaMaPortal.Controllers
                 throw;
             }
         }
+        [HttpGet]
+        public async Task<ActionResult> GetContractAmountPerDay(int propertyId)
+        {
+            try
+            {
+                var unit = await db.tbl_propertiesmaster.Where(x => x.Ref_Unit_Property_ID == propertyId).ToListAsync();
+                //ViewBag.UnitIDTawtheeq = new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
+                //ViewBag.UnitPropertyName = new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_Property_Name");
 
+                return Json(new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_Property_Name"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
 
         [HttpGet]
         public async Task<ActionResult> Delete(int AgreementNo)

@@ -186,7 +186,7 @@
                         @Html.EditorFor(model => model.Agreement_Start_Date, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                     </div>
                 </div>
-                <div class="col-md-12 p-b-7">
+                <div class="col-md-12 p-b-7"> 
                     <div class="col-md-6">
                         @Html.LabelFor(model => model.Agreement_End_Date, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
@@ -207,7 +207,7 @@
                         @Html.LabelFor(model => model.Perday_Rental, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Perday_Rental, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'Perday_Rental');", @required = "required" } })
+                        @Html.EditorFor(model => model.Perday_Rental, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'Perday_Rental');", @required = "required",@readonly= "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -555,6 +555,37 @@
     {
         $("#Unit_ID_Tawtheeq").val($("#UnitIDTawtheeq option:selected").text() == "--Select--" ? null : $("#UnitIDTawtheeq option:selected").text());
         $("#Unit_Property_Name").val($("#UnitPropertyName option:selected").text() == "--Select--" ? null : $("#UnitIDTawtheeq option:selected").text());
+    }
+    $("#Agreement_Start_Date").change(function () {
+        setContractAmountPerDay();
+    });
+    $("#Agreement_End_Date").change(function () {
+        setContractAmountPerDay();
+    });
+    $("#Total_Rental_amount").change(function () {
+        setContractAmountPerDay();
+    });
+    setContractAmountPerDay();
+    function setContractAmountPerDay()
+    {
+        var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+        var firstDate = new Date($("#Agreement_Start_Date").val());
+        var secondDate = new Date($("#Agreement_End_Date").val());
+        var Total_Rental_amount = parseFloat($("#Total_Rental_amount").val());
+        var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
+        var amountperday = 0.0;
+        if (firstDate < secondDate)
+        {
+            if (diffDays > 0) {
+                amountperday = (Total_Rental_amount / (diffDays+1)).toFixed(2);
+            }
+        }
+        else if(firstDate.getDate() == secondDate.getDate())
+        {
+            amountperday = Total_Rental_amount;
+        }
+        
+        $("#Perday_Rental").val(amountperday);
     }
 </script>
 

@@ -26,7 +26,7 @@
             Contract Tenancy Agreement - Renewal
         </div>
         <div class="p-b-25"> &nbsp; </div>
-        <div class="row">
+        <div class="row" style="pointer-events: none;">
             <div class="col-md-6 ht-50">
                 <div class="col-md-12 p-b-7">
                     <div class="col-md-3 m-t-3">
@@ -213,7 +213,7 @@
                         @Html.LabelFor(model => model.Perday_Rental, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Perday_Rental, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'TcaRenewal #Perday_Rental');" } })
+                        @Html.EditorFor(model => model.Perday_Rental, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'TcaRenewal #Perday_Rental');", @readonly = "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -487,11 +487,33 @@
         }
         //$("#TcaRenewal #property").prop('checked', true).change();
     });
-    function setpropertyFields() {
-        //$("#TcaRenewal #Property_ID_Tawtheeq").val($("#TcaRenewal #TcaPropertyIDTawtheeq option:selected").text() == "--Select--" ? null : $("#TcaRenewal #TcaPropertyIDTawtheeq option:selected").text());
-        //$("#TcaRenewal #Properties_Name").val($("#TcaRenewal #TcaPropertyName option:selected").text() == "--Select--" ? null : $("#TcaRenewal #TcaPropertyName option:selected").text());
-        //$("#TcaRenewal #Unit_ID_Tawtheeq").val($("#TcaRenewal #UnitIDTawtheeq option:selected").text() == "--Select--" ? null : $("#TcaRenewal #UnitIDTawtheeq option:selected").text());
-        //$("#TcaRenewal #Unit_Property_Name").val($("#TcaRenewal #UnitPropertyName option:selected").text() == "--Select--" ? null : $("#TcaRenewal #UnitPropertyName option:selected").text());
+    $("#TcaRenewal #Agreement_Start_Date").change(function () {
+        setContractAmountPerDayRenewal();
+    });
+    $("#TcaRenewal #Agreement_End_Date").change(function () {
+        setContractAmountPerDayRenewal();
+    });
+    $("#TcaRenewal #Total_Rental_amount").change(function () {
+        setContractAmountPerDayRenewal();
+    });
+    setContractAmountPerDay();
+    function setContractAmountPerDayRenewal() {
+        var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+        var firstDate = new Date($("#TcaRenewal #Agreement_Start_Date").val());
+        var secondDate = new Date($("#TcaRenewal #Agreement_End_Date").val());
+        var Total_Rental_amount = parseFloat($("#TcaRenewal #Total_Rental_amount").val());
+        var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
+        var amountperday = 0.0;
+        if (firstDate < secondDate) {
+            if (diffDays > 0) {
+                amountperday = (Total_Rental_amount / (diffDays + 1)).toFixed(2);
+            }
+        }
+        else if (firstDate.getDate() == secondDate.getDate()) {
+            amountperday = Total_Rental_amount;
+        }
+
+        $("#TcaRenewal #Perday_Rental").val(amountperday);
     }
 </script>
 
