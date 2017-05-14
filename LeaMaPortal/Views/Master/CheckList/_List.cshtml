@@ -173,10 +173,8 @@
                 data: { CheckListId: param[0], CheckListName: param[1] },
                 success: function (result) {
                     if (result.Errors == undefined || result.Errors == "") {
-                        $("#CheckListId").val(result.Id);
-                        $("#CheckList_Id").val(result.Checklist_id);
-                        $("#CheckListName").val(result.Checklist_Name);
-                        $("#ChecklistType").val(result.Checklist_Type);
+                        $("#ContainerAddOrUpdate").empty();
+                        $("#ContainerAddOrUpdate").html(result);
                     }
                     else {
                         alert(data.Errors);

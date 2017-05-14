@@ -15,11 +15,11 @@
         <div class="row">
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-2 pull-left">
-                    Approval (Y/N)
+                    TCA Approval Required (Y/N) *
                 </div>
                 <div class="col-sm-4">
-                    @Html.RadioButtonFor(model => model.Approval_flag, "Yes", new { @id = "Approval_flag_yes" }) Yes
-                    @Html.RadioButtonFor(model => model.Approval_flag, "No", new { @id = "Approval_flag_no" }) No
+                    @Html.RadioButtonFor(model => model.Approval_flag, "Yes", new { @id = "Approval_flag_yes", required = "required" }) Yes
+                    @Html.RadioButtonFor(model => model.Approval_flag, "No", new { @id = "Approval_flag_no", required = "required" }) No
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -27,18 +27,45 @@
                     @Html.LabelFor(model => model.Userid, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4 ">
-                    @Html.DropDownList("Userid", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Userid" })
+                    @Html.DropDownList("Userid", null, "--Select--", htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required"})
                 </div>
             </div>
-            <div class="col-md-12 leama-fieldset ">
-                <div class="col-md-12 pull-left">
-                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+            @*<div class="col-md-12 leama-fieldset ">
+                    <div class="col-md-12 pull-left">
+                        <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                    </div>
+                </div>*@
+            <div class="col-md-12 form-input-padding btn-group-justified">
+                <div class="col-md-3">
+
                 </div>
+                <div class="col-md-3">
+                    <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn master-form-btn" id="btnCancel" type="reset" onclick="formReset()">Cancel</button>
+                </div>
+                <div class="col-md-3">
+
+                </div>
+
             </div>
         </div>
     </div>
 }
 <script>
+    $(document).ready(function () {
+
+        var id = $("#ApprovalSettingsId").val();
+        if (id != 0) {
+            document.getElementById("btnSubmit").innerHTML = 'Update';
+        }
+
+    });
+    function formReset() {
+        ApprovalAddOrUpdate();
+    }
+
     //Add or update
     $("form#ApprovalSettings").off("submit").on("submit", function (e) {
         e.preventDefault();
