@@ -9,7 +9,8 @@ namespace LeaMaPortal.Models
 {
     public class TenantIndividualViewModel
     {
-       
+        public int Id { get; set; }
+
         [Display(Name = "Tenant ID:")]
         public int Tenant_Id { get; set; }
         [StringLength(5)]

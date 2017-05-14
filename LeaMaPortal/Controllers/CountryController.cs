@@ -91,38 +91,32 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    MySqlParameter pa = new MySqlParameter();
-                    string PFlag = "INSERT";
-
-                    //Accyear,Createddatetime,Createduser,Delmark
-                    //tbl_country tbl_country = new tbl_country();
-                    //tbl_country.Country_name = model.Country;
-                    if (model.Id == 0)
+                    if (db.tbl_country.Any(a => a.Delmark != "*" && a.Country_name.ToLower() == model.Country.ToLower()) && model.Id == 0)
                     {
-                        tbl_country tbl_country = await db.tbl_country.FindAsync(model.Country);
-                        if (tbl_country != null)
-                        {
-                            PFlag = "UPDATE";
-                            model.Id = tbl_country.Id;
-                        }
-                        //tbl_country.Createddatetime = DateTime.Now;
-                        //tbl_country.Accyear = DateTime.Now.Year;
-                        //tbl_country.Createduser = "arul";
-                        //db.tbl_country.Add(tbl_country);
+                        result.Errors = "Country already exists!";
                     }
                     else
                     {
-                        PFlag = "UPDATE";
-                       // db.Entry(tbl_country).State = EntityState.Modified;
-                    }
-                    object[] param = { new MySqlParameter("@PFlag", PFlag),
+                        MySqlParameter pa = new MySqlParameter();
+                        string PFlag = "INSERT";
+
+                        if (model.Id != 0)
+                        {
+                            PFlag = "UPDATE";
+                            result.Message = "Country updated successfully";
+                        }
+                        else
+                        {
+                            result.Message = "Country created successfully";
+                        }
+                        object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PId", model.Id),
                                            new MySqlParameter("@PCountry_name",model.Country),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
-                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Country_All(@PFlag,@PId,@PCountry_name,@PCreateduser)", param).ToListAsync();
-                    await db.SaveChangesAsync();
-                   
+                        var RE = await db.Database.SqlQuery<object>("CALL Usp_Country_All(@PFlag,@PId,@PCountry_name,@PCreateduser)", param).ToListAsync();
+                        await db.SaveChangesAsync();
+                    }
                 }
                 return Json(result,JsonRequestBehavior.AllowGet);
             }
@@ -183,6 +177,7 @@ namespace LeaMaPortal.Controllers
             MessageResult result = new MessageResult();
             try
             {
+                result.Message = "Country deleted successfully";
                 if (id == null)
                 {
                     return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);

@@ -76,31 +76,33 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    MySqlParameter pa = new MySqlParameter();
-                    string PFlag = "INSERT";
-
-                    if (model.Id == 0)
+                    if (db.tbl_utilitiesmaster.Any(a => a.Utility_Name == model.Utility_Name && a.Delmark != "*") && model.Id == 0)
                     {
-                        //tbl_utilitiesmaster tbl_utility = await db.tbl_utilitiesmaster.FindAsync(model.Utility_id, model.Utility_Name);
-                        //if (tbl_utility != null)
-                        //{
-                        //    PFlag = "UPDATE";
-                        //    model.Id = tbl_utility.id;
-                        //}
+                        result.Errors = "Utility name already exists";
                     }
                     else
                     {
-                        PFlag = "UPDATE";
-                    }
-                    object[] param = { new MySqlParameter("@PFlag", PFlag),
+                        MySqlParameter pa = new MySqlParameter();
+                        string PFlag = "INSERT";
+
+                        if (model.Id != 0)
+                        {
+                            PFlag = "UPDATE";
+                            result.Message = "Utility updated successfully";
+                        }
+                        else
+                        {
+                            result.Message = "Utility created successfully";
+                        }
+                        object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PId", model.Id),
                                            new MySqlParameter("@PUtility_id",model.Utility_id),
                                             new MySqlParameter("@PUtility_Name",model.Utility_Name),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
-                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Utilities_All(@PFlag,@PId,@PUtility_id,@PUtility_Name,@PCreateduser)", param).ToListAsync();
-                    await db.SaveChangesAsync();
-
+                        var RE = await db.Database.SqlQuery<object>("CALL Usp_Utilities_All(@PFlag,@PId,@PUtility_id,@PUtility_Name,@PCreateduser)", param).ToListAsync();
+                        await db.SaveChangesAsync();
+                    }
                 }
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -142,6 +144,7 @@ namespace LeaMaPortal.Controllers
             MessageResult result = new MessageResult();
             try
             {
+                result.Message = "Utility deleted successfully";
                 if (UtilityId == null && UtilityName != null)
                 {
                     return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
