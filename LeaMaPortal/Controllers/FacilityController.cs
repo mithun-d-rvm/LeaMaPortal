@@ -76,7 +76,7 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (db.tbl_facilitymaster.Any(a => a.Facility_Name == model.Facility_Name && a.Delmark != "*"))
+                    if (db.tbl_facilitymaster.Any(a => a.Facility_Name == model.Facility_Name && a.Delmark != "*") && model.Id == 0)
                     {
                         result.Errors = "Facility name already exists";
                     }
@@ -85,13 +85,14 @@ namespace LeaMaPortal.Controllers
                         MySqlParameter pa = new MySqlParameter();
                         string PFlag = "INSERT";
 
-                        if (model.Id == 0)
-                        {
-
+                        if (model.Id != 0)
+                        { 
+                            PFlag = "UPDATE";
+                            result.Message = "Facility updated successfully";
                         }
                         else
                         {
-                            PFlag = "UPDATE";
+                            result.Message = "Facility created successfully";
                         }
                         object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PId", model.Id),
@@ -142,6 +143,7 @@ namespace LeaMaPortal.Controllers
             MessageResult result = new MessageResult();
             try
             {
+                result.Message = "Facility deleted successfully";
                 if (FacilityId == null && FacilityName != null)
                 {
                     return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);

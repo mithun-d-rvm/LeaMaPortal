@@ -76,7 +76,7 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (db.tbl_utilitiesmaster.Any(a => a.Utility_Name == model.Utility_Name && a.Delmark != "*"))
+                    if (db.tbl_utilitiesmaster.Any(a => a.Utility_Name == model.Utility_Name && a.Delmark != "*") && model.Id == 0)
                     {
                         result.Errors = "Utility name already exists";
                     }
@@ -85,18 +85,14 @@ namespace LeaMaPortal.Controllers
                         MySqlParameter pa = new MySqlParameter();
                         string PFlag = "INSERT";
 
-                        if (model.Id == 0)
+                        if (model.Id != 0)
                         {
-                            //tbl_utilitiesmaster tbl_utility = await db.tbl_utilitiesmaster.FindAsync(model.Utility_id, model.Utility_Name);
-                            //if (tbl_utility != null)
-                            //{
-                            //    PFlag = "UPDATE";
-                            //    model.Id = tbl_utility.id;
-                            //}
+                            PFlag = "UPDATE";
+                            result.Message = "Utility updated successfully";
                         }
                         else
                         {
-                            PFlag = "UPDATE";
+                            result.Message = "Utility created successfully";
                         }
                         object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PId", model.Id),
@@ -148,6 +144,7 @@ namespace LeaMaPortal.Controllers
             MessageResult result = new MessageResult();
             try
             {
+                result.Message = "Utility deleted successfully";
                 if (UtilityId == null && UtilityName != null)
                 {
                     return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
