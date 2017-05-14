@@ -421,11 +421,11 @@
         });
     }
 
-    function GetCheckList() {
-        //$("#img-loader").removeClass("hide");
+    function CheckListAddOrUpdate()
+    {
         $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
+
         $.ajax(
         {
             url: "../CheckList/AddOrUpdate",
@@ -444,6 +444,12 @@
                 $("#master-loader").addClass("hide");
             }
         });
+
+    }
+    function GetCheckList() {
+        CheckListAddOrUpdate();
+        $("#ContainerList").empty();
+        //$("#img-loader").removeClass("hide");
         //$("#img-loader").removeClass("hide");
         $("#master-loader").removeClass("hide");
         $.ajax(
