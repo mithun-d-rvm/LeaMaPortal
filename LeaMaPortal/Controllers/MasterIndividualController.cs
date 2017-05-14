@@ -13,7 +13,7 @@ using System.Data.Entity;
 
 namespace LeaMaPortal.Controllers
 {
-    public class MasterIndividualController : Controller
+    public class MasterIndividualController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
         // GET: MasterIndividual
@@ -59,12 +59,12 @@ namespace LeaMaPortal.Controllers
             {
                 TenantIndividualViewModel model = new TenantIndividualViewModel();
                 model.Marital_Status = Common.DefaultMaridalStatus;
-                model.Title = Common.DefaultTitle;
+                //model.Title = Common.DefaultTitle;
                 //var _titleResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
                 var _titleResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant individual" && x.comboname == "Title");
                 if (_titleResult != null)
                 {
-                    ViewBag.TitleDisplay = new SelectList(_titleResult.combovalue.Split(','), Common.DefaultTitle);
+                    ViewBag.TitleDisplay = new SelectList(_titleResult.combovalue.Split(','));
                 }
 
 

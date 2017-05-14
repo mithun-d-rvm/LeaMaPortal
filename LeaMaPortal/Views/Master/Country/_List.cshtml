@@ -2,7 +2,7 @@
 @using MvcPaging
 @model IPagedList<LeaMaPortal.Models.CountryViewModel>
 @{
-  Layout = null;
+    Layout = null;
 }
 <link href="~/content/bootstrap.css" rel="stylesheet" />
 <link href="~/theme/css/leemastyle.css" rel="stylesheet" />
@@ -10,171 +10,179 @@
 <!DOCTYPE html>
 
 @*@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Country" }))
-{
-    @Html.HiddenFor(m=>m.Id,new { @id="CountryId"})
-    <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
-        <div class="row">
-            <div class="col-md-12 leama-fieldset ">
-                <div class="col-md-2 pull-left">
-                    @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "leama-field-name" })
-                </div>
-                <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "leama-field form-control",@required= "required",@id="CountryName" } })
-                </div>
-                <div class="col-md-4">
-                    <button type="submit" class="leama-btn" >Submit</button>
-                </div>
-            </div>
-        </div>
-    </div>
-}*@
-    <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
-        <div id="master-loader-list" class="fa hide">
-        </div>
-        <div class="row" id="country-list">
-            <div class="col-md-12 leama-fieldset ">
-                <div class="col-md-2 pull-left">
-                    @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
-                </div>
-                <div class="col-md-4">
-                    <input type="text" class="leama-field form-control" name="Search" id="Search" value="@ViewData["Search"]"/>
-                </div>
-                <div class="col-md-4">
-                    <button type="button" id="btn-search" class="btn btn-info leama-search-btn col-md-4">Go</button>
-                </div>
-            </div>
-
-            <div class="col-md-12 leama-fieldset ">
-                &nbsp;
-            </div>
-
-            <div class="divTable leama-fieldset col-md-12">
-
-
-                <div class="divTableBody divFontBodyTable">
-                    <div class="divTableHeading">
-                        <div class="divTableCell">Country Name</div>
-                        <div class="divTableCell">Action</div>
-
+    {
+        @Html.HiddenFor(m=>m.Id,new { @id="CountryId"})
+        <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white; box-shadow: 7px 7px 7px #c5c2c7;">
+            <div class="row">
+                <div class="col-md-12 leama-fieldset ">
+                    <div class="col-md-2 pull-left">
+                        @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "leama-field-name" })
                     </div>
-                    @foreach (var item in Model)
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "leama-field form-control",@required= "required",@id="CountryName" } })
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="leama-btn" >Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }*@
+<div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
+    <div id="master-loader-list" class="fa hide">
+    </div>
+    <div class="row" id="country-list">
+        <div class="col-md-12 leama-fieldset ">
+            <div class="col-md-2 pull-left">
+                @Html.Label("Search", htmlAttributes: new { @class = "leama-field-name" })
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="leama-field form-control" name="Search" id="Search" value="@ViewData["Search"]" />
+            </div>
+            <div class="col-md-4">
+                <button type="button" id="btn-search" class="btn btn-info leama-search-btn col-md-4">Go</button>
+            </div>
+        </div>
+
+        <div class="col-md-12 leama-fieldset ">
+            &nbsp;
+        </div>
+
+        <div class="divTable leama-fieldset col-md-12">
+
+
+            <div class="divTableBody divFontBodyTable">
+                <div class="divTableHeading">
+                    <div class="divTableCell">Country Name</div>
+                    <div class="divTableCell">Action</div>
+
+                </div>
+                @foreach (var item in Model)
                 {
-                        <div class="divTableRow">
-                            <div class="divTableCell">@item.Country</div>
-                            <div class="divTableCell">
-                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit country-edit", title = "Edit", @data_id = @item.Country })  |
-                                @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash country-delete", @style = "color:red", @title = "Delete", @data_id = @item.Country })
+                    <div class="divTableRow">
+                        <div class="divTableCell">@item.Country</div>
+                        <div class="divTableCell">
+                            @if (@ViewBag.IsEditable == 1)
+                            {
+                                <span>
+                                    @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit country-edit", title = "Edit", @data_id = @item.Country })
+                                </span>
+                            }
+                            @if (@ViewBag.IsDeletable == 1)
+                            {
+                                <span>
+                                    | @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash country-delete", @style = "color:red", @title = "Delete", @data_id = @item.Country })
+                                </span>
+                            }
 
-                                @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
-                            </div>
-
+                            @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
+
+                    </div>
                 }
 
 
-                </div>
             </div>
-                <div class="col-md-12">
-                    <br />
-                    @Html.HiddenFor(m=>m.PageNumber)
-                    <div class="col-md-2">
-                        @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
-                    </div>
-                    <div class="col-lg-10 text-right">
-                        @for (int i = 1; i <= Model.PageCount; i++)
-                        {
-                            if (i == Model.PageNumber)
-                            {
-                                <input type="button" data-id="@i" value="@i" class="pagination-btn" />
-                            }
-                            else
-                            {
-                                <input type="button" data-id="@i" value="@i" class="Page" />
-                            }
-
-                        }
-                    </div>
-                </div>
-            
-            
-
-
-            <script type="text/javascript">
-
-                $(".Page").click(function(e)
+        </div>
+        <div class="col-md-12">
+            <br />
+            @Html.HiddenFor(m => m.PageNumber)
+            <div class="col-md-2">
+                @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="col-lg-10 text-right">
+                @for (int i = 1; i <= Model.PageCount; i++)
                 {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#country-list").addClass("hide");
-                    var page = parseInt($(this).data("id"));
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    var search = $("#Search").val();
-                    //alert(page);
-                    getCountryList(search,page,defaultPageSize)
-                });
-                $("#defaultPageSize").change(function () {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#country-list").addClass("hide");
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getCountryList(search, 1, defaultPageSize)
-                });
-                $("#btn-search").click(function (e) {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#country-list").addClass("hide");
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getCountryList(search, 1, defaultPageSize)
-                });
-                
-                function getCountryList(search,page,defaultPageSize)
-                {
-                    $.ajax(
-                       {
-                           url: "../Country/Index",
-                           type: "Get",
-                           data: { Search: search, page: page, defaultPageSize: defaultPageSize },
-                           success: function (html) {
-                               $("#ContainerList").html(html);
-                           },
-                           error: function (jqXhr, textStatus, errorThrown) {
-                               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                           },
-                           complete: function () {
-                               //   $("#VerifyIdDetailsLoader").addClass("hide");
-                               //$("#master-loader-list").addClass("hide");
-                               //$("#country-list").removeClass("hide");
-                           }
-                       });
+                    if (i == Model.PageNumber)
+                    {
+                        <input type="button" data-id="@i" value="@i" class="pagination-btn" />
+                    }
+                    else
+                    {
+                        <input type="button" data-id="@i" value="@i" class="Page" />
+                    }
+
                 }
-    function beginPaging(args) {
-        // Animate
-        $('#grid-list').fadeOut('normal');
-    }
-
-    function successPaging() {
-        // Animate
-        $('#grid-list').fadeIn('normal');
-        $('a').tooltip();
-    }
-
-    function failurePaging() {
-        alert("Could not retrieve list.");
-    }
-
-            </script>
-
-            <div class="col-md-12 leama-fieldset ">
-                &nbsp;
             </div>
         </div>
 
 
+
+
+        <script type="text/javascript">
+
+            $(".Page").click(function (e) {
+                $("#master-loader-list").removeClass("hide");
+                $("#country-list").addClass("hide");
+                var page = parseInt($(this).data("id"));
+                var defaultPageSize = $("#defaultPageSize").val();
+                var search = $("#Search").val();
+                //alert(page);
+                getCountryList(search, page, defaultPageSize)
+            });
+            $("#defaultPageSize").change(function () {
+                $("#master-loader-list").removeClass("hide");
+                $("#country-list").addClass("hide");
+                var search = $("#Search").val();
+                var defaultPageSize = $("#defaultPageSize").val();
+                getCountryList(search, 1, defaultPageSize)
+            });
+            $("#btn-search").click(function (e) {
+                $("#master-loader-list").removeClass("hide");
+                $("#country-list").addClass("hide");
+                var search = $("#Search").val();
+                var defaultPageSize = $("#defaultPageSize").val();
+                getCountryList(search, 1, defaultPageSize)
+            });
+
+            function getCountryList(search, page, defaultPageSize) {
+                $.ajax(
+                   {
+                       url: "../Country/Index",
+                       type: "Get",
+                       data: { Search: search, page: page, defaultPageSize: defaultPageSize },
+                       success: function (html) {
+                           $("#ContainerList").html(html);
+                       },
+                       error: function (jqXhr, textStatus, errorThrown) {
+                           alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                       },
+                       complete: function () {
+                           //   $("#VerifyIdDetailsLoader").addClass("hide");
+                           //$("#master-loader-list").addClass("hide");
+                           //$("#country-list").removeClass("hide");
+                       }
+                   });
+            }
+            function beginPaging(args) {
+                // Animate
+                $('#grid-list').fadeOut('normal');
+            }
+
+            function successPaging() {
+                // Animate
+                $('#grid-list').fadeIn('normal');
+                $('a').tooltip();
+            }
+
+            function failurePaging() {
+                alert("Could not retrieve list.");
+            }
+
+        </script>
+
+        <div class="col-md-12 leama-fieldset ">
+            &nbsp;
+        </div>
     </div>
+
+
+</div>
 
 <script>
-   
+
     //Edit get
-    
+
     $(".country-edit").click(function (e) {
         e.preventDefault();
         $("#master-loader-edit").removeClass("hide");
@@ -185,13 +193,12 @@
                 url: "../Country/Edit",
                 type: "Get",
                 data: { id: id },
-                success: function (result) {  
+                success: function (result) {
                     if (result.Errors == undefined || result.Errors == "") {
                         $("#CountryId").val(result.Id);
                         $("#CountryName").val(result.Country);
                     }
-                    else
-                    {
+                    else {
                         alert(data.Errors);
                     }
                 },
@@ -213,20 +220,20 @@
         if (r == false) {
             return;
         }
-        else {            
+        else {
             $.ajax(
                 {
                     url: "../Country/Delete",
                     type: "Get",
-                    
+
                     data: { id: id },
-                    
+
                     success: function (response) {
-                       
+
                         GetCountry();
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
-                       
+
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                     },
                     complete: function () {
@@ -236,5 +243,5 @@
                 });
         }
     });
-    
+
 </script>

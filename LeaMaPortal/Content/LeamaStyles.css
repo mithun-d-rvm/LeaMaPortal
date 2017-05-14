@@ -81,6 +81,9 @@
 .p-b-10-p {
     padding-bottom: 10%;
 }
+.p-b-2-p {
+    padding-bottom: 2%;
+}
 .font-15{
     font-size: 15px;
 }
@@ -101,6 +104,9 @@
 }
 .p-35{
     padding: 35px;
+}
+.p-15{
+    padding: 15px !important;
 }
 .font-smaller{
     font-size: smaller;
@@ -156,6 +162,11 @@
 }
 .result-title {
     font-weight: bold !important;
+}
+
+.print-btn{
+    padding: 10px !important;
+    cursor: pointer;
 }
 
 /* Dashboard */
@@ -365,7 +376,21 @@
     padding: 3px;
     color: white;
 }
-
+.home-common-table {
+    width: 98%;
+    max-height: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-bottom: 25px;
+}
+.tbl-dahboard{
+    background-color: white;
+    border-radius: 5px;
+}
+    .tbl-dahboard .tbl-head {
+        background-color: #554289;
+        color: white;
+    }
 
 
 /* Menu */
@@ -492,7 +517,8 @@
 }
 .label-default-remove {
     font-weight: normal !important;
-}.notification-tab-1{
+}
+.notification-tab-1{
     text-align: center;
     font-family: Abel;
 }

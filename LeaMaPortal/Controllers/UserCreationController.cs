@@ -12,7 +12,7 @@ using System.Data.Entity;
 
 namespace LeaMaPortal.Controllers
 {
-    public class UserCreationController : Controller
+    public class UserCreationController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
         // GET: UserCreation

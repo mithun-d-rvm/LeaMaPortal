@@ -12,7 +12,7 @@ using System.Data.Entity;
 
 namespace LeaMaPortal.Controllers
 {
-    public class SupplierController : Controller
+    public class SupplierController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
         // GET: Supplier
@@ -86,7 +86,7 @@ namespace LeaMaPortal.Controllers
             var _titleResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant individual" && x.comboname == "Title");
             if (_titleResult != null)
             {
-                ViewBag.Title = new SelectList(_titleResult.combovalue.Split(','), Common.DefaultTitle);
+                ViewBag.Title = new SelectList(_titleResult.combovalue.Split(','));
             }
 
             //var _emirateResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Emirate',',',null)").ToList();

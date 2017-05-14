@@ -48,8 +48,17 @@
                         <div class="divTableCell">@item.Property_Name</div>
                         <div class="divTableCell">@item.Status</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit property-edit", title = "Edit", @data_id = @item.Property_Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash property-delete", @style = "color:red", @title = "Delete", @data_id = @item.Property_Id })
+                            @if (@ViewBag.IsEditable == 1)
+                            {
+                                <span>  @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit property-edit", title = "Edit", @data_id = @item.Property_Id })</span>
+                            }
+
+                            @if (@ViewBag.IsDeletable == 1)
+                            {
+                                <span>
+                                    |  @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash property-delete", @style = "color:red", @title = "Delete", @data_id = @item.Property_Id })
+                                </span>
+                            }
 
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
@@ -88,65 +97,63 @@
         </div>
 
         <script type="text/javascript">
-                $(".Page").click(function(e)
-                {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#property-list").addClass("hide");
-                    var page = parseInt($(this).data("id"));
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    var search = $("#Search").val();
-                    //alert(page);
-                    getCountryList(search,page,defaultPageSize)
-                });
-                $("#defaultPageSize").change(function () {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#property-list").addClass("hide");
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getCountryList(search, 1, defaultPageSize)
-                });
-                $("#btn-search").click(function (e) {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#property-list").addClass("hide");
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getCountryList(search, 1, defaultPageSize)
-                });
+            $(".Page").click(function (e) {
+                $("#master-loader-list").removeClass("hide");
+                $("#property-list").addClass("hide");
+                var page = parseInt($(this).data("id"));
+                var defaultPageSize = $("#defaultPageSize").val();
+                var search = $("#Search").val();
+                //alert(page);
+                getCountryList(search, page, defaultPageSize)
+            });
+            $("#defaultPageSize").change(function () {
+                $("#master-loader-list").removeClass("hide");
+                $("#property-list").addClass("hide");
+                var search = $("#Search").val();
+                var defaultPageSize = $("#defaultPageSize").val();
+                getCountryList(search, 1, defaultPageSize)
+            });
+            $("#btn-search").click(function (e) {
+                $("#master-loader-list").removeClass("hide");
+                $("#property-list").addClass("hide");
+                var search = $("#Search").val();
+                var defaultPageSize = $("#defaultPageSize").val();
+                getCountryList(search, 1, defaultPageSize)
+            });
 
-                function getCountryList(search,page,defaultPageSize)
-                {
-                    $.ajax(
-                       {
-                           url: "../PropertyMaster/Index",
-                           type: "Get",
-                           data: { Search: search, page: page, defaultPageSize: defaultPageSize },
-                           success: function (html) {
-                               $("#ContainerList").html(html);
-                           },
-                           error: function (jqXhr, textStatus, errorThrown) {
-                               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                           },
-                           complete: function () {
-                               //   $("#VerifyIdDetailsLoader").addClass("hide");
-                               //$("#master-loader-list").addClass("hide");
-                               //$("#property-list").removeClass("hide");
-                           }
-                       });
-                }
-    function beginPaging(args) {
-        // Animate
-        $('#grid-list').fadeOut('normal');
-    }
+            function getCountryList(search, page, defaultPageSize) {
+                $.ajax(
+                   {
+                       url: "../PropertyMaster/Index",
+                       type: "Get",
+                       data: { Search: search, page: page, defaultPageSize: defaultPageSize },
+                       success: function (html) {
+                           $("#ContainerList").html(html);
+                       },
+                       error: function (jqXhr, textStatus, errorThrown) {
+                           alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                       },
+                       complete: function () {
+                           //   $("#VerifyIdDetailsLoader").addClass("hide");
+                           //$("#master-loader-list").addClass("hide");
+                           //$("#property-list").removeClass("hide");
+                       }
+                   });
+            }
+            function beginPaging(args) {
+                // Animate
+                $('#grid-list').fadeOut('normal');
+            }
 
-    function successPaging() {
-        // Animate
-        $('#grid-list').fadeIn('normal');
-        $('a').tooltip();
-    }
+            function successPaging() {
+                // Animate
+                $('#grid-list').fadeIn('normal');
+                $('a').tooltip();
+            }
 
-    function failurePaging() {
-        alert("Could not retrieve list.");
-    }
+            function failurePaging() {
+                alert("Could not retrieve list.");
+            }
 
         </script>
     </div>
@@ -163,7 +170,7 @@
             {
                 url: "../PropertyMaster/Edit",
                 type: "Get",
-                data: { Property_Id: propertyId},
+                data: { Property_Id: propertyId },
                 success: function (html) {
                     $("#ContainerAddOrUpdate").html(html);
                 },
@@ -182,7 +189,7 @@
         debugger;
         e.preventDefault();
         var propertyId = $(this).data("id");
-        
+
         var r = confirm("Are you sure want to delete?");
         if (r == false) {
             return;
@@ -192,7 +199,7 @@
                 {
                     url: "../PropertyMaster/Delete",
                     type: "Post",
-                    data: { Property_Id: propertyId},
+                    data: { Property_Id: propertyId },
                     success: function (response) {
                         GetPropertyMaster();
                     },
