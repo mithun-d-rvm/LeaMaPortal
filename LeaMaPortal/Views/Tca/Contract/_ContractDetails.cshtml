@@ -1,0 +1,392 @@
+﻿
+@model LeaMaPortal.Models.TcaPrintModel
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<div class="modal-content" >
+    <button type="button" class="close" data-dismiss="modal" style="margin-top: -40px;margin-right: -26px;font-size: xx-large; color:black;background-color:white">×</button>
+    <div id="PrintelementID">
+        <div class="modal-body" style="padding:5%; font-size:larger;">
+
+            <div class="row" style="font-size: x-large;text-transform:uppercase;">
+                <div style="float:left;width:50%;">
+                    Agreement for @Model.Tenant_Type
+            </div>
+            <div style="float:left;width:50%;">
+                <div style="float:right;">
+                    <img src="~/Images/Logo-Bitmap.png">
+                </div>
+            </div>
+        </div>
+
+        @*<div class="row" style="padding-top:3%;">
+            <div style="float:left;width:100%;">
+                <span> Contract ID </span>
+            </div>
+        </div>
+        <div class="row">
+            <div style="float:left;width:16.66666667%">
+                <span style="font-size:x-large;">AH155833B</span>
+            </div>
+            <div style="float:left;width:66.66666667%; text-align:center;">
+                <span style="font-size:x-large;"></span>
+            </div>
+            <div style="float:left;width:16.66666667%">
+            </div>
+        </div>*@
+
+        <div class="row" style="font-size:x-large;color:#973132;font-weight:bold;padding-top:3%;text-align:center;">
+            <div> <span lang="ar" style="font-weight:bold">عقد الايجار</span> </div>
+            <div> Tenancy Contract </div>
+        </div>
+
+        <div class="row" style="padding-top:3%;">
+            <div style="float:left;width:50%;">
+                <span> <strong> Contract Number </strong> </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="color:#066CBE; font-weight:bold;"> @Model.Agreement_No </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span lang="ar" style="font-weight:bold"> <strong> رقم التعاقد: </strong> </span>
+            </div>
+            <div style="float:left;width:50%;">
+                <div style="float:right; text-align:right;">
+                    <span> <strong> Issue Date </strong> </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span style="color:#066CBE; font-weight:bold;"> @Model.IssueDate </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span lang="ar" style="font-weight:bold"> <strong> تاريخ الاصدار: </strong> </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="font-weight: bold;padding-top:3%;">
+            <div style="float:left;width:50%;">
+                A: LANDLORD AND TENANT DETAILS:
+            </div>
+            <div style="float:left;width:50%;">
+                <div style="float:right; text-align:right;">
+                    <span lang="ar" style="font-weight:bold">:تاريخ الاصدار:</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:33.33333333%;">
+                Landlord:
+            </div>
+            <div style="float:left;width:33.33333333%; color:#066CBE; font-weight:bold;text-align:center;">
+                Hameem Investment
+            </div>
+            <div style="float:left;width:33.33333333%;float:right; text-align:right;">
+                <span lang="ar" style="font-weight:bold">المالك:</span>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:33.33333333%;">
+                Management Address:
+            </div>
+            <div style="float:left;width:33.33333333%;color:#066CBE; font-weight:bold;text-align:center;">
+                Po Box:60885 Abu Dhabi-UAE
+            </div>
+            <div style="float:left;width:33.33333333%;float:right; text-align:right;">
+                <span lang="ar" style="font-weight:bold"> إدارة العنوان: </span>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:41.66666667%">
+                <div style="float:right; text-align:right;">
+                    Tel: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#066CBE; font-weight:bold;"> 03 7375 474 </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span lang="ar" style="font-weight:bold"> هاتف:</span>
+                </div>
+            </div>
+            <div style="float:left;width:8.33333333%"> &nbsp; </div>
+            <div style="float:left;width:41.66666667%">
+                Fax: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#066CBE; font-weight:bold;"> @Model.CompanyFax </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span lang="ar" style="font-weight:bold"> فاكس:</span>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%; text-align:center;">
+            <div style="color:#066CBE; font-weight:bold;">
+                Mobile No: 050 6633003 or 050 3326562
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%">
+            <div style="float:left;width:33.33333333%;">
+                Tenant Name:
+            </div>
+            <div style="float:left;width:33.33333333%;color:#066CBE; font-weight:bold;text-align:center;">
+                @Model.Ag_Tenant_Name
+            </div>
+            <div style="float:left;width:33.33333333%;float:right; text-align:right;">
+                <span lang="ar" style="font-weight:bold"> اسم المستأجر:</span>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:33.33333333%;">
+                Tenant Address:
+            </div>
+            <div style="float:left;width:33.33333333%;color:#066CBE; font-weight:bold;text-align:center;">
+                PO Box: @Model.Ag_Tenant_Address
+            </div>
+            <div style="float:left;width:33.33333333%;float:right; text-align:right;">
+                <span lang="ar" style="font-weight:bold"> مستأجر العنوان:</span>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:41.66666667%">
+                <div style="float:right; text-align:right;">
+                    Tel: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#066CBE; font-weight:bold;"> @Model.Ag_Tenant_Telephone </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span lang="ar" style="font-weight:bold"> هاتف:</span>
+                </div>
+            </div>
+            <div style="float:left;width:8.33333333%"> &nbsp; </div>
+            <div style="float:left;width:41.66666667%">
+                Fax: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#066CBE; font-weight:bold;"> @Model.Ag_Tenant_Faxno </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span lang="ar" style="font-weight:bold"> فاكس:</span>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:33.33333333%;">
+                Occupied By:
+            </div>
+            <div style="float:left;width:33.33333333%;color:#066CBE; font-weight:bold;text-align:center;">
+                @Model.Ag_Tenant_Name
+            </div>
+            <div style="float:left;width:33.33333333%;float:right; text-align:right;">
+                <span lang="ar" style="font-weight:bold"> يحتلها:</span>
+            </div>
+        </div>
+
+        <div class="row" style="font-weight: bold; padding-top:5%;">
+            <div style="float:left;width:50%;">
+                B: PROPERTY AND UNIT DETAILS:
+            </div>
+            <div style="float:left;width:50%;">
+                <div style="float:right; text-align:right;">
+                    <span lang="ar" style="font-weight:bold"> : الممتلكات ووحدة تفاصيل: </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:33.33333333%;">
+                Property Details:
+            </div>
+            <div style="float:left;width:33.33333333%;color:#066CBE; font-weight:bold;text-align:center;">
+                @Model.Properties_Name;
+            </div>
+            <div style="float:left;width:33.33333333%;float:right; text-align:right;">
+                <span lang="ar" style="font-weight:bold"> تفاصيل اوضح: </span>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:33.33333333%;">
+                Unit Number:
+            </div>
+            <div style="float:left;width:33.33333333%;color:#066CBE; font-weight:bold; text-align:center;">
+                @Model.Unit_ID_Tawtheeq
+            </div>
+            <div style="float:left;width:33.33333333%;float:right; text-align:right;">
+                <span lang="ar" style="font-weight:bold"> رقم الوحدة:</span>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:33.33333333%;">
+                Unit Description:
+            </div>
+            <div style="float:left;width:33.33333333%;color:#066CBE; font-weight:bold; text-align:center;">
+                @Model.Unit_Property_Name
+            </div>
+            <div style="float:left;width:33.33333333%;float:right; text-align:right;">
+                <span lang="ar" style="font-weight:bold"> وصف الوحدة:</span>
+            </div>
+        </div>
+
+        <div class="row" style="font-weight: bold;padding-top:5%;">
+            <div style="float:left;width:50%;">
+                C: LEASE PERIOD AND PAYMENT DETAILS:
+            </div>
+            <div style="float:left;width:50%;">
+                <div style="float:right; text-align:right;">
+                    <span lang="ar" style="font-weight:bold"> فترة الإيجار وتفاصيل الدفع</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:33.33333333%;">
+                Contract Period:
+            </div>
+            <div style="float:left;width:33.33333333%;color:#066CBE; font-weight:bold; text-align:center;">
+                @Model.Agreement_Start_Date to @Model.Agreement_End_Date
+            </div>
+            <div style="float:left;width:33.33333333%;float:right; text-align:right;">
+                <span lang="ar" style="font-weight:bold">مدة العقد</span>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:33.33333333%;">
+                Duration:
+            </div>
+            <div style="float:left;width:33.33333333%;color:#066CBE; font-weight:bold; text-align:center;">
+               @Model.ContractYearsAndMonths
+            </div>
+            <div style="float:left;width:33.33333333%;float:right; text-align:right;">
+                <span lang="ar" style="font-weight:bold">المدة الزمنية</span>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:33.33333333%;">
+                Amount:
+            </div>
+            <div style="float:left;width:33.33333333%;color:#066CBE; font-weight:bold; text-align:center;">
+                AED.@Model.Total_Rental_amount /- (AED. @Model.TotalAmountInWords only)
+            </div>
+            <div style="float:left;width:33.33333333%;float:right; text-align:right;">
+                <span lang="ar" style="font-weight:bold"> كمية</span>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:33.33333333%;">
+                Payment Terms:
+            </div>
+            <div style="float:left;width:33.33333333%;color:#066CBE; font-weight:bold; text-align:center;">
+                All terms & conditions are applied.
+            </div>
+            <div style="float:left;width:33.33333333%;float:right; text-align:right;">
+                <span lang="ar" style="font-weight:bold"> شروط الدفع</span>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:33.33333333%;">
+                Security Deposit:
+            </div>
+            <div style="float:left;width:33.33333333%;color:#066CBE; font-weight:bold;text-align:center;">
+                @Model.SecurityDeposit
+            </div>
+            <div style="float:left;width:33.33333333%;float:right; text-align:right;">
+                <span lang="ar" style="font-weight:bold"> مبلغ التأمين</span>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:33.33333333%;">
+                Account Details:
+            </div>
+            <div style="float:left;width:33.33333333%;color:#066CBE; font-weight:bold; text-align:center;">
+                Hameem Investment
+            </div>
+            <div style="float:left;width:33.33333333%;float:right; text-align:right;">
+                <span lang="ar" style="font-weight:bold"> تفاصيل الحساب</span>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:33.33333333%;">
+                Bank Deatils:
+            </div>
+            <div style="float:left;width:33.33333333%;color:#066CBE; font-weight:bold;text-align:center;">
+                @Model.BankName
+            </div>
+            <div style="float:left;width:33.33333333%;float:right; text-align:right;">
+                <span lang="ar" style="font-weight:bold">التفاصيل المصرفية</span>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:33.33333333%;">
+                Account Number:
+            </div>
+            <div style="float:left;width:33.33333333%;color:#066CBE; font-weight:bold;text-align:center;">
+                @Model.AccountNo
+            </div>
+            <div style="float:left;width:33.33333333%;float:right; text-align:right;">
+                <span lang="ar" style="font-weight:bold"> رقم حساب</span>
+            </div>
+        </div>
+
+        <div class="row" style="font-weight: bold;padding-top: 5%;">
+            <div style="float:left;width:50%;">
+                D: ADDITIONAL TERMS:
+            </div>
+            <div style="float:left;width:50%;">
+                <div style="float:right; text-align:right;">
+                    <span lang="ar" style="font-weight:bold"> شروط إضافية</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 3%;">
+            <div style="float:left;width:50%;">
+                The terms and conditions attached to this Tenancy Contract are an integral part of this contract
+            </div>
+            <div style="float:left;width:50%;">
+                <div style="float:right; text-align:right;">
+                    <span lang="ar" style="font-weight:bold">إن الشروط والأحكام المرتبطة بعقد الإيجار هذا جزء لا يتجزأ من هذا العقد.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="font-weight: bold;padding-top: 10%;">
+            <div style="float:left;width:8.33333333%"> &nbsp; </div>
+            <div style="float:left;width:33.33333333%;">
+                <div style="border-bottom:2px solid;"></div>
+                <div style="float:left;width:41.66666667%"> Landlord </div>
+                <div style="float:left;width:8.33333333%"> &nbsp; </div>
+                <div style="float:left;width:41.66666667%;float:right; text-align:right;"> <span lang="ar" style="font-weight:bold"> المالك</span> </div>
+            </div>
+            <div style="float:left;width:16.66666667%"> &nbsp; </div>
+            <div style="float:left;width:33.33333333%;">
+                <div class="">
+                    <div style="border-bottom:2px solid;"></div>
+                    <div style="float:left;width:41.66666667%"> Tenant </div>
+                    <div style="float:left;width:8.33333333%"> &nbsp; </div>
+                    <div style="float:left;width:41.66666667%;float:right; text-align:right;"> <span lang="ar" style="font-weight:bold"> مستأجر</span> </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+</div>
+<div class="row" style="padding-top:5%; text-align:center;">
+    <input type="button" style="background-color: #554289;
+    color: white;
+    border-radius: 15px !important;
+    width: 200px;
+    padding: 10px !important;" value="Print" id="btnPrint" />
+</div>
+<script type="text/javascript">
+    function printData() {
+        //alert(1);
+        var divToPrint = document.getElementById("PrintelementID");
+        newWin = window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+        //$("#contractModal").modal('hide');
+    }
+    //printData();
+        $(document).ready()
+        {
+
+         //btnPrint button id
+            $('#btnPrint').on('click', function () {
+                               printData();
+            })
+
+        }
+</script>
