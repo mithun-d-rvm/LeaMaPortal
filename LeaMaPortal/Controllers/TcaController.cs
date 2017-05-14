@@ -54,7 +54,7 @@ namespace LeaMaPortal.Controllers
                 //IList<CountryViewModel> list;
                 if (string.IsNullOrWhiteSpace(Search))
                 {
-                   var list = db.tbl_agreement.Where(x => x.Delmark != "*" && x.Status==null).OrderBy(x => x.Agreement_No).Select(x => new AgreementFormViewModel()
+                   var list = db.tbl_agreement.Where(x => x.Delmark != "*" && x.Status==null).OrderByDescending(x => x.Agreement_No).Select(x => new AgreementFormViewModel()
                     {
                        Agreement_No=x.Agreement_No, 
                        Properties_Name=x.Properties_Name,
@@ -67,7 +67,7 @@ namespace LeaMaPortal.Controllers
                 else
                 {
                    var list = db.tbl_agreement.Where(x => x.Delmark != "*" && x.Agreement_No.ToString().ToLower().Contains(Search.ToLower()))
-                                  .OrderBy(x => x.Agreement_No).Select(x => new AgreementFormViewModel()
+                                  .OrderByDescending(x => x.Agreement_No).Select(x => new AgreementFormViewModel()
                                   {
                                       Agreement_No = x.Agreement_No,
                                       Properties_Name = x.Properties_Name,
