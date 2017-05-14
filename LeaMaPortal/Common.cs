@@ -388,6 +388,7 @@ namespace LeaMaPortal
                 }
             }
 
+            words=string.IsNullOrWhiteSpace(words)?words: words.First().ToString().ToUpper() + String.Join("", words.Skip(1));
             return words;
         }
     }
