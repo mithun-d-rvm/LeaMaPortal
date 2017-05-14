@@ -331,7 +331,7 @@
                 &nbsp;
             </div>
             <div class="col-md-4">
-                <input type="submit" class="btn master-form-btn" value="Submit" />
+                <input type="submit" class="btn master-form-btn" value="Update" />
             </div>
         </div>
     </div>
@@ -701,3 +701,22 @@
     }
 </script>
 
+<script>
+    $("form#TcaRenewal").off("submit").on("submit", function (e) {
+        // e.preventDefault();
+        try {
+            var firstDate = new Date($("#TcaRenewal #Agreement_Start_Date").val());
+            var secondDate = new Date($("#TcaRenewal #Agreement_End_Date").val());
+            if (firstDate.getDate() > secondDate.getDate()) {
+                e.preventDefault();
+                $("#TcaRenewal #Agreement_End_Date").focus();
+                alert("Agreement Start Date less than or equal to Agreement End Date");
+
+            }
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+</script>
