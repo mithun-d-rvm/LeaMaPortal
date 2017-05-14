@@ -489,6 +489,7 @@
     <Compile Include="Models\PropertyViewModel.cs" />
     <Compile Include="Models\SlabViewModel.cs" />
     <Compile Include="Models\SupplierViewModel.cs" />
+    <Compile Include="Models\TcaStatusViewModel.cs" />
     <Compile Include="Models\UserCreationViewModel.cs" />
     <Compile Include="Models\UtilityPaymentModel.cs" />
     <Compile Include="PagingProperty.cs" />
@@ -889,6 +890,8 @@
     <Content Include="Views\EbWater\_List.cshtml" />
     <Content Include="Views\EbWater\_AddorUpdate.cshtml" />
     <Content Include="Views\Tca\Contract\_ContractDetails.cshtml" />
+    <Content Include="Views\Tca\Agreement\_AgreementFormEdit.cshtml" />
+    <Content Include="Views\Tca\PrintAgreement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

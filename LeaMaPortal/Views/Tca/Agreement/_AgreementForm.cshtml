@@ -21,9 +21,9 @@
         @Html.HiddenFor(m => m.New_Renewal_flag)
         <div class="text-uppercase">
             <span class="font-x-large"> <strong> Agreement </strong> </span>
-            <div class="pull-right m-t-15">
+            @*<div class="pull-right m-t-15">
                 <span class="document-btn print-btn" data-toggle="modal" data-target="#contractModal"> Print Contract </span>
-            </div>
+            </div>*@
         </div>
         <div class="p-b-25"> &nbsp; </div>
         <div class="row">
@@ -75,7 +75,7 @@
                     <div class="col-md-6">
                         @*@Html.EditorFor(model => model.Agreement_Date, new { htmlAttributes = new { @class = "master-form-input" } })*@
                         @Html.EditorFor(model => model.Agreement_Date, new { htmlAttributes = new { @class = "master-form-input form-control" } })
-                        @Html.ValidationMessageFor(model => model.Agreement_Date, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Agreement_Date, "", new { @class = "text-danger", @required = "required" })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -128,7 +128,7 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.EditorFor(model=>model.property_id, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly="readonly" } })
+                        @Html.EditorFor(model=>model.property_id, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly="readonly", @required = "required" } })
                         @*@Html.DropDownList("TcaPropertyId", null, "-- Select --", new { @class = "master-form-input" })*@
                     </div>
                 </div>
@@ -178,7 +178,7 @@
                         @Html.LabelFor(model => model.Vacantstartdate, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Vacantstartdate, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Vacantstartdate, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -186,15 +186,15 @@
                         @Html.LabelFor(model => model.Agreement_Start_Date, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Agreement_Start_Date, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Agreement_Start_Date, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                     </div>
                 </div>
-                <div class="col-md-12 p-b-7">
+                <div class="col-md-12 p-b-7"> 
                     <div class="col-md-6">
                         @Html.LabelFor(model => model.Agreement_End_Date, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Agreement_End_Date, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Agreement_End_Date, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -202,7 +202,7 @@
                         @Html.LabelFor(model => model.Total_Rental_amount, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Total_Rental_amount, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'Total_Rental_amount');" } })
+                        @Html.EditorFor(model => model.Total_Rental_amount, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'Total_Rental_amount');", @required = "required" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -210,7 +210,7 @@
                         @Html.LabelFor(model => model.Perday_Rental, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Perday_Rental, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'Perday_Rental');" } })
+                        @Html.EditorFor(model => model.Perday_Rental, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'Perday_Rental');", @required = "required",@readonly= "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -218,7 +218,7 @@
                         @Html.LabelFor(model => model.nofopayments, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);" } })
+                        @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);", @required = "required" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -226,7 +226,7 @@
                         @Html.LabelFor(model => model.Advance_Security_Amount, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Advance_Security_Amount, new { htmlAttributes = new { @class = "master-form-input form-control",@onkeypress = "allow_only_Float(event,'Advance_Security_Amount');"} })
+                        @Html.EditorFor(model => model.Advance_Security_Amount, new { htmlAttributes = new { @class = "master-form-input form-control",@onkeypress = "allow_only_Float(event,'Advance_Security_Amount');",@required= "required"} })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -239,7 +239,7 @@
                                 <option> Payment 2 </option>
                                 <option> Payment 3 </option>
                             </select>*@
-                        @Html.DropDownList("SecurityFlag", null, new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("SecurityFlag", null, new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -278,7 +278,7 @@
 }
 <script>
     $('input[type=radio][name=Single_Multiple_Flag]').change(function () {
-        debugger;
+        
         if (this.value == 'Multiple') {
             //$('#UnitIDTawtheeq').attr('disabled', true);
             //$('#UnitPropertyName').attr('disabled', true);
@@ -461,23 +461,22 @@
     });
 
     $("#UnitIDTawtheeq").change(function () {
-        var propertyid = $("#UnitIDTawtheeq").val();
-        $("#TcaPropertyIDTawtheeq").val($("#UnitIDTawtheeq option:selected").val());
-        $("#TcaPropertyName").val($("#UnitIDTawtheeq option:selected").val());
-        $("#UnitPropertyName").val($("#UnitIDTawtheeq option:selected").val());
-        $("#property_id").val(propertyid);
-        setpropertyFields();
+        //var propertyid = $("#UnitIDTawtheeq").val();
+        //$("#TcaPropertyIDTawtheeq").val($("#UnitIDTawtheeq option:selected").val());
+        //$("#TcaPropertyName").val($("#UnitIDTawtheeq option:selected").val());
+        //$("#UnitPropertyName").val($("#UnitIDTawtheeq option:selected").val());
+        //$("#property_id").val(propertyid);
+        setunitFields();
         //$("#Ag_Tenant_id").val($("#Ag_Tenant_Name option:selected").text());
+        $("#UnitPropertyName").val($("#Property_ID_Tawtheeq option:selected").text() == "--Select--" ? null : $("#UnitIDTawtheeq").val());
+        setunitFields();
         return;
     });
 
     $("#UnitPropertyName").change(function () {
-        var propertyid = $("#UnitPropertyName").val();
-        $("#TcaPropertyIDTawtheeq").val($("#UnitPropertyName option:selected").val());
-        $("#TcaPropertyName").val($("#UnitPropertyName option:selected").val());
-        $("#UnitIDTawtheeq").val($("#UnitPropertyName option:selected").val());
-        $("#property_id").val(propertyid);
-        setpropertyFields();
+        
+        $("#UnitIDTawtheeq").val($("#UnitPropertyName option:selected").text() == "--Select--" ? null : $("#UnitPropertyName").val());
+       setunitFields();
         //$("#Ag_Tenant_id").val($("#Ag_Tenant_Name option:selected").text());
         return;
     });
@@ -497,8 +496,101 @@
     function setpropertyFields() {
         $("#Property_ID_Tawtheeq").val($("#TcaPropertyIDTawtheeq option:selected").text() == "--Select--" ? null : $("#TcaPropertyIDTawtheeq option:selected").text());
         $("#Properties_Name").val($("#TcaPropertyName option:selected").text() == "--Select--" ? null : $("#TcaPropertyName option:selected").text());
+        var propertyid =parseInt($("#property_id").val());
+       // alert(propertyid);
+        if($.isNumeric(propertyid))
+        {
+           
+            getUnit(propertyid);
+        }  
+    }
+    function getUnit(propertyId)
+    {
+        $.ajax(
+               {
+                   url: "../Tca/GetPropertiesUnitDetails",
+                   // dataType: "jsonp",
+                   method: "GET",
+                   data: { propertyId: propertyId }, //FormData(form.get(0)),
+                   contentType: "application/json",
+
+                   success: function (response) {
+                       debugger;
+                       //var propertyidOptions = '<option value="" selected>--Select--</option>';
+                       //$("#TcaPropertyId").empty();
+
+                       //var propertyidTawtheeqOptions = '<option value="" selected>--Select--</option>';
+                       //$("#TcaPropertyIDTawtheeq").empty();
+
+                       var propertyNameOptions = '<option value="" selected>--Select--</option>';
+                       //$("#TcaPropertyName").empty();
+
+                       var unitidOptions = '<option value="" selected>--Select--</option>';
+                       $("#UnitIDTawtheeq").empty();
+
+                       var unitnameOptions = '<option value="" selected>--Select--</option>';
+                       $("#UnitPropertyName").empty();
+
+                       $.each(response, function (index, data) {
+                           //propertyidOptions += '<option value="' + data.property_id + '">' + data.property_id + '</option>';
+                           //propertyidTawtheeqOptions += '<option value="' + data.Property_ID_Tawtheeq + '">' + data.Property_ID_Tawtheeq + '</option>';
+                           // propertyNameOptions += '<option value="' + data.Property_ID_Tawtheeq + '">' + data.Property_Name + '</option>';
+
+                           unitidOptions += '<option value="' + data.Value + '">' + data.Value + '</option>';
+                           unitnameOptions += '<option value="' + data.Value + '">' + data.Text + '</option>';
+
+                       });
+                       //$('#TcaPropertyIDTawtheeq').append(propertyidTawtheeqOptions);
+                       //$('#TcaPropertyName').append(propertyNameOptions);
+                       $('#UnitIDTawtheeq').append(unitidOptions);
+                       $('#UnitPropertyName').append(unitnameOptions);
+                   },
+                   error: function (jqXhr, textStatus, errorThrown) {
+                       alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   },
+                   complete: function () {
+                       // $("#").addClass("hide");
+                   }
+
+               });
+    }
+    function setunitFields()
+    {
         $("#Unit_ID_Tawtheeq").val($("#UnitIDTawtheeq option:selected").text() == "--Select--" ? null : $("#UnitIDTawtheeq option:selected").text());
-        $("#Unit_Property_Name").val($("#UnitPropertyName option:selected").text() == "--Select--" ? null : $("#UnitPropertyName option:selected").text());
+        $("#Unit_Property_Name").val($("#UnitPropertyName option:selected").text() == "--Select--" ? null : $("#UnitIDTawtheeq option:selected").text());
+    }
+    $("#Agreement_Start_Date").change(function () {
+        setContractAmountPerDay();
+    });
+    $("#Agreement_End_Date").change(function () {
+        setContractAmountPerDay();
+    });
+    $("#Total_Rental_amount").change(function () {
+        setContractAmountPerDay();
+    });
+    setContractAmountPerDay();
+    function setContractAmountPerDay()
+    {
+        var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+        var firstDate = new Date($("#Agreement_Start_Date").val());
+        var secondDate = new Date($("#Agreement_End_Date").val());
+        var Total_Rental_amount = parseFloat($("#Total_Rental_amount").val());
+        var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
+        var amountperday = 0.0;
+        if (firstDate < secondDate)
+        {
+            if (diffDays > 0) {
+                amountperday = (Total_Rental_amount / (diffDays+1)).toFixed(2);
+            }
+        }
+        else if(firstDate.getDate() == secondDate.getDate())
+        {
+            amountperday = Total_Rental_amount;
+        }
+        
+        $("#Perday_Rental").val(amountperday);
     }
 </script>
+
+
 
