@@ -144,12 +144,12 @@ namespace LeaMaPortal.Controllers
                     int? paymentno = await db.tbl_eb_water_paymenthd.Select(x => x.PaymentNo).OrderByDescending(x => x).FirstOrDefaultAsync();
                     model.PaymentNo = paymentno == null ? 1 : paymentno.Value + 1;
                     PFlag = "INSERT";
-                    result.Message = "Utlity payment added successfully";
+                    result.Message = "Utility payment added successfully";
                 }
                 else
                 {
                     PFlag = "UPDATE";
-                    result.Message = "Utlity payment updated successfully";
+                    result.Message = "Utility payment updated successfully";
                 }
                 string utilityPayment = null;
                 if (model.UtilityPaymentDetails != null)
@@ -410,6 +410,7 @@ namespace LeaMaPortal.Controllers
                          new MySqlParameter("@PPaymentdt", null)
                     };
                 var ebpayment = await db.Database.SqlQuery<object>("call Usp_eb_water_paymenthd_All(@PFlag, @PPaymentNo, @PPaymentDate, @PUtility_id, @PUtiltiy_name, @PSupplier_id, @PSupplier_name, @PPaymentType, @PPaymentMode, @PTotalAmount, @PAmtInWords, @PDDChequeNo, @PCheqdate, @Ppdcstatus, @PBankAcCode, @PBankAcName, @PAdvAcCode, @PNarration, @PCreateduser, @PPaymentdt)", parameters).ToListAsync();
+                result.Message = "Utility payment deleted successfully";
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch(Exception e)
