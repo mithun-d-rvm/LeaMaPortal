@@ -53,8 +53,18 @@
                         <div class="divTableCell">@item.Supplier_name</div>
                         <div class="divTableCell">@item.TotalAmount</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit utility-payment-edit", title = "Edit", @data_id = @item.id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash utility-payment-delete", @style = "color:red", @title = "Delete", @data_id = @item.id })
+                            @if (@ViewBag.IsEditable == 1)
+                            {
+                                <span>
+                                    @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit utility-payment-edit", title = "Edit", @data_id = @item.id })
+                                </span>
+                            }
+                            @if (@ViewBag.IsDeletable == 1)
+                            {
+                                <span>
+                                    | @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash utility-payment-delete", @style = "color:red", @title = "Delete", @data_id = @item.id })
+                                </span>
+                            }
 
                         </div>
 
@@ -93,51 +103,49 @@
     </div>
 </div>
 <script type="text/javascript">
-                $(".Page").click(function(e)
-                {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#utility-payment-list").addClass("hide");
-                    var page = parseInt($(this).data("id"));
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    var search = $("#Search").val();
-                    //alert(page);
-                    getUtilityPaymentList(search, page, defaultPageSize)
-                });
-                $("#defaultPageSize").change(function () {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#utility-payment-list").addClass("hide");
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getUtilityPaymentList(search, 1, defaultPageSize)
-                });
-                $("#btn-search").click(function (e) {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#utility-payment-list").addClass("hide");
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getUtilityPaymentList(search, 1, defaultPageSize)
-                });
+    $(".Page").click(function (e) {
+        $("#master-loader-list").removeClass("hide");
+        $("#utility-payment-list").addClass("hide");
+        var page = parseInt($(this).data("id"));
+        var defaultPageSize = $("#defaultPageSize").val();
+        var search = $("#Search").val();
+        //alert(page);
+        getUtilityPaymentList(search, page, defaultPageSize)
+    });
+    $("#defaultPageSize").change(function () {
+        $("#master-loader-list").removeClass("hide");
+        $("#utility-payment-list").addClass("hide");
+        var search = $("#Search").val();
+        var defaultPageSize = $("#defaultPageSize").val();
+        getUtilityPaymentList(search, 1, defaultPageSize)
+    });
+    $("#btn-search").click(function (e) {
+        $("#master-loader-list").removeClass("hide");
+        $("#utility-payment-list").addClass("hide");
+        var search = $("#Search").val();
+        var defaultPageSize = $("#defaultPageSize").val();
+        getUtilityPaymentList(search, 1, defaultPageSize)
+    });
 
-                function getUtilityPaymentList(search, page, defaultPageSize)
-                {
-                    $.ajax(
-                       {
-                           url: "../UtilityPayment/List",
-                           type: "Get",
-                           data: { Search: search, page: page, defaultPageSize: defaultPageSize },
-                           success: function (html) {
-                               $("#ContainerList").html(html);
-                           },
-                           error: function (jqXhr, textStatus, errorThrown) {
-                               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                           },
-                           complete: function () {
-                               //   $("#VerifyIdDetailsLoader").addClass("hide");
-                               //$("#master-loader-list").addClass("hide");
-                               //$("#utility-payment-list").removeClass("hide");
-                           }
-                       });
-                }
+    function getUtilityPaymentList(search, page, defaultPageSize) {
+        $.ajax(
+           {
+               url: "../UtilityPayment/List",
+               type: "Get",
+               data: { Search: search, page: page, defaultPageSize: defaultPageSize },
+               success: function (html) {
+                   $("#ContainerList").html(html);
+               },
+               error: function (jqXhr, textStatus, errorThrown) {
+                   alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+               },
+               complete: function () {
+                   //   $("#VerifyIdDetailsLoader").addClass("hide");
+                   //$("#master-loader-list").addClass("hide");
+                   //$("#utility-payment-list").removeClass("hide");
+               }
+           });
+    }
     function beginPaging(args) {
         // Animate
         $('#grid-list').fadeOut('normal');
@@ -195,11 +203,20 @@
                     data: { id: id },
                     success: function (response) {
                         getUtilityPayment();
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                        $(".result-title").text("Success");
+                        $(".result-modal-body span").text(response.Message);
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
-                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(masterResultError);
                     },
                     complete: function () {
+                        $('#masterResultModal').modal('show');
                     }
                 });
         }

@@ -51,14 +51,24 @@
                         <div class="divTableCell">@item.Email</div>
                         <div class="divTableCell">@item.address</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit supplier-edit", title = "Edit", @data_id = @item.Supplier_Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash supplier-delete", @style = "color:red", @title = "Delete", @data_id = @item.Supplier_Id })
+                            @if (@ViewBag.IsEditable == 1)
+                            {
+                                <span>
+                                    @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit supplier-edit", title = "Edit", @data_id = @item.Supplier_Id })
+                                </span>
+                            }
+                            @if (@ViewBag.IsDeletable == 1)
+                            {
+                                <span>
+                                    | @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash supplier-delete", @style = "color:red", @title = "Delete", @data_id = @item.Supplier_Id })
+                                </span>
+                            }
 
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
 
                     </div>
-                }
+                            }
 
 
             </div>
@@ -91,65 +101,63 @@
         </div>
 
         <script type="text/javascript">
-                $(".Page").click(function(e)
-                {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#supplier-list").addClass("hide");
-                    var page = parseInt($(this).data("id"));
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    var search = $("#Search").val();
-                    //alert(page);
-                    getCountryList(search,page,defaultPageSize)
-                });
-                $("#defaultPageSize").change(function () {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#supplier-list").addClass("hide");
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getCountryList(search, 1, defaultPageSize)
-                });
-                $("#btn-search").click(function (e) {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#supplier-list").addClass("hide");
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getCountryList(search, 1, defaultPageSize)
-                });
+            $(".Page").click(function (e) {
+                $("#master-loader-list").removeClass("hide");
+                $("#supplier-list").addClass("hide");
+                var page = parseInt($(this).data("id"));
+                var defaultPageSize = $("#defaultPageSize").val();
+                var search = $("#Search").val();
+                //alert(page);
+                getCountryList(search, page, defaultPageSize)
+            });
+            $("#defaultPageSize").change(function () {
+                $("#master-loader-list").removeClass("hide");
+                $("#supplier-list").addClass("hide");
+                var search = $("#Search").val();
+                var defaultPageSize = $("#defaultPageSize").val();
+                getCountryList(search, 1, defaultPageSize)
+            });
+            $("#btn-search").click(function (e) {
+                $("#master-loader-list").removeClass("hide");
+                $("#supplier-list").addClass("hide");
+                var search = $("#Search").val();
+                var defaultPageSize = $("#defaultPageSize").val();
+                getCountryList(search, 1, defaultPageSize)
+            });
 
-                function getCountryList(search,page,defaultPageSize)
-                {
-                    $.ajax(
-                       {
-                           url: "../Supplier/Index",
-                           type: "Get",
-                           data: { Search: search, page: page, defaultPageSize: defaultPageSize },
-                           success: function (html) {
-                               $("#ContainerList").html(html);
-                           },
-                           error: function (jqXhr, textStatus, errorThrown) {
-                               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                           },
-                           complete: function () {
-                               //   $("#VerifyIdDetailsLoader").addClass("hide");
-                               //$("#master-loader-list").addClass("hide");
-                               //$("#supplier-list").removeClass("hide");
-                           }
-                       });
-                }
-    function beginPaging(args) {
-        // Animate
-        $('#grid-list').fadeOut('normal');
-    }
+            function getCountryList(search, page, defaultPageSize) {
+                $.ajax(
+                   {
+                       url: "../Supplier/Index",
+                       type: "Get",
+                       data: { Search: search, page: page, defaultPageSize: defaultPageSize },
+                       success: function (html) {
+                           $("#ContainerList").html(html);
+                       },
+                       error: function (jqXhr, textStatus, errorThrown) {
+                           alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                       },
+                       complete: function () {
+                           //   $("#VerifyIdDetailsLoader").addClass("hide");
+                           //$("#master-loader-list").addClass("hide");
+                           //$("#supplier-list").removeClass("hide");
+                       }
+                   });
+            }
+            function beginPaging(args) {
+                // Animate
+                $('#grid-list').fadeOut('normal');
+            }
 
-    function successPaging() {
-        // Animate
-        $('#grid-list').fadeIn('normal');
-        $('a').tooltip();
-    }
+            function successPaging() {
+                // Animate
+                $('#grid-list').fadeIn('normal');
+                $('a').tooltip();
+            }
 
-    function failurePaging() {
-        alert("Could not retrieve list.");
-    }
+            function failurePaging() {
+                alert("Could not retrieve list.");
+            }
 
         </script>
     </div>
@@ -198,11 +206,27 @@
                     data: { Supplier_Id: supplierId },
                     success: function (response) {
                         GetSupplier();
+                        if (response.Errors == null) {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Message);
+                        }
+                        else {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(response.Errors);
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
-                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(masterResultError);
                     },
                     complete: function () {
+                        $('#masterResultModal').modal('show');
 
                     }
                 });

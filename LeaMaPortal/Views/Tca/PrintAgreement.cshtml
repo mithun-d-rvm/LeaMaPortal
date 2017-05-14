@@ -1,0 +1,44 @@
+﻿@model LeaMaPortal.Models.AgreementFormViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    
+    <meta name="viewport" content="width=device-width" />
+    <title>PrintAgreement</title>
+</head>
+<body>
+    <div id="PrintelementID"> 
+        print test
+    </div>
+    <input type="button" value="Print" id="btnPrint" />
+    <script type="text/javascript">
+    function printData() {
+        //alert(1);
+        var divToPrint = document.getElementById("PrintelementID");
+        newWin = window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+    }
+    printData();
+        $(document).ready()
+        {
+
+         //btnPrint button id
+            $('#btnPrint').on('click', function () {
+                               printData();
+            })
+
+        }
+    </script>
+</body>
+</html>

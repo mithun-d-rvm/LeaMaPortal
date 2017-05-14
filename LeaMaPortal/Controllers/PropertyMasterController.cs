@@ -11,9 +11,10 @@ using System.Web.Mvc;
 
 namespace LeaMaPortal.Controllers
 {
-    public class PropertyMasterController : Controller
+    public class PropertyMasterController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
+
         //private string user = "rmv";
         // GET: PropertyMaster
         public async Task<ActionResult> Index(string Search, int? page, int? defaultPageSize)
@@ -24,6 +25,9 @@ namespace LeaMaPortal.Controllers
                 int currentPageIndex = page.HasValue ? page.Value : 1;
                 int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
                 ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, PageSize);
+                //ViewBag.IsEditable = CurrentUser.EditConfig;
+                //ViewBag.IsDeletable = CurrentUser.DeleteConfig;
+                //ViewBag.IsAdd = CurrentUser.AddConfig;
                 //TenantCompanyViewModel model = new TenantCompanyViewModel();
                 var query = db.tbl_propertiesmaster.Where(x => x.Delmark != "*");
                 if (!string.IsNullOrWhiteSpace(Search))
@@ -65,9 +69,17 @@ namespace LeaMaPortal.Controllers
             ViewBag.Property_Usage_unit = new SelectList(propertyTypeData.Select(x => x.Usage_name));
             ViewBag.Property_Type_unit = new SelectList(propertyTypeData.Select(x => x.PropertyCategory));
 
-            var propertyMaster = db.tbl_propertiesmaster.Where(x => x.Noofunits > 0 &&  x.Status != "Avail" && x.Delmark != "*").ToList();
+            var propertyMasterData = db.tbl_propertiesmaster.Where(x => x.Noofunits > 0 && x.Status != "Avail" && x.Delmark != "*").ToList();
+            List<tbl_propertiesmaster> propertyMaster = new List<tbl_propertiesmaster>();
+            foreach (var data in propertyMasterData)
+            {
+                if(db.tbl_propertiesmaster.Where(x => x.Ref_Unit_Property_ID == data.Property_Id).Count() < data.Noofunits)
+                {
+                    propertyMaster.Add(data);
+                }
+            }
             ViewBag.Ref_unit_Property_ID_Tawtheeq = new SelectList(propertyMaster.Select(x => new { PropertyIdTawtheeq = x.Property_ID_Tawtheeq, PropertyId = x.Property_Id }), "PropertyId", "PropertyIdTawtheeq");
-            
+
             ViewBag.Ref_Unit_Property_ID = new SelectList(propertyMaster.Select(x => x.Property_Id));
             ViewBag.Ref_Unit_Property_Name = new SelectList(propertyMaster.Select(x => new { PropertyName = x.Property_Name, PropertyId = x.Property_Id }), "PropertyId", "PropertyName");
 
@@ -80,10 +92,10 @@ namespace LeaMaPortal.Controllers
             ViewBag.Profession = new SelectList(Common.Profession);
             //ViewBag.PropertyId = db.tbl_propertiesmaster.OrderByDescending(x => x.Property_Id).FirstOrDefault()?.Property_Id + 1;
             ViewBag.Utility_Name = new SelectList(db.tbl_utilitiesmaster.Where(x => x.Delmark != "*").OrderBy(x => x.Utility_id), "Utility_id", "Utility_Name");
-            ViewBag.Utility_ID  = new SelectList(db.tbl_utilitiesmaster.Where(x => x.Delmark != "*").OrderBy(x => x.Utility_id), "Utility_Name", "Utility_id");
+            ViewBag.Utility_ID = new SelectList(db.tbl_utilitiesmaster.Where(x => x.Delmark != "*").OrderBy(x => x.Utility_id), "Utility_Name", "Utility_id");
 
             ViewBag.Facility_Name = new SelectList(db.tbl_facilitymaster.Where(x => x.Delmark != "*").OrderBy(x => x.Facility_id), "Facility_id", "Facility_Name");
-            ViewBag.Facility_id = new SelectList(db.tbl_facilitymaster.Where(x => x.Delmark != "*").OrderBy(x => x.Facility_id), "Facility_Name","Facility_id");
+            ViewBag.Facility_id = new SelectList(db.tbl_facilitymaster.Where(x => x.Delmark != "*").OrderBy(x => x.Facility_id), "Facility_Name", "Facility_id");
             return PartialView("../Master/PropertyMaster/_AddOrUpdate", model);
         }
         // GET: PropertyMaster/Details/5
@@ -110,7 +122,7 @@ namespace LeaMaPortal.Controllers
                 ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
                 ViewBag.Profession = new SelectList(Common.Profession);
                 ViewBag.PropertyId = db.tbl_propertiesmaster.OrderByDescending(x => x.Property_Id).FirstOrDefault()?.Property_Id + 1;
-                
+
                 return PartialView("../Master/TenantIndividual/_AddOrUpdate", model);
             }
             catch (Exception e)
@@ -133,7 +145,7 @@ namespace LeaMaPortal.Controllers
                     model.Property_Id = propertyMaster != null ? propertyMaster.Property_Id + 1 : 1;
                 }
                 string facility = null, utility = null;
-                foreach(var propertiesdt in model.PropertiesdtList)
+                foreach (var propertiesdt in model.PropertiesdtList)
                 {
                     if (string.IsNullOrWhiteSpace(facility))
                     {
@@ -221,14 +233,22 @@ namespace LeaMaPortal.Controllers
 
                 var propertyTypeData = db.tbl_propertytypemaster.Where(x => x.Type_Flag == "Property").Select(x => new PropertyTypeModel { PropertyCategory = x.Type_name, Usage_name = x.Usage_name }).ToList();
                 ViewBag.Property_Usage = new SelectList(propertyTypeData.Select(x => x.Usage_name), model.Property_Usage);
-                ViewBag.Property_Type = new SelectList(propertyTypeData.Select(x => x.PropertyCategory),model.Property_Type);
+                ViewBag.Property_Type = new SelectList(propertyTypeData.Select(x => x.PropertyCategory), model.Property_Type);
 
 
                 propertyTypeData = db.tbl_propertytypemaster.Where(x => x.Type_Flag == "Unit").Select(x => new PropertyTypeModel { PropertyCategory = x.Type_name, Usage_name = x.Usage_name }).ToList();
                 ViewBag.Property_Usage_unit = new SelectList(propertyTypeData.Select(x => x.Usage_name), model.Property_Usage_unit);
                 ViewBag.Property_Type_unit = new SelectList(propertyTypeData.Select(x => x.PropertyCategory), model.Property_Type_unit);
 
-                var propertyMaster = db.tbl_propertiesmaster.Where(x => x.Noofunits > 0 && x.Status != "Avail" && x.Delmark != "*").ToList();
+                var propertyMasterData = db.tbl_propertiesmaster.Where(x => x.Noofunits > 0 && x.Status != "Avail" && x.Delmark != "*").ToList();
+                List<tbl_propertiesmaster> propertyMaster = new List<tbl_propertiesmaster>();
+                foreach (var data in propertyMasterData)
+                {
+                    if (db.tbl_propertiesmaster.Where(x => x.Ref_Unit_Property_ID == data.Property_Id).Count() < data.Noofunits)
+                    {
+                        propertyMaster.Add(data);
+                    }
+                }
                 ViewBag.Ref_unit_Property_ID_Tawtheeq = new SelectList(propertyMaster.Select(x => new { PropertyIdTawtheeq = x.Property_ID_Tawtheeq, PropertyId = x.Property_Id }), "PropertyId", "PropertyIdTawtheeq", model.Ref_Unit_Property_ID);
                 ViewBag.Ref_Unit_Property_ID = new SelectList(propertyMaster.Select(x => x.Property_Id), model.Ref_Unit_Property_ID);
                 ViewBag.Ref_Unit_Property_Name = new SelectList(propertyMaster.Select(x => new { PropertyName = x.Property_Name, PropertyId = x.Property_Id }), "PropertyId", "PropertyName", model.Ref_Unit_Property_ID);
@@ -243,7 +263,7 @@ namespace LeaMaPortal.Controllers
 
                 return PartialView("../Master/PropertyMaster/_AddOrUpdate", model);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw e;
             }
@@ -289,12 +309,12 @@ namespace LeaMaPortal.Controllers
 
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     return Json(new MessageResult() { Errors = "Internal server error" }, JsonRequestBehavior.AllowGet);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return View();
             }

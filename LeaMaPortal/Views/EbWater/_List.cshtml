@@ -45,8 +45,19 @@
                         <div class="divTableCell">@item.UtilityName</div>
                         <div class="divTableCell">@item.SupplierName</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit ebwater-edit", title = "Edit", @data_id = @item.BillEnteryNo })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash ebwater-delete", @style = "color:red", @title = "Delete", @data_id = @item.BillEnteryNo })
+                            @if (@ViewBag.IsEditable == 1)
+                            {
+                                <span>
+
+                                    @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit ebwater-edit", title = "Edit", @data_id = @item.BillEnteryNo })
+                                </span>
+                            }
+                            @if (@ViewBag.IsDeletable == 1)
+                            {
+                                <span>
+                                    | @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash ebwater-delete", @style = "color:red", @title = "Delete", @data_id = @item.BillEnteryNo })
+                                </span>
+                            }
                         </div>
                     </div>
                 }
@@ -79,51 +90,49 @@
     </div>
 </div>
 <script type="text/javascript">
-                $(".Page").click(function(e)
-                {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#payment-list").addClass("hide");
-                    var page = parseInt($(this).data("id"));
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    var search = $("#Search").val();
-                    //alert(page);
-                    getEbWaterList(search, page, defaultPageSize)
-                });
-                $("#defaultPageSize").change(function () {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#payment-list").addClass("hide");
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getEbWaterList(search, 1, defaultPageSize)
-                });
-                $("#btn-search").click(function (e) {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#payment-list").addClass("hide");
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getEbWaterList(search, 1, defaultPageSize)
-                });
+    $(".Page").click(function (e) {
+        $("#master-loader-list").removeClass("hide");
+        $("#payment-list").addClass("hide");
+        var page = parseInt($(this).data("id"));
+        var defaultPageSize = $("#defaultPageSize").val();
+        var search = $("#Search").val();
+        //alert(page);
+        getEbWaterList(search, page, defaultPageSize)
+    });
+    $("#defaultPageSize").change(function () {
+        $("#master-loader-list").removeClass("hide");
+        $("#payment-list").addClass("hide");
+        var search = $("#Search").val();
+        var defaultPageSize = $("#defaultPageSize").val();
+        getEbWaterList(search, 1, defaultPageSize)
+    });
+    $("#btn-search").click(function (e) {
+        $("#master-loader-list").removeClass("hide");
+        $("#payment-list").addClass("hide");
+        var search = $("#Search").val();
+        var defaultPageSize = $("#defaultPageSize").val();
+        getEbWaterList(search, 1, defaultPageSize)
+    });
 
-                function getEbWaterList(search, page, defaultPageSize)
-                {
-                    $.ajax(
-                       {
-                           url: "../EbWater/List",
-                           type: "Get",
-                           data: { Search: search, page: page, defaultPageSize: defaultPageSize },
-                           success: function (html) {
-                               $("#ContainerList").html(html);
-                           },
-                           error: function (jqXhr, textStatus, errorThrown) {
-                               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                           },
-                           complete: function () {
-                               //   $("#VerifyIdDetailsLoader").addClass("hide");
-                               //$("#master-loader-list").addClass("hide");
-                               //$("#payment-list").removeClass("hide");
-                           }
-                       });
-                }
+    function getEbWaterList(search, page, defaultPageSize) {
+        $.ajax(
+           {
+               url: "../EbWater/List",
+               type: "Get",
+               data: { Search: search, page: page, defaultPageSize: defaultPageSize },
+               success: function (html) {
+                   $("#ContainerList").html(html);
+               },
+               error: function (jqXhr, textStatus, errorThrown) {
+                   alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+               },
+               complete: function () {
+                   //   $("#VerifyIdDetailsLoader").addClass("hide");
+                   //$("#master-loader-list").addClass("hide");
+                   //$("#payment-list").removeClass("hide");
+               }
+           });
+    }
     function beginPaging(args) {
         // Animate
         $('#grid-list').fadeOut('normal');
@@ -149,12 +158,17 @@
             {
                 url: "../EbWater/Edit",
                 type: "Get",
-                data: { BillEntryNo : id },
+                data: { BillEntryNo: id },
                 success: function (html) {
                     $("#ContainerAddOrUpdate").html(html);
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
-                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                    $(".result-title").text("Failure");
+                    $(".result-modal-body span").text(masterResultError);
+                    $('#masterResultModal').modal('show');
                 },
                 complete: function () {
                     $("body").scrollTop(0);
@@ -178,14 +192,23 @@
                 {
                     url: "../EbWater/Delete",
                     type: "post",
-                    data: { BillEntryNo : id },
+                    data: { BillEntryNo: id },
                     success: function (response) {
                         GetEbWater();
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                        $(".result-title").text("Success");
+                        $(".result-modal-body span").text(response.Message);
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
-                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        // alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(masterResultError);
                     },
                     complete: function () {
+                        $('#masterResultModal').modal('show');
                     }
                 });
         }

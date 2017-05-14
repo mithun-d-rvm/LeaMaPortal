@@ -13,7 +13,7 @@ using System.Data.Entity;
 
 namespace LeaMaPortal.Controllers
 {
-    public class MasterIndividualController : Controller
+    public class MasterIndividualController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
         // GET: MasterIndividual
@@ -266,6 +266,7 @@ namespace LeaMaPortal.Controllers
         {
              return new TenantIndividualViewModel()
             {
+                 Id = tenant.Id,
                 Tenant_Id = tenant.Tenant_Id,
                 Title = tenant.Title,
                 First_Name = tenant.First_Name,

@@ -81,6 +81,9 @@
 .p-b-10-p {
     padding-bottom: 10%;
 }
+.p-b-2-p {
+    padding-bottom: 2%;
+}
 .font-15{
     font-size: 15px;
 }
@@ -123,6 +126,9 @@
 .color-f5a623{
     color:#f5a623;
 }
+.white-bg{
+    background-color:white;
+}
 
 
 /* Custom Width */
@@ -161,6 +167,11 @@
     font-weight: bold !important;
 }
 
+.print-btn{
+    padding: 10px !important;
+    cursor: pointer;
+}
+
 /* Dashboard */
 
 .logo-thumb{
@@ -191,7 +202,7 @@
     color: white;
 }
 .earning-money {
-    font-size: 30px;
+    font-size: 28px;
     color: #52ce6f;
     padding-bottom: 18px;
 }
@@ -286,10 +297,10 @@
     border-radius: 3px;
     background-color: #d35847;
     color: white;
-    padding: 5px;
+    padding: 3px;
 }
 .total-loss-number {
-    font-size: 25px;
+    font-size: 20px;
     color: #d35847;
 }
 .total-loss-resid-div{
@@ -307,8 +318,9 @@
     border-radius: 5px;
 }
 .total-loss-res-amt {
-    font-size: 30px;
+    font-size: 22px;
     color: #2c2e35;
+    margin-top: 10px;
 }
 .total-loss-comm-div {
     background-color: #f9f9f9;

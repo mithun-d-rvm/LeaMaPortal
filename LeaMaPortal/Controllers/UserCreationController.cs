@@ -12,7 +12,7 @@ using System.Data.Entity;
 
 namespace LeaMaPortal.Controllers
 {
-    public class UserCreationController : Controller
+    public class UserCreationController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
         // GET: UserCreation
@@ -84,6 +84,7 @@ namespace LeaMaPortal.Controllers
                     if (model.id == 0)
                     {
                         PFlag = "INSERT";
+                        result.Message = "User created successfully";
                     }
                     else
                     {
@@ -97,8 +98,8 @@ namespace LeaMaPortal.Controllers
                                 model.Cnfpwd = userRights.Cnfpwd;
                             }
                         }
-                        
-                        
+                        result.Message = "User details updated successfully";
+
                     }
                     object[] parameters = {
                          new MySqlParameter("@PFlag", PFlag),
@@ -162,7 +163,7 @@ namespace LeaMaPortal.Controllers
                         IsChecked = false
                     });
                 }
-               
+
                 UserCreationViewModel model = new UserCreationViewModel()
                 {
                     AddConfig = userRights.AddConfig,
@@ -177,7 +178,8 @@ namespace LeaMaPortal.Controllers
                     Name = userRights.Name,
                     Phoneno = userRights.Phoneno,
                     Pwd = userRights.Pwd,
-                    Userid = userRights.Userid
+                    Userid = userRights.Userid,
+                    Active = userRights.Active
                 };
                 return PartialView("../Master/UserCreation/_AddOrUpdate", model);
             }
@@ -213,6 +215,7 @@ namespace LeaMaPortal.Controllers
                     };
 
             var userCreation = await db.Database.SqlQuery<object>("call Usp_Userrights_All(@PFlag, @Pid, @PName, @PUserid, @PPwd, @PCnfpwd, @PCategory, @PEmail, @PPhoneno, @PAddConfig, @PEditConfig, @PDeleteConfig, @PMenuConfig, @PActive, @PCreateduser)", parameters).ToListAsync();
+            result.Message = "User deleted successfully";
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -245,11 +248,35 @@ namespace LeaMaPortal.Controllers
         //    }
         //}
 
-        // GET: UserCreation/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
+        //GET: UserCreation/checkUserName/5
+        public async Task<ActionResult> checkUserName(int id, string userid)
+        {
+            try
+            {
+                MessageResult result = new MessageResult();
+                bool isAvailbale = false;
+                if (id != 0)
+                {
+                    isAvailbale = await db.tbl_userrights.AnyAsync(x => x.Userid == userid && x.id != id);
+                }
+                else
+                {
+                    isAvailbale = await db.tbl_userrights.AnyAsync(x => x.Userid == userid);
+                }
+                if (!isAvailbale)
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                else
+                {
+                    result.Errors = "User id already available";
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
+                    
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
 
         // POST: UserCreation/Edit/5
         //[HttpPost]

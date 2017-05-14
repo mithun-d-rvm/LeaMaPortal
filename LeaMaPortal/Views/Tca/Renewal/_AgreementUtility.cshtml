@@ -31,7 +31,8 @@
             @Html.DropDownList("Utility_Name",null, "--Select--", new { @class = "form-control master-form-input" })
         </div>
         <div class="col-md-2">
-            @Html.DropDownList("Payable", null, "--Select--", new { @class = "form-control master-form-input" })
+            <input type="text" class="master-form-input form-control" id="Payable" name="Payable" maxlength="100" />
+            @*@Html.DropDownList("Payable", null, "--Select--", new { @class = "form-control master-form-input" })*@
         </div>
         <div class="col-md-2">
             @Html.DropDownList("Amount_Type", null, "--Select--", new { @class = "form-control master-form-input" })

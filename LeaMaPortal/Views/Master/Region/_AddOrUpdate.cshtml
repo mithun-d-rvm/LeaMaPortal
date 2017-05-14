@@ -18,7 +18,7 @@
                     @Html.LabelFor(model => model.Region_Name, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Region_Name, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "RegionName" } })
+                    @Html.EditorFor(model => model.Region_Name, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "RegionName", @pattern = "[a-zA-Z0-9\\s]+", title="Alphanumeric only" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -26,18 +26,22 @@
                     @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4 ">
-                    @Html.DropDownList("Country", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Country" })
+                    @Html.DropDownList("Country", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Country", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-12 pull-left">
-                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>&nbsp;&nbsp;
+<button class="btn master-form-btn" id="btnCancel" type="button" onclick="formReset()">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
 }
 <script>
+    function formReset() {
+        GetRegionAddOrUpdate();
+    }
     //Add or update
     $("form#Region").off("submit").on("submit", function (e) {
         e.preventDefault();
@@ -58,10 +62,19 @@
                     processData: false,
                     success: function (response) {
                         GetRegion();
-                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
-                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
-                        $(".result-title").text("Success");
-                        $(".result-modal-body span").text(regionAdded);
+                        if (response.Errors == null) {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Message);
+                        }
+                        else
+                        {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(response.Errors);
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -98,4 +111,10 @@
         });
         return o;
     };
+    $(document).ready(function () {
+        var id = $("#RegionId").val();
+        if (id != 0) {
+            document.getElementById("btnSubmit").innerHTML = 'Update';
+        }
+    });
 </script>

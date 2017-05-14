@@ -45,8 +45,18 @@
                         <div class="divTableCell">@item.Region_Name</div>
                         <div class="divTableCell">@item.Country</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit region-edit", title = "Edit", @data_id = @item.Region_Name + '`' + @item.Country })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash region-delete", @style = "color:red", @title = "Delete", @data_id = @item.Region_Name + '`' + @item.Country })
+                            @if (@ViewBag.IsEditable == 1)
+                            {
+                                <span>
+                                    @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit region-edit", title = "Edit", @data_id = @item.Region_Name + '`' + @item.Country })
+                                </span>
+                            }
+                            @if (@ViewBag.IsDeletable == 1)
+                            {
+                                <span>
+                                    | @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash region-delete", @style = "color:red", @title = "Delete", @data_id = @item.Region_Name + '`' + @item.Country })
+                                </span>
+                            }
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
                     </div>
@@ -54,88 +64,86 @@
 
             </div>
         </div>
-            <div class="col-md-12">
-                <br />
-                @Html.HiddenFor(m => m.PageNumber)
-                <div class="col-md-2">
-                    @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="col-lg-10 text-right">
-                    @for (int i = 1; i <= Model.PageCount; i++)
-                    {
-                        if (i == Model.PageNumber)
-                        {
-                            <input type="button" data-id="@i" value="@i" class="pagination-btn" />
-                        }
-                        else
-                        {
-                            <input type="button" data-id="@i" value="@i" class="Page" />
-                        }
-                    }
-                </div>
+        <div class="col-md-12">
+            <br />
+            @Html.HiddenFor(m => m.PageNumber)
+            <div class="col-md-2">
+                @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
             </div>
-        
+            <div class="col-lg-10 text-right">
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    if (i == Model.PageNumber)
+                    {
+                        <input type="button" data-id="@i" value="@i" class="pagination-btn" />
+                    }
+                    else
+                    {
+                        <input type="button" data-id="@i" value="@i" class="Page" />
+                    }
+                }
+            </div>
+        </div>
+
 
         <script type="text/javascript">
-                $(".Page").click(function(e)
-                {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#region-list").addClass("hide");
-                    var page = parseInt($(this).data("id"));
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    var search = $("#Search").val();
-                    //alert(page);
-                    getRegionList(search,page,defaultPageSize)
-                });
-                $("#defaultPageSize").change(function () {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#region-list").addClass("hide");
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getRegionList(search, 1, defaultPageSize)
-                });
-                $("#btn-search").click(function (e) {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#region-list").addClass("hide");
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getRegionList(search, 1, defaultPageSize)
-                });
+            $(".Page").click(function (e) {
+                $("#master-loader-list").removeClass("hide");
+                $("#region-list").addClass("hide");
+                var page = parseInt($(this).data("id"));
+                var defaultPageSize = $("#defaultPageSize").val();
+                var search = $("#Search").val();
+                //alert(page);
+                getRegionList(search, page, defaultPageSize)
+            });
+            $("#defaultPageSize").change(function () {
+                $("#master-loader-list").removeClass("hide");
+                $("#region-list").addClass("hide");
+                var search = $("#Search").val();
+                var defaultPageSize = $("#defaultPageSize").val();
+                getRegionList(search, 1, defaultPageSize)
+            });
+            $("#btn-search").click(function (e) {
+                $("#master-loader-list").removeClass("hide");
+                $("#region-list").addClass("hide");
+                var search = $("#Search").val();
+                var defaultPageSize = $("#defaultPageSize").val();
+                getRegionList(search, 1, defaultPageSize)
+            });
 
-                function getRegionList(search,page,defaultPageSize)
-                {
-                    $.ajax(
-                       {
-                           url: "../Region/Index",
-                           type: "Get",
-                           data: { Search: search, page: page, defaultPageSize: defaultPageSize },
-                           success: function (html) {
-                               $("#ContainerList").html(html);
-                           },
-                           error: function (jqXhr, textStatus, errorThrown) {
-                               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                           },
-                           complete: function () {
-                               //   $("#VerifyIdDetailsLoader").addClass("hide");
-                               //$("#master-loader-list").addClass("hide");
-                               //$("#region-list").removeClass("hide");
-                           }
-                       });
-                }
-    function beginPaging(args) {
-        // Animate
-        $('#grid-list').fadeOut('normal');
-    }
+            function getRegionList(search, page, defaultPageSize) {
+                $.ajax(
+                   {
+                       url: "../Region/Index",
+                       type: "Get",
+                       data: { Search: search, page: page, defaultPageSize: defaultPageSize },
+                       success: function (html) {
+                           $("#ContainerList").html(html);
+                       },
+                       error: function (jqXhr, textStatus, errorThrown) {
+                           alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                       },
+                       complete: function () {
+                           //   $("#VerifyIdDetailsLoader").addClass("hide");
+                           //$("#master-loader-list").addClass("hide");
+                           //$("#region-list").removeClass("hide");
+                       }
+                   });
+            }
+            function beginPaging(args) {
+                // Animate
+                $('#grid-list').fadeOut('normal');
+            }
 
-    function successPaging() {
-        // Animate
-        $('#grid-list').fadeIn('normal');
-        $('a').tooltip();
-    }
+            function successPaging() {
+                // Animate
+                $('#grid-list').fadeIn('normal');
+                $('a').tooltip();
+            }
 
-    function failurePaging() {
-        alert("Could not retrieve list.");
-    }
+            function failurePaging() {
+                alert("Could not retrieve list.");
+            }
 
         </script>
 
@@ -160,7 +168,7 @@
             {
                 url: "../Region/Edit",
                 type: "Get",
-                data: { RegionName: param[0], CountryName : param[1] },
+                data: { RegionName: param[0], CountryName: param[1] },
                 success: function (result) {
                     //var data=jQuery.parseJSON(result);
                     if (result.Errors == undefined || result.Errors == "") {
@@ -180,7 +188,7 @@
                 complete: function () {
                     $("body").scrollTop(0);
                     $("#master-loader-edit").addClass("hide");
-                    $("#ContainerAddOrUpdate").show();                    
+                    $("#ContainerAddOrUpdate").show();
                 }
             });
     });
@@ -202,11 +210,27 @@
                     data: { RegionName: param[0], CountryName: param[1] },
                     success: function (response) {
                         GetRegion();
+                        if (response.Errors == null) {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Message);
+                        }
+                        else {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(response.Errors);
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
-                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(masterResultError);
                     },
                     complete: function () {
+                        $('#masterResultModal').modal('show');
                     }
                 });
         }

@@ -32,7 +32,7 @@
                             @Html.LabelFor(model => model.BillEntryDate, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.BillEntryDate, new { htmlAttributes = new { @class = "master-form-input form-control", @type="date" } })
+                            @Html.EditorFor(model => model.BillEntryDate, new { htmlAttributes = new { @class = "master-form-input form-control", @type="date", @required="required" } })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -40,7 +40,7 @@
                             @Html.LabelFor(model => model.SupplierName, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.DropDownList("Supplier_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                            @Html.DropDownList("Supplier_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -48,7 +48,7 @@
                             @Html.LabelFor(model => model.UtilityName, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.DropDownList("Utility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                            @Html.DropDownList("Utility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                             <input type="date" class="form-control master-form-input" id="ReadingDate" />
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="BillNo" />
+                            <input type="number" class="form-control master-form-input" min="0" id="BillNo" />
                         </div>
                     </div>
 
@@ -133,10 +133,10 @@
                             <input type="text" class="form-control master-form-input" id="MeterReadingNo" onchange="calculateBalance('')" />
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="TotalUnits" />
+                            <input type="text" class="form-control master-form-input" id="TotalUnits" onkeypress = "allow_only_Float(event, 'TotalUnits');"/>
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="DayOfUse" />
+                            <input type="number" class="form-control master-form-input" id="DayOfUse" />
                         </div>
                     </div>
                     <div class="col-md-12 document-row" id="GridView">
@@ -152,20 +152,12 @@
                     &nbsp;
                 </div>
                 <div class="row">
-                    @if (Model.Details != null)
-                    {
-                        <input type="hidden" id="init-details" value="@Model.Details.Count" />
-                    }
-                    else
-                    {
-                        <input type="hidden" id="init-company-contact-det-count" value="0" />
-                    }
                     <div class="col-md-12 document-row" id="GridView">
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="Rate" />
+                            <input type="text" class="form-control master-form-input" id="Rate" onkeypress = "allow_only_Float(event, 'Rate');"/>
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="Amount" />
+                            <input type="text" class="form-control master-form-input" id="Amount" onkeypress = "allow_only_Float(event, 'Amount');"/>
                         </div>
                         <div class="col-md-2">
                             <button type="button" class="document-btn" onclick="Add()">Add</button>
@@ -179,6 +171,14 @@
                 <div class="row ht-5">
                     &nbsp;
                 </div>
+            @if (Model.Details != null)
+            {
+                <input type="hidden" id="init-details" value="@Model.Details.Count" />
+            }
+            else
+            {
+                <input type="hidden" id="init-company-contact-det-count" value="0" />
+            }
                 <table class="row m-t-20" id="EbWaterDetailsForm">
                     @if (Model.Details != null)
                     {
@@ -222,58 +222,58 @@
                             html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + @Model.Details[j].Amount + "' class='form-control master-form-input' name='Details[" + j + "].Amount' data-name='Amount' id='Amount" + @j + "' /></div>";
                             //html += "<div class='col-md-2'><button type='button' id='Deleter" + @j + "' class='document-btn removebutton'>Delete</button></div>";
                             //html += "</div></div><div class='row ht-5'>&nbsp;</div>";
-                            html = html + "<div class='col-md-12 document-row'>" +
-                        " <div class='col-md-1 col-md-1 w-md-13'>" +
+                            html = html + "<div class='col-md-12 document-row border-btm'>" +
+                        "<div class='col-md-12'> <div class='col-md-2'>" +
                                                    Model.Details[@j].MeterNo +
                         "</div>" +
-                        "<div class='col-md-2 w-md-14'>" +
+                        "<div class='col-md-2'>" +
                                                    Model.Details[@j].PropertyId +
 
                         "</div>" +
-                                                "<div class='col-md-2 w-md-16'>" +
+                                                "<div class='col-md-2'>" +
                                                    Model.Details[@j].UnitId +
 
                         "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "<div class='col-md-2'>" +
                                                    Model.Details[@j].ReadingDate +
 
                         "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "<div class='col-md-2'>" +
                                                    Model.Details[@j].BillNo +
 
-                        "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "</div></div><div class='col-md-12 m-t-20'>" +
+                        "<div class='col-md-2'>" +
                                                    Model.Details[@j].BillDate +
 
                         "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "<div class='col-md-2'>" +
                                                    Model.Details[@j].DueDate +
 
                         "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "<div class='col-md-2'>" +
                                                    Model.Details[@j].MeterReadingNo +
 
                         "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "<div class='col-md-2'>" +
                                                    Model.Details[@j].TotalUnits +
 
                         "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "<div class='col-md-2'>" +
                                                    Model.Details[@j].DayOfUse +
 
-                        "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "</div></div><div class='col-md-12 m-t-20'>" +
+                        "<div class='col-md-2'>" +
                                                    Model.Details[@j].Rate +
 
                         "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "<div class='col-md-2'>" +
                                                    Model.Details[@j].Amount +
 
                         "</div>" +
 
-                        "<div class='col-md-1 w-md-14'>" +
+                        "<div class='col-md-1'>" +
                                                  "<button type='button' class='btn ebwater-remove'>X</button>" +
-                                                 "</div></div>";
+                                                 "</div></div></div>";
                             <tr>
                                 <td>
                                     @Html.Raw(html)
@@ -399,58 +399,58 @@
         //html += "<div class='col-md-2'><button type='button' id='Delete" + j + "' class='document-btn removebutton'>Delete</button></div>";
         //html += "</div></div><div class='row ht-5'>&nbsp;</div>";
         
-        html = html + "<div class='col-md-12 document-row'>" +
-                        " <div class='col-md-1 col-md-1 w-md-13'>" +
+        html = html + "<div class='col-md-12 document-row border-btm'>" +
+                        "<div class='col-md-12'> <div class='col-md-2'>" +
                                                    MeterNo +
                         "</div>" +
-                        "<div class='col-md-2 w-md-14'>" +
+                        "<div class='col-md-2'>" +
                                                    PropertyId +
 
                         "</div>" +
-                                                "<div class='col-md-2 w-md-16'>" +
+                                                "<div class='col-md-2'>" +
                                                    UnitId +
 
                         "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "<div class='col-md-2'>" +
                                                    ReadingDate +
 
                         "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "<div class='col-md-2'>" +
                                                    BillNo +
 
-                        "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "</div></div><div class='col-md-12 m-t-20'>" +
+                        "<div class='col-md-2'>" +
                                                    BillDate +
 
                         "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "<div class='col-md-2'>" +
                                                    DueDate +
 
                         "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "<div class='col-md-2'>" +
                                                    MeterReadingNo +
 
                         "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "<div class='col-md-2'>" +
                                                    TotalUnits +
 
                         "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "<div class='col-md-2'>" +
                                                    DayOfUse +
 
-                        "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "</div></div><div class='col-md-12 m-t-20'>" +
+                        "<div class='col-md-2'>" +
                                                    Rate +
 
                         "</div>" +
-                        "<div class='col-md-2 w-md-16'>" +
+                        "<div class='col-md-2'>" +
                                                    Amount +
 
                         "</div>" +
 
-                        "<div class='col-md-1 w-md-14'>" +
+                        "<div class='col-md-2'>" +
                                                  "<button type='button' class='btn ebwater-remove'>X</button>" +
-                                                 "</div></div>";
+                                                 "</div></div></div>";
         html = html + "</td></tr>"
         j++;
         $("#EbWaterDetailsForm").append(html);
@@ -507,20 +507,20 @@
                     success: function (response) {
                         debugger;
                         GetEbWater();
-                        //$("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
-                        //$("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
-                        //$(".result-title").text("Success");
-                        //$(".result-modal-body span").text(paymentAdded);
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                        $(".result-title").text("Success");
+                        $(".result-modal-body span").text(response.Message);
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                        //$("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
-                        //$("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
-                        //$(".result-title").text("Failure");
-                        //$(".result-modal-body span").text(masterResultError);
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(masterResultError);
                     },
                     complete: function () {
-                        //$('#masterResultModal').modal('show');
+                        $('#masterResultModal').modal('show');
                     }
                 });
 

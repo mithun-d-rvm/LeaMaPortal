@@ -43,7 +43,7 @@
                     @Html.LabelFor(model => model.Unit_From, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Unit_From, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Unit_From" } })
+                    @Html.EditorFor(model => model.Unit_From, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Unit_From", @onblur = "setMinForUnit()", @pattern = "[0-9]+", title = "Numeric only" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -51,7 +51,7 @@
                     @Html.LabelFor(model => model.Unit_to, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Unit_to, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Unit_to" } })
+                    @Html.EditorFor(model => model.Unit_to, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Unit_to", @onblur = "setMaxForUnit()", @pattern = "[0-9]+", title = "Numeric only" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -59,7 +59,7 @@
                     @Html.LabelFor(model => model.rate, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.rate, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "rate" } })
+                    @Html.EditorFor(model => model.rate, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "rate", @pattern = "[0-9]+", title = "Numeric only" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -80,13 +80,34 @@
             </div>
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-12 pull-left">
-                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                    <button type="submit" id="btnCancel" class="col-md-offset-2 leama-btn">Submit</button>&nbsp;&nbsp;
+                    <button class="btn master-form-btn" id="btnCancel" type="button" onclick="formReset()">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
 }
 <script>
+    function formReset() {
+        GetSlabAddOrUpdate();
+    }
+    function setMaxForUnit() {
+        debugger;
+        var to = $("#Unit_to").val();
+        if(to != "")
+        {
+            $("#Unit_From").prop('max', parseInt(to));
+            //$("#Unit_From").attr('max', parseInt(to));
+        }
+    }
+    function setMinForUnit() {
+        debugger;
+        var from = $("#Unit_From").val();
+        if (from != "") {
+            $("#Unit_to").prop('min', parseInt(from));
+            //$("#Unit_to").attr('min', parseInt(from));
+        }
+    }
     function getUtilityId()
     {
         var UtilityName = $("#Utility_Name").val();
@@ -111,6 +132,16 @@
     //Add or update
     $("form#Slab").off("submit").on("submit", function (e) {
         e.preventDefault();
+        //var from = $("#Unit_From").val();
+        //var to = $("#Unit_to").val();
+        //if ((to-from) < 0)
+        //{
+        //    debugger;
+        //    alert("Enter valid unit from and unit to values!");
+
+        //    $("#Unit_From").get(0).setCustomValidity("Enter valid unit from and unit to values!");
+        //    //$("#Unit_to").get(0).setCustomValidity("Enter valid unit from and unit to values!");
+        //}
         try {
             var form = $("form#Slab");
             $.ajax(
@@ -122,10 +153,19 @@
                     processData: false,
                     success: function (response) {
                         GetSlab();
-                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
-                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
-                        $(".result-title").text("Success");
-                        $(".result-modal-body span").text(slabAdded);
+                        if (response.Errors == null) {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Message);
+                        }
+                        else
+                        {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(response.Errors);
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -160,4 +200,10 @@
         });
         return o;
     };
+    $(document).ready(function () {
+        var id = $("#SlabMasterId").val();
+        if (id != 0) {
+            document.getElementById("btnSubmit").innerHTML = 'Update';
+        }
+    });
 </script>

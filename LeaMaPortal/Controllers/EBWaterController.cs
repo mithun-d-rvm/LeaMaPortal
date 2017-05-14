@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace LeaMaPortal.Controllers
 {
-    public class EbWaterController : Controller
+    public class EbWaterController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
         // GET: EBWater
@@ -102,10 +102,11 @@ namespace LeaMaPortal.Controllers
                 {
                     MySqlParameter pa = new MySqlParameter();
                     string PFlag = "INSERT";
-
+                    result.Message = "Utility bill entry created successfully";
                     if (model.Id != 0)
                     {
                         PFlag = "UPDATE";
+                        result.Message = "Utility bill entry updated successfully";
                     }
                     string billEntries = null;
                     if (model.Details != null)
@@ -118,14 +119,14 @@ namespace LeaMaPortal.Controllers
                             if (string.IsNullOrWhiteSpace(billEntries))
                             {
                                 billEntries = "(" + model.BillEnteryNo + ",'" + item.MeterNo + "','" + item.PropertyId +
-                                    "','" + item.UnitId + "'," + item.TotalUnits + "," + item.MeterReadingNo + "," + readingDate + "," + billDate + ",'" + item.BillNo
-                                    + "'," + dueDate + ",'" + item.DayOfUse + "','" + item.Rate + "','" + item.Amount + "')";
+                                    "','" + item.UnitId + "'," + item.TotalUnits + ",'" + item.MeterReadingNo + "'," + readingDate + "," + billDate + "," + item.BillNo
+                                    + "," + dueDate + "," + item.DayOfUse + "," + item.Rate + "," + item.Amount + ")";
                             }
                             else
                             {
                                 billEntries += ",(" + model.BillEnteryNo + ",'" + item.MeterNo + "','" + item.PropertyId +
-                                    "','" + item.UnitId + "'," + item.TotalUnits + "," + item.MeterReadingNo + "," + readingDate + "," + billDate + ",'" + item.BillNo
-                                    + "'," + dueDate + ",'" + item.DayOfUse + "','" + item.Rate + "','" + item.Amount + "')";
+                                    "','" + item.UnitId + "'," + item.TotalUnits + ",'" + item.MeterReadingNo + "'," + readingDate + "," + billDate + "," + item.BillNo
+                                    + "," + dueDate + "," + item.DayOfUse + "," + item.Rate + "," + item.Amount + ")";
                             }
                         }
                     }
@@ -246,6 +247,7 @@ namespace LeaMaPortal.Controllers
                                            new MySqlParameter("@Pelewaterdt", model.Details)
                                          };
                 var RE = await db.Database.SqlQuery<object>("CALL Usp_eb_water_All(@PFlag,@PRefno,@Prefdate,@PUtility_id,@PUtiltiy_name,@PSupplier_id,@PSupplier_name,@PCreateduser,@Pelewaterdt)", param).ToListAsync();
+                result.Message = "Utility bill entry deleted successfully";
                 return Json(result, JsonRequestBehavior.AllowGet);
 
             }

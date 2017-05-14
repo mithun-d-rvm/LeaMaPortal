@@ -4,7 +4,7 @@
   Created Date   : 25-Mar-2017
   Notes          : <Notes>
 -->
-
+@model LeaMaPortal.Models.TcaStatusDisplayModel
 
 <div class="modal-content">
     @*<div class="modal-header">
@@ -15,8 +15,8 @@
         <div class="text-uppercase popup-heading">
             Status of Tenancy Contract Agreement
         </div>
-        <div class="p-t-5-p"> &nbsp; </div>
-        <div class="row">
+        @*<div class="p-t-5-p"> &nbsp; </div>*@
+        @*<div class="row">
             <div class="col-md-3">
                 <select class="master-form-input form-control">
                     <option> Select Region </option>
@@ -45,7 +45,7 @@
                     <option> Agreement 3 </option>
                 </select>
             </div>
-        </div>
+        </div>*@
         <div class="p-t-5-p"> &nbsp; </div>
         <div class="row">
             <div class="col-md-6">
@@ -54,11 +54,14 @@
                         Contract Agreement No:
                     </div>
                     <div class="col-md-6">
-                        <select class="master-form-input form-control">
+                        @Html.HiddenFor(m=>m.Id)
+                        @Html.HiddenFor(m=>m.Agreement_No)
+                       <span>@Model.Agreement_No</span>
+                        @*<select class="master-form-input form-control">
                             <option> Agreement 1 </option>
                             <option> Agreement 2 </option>
                             <option> Agreement 3 </option>
-                        </select>
+                        </select>*@
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -66,7 +69,7 @@
                         Contract Agreement Date:
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="master-form-input form-control" />
+                        <span>@Model.AgreementDate</span>
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -74,7 +77,8 @@
                         Contract Tenant Type:
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="master-form-input form-control" />
+                        <span>@Model.Tenant_Type</span>
+                        @*<input type="text" class="master-form-input form-control" />*@
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -82,7 +86,9 @@
                         Tenant ID:
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="master-form-input form-control" />
+                        @Html.HiddenFor(m=>m.Ag_Tenant_id)
+                        <span>@Model.Ag_Tenant_id</span>
+                        @*<input type="text" class="master-form-input form-control" />*@
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -90,7 +96,9 @@
                         Tenant Name:
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="master-form-input form-control" />
+                        @Html.HiddenFor(m => m.Ag_Tenant_Name)
+                        <span>@Model.Ag_Tenant_Name</span>
+                        @*<input type="text" class="master-form-input form-control" />*@
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -98,7 +106,9 @@
                         Property ID:
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="master-form-input form-control" />
+                        @Html.HiddenFor(m => m.Properties_ID)
+                        <span>@Model.Properties_ID</span>
+                        @*<input type="text" class="master-form-input form-control" />*@
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -106,7 +116,9 @@
                         Property Name:
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="master-form-input form-control" />
+                        @Html.HiddenFor(m => m.Properties_Name)
+                        <span>@Model.Properties_Name</span>
+                        @*<input type="text" class="master-form-input form-control" />*@
                     </div>
                 </div>
             </div>
@@ -119,7 +131,9 @@
                         Unit ID:
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="master-form-input form-control" />
+                      
+                        <span>@Model.Unit_ID_Tawtheeq</span>
+                        @*<input type="text" class="master-form-input form-control" />*@
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -127,7 +141,9 @@
                         Unit Name:
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="master-form-input form-control" />
+                      
+                        <span>@Model.Unit_Property_Name</span>
+                        @*<input type="text" class="master-form-input form-control" />*@
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -135,11 +151,13 @@
                         Renewal Status:
                     </div>
                     <div class="col-md-6">
-                        <select class="master-form-input form-control">
+                        @Html.DropDownList("Renewal_Close_Flag", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required" })
+                        @*@Html.DropDownList("Renewal_Close_Flag", null, new { @class = "master-form-input form-control" })*@
+                        @*<select class="master-form-input form-control">
                             <option> Payment 1 </option>
                             <option> Payment 2 </option>
                             <option> Payment 3 </option>
-                        </select>
+                        </select>*@
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -147,7 +165,8 @@
                         Caretaker Id:
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="master-form-input form-control" />
+                        @Html.HiddenFor(m => m.Caretaker_id)
+                        <span>@Model.Caretaker_id</span>
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -155,7 +174,8 @@
                         Caretaker Name:
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="master-form-input form-control" />
+                        @Html.HiddenFor(m => m.Caretaker_Name)
+                        <span>@Model.Caretaker_Name</span>
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -163,7 +183,7 @@
                         &nbsp;
                     </div>
                     <div class="col-md-4">
-                        <input type="button" class="btn master-form-btn" value="Submit" />
+                        <input type="submit" class="btn master-form-btn" value="Submit" />
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@ namespace LeaMaPortal.Models
     public class ApprovalSettingsViewModel
     {
         public int Id { get; set; }
-        [DisplayName("Approval Flag")]
+        [DisplayName("TCA Approval Required")]
         public string Approval_flag { get; set; }
         [DisplayName("Approval User")]
         public string Userid { get; set; }

@@ -12,12 +12,14 @@
         height: 30%;
         width: 3%;
     }
+
     #master-loader-list {
         background: url("../Images/loader.gif") no-repeat scroll center center #FFF;
         width: 98%;
         height: 500px;
         /*position: absolute;*/
     }
+
     #master-loader-edit {
         background: url(../Images/loader.gif) no-repeat scroll center center #FFF;
         /* position: absolute; */
@@ -34,31 +36,38 @@
         <div id="ContainerAddOrUpdate"></div>
         <div class="row" id="ContainerList"></div>
         <input type="hidden" id="FormMasterSelected" value="@ViewBag.FormMasterSelected" />
+        <input type="hidden" id="IsAllowAdd" value="@ViewBag.IsAdd" />
     </div>
 </div>
 <!-- Modal -->
 @*<div id="masterResultModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+        <div class="modal-dialog">
 
 
-        <div class="modal-content text-center">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title result-title"></h4>
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title result-title"></h4>
+                </div>
+                <div class="modal-body result-modal-body">
+                    <span></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="modal-body result-modal-body">
-                <span></span>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+
         </div>
-
-    </div>
-</div>*@
+    </div>*@
 <script>
-
-    
+    IsAddAllow();
+    function IsAddAllow() {
+        var isAllow = $("#IsAllowAdd").val();
+        if (isAllow == 1)
+            $("#ContainerAddOrUpdate").show();
+        else
+            $("#ContainerAddOrUpdate").hide();
+    }
 
     $(function () {
         $("#TopNavBarFilter").empty();
@@ -191,6 +200,29 @@
             }
         });
     }
+    function GetCountryAddOrUpdate() {
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../Country/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
     function GetTenantCompany() {
         //$("#img-loader").removeClass("hide");
         $("#master-loader").removeClass("hide");
@@ -225,6 +257,29 @@
             processData: false,
             success: function (html) {
                 $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+    function GetTenantCompanyAddOrUpdate() {
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../TenantCompany/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -278,6 +333,29 @@
                $("#master-loader").addClass("hide");
            }
        });
+    }
+    function GetTenantIndividualAddOrUpdate() {
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../MasterIndividual/Create",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
     }
 
     function GetCaretaker() {
@@ -368,17 +446,17 @@
             }
         });
     }
-
-    function GetPropertyMaster() {
+    function GetRegionAddOrUpdate() {
         //$("#img-loader").removeClass("hide");
         $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
         $.ajax(
         {
-            url: "../PropertyMaster/AddOrUpdate",
+            url: "../Region/AddOrUpdate",
             type: "Get",
-            data: { Search: "" },
+            data: {},
+            contentType: "application/json",
+            processData: false,
             success: function (html) {
                 $("#ContainerAddOrUpdate").html(html);
             },
@@ -390,6 +468,33 @@
                 $("#master-loader").addClass("hide");
             }
         });
+    }
+
+    function getPropertyMasterAddorUpdate() {
+        $.ajax(
+       {
+           url: "../PropertyMaster/AddOrUpdate",
+           type: "Get",
+           data: { Search: "" },
+           success: function (html) {
+               $("#ContainerAddOrUpdate").html(html);
+           },
+           error: function (jqXhr, textStatus, errorThrown) {
+               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+           },
+           complete: function () {
+               //$("#img-loader").addClass("hide");
+               $("#master-loader").addClass("hide");
+           }
+       });
+    }
+    function GetPropertyMaster() {
+        //$("#img-loader").removeClass("hide");
+        // $("#master-loader").removeClass("hide");
+        getPropertyMasterAddorUpdate();
+        $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
+
         //$("#img-loader").removeClass("hide");
         $("#master-loader").removeClass("hide");
         $.ajax(
@@ -412,11 +517,11 @@
         });
     }
 
-    function GetCheckList() {
-        //$("#img-loader").removeClass("hide");
+    function CheckListAddOrUpdate()
+    {
         $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
+
         $.ajax(
         {
             url: "../CheckList/AddOrUpdate",
@@ -435,6 +540,12 @@
                 $("#master-loader").addClass("hide");
             }
         });
+
+    }
+    function GetCheckList() {
+        CheckListAddOrUpdate();
+        $("#ContainerList").empty();
+        //$("#img-loader").removeClass("hide");
         //$("#img-loader").removeClass("hide");
         $("#master-loader").removeClass("hide");
         $.ajax(
@@ -501,6 +612,29 @@
             }
         });
     }
+    function GetFacilityAddOrUpdate() {
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../Facility/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
 
     function GetUtility() {
         //$("#img-loader").removeClass("hide");
@@ -536,6 +670,29 @@
             processData: false,
             success: function (html) {
                 $("#ContainerList").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
+    function GetUtilityAddOrUpdate() {
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../Utility/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -590,11 +747,8 @@
             }
         });
     }
-    function GetUserCreation() {
-        //$("#img-loader").removeClass("hide");
+    function getUserCreationAddOrUpdate() {
         $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
         $.ajax(
         {
             url: "../UserCreation/AddOrUpdate",
@@ -606,15 +760,23 @@
                 $("#ContainerAddOrUpdate").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                // alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text(masterResultError);
             },
             complete: function () {
                 //$("#img-loader").addClass("hide");
                 $("#master-loader").addClass("hide");
             }
         });
+    }
+    function GetUserCreation() {
         //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $("#ContainerList").empty();
+        getUserCreationAddOrUpdate();
         $.ajax(
         {
             url: "../UserCreation/Index",
@@ -626,7 +788,11 @@
                 $("#ContainerList").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                // alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text(masterResultError);
             },
             complete: function () {
                 //$("#img-loader").addClass("hide");
@@ -679,11 +845,10 @@
             }
         });
     }
-    function GetApprovalSettings() {
-        //$("#img-loader").removeClass("hide");
+    function ApprovalAddOrUpdate() {
         $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
+
         $.ajax(
         {
             url: "../ApprovalSettings/AddOrUpdate",
@@ -702,6 +867,32 @@
                 $("#master-loader").addClass("hide");
             }
         });
+    }
+    function GetApprovalSettings() {
+        ApprovalAddOrUpdate();
+        $("#ContainerList").empty();
+        //$("#img-loader").removeClass("hide");
+        //$("#master-loader").removeClass("hide");
+        //$("#ContainerAddOrUpdate").empty();
+        //$("#ContainerList").empty();
+        //$.ajax(
+        //{
+        //    url: "../ApprovalSettings/AddOrUpdate",
+        //    type: "Get",
+        //    data: {},
+        //    contentType: "application/json",
+        //    processData: false,
+        //    success: function (html) {
+        //        $("#ContainerAddOrUpdate").html(html);
+        //    },
+        //    error: function (jqXhr, textStatus, errorThrown) {
+        //        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+        //    },
+        //    complete: function () {
+        //        //$("#img-loader").addClass("hide");
+        //        $("#master-loader").addClass("hide");
+        //    }
+        //});
         //$("#img-loader").removeClass("hide");
         $("#master-loader").removeClass("hide");
         $.ajax(
@@ -767,6 +958,29 @@
             }
         });
     }
+    function GetMeterAddOrUpdate() {
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../Meter/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
     function GetSlab() {
         //$("#img-loader").removeClass("hide");
         $("#master-loader").removeClass("hide");
@@ -811,7 +1025,29 @@
             }
         });
     }
-
+    function GetSlabAddOrUpdate() {
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../Slab/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
     function GetSupplier() {
         //$("#img-loader").removeClass("hide");
         $("#master-loader").removeClass("hide");
@@ -856,5 +1092,27 @@
             }
         });
     }
-
+    function GetSupplierAddOrUpdate() {
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../Supplier/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
 </script>

@@ -13,7 +13,7 @@ using MvcPaging;
 
 namespace LeaMaPortal.Controllers
 {
-    public class RegionController : Controller
+    public class RegionController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
 
@@ -92,30 +92,32 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    MySqlParameter pa = new MySqlParameter();
-                    string PFlag = "INSERT";
-                    if (model.Id == 0)
+                    if (db.tbl_region.Any(a => a.Region_Name.ToLower() == model.Region_Name.ToLower() && a.Country == model.Country && a.Delmark != "*") && model.Id == 0)
                     {
-                        tbl_region tbl_region = await db.tbl_region.FindAsync(model.Region_Name_PK, model.Country_PK);
-                        if (tbl_region != null)
-                        {
-                            PFlag = "UPDATE";
-                            model.Id = tbl_region.Id;
-                        }
+                        result.Errors = "Region already exists!";
                     }
                     else
                     {
-                        PFlag = "UPDATE";
-                    }
-                    object[] param = { new MySqlParameter("@PFlag", PFlag),
+                        MySqlParameter pa = new MySqlParameter();
+                        string PFlag = "INSERT";
+                        if (model.Id != 0)
+                        {
+                            PFlag = "UPDATE";
+                            result.Message = "Region updated successfully";
+                        }
+                        else
+                        {
+                            result.Message = "Region created successfully";
+                        }
+                        object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PId", model.Id),
                                            new MySqlParameter("@PRegion_Name",model.Region_Name),
                                             new MySqlParameter("@PCountry",model.Country),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
-                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Region_All(@PFlag,@PId,@PRegion_Name,@PCountry,@PCreateduser)", param).ToListAsync();
-                    await db.SaveChangesAsync();
-
+                        var RE = await db.Database.SqlQuery<object>("CALL Usp_Region_All(@PFlag,@PId,@PRegion_Name,@PCountry,@PCreateduser)", param).ToListAsync();
+                        await db.SaveChangesAsync();
+                    }
                 }
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -160,6 +162,7 @@ namespace LeaMaPortal.Controllers
             MessageResult result = new MessageResult();
             try
             {
+                result.Message = "Region deleted successfully";
                 if (CountryName == null && RegionName != null)
                 {
                     return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);

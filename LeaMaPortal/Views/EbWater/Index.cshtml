@@ -35,10 +35,19 @@
     <div class="blank">
         <div id="ContainerAddOrUpdate"></div>
         <div class="row" id="ContainerList"></div>
+        <input type="hidden" id="IsAllowAdd" value="@ViewBag.IsAdd" />
     </div>
 </div>
 
 <script>
+    IsAddAllow();
+    function IsAddAllow() {
+        var isAllow = $("#IsAllowAdd").val();
+        if (isAllow == 1)
+            $("#ContainerAddOrUpdate").show();
+        else
+            $("#ContainerAddOrUpdate").hide();
+    }
     function GetEbWater() {
         $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();

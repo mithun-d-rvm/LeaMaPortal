@@ -1,5 +1,4 @@
-﻿
-@*@model LeaMaPortal.Models.ApprovalSettingsViewModel*@
+﻿@*@model LeaMaPortal.Models.ApprovalSettingsViewModel*@
 @using MvcPaging
 @model IPagedList<LeaMaPortal.Models.ApprovalSettingsViewModel>
 @{
@@ -46,8 +45,19 @@
                         <div class="divTableCell">@item.Userid</div>
                         <div class="divTableCell">@item.Approval_flag</div>
                         <div class="divTableCell">
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit approval-edit", title = "Edit", @data_id = @item.Id })  |
-                            @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash approval-delete", @style = "color:red", @title = "Delete", @data_id = @item.Id })
+                            @if (@ViewBag.IsEditable == 1)
+                            {
+                                <span>
+                                    @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit approval-edit", title = "Edit", @data_id = @item.Id })
+                                </span>
+                            }
+
+                            @if (@ViewBag.IsDeletable == 1)
+                {
+                                <span>
+                                    | @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash approval-delete", @style = "color:red", @title = "Delete", @data_id = @item.Id })
+                                </span>
+                            }
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
                     </div>
@@ -55,88 +65,86 @@
 
             </div>
         </div>
-            <div class="col-md-12">
-                <br />
-                @Html.HiddenFor(m => m.PageNumber)
-                <div class="col-md-2">
-                    @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="col-lg-10 text-right">
-                    @for (int i = 1; i <= Model.PageCount; i++)
-                    {
-                        if (i == Model.PageNumber)
-                        {
-                            <input type="button" data-id="@i" value="@i" class="pagination-btn" />
-                        }
-                        else
-                        {
-                            <input type="button" data-id="@i" value="@i" class="Page" />
-                        }
-                    }
-                </div>
+        <div class="col-md-12">
+            <br />
+            @Html.HiddenFor(m => m.PageNumber)
+            <div class="col-md-2">
+                @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
             </div>
-        
+            <div class="col-lg-10 text-right">
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    if (i == Model.PageNumber)
+                    {
+                        <input type="button" data-id="@i" value="@i" class="pagination-btn" />
+                    }
+                    else
+                    {
+                        <input type="button" data-id="@i" value="@i" class="Page" />
+                    }
+                }
+            </div>
+        </div>
+
 
         <script type="text/javascript">
-                $(".Page").click(function(e)
-                {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#approval-list").addClass("hide");
-                    var page = parseInt($(this).data("id"));
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    var search = $("#Search").val();
-                    //alert(page);
-                    getApprovalSettingsList(search,page,defaultPageSize)
-                });
-                $("#defaultPageSize").change(function () {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#approval-list").addClass("hide");
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getApprovalSettingsList(search, 1, defaultPageSize)
-                });
-                $("#btn-search").click(function (e) {
-                    $("#master-loader-list").removeClass("hide");
-                    $("#approval-list").addClass("hide");
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getApprovalSettingsList(search, 1, defaultPageSize)
-                });
+            $(".Page").click(function (e) {
+                $("#master-loader-list").removeClass("hide");
+                $("#approval-list").addClass("hide");
+                var page = parseInt($(this).data("id"));
+                var defaultPageSize = $("#defaultPageSize").val();
+                var search = $("#Search").val();
+                //alert(page);
+                getApprovalSettingsList(search, page, defaultPageSize)
+            });
+            $("#defaultPageSize").change(function () {
+                $("#master-loader-list").removeClass("hide");
+                $("#approval-list").addClass("hide");
+                var search = $("#Search").val();
+                var defaultPageSize = $("#defaultPageSize").val();
+                getApprovalSettingsList(search, 1, defaultPageSize)
+            });
+            $("#btn-search").click(function (e) {
+                $("#master-loader-list").removeClass("hide");
+                $("#approval-list").addClass("hide");
+                var search = $("#Search").val();
+                var defaultPageSize = $("#defaultPageSize").val();
+                getApprovalSettingsList(search, 1, defaultPageSize)
+            });
 
-                function getApprovalSettingsList(search, page, defaultPageSize)
-                {
-                    $.ajax(
-                       {
-                           url: "../ApprovalSettings/Index",
-                           type: "Get",
-                           data: { Search: search, page: page, defaultPageSize: defaultPageSize },
-                           success: function (html) {
-                               $("#ContainerList").html(html);
-                           },
-                           error: function (jqXhr, textStatus, errorThrown) {
-                               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                           },
-                           complete: function () {
-                               //   $("#VerifyIdDetailsLoader").addClass("hide");
-                               //$("#master-loader-list").addClass("hide");
-                               //$("#approval-list").removeClass("hide");
-                           }
-                       });
-                }
-    function beginPaging(args) {
-        // Animate
-        $('#grid-list').fadeOut('normal');
-    }
+            function getApprovalSettingsList(search, page, defaultPageSize) {
+                $.ajax(
+                   {
+                       url: "../ApprovalSettings/Index",
+                       type: "Get",
+                       data: { Search: search, page: page, defaultPageSize: defaultPageSize },
+                       success: function (html) {
+                           $("#ContainerList").html(html);
+                       },
+                       error: function (jqXhr, textStatus, errorThrown) {
+                           alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                       },
+                       complete: function () {
+                           //   $("#VerifyIdDetailsLoader").addClass("hide");
+                           //$("#master-loader-list").addClass("hide");
+                           //$("#approval-list").removeClass("hide");
+                       }
+                   });
+            }
+            function beginPaging(args) {
+                // Animate
+                $('#grid-list').fadeOut('normal');
+            }
 
-    function successPaging() {
-        // Animate
-        $('#grid-list').fadeIn('normal');
-        $('a').tooltip();
-    }
+            function successPaging() {
+                // Animate
+                $('#grid-list').fadeIn('normal');
+                $('a').tooltip();
+            }
 
-    function failurePaging() {
-        alert("Could not retrieve list.");
-    }
+            function failurePaging() {
+                alert("Could not retrieve list.");
+            }
 
         </script>
         <div class="col-md-12 leama-fieldset ">
@@ -159,22 +167,9 @@
                 url: "../ApprovalSettings/Edit",
                 type: "Get",
                 data: { Id: id },
-                success: function (result) {
-                    if (result.Errors == undefined || result.Errors == "") {
-                        $("#ApprovalSettingsId").val(result.Id);
-                        $("#Userid").val(result.Userid);                        
-                        if (result.Approval_flag == "Yes")
-                        {
-                            $("#Approval_flag_yes").attr("checked", "checked");
-                        }
-                        else
-                        {
-                            $("#Approval_flag_no").attr("checked", "checked");
-                        }
-                    }
-                    else {
-                        alert(data.Errors);
-                    }
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").empty();
+                    $("#ContainerAddOrUpdate").html(html);
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
