@@ -266,6 +266,7 @@ namespace LeaMaPortal.Controllers
         {
              return new TenantIndividualViewModel()
             {
+                 Id = tenant.Id,
                 Tenant_Id = tenant.Tenant_Id,
                 Title = tenant.Title,
                 First_Name = tenant.First_Name,

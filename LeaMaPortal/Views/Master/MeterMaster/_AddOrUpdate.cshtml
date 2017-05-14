@@ -26,7 +26,7 @@
                     @Html.LabelFor(model => model.Utility_id, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Utility_id, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Utility_id" } })
+                    @Html.EditorFor(model => model.Utility_id, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Utility_id", @readonly="readonly" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -42,7 +42,7 @@
                     @Html.LabelFor(model => model.Accno, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Accno, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Accno" } })
+                    @Html.EditorFor(model => model.Accno, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "Accno", @pattern = "[a-zA-Z0-9\\s]+", @title = "Alphanumeric only" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -71,13 +71,17 @@
             </div>
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-12 pull-left">
-                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>&nbsp;&nbsp;
+<button class="btn master-form-btn" id="btnCancel" type="button" onclick="formReset()">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
 }
 <script>
+    function formReset() {
+        GetMeterAddOrUpdate();
+    }
     function getUtilityId() {
         var UtilityName = $("#Utility_Name").val();
         if (UtilityName != null) {
@@ -116,6 +120,7 @@
                         $.each(response, function (index, data) {
                             options += '<option value="' + data.Value + '">' + data.Value + '</option>' ;
                         });
+                        debugger;
                         $('#unit_id').append(options);
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
@@ -142,10 +147,19 @@
                     processData: false,
                     success: function (response) {
                         GetMeter();
-                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
-                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
-                        $(".result-title").text("Success");
-                        $(".result-modal-body span").text(meterAdded);
+                        if (response.Errors == null) {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Message);
+                        }
+                        else
+                        {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(response.Errors);
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -182,4 +196,10 @@
         });
         return o;
     };
+    $(document).ready(function () {
+        var id = $("#MeterId").val();
+        if (id != 0) {
+            document.getElementById("btnSubmit").innerHTML = 'Update';
+        }
+    });
 </script>
