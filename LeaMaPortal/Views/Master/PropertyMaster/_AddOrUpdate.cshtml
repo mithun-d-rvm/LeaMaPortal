@@ -65,7 +65,7 @@
                     Property Thwtheeq ID:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Property_ID_Tawtheeq, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Property_ID_Tawtheeq, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", title = "Property Thwtheeq ID should be letters or numbers" } })
                     @Html.ValidationMessageFor(model => model.Property_ID_Tawtheeq, "", new { @class = "text-danger" })
                     @*<input type="text" class="form-control master-form-input" />*@
                 </div>
@@ -75,7 +75,7 @@
                     Property Name:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", title = "Property name should be letters or numbers" } })
                     @Html.ValidationMessageFor(model => model.Property_Name, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -182,7 +182,7 @@
                 </div>
                 <div class="col-md-8">
                     @*<input type="text" class="form-control master-form-input" />*@
-                    @Html.EditorFor(model => model.plotno, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.plotno, new { htmlAttributes = new { @class = "form-control master-form-input", @pattern = "[a-zA-Z0-9\\s]+", title = "Plot number should be letters or numbers" } })
                     @Html.ValidationMessageFor(model => model.plotno, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -230,7 +230,7 @@
                         }
 
                         @Html.DropDownListFor(model => model.Property_Usage, PropertyUsage, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })*@
-                    @Html.DropDownList("Property_Usage", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-Select-" })
+                    @Html.DropDownList("Property_Usage", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-Select-", @required = "required" })
 
                 </div>
             </div>
@@ -265,7 +265,7 @@
                         }
 
                         @Html.DropDownListFor(model => model.Property_Type, PropertyCategory, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })*@
-                    @Html.DropDownList("Property_Type", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-Select-" })
+                    @Html.DropDownList("Property_Type", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-Select-", @required = "required" })
 
                 </div>
             </div>
@@ -297,7 +297,7 @@
                     Address 1:
                 </div>
                 <div class="col-md-8">
-                    @Html.TextAreaFor(model => model.Address1, new { @class = "form-control master-form-input", @rows = "4" })
+                    @Html.TextAreaFor(model => model.Address1, new { @class = "form-control master-form-input", @rows = "4", @required = "required" })
                     @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -307,7 +307,7 @@
                 </div>
                 <div class="col-md-8">
                     @*<textarea class="form-control master-form-input"></textarea>*@
-                    @Html.TextAreaFor(model => model.Address2, new { @class = "form-control master-form-input", @rows = "4" })
+                    @Html.TextAreaFor(model => model.Address2, new { @class = "form-control master-form-input", @rows = "4", @required = "required" })
                     @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -325,7 +325,7 @@
                     Region:
                 </div>
                 <div class="col-md-8">
-                    @Html.DropDownList("Region_Name", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-Select-" })
+                    @Html.DropDownList("Region_Name", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-Select-", @required = "required" })
 
 
                 </div>
@@ -335,7 +335,7 @@
                     Country:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -344,7 +344,7 @@
                     City:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -353,7 +353,7 @@
                     State:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -362,7 +362,7 @@
                     External ref no:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Externalrefno, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Externalrefno, new { htmlAttributes = new { @class = "form-control master-form-input", @pattern = "[a-zA-Z0-9\\s]+", title = "External ref no should be letters or numbers" } })
                     @Html.ValidationMessageFor(model => model.Externalrefno, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -371,7 +371,7 @@
                     Number of Floors:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Noofoffloors, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Noofoffloors, new { htmlAttributes = new { @class = "form-control master-form-input",@min="0" } })
                     @Html.ValidationMessageFor(model => model.Noofoffloors, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -380,7 +380,7 @@
                     Number of Units:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Noofunits, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Noofunits, new { htmlAttributes = new { @class = "form-control master-form-input", @min = "0" } })
                     @Html.ValidationMessageFor(model => model.Noofunits, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -390,7 +390,7 @@
                 </div>
                 <div class="col-md-8">
                     @*<input type="text" class="form-control master-form-input" />*@
-                    @Html.EditorFor(model => model.Builtarea, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Builtarea, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onkeypress = "allow_only_Float(event,'Builtarea');" } })
                     @Html.ValidationMessageFor(model => model.Builtarea, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -399,7 +399,7 @@
                     Plot Area:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Plotarea, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Plotarea, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onkeypress = "allow_only_Float(event,'Plotarea');" } })
                     @Html.ValidationMessageFor(model => model.Plotarea, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -408,7 +408,7 @@
                     Leasable Area:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Leasablearea, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Leasablearea, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onkeypress = "allow_only_Float(event,'Leasablearea');" } })
                     @Html.ValidationMessageFor(model => model.Leasablearea, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -417,7 +417,7 @@
                     Common Area:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.commonarea, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.commonarea, new { htmlAttributes = new { @class = "form-control master-form-input", @onkeypress = "allow_only_Float(event,'commonarea');" } })
                     @Html.ValidationMessageFor(model => model.commonarea, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -435,7 +435,7 @@
                     Property Value (in AED):
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.AEDvalue, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.AEDvalue, new { htmlAttributes = new { @class = "form-control master-form-input", @onkeypress = "allow_only_Float(event,'AEDvalue');" } })
                     @Html.ValidationMessageFor(model => model.AEDvalue, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -444,7 +444,7 @@
                     Purchased Date:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Purchased_date, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Purchased_date, new { htmlAttributes = new { @class = "form-control master-form-input"} })
                     @Html.ValidationMessageFor(model => model.Purchased_date, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -453,7 +453,7 @@
                     Property Valued Date:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Valued_Date, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Valued_Date, new { htmlAttributes = new { @class = "form-control master-form-input", @onblur= "setMaxForPurchasedDate()" } })
                     @Html.ValidationMessageFor(model => model.Valued_Date, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -462,7 +462,7 @@
                     Available From:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Vacant_Start_Date, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Vacant_Start_Date, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onblur = "setMaxForPropertyDate()" } })
                     @Html.ValidationMessageFor(model => model.Vacant_Start_Date, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -471,7 +471,7 @@
                     Min.Rental Rate/Month (in AED):
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Rental_Rate_Month, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Rental_Rate_Month, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onkeypress = "allow_only_Float(event,'Rental_Rate_Month');" } })
                     @Html.ValidationMessageFor(model => model.Rental_Rate_Month, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -517,7 +517,7 @@
                             });
                         }*@
 
-                    @Html.DropDownList("Ref_unit_Property_ID_Tawtheeq", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-- Select --" })
+                    @Html.DropDownList("Ref_unit_Property_ID_Tawtheeq", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-- Select --", @required = "required" })
 
 
                 </div>
@@ -551,7 +551,7 @@
                             });
                         }*@
 
-                    @Html.DropDownList("Ref_Unit_Property_ID", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-- Select --" })
+                    @Html.DropDownList("Ref_Unit_Property_ID", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-- Select --", @required = "required" })
 
 
                 </div>
@@ -585,7 +585,7 @@
                             });
                         }*@
 
-                    @Html.DropDownList("Ref_Unit_Property_Name", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-- Select --" })
+                    @Html.DropDownList("Ref_Unit_Property_Name", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-- Select --", @required = "required" })
 
 
                 </div>
@@ -595,7 +595,7 @@
                     Unit Tawteeq ID:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Unit_ID_Tawtheeq, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Unit_ID_Tawtheeq, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.Unit_ID_Tawtheeq, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -609,7 +609,7 @@
                             <option> ID 2 </option>
                             <option> ID 3 </option>
                         </select>*@
-                    @Html.EditorFor(model => model.Unit_Property_Name, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Unit_Property_Name, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.Unit_Property_Name, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -637,7 +637,7 @@
                             <option> Real Estate </option>
                             <option> Bunglow </option>
                         </select>*@
-                    @Html.EditorFor(model => model.AEDvalue_unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.AEDvalue_unit, new { htmlAttributes = new { @class = "form-control master-form-input", @onkeypress = "allow_only_Float(event,'AEDvalue_unit');" } })
                     @Html.ValidationMessageFor(model => model.AEDvalue_unit, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -647,7 +647,7 @@
                 </div>
                 <div class="col-md-8">
                     @*<input type="text" class="form-control master-form-input" />*@
-                    @Html.EditorFor(model => model.Purchased_date_unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Purchased_date_unit, new { htmlAttributes = new { @class = "form-control master-form-input", @onblur= "setMaxForCompletionDate()" } })
                     @Html.ValidationMessageFor(model => model.Purchased_date_unit, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -676,7 +676,7 @@
                     Available From:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Vacant_Start_Date_Unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Vacant_Start_Date_Unit, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.Vacant_Start_Date_Unit, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -685,7 +685,7 @@
                     Min Rental Rate/Month (in AED) (Unit):
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Rental_Rate_Month_unit, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Rental_Rate_Month_unit, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onkeypress = "allow_only_Float(event,'AEDvalue_unit');" } })
                     @Html.ValidationMessageFor(model => model.Rental_Rate_Month, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -739,7 +739,7 @@
                     Total Area:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Total_Area, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Total_Area, new { htmlAttributes = new { @class = "form-control master-form-input", @onkeypress = "allow_only_Float(event,'Total_Area');" } })
                     @Html.ValidationMessageFor(model => model.Total_Area, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -748,7 +748,7 @@
                     Unit Common Area:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Unit_Common_Area, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Unit_Common_Area, new { htmlAttributes = new { @class = "form-control master-form-input", @onkeypress = "allow_only_Float(event,'Unit_Common_Area');" } })
                     @Html.ValidationMessageFor(model => model.Unit_Common_Area, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -757,7 +757,7 @@
                     Common Area:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Common_Area, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Common_Area, new { htmlAttributes = new { @class = "form-control master-form-input", @onkeypress = "allow_only_Float(event,'Common_Area');" } })
                     @Html.ValidationMessageFor(model => model.Common_Area, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -766,7 +766,7 @@
                     Parking Number:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Parkingno, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Parkingno, new { htmlAttributes = new { @class = "form-control master-form-input",@min="0" } })
                     @Html.ValidationMessageFor(model => model.Parkingno, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -788,7 +788,7 @@
                     Caretaker Name:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Caretaker_Name, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                    @Html.EditorFor(model => model.Caretaker_Name, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.Caretaker_Name, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -802,7 +802,7 @@
                             <option> ID 2 </option>
                             <option> ID 3 </option>
                         </select>*@
-                    @Html.DropDownList("Caretaker_ID", null, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })
+                    @Html.DropDownList("Caretaker_ID", null, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -993,17 +993,44 @@
 
                         @*</div>
                             </div>*@
-                        <div class="col-md-12 form-input-padding">
-                            <div class="col-md-4">
-                                &nbsp;
+                        <div class="col-md-12 form-input-padding btn-group-justified">
+                            <div class="col-md-3">
+
                             </div>
-                            <div class="col-md-4">
-                                <button class="btn master-form-btn">Submit</button>
+                            <div class="col-md-3">
+                                <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
                             </div>
+                            <div class="col-md-3">
+                                <button class="btn master-form-btn" id="btnCancel" type="reset" onclick="formReset()">Cancel</button>
+                            </div>
+                            <div class="col-md-3">
+
+                            </div>
+
                         </div>
                         }
 <script>
-
+    function setMaxForCompletionDate() {
+        debugger;
+        var to = $("#Purchased_date").val();
+        if (to != "") {
+            $("#completion_Date").prop('max', to);
+        }
+    }
+    function setMaxForPurchasedDate() {
+        debugger;
+        var to = $("#Valued_Date").val();
+        if (to != "") {
+            $("#Purchased_date").prop('max', to);
+        }
+    }
+    function setMaxForPropertyDate() {
+        debugger;
+        var to = $("#Vacant_Start_Date").val();
+        if (to != "") {
+            $("#Valued_Date").prop('max', to);
+        }
+    }
     $("#Ref_unit_Property_ID_Tawtheeq").change(function () {
         debugger;
         $("#Ref_Unit_Property_ID").val($("#Ref_unit_Property_ID_Tawtheeq option:selected").val());
@@ -1199,11 +1226,14 @@
     $('input[type=radio][name=Property_Flag]').change(function () {
         if (this.value == 'Property') {
             // $("select option").prop("selected", false);
+            $("#TypeProperty :input").attr("disabled", false);
+            $("#TypeUnit :input").attr("disabled", true);
             $("#TypeProperty").show();
             $("#TypeUnit").hide();
         }
         else {
-            // $("select option").prop("selected", false);
+            $("#TypeProperty :input").attr("disabled", true);
+            $("#TypeUnit :input").attr("disabled", false);
             $("#TypeProperty").hide();
             $("#TypeUnit").show();
         }
@@ -1249,7 +1279,13 @@
             $("#property").prop('checked', true).change();
             //$("select option").prop("selected", false);
         }
+        var id = $("#Id").val();
+        if (id != 0) {
+            document.getElementById("btnSubmit").innerHTML = 'Update';
+        }
         //$("#property").prop('checked', true).change();
     });
-
+    function formReset() {
+        getPropertyMasterAddorUpdate();
+    }
 </script>
