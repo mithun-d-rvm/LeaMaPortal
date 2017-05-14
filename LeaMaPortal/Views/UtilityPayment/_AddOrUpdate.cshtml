@@ -80,7 +80,7 @@
                             @Html.LabelFor(model => model.PaymentDate, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                            @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -88,7 +88,7 @@
                             @Html.LabelFor(model => model.Utiltiy_name, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.DropDownList("Utiltiyname", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                            @Html.DropDownList("Utiltiyname", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -96,7 +96,7 @@
                             @Html.LabelFor(model => model.Supplier_name, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.DropDownList("Suppliername", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                            @Html.DropDownList("Suppliername", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -104,7 +104,7 @@
                             @Html.LabelFor(model => model.PaymentType, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.DropDownList("PaymentType", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                            @Html.DropDownList("PaymentType", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
 
@@ -113,7 +113,7 @@
                             @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.DropDownList("PaymentMode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                            @Html.DropDownList("PaymentMode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
                     @*<div class="col-md-12 form-input-padding">
@@ -129,7 +129,7 @@
                             @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                            @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required", @onkeypress = "allow_only_Float(event,'TotalAmount');" } })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -243,7 +243,7 @@
                             </div>
                             <div class="col-md-3 form-group">
                                 <label for="quantity">Bill Date</label>
-                                <input type="date" class="form-control master-form-input" id="billDate"/>
+                                <input type="date" class="form-control master-form-input" id="billDate" />
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="amount">Bill Amount</label>
@@ -251,11 +251,11 @@
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="amount">Received Amount</label>
-                                <input id="ReceivedAmount" type="text" class="form-control master-form-input" />
+                                <input id="ReceivedAmount" type="text" class="form-control master-form-input" onkeypress = "allow_only_Float(event, 'ReceivedAmount');"/>
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="DebitAmount">Debit Amount</label>
-                                <input id="DebitAmount" type="text" class="form-control master-form-input" />
+                                <input id="DebitAmount" type="text" class="form-control master-form-input" onkeypress = "allow_only_Float(event, 'DebitAmount');"/>
                             </div>
                             <div class="col-md-3 form-group">
                                 <label for="Remarks">Remarks</label>

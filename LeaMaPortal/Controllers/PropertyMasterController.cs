@@ -69,7 +69,15 @@ namespace LeaMaPortal.Controllers
             ViewBag.Property_Usage_unit = new SelectList(propertyTypeData.Select(x => x.Usage_name));
             ViewBag.Property_Type_unit = new SelectList(propertyTypeData.Select(x => x.PropertyCategory));
 
-            var propertyMaster = db.tbl_propertiesmaster.Where(x => x.Noofunits > 0 && x.Status != "Avail" && x.Delmark != "*").ToList();
+            var propertyMasterData = db.tbl_propertiesmaster.Where(x => x.Noofunits > 0 && x.Status != "Avail" && x.Delmark != "*").ToList();
+            List<tbl_propertiesmaster> propertyMaster = new List<tbl_propertiesmaster>();
+            foreach (var data in propertyMasterData)
+            {
+                if(db.tbl_propertiesmaster.Where(x => x.Ref_Unit_Property_ID == data.Property_Id).Count() < data.Noofunits)
+                {
+                    propertyMaster.Add(data);
+                }
+            }
             ViewBag.Ref_unit_Property_ID_Tawtheeq = new SelectList(propertyMaster.Select(x => new { PropertyIdTawtheeq = x.Property_ID_Tawtheeq, PropertyId = x.Property_Id }), "PropertyId", "PropertyIdTawtheeq");
 
             ViewBag.Ref_Unit_Property_ID = new SelectList(propertyMaster.Select(x => x.Property_Id));
@@ -232,7 +240,15 @@ namespace LeaMaPortal.Controllers
                 ViewBag.Property_Usage_unit = new SelectList(propertyTypeData.Select(x => x.Usage_name), model.Property_Usage_unit);
                 ViewBag.Property_Type_unit = new SelectList(propertyTypeData.Select(x => x.PropertyCategory), model.Property_Type_unit);
 
-                var propertyMaster = db.tbl_propertiesmaster.Where(x => x.Noofunits > 0 && x.Status != "Avail" && x.Delmark != "*").ToList();
+                var propertyMasterData = db.tbl_propertiesmaster.Where(x => x.Noofunits > 0 && x.Status != "Avail" && x.Delmark != "*").ToList();
+                List<tbl_propertiesmaster> propertyMaster = new List<tbl_propertiesmaster>();
+                foreach (var data in propertyMasterData)
+                {
+                    if (db.tbl_propertiesmaster.Where(x => x.Ref_Unit_Property_ID == data.Property_Id).Count() < data.Noofunits)
+                    {
+                        propertyMaster.Add(data);
+                    }
+                }
                 ViewBag.Ref_unit_Property_ID_Tawtheeq = new SelectList(propertyMaster.Select(x => new { PropertyIdTawtheeq = x.Property_ID_Tawtheeq, PropertyId = x.Property_Id }), "PropertyId", "PropertyIdTawtheeq", model.Ref_Unit_Property_ID);
                 ViewBag.Ref_Unit_Property_ID = new SelectList(propertyMaster.Select(x => x.Property_Id), model.Ref_Unit_Property_ID);
                 ViewBag.Ref_Unit_Property_Name = new SelectList(propertyMaster.Select(x => new { PropertyName = x.Property_Name, PropertyId = x.Property_Id }), "PropertyId", "PropertyName", model.Ref_Unit_Property_ID);
