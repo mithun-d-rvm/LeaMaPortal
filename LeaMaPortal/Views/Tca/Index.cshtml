@@ -93,6 +93,13 @@
 
             </div>
         </div>
+        <div id="renewalModal" class="modal fade" role="dialog">
+
+            <div class="modal-dialog tca-modal-md" id="editAddOrUpdateContainer" style="background-color: white;">
+
+            </div>
+
+        </div>
 
         <div id="closureModal" class="modal fade" role="dialog">
            @using (Html.BeginForm("Closure", "Tca", FormMethod.Post, new { @id = "Closure", @enctype = "multipart/form-data" }))
@@ -102,6 +109,15 @@
                 
             </div>
            }
+        </div>
+        <div id="statusModal" class="modal fade" role="dialog">
+            @using (Html.BeginForm("Status", "Tca", FormMethod.Post, new { @id = "Status", @enctype = "multipart/form-data" }))
+            {
+                <div class="modal-dialog tca-modal-md" id="StatusContainer" style="background-color: white;">
+
+
+                </div>
+            }
         </div>
         <!-- End Grid view -->
         <!-- Trigger the modal with a button -->
@@ -113,8 +129,9 @@
 
         <!-- Contract Modal -->
         <div id="contractModal" class="modal fade" role="dialog">
-            <div class="modal-dialog tca-modal-md" style="background-color: white;">
-                @Html.Partial("Contract/_ContractDetails")
+            
+            <div class="modal-dialog tca-modal-md" id="PrintContainer" style="background-color: white;">
+                @*@Html.Partial("Contract/_ContractDetails")*@
 
             </div>
         </div>
@@ -128,74 +145,28 @@
     });
 
 </script>
+<script type="text/javascript">
+    function printData() {
+        //alert(1);
+        var divToPrint = document.getElementById("PrintelementID");
+        newWin = window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+    }
+    //printData();
+        $(document).ready()
+        {
+
+         //btnPrint button id
+            $('#btnPrint').on('click', function () {
+                               printData();
+            })
+
+        }
+</script>
 
 
-<!-- including css & jQuery Dialog UI here-->
-@*<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/ui-darkness/jquery-ui.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
-
-    <div class="inner-block p-t-5-p">
-        <div class="blank">
-
-            <div class="main">
-                <div id="dialog" title="Dialog Form">
-                    <form action="" method="post">
-                        <label>Name:</label><br />
-                        <input type="text" id="name" name="name"><br />
-
-                        <label>Email:</label><br />
-                        <input type="text" id="email" name="email"><br />
-
-                        <input type="submit" id="submit" value="Submit" />
-                    </form>
-                </div>
-                <h2>jQuery Dialog Form Example</h2><hr />
-                <p>Click below button to see jQuery dialog form.</p>
-                <input type="button" id="button" value="Open Dialog Form" />
-            </div>
-
-        </div>
-    </div>
-
-    <script>
-
-        $(document).ready(function () {
-
-            $(function () {
-                $("#dialog").dialog({
-                    autoOpen: false
-                });
-                $("#button").on("click", function () {
-                    $("#dialog").dialog("open");
-                });
-            });
-
-            //validating Form Fields.....
-            $("#submit").click(function (e) {
-
-                var email = $("#email").val();
-                var name = $("#name").val();
-
-
-                if (email === '' || name === '') {
-                    alert("Please fill all fields...!!!!!!");
-                    e.preventDefault();
-                }
-                //else if (!(email).match(emailReg)) {
-                //    alert("Invalid Email...!!!!!!");
-                //    e.preventDefault();
-                //}
-                else {
-                    alert("Form Submitted Successfully......");
-                }
-
-            });
-
-        });
-
-
-    </script>*@
 
 <script>
     $("#TopNavBarFilter").empty();
@@ -385,4 +356,25 @@
            });
     }
 
+</script>
+
+<script>
+    $("form#Tca").off("submit").on("submit", function (e) {
+       // e.preventDefault();
+        try {
+            var firstDate = new Date($("#Agreement_Start_Date").val());
+            var secondDate = new Date($("#Agreement_End_Date").val());
+            if (firstDate.getDate() > secondDate.getDate()) {
+                e.preventDefault();
+                $("#Agreement_End_Date").focus();
+                alert("Agreement Start Date less than or equal to Agreement End Date");
+            }
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+    
+    
 </script>
