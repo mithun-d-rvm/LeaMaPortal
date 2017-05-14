@@ -688,11 +688,10 @@
             }
         });
     }
-    function GetApprovalSettings() {
-        //$("#img-loader").removeClass("hide");
+    function ApprovalAddOrUpdate() {
         $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
+        
         $.ajax(
         {
             url: "../ApprovalSettings/AddOrUpdate",
@@ -711,6 +710,32 @@
                 $("#master-loader").addClass("hide");
             }
         });
+    }
+    function GetApprovalSettings() {
+        ApprovalAddOrUpdate();
+        $("#ContainerList").empty();
+        //$("#img-loader").removeClass("hide");
+        //$("#master-loader").removeClass("hide");
+        //$("#ContainerAddOrUpdate").empty();
+        //$("#ContainerList").empty();
+        //$.ajax(
+        //{
+        //    url: "../ApprovalSettings/AddOrUpdate",
+        //    type: "Get",
+        //    data: {},
+        //    contentType: "application/json",
+        //    processData: false,
+        //    success: function (html) {
+        //        $("#ContainerAddOrUpdate").html(html);
+        //    },
+        //    error: function (jqXhr, textStatus, errorThrown) {
+        //        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+        //    },
+        //    complete: function () {
+        //        //$("#img-loader").addClass("hide");
+        //        $("#master-loader").addClass("hide");
+        //    }
+        //});
         //$("#img-loader").removeClass("hide");
         $("#master-loader").removeClass("hide");
         $.ajax(

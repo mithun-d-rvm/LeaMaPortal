@@ -167,20 +167,9 @@
                 url: "../ApprovalSettings/Edit",
                 type: "Get",
                 data: { Id: id },
-                success: function (result) {
-                    if (result.Errors == undefined || result.Errors == "") {
-                        $("#ApprovalSettingsId").val(result.Id);
-                        $("#Userid").val(result.Userid);
-                        if (result.Approval_flag == "Yes") {
-                            $("#Approval_flag_yes").attr("checked", "checked");
-                        }
-                        else {
-                            $("#Approval_flag_no").attr("checked", "checked");
-                        }
-                    }
-                    else {
-                        alert(data.Errors);
-                    }
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").empty();
+                    $("#ContainerAddOrUpdate").html(html);
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");

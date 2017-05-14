@@ -170,7 +170,7 @@ namespace LeaMaPortal
            //new FormMaster() {Id=1,FormName="" },
            new FormMaster() {Id=2,MenuName="User Rights" , MenuId=2 },
            //new FormMaster() {Id=3,FormName="" },
-           new FormMaster() {Id=4,MenuName="Approval",MenuId=4 },
+           new FormMaster() {Id=4,MenuName="TCA Approval Setting",MenuId=4 },
            new FormMaster() {Id=5,MenuName="Country Master" , MenuId=5},
            new FormMaster() {Id=6,MenuName="Region Master",MenuId=6 },
            new FormMaster() {Id=7,MenuName="Caretaker Master", MenuId=7 },
