@@ -39,7 +39,7 @@
                             Supplier Name
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Supplier_Name, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.EditorFor(model => model.Supplier_Name, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", @title = "Alphanumeric only" } })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -58,7 +58,7 @@
                         </div>
                         <div class="col-md-8">
                            
-                            @Html.DropDownList("Title",null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input" })
+                            @Html.DropDownList("Title",null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -67,7 +67,7 @@
                         </div>
                         <div class="col-md-8">
                             @*<input type="text" class="form-control master-form-input" />*@
-                            @Html.EditorFor(model => model.First_Name, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.EditorFor(model => model.First_Name, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" } })
                             @Html.ValidationMessageFor(model => model.First_Name, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                             Middle Name:
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Middle_Name, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.EditorFor(model => model.Middle_Name, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" } })
                             @Html.ValidationMessageFor(model => model.Middle_Name, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                             Last Name:
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Last_Name, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.EditorFor(model => model.Last_Name, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" } })
                             @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                             Address:
                         </div>
                         <div class="col-md-8">
-                            @Html.TextAreaFor(model => model.address, new { @class = "form-control master-form-input", @rows = "4" })
+                            @Html.TextAreaFor(model => model.address, new { @class = "form-control master-form-input", @rows = "4", @required = "required" })
                             @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                             Emirate:
                         </div>
                         <div class="col-md-8">
-                            @Html.DropDownList("Emirate", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input" })
+                            @Html.DropDownList("Emirate", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -131,7 +131,8 @@
                             City:
                         </div>
                         <div class="col-md-8">
-                            @Html.DropDownList("City", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input" })
+                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control master-form-input", @id = "City", @required = "required" } })
+                            @*@Html.DropDownList("City", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })*@
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -139,7 +140,7 @@
                             Post Box:
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.PostboxNo, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.EditorFor(model => model.PostboxNo, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" } })
                             @Html.ValidationMessageFor(model => model.PostboxNo, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -148,7 +149,7 @@
                             Email:
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", title = "Enter valid email id" } })
                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -159,17 +160,17 @@
                         <div class="col-md-8">
                             <div class="col-md-3" style="margin-left: -15px;">
                                 @*<input type="text" class="form-control master-form-input">*@
-                                @Html.EditorFor(model => model.Mobile_Countrycode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                                @Html.EditorFor(model => model.Mobile_Countrycode, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[0-9]+", title = "Enter valid country code" } })
                                 @Html.ValidationMessageFor(model => model.Mobile_Countrycode, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-3" style="margin-left: -15px;">
                                 @*<input type="text" class="form-control master-form-input">*@
-                                @Html.EditorFor(model => model.Mobile_Areacode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                                @Html.EditorFor(model => model.Mobile_Areacode, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[0-9]+", title = "Enter valid area code" } })
                                 @Html.ValidationMessageFor(model => model.Mobile_Areacode, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-6" style="margin-left: 32%;width: 64%;position: absolute;">
                                 @*<input type="text" class="form-control master-form-input">*@
-                                @Html.EditorFor(model => model.Mobile_No, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                                @Html.EditorFor(model => model.Mobile_No, new { htmlAttributes = new { @class = "form-control master-form-input", @maxlength = "15", @required = "required", @pattern = "[0-9]+", title = "Enter valid mobile no" } })
                                 @Html.ValidationMessageFor(model => model.Mobile_No, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -189,19 +190,19 @@
                         <div class="col-md-8">
                             <div class="col-md-3" style="margin-left: -15px;">
                                 @*<input type="text" class="form-control master-form-input">*@
-                                @Html.EditorFor(model => model.Landline_Countrycode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                                @Html.EditorFor(model => model.Landline_Countrycode, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[0-9]+", title = "Enter valid country code" } })
                                 @Html.ValidationMessageFor(model => model.Landline_Countrycode, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-3" style="margin-left: -15px;">
                                 @*<input type="text" class="form-control master-form-input">*@
 
-                                @Html.EditorFor(model => model.Landline_Areacode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                                @Html.EditorFor(model => model.Landline_Areacode, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[0-9]+", title = "Enter valid are code" } })
                                 @Html.ValidationMessageFor(model => model.Landline_Areacode, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-6" style="margin-left: 32%;width: 64%;position: absolute;">
                                 @*<input type="text" class="form-control master-form-input">*@
 
-                                @Html.EditorFor(model => model.Landline_No, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                                @Html.EditorFor(model => model.Landline_No, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @maxlength = "15", @pattern = "[0-9]+", title = "Enter valid landline no" } })
                                 @Html.ValidationMessageFor(model => model.Landline_No, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -213,17 +214,17 @@
                         <div class="col-md-8">
                             <div class="col-md-3" style="margin-left: -15px;">
                                 @*<input type="text" class="form-control master-form-input">*@
-                                @Html.EditorFor(model => model.Fax_Countrycode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                                @Html.EditorFor(model => model.Fax_Countrycode, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[0-9]+", title = "Enter valid country code" } })
                                 @Html.ValidationMessageFor(model => model.Fax_Countrycode, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-3" style="margin-left: -15px;">
                                 @*<input type="text" class="form-control master-form-input">*@
-                                @Html.EditorFor(model => model.Fax_Areacode, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                                @Html.EditorFor(model => model.Fax_Areacode, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[0-9]+", title = "Enter valid fax area code" } })
                                 @Html.ValidationMessageFor(model => model.Fax_Areacode, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-6" style="margin-left: 32%;width: 64%;position: absolute;">
                                 @*<input type="text" class="form-control master-form-input">*@
-                                @Html.EditorFor(model => model.Fax_No, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                                @Html.EditorFor(model => model.Fax_No, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[0-9]+", title = "Enter valid fax no" } })
                                 @Html.ValidationMessageFor(model => model.Fax_No, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -233,7 +234,8 @@
                             Nationality:
                         </div>
                         <div class="col-md-8">
-                            @Html.DropDownList("Nationality", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input" })
+                            @Html.EditorFor(model => model.Nationality, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required"} })
+                            @*@Html.DropDownList("Nationality", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })*@
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -241,7 +243,7 @@
                             Activity:
                         </div>
                         <div class="col-md-8">
-                            @Html.DropDownList("Actitvity", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input" })
+                            @Html.DropDownList("Actitvity", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -249,7 +251,7 @@
                             Chamber of Commerce & Industry Unified ID:
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Cocandindustryuid, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.EditorFor(model => model.Cocandindustryuid, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" } })
                             @Html.ValidationMessageFor(model => model.Cocandindustryuid, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -258,7 +260,7 @@
                             Trade License Number:
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.TradelicenseNo, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.EditorFor(model => model.TradelicenseNo, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" } })
                             @Html.ValidationMessageFor(model => model.TradelicenseNo, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -267,7 +269,7 @@
                             Type:
                         </div>
                         <div class="col-md-8">
-                            @Html.DropDownList("Type", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input" })
+                            @Html.DropDownList("Type", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -276,7 +278,7 @@
                         </div>
                         <div class="col-md-8">
                             @*<input type="text" class="form-control master-form-input"  />*@
-                            @Html.EditorFor(model => model.License_issueDate, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.EditorFor(model => model.License_issueDate, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onblur = "setMin()", @id = "License_issueDate" } })
                             @Html.ValidationMessageFor(model => model.License_issueDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -286,7 +288,7 @@
                         </div>
                         <div class="col-md-8">
                             @*<input type="text" class="form-control master-form-input" />*@
-                            @Html.EditorFor(model => model.License_ExpiryDate, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.EditorFor(model => model.License_ExpiryDate, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onblur = "setMax()", @id = "License_ExpiryDate" } })
                             @Html.ValidationMessageFor(model => model.License_ExpiryDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -295,17 +297,17 @@
                             Issuance authority:
                         </div>
                         <div class="col-md-8">
-                            @Html.DropDownList("Issuance_authority", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input" })
+                            @Html.DropDownList("Issuance_authority", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                         </div>
                     </div>
-                    <div id="ADWEARegisterId" class="col-md-12 form-input-padding" id="ADWEARegisterId">
+                    <div id="ADWEARegisterId" class="col-md-12 form-input-padding">
                         <div class="col-md-4">
                             ADWEA registration Id:
                         </div>
                         <div class="col-md-8">
                             @*<input type="text" class="form-control master-form-input" />*@
 
-                            @Html.EditorFor(model => model.ADWEA_Regid, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                            @Html.EditorFor(model => model.ADWEA_Regid, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })
                             @Html.ValidationMessageFor(model => model.ADWEA_Regid, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -338,11 +340,11 @@
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="city">City</label>
-                                <input type="text" class="form-control master-form-input" id="city" />
+                                <input type="text" class="form-control master-form-input" id="city"  />
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="state">State</label>
-                                <input type="text" class="form-control master-form-input" id="state" />
+                                <input type="text" class="form-control master-form-input" id="state"  />
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="country">Country</label>
@@ -356,11 +358,11 @@
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="phno">Phone Number</label>
-                                <input type="text" class="form-control master-form-input" id="phno" />
+                                <input type="text" class="form-control master-form-input" id="phno"/>
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="emailid">Email id</label>
-                                <input type="text" class="form-control master-form-input" id="emailid" />
+                                <input type="text" class="form-control master-form-input" id="emailid"/>
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="fax">Fax</label>
@@ -548,11 +550,12 @@
 
         </div>
         <div class="col-md-12 form-input-padding">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 &nbsp;
             </div>
-            <div class="col-md-4">
-                <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
+            <div class="col-md-6">
+                <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>&nbsp;&nbsp;
+                <button class="btn master-form-btn" id="btnCancel" type="button" onclick="formReset()">Cancel</button>
             </div>
         </div>
         <div class="row">
@@ -564,6 +567,23 @@
 }
 
 <script>
+    function formReset() {
+        GetSupplierAddOrUpdate();
+    }
+    function setMax() {
+        debugger;
+        var to = $("#License_ExpiryDate").val();
+        if (to != "") {
+            $("#License_issueDate").prop('max', to);
+        }
+    }
+    function setMin() {
+        debugger;
+        var from = $("#License_issueDate").val();
+        if (from != "") {
+            $("#License_ExpiryDate").prop('min', from);
+        }
+    }
     $("#TitleDisplay").on('change', function (e) {
         $("#Title").val($("#TitleDisplay").val());
     });
@@ -827,10 +847,19 @@
                     processData: false,
                     success: function (response) {
                         GetSupplier();
-                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
-                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
-                        $(".result-title").text("Success");
-                        $(".result-modal-body span").text(supplierAdded);
+                        if (response.Errors == null) {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Message);
+                        }
+                        else
+                        {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(response.Errors);
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -870,11 +899,13 @@
     $("#Type").on('change', function (e) {
         var type = $("#Type").val();
         if (type == "Company") {
+            $("#ADWEARegisterId :input").attr("disabled", false);
             $("#ADWEARegisterId").show();
             $("#contactDetails").show();
             $("#companyDetails").show();
         }
         else {
+            $("#ADWEARegisterId :input").attr("disabled", true);
             $("#ADWEARegisterId").hide();
             $("#contactDetails").hide();
             $("#companyDetails").hide();
@@ -885,15 +916,21 @@
         debugger;
         var type = $("#Type").val();
         if (type == "Company") {
+            $("#ADWEARegisterId :input").attr("disabled", false);
             $("#ADWEARegisterId").show();
             $("#contactDetails").show();
             $("#companyDetails").show();
         }
         else {
+            $("#ADWEARegisterId :input").attr("disabled", true);
             $("#ADWEARegisterId").hide();
             $("#contactDetails").hide();
             $("#companyDetails").hide();
         }
+        var id = $("#Id").val();
+            if (id != 0) {
+                document.getElementById("btnSubmit").innerHTML = 'Update';
+            }
         //$("#property").prop('checked', true).change();
     });
 </script>

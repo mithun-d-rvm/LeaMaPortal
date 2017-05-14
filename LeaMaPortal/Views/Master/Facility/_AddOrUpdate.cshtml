@@ -33,13 +33,17 @@
             </div>
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-12 pull-left">
-                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                    <button type="submit" id="btnSubmit" class="col-md-offset-2 leama-btn">Submit</button>&nbsp;&nbsp;
+<button class="btn master-form-btn" id="btnCancel" type="button" onclick="formReset()">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
 }
 <script>
+    function formReset() {
+        GetFacilityAddOrUpdate();
+    }
     //Add or update
     $("form#Facility").off("submit").on("submit", function (e) {
         e.preventDefault();
@@ -54,10 +58,20 @@
                     processData: false,
                     success: function (response) {
                         GetFacility();
-                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
-                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
-                        $(".result-title").text("Success");
-                        $(".result-modal-body span").text(facilityAdded);
+                        
+                        if (response.Errors == null) {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Message);
+                        }
+                        else
+                        {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Errors);
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -94,4 +108,10 @@
         });
         return o;
     };
+    $(document).ready(function () {
+        var id = $("#FacilityId").val();
+        if (id != 0) {
+            document.getElementById("btnSubmit").innerHTML = 'Update';
+        }
+    });
 </script>

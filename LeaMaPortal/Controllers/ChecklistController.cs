@@ -15,7 +15,7 @@ using LeaMaPortal.Helpers;
 
 namespace LeaMaPortal.Controllers
 {
-    public class ChecklistController : Controller
+    public class ChecklistController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
 
@@ -80,12 +80,18 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var checkList = await db.tbl_checklistmaster.FirstOrDefaultAsync(r => r.Checklist_Name.ToLower() == model.Checklist_Name.ToLower());
+                    if (checkList != null)
+                    {
+                        result.Errors = "Check list name already added";
+                        return Json(result, JsonRequestBehavior.AllowGet);
+                    }
                     MySqlParameter pa = new MySqlParameter();
                     string PFlag = "INSERT";
 
                     if (model.Id == 0)
                     {
-                        
+
                     }
                     else
                     {
@@ -129,7 +135,9 @@ namespace LeaMaPortal.Controllers
                     Checklist_Name = tbl_checklist.Checklist_Name,
                     Checklist_Type = tbl_checklist.Check_type
                 };
-                return Json(model, JsonRequestBehavior.AllowGet);
+                ViewBag.Checklist_Type = new SelectList(StaticHelper.GetStaticData(StaticHelper.CHECKLIST_DROPDOWN), "Name", "Name", model.Checklist_Type);
+                //return Json(model, JsonRequestBehavior.AllowGet);
+                return PartialView("../Master/CheckList/_AddOrUpdate", model);
             }
             catch (Exception ex)
             {
