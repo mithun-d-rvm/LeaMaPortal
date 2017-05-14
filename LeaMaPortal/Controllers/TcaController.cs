@@ -467,6 +467,85 @@ namespace LeaMaPortal.Controllers
                 throw;
             }
         }
+
+        public async Task<PartialViewResult> Print(int AgreementNo)
+        {
+            try
+            {
+                TcaPrintModel model = new TcaPrintModel();
+                var agreementDet = await db.tbl_agreement.FirstOrDefaultAsync(x => x.Agreement_No == AgreementNo && x.Delmark != "*");
+
+                ViewBag.Renewal_Close_Flag = new SelectList(Common.Renewal_Close_Flag);
+                model.Tenant_Type = agreementDet.Tenant_Type;
+                model.Ag_Tenant_Name = agreementDet.Ag_Tenant_Name;
+                if (agreementDet.Tenant_Type.ToLower().Trim()== "Individual".ToLower().Trim())
+                {
+                    var tenant =await db.tbl_tenant_individual.FirstOrDefaultAsync(x => x.Tenant_Id == agreementDet.Ag_Tenant_id);
+                    if(tenant!=null)
+                    {
+                        model.Ag_Tenant_Faxno =string.IsNullOrWhiteSpace(tenant.Fax_No)?"":tenant.Fax_Countrycode + "-" + tenant.Fax_Areacode + "-" + tenant.Fax_No;
+                        model.Ag_Tenant_Address = tenant.address + ", " + tenant.address1 + ", " + tenant.City;
+                        model.Ag_Tenant_Telephone = string.IsNullOrWhiteSpace(tenant.Landline_No)?"":tenant.Landline_Countrycode + "-" + tenant.Landline_Areacode+"-" + tenant.Landline_No;
+                        model.Ag_Tenant_Name = tenant.Title + " " + model.Ag_Tenant_Name;
+                    }
+
+                }
+                else
+                {
+                    var tenant = await db.tbl_tenant_company.FirstOrDefaultAsync(x => x.Tenant_Id == agreementDet.Ag_Tenant_id);
+                    if (tenant != null)
+                    {
+                        model.Ag_Tenant_Faxno = string.IsNullOrWhiteSpace(tenant.Fax_No) ? "" : tenant.Fax_Countrycode + "-" + tenant.Fax_Areacode + "-" + tenant.Fax_No;
+                        model.Ag_Tenant_Address = tenant.address + ", " + tenant.address1 + ", " + tenant.City;
+                        model.Ag_Tenant_Telephone = string.IsNullOrWhiteSpace(tenant.Landline_No) ? "" : tenant.Landline_Countrycode + "-" + tenant.Landline_Areacode + "-" + tenant.Landline_No;
+                        model.Ag_Tenant_Name = tenant.Title + " " + model.Ag_Tenant_Name;
+                    }
+                }
+                var bankDet = Common.BankDetails.First();
+                model.BankName = bankDet.BankName;
+                model.AccountNo = bankDet.AccountNumber;
+                model.CompanyFax = Common.CompanyFax;
+                model.Ag_Tenant_id = agreementDet.Ag_Tenant_id;
+                
+
+                model.Properties_ID = agreementDet.property_id;
+                //model.Property_ID_Tawtheeq = agreementDet.Property_ID_Tawtheeq;
+                model.Properties_Name = agreementDet.Properties_Name;
+
+                //var unit = property.Where(x => x.Property_Flag == "Unit").ToList();
+                model.Unit_ID_Tawtheeq = agreementDet.Unit_ID_Tawtheeq;
+                model.Unit_Property_Name = agreementDet.Unit_Property_Name;
+
+                model.Caretaker_id = agreementDet.Caretaker_id;
+                model.Caretaker_Name = agreementDet.Caretaker_Name;
+                model.AgreementDate = agreementDet.Agreement_Date.HasValue ? agreementDet.Agreement_Date.Value.ToString(Common.DisplayDateFormat) : "";
+                
+                model.Agreement_No = AgreementNo;
+                model.Agreement_Start_Date =agreementDet.Agreement_Start_Date.HasValue ? agreementDet.Agreement_Start_Date.Value.ToString(Common.DisplayDateFormat) : "";
+                model.Agreement_End_Date = agreementDet.Agreement_End_Date.HasValue ? agreementDet.Agreement_End_Date.Value.ToString(Common.DisplayDateFormat) : "";
+                if(agreementDet.Agreement_Start_Date.HasValue && agreementDet.Agreement_End_Date.HasValue)
+                {
+                    DateTime startDate = agreementDet.Agreement_Start_Date.Value;
+                    DateTime endDate = agreementDet.Agreement_End_Date.Value;
+                    var totalDays = (endDate - startDate).TotalDays;
+                    var totalYears = Math.Truncate(totalDays / 365);
+                    var totalMonths = Math.Truncate((totalDays % 365) / 30);
+                   // var remainingDays = Math.Truncate((totalDays % 365) % 30);
+                   // Console.WriteLine("Estimated duration is {0} year(s), {1} month(s) and {2} day(s)", totalYears, totalMonths, remainingDays);
+                    model.ContractYearsAndMonths = totalYears+ "year(s)"+ "-"+ totalMonths+ "month(s)";
+                }
+                model.SecurityDeposit = agreementDet.Advance_Security_Amount;
+                model.IssueDate = System.DateTime.Now.ToString(Common.DisplayDateFormat);
+                model.Total_Rental_amount = agreementDet.Total_Rental_amount;
+                model.TotalAmountInWords = agreementDet.Total_Rental_amount.HasValue ? Common.NumberToWords(Convert.ToInt64(agreementDet.Total_Rental_amount.Value)) : "";
+                //model.AgreementPd = new AgreementPdcViewModel();
+                return PartialView("../Tca/Contract/_ContractDetails", model);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
         [HttpPost]
         public async Task<ActionResult> Status(TcaStatusViewModel model)
         {
@@ -966,7 +1045,7 @@ namespace LeaMaPortal.Controllers
             {
                 if (Type != "Multiple")
                 {
-                    var propertylist = await db.Database.SqlQuery<PropertyDropdownModel>("select property_id,  Property_ID_Tawtheeq,Property_Name,Unit_ID_Tawtheeq,Unit_Property_Name from tbl_propertiesmaster where ifnull(Noofunits,0)=0 and Property_Flag='property'  and ifnull(status,'')<>'Avail' and ifnull(delmark,'')<>'*' and ifnull(Company_occupied_Flag,0)<>1 union all select property_id, Ref_unit_Property_ID_Tawtheeq,Ref_Unit_Property_Name, Unit_ID_Tawtheeq,Unit_Property_Name from tbl_propertiesmaster where Property_Flag='Unit'   and  Caretaker_id=2 and ifnull(status,'')<>'Avail' and ifnull(delmark,'')<>'*' and ifnull(Company_occupied_Flag,0)<>1").ToListAsync();
+                    var propertylist = await db.Database.SqlQuery<PropertyDropdownModel>("select property_id,  Property_ID_Tawtheeq,Property_Name,Unit_ID_Tawtheeq,Unit_Property_Name from tbl_propertiesmaster where ifnull(Noofunits,0)=0 and Property_Flag='property'  and ifnull(status,'')<>'Avail' and ifnull(delmark,'')<>'*' and ifnull(Company_occupied_Flag,0)<>1 union all select property_id, Ref_unit_Property_ID_Tawtheeq,Ref_Unit_Property_Name, Unit_ID_Tawtheeq,Unit_Property_Name from tbl_propertiesmaster where Property_Flag='Unit' and ifnull(status,'')<>'Avail' and ifnull(delmark,'')<>'*' and ifnull(Company_occupied_Flag,0)<>1").ToListAsync();
                     return Json(propertylist, JsonRequestBehavior.AllowGet);
                 }
                 else

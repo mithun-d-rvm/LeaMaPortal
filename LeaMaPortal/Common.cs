@@ -9,13 +9,16 @@ using System.Data.Entity;
 
 namespace LeaMaPortal
 {
-     
+
     public static class Common
     {
-       public static LeamaEntities db = new LeamaEntities();
-        public static List<string> Title { get
+        //public static LeamaEntities db = new LeamaEntities();
+
+        public static List<string> Title
+        {
+            get
             {
-               return GetTitle();
+                return GetTitle();
             }
         }
         public static List<string> TcaTenantType
@@ -99,60 +102,96 @@ namespace LeaMaPortal
 
         public static List<string> GetTitle()
         {
-            return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Tenant individual" && x.comboname == "Title")?.combovalue.Split(',').ToList();
+            using (LeamaEntities db = new LeamaEntities())
+            {
+                return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Tenant individual" && x.comboname == "Title")?.combovalue.Split(',').ToList();
+            }
         }
         public static List<string> GetTcaTenantType()
         {
-            return new List<string> { "Company", "Individual" };
+            using (LeamaEntities db = new LeamaEntities())
+            {
+                return new List<string> { "Company", "Individual" };
+            }
         }
         public static List<string> GetSecurityFlag()
         {
-            return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Tenancy Contract Agreement" && x.comboname == "Security_Flag")?.combovalue.Split(',').ToList();
+            using (LeamaEntities db = new LeamaEntities())
+            {
+                return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Tenancy Contract Agreement" && x.comboname == "Security_Flag")?.combovalue.Split(',').ToList();
+            }
         }
         public static List<string> GetPaymentMode()
         {
-            return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Tenancy Contract Agreement" && x.comboname == "Security_Flag")?.combovalue.Split(',').ToList();
+            using (LeamaEntities db = new LeamaEntities())
+            {
+                return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Tenancy Contract Agreement" && x.comboname == "Security_Flag")?.combovalue.Split(',').ToList();
+            }
         }
         public static List<string> GetTenantType()
         {
-            return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Tenant Master" && x.comboname == "Type")?.combovalue.Split(',').ToList();
+            using (LeamaEntities db = new LeamaEntities())
+            {
+                return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Tenant Master" && x.comboname == "Type")?.combovalue.Split(',').ToList();
+            }
         }
 
         public static List<string> GetEmirate()
         {
-            return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Tenant Company" && x.comboname == "Emirate")?.combovalue.Split(',').ToList();
+            using (LeamaEntities db = new LeamaEntities())
+            {
+                return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Tenant Company" && x.comboname == "Emirate")?.combovalue.Split(',').ToList();
+            }
         }
 
         public static List<string> GetComapanyActivity()
         {
-            return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Tenant Company" && x.comboname == "Actitvity")?.combovalue.Split(',').ToList();
+            using (LeamaEntities db = new LeamaEntities())
+            {
+                return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Tenant Company" && x.comboname == "Actitvity")?.combovalue.Split(',').ToList();
+            }
         }
         public static List<string> GetNationality()
         {
-            return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Slab Master" && x.comboname == "Residence_type")?.combovalue.Split(',').ToList();
+            using (LeamaEntities db = new LeamaEntities())
+            {
+                return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Slab Master" && x.comboname == "Residence_type")?.combovalue.Split(',').ToList();
+            }
         }
         public static List<string> GetInvoiceType()
         {
-            return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Invoice" && x.comboname == "invtype")?.combovalue.Split(',').ToList();
+            using (LeamaEntities db = new LeamaEntities())
+            {
+                return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Invoice" && x.comboname == "invtype")?.combovalue.Split(',').ToList();
+            }
         }
         public static List<string> GetReccategory()
         {
-            return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Receipts" && x.comboname == "Reccategory")?.combovalue.Split(',').ToList();
+            using (LeamaEntities db = new LeamaEntities())
+            {
+                return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Receipts" && x.comboname == "Reccategory")?.combovalue.Split(',').ToList();
+            }
         }
         public static List<string> GetReceiptMode()
         {
-            return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Receipts" && x.comboname == "RecpType")?.combovalue.Split(',').ToList();
+            using (LeamaEntities db = new LeamaEntities())
+            {
+                return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Receipts" && x.comboname == "RecpType")?.combovalue.Split(',').ToList();
+            }
         }
         public static List<string> GetReceipts_PDCStatus()
         {
-            return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Receipts" && x.comboname == "PDCstatus")?.combovalue.Split(',').ToList();
+            using (LeamaEntities db = new LeamaEntities())
+            {
+                return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Receipts" && x.comboname == "PDCstatus")?.combovalue.Split(',').ToList();
+            }
         }
         public static List<string> Renewal_Close_Flag = new List<string>() { "Renewal", "Close" };
         //public static List<string> Title = new List<string>() { "MR.", "MRS.", "MS." };
         //public static List<string> TcaTenantType = new List<string>() { "Company", "Individual" };
         //public static List<string> SecurityFlag = new List<string>() { "Cash", "Cheque", "Online", "Cheque without date", "DD" };
 
-        public static List<string> Months= new List<string>() { "Jan", "Feb", "Mar", "April", "May","June","July","Aug","Sep","Oct","Nov","Dec" };
+        public static List<string> Months = new List<string>() { "Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec" };
         //public static List<string> PaymentMode = new List<string>() { "Cash", "Cheque", "Online", "Cheque without date", "DD" };
         //public const string DefaultTitle = "Mr.";
         public static List<string> Role = new List<string>() { "Admin", "Management", "Caretaker" };
@@ -164,7 +203,7 @@ namespace LeaMaPortal
         public const string Bank_number = "XXXXYYYYZZZZ";
         public const string TenantIndividualDocumentContainer = "Documents/TenantIndividual/";
         public const string TenantIndividualDocumentDirectoryName = "TenantIndividual";
-
+        public const string DisplayDateFormat = "dd-MM-yyyy";
         public static List<FormMaster> FormMasterList = new List<FormMaster>()
         {
            //new FormMaster() {Id=1,FormName="" },
@@ -200,7 +239,7 @@ namespace LeaMaPortal
         public static List<string> Issuance_authority = new List<string>() { "List-1" };
         public const string TenantCompanyDocumentContainer = "Documents/TenantCompany/";
         public const string TenantCompanyDocumentDirectoryName = "TenantCompany";
-        
+
         //public static List<string> Nationality = new List<string>() { "UAE", "Non-UAE" };
         public static string DefaultNationality = "UAE";
         public static string DefaultMaridalStatus = "Family";
@@ -277,7 +316,7 @@ namespace LeaMaPortal
                 Value = 12
             }
         };
-        
+
 
         //public static List<string> Reccategory = new List<string>() { "advance", "against", "invoice", "others", "security", "deposit" };
         //public static List<string> ReceiptMode = new List<string>() { "cheque", "cash", "online", "Pdc", "advance adjustment" };
@@ -286,7 +325,7 @@ namespace LeaMaPortal
         //public static List<string> BankAccountName = new List<string>() { "Axis Bank", "ICICI Bank", "HDFC Bank", "SBI Bank" };
 
         //public static List<string> Receipts_PDCStatus = new List<string>() { "Received", "Cleared", "Bounced", "Cancelled" };
-
+        public const string CompanyFax= "";
         public static List<BankDetails> BankDetails = new List<BankDetails>()
         {
             new BankDetails()
@@ -300,6 +339,57 @@ namespace LeaMaPortal
                 AccountNumber="Account 2"
             }
         };
+
+
+
+        public static string NumberToWords(Int64 number)
+        {
+            if (number == 0)
+                return "zero";
+
+            if (number < 0)
+                return "minus " + NumberToWords(Math.Abs(number));
+
+            string words = "";
+
+            if ((number / 1000000) > 0)
+            {
+                words += NumberToWords(number / 1000000) + " million ";
+                number %= 1000000;
+            }
+
+            if ((number / 1000) > 0)
+            {
+                words += NumberToWords(number / 1000) + " thousand ";
+                number %= 1000;
+            }
+
+            if ((number / 100) > 0)
+            {
+                words += NumberToWords(number / 100) + " hundred ";
+                number %= 100;
+            }
+
+            if (number > 0)
+            {
+                if (words != "")
+                    words += "and ";
+
+                var unitsMap = new[] { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
+                var tensMap = new[] { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
+
+                if (number < 20)
+                    words += unitsMap[number];
+                else
+                {
+                    words += tensMap[number / 10];
+                    if ((number % 10) > 0)
+                        words += "-" + unitsMap[number % 10];
+                }
+            }
+
+            return words;
+        }
     }
     public class FormMaster
     {
@@ -317,6 +407,6 @@ namespace LeaMaPortal
         public string BankName { get; set; }
         public string AccountNumber { get; set; }
     }
-
+    
 
 }
