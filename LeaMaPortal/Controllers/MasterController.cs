@@ -12,7 +12,7 @@ using LeaMaPortal.Models;
 namespace LeaMaPortal.Controllers
 {
     [Authorize]
-    public class MasterController : Controller
+    public class MasterController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
 
@@ -21,23 +21,25 @@ namespace LeaMaPortal.Controllers
         {
             try
             {
+                //var currentUser=Request.Cookies.Get()
                 MasterViewModel model = new MasterViewModel();
                 ViewBag.FormMasterSelected = selected == 0 ? Common.DefaultMaster : selected;
-                ViewBag.FormMasterId = new SelectList(Common.FormMasterList, "Id", "MenuName");
+                ViewBag.FormMasterId = new SelectList(Common.GetForms(CurrentUser.MenuConfig.Split(',').ToList()), "Id", "MenuName");
                 return View(model);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return RedirectToAction("Index", "Error");
             }
-           
+
         }
 
-        public PartialViewResult Filter(int selected=1)
+        public PartialViewResult Filter(int selected = 1)
         {
             try
             {
-                ViewBag.FormMasterId = new SelectList(Common.FormMasterList, "Id", "MenuName", selected);
+                //ViewBag.FormMasterId = new SelectList(Common.FormMasterList, "Id", "MenuName", selected);
+                ViewBag.FormMasterId = new SelectList(Common.GetForms(CurrentUser.MenuConfig.Split(',').ToList()), "Id", "MenuName", selected);
                 return PartialView("_Filter");
             }
             catch

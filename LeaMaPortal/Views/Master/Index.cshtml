@@ -12,12 +12,14 @@
         height: 30%;
         width: 3%;
     }
+
     #master-loader-list {
         background: url("../Images/loader.gif") no-repeat scroll center center #FFF;
         width: 98%;
         height: 500px;
         /*position: absolute;*/
     }
+
     #master-loader-edit {
         background: url(../Images/loader.gif) no-repeat scroll center center #FFF;
         /* position: absolute; */
@@ -34,31 +36,38 @@
         <div id="ContainerAddOrUpdate"></div>
         <div class="row" id="ContainerList"></div>
         <input type="hidden" id="FormMasterSelected" value="@ViewBag.FormMasterSelected" />
+        <input type="hidden" id="IsAllowAdd" value="@ViewBag.IsAdd" />
     </div>
 </div>
 <!-- Modal -->
 @*<div id="masterResultModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+        <div class="modal-dialog">
 
 
-        <div class="modal-content text-center">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title result-title"></h4>
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title result-title"></h4>
+                </div>
+                <div class="modal-body result-modal-body">
+                    <span></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="modal-body result-modal-body">
-                <span></span>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+
         </div>
-
-    </div>
-</div>*@
+    </div>*@
 <script>
-
-    
+    IsAddAllow();
+    function IsAddAllow() {
+        var isAllow = $("#IsAllowAdd").val();
+        if (isAllow == 1)
+            $("#ContainerAddOrUpdate").show();
+        else
+            $("#ContainerAddOrUpdate").hide();
+    }
 
     $(function () {
         $("#TopNavBarFilter").empty();

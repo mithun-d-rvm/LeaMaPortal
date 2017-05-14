@@ -13,7 +13,7 @@ using System.Data.Entity;
 
 namespace LeaMaPortal.Controllers
 {
-    public class MasterIndividualController : Controller
+    public class MasterIndividualController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
         // GET: MasterIndividual

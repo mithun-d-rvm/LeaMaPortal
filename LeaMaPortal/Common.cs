@@ -168,27 +168,31 @@ namespace LeaMaPortal
         public static List<FormMaster> FormMasterList = new List<FormMaster>()
         {
            //new FormMaster() {Id=1,FormName="" },
-           new FormMaster() {Id=2,MenuName="User Rights" },
+           new FormMaster() {Id=2,MenuName="User Rights" , MenuId=2 },
            //new FormMaster() {Id=3,FormName="" },
-           new FormMaster() {Id=4,MenuName="Approval" },
-           new FormMaster() {Id=5,MenuName="Country Master" },
-           new FormMaster() {Id=6,MenuName="Region Master" },
-           new FormMaster() {Id=7,MenuName="Caretaker Master" },
-           new FormMaster() {Id=8,MenuName="Property Type Master" },
-           new FormMaster() {Id=9,MenuName="Property Master" },
-           new FormMaster() {Id=10,MenuName="Tenant Master - Company" },
-           new FormMaster() {Id=11,MenuName="Tenant Master - Individual" },
-           new FormMaster() {Id=12,MenuName="Checklist Master" },
-           new FormMaster() {Id=13,MenuName="Facility Master" },
-           new FormMaster() {Id=14,MenuName="Utility Master" },
-           new FormMaster() {Id=15,MenuName="Supplier Master" },
-           new FormMaster() {Id=16,MenuName="Slab Master" },
-           new FormMaster() {Id=17,MenuName="Meter Master" },
-           new FormMaster() {Id=18,MenuName="Email Template" },
+           new FormMaster() {Id=4,MenuName="Approval",MenuId=4 },
+           new FormMaster() {Id=5,MenuName="Country Master" , MenuId=5},
+           new FormMaster() {Id=6,MenuName="Region Master",MenuId=6 },
+           new FormMaster() {Id=7,MenuName="Caretaker Master", MenuId=7 },
+           new FormMaster() {Id=8,MenuName="Property Type Master",MenuId=8 },
+           new FormMaster() {Id=9,MenuName="Property Master",MenuId=9 },
+           new FormMaster() {Id=10,MenuName="Tenant Master - Company" ,MenuId=10},
+           new FormMaster() {Id=11,MenuName="Tenant Master - Individual",MenuId=11 },
+           new FormMaster() {Id=12,MenuName="Checklist Master",MenuId=12 },
+           new FormMaster() {Id=13,MenuName="Facility Master",MenuId=13 },
+           new FormMaster() {Id=14,MenuName="Utility Master" ,MenuId=14},
+           new FormMaster() {Id=15,MenuName="Supplier Master",MenuId=15 },
+           new FormMaster() {Id=16,MenuName="Slab Master",MenuId=16 },
+           new FormMaster() {Id=17,MenuName="Meter Master",MenuId=17 },
+           new FormMaster() {Id=18,MenuName="Email Template",MenuId=18 },
            //new FormMaster() {Id=19,FormName="" },
            //new FormMaster() {Id=20,FormName="" }
 
         };
+        public static List<FormMaster> GetForms(List<string> MenuIds)
+        {
+            return FormMasterList.Where(r => MenuIds.Contains(r.MenuId.ToString())).ToList();
+        }
         //tenant company
         //public static List<string> TenantType = new List<string>() { "Government", "Person", "Company" };
         //public static List<string> Emirate = new List<string>() { "Default" };
@@ -205,11 +209,11 @@ namespace LeaMaPortal
         //agreement
         public const string AgreementDocumentContainer = "Documents/AgreementDocument/";
         public const string AgreementDocumentDirectoryName = "AgreementDocument";
-        
-        public const string AgreementCheck_type= "New Contract";
+
+        public const string AgreementCheck_type = "New Contract";
         public const string NewAgreement = "New";
         public const string Renewal = "Renewal";
-        
+
         public static List<MonthField> Month = new List<MonthField>()
         {
             new MonthField
@@ -301,6 +305,7 @@ namespace LeaMaPortal
     {
         public int Id { get; set; }
         public string MenuName { get; set; }
+        public int MenuId { get; set; }
     }
     public class MonthField
     {

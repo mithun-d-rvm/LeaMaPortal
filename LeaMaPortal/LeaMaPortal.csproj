@@ -177,6 +177,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="Controllers\ApprovalSettingsController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CaretakerController.cs" />
     <Compile Include="Controllers\ChecklistController.cs" />
     <Compile Include="Controllers\ContractApprovalSettingController.cs" />
@@ -585,6 +586,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -886,11 +888,13 @@
     <Content Include="Views\EbWater\Index.cshtml" />
     <Content Include="Views\EbWater\_List.cshtml" />
     <Content Include="Views\EbWater\_AddorUpdate.cshtml" />
+    <Content Include="Views\Tca\Contract\_ContractDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Documents\TenantIndividual\" />
     <Folder Include="Models\DBContext\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\Notification\" />
     <Folder Include="Views\PropertyMaster\" />
     <Folder Include="Views\Supplier\" />
