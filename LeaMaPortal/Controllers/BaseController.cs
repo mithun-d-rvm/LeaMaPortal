@@ -27,6 +27,7 @@ namespace LeaMaPortal.Controllers
             ViewBag.IsEditable = CurrentUser.EditConfig;
             ViewBag.IsDeletable = CurrentUser.DeleteConfig;
             ViewBag.IsAdd = CurrentUser.AddConfig;
+            ViewBag.MenuConfig = CurrentUser.MenuConfig.Split(',');
         }
     }
 }
