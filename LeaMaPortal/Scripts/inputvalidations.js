@@ -131,6 +131,7 @@ function allow_only_alphabets_name(e) {
 }
 
 
+
 //regular exp value based validate Mobile numbers
 function validateNumbers(numbers) {
     try{
@@ -217,3 +218,4 @@ function checkdate(input) {
     if (returnval == false) input.select()
     return returnval
 }
+

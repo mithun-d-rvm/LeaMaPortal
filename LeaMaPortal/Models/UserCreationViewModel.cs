@@ -12,6 +12,7 @@ namespace LeaMaPortal.Models
         public int id { get; set; }
 
         [DisplayName("Display Name")]
+        [Required]
         [StringLength(100)]
         public string Name { get; set; }
 

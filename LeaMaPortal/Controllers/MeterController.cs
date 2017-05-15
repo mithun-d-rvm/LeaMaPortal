@@ -75,7 +75,8 @@ namespace LeaMaPortal.Controllers
             MeterViewModel model = new MeterViewModel();
             ViewBag.Utility_Name = new SelectList(db.tbl_utilitiesmaster.OrderBy(o => o.Utility_Name).Distinct(), "Utility_Name", "Utility_Name");
             ViewBag.Property_id = new SelectList(db.tbl_propertiesmaster.Where(x => x.Property_Flag == "Property").OrderBy(o => o.Property_Id).Distinct(), "Property_Id", "Property_ID_Tawtheeq");
-            ViewBag.Unit_id = new SelectList(new List<OptionModel>());
+            var units = db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Unit" && w.Delmark != "*").OrderBy(o => o.id);
+            ViewBag.unit_id = new SelectList(units, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
             ViewBag.Dueday = new SelectList(StaticHelper.GetStaticData(StaticHelper.METER_DROPDOWN), "Id", "Id");
             return PartialView("../Master/MeterMaster/_AddOrUpdate", model);
         }
@@ -90,18 +91,25 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    MySqlParameter pa = new MySqlParameter();
-                    string PFlag = "INSERT";
-
-                    if (model.Id == 0)
+                    if (db.tbl_metermaster.Any(a => a.Delmark != "*" && a.Meter_no == model.Meter_no) && model.Id == 0)
                     {
-
+                        result.Errors = "Meter number already exists!";
                     }
                     else
                     {
-                        PFlag = "UPDATE";
-                    }
-                    object[] param = { new MySqlParameter("@PFlag", PFlag),
+                        MySqlParameter pa = new MySqlParameter();
+                        string PFlag = "INSERT";
+
+                        if (model.Id != 0)
+                        {
+                            PFlag = "UPDATE";
+                            result.Message = "Meter details updated successfully";
+                        }
+                        else
+                        {
+                            result.Message = "Meter details created successfully";
+                        }
+                        object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PId", model.Id),
                                            new MySqlParameter("@PUtility_id",model.Utility_id),
                                             new MySqlParameter("@PUtility_Name",model.Utility_Name),
@@ -112,8 +120,9 @@ namespace LeaMaPortal.Controllers
                                             new MySqlParameter("@PDueday",model.Dueday),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
-                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Metermaster_All(@PFlag,@PId,@PUtility_id,@PUtility_Name,@PMeter_no,@PAccno,@PProperty_id,@Punit_id,@PDueday,@PCreateduser)", param).ToListAsync();
-                    await db.SaveChangesAsync();
+                        var RE = await db.Database.SqlQuery<object>("CALL Usp_Metermaster_All(@PFlag,@PId,@PUtility_id,@PUtility_Name,@PMeter_no,@PAccno,@PProperty_id,@Punit_id,@PDueday,@PCreateduser)", param).ToListAsync();
+                        await db.SaveChangesAsync();
+                    }
                 }
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -159,6 +168,7 @@ namespace LeaMaPortal.Controllers
             MessageResult result = new MessageResult();
             try
             {
+                result.Message = "Meter details deleted successfully";
                 if (MeterId == null && MeterNumber != null)
                 {
                     return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
