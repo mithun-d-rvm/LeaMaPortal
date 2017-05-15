@@ -130,6 +130,30 @@ namespace LeaMaPortal.Models
 
     }
 
+    public class ReceiptsDDLChangeModel
+    {
+        //public string ReceiptNo { get; set; }
+        public string Agreement_No { get; set; }
+        public string Prperty_id { get; set; }
+        public string Property_Name { get; set; }
+        public string Unit_id { get; set; }
+        public string Unitname { get; set; }
+        public string Ag_Tenant_id { get; set; }
+        public string Ag_Tenant_Name { get; set; }
+        public string TotalAmount { get; set; }
+        public string pdc_Amount { get; set; }
+        public string DDChequeNo { get; set; }
+        public string invno { get; set; }
+        public string month { get; set; }
+        public string year { get; set; }
+        public string date { get; set; }
+        public string incno { get; set; }
+        public string invtype { get; set; }
+        public string totalamt { get; set; }
+        public string InvoiceAmount { get; set; }
+
+    }
+
     public class AdvancePendingSelectList
     {
         public SelectList ReceiptNo { get; set; }

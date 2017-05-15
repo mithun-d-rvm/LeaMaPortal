@@ -625,6 +625,70 @@
         }
 
     }
+    $("#agreement_no").on('change', function (e) {
+        var agreement_no = $("#agreement_no").val();
+        $.ajax(
+                {
+                    url: "../Invoice/GetAgreementDetails",
+                    // dataType: "jsonp",
+                    method: "GET",
+                    data: { agreement_no: agreement_no }, //FormData(form.get(0)),
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        $("#Tenant_id").empty();
+                        var options = '';
+                        $.each(response.Tenants, function (index, data) {
+                            options += '<option value="' + data.Tenantid + '">' + data.Tenantid + '</option>';
+                        });
+                        $('#Tenant_id').append(options);
+
+                        $("#Tenant_Name").empty();
+                        var options = '';
+                        $.each(response.Tenants, function (index, data) {
+                            options += '<option value="' + data.Tenantid + '">' + data.TenantName + '</option>';
+                        });
+                        $('#Tenant_Name').append(options);
+
+                        $("#Property_id").empty();
+                        var options = '';
+                        $.each(response.Properties, function (index, data) {
+                            options += '<option value="' + data.Propertyid + '">' + data.Propertyid + '</option>';
+                        });
+                        $('#Property_id').append(options);
+
+                        $("#Property_Name").empty();
+                        var options = '';
+                        $.each(response.Properties, function (index, data) {
+                            options += '<option value="' + data.Propertyid + '">' + data.PropertyName + '</option>';
+                        });
+                        $('#Property_Name').append(options);
+
+                        $("#Unit_ID").empty();
+                        var options = '';
+                        $.each(response.Units, function (index, data) {
+                            options += '<option value="' + data.Unitid + '">' + data.Unitid + '</option>';
+                        });
+                        $('#Unit_ID').append(options);
+
+                        $("#unit_Name").empty();
+                        var options = '';
+                        $.each(response.Units, function (index, data) {
+                            options += '<option value="' + data.Unitid + '">' + data.unitName + '</option>';
+                        });
+                        $('#unit_Name').append(options);
+
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+    });
    
     $("#TotalAmount").on('change', function () {
         debugger;
