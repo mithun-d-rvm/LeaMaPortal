@@ -5,7 +5,7 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("Create", "PropertyMaster", FormMethod.Post))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "PropertyMaster" }))
 {
     @Html.AntiForgeryToken()
 
@@ -865,50 +865,50 @@
 
             <div class="">
                 @if (Model.PropertiesdtList != null)
-                    {
+                {
                     <input type="hidden" id="propertiesdt-list-count" value="@Model.PropertiesdtList.Count" />
-                    }
-                    else
-                    {
+                }
+                else
+                {
                     <input type="hidden" id="propertiesdt-list-count" value="0" />
-                    }
+                }
                 <table id="facility-details-list" class="col-md-12 document-row m-l-5">
                     @if (Model.PropertiesdtList != null)
+                    {
+
+                        for (int i = 0; i < Model.PropertiesdtList.Count; i++)
                         {
 
-                            for (int i = 0; i < Model.PropertiesdtList.Count; i++)
-                            {
-
-                        <tr class="document-row">
-                            <td class="p-t-25">
-                                <div class="col-md-3">
-                                    @Html.HiddenFor(m => m.PropertiesdtList[i].Facility_id, new { @data_name = "Facility_id" })
-                                    @Html.HiddenFor(m => m.PropertiesdtList[i].Facility_Name, new { @data_name = "Facility_Name" })
-                                    @Html.HiddenFor(m => m.PropertiesdtList[i].Numbers_available, new { @data_name = "Numbers_available" })
-                                    @Model.PropertiesdtList[i].Facility_id
-                                </div>
-                                <div class="col-md-4">
-                                    @Model.PropertiesdtList[i].Facility_Name
-                                </div>
-                                <div class="col-md-3">
-                                    @Model.PropertiesdtList[i].Numbers_available
-                                </div>
-                                <div class="col-md-2">
-                                    <button class='document-btn remove-propertiesdtlist-button' id='Delete" + @i + "'> Delete </button>
-                                </div>
-                            </td>
-                        </tr>
-                            }
+                            <tr class="document-row">
+                                <td class="p-t-25">
+                                    <div class="col-md-3">
+                                        @Html.HiddenFor(m => m.PropertiesdtList[i].Facility_id, new { @data_name = "Facility_id" })
+                                        @Html.HiddenFor(m => m.PropertiesdtList[i].Facility_Name, new { @data_name = "Facility_Name" })
+                                        @Html.HiddenFor(m => m.PropertiesdtList[i].Numbers_available, new { @data_name = "Numbers_available" })
+                                        @Model.PropertiesdtList[i].Facility_id
+                                    </div>
+                                    <div class="col-md-4">
+                                        @Model.PropertiesdtList[i].Facility_Name
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Model.PropertiesdtList[i].Numbers_available
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class='document-btn remove-propertiesdtlist-button' id='Delete" + @i + "'> Delete </button>
+                                    </div>
+                                </td>
+                            </tr>
                         }
+                    }
                 </table>
 
             </div>
         </div>
 
     </div>
-            <div class="row ht-5">
-                &nbsp;
-            </div>
+    <div class="row ht-5">
+        &nbsp;
+    </div>
 
             <div class="m-t-5-p col-md-10 document-row" id="GridView">
                 <!-- Begin Dynamic row -->
@@ -941,19 +941,19 @@
 
                     <div class="">
                         @if (Model.Propertiesdt1List != null)
-                                {
-                                <input type="hidden" id="propertiesdt1-list-count" value="@Model.Propertiesdt1List.Count" />
-                                }
-                                else
-                                {
-                                <input type="hidden" id="propertiesdt1-list-count" value="0" />
-                                }
+                        {
+                            <input type="hidden" id="propertiesdt1-list-count" value="@Model.Propertiesdt1List.Count" />
+                        }
+                        else
+                        {
+                            <input type="hidden" id="propertiesdt1-list-count" value="0" />
+                        }
                         <table id="utility-details-list" class="col-md-12 document-row m-l-5">
                             @if (Model.Propertiesdt1List != null)
-                                    {
+                            {
 
-                                        for (int i = 0; i < Model.Propertiesdt1List.Count; i++)
-                                        {
+                                for (int i = 0; i < Model.Propertiesdt1List.Count; i++)
+                                {
 
                                     <tr class="document-row">
                                         <td class="p-t-25">
@@ -970,16 +970,16 @@
                                             </div>
                                         </td>
                                     </tr>
-                                        }
-                                    }
+                                }
+                            }
                         </table>
 
                     </div>
                 </div>
             </div>
-                        <div class="row ht-5">
-                            &nbsp;
-                        </div>
+            <div class="row ht-5">
+                &nbsp;
+            </div>
 
                         <!-- Begin Dynamic row -->
                         @*@Html.Partial("_UtilityDetails")*@
@@ -994,16 +994,19 @@
                         @*</div>
                             </div>*@
                         <div class="col-md-12 form-input-padding">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 &nbsp;
                             </div>
-                            <div class="col-md-4">
-                                <button class="btn master-form-btn">Submit</button>
+                            <div class="col-md-6">
+                                <button id="btnSubmit" class="btn master-form-btn">Submit</button>&nbsp;&nbsp;
+<button class="btn master-form-btn" id="btnCancel" type="button" onclick="formReset()">Cancel</button>
                             </div>
                         </div>
                         }
 <script>
-
+    function formReset() {
+        GetPropertyMasterAddOrUpdate();
+    }
     $("#Ref_unit_Property_ID_Tawtheeq").change(function () {
         debugger;
         $("#Ref_Unit_Property_ID").val($("#Ref_unit_Property_ID_Tawtheeq option:selected").val());
@@ -1237,6 +1240,68 @@
         }
         // $("#Title").val($("#TitleDisplay").val());
     });
+    //Add or update
+    $("form#PropertyMaster").off("submit").on("submit", function (e) {
+        e.preventDefault();
+        try {
+            var form = $("form#PropertyMaster");
+            $.ajax(
+                {
+                    url: "../PropertyMaster/Create",
+                    // dataType: "jsonp",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        debugger;
+                        GetPropertyMaster();
+                        if (response.Errors == null) {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Message);
+                        }
+                        else {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(response.Errors);
+                        }
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(masterResultError);
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                        $('#masterResultModal').modal('show');
+                    }
+                });
+        }
+        catch (ex) {
+            alert(ex);
+        }
+
+    });
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
     $(document).ready(function () {
         debugger;
         $('#Status_unit').attr('disabled', 'disabled');
@@ -1249,6 +1314,10 @@
             $("#property").prop('checked', true).change();
             //$("select option").prop("selected", false);
         }
+            var id = $("#Id").val();
+            if (id != 0) {
+                document.getElementById("btnSubmit").innerHTML = 'Update';
+            }
         //$("#property").prop('checked', true).change();
     });
 

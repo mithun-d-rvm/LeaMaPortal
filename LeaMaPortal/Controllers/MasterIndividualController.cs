@@ -110,8 +110,10 @@ namespace LeaMaPortal.Controllers
                 MessageResult result = new MessageResult();
                 model.Type = "Individual";
                 string PFlag =Common.UPDATE;
+                result.Message = "Tenant individual updated successfully";
                 if (model.Tenant_Id==0)
                 {
+                    result.Message = "Tenant individual created successfully";
                     PFlag = Common.INSERT;
                     var tenant = db.tbl_tenant_individual.OrderByDescending(x => x.Tenant_Id).FirstOrDefault();
                     model.Tenant_Id = tenant != null ? tenant.Tenant_Id + 1 : 1;
@@ -335,7 +337,7 @@ namespace LeaMaPortal.Controllers
                 ,@PCreateduser  
                 ,@Ptenantdocdetails 
                                     )", param).ToListAsync();
-                
+                result.Message = "Tenant individual deleted successfully";
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch
