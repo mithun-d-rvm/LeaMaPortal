@@ -36,16 +36,56 @@
                     @Html.EditorFor(model => model.Checklist_Name, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "CheckListName" } })
                 </div>
             </div>
-            
-            <div class="col-md-12 leama-fieldset ">
-                <div class="col-md-12 pull-left">
-                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+
+            @*<div class="col-md-12 leama-fieldset ">
+                    <div class="col-md-12 pull-left">
+                        <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                    </div>
+                </div>*@
+            <div class="col-md-12 form-input-padding btn-group-justified">
+                <div class="col-md-3">
+
                 </div>
+                @if (Model.Id == 0)
+                {
+                    <div class="col-md-3">
+                        <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-3">
+                        <button class="btn master-form-btn" id="btnSubmit" type="submit">Update</button>
+                    </div>
+                }
+
+                <div class="col-md-3">
+                    <button class="btn master-form-btn" id="btnCancel" type="reset" onclick="formReset()">Cancel</button>
+                </div>
+                <div class="col-md-3">
+
+                </div>
+
             </div>
         </div>
     </div>
 }
 <script>
+
+    $(document).ready(function () {
+        debugger;
+        var id = $("#CheckListId").val();
+        //alert(id);
+        if (id != 0) {
+            document.getElementById("btnSubmit").innerHTML = 'Update';
+        }
+
+    });
+
+    function formReset() {
+        CheckListAddOrUpdate();
+    }
+
     //Add or update
     $("form#CheckList").off("submit").on("submit", function (e) {
         e.preventDefault();
@@ -56,15 +96,25 @@
                     url: "../CheckList/AddOrUpdate",
                     // dataType: "jsonp",
                     method: "POST",
-                    data: JSON.stringify($(form).serializeObject()), 
+                    data: JSON.stringify($(form).serializeObject()),
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
-                        GetCheckList();
-                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
-                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
-                        $(".result-title").text("Success");
-                        $(".result-modal-body span").text(checkListAdded);
+                        if (response.Errors == undefined || response.Errors == "") {
+                            GetCheckList();
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(checkListAdded);
+                        }
+                        else
+                        {
+                            //alert(response.Errors);
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(response.Errors);
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");

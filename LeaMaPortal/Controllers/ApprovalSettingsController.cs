@@ -61,7 +61,8 @@ namespace LeaMaPortal.Controllers
         public PartialViewResult AddOrUpdate()
         {
             ApprovalSettingsViewModel model = new ApprovalSettingsViewModel();
-            ViewBag.Userid = new SelectList(db.tbl_userrights.OrderBy(o => o.Userid).Distinct(), "Userid", "Userid");
+            var users = db.tbl_approvalconfig.Select(r => r.Userid).ToList();
+            ViewBag.Userid = new SelectList(db.tbl_userrights.Where(d => !users.Contains(d.Userid)).OrderBy(o => o.Userid).ToList(), "Userid", "Userid");
             return PartialView("../Master/ApprovalSettings/_AddOrUpdate", model);
         }
         // POST: CheckList/Create
@@ -80,11 +81,12 @@ namespace LeaMaPortal.Controllers
 
                     if (model.Id == 0)
                     {
-
+                        result.Message = "Tca approval setting added successfully";
                     }
                     else
                     {
                         PFlag = "UPDATE";
+                        result.Message = "Tca approval setting updated successfully";
                     }
                     //tbl_approvalconfig tbl_approval = new tbl_approvalconfig();
                     //tbl_approval.Userid = model.Userid;
@@ -113,7 +115,7 @@ namespace LeaMaPortal.Controllers
         {
             try
             {
-                if (Id == 0 )
+                if (Id == 0)
                 {
                     return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
                 }
@@ -126,9 +128,11 @@ namespace LeaMaPortal.Controllers
                 {
                     Id = tbl_approval.Id,
                     Approval_flag = tbl_approval.Approval_flag,
-                    Userid = tbl_approval.Userid
+                    //Userid = tbl_approval.Userid
                 };
-                return Json(model, JsonRequestBehavior.AllowGet);
+                var users = db.tbl_approvalconfig.Where(x => x.Userid != tbl_approval.Userid).Select(r => r.Userid).ToList();
+                ViewBag.Userid = new SelectList(db.tbl_userrights.Where(d => !users.Contains(d.Userid)).OrderBy(o => o.Userid).ToList(), "Userid", "Userid", tbl_approval.Userid);
+                return PartialView("../Master/ApprovalSettings/_AddOrUpdate", model);
             }
             catch (Exception ex)
             {
