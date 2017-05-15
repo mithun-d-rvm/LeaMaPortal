@@ -288,12 +288,10 @@
            }
        });
     }
-
-    function GetCaretaker() {
-        //$("#img-loader").removeClass("hide");
+    function CareTakerAddOrUpdate()
+    {
         $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
         $.ajax(
         {
             url: "../Caretaker/AddOrUpdate",
@@ -312,7 +310,12 @@
                 $("#master-loader").addClass("hide");
             }
         });
-        //$("#img-loader").removeClass("hide");
+
+    }
+    function GetCaretaker() {
+        $("#ContainerList").empty();
+        CareTakerAddOrUpdate();
+
         $("#master-loader").removeClass("hide");
         $.ajax(
         {

@@ -35,7 +35,7 @@
                     @Html.LabelFor(model => model.Dob, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Dob, new { htmlAttributes = new { @class = "leama-field form-control" , @required = "required" } })
+                    @Html.EditorFor(model => model.Dob, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required" } })
                 </div>
                 <div class="col-md-2 pull-left">
                     @Html.LabelFor(model => model.Doj, htmlAttributes: new { @class = "leama-field-name" })
@@ -140,8 +140,33 @@
                 <div class="col-md-2">
 
                 </div>
-                <div class="col-md-4">
-                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                @*<div class="col-md-4">
+                        <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                    </div>*@
+                <div class="col-md-12 form-input-padding btn-group-justified">
+                    <div class="col-md-3">
+
+                    </div>
+                    @if (Model.Id == 0)
+                {
+                        <div class="col-md-3">
+                            <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-3">
+                            <button class="btn master-form-btn" id="btnSubmit" type="submit">Update</button>
+                        </div>
+                    }
+
+                    <div class="col-md-3">
+                        <button class="btn master-form-btn" id="btnCancel" type="reset" onclick="formReset()">Cancel</button>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+
                 </div>
             </div>
             @*<div class="col-md-12 leama-fieldset ">
@@ -170,6 +195,20 @@
 
 }
 <script>
+    $(document).ready(function () {
+        debugger;
+        var id = $("#CaretakerId").val();
+        //alert(id);
+        if (id != 0) {
+            document.getElementById("btnSubmit").innerHTML = 'Update';
+        }
+
+    });
+
+    function formReset() {
+        CareTakerAddOrUpdate();
+    }
+
     //Add or update
     $("form#Caretaker").off("submit").on("submit", function (e) {
         e.preventDefault();
@@ -189,11 +228,20 @@
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
-                        GetCaretaker();
-                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
-                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
-                        $(".result-title").text("Success");
-                        $(".result-modal-body span").text(caretakerAdded);
+                        if (response.Errors == undefined || response.Errors == "") {
+                            GetCaretaker();
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Message);
+                        }
+                        else {
+                            //alert(response.Errors);
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(response.Errors);
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
