@@ -284,29 +284,18 @@
         $("#menu-home-master").hide();
         $("#menu-home-utility-billentry").hide();
         $("#menu-home-utility-payments").hide();
-
-        //EB-Water Receipts -utility bill entry
-        //EB-Water Payments - utility payments
-
     }
     function GetMenuRights() {
         debugger;
-        //var sessionMenuConfig = $("#hdnMenuConfig").val();
-        //var menus = sessionMenuConfig.split(",");
-        //var cookie = document.cookie.split("=");
-        //var currentUser = JSON.parse(cookie[1]);
-        ////alert(currentUser);
-        ////alert(menus);
-        //menus = currentUser.MenuConfig.split(",");
-        var currentUser = $.cookie("CurrentUser");
-        var currentUser = JSON.parse(currentUser);
+        var user = $.cookie("CurrentUser");
+        var currentUser = JSON.parse(user);
         menus = currentUser.MenuConfig.split(",");
         jQuery.each(menus, function (index, item) {
             debugger;
-            if (item == 2) {
-                $("#menu-home-notification").show();
-            }
-            if (item == 2) {
+            //if (item == 2) {
+            $("#menu-home-notification").show();
+            // }
+            if (item == 20) {
                 $("#menu-home-tca").show();
             } if (item == 24) {
                 $("#menu-home-invoice").show();
@@ -314,11 +303,13 @@
                 $("#menu-home-payments").show();
             } if (item == 25) {
                 $("#menu-home-receipts").show();
-            } if (item == 2) {
-                $("#menu-home-reporting").show();
-            } if (item == 2) {
-                $("#menu-home-master").show();
             }
+            //if (item == 2) {
+            $("#menu-home-reporting").show();
+            //}
+            //if (item == 2) {
+            $("#menu-home-master").show();
+            //}
             if (item == 27) {
                 $("#menu-home-utility-billentry").show();
             }
