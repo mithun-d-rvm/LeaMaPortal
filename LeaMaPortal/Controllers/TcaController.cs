@@ -50,7 +50,10 @@ namespace LeaMaPortal.Controllers
                 int currentPageIndex = page.HasValue ? page.Value : 1;
                 int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
                 ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, defaultPageSize);
-
+                var menus = CurrentUser.MenuConfig.Split(',');
+                ViewBag.IsRenewalVisible = menus.Contains("22");
+                ViewBag.IsClosureVisible = menus.Contains("23");
+                ViewBag.IsAgreementStatusVisible = menus.Contains("21");
                 //IList<CountryViewModel> list;
                 if (string.IsNullOrWhiteSpace(Search))
                 {

@@ -45,20 +45,28 @@
                     <div class="divTableCell">@item.Ag_Tenant_Name</div>
                     <div class="divTableCell">@item.Unit_Property_Name</div>
                     <div class="divTableCell">
-                        <span>
-                            @Html.ActionLink(" ", "Renewal", null, new { @class = "glyphicon glyphicon-open agreement-renewal", title = "Renewal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-renewal" })  |
-                        </span>
-                        <span>
-                            @Html.ActionLink(" ", "Closue", null, new { @class = "glyphicon glyphicon-save agreement-closure", title = "Closure", @data_toggle = "modal", @data_target = "#closureModal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-closure" })  |
-                        </span>
-                        <span>
-                            @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-stats agreement-stats", title = "Status", @data_toggle = "modal", @data_target = "#statusModal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-status" })  |
-                        </span>
-
+                        @if (@ViewBag.IsRenewalVisible)
+                        {
+                            <span>
+                                @Html.ActionLink(" ", "Renewal", null, new { @class = "glyphicon glyphicon-open agreement-renewal", title = "Renewal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-renewal" })  |
+                            </span>
+                        }
+                        @if (@ViewBag.IsClosureVisible)
+                        {
+                            <span>
+                                @Html.ActionLink(" ", "Closue", null, new { @class = "glyphicon glyphicon-save agreement-closure", title = "Closure", @data_toggle = "modal", @data_target = "#closureModal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-closure" })  |
+                            </span>
+                        }
+                        @if (@ViewBag.IsAgreementStatusVisible)
+                        {
+                            <span>
+                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-stats agreement-stats", title = "Status", @data_toggle = "modal", @data_target = "#statusModal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-status" })  |
+                            </span>
+                        }
                         @if (@ViewBag.IsEditable == 1)
                         {
                             <span>
-                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit agreement-edit", title = "Edit", @data_agreementno = @item.Agreement_No })  |                                                                      }
+                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit agreement-edit", title = "Edit", @data_agreementno = @item.Agreement_No })  |
                             </span>
                         }
                         @if (@ViewBag.IsDeletable == 1)
@@ -98,7 +106,7 @@
         </div>
 
         <script type="text/javascript">
-            GetMenuRights();
+            //GetMenuRights();
             function GetMenuRights() {
 
                 debugger;

@@ -360,765 +360,764 @@
 
     function GetCaretaker() {
         //$("#img-loader").removeClass("hide");
-    function CareTakerAddOrUpdate()
-    {
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $.ajax(
-        {
-            url: "../Caretaker/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
+        function CareTakerAddOrUpdate() {
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
+            $.ajax(
+            {
+                url: "../Caretaker/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
 
-    }
-    function GetCaretaker() {
-        $("#ContainerList").empty();
-        CareTakerAddOrUpdate();
+        }
+        function GetCaretaker() {
+            $("#ContainerList").empty();
+            CareTakerAddOrUpdate();
 
-        $("#master-loader").removeClass("hide");
-        $.ajax(
-        {
-            url: "../Caretaker/Index",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerList").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
-    function GetRegion() {
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
-        $.ajax(
-        {
-            url: "../Region/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $.ajax(
-        {
-            url: "../Region/Index",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerList").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
-    function GetRegionAddOrUpdate() {
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $.ajax(
-        {
-            url: "../Region/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
+            $("#master-loader").removeClass("hide");
+            $.ajax(
+            {
+                url: "../Caretaker/Index",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerList").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
+        function GetRegion() {
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
+            $("#ContainerList").empty();
+            $.ajax(
+            {
+                url: "../Region/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $.ajax(
+            {
+                url: "../Region/Index",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerList").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
+        function GetRegionAddOrUpdate() {
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
+            $.ajax(
+            {
+                url: "../Region/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
 
-    function getPropertyMasterAddorUpdate() {
-        $.ajax(
-       {
-           url: "../PropertyMaster/AddOrUpdate",
-           type: "Get",
-           data: { Search: "" },
-           success: function (html) {
-               $("#ContainerAddOrUpdate").html(html);
-           },
-           error: function (jqXhr, textStatus, errorThrown) {
-               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-           },
-           complete: function () {
-               //$("#img-loader").addClass("hide");
-               $("#master-loader").addClass("hide");
-           }
-       });
-    }
-    function GetPropertyMaster() {
-        //$("#img-loader").removeClass("hide");
-        // $("#master-loader").removeClass("hide");
-        getPropertyMasterAddorUpdate();
-        $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
+        function getPropertyMasterAddorUpdate() {
+            $.ajax(
+           {
+               url: "../PropertyMaster/AddOrUpdate",
+               type: "Get",
+               data: { Search: "" },
+               success: function (html) {
+                   $("#ContainerAddOrUpdate").html(html);
+               },
+               error: function (jqXhr, textStatus, errorThrown) {
+                   alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+               },
+               complete: function () {
+                   //$("#img-loader").addClass("hide");
+                   $("#master-loader").addClass("hide");
+               }
+           });
+        }
+        function GetPropertyMaster() {
+            //$("#img-loader").removeClass("hide");
+            // $("#master-loader").removeClass("hide");
+            getPropertyMasterAddorUpdate();
+            $("#ContainerAddOrUpdate").empty();
+            $("#ContainerList").empty();
 
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $.ajax(
-        {
-            url: "../PropertyMaster/Index",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerList").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $.ajax(
+            {
+                url: "../PropertyMaster/Index",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerList").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
 
-    function CheckListAddOrUpdate()
-    {
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
+        function CheckListAddOrUpdate() {
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
 
-        $.ajax(
-        {
-            url: "../CheckList/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
+            $.ajax(
+            {
+                url: "../CheckList/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
 
-    }
-    function GetCheckList() {
-        CheckListAddOrUpdate();
-        $("#ContainerList").empty();
-        //$("#img-loader").removeClass("hide");
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $.ajax(
-        {
-            url: "../CheckList/Index",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerList").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
+        }
+        function GetCheckList() {
+            CheckListAddOrUpdate();
+            $("#ContainerList").empty();
+            //$("#img-loader").removeClass("hide");
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $.ajax(
+            {
+                url: "../CheckList/Index",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerList").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
 
-    function GetFacility() {
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
-        $.ajax(
-        {
-            url: "../Facility/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $.ajax(
-        {
-            url: "../Facility/Index",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerList").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
-    function GetFacilityAddOrUpdate() {
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $.ajax(
-        {
-            url: "../Facility/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
+        function GetFacility() {
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
+            $("#ContainerList").empty();
+            $.ajax(
+            {
+                url: "../Facility/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $.ajax(
+            {
+                url: "../Facility/Index",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerList").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
+        function GetFacilityAddOrUpdate() {
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
+            $.ajax(
+            {
+                url: "../Facility/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
 
-    function GetUtility() {
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
-        $.ajax(
-        {
-            url: "../Utility/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $.ajax(
-        {
-            url: "../Utility/Index",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerList").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
-    function GetUtilityAddOrUpdate() {
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $.ajax(
-        {
-            url: "../Utility/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
-    function GetEmailTemplate() {
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
-        $.ajax(
-        {
-            url: "../EmailTemplate/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $.ajax(
-        {
-            url: "../EmailTemplate/Index",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerList").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
-    function getUserCreationAddOrUpdate() {
-        $("#master-loader").removeClass("hide");
-        $.ajax(
-        {
-            url: "../UserCreation/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                // alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
-                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
-                $(".result-title").text("Failure");
-                $(".result-modal-body span").text(masterResultError);
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
-    function GetUserCreation() {
-        //$("#img-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
-        getUserCreationAddOrUpdate();
-        $.ajax(
-        {
-            url: "../UserCreation/Index",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerList").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                // alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
-                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
-                $(".result-title").text("Failure");
-                $(".result-modal-body span").text(masterResultError);
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
+        function GetUtility() {
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
+            $("#ContainerList").empty();
+            $.ajax(
+            {
+                url: "../Utility/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $.ajax(
+            {
+                url: "../Utility/Index",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerList").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
+        function GetUtilityAddOrUpdate() {
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
+            $.ajax(
+            {
+                url: "../Utility/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
+        function GetEmailTemplate() {
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
+            $("#ContainerList").empty();
+            $.ajax(
+            {
+                url: "../EmailTemplate/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $.ajax(
+            {
+                url: "../EmailTemplate/Index",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerList").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
+        function getUserCreationAddOrUpdate() {
+            $("#master-loader").removeClass("hide");
+            $.ajax(
+            {
+                url: "../UserCreation/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    // alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                    $(".result-title").text("Failure");
+                    $(".result-modal-body span").text(masterResultError);
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
+        function GetUserCreation() {
+            //$("#img-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
+            $("#ContainerList").empty();
+            getUserCreationAddOrUpdate();
+            $.ajax(
+            {
+                url: "../UserCreation/Index",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerList").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    // alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                    $(".result-title").text("Failure");
+                    $(".result-modal-body span").text(masterResultError);
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
 
-    function GetPropertyType() {
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
-        $.ajax(
-        {
-            url: "../PropertyType/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $.ajax(
-        {
-            url: "../PropertyType/Index",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerList").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
-    function ApprovalAddOrUpdate() {
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
+        function GetPropertyType() {
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
+            $("#ContainerList").empty();
+            $.ajax(
+            {
+                url: "../PropertyType/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $.ajax(
+            {
+                url: "../PropertyType/Index",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerList").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
+        function ApprovalAddOrUpdate() {
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
 
-        $.ajax(
-        {
-            url: "../ApprovalSettings/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
-    function GetApprovalSettings() {
-        ApprovalAddOrUpdate();
-        $("#ContainerList").empty();
-        //$("#img-loader").removeClass("hide");
-        //$("#master-loader").removeClass("hide");
-        //$("#ContainerAddOrUpdate").empty();
-        //$("#ContainerList").empty();
-        //$.ajax(
-        //{
-        //    url: "../ApprovalSettings/AddOrUpdate",
-        //    type: "Get",
-        //    data: {},
-        //    contentType: "application/json",
-        //    processData: false,
-        //    success: function (html) {
-        //        $("#ContainerAddOrUpdate").html(html);
-        //    },
-        //    error: function (jqXhr, textStatus, errorThrown) {
-        //        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-        //    },
-        //    complete: function () {
-        //        //$("#img-loader").addClass("hide");
-        //        $("#master-loader").addClass("hide");
-        //    }
-        //});
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $.ajax(
-        {
-            url: "../ApprovalSettings/Index",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerList").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
-    function GetMeter() {
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
-        $.ajax(
-        {
-            url: "../Meter/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $.ajax(
-        {
-            url: "../Meter/Index",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerList").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
-    function GetMeterAddOrUpdate() {
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $.ajax(
-        {
-            url: "../Meter/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
-    function GetSlab() {
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
-        $.ajax(
-        {
-            url: "../Slab/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $.ajax(
-        {
-            url: "../Slab/Index",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerList").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
-    function GetSlabAddOrUpdate() {
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $.ajax(
-        {
-            url: "../Slab/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
-    function GetSupplier() {
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
-        $.ajax(
-        {
-            url: "../Supplier/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $.ajax(
-        {
-            url: "../Supplier/Index",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerList").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
-    }
-    function GetSupplierAddOrUpdate() {
-        //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
-        $("#ContainerAddOrUpdate").empty();
-        $.ajax(
-        {
-            url: "../Supplier/AddOrUpdate",
-            type: "Get",
-            data: {},
-            contentType: "application/json",
-            processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
+            $.ajax(
+            {
+                url: "../ApprovalSettings/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
+        function GetApprovalSettings() {
+            ApprovalAddOrUpdate();
+            $("#ContainerList").empty();
+            //$("#img-loader").removeClass("hide");
+            //$("#master-loader").removeClass("hide");
+            //$("#ContainerAddOrUpdate").empty();
+            //$("#ContainerList").empty();
+            //$.ajax(
+            //{
+            //    url: "../ApprovalSettings/AddOrUpdate",
+            //    type: "Get",
+            //    data: {},
+            //    contentType: "application/json",
+            //    processData: false,
+            //    success: function (html) {
+            //        $("#ContainerAddOrUpdate").html(html);
+            //    },
+            //    error: function (jqXhr, textStatus, errorThrown) {
+            //        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            //    },
+            //    complete: function () {
+            //        //$("#img-loader").addClass("hide");
+            //        $("#master-loader").addClass("hide");
+            //    }
+            //});
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $.ajax(
+            {
+                url: "../ApprovalSettings/Index",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerList").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
+        function GetMeter() {
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
+            $("#ContainerList").empty();
+            $.ajax(
+            {
+                url: "../Meter/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $.ajax(
+            {
+                url: "../Meter/Index",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerList").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
+        function GetMeterAddOrUpdate() {
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
+            $.ajax(
+            {
+                url: "../Meter/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
+        function GetSlab() {
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
+            $("#ContainerList").empty();
+            $.ajax(
+            {
+                url: "../Slab/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $.ajax(
+            {
+                url: "../Slab/Index",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerList").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
+        function GetSlabAddOrUpdate() {
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
+            $.ajax(
+            {
+                url: "../Slab/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
+        function GetSupplier() {
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
+            $("#ContainerList").empty();
+            $.ajax(
+            {
+                url: "../Supplier/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $.ajax(
+            {
+                url: "../Supplier/Index",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerList").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
+        function GetSupplierAddOrUpdate() {
+            //$("#img-loader").removeClass("hide");
+            $("#master-loader").removeClass("hide");
+            $("#ContainerAddOrUpdate").empty();
+            $.ajax(
+            {
+                url: "../Supplier/AddOrUpdate",
+                type: "Get",
+                data: {},
+                contentType: "application/json",
+                processData: false,
+                success: function (html) {
+                    $("#ContainerAddOrUpdate").html(html);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    //$("#img-loader").addClass("hide");
+                    $("#master-loader").addClass("hide");
+                }
+            });
+        }
     }
 </script>
