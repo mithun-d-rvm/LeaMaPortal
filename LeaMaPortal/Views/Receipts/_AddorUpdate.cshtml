@@ -2,6 +2,7 @@
 @model LeaMaPortal.Models.ReceiptViewModel
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Receipts" }))
 {
+    @Html.HiddenFor(model=>model.Id)
     <div class="row">
         <div class="col-md-6">
             <div class="col-md-12 form-input-padding">
@@ -124,7 +125,7 @@
                     @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input", @onkeypress = "allow_only_Float(event,'TotalAmount');" } })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -191,14 +192,7 @@
                     @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
-                <div class="col-md-4">
-                    &nbsp;
-                </div>
-                <div class="col-md-4">
-                    <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
-                </div>
-            </div>
+            
         </div>
 
     </div>
@@ -344,19 +338,19 @@
                         <div class="col-md-12">
                             <div class="col-md-2 form-group">
                                 <label for="itemtype">Invoice Amount</label>
-                                <input type="text" class="form-control master-form-input" id="InvoiceAmount" />
+                                <input type="text" class="form-control master-form-input" id="InvoiceAmount" onkeypress = "allow_only_Float(event, 'InvoiceAmount');" />
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="description">Credit Amount</label>
-                                <input type="text" class="form-control master-form-input" onchange="calculateBalance()" id="CreditAmount" />
+                                <input type="text" class="form-control master-form-input" onkeypress = "allow_only_Float(event, 'CreditAmount');" onchange="calculateBalance()" id="CreditAmount" />
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="quantity">Received Amount</label>
-                                <input type="text" class="form-control master-form-input" onchange="calculateBalance()" id="ReceivedAmount" />
+                                <input type="text" class="form-control master-form-input" onchange="calculateBalance()" id="ReceivedAmount" onkeypress = "allow_only_Float(event, 'ReceivedAmount');" />
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="amount">Balance Amount</label>
-                                <input class="form-control master-form-input" id="BalanceAmount" />
+                                <input class="form-control master-form-input" id="BalanceAmount" onkeypress = "allow_only_Float(event, 'BalanceAmount');" />
                             </div>
                             <div class="col-md-2 btn-group">
                                 <br />
@@ -440,6 +434,21 @@
     </div>
     <div class="row ht-5">
         &nbsp;
+    </div>
+    <div class="col-md-12 form-input-padding btn-group-justified">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-3">
+            <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
+        </div>
+        <div class="col-md-3">
+            <button class="btn master-form-btn" id="btnCancel" type="reset" onclick="formReset()">Cancel</button>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+
     </div>
 }
 <script>
@@ -571,7 +580,7 @@
     $("#InvoiceNumber").change(function () { getInvoice($("#InvoiceNumber option:selected").val()) });
 
     function showHideSubForm(Reccategory) {
-        if (Reccategory != "against") {
+        if (Reccategory != "against invoice") {
             document.getElementById('invoice').style.display = "none";
             document.getElementById('ReceiptDetailsListForms').style.display = "none";
         }
@@ -1041,7 +1050,7 @@
                         $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
                         $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
                         $(".result-title").text("Success");
-                        $(".result-modal-body span").text(receiptsAdded);
+                        $(".result-modal-body span").text(response.Message);
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -1076,4 +1085,13 @@
         });
         return o;
     };
+    function formReset() {
+        getReceiptAddorUpdate();
+    }
+    $(document).ready(function () {
+        var id = $("#Id").val();
+        if (id != 0) {
+            document.getElementById("btnSubmit").innerHTML = 'Update';
+        }
+    });
 </script>

@@ -428,11 +428,13 @@ namespace LeaMaPortal.Controllers
             {
 
                 string PFlag = Common.UPDATE;
-                if (model.ReceiptNo == 0)
+                result.Message = "Receipts updated successfully";
+                if (model.Id == 0)
                 {
                     PFlag = Common.INSERT;
                     var receipts = db.tbl_receipthd.OrderByDescending(x => x.id).FirstOrDefault();
                     model.ReceiptNo = receipts != null ? receipts.id + 1 : 1;
+                    result.Message = "Receipts added successfully";
                 }
                 string recDet = null;
                 if (model.ReceiptDetailsList != null)
