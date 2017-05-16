@@ -96,10 +96,12 @@ namespace LeaMaPortal.Controllers
                             model.Caretaker_id = 1;
                         }
                         PFlag = "INSERT";
+                        result.Message = "Caretaker master added successfully";
                     }
                     else
                     {
                         PFlag = "UPDATE";
+                        result.Message = "Caretaker master updated successfully";
                     }
                     object[] parameters = {
                          new MySqlParameter("@PFlag", PFlag),
