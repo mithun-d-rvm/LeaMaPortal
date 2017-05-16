@@ -45,12 +45,37 @@
                     <div class="divTableCell">@item.Ag_Tenant_Name</div>
                     <div class="divTableCell">@item.Unit_Property_Name</div>
                     <div class="divTableCell">
-                        @Html.ActionLink(" ", "Renewal", null, new { @class = "glyphicon glyphicon-open agreement-renewal", title = "Renewal",@data_agreementno=@item.Agreement_No })  |
-                        @Html.ActionLink(" ", "Closue", null, new { @class = "glyphicon glyphicon-save agreement-closure", title = "Closure", @data_toggle = "modal", @data_target = "#closureModal", @data_agreementno = @item.Agreement_No })  |
-                        @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-stats agreement-stats", title = "Status", @data_toggle = "modal", @data_target = "#statusModal", @data_agreementno = @item.Agreement_No })  |
-                        @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit agreement-edit", title = "Edit", @data_agreementno = @item.Agreement_No })  |
-                        @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash agreement-delete", @style = "color:red", title = "Delete", @data_agreementno = @item.Agreement_No }) | 
-                        @Html.ActionLink(" ", "Print", null, new { @class = "glyphicon glyphicon-print agreement-print",title = "Print",@data_toggle = "modal", @data_target = "#contractModal",@data_agreementno = @item.Agreement_No })
+                        @if (@ViewBag.IsRenewalVisible)
+                        {
+                            <span>
+                                @Html.ActionLink(" ", "Renewal", null, new { @class = "glyphicon glyphicon-open agreement-renewal", title = "Renewal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-renewal" })  |
+                            </span>
+                        }
+                        @if (@ViewBag.IsClosureVisible)
+                        {
+                            <span>
+                                @Html.ActionLink(" ", "Closue", null, new { @class = "glyphicon glyphicon-save agreement-closure", title = "Closure", @data_toggle = "modal", @data_target = "#closureModal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-closure" })  |
+                            </span>
+                        }
+                        @if (@ViewBag.IsAgreementStatusVisible)
+                        {
+                            <span>
+                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-stats agreement-stats", title = "Status", @data_toggle = "modal", @data_target = "#statusModal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-status" })  |
+                            </span>
+                        }
+                        @if (@ViewBag.IsEditable == 1)
+                        {
+                            <span>
+                                @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit agreement-edit", title = "Edit", @data_agreementno = @item.Agreement_No })  |
+                            </span>
+                        }
+                        @if (@ViewBag.IsDeletable == 1)
+                        {
+                            <span>
+                                @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash agreement-delete", @style = "color:red", title = "Delete", @data_agreementno = @item.Agreement_No }) |
+                            </span>
+                        }
+                        @Html.ActionLink(" ", "Print", null, new { @class = "glyphicon glyphicon-print agreement-print", title = "Print", @data_toggle = "modal", @data_target = "#contractModal", @data_agreementno = @item.Agreement_No })
                         @*<a target="_blank" href="../Tca/PrintAgreement?AgreementNo=@item.Agreement_No" class="glyphicon glyphicon-print"></a>*@
                     </div>
                 </div>
@@ -59,79 +84,107 @@
         @*, @data_toggle = "modal", @data_target = "#renewalModal"*@
     </div>
     <div class="col-sm-12">
-       
-            <br />
-            @Html.HiddenFor(m => m.PageNumber)
-            <div class="col-md-2">
-                @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
-            </div>
-            <div class="col-lg-10 text-right">
-                @for (int i = 1; i <= Model.PageCount; i++)
-                {
-                    if (i == Model.PageNumber)
-                    {
-                        <input type="button" data-id="@i" value="@i" class="pagination-btn" />
-                    }
-                    else
-                    {
-                        <input type="button" data-id="@i" value="@i" class="Page" />
-                    }
 
+        <br />
+        @Html.HiddenFor(m => m.PageNumber)
+        <div class="col-md-2">
+            @Html.DropDownList("defaultPageSize", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="col-lg-10 text-right">
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                if (i == Model.PageNumber)
+                {
+                    <input type="button" data-id="@i" value="@i" class="pagination-btn" />
                 }
-            </div>
-       
+                else
+                {
+                    <input type="button" data-id="@i" value="@i" class="Page" />
+                }
+
+            }
+        </div>
+
         <script type="text/javascript">
-                $(".Page").click(function(e)
-                {
-                    var page = parseInt($(this).data("id"));
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    var search = $("#Search").val();
-                    //alert(page);
-                    getAgreementList(search, page, defaultPageSize)
-                });
-                $("#defaultPageSize").change(function () {
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getAgreementList(search, 1, defaultPageSize)
-                });
-                $("#btn-search").click(function (e) {
-                    var search = $("#Search").val();
-                    var defaultPageSize = $("#defaultPageSize").val();
-                    getAgreementList(search, 1, defaultPageSize)
+            //GetMenuRights();
+            function GetMenuRights() {
+
+                debugger;
+                $("#menu-home-tca-renewal").hide();
+                $("#menu-home-tca-closure").hide();
+                $("#menu-home-tca-status").hide();
+                var user = $.cookie("CurrentUser");
+                var currentUser = JSON.parse(user);
+                menus = currentUser.MenuConfig.split(",");
+                jQuery.each(menus, function (index, item) {
+                    debugger;
+                    if (item == 22) {
+                        $("#menu-home-tca-renewal").show();
+                    } if (item == 23) {
+                        $("#menu-home-tca-closure").show();
+                    } if (item == 21) {
+                        $("#menu-home-tca-status").show();
+                    }
                 });
 
-                function getAgreementList(search,page,defaultPageSize)
-                {
-                    $.ajax(
-                       {
-                           url: "../Tca/List",
-                           type: "Get",
-                           data: { Search: search, page: page, defaultPageSize: defaultPageSize },
-                           success: function (html) {
-                               $("#agreementList").html(html);
-                           },
-                           error: function (jqXhr, textStatus, errorThrown) {
-                               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                           },
-                           complete: function () {
-                               //   $("#VerifyIdDetailsLoader").addClass("hide");
-                           }
-                       });
-                }
-    function beginPaging(args) {
-        // Animate
-        $('#grid-list').fadeOut('normal');
-    }
+            }
+            //IsAddAllow();
+            //function IsAddAllow() {
+            //    var isAllow = $("#IsAllowAdd").val();
+            //    if (isAllow == 1)
+            //        $("#ContainerAddOrUpdate").show();
+            //    else
+            //        $("#ContainerAddOrUpdate").hide();
+            //}
+            $(".Page").click(function (e) {
+                var page = parseInt($(this).data("id"));
+                var defaultPageSize = $("#defaultPageSize").val();
+                var search = $("#Search").val();
+                //alert(page);
+                getAgreementList(search, page, defaultPageSize)
+            });
+            $("#defaultPageSize").change(function () {
+                var search = $("#Search").val();
+                var defaultPageSize = $("#defaultPageSize").val();
+                getAgreementList(search, 1, defaultPageSize)
+            });
+            $("#btn-search").click(function (e) {
+                var search = $("#Search").val();
+                var defaultPageSize = $("#defaultPageSize").val();
+                getAgreementList(search, 1, defaultPageSize)
+            });
 
-    function successPaging() {
-        // Animate
-        $('#grid-list').fadeIn('normal');
-        $('a').tooltip();
-    }
+            function getAgreementList(search, page, defaultPageSize) {
+                $.ajax(
+                   {
+                       url: "../Tca/List",
+                       type: "Get",
+                       data: { Search: search, page: page, defaultPageSize: defaultPageSize },
+                       success: function (html) {
+                           $("#agreementList").html(html);
+                       },
+                       error: function (jqXhr, textStatus, errorThrown) {
+                           alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                       },
+                       complete: function () {
+                           //   $("#VerifyIdDetailsLoader").addClass("hide");
+                       }
+                   });
+            }
+            function beginPaging(args) {
+                // Animate
+                $('#grid-list').fadeOut('normal');
+            }
 
-    function failurePaging() {
-        alert("Could not retrieve list.");
-    }
+            function successPaging() {
+                // Animate
+                $('#grid-list').fadeIn('normal');
+                $('a').tooltip();
+            }
+
+            function failurePaging() {
+                alert("Could not retrieve list.");
+            }
 
         </script>
     </div>
@@ -174,399 +227,399 @@
                     $("body").scrollTop(0);
                 }
             });
-           });
-           //Edit get
+    });
+    //Edit get
 
-           $(".agreement-renewal").click(function (e) {
-              // $("#img-loader").removeClass("hide");
-               e.preventDefault();
-               var id = $(this).data("agreementno");
-               $.ajax(
-                   {
-                       url: "../Tca/Renewal",
-                       type: "Get",
-                       data: { AgreementNo: id },
-                       success: function (result) {
-                           debugger;
-                           //var data=jQuery.parseJSON(result);
-                           if (result.Errors == undefined || result.Errors == "") {
-                               $("#renewalAddOrUpdateContainer").empty();
-                               $("#renewalAddOrUpdateContainer").html(result);
-                               $("#renewalModal").modal('show');
-                               //$("#CountryId").val(result.Id);
-                               //$("#CountryName").val(result.Country);
-                           }
-                           else {
-                               alert(data.Errors);
-                           }
-                       },
-                       error: function (jqXhr, textStatus, errorThrown) {
-                           alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                       },
-                       complete: function () {
-                           var AgreementNo = id;
-                           AgreementPdc(AgreementNo);
-                           AgreementFacility(AgreementNo);
-                           AgreementDocument(AgreementNo);
-                           AgreementUtility(AgreementNo);
-                           AgreementUnit(AgreementNo);
-                           AgreementCheckList(AgreementNo);
-                           $("body").scrollTop(0);
-                       }
-                   });
-           });
-
-
-           $(".agreement-edit").click(function (e) {
-               // $("#img-loader").removeClass("hide");
-               e.preventDefault();
-               var id = $(this).data("agreementno");
-               $.ajax(
-                   {
-                       url: "../Tca/Edit",
-                       type: "Get",
-                       data: { AgreementNo: id },
-                       success: function (result) {
-                           debugger;
-                           //var data=jQuery.parseJSON(result);
-                           if (result.Errors == undefined || result.Errors == "") {
-                               $("#renewalAddOrUpdateContainer").empty();
-                               $("#renewalAddOrUpdateContainer").html(result);
-                               $("#renewalModal").modal('show');
-                               //$("#CountryId").val(result.Id);
-                               //$("#CountryName").val(result.Country);
-                           }
-                           else {
-                               alert(data.Errors);
-                           }
-                       },
-                       error: function (jqXhr, textStatus, errorThrown) {
-                           alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                       },
-                       complete: function () {
-                           var AgreementNo = id;
-                           AgreementPdc(AgreementNo);
-                           AgreementFacility(AgreementNo);
-                           AgreementDocument(AgreementNo);
-                           AgreementUtility(AgreementNo);
-                           AgreementUnit(AgreementNo);
-                           AgreementCheckList(AgreementNo);
-                           $("body").scrollTop(0);
-                       }
-                   });
-           });
+    $(".agreement-renewal").click(function (e) {
+        // $("#img-loader").removeClass("hide");
+        e.preventDefault();
+        var id = $(this).data("agreementno");
+        $.ajax(
+            {
+                url: "../Tca/Renewal",
+                type: "Get",
+                data: { AgreementNo: id },
+                success: function (result) {
+                    debugger;
+                    //var data=jQuery.parseJSON(result);
+                    if (result.Errors == undefined || result.Errors == "") {
+                        $("#renewalAddOrUpdateContainer").empty();
+                        $("#renewalAddOrUpdateContainer").html(result);
+                        $("#renewalModal").modal('show');
+                        //$("#CountryId").val(result.Id);
+                        //$("#CountryName").val(result.Country);
+                    }
+                    else {
+                        alert(data.Errors);
+                    }
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    var AgreementNo = id;
+                    AgreementPdc(AgreementNo);
+                    AgreementFacility(AgreementNo);
+                    AgreementDocument(AgreementNo);
+                    AgreementUtility(AgreementNo);
+                    AgreementUnit(AgreementNo);
+                    AgreementCheckList(AgreementNo);
+                    $("body").scrollTop(0);
+                }
+            });
+    });
 
 
-           $(".agreement-stats").click(function (e) {
-               // $("#img-loader").removeClass("hide");
-               e.preventDefault();
-               var id = $(this).data("agreementno");
-               $.ajax(
-                   {
-                       url: "../Tca/Status",
-                       type: "Get",
-                       data: { AgreementNo: id },
-                       success: function (result) {
-                           debugger;
-                           //var data=jQuery.parseJSON(result);
-                           if (result.Errors == undefined || result.Errors == "") {
-                               $("#StatusContainer").empty();
-                               $("#StatusContainer").html(result);
-                               $("#statusModal").modal('show');
-                              
-                           }
-                           else {
-                               alert(data.Errors);
-                           }
-                       },
-                       error: function (jqXhr, textStatus, errorThrown) {
-                           alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                       },
-                       complete: function () {
-                          // $("body").scrollTop(0);
-                       }
-                   });
-           });
-           //Add or update
-           $("form#Status").off("submit").on("submit", function (e) {
-               e.preventDefault();
-               
-               try {
-                   var form = $("form#Status");
+    $(".agreement-edit").click(function (e) {
+        // $("#img-loader").removeClass("hide");
+        e.preventDefault();
+        var id = $(this).data("agreementno");
+        $.ajax(
+            {
+                url: "../Tca/Edit",
+                type: "Get",
+                data: { AgreementNo: id },
+                success: function (result) {
+                    debugger;
+                    //var data=jQuery.parseJSON(result);
+                    if (result.Errors == undefined || result.Errors == "") {
+                        $("#renewalAddOrUpdateContainer").empty();
+                        $("#renewalAddOrUpdateContainer").html(result);
+                        $("#renewalModal").modal('show');
+                        //$("#CountryId").val(result.Id);
+                        //$("#CountryName").val(result.Country);
+                    }
+                    else {
+                        alert(data.Errors);
+                    }
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    var AgreementNo = id;
+                    AgreementPdc(AgreementNo);
+                    AgreementFacility(AgreementNo);
+                    AgreementDocument(AgreementNo);
+                    AgreementUtility(AgreementNo);
+                    AgreementUnit(AgreementNo);
+                    AgreementCheckList(AgreementNo);
+                    $("body").scrollTop(0);
+                }
+            });
+    });
 
-                   // var form = $('"form#VerifyId')[0]; // You need to use standart javascript object here
-                   //var formData = new FormData(form);
-                   $.ajax(
-                       {
-                           url: "../Tca/Status",
-                           // dataType: "jsonp",
-                           method: "POST",
-                           data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
-                           contentType: "application/json",
-                           processData: false,
-                           success: function (response) {
-                               $("#statusModal").modal('hide');
-                               $(".result-title").text("Success");
-                               $(".result-modal-body span").text("Status saved successfully.");
-                           },
-                           error: function (jqXhr, textStatus, errorThrown) {
-                               //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                              
-                               $(".result-title").text("Failure");
-                               $(".result-modal-body span").text(masterResultError);
-                           },
-                           complete: function () {
-                               // $("#").addClass("hide");
-                               //$('#masterResultModal').modal('show');
-                           }
 
-                       });
+    $(".agreement-stats").click(function (e) {
+        // $("#img-loader").removeClass("hide");
+        e.preventDefault();
+        var id = $(this).data("agreementno");
+        $.ajax(
+            {
+                url: "../Tca/Status",
+                type: "Get",
+                data: { AgreementNo: id },
+                success: function (result) {
+                    debugger;
+                    //var data=jQuery.parseJSON(result);
+                    if (result.Errors == undefined || result.Errors == "") {
+                        $("#StatusContainer").empty();
+                        $("#StatusContainer").html(result);
+                        $("#statusModal").modal('show');
 
-               }
-               catch (ex) {
-                   alert(ex);
-               }
+                    }
+                    else {
+                        alert(data.Errors);
+                    }
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    // $("body").scrollTop(0);
+                }
+            });
+    });
+    //Add or update
+    $("form#Status").off("submit").on("submit", function (e) {
+        e.preventDefault();
 
-           });
-           $.fn.serializeObject = function () {
-               var o = {};
-               var a = this.serializeArray();
-               $.each(a, function () {
-                   if (o[this.name] !== undefined) {
-                       if (!o[this.name].push) {
-                           o[this.name] = [o[this.name]];
-                       }
-                       o[this.name].push(this.value || '');
-                   } else {
-                       o[this.name] = this.value || '';
-                   }
-               });
-               return o;
-           };
+        try {
+            var form = $("form#Status");
 
-           
-           function AgreementClosurePdc(AgreementNo) {
-               debugger;
-               $("#img-loader").removeClass("hide");
-               $.ajax(
-               {
-                   url: "../Tca/AgreementClosurePdc",
-                   type: "Get",
-                   data: { AgreementNo: AgreementNo },
-                   // contentType: "application/json",
-                   // processData: false,
-                   success: function (html) {
-                       $("#TcaRenewal #AgreementPdcR").html(html);
-                   },
-                   error: function (jqXhr, textStatus, errorThrown) {
-                       alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                   },
-                   complete: function () {
-                       $("#img-loader").addClass("hide");
-                   }
-               });
-           }
-           function AgreementPdc(AgreementNo) {
-               debugger;
-               $("#img-loader").removeClass("hide");
-               $.ajax(
-               {
-                   url: "../Tca/AgreementPdc",
-                   type: "Get",
-                   data: { AgreementNo: AgreementNo },
-                   // contentType: "application/json",
-                   // processData: false,
-                   success: function (html) {
-                       $("#TcaRenewal #AgreementPdcR").html(html);
-                   },
-                   error: function (jqXhr, textStatus, errorThrown) {
-                       alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                   },
-                   complete: function () {
-                       $("#img-loader").addClass("hide");
-                   }
-               });
-           }
-           function AgreementFacility(AgreementNo) {
-               debugger;
-               $("#img-loader").removeClass("hide");
-               $.ajax(
-               {
-                   url: "../Tca/AgreementFacility",
-                   type: "Get",
-                   data: { AgreementNo: AgreementNo },
-                   //contentType: "application/json",
-                   //processData: false,
-                   success: function (html) {
-                       $("#TcaRenewal #AgreementFacilityR").html(html);
-                   },
-                   error: function (jqXhr, textStatus, errorThrown) {
-                       alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                   },
-                   complete: function () {
-                       $("#img-loader").addClass("hide");
-                   }
-               });
-           }
-           function AgreementDocument(AgreementNo) {
-               debugger;
-               $("#img-loader").removeClass("hide");
-               $.ajax(
-               {
-                   url: "../Tca/AgreementDocument",
-                   type: "Get",
-                   data: { AgreementNo: AgreementNo },
-                   //contentType: "application/json",
-                   //processData: false,
-                   success: function (html) {
-                       $("#TcaRenewal #AgreementDocumentR").html(html);
-                   },
-                   error: function (jqXhr, textStatus, errorThrown) {
-                       alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                   },
-                   complete: function () {
-                       $("#img-loader").addClass("hide");
-                   }
-               });
-           }
-           function AgreementUtility(AgreementNo) {
-               $("#img-loader").removeClass("hide");
-               $.ajax(
-               {
-                   url: "../Tca/AgreementUtility",
-                   type: "Get",
-                   data: { AgreementNo: AgreementNo },
-                   //contentType: "application/json",
-                   //processData: false,
-                   success: function (html) {
-                       $("#TcaRenewal #AgreementUtilityR").html(html);
-                   },
-                   error: function (jqXhr, textStatus, errorThrown) {
-                       alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                   },
-                   complete: function () {
-                       $("#img-loader").addClass("hide");
-                   }
-               });
-           }
-           function AgreementUnit(AgreementNo) {
-               $("#img-loader").removeClass("hide");
-               $.ajax(
-               {
-                   url: "../Tca/AgreementUnit",
-                   type: "Get",
-                   data: { AgreementNo: AgreementNo },
-                   //contentType: "application/json",
-                   //processData: false,
-                   success: function (html) {
-                       $("#TcaRenewal #AgreementUnitR").html(html);
-                   },
-                   error: function (jqXhr, textStatus, errorThrown) {
-                       alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                   },
-                   complete: function () {
-                       $("#img-loader").addClass("hide");
-                   }
-               });
-           }
-           function AgreementCheckList(AgreementNo) {
-               $("#img-loader").removeClass("hide");
-               $.ajax(
-               {
-                   url: "../Tca/AgreementCheckList",
-                   type: "Get",
-                   data: { AgreementNo: AgreementNo },
-                   //contentType: "application/json",
-                   //processData: false,
-                   success: function (html) {
-                       $("#TcaRenewal #AgreementCheckListR").html(html);
-                   },
-                   error: function (jqXhr, textStatus, errorThrown) {
-                       alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                   },
-                   complete: function () {
-                       $("#img-loader").addClass("hide");
-                   }
-               });
-           }
-           function getAgreementList() {
-               $.ajax(
-                  {
-                      url: "../Tca/List",
-                      type: "Get",
-                      data: { Search: "", page: 1 },
-                      success: function (html) {
-                          $("#agreementList").empty();
-                          $("#agreementList").html(html);
-                      },
-                      error: function (jqXhr, textStatus, errorThrown) {
-                          alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                      },
-                      complete: function () {
-                          //   $("#VerifyIdDetailsLoader").addClass("hide");
-                      }
-                  });
-           }
-           $(".agreement-delete").click(function (e) {
-               e.preventDefault();
-               var id = $(this).data("agreementno");
-               var r = confirm("Are you sure want to delete?");
-               if (r == false) {
-                   return;
-               }
-               else {
-                   $.ajax(
-                       {
-                           url: "../Tca/Delete",
-                           type: "Get",
+            // var form = $('"form#VerifyId')[0]; // You need to use standart javascript object here
+            //var formData = new FormData(form);
+            $.ajax(
+                {
+                    url: "../Tca/Status",
+                    // dataType: "jsonp",
+                    method: "POST",
+                    data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        $("#statusModal").modal('hide');
+                        $(".result-title").text("Success");
+                        $(".result-modal-body span").text("Status saved successfully.");
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
 
-                           data: { AgreementNo: id },
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(masterResultError);
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                        //$('#masterResultModal').modal('show');
+                    }
 
-                           success: function (response) {
+                });
 
-                               getAgreementList();
-                           },
-                           error: function (jqXhr, textStatus, errorThrown) {
+        }
+        catch (ex) {
+            alert(ex);
+        }
 
-                               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                           },
-                           complete: function () {
-                               //GetCountry();
-                               // $("#").addClass("hide");
-                           }
-                       });
+    });
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+
+
+    function AgreementClosurePdc(AgreementNo) {
+        debugger;
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Tca/AgreementClosurePdc",
+            type: "Get",
+            data: { AgreementNo: AgreementNo },
+            // contentType: "application/json",
+            // processData: false,
+            success: function (html) {
+                $("#TcaRenewal #AgreementPdcR").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function AgreementPdc(AgreementNo) {
+        debugger;
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Tca/AgreementPdc",
+            type: "Get",
+            data: { AgreementNo: AgreementNo },
+            // contentType: "application/json",
+            // processData: false,
+            success: function (html) {
+                $("#TcaRenewal #AgreementPdcR").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function AgreementFacility(AgreementNo) {
+        debugger;
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Tca/AgreementFacility",
+            type: "Get",
+            data: { AgreementNo: AgreementNo },
+            //contentType: "application/json",
+            //processData: false,
+            success: function (html) {
+                $("#TcaRenewal #AgreementFacilityR").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function AgreementDocument(AgreementNo) {
+        debugger;
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Tca/AgreementDocument",
+            type: "Get",
+            data: { AgreementNo: AgreementNo },
+            //contentType: "application/json",
+            //processData: false,
+            success: function (html) {
+                $("#TcaRenewal #AgreementDocumentR").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function AgreementUtility(AgreementNo) {
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Tca/AgreementUtility",
+            type: "Get",
+            data: { AgreementNo: AgreementNo },
+            //contentType: "application/json",
+            //processData: false,
+            success: function (html) {
+                $("#TcaRenewal #AgreementUtilityR").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function AgreementUnit(AgreementNo) {
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Tca/AgreementUnit",
+            type: "Get",
+            data: { AgreementNo: AgreementNo },
+            //contentType: "application/json",
+            //processData: false,
+            success: function (html) {
+                $("#TcaRenewal #AgreementUnitR").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function AgreementCheckList(AgreementNo) {
+        $("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Tca/AgreementCheckList",
+            type: "Get",
+            data: { AgreementNo: AgreementNo },
+            //contentType: "application/json",
+            //processData: false,
+            success: function (html) {
+                $("#TcaRenewal #AgreementCheckListR").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function getAgreementList() {
+        $.ajax(
+           {
+               url: "../Tca/List",
+               type: "Get",
+               data: { Search: "", page: 1 },
+               success: function (html) {
+                   $("#agreementList").empty();
+                   $("#agreementList").html(html);
+               },
+               error: function (jqXhr, textStatus, errorThrown) {
+                   alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+               },
+               complete: function () {
+                   //   $("#VerifyIdDetailsLoader").addClass("hide");
                }
            });
+    }
+    $(".agreement-delete").click(function (e) {
+        e.preventDefault();
+        var id = $(this).data("agreementno");
+        var r = confirm("Are you sure want to delete?");
+        if (r == false) {
+            return;
+        }
+        else {
+            $.ajax(
+                {
+                    url: "../Tca/Delete",
+                    type: "Get",
 
-           $(".agreement-print").click(function (e) {
-               // $("#img-loader").removeClass("hide");
-               e.preventDefault();
-               var id = $(this).data("agreementno");
-               $.ajax(
-                   {
-                       url: "../Tca/Print",
-                       type: "Get",
-                       data: { AgreementNo: id },
-                       success: function (result) {
-                           //var data=jQuery.parseJSON(result);
-                           if (result.Errors == undefined || result.Errors == "") {
-                               $("#PrintContainer").empty();
-                               $("#PrintContainer").html(result);
-                               $("#contractModal").modal('show');
+                    data: { AgreementNo: id },
 
-                           }
-                           else {
-                               alert(data.Errors);
-                           }
-                       },
-                       error: function (jqXhr, textStatus, errorThrown) {
-                           alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                       },
-                       complete: function () {
-                           // $("body").scrollTop(0);
-                       }
-                   });
-           });
+                    success: function (response) {
 
-    
+                        getAgreementList();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        //GetCountry();
+                        // $("#").addClass("hide");
+                    }
+                });
+        }
+    });
+
+    $(".agreement-print").click(function (e) {
+        // $("#img-loader").removeClass("hide");
+        e.preventDefault();
+        var id = $(this).data("agreementno");
+        $.ajax(
+            {
+                url: "../Tca/Print",
+                type: "Get",
+                data: { AgreementNo: id },
+                success: function (result) {
+                    //var data=jQuery.parseJSON(result);
+                    if (result.Errors == undefined || result.Errors == "") {
+                        $("#PrintContainer").empty();
+                        $("#PrintContainer").html(result);
+                        $("#contractModal").modal('show');
+
+                    }
+                    else {
+                        alert(data.Errors);
+                    }
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    // $("body").scrollTop(0);
+                }
+            });
+    });
+
+
 </script>

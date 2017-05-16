@@ -51,7 +51,7 @@ namespace LeaMaPortal.Controllers
                     State = x.State
                 }).ToPagedList(currentPageIndex, PageSize));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw;
             }
@@ -70,7 +70,7 @@ namespace LeaMaPortal.Controllers
             {
                 ViewBag.CaretakerId = 1;
             }
-            
+
             return PartialView("../Master/Caretaker/_AddOrUpdate", new CaretakerViewModel());
         }
 
@@ -103,6 +103,8 @@ namespace LeaMaPortal.Controllers
                         PFlag = "UPDATE";
                         result.Message = "Caretaker master updated successfully";
                     }
+                    if (model.Phoneno.IndexOf('+') != 0)
+                        model.Phoneno = "+" + model.Phoneno;
                     object[] parameters = {
                          new MySqlParameter("@PFlag", PFlag),
                          new MySqlParameter("@PId", model.Id),
@@ -136,13 +138,13 @@ namespace LeaMaPortal.Controllers
         {
             try
             {
-                tbl_caretaker caretaker = db.tbl_caretaker.FirstOrDefault(x =>x.Delmark != "*" && x.Id == id);
+                tbl_caretaker caretaker = db.tbl_caretaker.FirstOrDefault(x => x.Delmark != "*" && x.Id == id);
                 if (caretaker == null)
                 {
                     return PartialView("../Master/Caretaker/_AddOrUpdate", new CaretakerViewModel());
                     //return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
                 }
-                ViewBag.Region_Name = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name",caretaker.Region_Name);
+                ViewBag.Region_Name = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name", caretaker.Region_Name);
                 ViewBag.CaretakerId = caretaker.Caretaker_id;
                 CaretakerViewModel model = new CaretakerViewModel()
                 {
