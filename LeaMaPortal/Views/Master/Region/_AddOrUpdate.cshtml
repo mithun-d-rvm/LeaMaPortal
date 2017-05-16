@@ -62,7 +62,7 @@
                     processData: false,
                     success: function (response) {
                         GetRegion();
-                        if (response.Errors == null) {
+                        if (response != null && response.Errors == null) {
                             $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
                             $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
                             $(".result-title").text("Success");

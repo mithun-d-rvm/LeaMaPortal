@@ -157,9 +157,11 @@ namespace LeaMaPortal.Controllers
                     //    model.invno = model.incno.ToString() + DateTime.Now.Year;
                     //}
                     PFlag = "INSERT";
+                    result.Message = "Invoice creadted successfully";
                 }
                 else
                 {
+                    result.Message = "Invoice updated successfully";
                     PFlag = "UPDATE";
                 }
                 string invoiceDet = null;
@@ -557,8 +559,8 @@ namespace LeaMaPortal.Controllers
                          new MySqlParameter("@PCreateduser", System.Web.HttpContext.Current.User.Identity.Name)
                     };
                 var sp_result = await db.Database.SqlQuery<object>("CALL Usp_Invoice_All(@PFlag, @PId, @Pinvno, @Pdate, @PTenant_id, @PTenant_Name, @Pinvtype, @PAgreement_No, @PProperty_ID, @PProperty_Name, @PUnit_ID, @Punit_Name, @Pmonth, @Pyear, @Ptotalamt, @Pduedate, @Pbank_details, @Premarks, @Pincno, @PCreateduser, @Pinvoicedt)", parameters).ToListAsync();
+                result.Message = "Invoice details deleted successfully";
                 return Json(result, JsonRequestBehavior.AllowGet);
-
             }
             catch(Exception e)
             {

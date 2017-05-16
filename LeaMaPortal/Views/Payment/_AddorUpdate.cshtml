@@ -338,18 +338,21 @@
 
                 </div>
         <div class="col-md-12 form-input-padding">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 &nbsp;
             </div>
-            <div class="col-md-4">
-                <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
+            <div class="col-md-6">
+                <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>&nbsp;&nbsp;
+<button class="btn master-form-btn" id="btnCancel" type="button" onclick="formReset()">Cancel</button>
             </div>
         </div>
 </div>
 </div>
 }
 <script>
-
+    function formReset() {
+        GetPaymentAddOrUpdate();
+    }
     $("#Supplierid").on('change', function (e) {
         debugger;
         //var tenantid = $("#Supplier_id").val();
@@ -908,12 +911,19 @@
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
-                        debugger;
                         GetPayment();
-                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
-                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
-                        $(".result-title").text("Success");
-                        $(".result-modal-body span").text(paymentAdded);
+                        if (response.Errors == null) {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Message);
+                        }
+                        else {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(response.Errors);
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -923,6 +933,7 @@
                         $(".result-modal-body span").text(masterResultError);
                     },
                     complete: function () {
+                        // $("#").addClass("hide");
                         $('#masterResultModal').modal('show');
                     }
                 });
@@ -948,4 +959,10 @@
         });
         return o;
     };
+    $(document).ready(function () {
+        var id = $("#Id").val();
+        if (id != 0) {
+            document.getElementById("btnSubmit").innerHTML = 'Update';
+        }
+    });
 </script>
