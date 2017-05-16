@@ -24,41 +24,49 @@ namespace LeaMaPortal.Controllers
         [HttpGet]
         public PartialViewResult List(string Search, int? page, int? defaultPageSize)
         {
-            ViewData["Search"] = Search;
-            int currentPageIndex = page.HasValue ? page.Value : 1;
-            int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
-            ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, PageSize);
-            var EBDetails = db.tbl_eb_water_billentryhd.Where(x => x.Delmark != "*");
-            if (!string.IsNullOrWhiteSpace(Search))
+            try
             {
-                EBDetails = EBDetails.Where(x => x.Refno.ToString().Contains(Search));
-            }
-            var invoice = EBDetails.OrderBy(x => x.id).Select(x => new EBWaterModel()
-            {
-                BillEnteryNo = x.Refno,
-                BillEntryDate = x.refdate,
-                UtilityId = x.Utility_id,
-                UtilityName = x.utility_name,
-                SupplierId = x.Supplier_id,
-                SupplierName = x.Supplier_name,
-                Details = db.tbl_eb_water_billentrydt.Where(y => y.Delmark != "*" && y.Refno == x.Refno).Select(z => new EBWaterDetailsModel
+                ViewData["Search"] = Search;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+                int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
+                ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, PageSize);
+                var EBDetails = db.tbl_eb_water_billentryhd.Where(x => x.Delmark != "*");
+                if (!string.IsNullOrWhiteSpace(Search))
                 {
-                    MeterReadingNo = z.Meterreadingno,
-                    Amount = z.amount,
-                    BillDate = z.billdate,
-                    RefNo = z.Refno,
-                    BillNo = z.billno,
-                    DayOfUse = z.daysofuse,
-                    DueDate = z.duedate,
-                    MeterNo = z.Meterno,
-                    PropertyId = z.property_id,
-                    Rate = z.rate,
-                    ReadingDate = z.Reading_date,
-                    TotalUnits = z.Total_units,
-                    UnitId = z.Unit_id
-                }).ToList()
-            }).ToPagedList(currentPageIndex, PageSize);
-            return PartialView("../EbWater/_List", invoice);
+                    EBDetails = EBDetails.Where(x => x.Refno.ToString().Contains(Search));
+                }
+                var invoice = EBDetails.OrderBy(x => x.id).Select(x => new EBWaterModel()
+                {
+                    BillEnteryNo = x.Refno,
+                    BillEntryDate = x.refdate,
+                    UtilityId = x.Utility_id,
+                    UtilityName = x.utility_name,
+                    SupplierId = x.Supplier_id,
+                    SupplierName = x.Supplier_name,
+                    Details = db.tbl_eb_water_billentrydt.Where(y => y.Delmark != "*" && y.Refno == x.Refno).Select(z => new EBWaterDetailsModel
+                    {
+                        MeterReadingNo = z.Meterreadingno,
+                        Amount = z.amount,
+                        BillDate = z.billdate,
+                        RefNo = z.Refno,
+                        BillNo = z.billno,
+                        DayOfUse = z.daysofuse,
+                        DueDate = z.duedate,
+                        MeterNo = z.Meterno,
+                        PropertyId = z.property_id,
+                        Rate = z.rate,
+                        ReadingDate = z.Reading_date,
+                        TotalUnits = z.Total_units,
+                        UnitId = z.Unit_id
+                    }).ToList()
+                }).ToPagedList(currentPageIndex, PageSize);
+                return PartialView("../EbWater/_List", invoice);
+            }
+            catch(Exception e)
+            {
+                throw;
+            }
+            
         }
 
         [HttpGet]
@@ -82,7 +90,7 @@ namespace LeaMaPortal.Controllers
                 ViewBag.Supplier_Name = new SelectList(suppliers, "Supplier_Id", "Supplier_Name");
 
                 var meters = await db.tbl_metermaster.Where(w => w.Delmark != "*").ToListAsync();
-                ViewBag.MeterNo = new SelectList(meters, "Meter_no", "Meter_no");
+                ViewBag.MeterNo = new SelectList("", "");
 
                 return PartialView("../EbWater/_AddOrUpdate", model);
             }
@@ -193,7 +201,7 @@ namespace LeaMaPortal.Controllers
                 //ViewBag.UtilityId = new SelectList(utilities, "Utility_id", "Utility_id", model.UtilityId);
                 ViewBag.Utility_Name = new SelectList(utilities, "Utility_id", "Utility_Name", model.UtilityId);
 
-                var meters = await db.tbl_metermaster.Where(w => w.Delmark != "*").ToListAsync();
+                var meters = await db.tbl_metermaster.Where(w => w.Delmark != "*" && w.Utility_id == model.UtilityId).ToListAsync();
                 ViewBag.MeterNo = new SelectList(meters, "Meter_no", "Meter_no");
 
                 return PartialView("../EbWater/_AddorUpdate", model);
@@ -270,11 +278,11 @@ namespace LeaMaPortal.Controllers
             }
         }
         [HttpGet]
-        public JsonResult getMeterDropdown()
+        public JsonResult getMeterDropdown(string utilityid)
         {
             try
             {
-                var data = db.tbl_metermaster.Where(f => f.Delmark != "*");
+                var data = db.tbl_metermaster.Where(f => f.Delmark != "*" && f.Utility_id == utilityid).Select(x => x.Meter_no).ToList();
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
