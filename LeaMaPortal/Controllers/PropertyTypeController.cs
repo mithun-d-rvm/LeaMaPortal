@@ -77,27 +77,33 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    MySqlParameter pa = new MySqlParameter();
-                    string PFlag = "INSERT";
-
-                    if (model.Id == 0)
+                    if (db.tbl_propertytypemaster.Any(a => a.Type_name == model.PropertyType
+                         && a.Usage_name == model.Usage_name
+                         && a.Delmark != "*")
+                        && model.Id == 0)
                     {
-
+                        result.Errors = "Property type already exists!";
                     }
                     else
                     {
-                        PFlag = "UPDATE";
-                    }
-                    object[] param = { new MySqlParameter("@PFlag", PFlag),
+                        MySqlParameter pa = new MySqlParameter();
+                        string PFlag = "INSERT";
+                        result.Message = "Property type created successfully";
+                        if (model.Id != 0)
+                        { 
+                            PFlag = "UPDATE";
+                            result.Message = "Property type updated successfully";
+                        }
+                        object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PId", model.Id),
                                            new MySqlParameter("@PType_name",model.PropertyType),
                                             new MySqlParameter("@PType_Flag",model.PropertyCategory),
                                             new MySqlParameter("@PUsage_name",model.Usage_name),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
-                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Propertytype_All(@PFlag,@PId,@PType_name,@PType_Flag,@PUsage_name,@PCreateduser)", param).ToListAsync();
-                    await db.SaveChangesAsync();
-
+                        var RE = await db.Database.SqlQuery<object>("CALL Usp_Propertytype_All(@PFlag,@PId,@PType_name,@PType_Flag,@PUsage_name,@PCreateduser)", param).ToListAsync();
+                        await db.SaveChangesAsync();
+                    }
                 }
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -156,6 +162,7 @@ namespace LeaMaPortal.Controllers
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
                 var spResult = await db.Database.SqlQuery<object>("Usp_Propertytype_All(@PFlag,@PId,@PType_name,@PType_Flag,@PUsage_name,@PCreateduser)", param).ToListAsync();
+                result.Message = "Property details added successfully";
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

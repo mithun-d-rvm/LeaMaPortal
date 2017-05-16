@@ -366,10 +366,12 @@ namespace LeaMaPortal.Controllers
                         var tenantId = db.tbl_tenant_company.OrderByDescending(x => x.Id).FirstOrDefault();
                         model.TenantId = tenantId != null ? tenantId.Tenant_Id + 1 : 1;
                         PFlag = "INSERT";
+                        result.Message = "Tenant company created successfully";
                     }
                     else
                     {
                         PFlag = "UPDATE";
+                        result.Message = "Tenant company updated successfully";
                     }
                     
                     string companyDet = null;
@@ -565,7 +567,7 @@ namespace LeaMaPortal.Controllers
 
                 };
                 var spResult = await db.Database.SqlQuery<object>("CALL Usp_Tenant_Company_All(@PFlag, @PTenant_Id, @PCompanyName, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser, @Ptenant_companydt, @Ptenant_companydt1, @Ptenant_companydoc)", parameters).ToListAsync();
-                
+                result.Message = "Tenant company deleted successfully";
                 //await db.SaveChangesAsync();
                 //tbl_country.Delmark = "*";
                 //db.Entry(tbl_country).State = EntityState.Modified;

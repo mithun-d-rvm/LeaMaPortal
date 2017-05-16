@@ -27,7 +27,7 @@
                     @Html.LabelFor(model => model.Userid, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4 ">
-                    @Html.DropDownList("Userid", null, "--Select--", htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required"})
+                    @Html.DropDownList("Userid", null, "--Select--", htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required" })
                 </div>
             </div>
             @*<div class="col-md-12 leama-fieldset ">
@@ -79,11 +79,20 @@
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
-                        GetApprovalSettings();
-                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
-                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
-                        $(".result-title").text("Success");
-                        $(".result-modal-body span").text(userApprovalAdded);
+                        if (response.Errors == undefined || response.Errors == "") {
+                            GetApprovalSettings();
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Message);
+                        }
+                        else {
+                            //alert(response.Errors);
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(response.Errors);
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");

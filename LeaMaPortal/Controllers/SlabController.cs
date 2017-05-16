@@ -97,7 +97,7 @@ namespace LeaMaPortal.Controllers
                 {
                     MySqlParameter pa = new MySqlParameter();
                     string PFlag = "INSERT";
-
+                    result.Message = "Slab created successfully";
                     if (model.Id == 0)
                     {
                         model.SlabId = db.tbl_slabmaster.OrderByDescending(o => o.id).Select(s => s.slabid).FirstOrDefault();
@@ -106,6 +106,7 @@ namespace LeaMaPortal.Controllers
                     else
                     {
                         PFlag = "UPDATE";
+                        result.Message = "Slab updated successfully";
                     }
                     //tbl_slabmaster slab = new tbl_slabmaster();
                     //slab.slabid = model.SlabId;
@@ -197,6 +198,7 @@ namespace LeaMaPortal.Controllers
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
                 var RE = await db.Database.SqlQuery<object>("CALL Usp_Slabmaster_All(@PFlag,@Pslabid,@PUtility_id,@PUtility_Name,@PUnit_From,@PUnitto,@Prate,@PColour,@PResidence_type,@PCreateduser)", param).ToListAsync();
+                result.Message = "Slab details deleted successfully";
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
