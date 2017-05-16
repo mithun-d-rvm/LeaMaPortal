@@ -19,6 +19,7 @@ namespace LeaMaPortal.Models
             this.Status = "vacant";
             this.Status_unit = "vacant";
         }
+        public int Id { get; set; }
         [StringLength(100)]
         [DisplayName("Property Type:")]
         public string Property_Flag { get; set; }

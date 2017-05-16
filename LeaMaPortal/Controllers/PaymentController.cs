@@ -145,10 +145,11 @@ namespace LeaMaPortal.Controllers
                 {
                     MySqlParameter pa = new MySqlParameter();
                     string PFlag = "INSERT";
-
+                    result.Message = "Payment details created successfully";
                     if (model.Id != 0)
                     {
                         PFlag = "UPDATE";
+                        result.Message = "Payment details updated successfully";
                     }
                     string invoice = null;
                     if (model.PaymentDetailsViewModel != null && model.PaymentType == "against invoice")
@@ -397,6 +398,7 @@ namespace LeaMaPortal.Controllers
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
                 var RE = await db.Database.SqlQuery<object>("CALL Usp_Payment_All(@PFlag,@PPaymentNo,@PPaymentDate,@Pagreement_no,@PProperty_ID,@PProperty_Name,@PUnit_ID,@Punit_Name,@PSupplier_id,@PSupplier_Name,@PPaymentType,@PPaymentMode,@PTotalAmount,@PAmtInWords,@PDDChequeNo,@PCheqdate,@Ppdcstatus,@PBankAcCode,@PBankAcName,@PAdvAcCode,@PNarration,@PCreateduser,@PPaymentdt)", param).ToListAsync();
+                result.Message = "Payment details deleted successfully";
                 return Json(result, JsonRequestBehavior.AllowGet);
 
             }
