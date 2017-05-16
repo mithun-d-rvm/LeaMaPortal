@@ -112,7 +112,7 @@
                     @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" } })
+                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" , @readonly = "readonly" } })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -135,7 +135,7 @@
                     @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @pattern = "^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", title = "Enter valid email id" } })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @pattern = "^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", title = "Enter valid email id, for example xyz@abc.com" } })
                 </div>
                 <div class="col-md-2">
 
@@ -208,6 +208,36 @@
     function formReset() {
         CareTakerAddOrUpdate();
     }
+
+    $("#Region_Name").on('change', function (e) {
+        debugger;
+        var region = $("#Region_Name").val();
+        if (region != "" && region != null) {
+            $.ajax(
+                {
+                    url: "../Region/GetCountry",
+                    // dataType: "jsonp",
+                    method: "GET",
+                    data: { region: $("#Region_Name").val() }, //FormData(form.get(0)),
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        if (response != null) {
+                            $("#Country").val(response);
+                        }
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+        }
+        // $("#Title").val($("#TitleDisplay").val());
+    });
 
     //Add or update
     $("form#Caretaker").off("submit").on("submit", function (e) {

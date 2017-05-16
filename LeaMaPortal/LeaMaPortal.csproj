@@ -961,6 +961,8 @@
     <Content Include="Views\Report\PDCReport\_PDCReport.cshtml" />
     <Content Include="Views\Report\CollectionSummary\_CollectionSummaryReport.cshtml" />
     <Content Include="Views\Report\SummaryEBWaterReport\_SummaryEBWaterReport.cshtml" />
+    <Content Include="Views\Tca\Contract\_TermsResidential.cshtml" />
+    <Content Include="Views\Tca\Contract\_TermsCommercial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

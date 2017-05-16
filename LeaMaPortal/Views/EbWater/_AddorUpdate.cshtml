@@ -62,19 +62,19 @@
                 <div class="row">
                     <div class="col-md-12 document-row" id="GridView">
                         <div class="col-md-2">
-                            Meter Number
+                            Meter Number*
                         </div>
                         <div class="col-md-2">
-                            Property ID
+                            Property ID*
                         </div>
                         <div class="col-md-2">
                             Unit ID
                         </div>
                         <div class="col-md-2">
-                            Reading Date
+                            Reading Date*
                         </div>
                         <div class="col-md-2">
-                            Bill No
+                            Bill No*
                         </div>
                     </div>
                 </div>
@@ -85,6 +85,9 @@
                     <div class="col-md-12 document-row" id="GridView">
                         <div class="col-md-2">
                             @Html.DropDownList("MeterNo", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                            @*<select id="MeterNo" class="master-form-input form-control">
+                                <option value="" selected>--Select--</option>
+                            </select>*@
                         </div>
                         <div class="col-md-2">
                             <input type="text" class="form-control master-form-input" id="PropertyId" readonly/>
@@ -102,19 +105,19 @@
 
                     <div class="col-md-12 document-row" id="GridView">
                         <div class="col-md-2">
-                            Bill Date
+                            Bill Date*
                         </div>
                         <div class="col-md-2">
-                            Due Date
+                            Due Date*
                         </div>
                         <div class="col-md-2">
-                            Meter Reading Number
+                            Meter Reading Number*
                         </div>
                         <div class="col-md-2">
-                            Total Units
+                            Total Units*
                         </div>
                         <div class="col-md-2">
-                            Day of Use
+                            Day of Use*
                         </div>
                     </div>
                 </div>
@@ -124,13 +127,13 @@
                 <div class="row">
                     <div class="col-md-12 document-row" id="GridView">
                         <div class="col-md-2">
-                            <input type="date" class="form-control master-form-input" id="BillDate" onchange="calculateBalance('')" />
+                            <input type="date" class="form-control master-form-input" id="BillDate" />
                         </div>
                         <div class="col-md-2">
-                            <input type="date" class="form-control master-form-input" id="DueDate" onchange="calculateBalance('')" />
+                            <input type="date" class="form-control master-form-input" id="DueDate" />
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="MeterReadingNo" onchange="calculateBalance('')" />
+                            <input type="text" class="form-control master-form-input" id="MeterReadingNo" onkeypress="allow_only_numbers_text(event, 'MeterReadingNo')" />
                         </div>
                         <div class="col-md-2">
                             <input type="text" class="form-control master-form-input" id="TotalUnits" onkeypress = "allow_only_Float(event, 'TotalUnits');"/>
@@ -141,10 +144,10 @@
                     </div>
                     <div class="col-md-12 document-row" id="GridView">
                         <div class="col-md-2">
-                            Rate
+                            Rate*
                         </div>
                         <div class="col-md-2">
-                            Amount
+                            Amount*
                         </div>
                     </div>
                 </div>
@@ -177,7 +180,7 @@
             }
             else
             {
-                <input type="hidden" id="init-company-contact-det-count" value="0" />
+                <input type="hidden" id="init-details" value="0" />
             }
                 <table class="row m-t-20" id="EbWaterDetailsForm">
                     @if (Model.Details != null)
@@ -317,6 +320,7 @@
     $("#Utility_Name").change(function () {
         $("#UtilityName").val($("#Utility_Name option:selected").text());
         $("#UtilityId").val($("#Utility_Name").val());
+        getMeter();
     });
     function getMeterDetails() {
         var MeterNo = $("#MeterNo").val();
@@ -343,6 +347,36 @@
                 });
 
     }
+    function getMeter() {
+        var Utilityid = $("#UtilityId").val();
+        debugger;
+        $.ajax(
+                {
+                    url: "../EbWater/getMeterDropdown",
+                    // dataType: "jsonp",
+                    method: "GET",
+                    data: { utilityid: Utilityid }, //FormData(form.get(0)),
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        $("#MeterNo").empty();
+                        var options = '<option value="" selected>--Select--</option>';
+                        $.each(response, function (index, data) {
+                            options += '<option value="' + data + '">' + data + '</option>';
+                        });
+                        $('#MeterNo').append(options);
+                        $("#EbWaterDetailsForm").empty();
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+                });
+
+    }
     //$("#agreement_no").change(function () { debugger; getAgreementDetails() });
     var j = parseInt($("#init-details").val());
     function Add() {
@@ -359,113 +393,121 @@
         var DayOfUse = document.getElementById("DayOfUse").value;
         var Rate = document.getElementById("Rate").value;
         var Amount = document.getElementById("Amount").value;
+        if ((MeterNo == null || MeterNo == "") || (ReadingDate == null || ReadingDate == "") || (BillNo == null || BillNo == "") || (BillDate == null || BillDate == "") || (DueDate == null || DueDate == "") || (MeterReadingNo == null || MeterReadingNo == "") || (TotalUnits == null || TotalUnits == "") || (DayOfUse == null || DayOfUse == "") || (Rate == null || Rate == "") || (Amount == null || Amount == "")) {
+            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            $(".result-title").text("Failure");
+            $(".result-modal-body span").text("Enter required fields");
+            $('#masterResultModal').modal('show');
+        }
+        else {
+            var html = "<tr><td><div class='row'><div class='col-md-12 document-row' id='GridView" + j + "'>";
+            //html += "<div class='col-md-2'>Meter Number</div>";
+            //html += "<div class='col-md-2'>Property Id</div>";
+            //html += "<div class='col-md-2'>Unit Id</div>";
+            //html += "<div class='col-md-2'>Reading Date</div>";
+            //html += "<div class='col-md-2'>Bill No</div>";
+            //html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
-        var html = "<tr><td><div class='row'><div class='col-md-12 document-row' id='GridView" + j + "'>";
-        //html += "<div class='col-md-2'>Meter Number</div>";
-        //html += "<div class='col-md-2'>Property Id</div>";
-        //html += "<div class='col-md-2'>Unit Id</div>";
-        //html += "<div class='col-md-2'>Reading Date</div>";
-        //html += "<div class='col-md-2'>Bill No</div>";
-        //html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+            //html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+            html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + MeterNo + "' class='form-control master-form-input' name='Details[" + j + "].MeterNo' data-name='MeterNo' id='MeterNo" + j + "' /></div>";
+            html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + PropertyId + "' class='form-control master-form-input' name='Details[" + j + "].PropertyId' data-name='PropertyId' id='PropertyId" + j + "' /></div>";
+            html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + UnitId + "' class='form-control master-form-input' name='Details[" + j + "].UnitId' data-name='UnitId' id='UnitId" + j + "' /></div>";
+            html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + ReadingDate + "' class='form-control master-form-input' name='Details[" + j + "].ReadingDate' data-name='ReadingDate' id='ReadingDate" + j + "' /></div>";
+            html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + BillNo + "' class='form-control master-form-input' name='Details[" + j + "].BillNo' data-name='BillNo' id='BillNo" + j + "' /></div>";
+            //html += "</div><div class='col-md-12 document-row' id='GridView'>";
+            //html += "<div class='col-md-2'>Bill Date</div>";
+            //html += "<div class='col-md-2'>Due Date</div>";
+            //html += "<div class='col-md-2'>Meter Reading Number</div>";
+            //html += "<div class='col-md-2'>Total Units</div>";
+            //html += "<div class='col-md-2'>Day of Use</div>";
+            //html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
-        //html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-        html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + MeterNo + "' class='form-control master-form-input' name='Details[" + j + "].MeterNo' data-name='MeterNo' id='MeterNo" + j + "' /></div>";
-        html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + PropertyId + "' class='form-control master-form-input' name='Details[" + j + "].PropertyId' data-name='PropertyId' id='PropertyId" + j + "' /></div>";
-        html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + UnitId + "' class='form-control master-form-input' name='Details[" + j + "].UnitId' data-name='UnitId' id='UnitId" + j + "' /></div>";
-        html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + ReadingDate + "' class='form-control master-form-input' name='Details[" + j + "].ReadingDate' data-name='ReadingDate' id='ReadingDate" + j + "' /></div>";
-        html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + BillNo + "' class='form-control master-form-input' name='Details[" + j + "].BillNo' data-name='BillNo' id='BillNo" + j + "' /></div>";
-        //html += "</div><div class='col-md-12 document-row' id='GridView'>";
-        //html += "<div class='col-md-2'>Bill Date</div>";
-        //html += "<div class='col-md-2'>Due Date</div>";
-        //html += "<div class='col-md-2'>Meter Reading Number</div>";
-        //html += "<div class='col-md-2'>Total Units</div>";
-        //html += "<div class='col-md-2'>Day of Use</div>";
-        //html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+            //html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+            html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + BillDate + "' class='form-control master-form-input' name='Details[" + j + "].BillDate' data-name='BillDate' id='BillDate" + j + "'  /></div>";
+            html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + DueDate + "' class='form-control master-form-input' name='Details[" + j + "].DueDate' data-name='DueDate' id='DueDate" + j + "'  /></div>";
+            html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + MeterReadingNo + "' class='form-control master-form-input' name='Details[" + j + "].MeterReadingNo' data-name='MeterReadingNo' id='MeterReadingNo" + j + "'  /></div>";
+            html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + TotalUnits + "' class='form-control master-form-input' name='Details[" + j + "].TotalUnits' data-name='TotalUnits' id='TotalUnits" + j + "' /></div>";
+            html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + DayOfUse + "' class='form-control master-form-input' name='Details[" + j + "].DayOfUse' data-name='DayOfUse' id='DayOfUse" + j + "' /></div>";
+            //html += "</div><div class='col-md-12 document-row' id='GridView'>";
+            //html += "<div class='col-md-2'>Rate</div>";
+            //html += "<div class='col-md-2'>Amount</div>";
+            //html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
-        //html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-        html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + BillDate + "' class='form-control master-form-input' name='Details[" + j + "].BillDate' data-name='BillDate' id='BillDate" + j + "'  /></div>";
-        html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + DueDate + "' class='form-control master-form-input' name='Details[" + j + "].DueDate' data-name='DueDate' id='DueDate" + j + "'  /></div>";
-        html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + MeterReadingNo + "' class='form-control master-form-input' name='Details[" + j + "].MeterReadingNo' data-name='MeterReadingNo' id='MeterReadingNo" + j + "'  /></div>";
-        html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + TotalUnits + "' class='form-control master-form-input' name='Details[" + j + "].TotalUnits' data-name='TotalUnits' id='TotalUnits" + j + "' /></div>";
-        html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + DayOfUse + "' class='form-control master-form-input' name='Details[" + j + "].DayOfUse' data-name='DayOfUse' id='DayOfUse" + j + "' /></div>";
-        //html += "</div><div class='col-md-12 document-row' id='GridView'>";
-        //html += "<div class='col-md-2'>Rate</div>";
-        //html += "<div class='col-md-2'>Amount</div>";
-        //html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+            //html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+            html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + Rate + "' class='form-control master-form-input' name='Details[" + j + "].Rate' data-name='Rate' id='Rate" + j + "'  /></div>";
+            html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + Amount + "' class='form-control master-form-input' name='Details[" + j + "].Amount' data-name='Amount' id='Amount" + j + "'  /></div>";
+            //html += "<div class='col-md-2'><button type='button' id='Delete" + j + "' class='document-btn removebutton'>Delete</button></div>";
+            //html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
-        //html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-        html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + Rate + "' class='form-control master-form-input' name='Details[" + j + "].Rate' data-name='Rate' id='Rate" + j + "'  /></div>";
-        html += "<div class='col-md-2'><input type='hidden' style='border: none;background: none;box-shadow: none;' value='" + Amount + "' class='form-control master-form-input' name='Details[" + j + "].Amount' data-name='Amount' id='Amount" + j + "'  /></div>";
-        //html += "<div class='col-md-2'><button type='button' id='Delete" + j + "' class='document-btn removebutton'>Delete</button></div>";
-        //html += "</div></div><div class='row ht-5'>&nbsp;</div>";
-        
-        html = html + "<div class='col-md-12 document-row border-btm'>" +
-                        "<div class='col-md-12'> <div class='col-md-2'>" +
-                                                   MeterNo +
-                        "</div>" +
-                        "<div class='col-md-2'>" +
-                                                   PropertyId +
+            html = html + "<div class='col-md-12 document-row border-btm'>" +
+                            "<div class='col-md-12'> <div class='col-md-2'>" +
+                                                       MeterNo +
+                            "</div>" +
+                            "<div class='col-md-2'>" +
+                                                       PropertyId +
 
-                        "</div>" +
-                                                "<div class='col-md-2'>" +
-                                                   UnitId +
+                            "</div>" +
+                                                    "<div class='col-md-2'>" +
+                                                       UnitId +
 
-                        "</div>" +
-                        "<div class='col-md-2'>" +
-                                                   ReadingDate +
+                            "</div>" +
+                            "<div class='col-md-2'>" +
+                                                       ReadingDate +
 
-                        "</div>" +
-                        "<div class='col-md-2'>" +
-                                                   BillNo +
+                            "</div>" +
+                            "<div class='col-md-2'>" +
+                                                       BillNo +
 
-                        "</div></div><div class='col-md-12 m-t-20'>" +
-                        "<div class='col-md-2'>" +
-                                                   BillDate +
+                            "</div></div><div class='col-md-12 m-t-20'>" +
+                            "<div class='col-md-2'>" +
+                                                       BillDate +
 
-                        "</div>" +
-                        "<div class='col-md-2'>" +
-                                                   DueDate +
+                            "</div>" +
+                            "<div class='col-md-2'>" +
+                                                       DueDate +
 
-                        "</div>" +
-                        "<div class='col-md-2'>" +
-                                                   MeterReadingNo +
+                            "</div>" +
+                            "<div class='col-md-2'>" +
+                                                       MeterReadingNo +
 
-                        "</div>" +
-                        "<div class='col-md-2'>" +
-                                                   TotalUnits +
+                            "</div>" +
+                            "<div class='col-md-2'>" +
+                                                       TotalUnits +
 
-                        "</div>" +
-                        "<div class='col-md-2'>" +
-                                                   DayOfUse +
+                            "</div>" +
+                            "<div class='col-md-2'>" +
+                                                       DayOfUse +
 
-                        "</div></div><div class='col-md-12 m-t-20'>" +
-                        "<div class='col-md-2'>" +
-                                                   Rate +
+                            "</div></div><div class='col-md-12 m-t-20'>" +
+                            "<div class='col-md-2'>" +
+                                                       Rate +
 
-                        "</div>" +
-                        "<div class='col-md-2'>" +
-                                                   Amount +
+                            "</div>" +
+                            "<div class='col-md-2'>" +
+                                                       Amount +
 
-                        "</div>" +
+                            "</div>" +
 
-                        "<div class='col-md-2'>" +
-                                                 "<button type='button' class='btn ebwater-remove'>X</button>" +
-                                                 "</div></div></div>";
-        html = html + "</td></tr>"
-        j++;
-        $("#EbWaterDetailsForm").append(html);
-        document.getElementById("MeterNo").value = "";
-        document.getElementById("PropertyId").value = "";
-        document.getElementById("UnitId").value ="" ;
-        document.getElementById("ReadingDate").value ="";
-        document.getElementById("BillNo").value = "";
-        document.getElementById("BillDate").value = "";
-        document.getElementById("DueDate").value = "";
-        document.getElementById("MeterReadingNo").value = "";
-        document.getElementById("TotalUnits").value = "";
-        document.getElementById("DayOfUse").value = "";
-        document.getElementById("Rate").value = "";
-        document.getElementById("Amount").value = "";
+                            "<div class='col-md-2'>" +
+                                                     "<button type='button' class='btn ebwater-remove'>X</button>" +
+                                                     "</div></div></div>";
+            html = html + "</td></tr>"
+            j++;
+            $("#EbWaterDetailsForm").append(html);
+            document.getElementById("MeterNo").value = "";
+            document.getElementById("PropertyId").value = "";
+            document.getElementById("UnitId").value = "";
+            document.getElementById("ReadingDate").value = "";
+            document.getElementById("BillNo").value = "";
+            document.getElementById("BillDate").value = "";
+            document.getElementById("DueDate").value = "";
+            document.getElementById("MeterReadingNo").value = "";
+            document.getElementById("TotalUnits").value = "";
+            document.getElementById("DayOfUse").value = "";
+            document.getElementById("Rate").value = "";
+            document.getElementById("Amount").value = "";
+        }
     }
 
     $(document).on('click', 'button.ebwater-remove', function () {
@@ -545,4 +587,7 @@
         });
         return o;
     };
+    $(document).ready(function () {
+        //$("#Utility_Name").prop('selected', true).change();
+    });
 </script>
