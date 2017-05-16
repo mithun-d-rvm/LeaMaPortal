@@ -42,6 +42,22 @@ function allow_only_numbers(e) {
     }
 }
 
+function allow_only_numbers_text(e) {
+    try{
+        var regex = new RegExp("^[a-zA-Z0-9]+$");
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        }
+
+        e.preventDefault();
+        return false;
+    }
+    catch (ex) {
+
+    }
+}
+
 
 function allow_only_Float(e, cntrl) {
     try {
