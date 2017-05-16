@@ -145,7 +145,7 @@ namespace LeaMaPortal.ReportASPX.SummaryEBWater
                 if (dropDown_Group.SelectedItem.Value == "Property")
                 {
                     SummaryEBWaterReportViewer.LocalReport.ReportPath = "ReportRDLC\\SummaryEBWater\\summaryebwaterprop.rdlc";
-                    var property = entities.Database.SqlQuery<SummaryEBWaterpropertyReportModel>("Select id,Refno,Meterno,property_id,Property_Name,Unit_id,Unit_Property_Name,Total_units,Meterreadingno,Reading_date,billdate,billno,duedate,utility_id,Utility_Name,Region_Name,country,Caretaker_Name,Caretaker_ID,Billamount,Paidamount,OutstandingAmt,Aging_Days,user from ebwater_report").ToList();
+                    var property = entities.Database.SqlQuery<SummaryEBWaterpropertyReportModel>("Select id,Refno,Meterno,property_id,Property_Name,Unit_id,Unit_Property_Name,Total_units,Meterreadingno,Reading_date,billdate,billno,duedate,utility_id,Utility_Name,Region_Name,country,Caretaker_Name,Caretaker_ID,Billamount,Paidamount,OutstandingAmt,Aging_Days,user from ebwater_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC
@@ -156,7 +156,7 @@ namespace LeaMaPortal.ReportASPX.SummaryEBWater
                 else if (dropDown_Group.SelectedItem.Value == "Region")
                 {
                     SummaryEBWaterReportViewer.LocalReport.ReportPath = "ReportRDLC\\SummaryEBWater\\summaryebwaterregion.rdlc";
-                    var region = entities.Database.SqlQuery<SummaryEBWaterRegionReportModel>("Select Region_Name,Country,Noof_properties,Billamount,Paidamount,user from summaryebwater_region_report").ToList();
+                    var region = entities.Database.SqlQuery<SummaryEBWaterRegionReportModel>("Select Region_Name,Country,Noof_properties,Billamount,Paidamount,user from summaryebwater_region_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC
@@ -167,7 +167,7 @@ namespace LeaMaPortal.ReportASPX.SummaryEBWater
                 else if (dropDown_Group.SelectedItem.Value == "Caretaker")
                 {
                     SummaryEBWaterReportViewer.LocalReport.ReportPath = "ReportRDLC\\SummaryEBWater\\summaryebwatercaretaker.rdlc";
-                    var caretaker = entities.Database.SqlQuery<SummaryEBWaterCaretakerReportModel>("Select Caretaker_id,Caretaker_Name,Region_Name,Country,Noof_properties,Billamount,Paidamount,user from summaryebwater_caretaker_report").ToList();
+                    var caretaker = entities.Database.SqlQuery<SummaryEBWaterCaretakerReportModel>("Select Caretaker_id,Caretaker_Name,Region_Name,Country,Noof_properties,Billamount,Paidamount,user from summaryebwater_caretaker_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC

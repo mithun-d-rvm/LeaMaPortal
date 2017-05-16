@@ -181,7 +181,7 @@ namespace LeaMaPortal.ReportASPX.VacancyReport
                 if (dropDown_Group.SelectedItem.Value == "Property")
                 {
                     VacancyReportViewer.LocalReport.ReportPath = "ReportRDLC\\Vacancy\\vacancyprop.rdlc";
-                    var property = entities.Database.SqlQuery<VacantPropertyReportModel>("Select id,Property_Flag,Property_id,Property_Name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Rental_Rate_Month,Vacant_Start_Date,Aging_Days,Loss_Amt,user from vacancy_report").ToList();
+                    var property = entities.Database.SqlQuery<VacantPropertyReportModel>("Select id,Property_Flag,Property_id,Property_Name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Rental_Rate_Month,Vacant_Start_Date,Aging_Days,Loss_Amt,user from vacancy_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC
@@ -192,7 +192,7 @@ namespace LeaMaPortal.ReportASPX.VacancyReport
                 else if (dropDown_Group.SelectedItem.Value == "Region")
                 {
                     VacancyReportViewer.LocalReport.ReportPath = "ReportRDLC\\Vacancy\\vacancyregion.rdlc";
-                    var region = entities.Database.SqlQuery<VacantRegionReportModel>("Select Region_Name,Country,Noof_properties,Aging_days,Aging_Range,Amount_Range,Loss_Amt,user from vacancy_region_report").ToList();
+                    var region = entities.Database.SqlQuery<VacantRegionReportModel>("Select Region_Name,Country,Noof_properties,Aging_days,Aging_Range,Amount_Range,Loss_Amt,user from vacancy_region_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC
@@ -203,7 +203,7 @@ namespace LeaMaPortal.ReportASPX.VacancyReport
                 else if (dropDown_Group.SelectedItem.Value == "Caretaker")
                 {
                     VacancyReportViewer.LocalReport.ReportPath = "ReportRDLC\\Vacancy\\vacancycaretaker.rdlc";
-                    var caretaker = entities.Database.SqlQuery<VacantCaretakerReportModel>("Select Caretaker_id,Caretaker_Name,Region_Name,Country,Noof_properties,Aging_days,Aging_Range,Amont_Range,Loss_Amt,user from vacancy_caretaker_report").ToList();
+                    var caretaker = entities.Database.SqlQuery<VacantCaretakerReportModel>("Select Caretaker_id,Caretaker_Name,Region_Name,Country,Noof_properties,Aging_days,Aging_Range,Amont_Range,Loss_Amt,user from vacancy_caretaker_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC

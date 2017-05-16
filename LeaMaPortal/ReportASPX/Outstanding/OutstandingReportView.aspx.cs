@@ -152,7 +152,7 @@ namespace LeaMaPortal.ReportASPX.Outstanding
                 if (dropDown_Group.SelectedItem.Value == "Property")
                 {
                     OutstandingReportViewer.LocalReport.ReportPath = "ReportRDLC\\Outstanding\\outstanding_prop.rdlc";
-                    var property = entities.Database.SqlQuery<OutstandingPropertyReportModel>("Select id,Agreement_No,Property_id,Property_name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Agreement_Start_Date,Ag_Tenant_Name,Agreement_End_Date,Total_Rental_amount,outstanding_amt,Perday_Rental,Remaining_Days,Contract_Value,user from outstanding_report").ToList();
+                    var property = entities.Database.SqlQuery<OutstandingPropertyReportModel>("Select id,Agreement_No,Property_id,Property_name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Agreement_Start_Date,Ag_Tenant_Name,Agreement_End_Date,Total_Rental_amount,outstanding_amt,Perday_Rental,Remaining_Days,Contract_Value,user from outstanding_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC
@@ -163,7 +163,7 @@ namespace LeaMaPortal.ReportASPX.Outstanding
                 else if (dropDown_Group.SelectedItem.Value == "Region")
                 {
                     OutstandingReportViewer.LocalReport.ReportPath = "ReportRDLC\\Outstanding\\outstandingregion.rdlc";
-                    var region = entities.Database.SqlQuery<OutstandingRegionReportModel>("Select Region_Name,Country,Noof_properties,Remaining_Days,Remaining_Range,Amount_Range,outstanding_amt,user from outstanding_region_report").ToList();
+                    var region = entities.Database.SqlQuery<OutstandingRegionReportModel>("Select Region_Name,Country,Noof_properties,Remaining_Days,Remaining_Range,Amount_Range,outstanding_amt,user from outstanding_region_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC
@@ -174,7 +174,7 @@ namespace LeaMaPortal.ReportASPX.Outstanding
                 else if (dropDown_Group.SelectedItem.Value == "Caretaker")
                 {
                     OutstandingReportViewer.LocalReport.ReportPath = "ReportRDLC\\Outstanding\\outstandingcaretaker.rdlc";
-                    var caretaker = entities.Database.SqlQuery<OutstandingCaretakerReportModel>("Select Caretaker_id,Caretaker_Name,Region_Name,Country,Noof_properties,Remaining_Days,Remaining_Range,Amont_Range,outstanding_amt,user from outstanding_caretaker_report").ToList();
+                    var caretaker = entities.Database.SqlQuery<OutstandingCaretakerReportModel>("Select Caretaker_id,Caretaker_Name,Region_Name,Country,Noof_properties,Remaining_Days,Remaining_Range,Amont_Range,outstanding_amt,user from outstanding_caretaker_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC

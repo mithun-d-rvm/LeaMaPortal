@@ -143,7 +143,7 @@ namespace LeaMaPortal.ReportASPX.CollectionSummary
                 if (dropDown_Group.SelectedItem.Value == "Property")
                 {
                     CollectionSummaryReportViewer.LocalReport.ReportPath = "ReportRDLC\\CollectionSummary\\summarycollectionprop.rdlc";
-                    var property = entities.Database.SqlQuery<CollectionSummaryReportModel>("Select id,property_id,Property_ID_Tawtheeq,Properties_Name,Unit_ID_Tawtheeq,Unit_Property_Name,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Ag_Tenant_Name,country,region_name,Reccategory,RecpType,pdcstatus,DDChequeNo,DDChequeDate,Total_Rental_amount,totalamount,user from summarycollection_report").ToList();
+                    var property = entities.Database.SqlQuery<CollectionSummaryReportModel>("Select id,property_id,Property_ID_Tawtheeq,Properties_Name,Unit_ID_Tawtheeq,Unit_Property_Name,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Ag_Tenant_Name,country,region_name,Reccategory,RecpType,pdcstatus,DDChequeNo,DDChequeDate,Total_Rental_amount,totalamount,user from summarycollection_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC
@@ -154,7 +154,7 @@ namespace LeaMaPortal.ReportASPX.CollectionSummary
                 else if (dropDown_Group.SelectedItem.Value == "Region")
                 {
                     CollectionSummaryReportViewer.LocalReport.ReportPath = "ReportRDLC\\CollectionSummary\\summarycollectionregion.rdlc";
-                    var region = entities.Database.SqlQuery<CollectionSummaryRegionReportModel>("Select Region_Name,Country,Noof_properties,Billamount,Paidamount,user from summaryebwater_region_report").ToList();
+                    var region = entities.Database.SqlQuery<CollectionSummaryRegionReportModel>("Select Region_Name,Country,Noof_properties,Billamount,Paidamount,user from summaryebwater_region_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC
@@ -165,7 +165,7 @@ namespace LeaMaPortal.ReportASPX.CollectionSummary
                 else if (dropDown_Group.SelectedItem.Value == "Caretaker")
                 {
                     CollectionSummaryReportViewer.LocalReport.ReportPath = "ReportRDLC\\CollectionSummary\\summarycollectioncaretaker.rdlc";
-                    var caretaker = entities.Database.SqlQuery<CollectionSummaryCaretakerReportModel>("Select Caretaker_id,Caretaker_Name,Region_Name,Country,Noof_properties,totalrentalamount,Totalpaidamt,user from summarycollection_caretaker_report").ToList();
+                    var caretaker = entities.Database.SqlQuery<CollectionSummaryCaretakerReportModel>("Select Caretaker_id,Caretaker_Name,Region_Name,Country,Noof_properties,totalrentalamount,Totalpaidamt,user from summarycollection_caretaker_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC

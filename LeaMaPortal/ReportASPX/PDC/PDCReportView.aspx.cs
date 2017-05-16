@@ -101,7 +101,7 @@ namespace LeaMaPortal.ReportASPX.PDC
                 PDCReport.Visible = true;
                 ReportDataSource reportDataSource = new ReportDataSource();
                 PDCReportViewer.LocalReport.ReportPath = "ReportRDLC\\PDC\\PDCreport.rdlc";
-                var property = entities.Database.SqlQuery<PDCReportModel>("Select id,Agreement_No,Property_id,Property_name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Ag_Tenant_Name,Agreement_Start_Date,Agreement_End_Date,Total_Rental_amount,outstanding_amt,cheque_amount,Cheque_No,cheque_date,pdcstatus,user from pdc_report").ToList();
+                var property = entities.Database.SqlQuery<PDCReportModel>("Select id,Agreement_No,Property_id,Property_name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Ag_Tenant_Name,Agreement_Start_Date,Agreement_End_Date,Total_Rental_amount,outstanding_amt,cheque_amount,Cheque_No,cheque_date,pdcstatus,user from pdc_report where user='" + txt_CreatedUser.Text + "'").ToList();
                 reportDataSource = new ReportDataSource
                 {
                     // Must match the DataSource in the RDLC

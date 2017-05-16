@@ -151,7 +151,7 @@ namespace LeaMaPortal.ReportASPX.ContractReport
                 if (dropDown_Group.SelectedItem.Value == "Property")
                 {
                     ContractReportViewer.LocalReport.ReportPath = "ReportRDLC\\Contract\\Renewalprop.rdlc";
-                    var property = entities.Database.SqlQuery<ContractPropertyReportModel>("Select id,Agreement_No,Property_id,Property_name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Ag_Tenant_Name,Agreement_End_Date,Notice_Period,Perday_Rental,Remaining_Days,Contract_Value,user from renewal_report").ToList();
+                    var property = entities.Database.SqlQuery<ContractPropertyReportModel>("Select id,Agreement_No,Property_id,Property_name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Ag_Tenant_Name,Agreement_End_Date,Notice_Period,Perday_Rental,Remaining_Days,Contract_Value,user from renewal_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC
@@ -162,7 +162,7 @@ namespace LeaMaPortal.ReportASPX.ContractReport
                 else if (dropDown_Group.SelectedItem.Value == "Region")
                 {
                     ContractReportViewer.LocalReport.ReportPath = "ReportRDLC\\Contract\\renewal_region_report.rdlc";
-                    var region = entities.Database.SqlQuery<ContractRegionReportModel>("Select Region_Name,Country,Noof_properties,Remaining_Days,Remaining_Range,Amount_Range,Contract_Value,user from renewal_region_report").ToList();
+                    var region = entities.Database.SqlQuery<ContractRegionReportModel>("Select Region_Name,Country,Noof_properties,Remaining_Days,Remaining_Range,Amount_Range,Contract_Value,user from renewal_region_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC
@@ -173,7 +173,7 @@ namespace LeaMaPortal.ReportASPX.ContractReport
                 else if (dropDown_Group.SelectedItem.Value == "Caretaker")
                 {
                     ContractReportViewer.LocalReport.ReportPath = "ReportRDLC\\Contract\\renewalcaretaker.rdlc";
-                    var caretaker = entities.Database.SqlQuery<ContractCaretakerReportModel>("Select Caretaker_id,Caretaker_Name,Region_Name,Country,Noof_properties,Remaining_Days,Remaining_Range,Amont_Range,Contract_Value,user from renewal_caretaker_report").ToList();
+                    var caretaker = entities.Database.SqlQuery<ContractCaretakerReportModel>("Select Caretaker_id,Caretaker_Name,Region_Name,Country,Noof_properties,Remaining_Days,Remaining_Range,Amont_Range,Contract_Value,user from renewal_caretaker_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC
