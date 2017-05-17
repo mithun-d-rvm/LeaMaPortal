@@ -122,8 +122,11 @@ namespace LeaMaPortal.Controllers
 
 
                 ViewBag.agreement_no = new SelectList(db.tbl_agreement.Where(w => w.Delmark != "*").OrderBy(o => o.id).Distinct(), "Agreement_No", "Agreement_No");
-                ViewBag.BankAcName = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NAME), "Name", "Name");
-                ViewBag.BankAcCode = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NUMBER), "Name", "Name");
+                ViewBag.BankAcCode = new SelectList(Common.BankDetails, "AccountNumber", "AccountNumber");
+                ViewBag.BankAcName = new SelectList(Common.BankDetails, "AccountNumber", "BankName");
+
+                //ViewBag.BankAcName = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NAME), "Name", "Name");
+                //ViewBag.BankAcCode = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NUMBER), "Name", "Name");
 
                 var advancepaymentnumber = db.Database.SqlQuery<int>("Select PaymentNo from view_advance_pending_payment");
                 ViewBag.AdvAcCode = new SelectList(advancepaymentnumber);
@@ -284,8 +287,8 @@ namespace LeaMaPortal.Controllers
                 ViewBag.SupplierName = new SelectList(suppliers, "Supplier_Id", "Supplier_Name", model.Supplier_id);
                 var agreements = db.tbl_agreement.Where(w => w.Delmark != "*").OrderBy(o => o.id);
                 ViewBag.agreement_no = new SelectList(agreements, "Agreement_No", "Agreement_No", model.agreement_no);
-                ViewBag.BankAcName = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NAME), "Name", "Name", model.BankAcName);
-                ViewBag.BankAcCode = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NUMBER), "Name", "Name", model.BankAcCode);
+                ViewBag.BankAcCode = new SelectList(Common.BankDetails, "AccountNumber", "AccountNumber", model.BankAcCode);
+                ViewBag.BankAcName = new SelectList(Common.BankDetails, "AccountNumber", "BankName", model.BankAcName);
                 if (model.agreement_no == null || model.agreement_no == 0)
                 {
                     var properties = db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Property" && w.Delmark != "*").OrderBy(o => o.id);
