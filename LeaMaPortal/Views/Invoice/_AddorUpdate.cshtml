@@ -74,7 +74,7 @@ Layout = null;
                         @Html.LabelFor(model => model.invtype, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.DropDownList("invtype", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("invtype", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -90,7 +90,7 @@ Layout = null;
                         @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -98,7 +98,7 @@ Layout = null;
                         @Html.LabelFor(model => model.Tenant_id, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                       @Html.DropDownList("Tenantid", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                       @Html.DropDownList("Tenantid", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
 
@@ -107,7 +107,7 @@ Layout = null;
                         @Html.LabelFor(model => model.Tenant_Name, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.DropDownList("TenantName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("TenantName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -116,7 +116,7 @@ Layout = null;
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Agreement_No, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("Agreement_No", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("Agreement_No", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -125,7 +125,7 @@ Layout = null;
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Property_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("PropertyId", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("PropertyId", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -134,7 +134,7 @@ Layout = null;
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("PropertyName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("PropertyName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
 
@@ -165,7 +165,7 @@ Layout = null;
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.month, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("month", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("month", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -173,7 +173,7 @@ Layout = null;
                         @Html.LabelFor(model => model.year, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.year, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.year, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                     </div>
                 </div>
 
@@ -182,7 +182,7 @@ Layout = null;
                         @Html.LabelFor(model => model.totalamt, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.totalamt, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.totalamt, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -190,7 +190,7 @@ Layout = null;
                         @Html.LabelFor(model => model.duedate, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.duedate, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.duedate, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -221,11 +221,11 @@ Layout = null;
         <div class="row" id="invoice">
             @if (Model.InvoiceDetails != null)
             {
-                <input type="hidden" id="init-company-contact-det-count" value="@Model.InvoiceDetails.Count" />
+                <input type="hidden" id="init-details" value="@Model.InvoiceDetails.Count" />
             }
             else
             {
-                <input type="hidden" id="init-company-contact-det-count" value="0" />
+                <input type="hidden" id="init-details" value="0" />
             }
 
             <div class="p-b-25">
@@ -235,20 +235,20 @@ Layout = null;
                 <div id="Gridview" class="row document-row">
                     <div class="col-md-12">
                         <div class="col-md-3 form-group">
-                            <label for="itemtype">Item Type</label>
+                            <label for="itemtype">Item Type*</label>
                             <input type="text" readonly class="form-control master-form-input" id="item" />
                         </div>
                         <div class="col-md-3 form-group">
-                            <label for="description">Item Description</label>
-                            <input type="text" class="form-control master-form-input" id="description" />
+                            <label for="description">Item Description*</label>
+                            <textarea id="description" class="form-control master-form-input"></textarea>
                         </div>
                         <div class="col-md-2 form-group">
-                            <label for="quantity">Quantity</label>
-                            <input type="text" class="form-control master-form-input" id="qty" />
+                            <label for="quantity">Quantity*</label>
+                            <input type="text" class="form-control master-form-input" id="qty" onkeypress="allow_only_Float(event,'qty')" />
                         </div>
                         <div class="col-md-2 form-group">
-                            <label for="amount">Amount</label>
-                            <input id="amount" class="form-control master-form-input" />
+                            <label for="amount">Amount*</label>
+                            <input id="amount" class="form-control master-form-input" onkeypress="allow_only_Float(event,'qty')" />
                         </div>
                         <div class="col-md-2 btn-group">
                             <br />
@@ -301,12 +301,14 @@ Layout = null;
                     var html = "<div class='col-md-12 document-row' id='GridViewCompanyContact" + @j + "'>";
 
                     html = html + "<div class='col-md-12'>";
-                    html = html + " <div class='col-md-3 form-group'> <label for='item'>Item Type</label><input id='item" + @j + "'  type='text' value='" + @Model.InvoiceDetails[j].item + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].item' data-name='Item Type' readonly /></div>";
-                    html = html + " <div class='col-md-3 form-group'> <label for='branch'>Item Description</label> <input id='description" + @j + "'  type='text' value='" + @Model.InvoiceDetails[j].description + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].description' data-name='description' /></div>";
-                    html = html + " <div class='col-md-2 form-group'> <label for='qty'>Quantity</label><input type='text' id='qty" + @j + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].qty' data-name='qty' value='" + @Model.InvoiceDetails[j].qty + "'/></div>";
-                    html = html + " <div class='col-md-2 form-group'> <label for='amount'>Amount</label><input type='text' id='amount" + @j + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].amount' data-name='amount' value='" + @Model.InvoiceDetails[j].amount + "'/></div>";
+                    html = html + " <div class='col-md-3 form-group'> <label for='item'>Item Type</label><input id='item" + @j + "'  type='text' value='" + @Model.InvoiceDetails[j].item + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].item' data-name='item' readonly /></div>";
+                    //html = html + " <div class='col-md-3 form-group'> <label for='branch'>Item Description</label> <input id='description" + @j + "'  type='text' value='" + @Model.InvoiceDetails[j].description + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].description' data-name='description' /></div>";
+                    html=html + " <div class='col-md-3 form-group'> <label for='Description'>Item Description</label> <textarea id='description'" + @j + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].description' data-name='description' value='" + @Model.InvoiceDetails[j].description + "'readonly>" + @Model.InvoiceDetails[@j].description + "</textarea></div>";
+                    html = html + " <div class='col-md-2 form-group'> <label for='qty'>Quantity</label><input type='text' id='qty" + @j + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].qty' data-name='qty' value='" + @Model.InvoiceDetails[j].qty + "'readonly/></div>";
+                    html = html + " <div class='col-md-2 form-group'> <label for='amount'>Amount</label><input type='text' id='amount" + @j + "' class='form-control master-form-input' name='InvoiceDetails[" + j + "].amount' data-name='amount' value='" + @Model.InvoiceDetails[j].amount + "'readonly/></div>";
                     html = html + "<div class='col-md-2 form-group'></br>  <button class='document-btn removebutton' id='Delete" + @j + "'> Delete </button></div>";
                     html = html + "</div>";
+
 
                     html = html + "</div>";
                     html = html + "<div class='row ht-5'> &nbsp;</div>";
@@ -316,11 +318,11 @@ Layout = null;
                             @Html.Raw(html)
                         </td>
                     </tr>
-                        <tr>
+                        @*<tr>
                             <td>
                                 &nbsp;
                             </td>
-                        </tr>
+                        </tr>*@
                 }
             }
         </table>
@@ -372,65 +374,83 @@ Layout = null;
     $('#dropDownId').change(function () {
         var val = $("#dropDownId option:selected").val();
         alert(val);
-        
+
     });
     $('#model-close').click(function () {
         $("#myModal").modal('hide');
     });
-    var i = 0;
+    var i = parseInt($("#init-details").val());
     function add() {
 
         var item = document.getElementById("item").value;
         var description = document.getElementById("description").value;
         var qty = document.getElementById("qty").value;
         var amount = document.getElementById("amount").value;
+        if ((item == null || item == "") || (description == null || description == "") || (qty == null || qty == "") || (amount == null || amount == "")) {
+            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            $(".result-title").text("Failure");
+            $(".result-modal-body span").text("Enter required fields");
+            $('#masterResultModal').modal('show');
+        }
+        else {
+            $("#totalamt").val(parseInt($("#totalamt").val()) + parseInt(amount));
 
+            var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + i + "'>";
 
-        var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + i + "'>";
+            html = html + "<div class='col-md-12'>";
+            html = html + " <div class='col-md-3 form-group'> <label for='item'>Item Type</label><input id='item" + i + "'  type='text' value='" + item + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].item' data-name='item' readonly /></div>";
+            html = html + " <div class='col-md-3 form-group'> <label for='Description'>Item Description</label> <textarea id='description'" + i + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].description' data-name='description' readonly value='" + description + "'>" + description + "</textarea></div>";
+            //html = html + " <div class='col-md-3 form-group'> <label for='branch'>Item Description</label> <input id='description" +i + "'  type='text' value='" + description + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].description' data-name='description' /></div>";
+            html = html + " <div class='col-md-2 form-group'> <label for='qty'>Quantity</label><input type='text' id='qty" + i + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].qty' data-name='qty' value='" + qty + "' readonly/></div>";
+            html = html + " <div class='col-md-2 form-group'> <label for='amount'>Amount</label><input type='text' id='amount" + i + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].amount' data-name='amount' value='" + amount + "' readonly/></div>";
+            html = html + "<div class='col-md-2 form-group'></br>  <button class='document-btn removebutton' id='Delete" + i + "'> Delete </button></div>";
+            html = html + "</div>";
 
-        html = html + "<div class='col-md-12'>";
-        html = html + " <div class='col-md-3 form-group'> <label for='item'>Item Type</label><input id='item" + i + "'  type='text' value='" + item + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].item' data-name='Item Type' readonly /></div>";
-        html = html + " <div class='col-md-3 form-group'> <label for='branch'>Item Description</label> <input id='description" +i + "'  type='text' value='" + description + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].description' data-name='description' /></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='qty'>Quantity</label><input type='text' id='qty" + i + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].qty' data-name='qty' value='" + qty + "'/></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='amount'>Amount</label><input type='text' id='amount" + i + "' class='form-control master-form-input' name='InvoiceDetails[" + i + "].amount' data-name='amount' value='" + amount + "'/></div>";
-        html = html + "<div class='col-md-2 form-group'></br>  <button class='document-btn removebutton' id='Delete" + i + "'> Delete </button></div>";
-        html = html + "</div>";
+            html = html + "</div>";
+            html = html + "<div class='row ht-5'> &nbsp;</div></td></tr>"
+            $('#invoiceDetailsForms').append(html);
+            i++;
 
-        html = html + "</div>";
-        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
-        $('#invoiceDetailsForms').append(html);
-        i++;
+            //$("#item").val('');
+            $("#description").val('');
+            $("#qty").val('');
+            $("#amount").val('');
+            return false;
+            //  var html = " <div class='col-md-12 document-row' id='GridView"+count+"'>";
+            //  html=html+" <div class='col-md-1'>"+count+"</div>";
+            //  html = html + " <div class='col-md-2'> <input id='item-id_" +count+"'  type='text' value='" +item+ "' class='master-form-input' /></div>";
+            //  html = html + " <div class='col-md-2'> <input id='description_" + count + "' type='text'  value='" + description + "' class='master-form-input' /></div>";
+            //  html = html + " <div class='col-md-2'> <input id='qty_" + count + "'  type='text' value='" + qty + "' class='master-form-input' /></div>";
+            //  html = html + " <div class='col-md-2'> <input id='amount_" + count + "' type='text'  value='" + amount + "' class='master-form-input' /></div>";
+            ////  html=html+ "<div class='col-md-2'><button class='document-btn'>Add</button> </div>";
+            //  html = html + " <div class='col-md-2'>  <button class='document-btn' id='Delete"+count+"' onclick='Delete(this)'>Delete</button></div>";
+            //  html=html+" </div>";
+            //  $('#invoice-details').append(html);
 
-        //$("#item").val('');
-        $("#description").val('');
-        $("#qty").val('');
-        $("#amount").val('');
-        return false;
-      //  var html = " <div class='col-md-12 document-row' id='GridView"+count+"'>";
-      //  html=html+" <div class='col-md-1'>"+count+"</div>";
-      //  html = html + " <div class='col-md-2'> <input id='item-id_" +count+"'  type='text' value='" +item+ "' class='master-form-input' /></div>";
-      //  html = html + " <div class='col-md-2'> <input id='description_" + count + "' type='text'  value='" + description + "' class='master-form-input' /></div>";
-      //  html = html + " <div class='col-md-2'> <input id='qty_" + count + "'  type='text' value='" + qty + "' class='master-form-input' /></div>";
-      //  html = html + " <div class='col-md-2'> <input id='amount_" + count + "' type='text'  value='" + amount + "' class='master-form-input' /></div>";
-      ////  html=html+ "<div class='col-md-2'><button class='document-btn'>Add</button> </div>";
-      //  html = html + " <div class='col-md-2'>  <button class='document-btn' id='Delete"+count+"' onclick='Delete(this)'>Delete</button></div>";
-      //  html=html+" </div>";
-      //  $('#invoice-details').append(html);
-
-      //  document.getElementById("item").value = "";
-      //  document.getElementById("description").value = "";
-      //  document.getElementById("qty").value = "";
-      //  document.getElementById("amount").value = ""
-      // count = count + 1;
+            //  document.getElementById("item").value = "";
+            //  document.getElementById("description").value = "";
+            //  document.getElementById("qty").value = "";
+            //  document.getElementById("amount").value = ""
+            // count = count + 1;
+        }
+        
 
     }
     $(document).on('click', 'button.removebutton', function () {
+        debugger;
+        $(this).closest('tr').find(":input").each(function () {
+            var dataname = $(this).data("name");
+            if (dataname == "amount") {
+                $("#totalamt").val(parseInt($("#totalamt").val()) - $(this).val());
+            }
+        })
         $(this).closest('tr').remove();
         var existfilelist = document.getElementById('invoiceDetailsForms');
         var newindex = 0;
         $(existfilelist).find('> tbody > tr').each(function () {
 
-            $(this).find("input").each(function () {
+            $(this).find(":input").each(function () {
                 var dataname = $(this).data("name");
                 // alert(dataname + $(this) .val()+ '-' + newindex)
                 $(this).attr({
@@ -456,7 +476,7 @@ Layout = null;
         $("#TenantName").val($("#Tenantid option:selected").val());
         //$("#Tenant_id").val($("#Tenantid option:selected").text() == "--Select--" ? null : $("#Tenantid option:selected").text());
         //$("#Tenant_Name").val($("#TenantName option:selected").text() == "--Select--" ? null : $("#TenantName option:selected").text());
-        
+
         //$("#TenantName").prop('selected', true).change();
     });
     $("#TenantName").on('change', function (e) {
@@ -479,7 +499,7 @@ Layout = null;
 
         $("input#Property_ID").val(propertyid);
         $("#Property_Name").val($("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
-        
+
         var id = $("#PropertyId option:selected").text() == "--Select--" ? null : propertyid;
         getunits(id);
         //$("#TenantName").prop('selected', true).change();
@@ -503,7 +523,7 @@ Layout = null;
         //$("#Unit_Id").val($("#UnitId option:selected").text() == "--Select--" ? null : $("#UnitId option:selected").text());
         //$("input#Unit_Id").val(unitid);
         //$("#unit_Name").val($("#unitName option:selected").text() == "--Select--" ? null : $("#unitName option:selected").text());
-        
+
         var id = $("#UnitId option:selected").text() == "--Select--" ? null : unitid;
         getproperty(id);
         //$("#TenantName").prop('selected', true).change();
@@ -645,7 +665,7 @@ Layout = null;
 
                 });
         }
-        
+
     }
 
     $("#Agreement_No").on('change', function (e) {
@@ -778,7 +798,7 @@ Layout = null;
 
                 });
         }
-        
+
         //$("#UnitId").val($("#unitName option:selected").val());
     });
 
@@ -863,7 +883,7 @@ Layout = null;
         if ($("#invtype").val() != null && $("#invtype").val() != "") {
             $("#item").val($("#invtype").val());
         }
-    
+
         var id = $("#Id").val();
         if (id != 0) {
             document.getElementById("btnSubmit").innerHTML = 'Update';
