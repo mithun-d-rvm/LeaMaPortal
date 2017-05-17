@@ -525,43 +525,7 @@
                 <div class="row p-b-25 p-t-17">
                     <h3> Company Details</h3>
                 </div>
-                @*<div class="row">
-                    <div class="col-md-12 document-row">
-                        <div class="col-md-1">
-                            Branch
-                        </div>
-                        <div class="col-md-1">
-                            City
-                        </div>
-                        <div class="col-md-1">
-                            Address 01
-                        </div>
-                        <div class="col-md-1">
-                            Address 02
-                        </div>
-                        <div class="col-md-1">
-                            State
-                        </div>
-                        <div class="col-md-1">
-                            Country
-                        </div>
-                        <div class="col-md-1">
-                            Pincode
-                        </div>
-                        <div class="col-md-1">
-                            Phone Number
-                        </div>
-                        <div class="col-md-1">
-                            Remarks
-                        </div>
-                        <div class="col-md-1">
-                            Email Id
-                        </div>
-                        <div class="col-md-1">
-                            FaxSSS
-                        </div>
-                    </div>
-                </div>*@
+                
                 <div class="row ht-5">
                     &nbsp;
                 </div>
@@ -632,10 +596,25 @@
                     <input type="hidden" id="init-company-det-count" value="0" />
                 }
 
-                <table class="row m-t-20" id="companyDetailsForm">
 
+                <div class="row">
+                    <table class="table table-responsive tbl-dahboard m-t-20" id="companyDetailsForm">
+                        <tr class="companyDetailsHead tbl-head hide">
+                            <th class="p-15"> Branch </th>
+                            <th class="p-15"> City </th>
+                            <th class="p-15"> Address 01 </th>
+                            <th class="p-15"> Address 02 </th>
+                            <th class="p-15"> State </th>
+                            <th class="p-15"> Country </th>
+                            <th class="p-15"> Pincode </th>
+                            <th class="p-15"> Phone Number </th>
+                            <th class="p-15"> Remarks </th>
+                            <th class="p-15"> Email Id </th>
+                            <th class="p-15"> Fax </th>
+                            <th colspan="2" class="p-15 text-center">Actions</th>
+                        </tr>
 
-                    @if (Model.CompanyDetails != null)
+                        @if (Model.CompanyDetails != null)
                     {
 
                         for (int i = 0; i < Model.CompanyDetails.Count; i++)
@@ -665,20 +644,20 @@
                             html = html + "</div>";
                             html = html + "<div class='row ht-5'> &nbsp;</div>";
 
-                    <tr>
-                        <td>
-                            @Html.Raw(html)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
+                                <tr>
+                                    <td>
+                                        @Html.Raw(html)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                </tr>
                         }
                     }
-                </table>
-
+                    </table>
+                </div>
                 <div class="row ht-5">
                     &nbsp;
                 </div>
@@ -897,7 +876,7 @@
     });
     var i = parseInt($("#init-company-det-count").val());
     function Add(e) {
-
+        $(".companyDetailsHead").removeClass("hide");
         var branch = document.getElementById("branch").value;
         var city = document.getElementById("city").value;
         var add01 = document.getElementById("add01").value;
@@ -911,29 +890,21 @@
         var fax = document.getElementById("fax").value;
 
 
-        var html = "<tr><td><div class='col-md-12 document-row' id='GridView"+i+"'>";
-        //html=html+"<div class='col-md-1'>";
-        //html = html + count;
-        //html=html+" </div>";
-        html = html + "<div class='col-md-12'>"
-        html = html + " <div class='col-md-2 form-group'> <label for='branch'>Branch</label> <input id='branch" + i + "'  type='text' value='" + branch + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].Branch' data-name='Branch' /></div>";
-        html = html + "<div class='col-md-2 form-group'> <label for='City'>city</label><input id='city" + i + "' type='text'  value='" + city + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].City' data-name='City' /></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='add01'>Address 01</label><textarea id='add01" + i + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].BranchAddress' data-name='BranchAddress' value='" + add01 + "'>" + add01 + "</textarea></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='add02'>Address 02</label><textarea id='add02" + i + "'class='form-control master-form-input' name='CompanyDetails[" + i + "].BranchAddress1' data-name='BranchAddress1' value='" + add02 + "'>" + add02 + "</textarea></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='state'>State</label><input id='state" + i + "'  type='text' value='" + state + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].State' data-name='State' /></div>";
-        html = html + "<div class='col-md-2 form-group'> <label for='country'>Country</label> <input id='country" + i + "' type='text'  value='" + country + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].Country' data-name='Country' /></div>";
-        html = html + "</div>"
-        html = html + "<div class='col-md-12'>"
-        html = html + " <div class='col-md-2 form-group'> <label for='pincode'>Pincode</label><input id='pincode" + i + "'  type='text' value='" + pincode + "' class='form-control master-form-input' name='CompanyDetails[" + i+ "].Pincode' data-name='Pincode' /></div>";
-        html = html + "<div class='col-md-2 form-group'> <label for='Phno'>Phone Number</label><input id='phno" + i+ "' type='text'  value='" + phno + "' class='form-control master-form-input' name='CompanyDetails[" + i+ "].Phoneno' data-name='Phoneno' /></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='remarks'>Remarks</label><textarea id='remarks" + i + "'class='form-control master-form-input' name='CompanyDetails[" + i + "].Remarks' data-name='Remarks' value='" + remarks + "' >" + remarks + "</textarea></div>";
-        html = html + "<div class='col-md-2 form-group'> <label for='emailid'>Email Id</label><input id='emailid" + i+ "' type='text'  value='" + emailid + "' class='form-control master-form-input' name='CompanyDetails[" + i+ "].EmailId' data-name='EmailId' /></div>";
-        html = html + " <div class='col-md-2 form-group'> <label for='fax'>Fax</label><input id='fax" + i+ "'  type='text' value='" + fax + "' class='form-control master-form-input' name='CompanyDetails[" + i+ "].FaxNo' data-name='FaxNo' /></div>";
-      //  html=html+ "<div class='col-md-2'><button class='document-btn'>Add</button> </div>";
-        html = html + "<div class='col-md-1'><br />  <button class='document-btn removebutton' id='Delete" + i+ "'> X </button></div>";
-        html = html + "</div>"
-        html = html + "</div>";
-        html=html+"<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
+        var html = "<tr id='GridView"+i+"'>";
+        html = html + "<td><span> " + branch + " </span> <input id='branch" + i + "'  type='hidden' value='" + branch + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].Branch' data-name='Branch' /></td>";
+        html = html + "<td><span> " + city + " </span> <input id='city" + i + "' type='hidden'  value='" + city + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].City' data-name='City' /></td>";
+        html = html + "<td><span> " + add01 + " </span> <textarea id='add01" + i + "' class='form-control master-form-input hide' name='CompanyDetails[" + i + "].BranchAddress' data-name='BranchAddress' value='" + add01 + "'>" + add01 + "</textarea></td>";
+        html = html + "<td><span> " + add02 + " </span> <textarea id='add02" + i + "'class='form-control master-form-input hide' name='CompanyDetails[" + i + "].BranchAddress1' data-name='BranchAddress1' value='" + add02 + "'>" + add02 + "</textarea></td>";
+        html = html + "<td><span> " + state + " </span> <input id='state" + i + "'  type='hidden' value='" + state + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].State' data-name='State' /></td>";
+        html = html + "<td><span> " + country + " </span>  <input id='country" + i + "' type='hidden'  value='" + country + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].Country' data-name='Country' /></td>";
+        html = html + "<td><span> " + pincode + " </span> <input id='pincode" + i + "'  type='hidden' value='" + pincode + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].Pincode' data-name='Pincode' /></td>";
+        html = html + "<td><span> " + phno + " </span> <input id='phno" + i + "' type='hidden'  value='" + phno + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].Phoneno' data-name='Phoneno' /></td>";
+        html = html + "<td><span> " + remarks + " </span> <textarea id='remarks" + i + "'class='form-control master-form-input hide' name='CompanyDetails[" + i + "].Remarks' data-name='Remarks' value='" + remarks + "' >" + remarks + "</textarea></td>";
+        html = html + "<td><span> " + emailid + " </span>  <input id='emailid" + i + "' type='hidden'  value='" + emailid + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].EmailId' data-name='EmailId' /></td>";
+        html = html + "<td><span> " + fax + " </span> <input id='fax" + i + "'  type='hidden' value='" + fax + "' class='form-control master-form-input' name='CompanyDetails[" + i + "].FaxNo' data-name='FaxNo' /></td>";
+        html = html + "<td> <i class='fa fa-pencil id='Edit" + i + "''></i></td>";
+        html = html + "<td><i class='fa fa-trash id='Delete" + i + "''></i></td>";
+        html = html + "</tr>"
         $('#companyDetailsForm').append(html);
         i++;
 
@@ -1006,7 +977,7 @@
         //html = html + "</div>";
 
         html = html + "</div>";
-        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
+        html = html + "<div class='row ht-5'> &nbsp;</div> </td></tr><tr><td>&nbsp;</td></tr>"
         $('#companyContactDetailsForm').append(html);
         j++;
 
@@ -1062,7 +1033,7 @@
         //html = html + "</div>";
 
         html = html + "</div>";
-        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
+        html = html + "<div class='row ht-5'> &nbsp;</div> </td></tr><tr><td>&nbsp;</td></tr>"
         $('#companyNewFileDetails').append(html);
         k++;
         return false;
