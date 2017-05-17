@@ -25,7 +25,7 @@ namespace LeaMaPortal.Models
         public string Property_Flag { get; set; }
 
         [StringLength(100)]
-        [DisplayName("Property Thwtheeq ID:")]
+        [DisplayName("Thwtheeq Id:")]
         public string Property_ID_Tawtheeq { get; set; }
 
         [Key]
@@ -213,7 +213,7 @@ namespace LeaMaPortal.Models
         public string Floorno { get; set; }
 
         [StringLength(100)]
-        [DisplayName("FLoor Level:")]
+        [DisplayName("Floor Level:")]
         public string Floorlevel { get; set; }
 
         [StringLength(100)]
