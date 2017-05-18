@@ -183,8 +183,8 @@ namespace LeaMaPortal.Controllers
                     object[] param = Helper.GetMySqlParameters<PropertyViewModel>(model, PFlag, System.Web.HttpContext.Current.User.Identity.Name);
 
                     var _result = await db.Database.SqlQuery<object>(@"call Usp_Properties_All(@PFlag, @PProperty_Flag, @PProperty_ID_Tawtheeq, @PProperty_Id, @PProperty_Name, @PCompound, @PZone, @Psector, @Pplotno, @Pownedbyregistrant, @PProperty_Usage, @PProperty_Type, @PCommercial_villa, @PStreet_Name, @PAddress1, @PAddress2, @PAddress3, @PRegion_Name, @PCountry, @PCity, @PState, @PExternalrefno, @PNoofoffloors, @PNoofunits, @PBuiltarea, @PPlotarea, @PLeasablearea, @Pcommonarea, @Pcompletion_Date, @PAEDvalue, @PPurchased_date, @PValued_Date, @PStatus, @PVacant_Start_Date, @PCaretaker_Name, @PCaretaker_ID, @PRental_Rate_Month, @PComments, @PRef_unit_Property_ID_Tawtheeq, @PRef_Unit_Property_ID, @PRef_Unit_Property_Name, @PUnit_ID_Tawtheeq, @PUnit_Property_Name, @PExternalrefno_unit, @PAEDvalue_unit, @PPurchased_date_unit, @PValued_Date_unit, @PStatus_unit, @PVacant_Start_Date_Unit, @PRental_Rate_Month_unit, @PFloorno, @PFloorlevel, @PProperty_Usage_unit, @PProperty_Type_unit, @PTotal_Area, @PUnit_Common_Area, @PCommon_Area, @PParkingno, @PUnitcomments, @PCreateduser, @PCompany_occupied_Flag, @Ppropertiesdt, @Ppropertiesdt1)", param).ToListAsync();
-                    return RedirectToAction("../Master/Index", new { selected = 9 });
-                    //return Json(result, JsonRequestBehavior.AllowGet);
+                    //return RedirectToAction("../Master/Index", new { selected = 9 });
+                    return Json(result, JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception e)
