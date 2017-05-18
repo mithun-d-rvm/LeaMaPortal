@@ -323,7 +323,7 @@ namespace LeaMaPortal.Controllers
                     ViewBag.PropertyName = new SelectList(propertyDropdown, "Propertyid", "PropertyName", model.Property_id);
                 }
                 var advancepaymentnumber = await db.Database.SqlQuery<int>("Select PaymentNo from view_advance_pending_payment").ToListAsync();
-                ViewBag.AdvAcCode = new SelectList(advancepaymentnumber, model.AdvAcCode);
+                ViewBag.AdvAcCode = new SelectList(advancepaymentnumber, Convert.ToInt32(model.AdvAcCode));
                 return PartialView("../Payment/_AddorUpdate", model);
             }
             catch (Exception e)
@@ -524,6 +524,21 @@ namespace LeaMaPortal.Controllers
             //    throw ex;
             //}
         }
+        [HttpGet]
+        public async Task<JsonResult> GetAdvanceAdjustmentAmount(int? advanceCode)
+        {
+
+            try
+            {
+                var advancepaymentnumber = await db.Database.SqlQuery<int>("Select TotalAmount from view_advance_pending_payment where PaymentNo=" + advanceCode).FirstOrDefaultAsync();
+                return Json(advancepaymentnumber, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -24,7 +24,7 @@ namespace LeaMaPortal.Models
         public int? Supplier_id { get; set; }
         [DisplayName("Supplier Name")]
         public string Supplier_Name { get; set; }
-        [DisplayName("Agreeement Number")]
+        [DisplayName("Contract Agreement Number")]
         public int? agreement_no { get; set; }
         [DisplayName("Property ID")]
         public string Property_id { get; set; }

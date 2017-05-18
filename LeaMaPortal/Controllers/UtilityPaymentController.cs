@@ -79,7 +79,7 @@ namespace LeaMaPortal.Controllers
                 UtilityPaymentModel model = new UtilityPaymentModel();
                 int? paymentno = await db.tbl_eb_water_paymenthd.Select(x => x.PaymentNo).OrderByDescending(x => x).FirstOrDefaultAsync();
                 model.PaymentNo = paymentno == null ? 1 : paymentno.Value + 1;
-
+                model.PaymentDate = DateTime.Now;
 
                 ViewBag.Utiltiyname = new SelectList(db.tbl_utilitiesmaster.Select(x => new { UtilityId = x.Utility_id, UtilityName = x.Utility_Name }), "UtilityId", "UtilityName");
                 ViewBag.Suppliername = new SelectList(db.tbl_suppliermaster.Select(x => new { SupplierId = x.Supplier_Id, SupplierName = x.Supplier_Name }), "SupplierId", "SupplierName");
@@ -313,8 +313,9 @@ namespace LeaMaPortal.Controllers
 
                 ViewBag.Utiltiyname = new SelectList(db.tbl_utilitiesmaster.Select(x => new { UtilityId = x.Utility_id, UtilityName = x.Utility_Name }), "UtilityId", "UtilityName", model.Utility_id);
                 ViewBag.Suppliername = new SelectList(db.tbl_suppliermaster.Select(x => new { SupplierId = x.Supplier_Id, SupplierName = x.Supplier_Name }), "SupplierId", "SupplierName", model.Supplier_id);
-
-                ViewBag.AdvAcCode = new SelectList(db.Database.SqlQuery<int>("SELECT PaymentNo FROM view_advance_pending_eb").ToList(), model.AdvAcCode);
+                var data = db.Database.SqlQuery<int>("SELECT PaymentNo FROM view_advance_pending_eb").ToList();
+                data.Add(Convert.ToInt32(model.AdvAcCode));
+                ViewBag.AdvAcCode = new SelectList(data, Convert.ToInt32(model.AdvAcCode));
                 var _paymentType = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Receipts" && x.comboname == "Reccategory");
                 if (_paymentType != null)
                 {
@@ -416,6 +417,19 @@ namespace LeaMaPortal.Controllers
             catch(Exception e)
             {
                 throw e;
+            }
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetAdvanceAdjustmentAmount(int advanceCode)
+        {
+            try
+            {
+                var advanceAmount = await db.Database.SqlQuery<int>("SELECT TotalAmount FROM view_advance_pending_eb where PaymentNo=" + advanceCode).FirstOrDefaultAsync();
+                return Json(advanceAmount, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }

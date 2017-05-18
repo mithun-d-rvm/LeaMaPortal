@@ -124,7 +124,7 @@
                         @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required", @readonly="readonly" } })
+                        @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required", @onchange= "AmountInWords()", @onkeypress = "allow_only_Float(event,'TotalAmount');" } })
                     </div>
                 </div>
 
@@ -536,10 +536,12 @@
     {
         if (paymentType != "against invoice") {
             document.getElementById('paymentDetail').style.display = "none";
+            $("#TotalAmount").prop("readonly", false);
         }
         else
         {
             document.getElementById('paymentDetail').style.display = "block";
+            $("#TotalAmount").prop("readonly", true);
         }
     }
     $("#PaymentType").change(function () { showHideSubForm($("#PaymentType").val()) });
@@ -589,31 +591,68 @@
             showHideChequeField(false);
             showhideAdvancePayment(true);
             showhidePDC(false);
+            if ($("#PaymentType").val() == "against invoice") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
         }
         else if (paymentModeValue == "cash") {
             showHideChequeField(true);
             showhideAdvancePayment(true);
             showhidePDC(true);
+            if ($("#PaymentType").val() == "against invoice") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
         }
         else if (paymentModeValue == "online") {
             showHideChequeField(false);
             showhideAdvancePayment(true);
             showhidePDC(true);
+            if ($("#PaymentType").val() == "against invoice") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
         }
         else if (paymentModeValue == "pdc") {
             showHideChequeField(true);
             showhideAdvancePayment(true);
             showhidePDC(false);
+            if ($("#PaymentType").val() == "against invoice") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
         }
         else if (paymentModeValue == "Advance adjust") {
             showHideChequeField(true);
             showhideAdvancePayment(false);
             showhidePDC(true);
+            $("#TotalAmount").prop("readonly", true);
+            //if ($("#PaymentType").val() == "against invoice") {
+            //    $("#TotalAmount").prop("readonly", true);
+            //}
+            //else {
+            //    $("#TotalAmount").prop("readonly", false);
+            //}
         }
         else {
             showHideChequeField(true);
             showhideAdvancePayment(true);
             showhidePDC(true);
+            if ($("#PaymentType").val() == "against invoice") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
         }
     }
     $("#BankAcCode").on('change', function (e) {
@@ -625,6 +664,17 @@
         debugger;
         var bankAcCode = $("#BankAcName").val();
         $("#BankAcCode").val(bankAcCode);
+    });
+    $("#AdvAcCode").on('change', function (e) {
+        debugger;
+        if ($("#AdvAcCode").val() != "") {
+            get_advance_payment_amount($("#AdvAcCode").val());
+        }
+        else {
+            $("#TotalAmount").val(0);
+            $("#TotalAmount").trigger("change");
+        }
+        
     });
     $("#PaymentMode").change(function () { ShowHidePaymentModeFields($("#PaymentMode").val()) });
     //showHideCheque($("#PaymentMode").val());
@@ -915,7 +965,7 @@
             $('#masterResultModal').modal('show');
             return false;
         }
-
+        $("#TotalAmount").val(Number($("#TotalAmount").val()) + Number(Balance));
         var html = "<tr><td><div class='row'><div class='col-md-12 document-row' id='GridView" + j + "'>";
         //html += "<div class='col-md-2'>Invoice Type</div>";
         html += "<div class='col-md-2'>Invoice Number</div>";
@@ -1071,7 +1121,7 @@
         {
             url: "../Receipts/AmountInWords",
             type: "Get",
-            data: { amount: totalAmount },
+            data: { amount: $("#TotalAmount").val() },
             success: function (response) {
                 $("#AmtInWords").val(response);
             },
@@ -1080,6 +1130,24 @@
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function get_advance_payment_amount(value) {
+        $.ajax(
+        {
+            url: "../Payment/GetAdvanceAdjustmentAmount",
+            type: "Get",
+            data: { advanceCode: value },
+            success: function (response) {
+                $("#TotalAmount").val(response);
+                $("#TotalAmount").trigger("change");
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
             }
         });
     }
