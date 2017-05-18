@@ -365,17 +365,23 @@
                 </div>
                 <div class="row" style="font-weight:bold;padding-top:8%;padding-bottom:8%;">
                     <div style="width:50%;float:left;">
-                        Contract Number : xxxxxxxxxxx
+                        Contract Number : @Model.Agreement_No
                     </div>
                     <div style="width:50%;float:right;text-align: right;">
-                        Issue Date : xx-xx-xxxx
+                        Issue Date : @Model.IssueDate
                     </div>
                 </div>
-
-                @*@Html.Partial("Contract/_TermsCommercial")*@
-
-                @Html.Partial("Contract/_TermsResidential")
-
+                @if (Model.Property_Usage.ToLower().Trim() == "Commercial".ToLower())
+                {            
+                    @Html.Partial("Contract/_TermsCommercial")
+                }
+                else
+                {
+                    @Html.Partial("Contract/_TermsResidential")
+                }
+                <div class="row">
+                    <textarea rows="5" id="otherTerms" style="border:none" placeholder="other terms"></textarea>
+                </div>
                 <div class="row" style="font-weight: bold;padding-top:12%;font-size:medium;">
                     <div style="width:50%;float:left;">
                         Landlord..............
@@ -392,6 +398,7 @@
         </div>
     </div>
 </div>
+
 <div class="row" style="padding-top:8%; text-align:center;">
     <input type="button" style="background-color: #554289;
     color: white;

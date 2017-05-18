@@ -75,6 +75,7 @@ namespace LeaMaPortal.Models
         public string ContractYearsAndMonths { get; set; }
         public Nullable<float> Total_Rental_amount { get; set; }
         public string TotalAmountInWords { get; set; }
+        public string Property_Usage { get; set; }
 
     }
 }

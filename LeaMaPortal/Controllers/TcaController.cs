@@ -57,13 +57,14 @@ namespace LeaMaPortal.Controllers
                 //IList<CountryViewModel> list;
                 if (string.IsNullOrWhiteSpace(Search))
                 {
-                    var list = db.tbl_agreement.Where(x => x.Delmark != "*" && x.Status == null).OrderByDescending(x => x.Agreement_No).Select(x => new AgreementFormViewModel()
+                    var list =db.tbl_agreement.Where(x => x.Delmark != "*" && x.Status == null).OrderByDescending(x => x.Agreement_No).Select(x => new AgreementFormViewModel()
                     {
                         Agreement_No = x.Agreement_No,
                         Properties_Name = x.Properties_Name,
                         Ag_Tenant_Name = x.Ag_Tenant_Name,
-                        Unit_Property_Name = x.Unit_Property_Name
-
+                        Unit_Property_Name = x.Unit_Property_Name,
+                        Approval_Flag= x.Approval_Flag.HasValue ? x.Approval_Flag.Value:0,
+                         
                     }).ToPagedList(currentPageIndex, PageSize);
                     return PartialView("../Tca/_List", list);
                 }
@@ -477,11 +478,13 @@ namespace LeaMaPortal.Controllers
             {
                 TcaPrintModel model = new TcaPrintModel();
                 var agreementDet = await db.tbl_agreement.FirstOrDefaultAsync(x => x.Agreement_No == AgreementNo && x.Delmark != "*");
-
+                var property = await db.tbl_propertiesmaster.FirstOrDefaultAsync(x => x.Property_Id == agreementDet.property_id);
+                if (property != null)
+                    model.Property_Usage = property.Property_Usage;
                 ViewBag.Renewal_Close_Flag = new SelectList(Common.Renewal_Close_Flag);
                 model.Tenant_Type = agreementDet.Tenant_Type;
                 model.Ag_Tenant_Name = agreementDet.Ag_Tenant_Name;
-                if (agreementDet.Tenant_Type.ToLower().Trim() == "Individual".ToLower().Trim())
+                if (agreementDet.Tenant_Type == "Individual")
                 {
                     var tenant = await db.tbl_tenant_individual.FirstOrDefaultAsync(x => x.Tenant_Id == agreementDet.Ag_Tenant_id);
                     if (tenant != null)
