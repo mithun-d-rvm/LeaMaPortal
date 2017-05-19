@@ -277,6 +277,11 @@
                 &nbsp;
             </div>
         </div>
+        <!-- BEGIN AGREEMENT UNIT -->
+        <div class="p-lr-20" id="AgreementUnitR">
+            @*@Html.Partial("_AgreementUnit")*@
+        </div>
+        <!-- END AGREEMENT UNIT -->
         <!-- BEGIN AGREEMENT PDC -->
         <div class="p-lr-20" id="AgreementPdcR">
             @*@Html.Partial("_AgreementPdc")*@
@@ -294,14 +299,8 @@
         <div class="row ht-5">
             &nbsp;
         </div>
-        <!-- BEGIN AGREEMENT DOCUMENT -->
-        <div class="p-lr-20" id="AgreementDocumentR">
-            @*@Html.Partial("_AgreementDocument")*@
-        </div>
-        <!-- END AGREEMENT DOCUMENT -->
-        <div class="row ht-5">
-            &nbsp;
-        </div>
+        
+      
         <!-- BEGIN AGREEMENT UTILITY -->
         <div class="p-lr-20" id="AgreementUtilityR">
             @*@Html.Partial("_AgreementUtility")*@
@@ -310,11 +309,7 @@
         <div class="row ht-5">
             &nbsp;
         </div>
-        <!-- BEGIN AGREEMENT UNIT -->
-        <div class="p-lr-20" id="AgreementUnitR">
-            @*@Html.Partial("_AgreementUnit")*@
-        </div>
-        <!-- END AGREEMENT UNIT -->
+       
         <div class="row ht-5">
             &nbsp;
         </div>
@@ -323,6 +318,11 @@
             @*@Html.Partial("_AgreementCheckList")*@
         </div>
         @*END AGREEMENT UNIT*@
+        <!-- BEGIN AGREEMENT DOCUMENT -->
+        <div class="p-lr-20" id="AgreementDocumentR">
+            @*@Html.Partial("_AgreementDocument")*@
+        </div>
+        <!-- END AGREEMENT DOCUMENT -->
         <div class="p-b-10">
             &nbsp;
         </div>
@@ -339,21 +339,21 @@
 <script>
     $('#editAgreementForm input[type=radio][name=Single_Multiple_Flag]').change(function () {
 
-        if (this.value == 'Multiple') {
-            //$('#UnitIDTawtheeq').attr('disabled', true);
-            //$('#UnitPropertyName').attr('disabled', true);
-            $("#editAgreementForm #UnitPropertyId").hide();
-            $("#editAgreementForm #Unitpropertyname").hide();
-            $("#editAgreementForm #AgreementUnit").show();
+        //if (this.value == 'Multiple') {
+        //    //$('#UnitIDTawtheeq').attr('disabled', true);
+        //    //$('#UnitPropertyName').attr('disabled', true);
+        //    $("#editAgreementForm #UnitPropertyId").hide();
+        //    $("#editAgreementForm #Unitpropertyname").hide();
+        //    $("#editAgreementForm #AgreementUnit").show();
 
-        }
-        else {
-            //$('#editAgreementForm #UnitIDTawtheeq').removeAttr('disabled');
-            //$('#editAgreementForm #UnitPropertyName').removeAttr('disabled');
-            $("#editAgreementForm #UnitPropertyId").show();
-            $("#editAgreementForm #Unitpropertyname").show();
-            $("#editAgreementForm #AgreementUnit").hide();
-        }
+        //}
+        //else {
+        //    //$('#editAgreementForm #UnitIDTawtheeq').removeAttr('disabled');
+        //    //$('#editAgreementForm #UnitPropertyName').removeAttr('disabled');
+        //    $("#editAgreementForm #UnitPropertyId").show();
+        //    $("#editAgreementForm #Unitpropertyname").show();
+        //    $("#editAgreementForm #AgreementUnit").hide();
+        //}
         //$("#editAgreementForm #property_id").val(null);
         $.ajax(
                {

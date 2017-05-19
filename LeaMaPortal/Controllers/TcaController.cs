@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using MvcPaging;
 using MySql.Data.MySqlClient;
+using System.Threading;
 
 namespace LeaMaPortal.Controllers
 {
@@ -112,6 +113,12 @@ namespace LeaMaPortal.Controllers
                 ViewBag.CaretakerName = new SelectList(caretaker, "Caretaker_id", "Caretaker_Name");
                 model.New_Renewal_flag = Common.NewAgreement;
                 model.Agreement_No = 0;
+                model.Agreement_Start_Date = DateTime.Now;
+                model.Agreement_End_Date = DateTime.Now;
+                model.Vacantstartdate = DateTime.Now;
+                model.Agreement_Date = DateTime.Now;
+                
+
                 //model.AgreementPd = new AgreementPdcViewModel();
                 return PartialView("../Tca/Agreement/_AgreementForm", model);
             }
@@ -472,10 +479,11 @@ namespace LeaMaPortal.Controllers
             }
         }
 
-        public async Task<PartialViewResult> Print(int AgreementNo)
+        public async Task<PartialViewResult> Print(int AgreementNo,string OtherTerms)
         {
             try
             {
+                Thread.Sleep(1000);
                 TcaPrintModel model = new TcaPrintModel();
                 var agreementDet = await db.tbl_agreement.FirstOrDefaultAsync(x => x.Agreement_No == AgreementNo && x.Delmark != "*");
                 var property = await db.tbl_propertiesmaster.FirstOrDefaultAsync(x => x.Property_Id == agreementDet.property_id);
@@ -544,6 +552,7 @@ namespace LeaMaPortal.Controllers
                 model.IssueDate = System.DateTime.Now.ToString(Common.DisplayDateFormat);
                 model.Total_Rental_amount = agreementDet.Total_Rental_amount;
                 model.TotalAmountInWords = agreementDet.Total_Rental_amount.HasValue ? Common.NumberToWords(Convert.ToInt64(agreementDet.Total_Rental_amount.Value)) : "";
+                model.OtherTerms = OtherTerms;
                 //model.AgreementPd = new AgreementPdcViewModel();
                 return PartialView("../Tca/Contract/_ContractDetails", model);
             }
@@ -1150,7 +1159,7 @@ namespace LeaMaPortal.Controllers
             }
         }
         [HttpGet]
-        public async Task<ActionResult> PrintAgreement(int AgreementNo)
+        public async Task<ActionResult> PrintAgreement(int AgreementNo,string OtherTerms)
         {
             AgreementFormViewModel model = new AgreementFormViewModel();
             try
