@@ -2,6 +2,7 @@
 using LeaMaPortal.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -118,6 +119,27 @@ namespace LeaMaPortal.Helpers
                     obj.Unit_Property_Name = string.IsNullOrEmpty(obj.Unit_Property_Name) ? string.Empty : obj.Unit_Property_Name;
                     obj.Ag_Tenant_Name = string.IsNullOrEmpty(obj.Ag_Tenant_Name) ? string.Empty : obj.Ag_Tenant_Name;
                 }
+                return data;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public async Task<List<NotificationContractApprovalModel>> getNotificationContractApproval()
+        {
+            try
+            {
+                List<NotificationContractApprovalModel> data = 
+                    await db.tbl_agreement.Where(w => w.Approval_Flag != 1)
+                    .Select(s => new NotificationContractApprovalModel
+                    {
+                        Id = s.id,
+                        AgreementNo = s.Agreement_No,
+                        PropertyName = s.Properties_Name,
+                        UnitName = s.Unit_Property_Name,
+                        TenantName = s.Ag_Tenant_Name,
+                    }).ToListAsync();                
                 return data;
             }
             catch

@@ -145,6 +145,8 @@
                             <span class="notification-filter notify-menu">Utility Dues</span>
                             <span class="notification-filter-line"> &nbsp; </span>
                             <span class="notification-filter notify-menu">Agreement approval</span>
+                            <span class="notification-filter-line"> &nbsp; </span>
+                            <span class="notification-filter notify-menu">Contract Approval</span>
                             <span class="pull-right"> Expand to page </span>
                         </div>
                         <div class="notification-filter-content"></div>
@@ -188,6 +190,7 @@
                         var data = "";
                         allRecordCount = allRecordCount + (response ? response.length : 0);
                         $("#count").text(allRecordCount);
+                        var i = 1;
                         $.each(response, function (index, obj) {
                             data = "<div>";
                             debugger;
@@ -238,10 +241,20 @@
                                 data += '<span class="notification-vr-2"> ' + obj.Agreement_No + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Total_Rental_amount + '</span>';
                             }
+                            else if (filter == "Contract Approval") {
+                                data += '<input type="hidden" id="contractId_'+i+' value="' + obj.Id + '" />';
+                                data += '<span class="notification-vr-1"> ' + obj.AgreementNo + '</span>';
+                                data += '<span class="notification-vr-1"> ' + obj.AgreementNo + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.TenantName + ' </span>';
+                                data += '<span class="notification-vr-2"> ' + obj.PropertyName + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.UnitName + '</span>';                                
+                                data += '<span class="notification-vr-2"><button type="button" onclick="approveContract('+i+')">Approve</button></span>';
+                                data += '<span class="notification-vr-2"><button type="button">Reject</button></span>';
+                                data += '<span class="notification-vr-2"><button type="button">View</button></span>';
+                            }
                             data += '</div><hr class="notification-hr" />';
                             $(".notification-filter-content").append(data);
                         });
-
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -264,6 +277,27 @@
                         $.each(response, function (index, obj) {
                             getData(obj.Name);
                         });
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+                });
+    }
+    function approveContract(id) {
+        var contractId = $("#contractId_" + id).val();
+        $.ajax(
+                {
+                    url: "../Notification/approveContract",
+                    type: "POST",
+                    data: { id: contractId },
+                    contentType: "application/json",
+                    success: function (response) {
+                        debugger;
+                        if (response) {
+                            getData("Contract Approval");
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");

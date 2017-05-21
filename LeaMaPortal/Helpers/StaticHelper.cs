@@ -62,6 +62,7 @@ namespace LeaMaPortal.Helpers
         public const string NOTIFICATION_RENTAL_DUE = "Rental Due";
         public const string NOTIFICATION_UTILITY_DUES = "Utility Dues";
         public const string NOTIFICATION_AGREEMENT_APPROVAL = "Agreement approval";
+        public const string NOTIFICATION_CONTRACT_APPROVED = "Contract Approval";
 
         private static List<OptionModel> GetCheckListDropdown()
         {   
