@@ -69,7 +69,7 @@ namespace LeaMaPortal.Models
         [DisplayName("Contract Perday Rental")]
         public float Perday_Rental { get; set; }
         [DisplayName("Total Number of Payments")]
-        public int nofopayments { get; set; }   
+        public int nofopayments { get; set; }
         [DisplayName("Contract Security Deposit Amount")]
         public float Advance_Security_Amount { get; set; }
         [DisplayName("Security Deposit Payment Mode")]
@@ -85,7 +85,7 @@ namespace LeaMaPortal.Models
 
 
         //newly  added fields
-        
+
         public int Caretaker_id { get; set; }
         [StringLength(100)]
         public string Caretaker_Name { get; set; }
@@ -101,7 +101,7 @@ namespace LeaMaPortal.Models
         public string Approved_By { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Approved_Date { get; set; }
-        [StringLength(150)]                                                    
+        [StringLength(150)]
         public string Createduser { get; set; }
         //lists longtext
         public string Agpdc { get; set; }
@@ -120,6 +120,7 @@ namespace LeaMaPortal.Models
         public List<AgreementDocumentExist> agreementDocumentExistList { get; set; }
         public List<AgreementUnitViewModel> AgreementUnitList { get; set; }
         public List<AgreementCheckListViewModel> AgreementCheckList { get; set; }
+       
 
     }
 

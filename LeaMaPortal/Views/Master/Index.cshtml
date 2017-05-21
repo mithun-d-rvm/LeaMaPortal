@@ -358,11 +358,11 @@
         });
     }
 
-    function GetCaretaker() {
-        //$("#img-loader").removeClass("hide");
+    //function GetCaretaker() {
+    //$("#img-loader").removeClass("hide");
+    function CareTakerAddOrUpdate() {
         $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
-        $("#ContainerList").empty();
         $.ajax(
         {
             url: "../Caretaker/AddOrUpdate",
@@ -381,7 +381,12 @@
                 $("#master-loader").addClass("hide");
             }
         });
-        //$("#img-loader").removeClass("hide");
+
+    }
+    function GetCaretaker() {
+        $("#ContainerList").empty();
+        CareTakerAddOrUpdate();
+
         $("#master-loader").removeClass("hide");
         $.ajax(
         {
@@ -517,8 +522,7 @@
         });
     }
 
-    function CheckListAddOrUpdate()
-    {
+    function CheckListAddOrUpdate() {
         $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
 
@@ -845,6 +849,30 @@
             }
         });
     }
+
+    function GetPropertyTypeAddOrUpdate() {
+        //$("#img-loader").removeClass("hide");
+        $("#master-loader").removeClass("hide");
+        $("#ContainerAddOrUpdate").empty();
+        $.ajax(
+        {
+            url: "../PropertyType/AddOrUpdate",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ContainerAddOrUpdate").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+                $("#master-loader").addClass("hide");
+            }
+        });
+    }
     function ApprovalAddOrUpdate() {
         $("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
@@ -1115,4 +1143,5 @@
             }
         });
     }
+
 </script>

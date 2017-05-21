@@ -81,11 +81,12 @@ namespace LeaMaPortal.Controllers
 
                     if (model.Id == 0)
                     {
-
+                        result.Message = "Tca approval setting added successfully";
                     }
                     else
                     {
                         PFlag = "UPDATE";
+                        result.Message = "Tca approval setting updated successfully";
                     }
                     //tbl_approvalconfig tbl_approval = new tbl_approvalconfig();
                     //tbl_approval.Userid = model.Userid;

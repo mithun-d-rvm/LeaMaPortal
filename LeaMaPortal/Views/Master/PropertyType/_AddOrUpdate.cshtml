@@ -10,6 +10,7 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "PropertyTypeMaster" }))
 {
     @Html.HiddenFor(m => m.Id, new { @id = "PropertyTypeId" })
+    
     <div class="col-md-12 leama-fieldset leama-header-top">
         <div class="row">
             <div class="col-md-12 leama-fieldset ">
@@ -17,7 +18,7 @@
                     @Html.LabelFor(model => model.PropertyType, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.DropDownList("PropertyType", null, htmlAttributes: new { @class = "master-form-input subheader-select class-property-type", @required = "required" })
+                    @Html.DropDownList("PropertyType", null, "--Select--", htmlAttributes: new { @class = "master-form-input subheader-select class-property-type", @placeholder = "-Select-", @required = "required" })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -25,7 +26,7 @@
                     @Html.LabelFor(model => model.Usage_name, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.DropDownList("Usage_name", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "UsageName" })
+                    @Html.DropDownList("Usage_name", null, "--Select--", htmlAttributes: new { @class = "master-form-input subheader-select", @placeholder = "-Select-", @required = "required", @id = "UsageName" })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -33,18 +34,23 @@
                     @Html.LabelFor(model => model.PropertyCategory, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4 ">
-                    @Html.DropDownList("PropertyCategory", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "PropertyCategory" })
+                    @Html.EditorFor(model => model.PropertyCategory, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @id = "PropertyCategory" } })
+                    @*@Html.DropDownList("PropertyCategory", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "PropertyCategory" })*@
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-12 pull-left">
-                    <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>
+                    <button type="submit" id="btnSubmit" class="col-md-offset-2 leama-btn">Submit</button>&nbsp;&nbsp;
+<button class="btn master-form-btn" id="btnCancel" type="button" onclick="formReset()">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
 }
 <script>
+    function formReset() {
+        GetPropertyTypeAddOrUpdate();
+    }
     function getUsage() {
         debugger;
         var PropertyType = $("#PropertyType").val();
@@ -58,7 +64,7 @@
                         success: function (response) {
                             debugger;
                             $("#UsageName").empty();
-                            var options = '';
+                            var options = '<option value="null">--SELECT--</option>';;
                             $.each(response, function (index, data) {
                                 options += '<option value="' + data.Value + '">' + data.Value + '</option>';
                             });
@@ -90,10 +96,18 @@
                     processData: false,
                     success: function (response) {
                         GetPropertyType();
-                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
-                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
-                        $(".result-title").text("Success");
-                        $(".result-modal-body span").text(propTypeAdded);
+                        if (response.Errors == null) {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Message);
+                        }
+                        else {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(response.Errors);
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -130,4 +144,10 @@
         });
         return o;
     };
+    $(document).ready(function () {
+        var id = $("#PropertyTypeId").val();
+        if (id != 0) {
+            document.getElementById("btnSubmit").innerHTML = 'Update';
+        }
+    });
 </script>

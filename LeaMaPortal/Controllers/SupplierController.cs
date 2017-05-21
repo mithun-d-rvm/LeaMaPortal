@@ -128,10 +128,12 @@ namespace LeaMaPortal.Controllers
                         var supplierId = db.tbl_suppliermaster.OrderByDescending(x => x.id).FirstOrDefault();
                         model.Supplier_Id = supplierId != null ? supplierId.Supplier_Id + 1 : 1;
                         PFlag = "INSERT";
+                        result.Message = "Supplier created successfully";
                     }
                     else
                     {
                         PFlag = "UPDATE";
+                        result.Message = "supplier updated successfully";
                     }
 
                     string companyDet = null;
@@ -383,7 +385,7 @@ namespace LeaMaPortal.Controllers
                     object[] param = Helper.GetMySqlParameters<SupplierViewModel>(Map(model), Common.DELETE, System.Web.HttpContext.Current.User.Identity.Name);
 
                     var _result = await db.Database.SqlQuery<object>(@"call Usp_Supplier_All(@PFlag, @PSupplier_Id, @PSupplier_Name, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PLocationlink, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser, @Psupplierdt, @Psupplierdt1)", param).ToListAsync();
-
+                    result.Message = "Supplier deleted successfully";
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)

@@ -33,7 +33,7 @@
                         @Html.LabelFor(model => model.PaymentDate, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -41,7 +41,7 @@
                         @Html.LabelFor(model => model.PaymentType, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.DropDownList("PaymentType",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control"})
+                        @Html.DropDownList("PaymentType",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -49,7 +49,7 @@
                         @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.DropDownList("PaymentMode",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("PaymentMode",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -57,7 +57,7 @@
                         @Html.LabelFor(model => model.Supplier_id, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.DropDownList("Supplierid",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("Supplierid",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -65,7 +65,7 @@
                         @Html.LabelFor(model => model.Supplier_Name, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.DropDownList("SupplierName",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("SupplierName",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
 
@@ -86,7 +86,7 @@
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Property_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("Propertyid", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })                        
+                        @Html.DropDownList("Propertyid", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })                        
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -95,7 +95,7 @@
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("PropertyName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })                        
+                        @Html.DropDownList("PropertyName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })                        
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -124,7 +124,7 @@
                         @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required", @onchange= "AmountInWords()", @onkeypress = "allow_only_Float(event,'TotalAmount');" } })
                     </div>
                 </div>
 
@@ -138,39 +138,39 @@
                         @Html.LabelFor(model => model.AmtInWords, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.AmtInWords, new { htmlAttributes = new { @class = "master-form-input" } })
+                        @Html.EditorFor(model => model.AmtInWords, new { htmlAttributes = new { @class = "master-form-input", @required = "required", @readonly="readonly" } })
                     </div>
                 </div>
-                <div class="col-md-12 form-input-padding">
+                <div class="col-md-12 form-input-padding" id="advancePayment">
                     <div class="col-md-4">
                         @Html.LabelFor(model => model.AdvAcCode, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.DropDownList("AdvAcCode",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("AdvAcCode",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
-                <div class="col-md-12 form-input-padding">
+                <div class="col-md-12 form-input-padding" id="pdcstatus">
                     <div class="col-md-4">
                         @Html.LabelFor(model => model.PDCstatus, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.DropDownList("PDCStatus",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("PDCStatus",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
-                <div class="col-md-12 form-input-padding" id="chequeNo">
+                <div class="col-md-12 form-input-padding" name="cheque" id="chequeNo">
                     <div class="col-md-4">
                         @Html.LabelFor(model => model.DDChequeNo, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.DDChequeNo, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.DDChequeNo, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                     </div>
                 </div>
-                <div class="col-md-12 form-input-padding" id="chequeDate">
+                <div class="col-md-12 form-input-padding" name="cheque" id="chequeDate">
                     <div class="col-md-4">
                         @Html.LabelFor(model => model.DDChequeDate, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.DDChequeDate, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.DDChequeDate, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -178,7 +178,7 @@
                         @Html.LabelFor(model => model.BankAcCode, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.DropDownList("BankAcCode",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("BankAcCode",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -186,7 +186,7 @@
                         @Html.LabelFor(model => model.BankAcName, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.DropDownList("BankAcName",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("BankAcName",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                     </div>
                 </div>
                 <div class="col-md-12 form-input-padding">
@@ -194,7 +194,7 @@
                         @Html.LabelFor(model => model.Narration, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                     </div>
                 </div>
                 
@@ -202,25 +202,33 @@
 
         </div>
         <div class="row" id="paymentDetail">
+            @if (Model.PaymentDetailsViewModel != null)
+                {
+                <input type="hidden" id="Payment-count" value="@Model.PaymentDetailsViewModel.Count" />
+            }
+            else
+            {
+                <input type="hidden" id="Payment-count" value="0" />
+            }
             <div class="p-b-25">
                 <h3>Invoice Details</h3>
             </div>
                 <div class="row">
                     <div class="col-md-12 document-row" id="GridView">                        
-                        <div class="col-md-2">
+                        @*<div class="col-md-2">
                             Invoice Type
+                        </div>*@
+                        <div class="col-md-2">
+                            Invoice Number*
                         </div>
                         <div class="col-md-2">
-                            Invoice Number
+                            Invoice Date*
                         </div>
                         <div class="col-md-2">
-                            Invoice Date
+                            Invoice Description*
                         </div>
                         <div class="col-md-2">
-                            Invoice Description
-                        </div>
-                        <div class="col-md-2">
-                            Remarks
+                            Remarks*
                         </div>
                     </div>
                 </div>
@@ -229,9 +237,9 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 document-row" id="GridView">                        
-                        <div class="col-md-2">
+                        @*<div class="col-md-2">
                             <input type="text" class="form-control master-form-input" id="Invtype" />
-                        </div>
+                        </div>*@
                         <div class="col-md-2">
                             <input type="text" class="form-control master-form-input" id="Invno" />
                         </div>
@@ -248,16 +256,16 @@
 
                     <div class="col-md-12 document-row" id="GridView">
                         <div class="col-md-2">
-                            Invoice Amount
+                            Invoice Amount*
                         </div>
                         <div class="col-md-2">
-                            Debit Amount
+                            Debit Amount*
                         </div>
                         <div class="col-md-2">
-                            Paid Amount
+                            Paid Amount*
                         </div>
                         <div class="col-md-2">
-                            Balance Amount
+                            Balance Amount*
                         </div>
                     </div>
 
@@ -268,16 +276,16 @@
                 <div class="row">
                     <div class="col-md-12 document-row" id="GridView">
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="InvoiceAmount" onchange="calculateBalance('')" />
+                            <input type="text" class="form-control master-form-input" id="InvoiceAmount" onchange="calculateBalance('')" onkeypress = "allow_only_Float(event,'InvoiceAmount');"/>
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="DebitAmount" onchange="calculateBalance('')" />
+                            <input type="text" class="form-control master-form-input" id="DebitAmount" onchange="calculateBalance('')" onkeypress = "allow_only_Float(event,'DebitAmount');"/>
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="PaidAmount" onchange="calculateBalance('')" />
+                            <input type="text" class="form-control master-form-input" id="PaidAmount" onchange="calculateBalance('')" onkeypress = "allow_only_Float(event,'PaidAmount');"/>
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="Balance" />
+                            <input type="text" class="form-control master-form-input" id="Balance" readonly/>
                         </div>
                         <div class="col-md-2" >
                             <button type="button" class="document-btn" onclick="Add()">Add</button>
@@ -290,35 +298,35 @@
                 </div>
             <table class="row m-t-20" id="PaymentDetailsForm">
                 @if (Model.PaymentDetailsViewModel != null)
-                {
-                    for (int j = 0; j < Model.PaymentDetailsViewModel.Count; j++)
                     {
-                        var html = "<div class='row'><div class='col-md-12 document-row' id='GridView" + @j + "'>";
-                        html += "<div class='col-md-2'>Invoice Type</div>";
-                        html += "<div class='col-md-2'>Invoice Number</div>";
-                        html += "<div class='col-md-2'>Invoice Date</div>";
-                        html += "<div class='col-md-2'>Invoice Description</div>";
-                        html += "<div class='col-md-2'>Remarks</div>";
-                        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+                        for (int j = 0; j < Model.PaymentDetailsViewModel.Count; j++)
+                        {
+                            var html = "<div class='row'><div class='col-md-12 document-row' id='GridView" + @j + "'>";
+                            //html += "<div class='col-md-2'>Invoice Type</div>";
+                            html += "<div class='col-md-2'>Invoice Number</div>";
+                            html += "<div class='col-md-2'>Invoice Date</div>";
+                            html += "<div class='col-md-2'>Invoice Description</div>";
+                            html += "<div class='col-md-2'>Remarks</div>";
+                            html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
-                        html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Invtype + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invtype' data-name='Inv type' id='Invtype" + @j + "' /></div>";
-                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Invno + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invno' data-name='Inv no' id='Invno" + @j + "' /></div>";
-                        html += "<div class='col-md-2'><input type='date' value='" + @Model.PaymentDetailsViewModel[j].InvoiceDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceDate' data-name='Invoice Date' id='InvoiceDate" + @j + "' /></div>";
-                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Description + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Description' data-name='Description' id='Description" + @j + "' /></div>";
-                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Remarks + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Remarks' data-name='Remarks' id='Remarks" + @j + "' /></div>";
-                        html += "</div><div class='col-md-12 document-row' id='GridView'>";
-                        html += "<div class='col-md-2'>Invoice Amount</div>";
-                        html += "<div class='col-md-2'>Debit Amount</div>";
-                        html += "<div class='col-md-2'>Paid Amount</div>";
-                        html += "<div class='col-md-2'>Balance Amount</div>";
-                        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+                            html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+                            //html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Invtype + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invtype' data-name='Inv type' id='Invtype" + @j + "' /></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Invno + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invno' data-name='Inv no' id='Invno" + @j + "' readonly/></div>";
+                            html += "<div class='col-md-2'><input type='date' value='" + @Model.PaymentDetailsViewModel[j].InvoiceDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceDate' data-name='Invoice Date' id='InvoiceDate" + @j + "' readonly/></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Description + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Description' data-name='Description' id='Description" + @j + "' readonly/></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Remarks + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Remarks' data-name='Remarks' id='Remarks" + @j + "' readonly/></div>";
+                            html += "</div><div class='col-md-12 document-row' id='GridView'>";
+                            html += "<div class='col-md-2'>Invoice Amount</div>";
+                            html += "<div class='col-md-2'>Debit Amount</div>";
+                            html += "<div class='col-md-2'>Paid Amount</div>";
+                            html += "<div class='col-md-2'>Balance Amount</div>";
+                            html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
-                        html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].InvoiceAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceAmount' data-name='Invoice Amount' id='InvoiceAmount" + @j + "' onchange='calculateBalance("+@j+")' /></div>";
-                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].DebitAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].DebitAmount' data-name='Debit Amount' id='DebitAmount" + @j + "' onchange='calculateBalance(" + @j + ")' /></div>";
-                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].PaidAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PaidAmount' data-name='Paid Amount' id='PaidAmount" + @j + "' onchange='calculateBalance(" + @j + ")' /></div>";
-                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Balance + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Balance' data-name='Balance' id='Balance" + @j + "' /></div>";
+                            html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].InvoiceAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceAmount' data-name='Invoice Amount' id='InvoiceAmount" + @j + "' onchange='calculateBalance("+@j+ ")' onkeypress = 'allow_only_Float(event,'InvoiceAmount" + @j + "');' readonly/></div>";
+                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].DebitAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].DebitAmount' data-name='Debit Amount' id='DebitAmount" + @j + "' onchange='calculateBalance(" + @j + ")' onkeypress = 'allow_only_Float(event,'DebitAmount" + @j + "');' readonly/></div>";
+                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].PaidAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PaidAmount' data-name='Paid Amount' id='PaidAmount" + @j + "' onchange='calculateBalance(" + @j + ")' onkeypress = 'allow_only_Float(event,'PaidAmount" + @j + "');' readonly/></div>";
+                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Balance + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Balance' data-name='Balance' id='Balance" + @j + "' readonly/></div>";
                         html += "<div class='col-md-2'><button type='button' id='Deleter" + @j + "' class='document-btn removebutton'>Delete</button></div>";
                         html += "</div></div><div class='row ht-5'>&nbsp;</div>";
                         <tr>
@@ -338,18 +346,21 @@
 
                 </div>
         <div class="col-md-12 form-input-padding">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 &nbsp;
             </div>
-            <div class="col-md-4">
-                <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
+            <div class="col-md-6">
+                <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>&nbsp;&nbsp;
+<button class="btn master-form-btn" id="btnCancel" type="button" onclick="formReset()">Cancel</button>
             </div>
         </div>
 </div>
 </div>
 }
 <script>
-
+    function formReset() {
+        GetPaymentAddOrUpdate();
+    }
     $("#Supplierid").on('change', function (e) {
         debugger;
         //var tenantid = $("#Supplier_id").val();
@@ -525,10 +536,12 @@
     {
         if (paymentType != "against invoice") {
             document.getElementById('paymentDetail').style.display = "none";
+            $("#TotalAmount").prop("readonly", false);
         }
         else
         {
             document.getElementById('paymentDetail').style.display = "block";
+            $("#TotalAmount").prop("readonly", true);
         }
     }
     $("#PaymentType").change(function () { showHideSubForm($("#PaymentType").val()) });
@@ -544,14 +557,135 @@
             document.getElementById('chequeDate').style.display = "block";
         }
     }
-    $("#PaymentMode").change(function () { showHideCheque($("#PaymentMode").val()) });
-    showHideCheque($("#PaymentMode").val());
+    function showHideChequeField(value) {
+        debugger;
+        $("[name='cheque'] :input").attr("disabled", value);
+        if (value) {
+            $("[name='cheque']").hide();
+        }
+        else {
+            $("[name='cheque']").show();
+        }
+    }
+    function showhideAdvancePayment(value) {
+        $("#advancePayment :input").attr("disabled", value);
+        if (value) {
+            $("#advancePayment").hide();
+        }
+        else {
+            $("#advancePayment").show();
+        }
+    }
+    function showhidePDC(value) {
+        $("#pdcstatus :input").attr("disabled", value);
+        if (value) {
+            $("#pdcstatus").hide();
+        }
+        else {
+            $("#pdcstatus").show();
+        }
+    }
+    function ShowHidePaymentModeFields(paymentModeValue) {
+        debugger;
+        if (paymentModeValue == "cheque") {
+            showHideChequeField(false);
+            showhideAdvancePayment(true);
+            showhidePDC(false);
+            if ($("#PaymentType").val() == "against invoice") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
+        }
+        else if (paymentModeValue == "cash") {
+            showHideChequeField(true);
+            showhideAdvancePayment(true);
+            showhidePDC(true);
+            if ($("#PaymentType").val() == "against invoice") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
+        }
+        else if (paymentModeValue == "online") {
+            showHideChequeField(false);
+            showhideAdvancePayment(true);
+            showhidePDC(true);
+            if ($("#PaymentType").val() == "against invoice") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
+        }
+        else if (paymentModeValue == "pdc") {
+            showHideChequeField(true);
+            showhideAdvancePayment(true);
+            showhidePDC(false);
+            if ($("#PaymentType").val() == "against invoice") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
+        }
+        else if (paymentModeValue == "Advance adjust") {
+            showHideChequeField(true);
+            showhideAdvancePayment(false);
+            showhidePDC(true);
+            $("#TotalAmount").prop("readonly", true);
+            //if ($("#PaymentType").val() == "against invoice") {
+            //    $("#TotalAmount").prop("readonly", true);
+            //}
+            //else {
+            //    $("#TotalAmount").prop("readonly", false);
+            //}
+        }
+        else {
+            showHideChequeField(true);
+            showhideAdvancePayment(true);
+            showhidePDC(true);
+            if ($("#PaymentType").val() == "against invoice") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
+        }
+    }
+    $("#BankAcCode").on('change', function (e) {
+        debugger;
+        var bankAcCode = $("#BankAcCode").val();
+        $("#BankAcName").val(bankAcCode);
+    });
+    $("#BankAcName").on('change', function (e) {
+        debugger;
+        var bankAcCode = $("#BankAcName").val();
+        $("#BankAcCode").val(bankAcCode);
+    });
+    $("#AdvAcCode").on('change', function (e) {
+        debugger;
+        if ($("#AdvAcCode").val() != "") {
+            get_advance_payment_amount($("#AdvAcCode").val());
+        }
+        else {
+            $("#TotalAmount").val(0);
+            $("#TotalAmount").trigger("change");
+        }
+        
+    });
+    $("#PaymentMode").change(function () { ShowHidePaymentModeFields($("#PaymentMode").val()) });
+    //showHideCheque($("#PaymentMode").val());
 
     function calculateBalance(pos) {
-        var InvoiceAmount = document.getElementById("InvoiceAmount"+pos).value;
-        var DebitAmount = document.getElementById("DebitAmount" + pos).value;
-        var PaidAmount = document.getElementById("PaidAmount" + pos).value;
-        var Balance = InvoiceAmount - PaidAmount;
+        debugger;
+        var InvoiceAmount = Number(document.getElementById("InvoiceAmount" + pos).value);
+        var DebitAmount = Number(document.getElementById("DebitAmount" + pos).value);
+        var PaidAmount = Number(document.getElementById("PaidAmount" + pos).value);
+        //var Balance = Number(InvoiceAmount).toFixed(3) - (Number(PaidAmount).toFixed(3) + Number(DebitAmount).toFixed(3));
+        var Balance = InvoiceAmount - (PaidAmount + DebitAmount);
         document.getElementById("Balance" + pos).value = Balance;
     }
 
@@ -809,10 +943,11 @@
         //        });
     }
     //$("#agreement_no").change(function () { debugger; getAgreementDetails() });
-    var j = 0;
+    //var i = parseInt($("#propertiesdt1-list-count").val());
+    var j = parseInt($("#Payment-count").val());
     function Add() {
         debugger;
-        var Invtype = document.getElementById("Invtype").value;
+        //var Invtype = document.getElementById("Invtype").value;
         var Invno = document.getElementById("Invno").value;
         var InvoiceDate = document.getElementById("InvoiceDate").value;
         var Description = document.getElementById("Description").value;
@@ -822,8 +957,17 @@
         var Balance = document.getElementById("Balance").value;
         var Remarks = document.getElementById("Remarks").value;
 
+        if ((Invno == null || Invno == "") || (InvoiceDate == null || InvoiceDate == "") || (Description == null || Description == "") || (InvoiceAmount == null || InvoiceAmount == "") || (DebitAmount == null || DebitAmount == "") || (PaidAmount == null || PaidAmount == "") || (Balance == null || Balance == "") || (Remarks == null || Remarks == "")) {
+            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            $(".result-title").text("Failure");
+            $(".result-modal-body span").text("Enter required fields");
+            $('#masterResultModal').modal('show');
+            return false;
+        }
+        $("#TotalAmount").val(Number($("#TotalAmount").val()) + Number(Balance));
         var html = "<tr><td><div class='row'><div class='col-md-12 document-row' id='GridView" + j + "'>";
-        html += "<div class='col-md-2'>Invoice Type</div>";
+        //html += "<div class='col-md-2'>Invoice Type</div>";
         html += "<div class='col-md-2'>Invoice Number</div>";
         html += "<div class='col-md-2'>Invoice Date</div>";
         html += "<div class='col-md-2'>Invoice Description</div>";
@@ -831,11 +975,11 @@
         html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
         html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-        html += "<div class='col-md-2'><input type='text' value='" + Invtype + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invtype' data-name='Inv type' id='Invtype" + j + "' /></div>";
-        html += "<div class='col-md-2'><input type='text' value='" + Invno + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invno' data-name='Inv no' id='Invno" + j + "' /></div>";
-        html += "<div class='col-md-2'><input type='date' value='" + InvoiceDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceDate' data-name='Invoice Date' id='InvoiceDate" + j + "' /></div>";
-        html += "<div class='col-md-2'><input type='text' value='" + Description + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Description' data-name='Description' id='Description" + j + "' /></div>";
-        html += "<div class='col-md-2'><input type='text' value='" + Remarks + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Remarks' data-name='Remarks' id='Remarks" + j + "' /></div>";
+        //html += "<div class='col-md-2'><input type='text' value='" + Invtype + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invtype' data-name='Inv type' id='Invtype" + j + "' /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + Invno + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Invno' data-name='Inv no' id='Invno" + j + "' readonly/></div>";
+        html += "<div class='col-md-2'><input type='date' value='" + InvoiceDate + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceDate' data-name='Invoice Date' id='InvoiceDate" + j + "' readonly/></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + Description + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Description' data-name='Description' id='Description" + j + "' readonly/></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + Remarks + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Remarks' data-name='Remarks' id='Remarks" + j + "' readonly/></div>";
         html += "</div><div class='col-md-12 document-row' id='GridView'>";
         html += "<div class='col-md-2'>Invoice Amount</div>";
         html += "<div class='col-md-2'>Debit Amount</div>";
@@ -844,16 +988,16 @@
         html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
         html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-        html += "<div class='col-md-2'><input type='text' value='" + InvoiceAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceAmount' data-name='Invoice Amount' id='InvoiceAmount" + j + "' onchange='calculateBalance("+j+")' /></div>";
-        html += "<div class='col-md-2'><input type='text' value='" + DebitAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].DebitAmount' data-name='Debit Amount' id='DebitAmount" + j + "' onchange='calculateBalance(" + j + ")' /></div>";
-        html += "<div class='col-md-2'><input type='text' value='" + PaidAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PaidAmount' data-name='Paid Amount' id='PaidAmount" + j + "' onchange='calculateBalance(" + j + ")' /></div>";
-        html += "<div class='col-md-2'><input type='text' value='" + Balance + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Balance' data-name='Balance' id='Balance" + j + "' /></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + InvoiceAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceAmount' data-name='Invoice Amount' id='InvoiceAmount" + j + "' onchange='calculateBalance(" + j + ")'onkeypress = 'allow_only_Float(event,'InvoiceAmount" + j + "');' readonly/></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + DebitAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].DebitAmount' data-name='Debit Amount' id='DebitAmount" + j + "' onchange='calculateBalance(" + j + ")' 'allow_only_Float(event,'DebitAmount" + j + "');' readonly/></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + PaidAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PaidAmount' data-name='Paid Amount' id='PaidAmount" + j + "' onchange='calculateBalance(" + j + ")' 'allow_only_Float(event,'PaidAmount" + j + "');' readonly/></div>";
+        html += "<div class='col-md-2'><input type='text' value='" + Balance + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Balance' data-name='Balance' id='Balance" + j + "' readonly/></div>";
         html += "<div class='col-md-2'><button type='button' id='Delete" + j + "' class='document-btn removebutton'>Delete</button></div>";
         html += "</div></div><div class='row ht-5'>&nbsp;</div>";
         html = html + "</td></tr><tr><td>&nbsp;</td></tr>"
         j++;
         $("#PaymentDetailsForm").append(html);
-        document.getElementById("Invtype").value = "";
+        //document.getElementById("Invtype").value = "";
         document.getElementById("Invno").value = "";
         document.getElementById("InvoiceDate").value = "";
         document.getElementById("Description").value = "";
@@ -890,7 +1034,16 @@
         debugger;
         e.preventDefault();
         try {
-
+            if ($("#PaymentType").val() == "against invoice") {
+                if (j == 0) {
+                    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                    $(".result-title").text("Failure");
+                    $(".result-modal-body span").text("Enter required fields");
+                    $('#masterResultModal').modal('show');
+                    return false;
+                }
+            }
             var form = $("form#Payment");
             $("#Supplier_id").val($("#Supplierid option:selected").text() == "--Select--" ? null : $("#Supplierid option:selected").text());
             $("#Supplier_Name").val($("#SupplierName option:selected").text() == "--Select--" ? null : $("#SupplierName option:selected").text());
@@ -908,12 +1061,19 @@
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
-                        debugger;
                         GetPayment();
-                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
-                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
-                        $(".result-title").text("Success");
-                        $(".result-modal-body span").text(paymentAdded);
+                        if (response.Errors == null) {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Message);
+                        }
+                        else {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(response.Errors);
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -923,6 +1083,7 @@
                         $(".result-modal-body span").text(masterResultError);
                     },
                     complete: function () {
+                        // $("#").addClass("hide");
                         $('#masterResultModal').modal('show');
                     }
                 });
@@ -948,4 +1109,46 @@
         });
         return o;
     };
+    $(document).ready(function () {
+        var id = $("#Id").val();
+        if (id != 0) {
+            document.getElementById("btnSubmit").innerHTML = 'Update';
+        }
+        ShowHidePaymentModeFields($("#PaymentMode").val())
+    });
+    function AmountInWords(totalAmount) {
+        $.ajax(
+        {
+            url: "../Receipts/AmountInWords",
+            type: "Get",
+            data: { amount: $("#TotalAmount").val() },
+            success: function (response) {
+                $("#AmtInWords").val(response);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function get_advance_payment_amount(value) {
+        $.ajax(
+        {
+            url: "../Payment/GetAdvanceAdjustmentAmount",
+            type: "Get",
+            data: { advanceCode: value },
+            success: function (response) {
+                $("#TotalAmount").val(response);
+                $("#TotalAmount").trigger("change");
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+            }
+        });
+    }
 </script>

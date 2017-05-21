@@ -73,7 +73,7 @@ namespace LeaMaPortal.Controllers
             List<tbl_propertiesmaster> propertyMaster = new List<tbl_propertiesmaster>();
             foreach (var data in propertyMasterData)
             {
-                if(db.tbl_propertiesmaster.Where(x => x.Ref_Unit_Property_ID == data.Property_Id).Count() < data.Noofunits)
+                if (db.tbl_propertiesmaster.Where(x => x.Ref_Unit_Property_ID == data.Property_Id).Count() < data.Noofunits)
                 {
                     propertyMaster.Add(data);
                 }
@@ -137,44 +137,55 @@ namespace LeaMaPortal.Controllers
         {
             try
             {
-                string PFlag = Common.UPDATE;
-                if (model.Property_Id == 0)
+                MessageResult result = new MessageResult();
+                if (model.Property_Id == 0 &&
+                    db.tbl_propertiesmaster.Any(a => a.Property_ID_Tawtheeq == model.Property_ID_Tawtheeq && !string.IsNullOrEmpty(model.Property_ID_Tawtheeq)))
                 {
-                    PFlag = Common.INSERT;
-                    var propertyMaster = await db.tbl_propertiesmaster.OrderByDescending(r => r.Property_Id).FirstOrDefaultAsync();
-                    model.Property_Id = propertyMaster != null ? propertyMaster.Property_Id + 1 : 1;
+                    result.Errors = "Property already exists!";
+                    return Json(result, JsonRequestBehavior.AllowGet);
                 }
-                string facility = null, utility = null;
-                foreach (var propertiesdt in model.PropertiesdtList)
+                else
                 {
-                    if (string.IsNullOrWhiteSpace(facility))
+                    string PFlag = Common.UPDATE;
+                    result.Message = "Property details updated successfully";
+                    if (model.Property_Id == 0)
                     {
-                        facility = "(" + model.Property_Id + ",'" + model.Property_ID_Tawtheeq + "','" + model.Unit_ID_Tawtheeq + "','" + propertiesdt.Facility_id + "','" + propertiesdt.Facility_Name + "','" + propertiesdt.Numbers_available + "'," + DateTime.Now.Year + ")";
+                        PFlag = Common.INSERT;
+                        result.Message = "Property details created successfully";
+                        var propertyMaster = await db.tbl_propertiesmaster.OrderByDescending(r => r.Property_Id).FirstOrDefaultAsync();
+                        model.Property_Id = propertyMaster != null ? propertyMaster.Property_Id + 1 : 1;
                     }
-                    else
+                    string facility = null, utility = null;
+                    foreach (var propertiesdt in model.PropertiesdtList)
                     {
-                        facility = facility + ",(" + model.Property_Id + ",'" + model.Property_ID_Tawtheeq + "','" + model.Unit_ID_Tawtheeq + "','" + propertiesdt.Facility_id + "','" + propertiesdt.Facility_Name + "','" + propertiesdt.Numbers_available + "'," + DateTime.Now.Year + ")";
+                        if (string.IsNullOrWhiteSpace(facility))
+                        {
+                            facility = "(" + model.Property_Id + ",'" + model.Property_ID_Tawtheeq + "','" + model.Unit_ID_Tawtheeq + "','" + propertiesdt.Facility_id + "','" + propertiesdt.Facility_Name + "','" + propertiesdt.Numbers_available + "'," + DateTime.Now.Year + ")";
+                        }
+                        else
+                        {
+                            facility = facility + ",(" + model.Property_Id + ",'" + model.Property_ID_Tawtheeq + "','" + model.Unit_ID_Tawtheeq + "','" + propertiesdt.Facility_id + "','" + propertiesdt.Facility_Name + "','" + propertiesdt.Numbers_available + "'," + DateTime.Now.Year + ")";
+                        }
                     }
+                    model.propertiesdt = facility;
+                    foreach (var propertiesdt1 in model.Propertiesdt1List)
+                    {
+                        if (string.IsNullOrWhiteSpace(utility))
+                        {
+                            utility = "(" + model.Property_Id + ",'" + model.Property_ID_Tawtheeq + "','" + model.Unit_ID_Tawtheeq + "','" + propertiesdt1.Utility_id + "','" + propertiesdt1.Utility_Name + "'," + DateTime.Now.Year + ")";
+                        }
+                        else
+                        {
+                            utility = utility + ",(" + model.Property_Id + ",'" + model.Property_ID_Tawtheeq + "','" + model.Unit_ID_Tawtheeq + "','" + propertiesdt1.Utility_id + "','" + propertiesdt1.Utility_Name + "'," + DateTime.Now.Year + ")";
+                        }
+                    }
+                    model.propertiesdt1 = utility;
+                    object[] param = Helper.GetMySqlParameters<PropertyViewModel>(model, PFlag, System.Web.HttpContext.Current.User.Identity.Name);
+
+                    var _result = await db.Database.SqlQuery<object>(@"call Usp_Properties_All(@PFlag, @PProperty_Flag, @PProperty_ID_Tawtheeq, @PProperty_Id, @PProperty_Name, @PCompound, @PZone, @Psector, @Pplotno, @Pownedbyregistrant, @PProperty_Usage, @PProperty_Type, @PCommercial_villa, @PStreet_Name, @PAddress1, @PAddress2, @PAddress3, @PRegion_Name, @PCountry, @PCity, @PState, @PExternalrefno, @PNoofoffloors, @PNoofunits, @PBuiltarea, @PPlotarea, @PLeasablearea, @Pcommonarea, @Pcompletion_Date, @PAEDvalue, @PPurchased_date, @PValued_Date, @PStatus, @PVacant_Start_Date, @PCaretaker_Name, @PCaretaker_ID, @PRental_Rate_Month, @PComments, @PRef_unit_Property_ID_Tawtheeq, @PRef_Unit_Property_ID, @PRef_Unit_Property_Name, @PUnit_ID_Tawtheeq, @PUnit_Property_Name, @PExternalrefno_unit, @PAEDvalue_unit, @PPurchased_date_unit, @PValued_Date_unit, @PStatus_unit, @PVacant_Start_Date_Unit, @PRental_Rate_Month_unit, @PFloorno, @PFloorlevel, @PProperty_Usage_unit, @PProperty_Type_unit, @PTotal_Area, @PUnit_Common_Area, @PCommon_Area, @PParkingno, @PUnitcomments, @PCreateduser, @PCompany_occupied_Flag, @Ppropertiesdt, @Ppropertiesdt1)", param).ToListAsync();
+                    return RedirectToAction("../Master/Index", new { selected = 9 });
+                    //return Json(result, JsonRequestBehavior.AllowGet);
                 }
-                model.propertiesdt = facility;
-                foreach (var propertiesdt1 in model.Propertiesdt1List)
-                {
-                    if (string.IsNullOrWhiteSpace(utility))
-                    {
-                        utility = "(" + model.Property_Id + ",'" + model.Property_ID_Tawtheeq + "','" + model.Unit_ID_Tawtheeq + "','" + propertiesdt1.Utility_id + "','" + propertiesdt1.Utility_Name + "'," + DateTime.Now.Year + ")";
-                    }
-                    else
-                    {
-                        utility = utility + ",(" + model.Property_Id + ",'" + model.Property_ID_Tawtheeq + "','" + model.Unit_ID_Tawtheeq + "','" + propertiesdt1.Utility_id + "','" + propertiesdt1.Utility_Name + "'," + DateTime.Now.Year + ")";
-                    }
-                }
-                model.propertiesdt1 = utility;
-                object[] param = Helper.GetMySqlParameters<PropertyViewModel>(model, PFlag, System.Web.HttpContext.Current.User.Identity.Name);
-
-                var _result = await db.Database.SqlQuery<object>(@"call Usp_Properties_All(@PFlag, @PProperty_Flag, @PProperty_ID_Tawtheeq, @PProperty_Id, @PProperty_Name, @PCompound, @PZone, @Psector, @Pplotno, @Pownedbyregistrant, @PProperty_Usage, @PProperty_Type, @PCommercial_villa, @PStreet_Name, @PAddress1, @PAddress2, @PAddress3, @PRegion_Name, @PCountry, @PCity, @PState, @PExternalrefno, @PNoofoffloors, @PNoofunits, @PBuiltarea, @PPlotarea, @PLeasablearea, @Pcommonarea, @Pcompletion_Date, @PAEDvalue, @PPurchased_date, @PValued_Date, @PStatus, @PVacant_Start_Date, @PCaretaker_Name, @PCaretaker_ID, @PRental_Rate_Month, @PComments, @PRef_unit_Property_ID_Tawtheeq, @PRef_Unit_Property_ID, @PRef_Unit_Property_Name, @PUnit_ID_Tawtheeq, @PUnit_Property_Name, @PExternalrefno_unit, @PAEDvalue_unit, @PPurchased_date_unit, @PValued_Date_unit, @PStatus_unit, @PVacant_Start_Date_Unit, @PRental_Rate_Month_unit, @PFloorno, @PFloorlevel, @PProperty_Usage_unit, @PProperty_Type_unit, @PTotal_Area, @PUnit_Common_Area, @PCommon_Area, @PParkingno, @PUnitcomments, @PCreateduser, @PCompany_occupied_Flag, @Ppropertiesdt, @Ppropertiesdt1)", param).ToListAsync();
-
-                return RedirectToAction("../Master/Index", new { selected = 9 });
-
             }
             catch (Exception e)
             {
@@ -244,10 +255,10 @@ namespace LeaMaPortal.Controllers
                 List<tbl_propertiesmaster> propertyMaster = new List<tbl_propertiesmaster>();
                 foreach (var data in propertyMasterData)
                 {
-                    if (db.tbl_propertiesmaster.Where(x => x.Ref_Unit_Property_ID == data.Property_Id).Count() < data.Noofunits)
-                    {
-                        propertyMaster.Add(data);
-                    }
+                    //if (db.tbl_propertiesmaster.Where(x => x.Ref_Unit_Property_ID == data.Property_Id).Count() < data.Noofunits)
+                    //{
+                    propertyMaster.Add(data);
+                    //}
                 }
                 ViewBag.Ref_unit_Property_ID_Tawtheeq = new SelectList(propertyMaster.Select(x => new { PropertyIdTawtheeq = x.Property_ID_Tawtheeq, PropertyId = x.Property_Id }), "PropertyId", "PropertyIdTawtheeq", model.Ref_Unit_Property_ID);
                 ViewBag.Ref_Unit_Property_ID = new SelectList(propertyMaster.Select(x => x.Property_Id), model.Ref_Unit_Property_ID);
@@ -306,7 +317,7 @@ namespace LeaMaPortal.Controllers
                     object[] param = Helper.GetMySqlParameters<PropertyViewModel>(Map(model), Common.DELETE, System.Web.HttpContext.Current.User.Identity.Name);
 
                     var _result = await db.Database.SqlQuery<object>(@"call Usp_Properties_All(@PFlag, @PProperty_Flag, @PProperty_ID_Tawtheeq, @PProperty_Id, @PProperty_Name, @PCompound, @PZone, @Psector, @Pplotno, @Pownedbyregistrant, @PProperty_Usage, @PProperty_Type, @PCommercial_villa, @PStreet_Name, @PAddress1, @PAddress2, @PAddress3, @PRegion_Name, @PCountry, @PCity, @PState, @PExternalrefno, @PNoofoffloors, @PNoofunits, @PBuiltarea, @PPlotarea, @PLeasablearea, @Pcommonarea, @Pcompletion_Date, @PAEDvalue, @PPurchased_date, @PValued_Date, @PStatus, @PVacant_Start_Date, @PCaretaker_Name, @PCaretaker_ID, @PRental_Rate_Month, @PComments, @PRef_unit_Property_ID_Tawtheeq, @PRef_Unit_Property_ID, @PRef_Unit_Property_Name, @PUnit_ID_Tawtheeq, @PUnit_Property_Name, @PExternalrefno_unit, @PAEDvalue_unit, @PPurchased_date_unit, @PValued_Date_unit, @PStatus_unit, @PVacant_Start_Date_Unit, @PRental_Rate_Month_unit, @PFloorno, @PFloorlevel, @PProperty_Usage_unit, @PProperty_Type_unit, @PTotal_Area, @PUnit_Common_Area, @PCommon_Area, @PParkingno, @PUnitcomments, @PCreateduser, @PCompany_occupied_Flag, @Ppropertiesdt, @Ppropertiesdt1)", param).ToListAsync();
-
+                    result.Message = "Property details deleted successfully";
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)
@@ -324,6 +335,7 @@ namespace LeaMaPortal.Controllers
         {
             PropertyViewModel model = new PropertyViewModel()
             {
+                Id = propertyMaster.id,
                 Address1 = propertyMaster.Address1,
                 Address2 = propertyMaster.Address2,
                 Address3 = propertyMaster.Address3,

@@ -122,8 +122,11 @@ namespace LeaMaPortal.Controllers
 
 
                 ViewBag.agreement_no = new SelectList(db.tbl_agreement.Where(w => w.Delmark != "*").OrderBy(o => o.id).Distinct(), "Agreement_No", "Agreement_No");
-                ViewBag.BankAcName = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NAME), "Name", "Name");
-                ViewBag.BankAcCode = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NUMBER), "Name", "Name");
+                ViewBag.BankAcCode = new SelectList(Common.BankDetails, "AccountNumber", "AccountNumber");
+                ViewBag.BankAcName = new SelectList(Common.BankDetails, "AccountNumber", "BankName");
+
+                //ViewBag.BankAcName = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NAME), "Name", "Name");
+                //ViewBag.BankAcCode = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NUMBER), "Name", "Name");
 
                 var advancepaymentnumber = db.Database.SqlQuery<int>("Select PaymentNo from view_advance_pending_payment");
                 ViewBag.AdvAcCode = new SelectList(advancepaymentnumber);
@@ -145,10 +148,11 @@ namespace LeaMaPortal.Controllers
                 {
                     MySqlParameter pa = new MySqlParameter();
                     string PFlag = "INSERT";
-
+                    result.Message = "Payment details created successfully";
                     if (model.Id != 0)
                     {
                         PFlag = "UPDATE";
+                        result.Message = "Payment details updated successfully";
                     }
                     string invoice = null;
                     if (model.PaymentDetailsViewModel != null && model.PaymentType == "against invoice")
@@ -283,8 +287,8 @@ namespace LeaMaPortal.Controllers
                 ViewBag.SupplierName = new SelectList(suppliers, "Supplier_Id", "Supplier_Name", model.Supplier_id);
                 var agreements = db.tbl_agreement.Where(w => w.Delmark != "*").OrderBy(o => o.id);
                 ViewBag.agreement_no = new SelectList(agreements, "Agreement_No", "Agreement_No", model.agreement_no);
-                ViewBag.BankAcName = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NAME), "Name", "Name", model.BankAcName);
-                ViewBag.BankAcCode = new SelectList(StaticHelper.GetStaticData(StaticHelper.ACCOUNT_NUMBER), "Name", "Name", model.BankAcCode);
+                ViewBag.BankAcCode = new SelectList(Common.BankDetails, "AccountNumber", "AccountNumber", model.BankAcCode);
+                ViewBag.BankAcName = new SelectList(Common.BankDetails, "AccountNumber", "BankName", model.BankAcName);
                 if (model.agreement_no == null || model.agreement_no == 0)
                 {
                     var properties = db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Property" && w.Delmark != "*").OrderBy(o => o.id);
@@ -319,7 +323,7 @@ namespace LeaMaPortal.Controllers
                     ViewBag.PropertyName = new SelectList(propertyDropdown, "Propertyid", "PropertyName", model.Property_id);
                 }
                 var advancepaymentnumber = await db.Database.SqlQuery<int>("Select PaymentNo from view_advance_pending_payment").ToListAsync();
-                ViewBag.AdvAcCode = new SelectList(advancepaymentnumber, model.AdvAcCode);
+                ViewBag.AdvAcCode = new SelectList(advancepaymentnumber, Convert.ToInt32(model.AdvAcCode));
                 return PartialView("../Payment/_AddorUpdate", model);
             }
             catch (Exception e)
@@ -397,6 +401,7 @@ namespace LeaMaPortal.Controllers
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
                 var RE = await db.Database.SqlQuery<object>("CALL Usp_Payment_All(@PFlag,@PPaymentNo,@PPaymentDate,@Pagreement_no,@PProperty_ID,@PProperty_Name,@PUnit_ID,@Punit_Name,@PSupplier_id,@PSupplier_Name,@PPaymentType,@PPaymentMode,@PTotalAmount,@PAmtInWords,@PDDChequeNo,@PCheqdate,@Ppdcstatus,@PBankAcCode,@PBankAcName,@PAdvAcCode,@PNarration,@PCreateduser,@PPaymentdt)", param).ToListAsync();
+                result.Message = "Payment details deleted successfully";
                 return Json(result, JsonRequestBehavior.AllowGet);
 
             }
@@ -519,6 +524,21 @@ namespace LeaMaPortal.Controllers
             //    throw ex;
             //}
         }
+        [HttpGet]
+        public async Task<JsonResult> GetAdvanceAdjustmentAmount(int? advanceCode)
+        {
+
+            try
+            {
+                var advancepaymentnumber = await db.Database.SqlQuery<int>("Select TotalAmount from view_advance_pending_payment where PaymentNo=" + advanceCode).FirstOrDefaultAsync();
+                return Json(advancepaymentnumber, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

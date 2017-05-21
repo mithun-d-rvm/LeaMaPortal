@@ -14,8 +14,9 @@
 <link href="~/theme/css/leemastyle.css" rel="stylesheet" />
 <link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
 <!DOCTYPE html>
-@using (Html.BeginForm("AddOrUpdate", "TenantCompany", FormMethod.Post, new { @id = "TenantCompany", @enctype = "multipart/form-data" }))
-{
+@*@using (Html.BeginForm("AddOrUpdate", "TenantCompany", FormMethod.Post, new { @id = "TenantCompany", @enctype = "multipart/form-data" }))*@
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "TenantCompany", @enctype = "multipart/form-data" }))
+    {
     @Html.HiddenFor(m => m.Id, new { @id = "Id" })
     <div class="inner-block">
         <div class="blank">
@@ -46,7 +47,7 @@
                                     Value = "Company"
                                 });
                             }*@
-                            @Html.DropDownList("TenantType", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required= "required" })
+                            @Html.DropDownList("TenantType", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                             @*@Html.DropDownListFor(model => model.TenantType, TenantType, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })*@
 
 
@@ -87,7 +88,7 @@
                                 });
                             }*@
                             @Html.HiddenFor(model => model.Title)
-                            @Html.DropDownList("TitleDisplay", null, "--Select--", new { @class = "form-control master-form-input", @required="required" })
+                            @Html.DropDownList("TitleDisplay", null, "--Select--", new { @class = "form-control master-form-input", @required = "required" })
 
 
                             @*@Html.DropDownListFor(model => model.Title, Title, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })*@
@@ -266,7 +267,7 @@
                         </div>
                         <div class="col-md-8">
                             @*<input type="text" class="form-control master-form-input"  />*@
-                            @Html.EditorFor(model => model.LicenseIssueDate, new { htmlAttributes = new { @class = "form-control master-form-input", @required="required", @onblur= "setMin('LicenseIssueDate','LicenseExpiryDate')" } })
+                            @Html.EditorFor(model => model.LicenseIssueDate, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onblur = "setMin('LicenseIssueDate','LicenseExpiryDate')" } })
                             @Html.ValidationMessageFor(model => model.LicenseIssueDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -406,7 +407,7 @@
                         <div class="col-md-8">
                             <div class="col-md-3" style="margin-left: -15px;">
                                 @*<input type="text" class="form-control master-form-input">*@
-                                @Html.EditorFor(model => model.MobileCountryCode, new { htmlAttributes = new { @class = "form-control master-form-input",@required = "required", @pattern = "[0-9]+", title = "Enter valid country code" } })
+                                @Html.EditorFor(model => model.MobileCountryCode, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[0-9]+", title = "Enter valid country code" } })
                                 @Html.ValidationMessageFor(model => model.MobileCountryCode, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-3" style="margin-left: -15px;">
@@ -685,13 +686,13 @@
 
             <div class="row" style="display: none;" id="contactDetails">
                 @if (Model.CompanyContactDetails != null)
-            {
+                {
                 <input type="hidden" id="init-company-contact-det-count" value="@Model.CompanyContactDetails.Count" />
-            }
-            else
-            {
+                }
+                else
+                {
                 <input type="hidden" id="init-company-contact-det-count" value="0" />
-            }
+                }
             
             <div class="p-b-25">
                 <h3>Contact Details</h3>
@@ -870,7 +871,7 @@
             </div>
 
         </div>
-    
+
 }
 
 <script>

@@ -12,71 +12,72 @@
 }
 
 <div class="inner-block p-t-5-p">
-    <div class="blank">
-@using (Html.BeginForm("AddOrUpdate", "Tca", FormMethod.Post, new { @id = "Tca", @enctype = "multipart/form-data" }))
-{
-        <div id="AgreementForm">
-        </div>
-        <div>
-            <!-- BEGIN AGREEMENT PDC -->
-            <div class="p-lr-20" id="AgreementPdc">
-                @*@Html.Partial("_AgreementPdc")*@
+    <input type="hidden" value="@ViewBag.IsAdd" id="IsAllowAdd" />
+    <div class="blank" id="">
+        @using (Html.BeginForm("AddOrUpdate", "Tca", FormMethod.Post, new { @id = "Tca", @enctype = "multipart/form-data" }))
+        {
+            <div id="AgreementForm">
             </div>
-            <!-- END AGREEMENT Facility -->
-            <div class="row ht-5">
+            <div>
+                <!-- BEGIN AGREEMENT PDC -->
+                <div class="p-lr-20" id="AgreementPdc">
+                    @*@Html.Partial("_AgreementPdc")*@
+                </div>
+                <!-- END AGREEMENT Facility -->
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+                <!-- BEGIN AGREEMENT Facility -->
+                <div class="p-lr-20" id="AgreementFacility">
+                    @*@Html.Partial("_AgreementDocument")*@
+                </div>
+                <!-- END AGREEMENT Facility -->
+                <!-- END AGREEMENT PDC -->
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+                <!-- BEGIN AGREEMENT DOCUMENT -->
+                <div class="p-lr-20" id="AgreementDocument">
+                    @*@Html.Partial("_AgreementDocument")*@
+                </div>
+                <!-- END AGREEMENT DOCUMENT -->
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+                <!-- BEGIN AGREEMENT UTILITY -->
+                <div class="p-lr-20" id="AgreementUtility">
+                    @*@Html.Partial("_AgreementUtility")*@
+                </div>
+                <!-- END AGREEMENT UTILITY -->
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+                <!-- BEGIN AGREEMENT UNIT -->
+                <div class="p-lr-20" id="AgreementUnit">
+                    @*@Html.Partial("_AgreementUnit")*@
+                </div>
+                <!-- END AGREEMENT UNIT -->
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
+                <!-- BEGIN AGREEMENT UNIT -->
+                <div class="p-lr-20" id="AgreementCheckList">
+                    @*@Html.Partial("_AgreementCheckList")*@
+                </div>
+                @*END AGREEMENT UNIT*@
+            </div>
+            <div class="p-b-10">
                 &nbsp;
             </div>
-            <!-- BEGIN AGREEMENT Facility -->
-            <div class="p-lr-20" id="AgreementFacility">
-                @*@Html.Partial("_AgreementDocument")*@
+            <div class="col-md-12 form-input-padding" id="formSubmitBtn">
+                <div class="col-md-6">
+                    &nbsp;
+                </div>
+                <div class="col-md-4">
+                    <input type="submit" class="btn master-form-btn" value="Submit" />
+                </div>
             </div>
-            <!-- END AGREEMENT Facility -->
-            <!-- END AGREEMENT PDC -->
-            <div class="row ht-5">
-                &nbsp;
-            </div>
-            <!-- BEGIN AGREEMENT DOCUMENT -->
-            <div class="p-lr-20" id="AgreementDocument">
-                @*@Html.Partial("_AgreementDocument")*@
-            </div>
-            <!-- END AGREEMENT DOCUMENT -->
-            <div class="row ht-5">
-                &nbsp;
-            </div>
-            <!-- BEGIN AGREEMENT UTILITY -->
-            <div class="p-lr-20" id="AgreementUtility">
-                @*@Html.Partial("_AgreementUtility")*@
-            </div>
-            <!-- END AGREEMENT UTILITY -->
-            <div class="row ht-5">
-                &nbsp;
-            </div>
-            <!-- BEGIN AGREEMENT UNIT -->
-            <div class="p-lr-20" id="AgreementUnit">
-                @*@Html.Partial("_AgreementUnit")*@
-            </div>
-            <!-- END AGREEMENT UNIT -->
-            <div class="row ht-5">
-                &nbsp;
-            </div>
-            <!-- BEGIN AGREEMENT UNIT -->
-            <div class="p-lr-20" id="AgreementCheckList">
-                @*@Html.Partial("_AgreementCheckList")*@
-            </div>
-            @*END AGREEMENT UNIT*@
-        </div>
-        <div class="p-b-10">
-            &nbsp;
-        </div>
-        <div class="col-md-12 form-input-padding">
-            <div class="col-md-6">
-                &nbsp;
-            </div>
-            <div class="col-md-4">
-                <input type="submit" class="btn master-form-btn" value="Submit" />
-            </div>
-        </div>
-}
+        }
         @*@Html.Partial("Agreement/_AgreementForm")*@
 
         <!-- Begin Grid view -->
@@ -102,13 +103,13 @@
         </div>
 
         <div id="closureModal" class="modal fade" role="dialog">
-           @using (Html.BeginForm("Closure", "Tca", FormMethod.Post, new { @id = "Closure", @enctype = "multipart/form-data" }))
-           {
-             <div class="modal-dialog tca-modal-md" id="closureContainer" style="background-color: white;">
-               
-                
-            </div>
-           }
+            @using (Html.BeginForm("Closure", "Tca", FormMethod.Post, new { @id = "Closure", @enctype = "multipart/form-data" }))
+            {
+                <div class="modal-dialog tca-modal-md" id="closureContainer" style="background-color: white;">
+
+
+                </div>
+            }
         </div>
         <div id="statusModal" class="modal fade" role="dialog">
             @using (Html.BeginForm("Status", "Tca", FormMethod.Post, new { @id = "Status", @enctype = "multipart/form-data" }))
@@ -129,13 +130,13 @@
 
         <!-- Contract Modal -->
         <div id="contractModal" class="modal fade" role="dialog">
-            
+
             <div class="modal-dialog tca-modal-md" id="PrintContainer" style="background-color: white;">
                 @*@Html.Partial("Contract/_ContractDetails")*@
 
             </div>
         </div>
-      
+
     </div>
 </div>
 
@@ -146,6 +147,7 @@
 
 </script>
 <script type="text/javascript">
+
     function printData() {
         //alert(1);
         var divToPrint = document.getElementById("PrintelementID");
@@ -155,37 +157,43 @@
         newWin.close();
     }
     //printData();
-        $(document).ready()
-        {
+    $(document).ready()
+    {
 
-         //btnPrint button id
-            $('#btnPrint').on('click', function () {
-                               printData();
-            })
+        //btnPrint button id
+        $('#btnPrint').on('click', function () {
+            printData();
+        })
 
-        }
+    }
 </script>
 
 
 
 <script>
     $("#TopNavBarFilter").empty();
-    CreateAgreement();
-    var AgreementNo = 0;//$("#Agreement_No").val();
-    AgreementPdc(AgreementNo);
-    AgreementFacility(AgreementNo);
-    AgreementDocument(AgreementNo);
-    AgreementUtility(AgreementNo);
-    AgreementUnit(AgreementNo);
-    AgreementCheckList(AgreementNo);
-    //AgreementPdc();
-    //AgreementDocument();
-    //AgreementUtility();
-    //AgreementUnit();
-    //AgreementCheckList();
+    //
+    var isAllow = $("#IsAllowAdd").val();
+    if (isAllow == 1)
+        IsAddAllow();
+    else
+        $("#formSubmitBtn").hide();
+
+    function IsAddAllow() {
+        
+        CreateAgreement();
+        var AgreementNo = 0;//$("#Agreement_No").val();
+        AgreementPdc(AgreementNo);
+        AgreementFacility(AgreementNo);
+        AgreementDocument(AgreementNo);
+        AgreementUtility(AgreementNo);
+        AgreementUnit(AgreementNo);
+        AgreementCheckList(AgreementNo);
+    }
+    //
     getAgreementList();
     function CreateAgreement() {
-       
+
         $("#img-loader").removeClass("hide");
         $.ajax(
         {
@@ -201,8 +209,8 @@
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
             },
             complete: function () {
-                
-               
+
+
                 //var AgreementNo = 0;//$("#Agreement_No").val();
                 //AgreementPdc(AgreementNo);
                 //AgreementFacility(AgreementNo);
@@ -210,7 +218,7 @@
                 //AgreementUtility(AgreementNo);
                 //AgreementUnit(AgreementNo);
                 //AgreementCheckList(AgreementNo);
-                
+
                 $("#img-loader").addClass("hide");
             }
         });
@@ -223,8 +231,8 @@
             url: "../Tca/AgreementPdc",
             type: "Get",
             data: { AgreementNo: AgreementNo },
-           // contentType: "application/json",
-           // processData: false,
+            // contentType: "application/json",
+            // processData: false,
             success: function (html) {
                 $("#AgreementPdc").html(html);
             },
@@ -360,7 +368,7 @@
 
 <script>
     $("form#Tca").off("submit").on("submit", function (e) {
-       // e.preventDefault();
+        // e.preventDefault();
         try {
             var firstDate = new Date($("#Agreement_Start_Date").val());
             var secondDate = new Date($("#Agreement_End_Date").val());
@@ -375,6 +383,6 @@
         }
 
     });
-    
-    
+
+
 </script>

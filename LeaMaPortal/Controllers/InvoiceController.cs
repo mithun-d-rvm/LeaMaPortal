@@ -26,109 +26,125 @@ namespace LeaMaPortal.Controllers
         }
         public PartialViewResult List(string Search, int? page, int? defaultPageSize)
         {
-            ViewData["Search"] = Search;
-            int currentPageIndex = page.HasValue ? page.Value : 1;
-            int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
-            ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, PageSize);
-            //TenantCompanyViewModel model = new TenantCompanyViewModel();
-            var invoiceDetails = db.tbl_invoicehd.Where(x => x.Delmark != "*");
-            if (!string.IsNullOrWhiteSpace(Search))
+            try
             {
-                invoiceDetails = invoiceDetails.Where(x => x.invno.Contains(Search));
-            }
-            var invoice = invoiceDetails.OrderBy(x => x.id).Select(x => new InvoiceViewModel()
-            {
-                Agreement_No = x.Agreement_No,
-                invno = x.invno,
-                bank_details = x.bank_details,
-                month = x.month,
-                date = x.date,
-                duedate = x.duedate,
-                Id = x.id,
-                invtype = x.invtype,
-                Property_ID = x.Property_ID,
-                Property_Name = x.Property_Name,
-                remarks = x.remarks,
-                Tenant_id = x.Tenant_id,
-                Tenant_Name = x.Tenant_Name,
-                totalamt = x.totalamt,
-                Unit_ID = x.Unit_ID,
-                unit_Name = x.unit_Name,
-                year = x.year,
-                InvoiceDetails = db.tbl_invoicedt.Where(y => y.invno == x.invno).Select(z => new InvoiceDetailsViewModel()
+                ViewData["Search"] = Search;
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+                int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
+                ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, PageSize);
+                //TenantCompanyViewModel model = new TenantCompanyViewModel();
+                var invoiceDetails = db.tbl_invoicehd.Where(x => x.Delmark != "*");
+                if (!string.IsNullOrWhiteSpace(Search))
                 {
-                    Id = z.id,
-                    amount = z.amount,
-                    description = z.description,
-                    item = z.item,
-                    qty = z.qty
-                }).ToList()
-            }).ToPagedList(currentPageIndex, PageSize);
-            return PartialView("../Invoice/_List", invoice);
+                    invoiceDetails = invoiceDetails.Where(x => x.invno.Contains(Search));
+                }
+                var invoice = invoiceDetails.OrderBy(x => x.id).Select(x => new InvoiceViewModel()
+                {
+                    Agreement_No = x.Agreement_No,
+                    invno = x.invno,
+                    bank_details = x.bank_details,
+                    month = x.month,
+                    date = x.date,
+                    duedate = x.duedate,
+                    Id = x.id,
+                    invtype = x.invtype,
+                    Property_ID = x.Property_ID,
+                    Property_Name = x.Property_Name,
+                    remarks = x.remarks,
+                    Tenant_id = x.Tenant_id,
+                    Tenant_Name = x.Tenant_Name,
+                    totalamt = x.totalamt,
+                    Unit_ID = x.Unit_ID,
+                    unit_Name = x.unit_Name,
+                    year = x.year,
+                    InvoiceDetails = db.tbl_invoicedt.Where(y => y.invno == x.invno).Select(z => new InvoiceDetailsViewModel()
+                    {
+                        Id = z.id,
+                        amount = z.amount,
+                        description = z.description,
+                        item = z.item,
+                        qty = z.qty
+                    }).ToList()
+                }).ToPagedList(currentPageIndex, PageSize);
+                return PartialView("../Invoice/_List", invoice);
+            }
+            catch(Exception e)
+            {
+                throw;
+            }
         }
 
         [HttpGet]
         public async Task<PartialViewResult> AddorUpdate(int? DropDownValue)
         {
-
-            //var InvType = db.Database.SqlQuery<string>(@"call usp_split('Invoice','invtype',',',null);").ToList();
-            //ViewBag.InvType = new SelectList(InvType);
-            //var Month = db.Database.SqlQuery<string>(@"call usp_split('Invoice','Month',',',null)").ToList();
-            //ViewBag.InvType = new SelectList(Month);
-
-            var model = new InvoiceViewModel();
-            //ViewBag.Tenant_Id = new SelectList(db.tbl_tenant_individual.OrderBy(x => x.Tenant_Id), "Tenant_Id", "Tenant_Id");
-            //ViewBag.Tenant_Name = new SelectList(db.tbl_tenant_individual.OrderBy(x => x.First_Name), "Tenant_Name", "Tenant_Name");
-            var properties = db.tbl_propertiesmaster.Where(x=>x.Delmark!="*" && x.Property_Flag == "Property").OrderBy(x => x.Property_Id).Select(x => new { PropertyId = x.Property_Id, PropertyName = x.Property_Name, GroupedValue = x.Property_Id + ":" + x.Property_Name, PropertyIdTawtheeq = x.Property_ID_Tawtheeq });
-            ViewBag.PropertyId = new SelectList(properties, "PropertyIdTawtheeq", "PropertyIdTawtheeq");
-            ViewBag.PropertyName = new SelectList(properties, "PropertyIdTawtheeq", "PropertyName");
-
-            var units = db.tbl_propertiesmaster.Where(x => x.Delmark != "*" && x.Property_Flag == "Unit").OrderBy(x => x.Unit_ID_Tawtheeq).Select(x => new { UnitId = x.Unit_ID_Tawtheeq, UnitName = x.Unit_Property_Name, GroupedValue = x.Unit_ID_Tawtheeq + ":" + x.Unit_Property_Name });
-            ViewBag.UnitId = new SelectList(units, "UnitId", "UnitId");
-            ViewBag.unitName = new SelectList(units, "UnitId", "UnitName");
-            ViewBag.Agreement_No = new SelectList(db.tbl_agreement.Where(x => x.Delmark != "*").OrderBy(x => x.Agreement_No).Select(x=>x.Agreement_No));
-            ViewBag.invtype = new SelectList(Common.InvoiceType);
-            ViewBag.month = new SelectList(Common.Month, "Value", "Text");
-            var invoice = await db.tbl_invoicehd.Select(x => x.incno).DefaultIfEmpty(0).MaxAsync();
-            model.invno = (invoice != null ? invoice + 1 : 1) + DateTime.Now.Year.ToString();
-            model.incno = invoice != null ? invoice + 1 : 1;
-            model.bank_details = Common.Bank_number;
-            model.year = DateTime.Now.Year;
-            var tenant = db.view_tenant.Select(x => new { TenantId = x.Tenant_id, TenantName = x.First_Name, Type = x.type, GroupedValue = x.Tenant_id + ":" + x.First_Name + ":" + x.type });
-            ViewBag.Tenantid = new SelectList(items: tenant, dataValueField: "TenantId", dataTextField: "TenantId", selectedValue: null);
-            ViewBag.TenantName = new SelectList(items: tenant, dataValueField: "TenantId", dataTextField: "TenantName", selectedValue: null);
-            //ViewBag.bank_details = Common.Bank_number;
-            switch (DropDownValue)
+            try
             {
-                case 1:
-                    ViewBag.AgreementList = db.tbl_agreement.Select(x => new InvoiceViewModel()
-                    {
-                        Tenant_id = x.Ag_Tenant_id,
-                        Tenant_Name = x.Ag_Tenant_Name,
-                        Property_ID = x.property_id.ToString(),
-                        Property_Name = x.Properties_Name,
-                        Unit_ID = x.Unit_ID_Tawtheeq,
-                        unit_Name = x.Unit_Property_Name
-                    }).ToList();
-                    break;
-                case 2:
+                //var InvType = db.Database.SqlQuery<string>(@"call usp_split('Invoice','invtype',',',null);").ToList();
+                //ViewBag.InvType = new SelectList(InvType);
+                //var Month = db.Database.SqlQuery<string>(@"call usp_split('Invoice','Month',',',null)").ToList();
+                //ViewBag.InvType = new SelectList(Month);
 
-                    break;
-                case 3:
+                var model = new InvoiceViewModel();
+                model.totalamt = 0;
+                model.date = DateTime.Now;
+                //ViewBag.Tenant_Id = new SelectList(db.tbl_tenant_individual.OrderBy(x => x.Tenant_Id), "Tenant_Id", "Tenant_Id");
+                //ViewBag.Tenant_Name = new SelectList(db.tbl_tenant_individual.OrderBy(x => x.First_Name), "Tenant_Name", "Tenant_Name");
+                var properties = db.tbl_propertiesmaster.Where(x => x.Delmark != "*" && x.Property_Flag == "Property").OrderBy(x => x.Property_Id).Select(x => new { PropertyId = x.Property_Id, PropertyName = x.Property_Name, GroupedValue = x.Property_Id + ":" + x.Property_Name, PropertyIdTawtheeq = x.Property_ID_Tawtheeq });
+                ViewBag.PropertyId = new SelectList(properties, "PropertyIdTawtheeq", "PropertyIdTawtheeq");
+                ViewBag.PropertyName = new SelectList(properties, "PropertyIdTawtheeq", "PropertyName");
 
-                    break;
-                case 4:
+                var units = db.tbl_propertiesmaster.Where(x => x.Delmark != "*" && x.Property_Flag == "Unit").OrderBy(x => x.Unit_ID_Tawtheeq).Select(x => new { UnitId = x.Unit_ID_Tawtheeq, UnitName = x.Unit_Property_Name, GroupedValue = x.Unit_ID_Tawtheeq + ":" + x.Unit_Property_Name });
+                ViewBag.UnitId = new SelectList(units, "UnitId", "UnitId");
+                ViewBag.unitName = new SelectList(units, "UnitId", "UnitName");
+                ViewBag.Agreement_No = new SelectList(db.tbl_agreement.Where(x => x.Delmark != "*").OrderBy(x => x.Agreement_No).Select(x => x.Agreement_No));
+                ViewBag.invtype = new SelectList(Common.InvoiceType);
+                ViewBag.month = new SelectList(Common.Month, "Value", "Text");
+                var invoice = await db.tbl_invoicehd.Select(x => x.incno).DefaultIfEmpty(0).MaxAsync();
+                model.invno = (invoice != null ? invoice + 1 : 1) + DateTime.Now.Year.ToString();
+                model.incno = invoice != null ? invoice + 1 : 1;
+                model.bank_details = Common.Bank_number;
+                model.year = DateTime.Now.Year;
+                var tenant = db.view_tenant.Select(x => new { TenantId = x.Tenant_id, TenantName = x.First_Name, Type = x.type, GroupedValue = x.Tenant_id + ":" + x.First_Name + ":" + x.type }).Distinct();
+                ViewBag.Tenantid = new SelectList(items: tenant, dataValueField: "TenantId", dataTextField: "TenantId", selectedValue: null);
+                ViewBag.TenantName = new SelectList(items: tenant, dataValueField: "TenantId", dataTextField: "TenantName", selectedValue: null);
+                //ViewBag.bank_details = Common.Bank_number;
+                switch (DropDownValue)
+                {
+                    case 1:
+                        ViewBag.AgreementList = db.tbl_agreement.Select(x => new InvoiceViewModel()
+                        {
+                            Tenant_id = x.Ag_Tenant_id,
+                            Tenant_Name = x.Ag_Tenant_Name,
+                            Property_ID = x.property_id.ToString(),
+                            Property_Name = x.Properties_Name,
+                            Unit_ID = x.Unit_ID_Tawtheeq,
+                            unit_Name = x.Unit_Property_Name
+                        }).ToList();
+                        break;
+                    case 2:
 
-                    break;
-                case 5:
+                        break;
+                    case 3:
 
-                    break;
-                case 6:
+                        break;
+                    case 4:
 
-                    break;
+                        break;
+                    case 5:
 
+                        break;
+                    case 6:
+
+                        break;
+
+                }
+                return PartialView("../Invoice/_AddorUpdate", model);
             }
-            return PartialView("../Invoice/_AddorUpdate", model);
+            catch(Exception e)
+            {
+                throw;
+            }
+            
         }
 
         [HttpPost]
@@ -157,9 +173,11 @@ namespace LeaMaPortal.Controllers
                     //    model.invno = model.incno.ToString() + DateTime.Now.Year;
                     //}
                     PFlag = "INSERT";
+                    result.Message = "Invoice creadted successfully";
                 }
                 else
                 {
+                    result.Message = "Invoice updated successfully";
                     PFlag = "UPDATE";
                 }
                 string invoiceDet = null;
@@ -557,8 +575,8 @@ namespace LeaMaPortal.Controllers
                          new MySqlParameter("@PCreateduser", System.Web.HttpContext.Current.User.Identity.Name)
                     };
                 var sp_result = await db.Database.SqlQuery<object>("CALL Usp_Invoice_All(@PFlag, @PId, @Pinvno, @Pdate, @PTenant_id, @PTenant_Name, @Pinvtype, @PAgreement_No, @PProperty_ID, @PProperty_Name, @PUnit_ID, @Punit_Name, @Pmonth, @Pyear, @Ptotalamt, @Pduedate, @Pbank_details, @Premarks, @Pincno, @PCreateduser, @Pinvoicedt)", parameters).ToListAsync();
+                result.Message = "Invoice details deleted successfully";
                 return Json(result, JsonRequestBehavior.AllowGet);
-
             }
             catch(Exception e)
             {
