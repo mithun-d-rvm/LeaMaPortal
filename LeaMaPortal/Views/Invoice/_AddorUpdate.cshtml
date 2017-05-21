@@ -394,7 +394,7 @@ Layout = null;
             $('#masterResultModal').modal('show');
         }
         else {
-            $("#totalamt").val(parseInt($("#totalamt").val()) + parseInt(amount));
+            $("#totalamt").val(Number($("#totalamt").val()) + Number(amount));
 
             var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + i + "'>";
 
