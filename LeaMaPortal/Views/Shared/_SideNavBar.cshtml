@@ -242,8 +242,7 @@
                                 data += '<span class="notification-vr-2"> ' + obj.Total_Rental_amount + '</span>';
                             }
                             else if (filter == "Contract Approval") {
-                                data += '<input type="hidden" id="contractId_'+i+' value="' + obj.Id + '" />';
-                                data += '<span class="notification-vr-1"> ' + obj.AgreementNo + '</span>';
+                                data += '<input type="hidden" id="contractId_'+i+'" value="' + obj.Id + '" />';
                                 data += '<span class="notification-vr-1"> ' + obj.AgreementNo + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.TenantName + ' </span>';
                                 data += '<span class="notification-vr-2"> ' + obj.PropertyName + '</span>';
@@ -285,24 +284,57 @@
                     }
                 });
     }
-    function approveContract(id) {
-        var contractId = $("#contractId_" + id).val();
+    function approveContract(pos) {
+        debugger;
+        var contractId = parseInt($("#contractId_" + pos).val());
+        //$.ajax(
+        //        {
+        //            url: "../Notification/approveContract",
+        //            type: "POST",
+        //            data: { id : contractId },
+        //            contentType: "application/json",
+        //            success: function (response) {
+        //                debugger;
+        //                if (response) {
+        //                    getData("Contract Approval");
+        //                }
+        //            },
+        //            error: function (jqXhr, textStatus, errorThrown) {
+        //                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+        //            },
+        //            complete: function () {
+        //            }
+        //        });
         $.ajax(
                 {
-                    url: "../Notification/approveContract",
-                    type: "POST",
-                    data: { id: contractId },
+                    url: "../Notification/approveContract?id=" + contractId,
+                    type: "GET",
                     contentType: "application/json",
                     success: function (response) {
                         debugger;
-                        if (response) {
-                            getData("Contract Approval");
+                        $(".notification-filter-content").empty();
+                        getData("Contract Approval");
+                        if (response.Errors == null) {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Message);
+                        }
+                        else {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(response.Errors);
                         }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
-                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(masterResultError);
                     },
                     complete: function () {
+                        $('#masterResultModal').modal('show');
                     }
                 });
     }

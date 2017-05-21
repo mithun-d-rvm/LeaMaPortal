@@ -136,9 +136,9 @@ namespace LeaMaPortal.Helpers
                     {
                         Id = s.id,
                         AgreementNo = s.Agreement_No,
-                        PropertyName = s.Properties_Name,
-                        UnitName = s.Unit_Property_Name,
-                        TenantName = s.Ag_Tenant_Name,
+                        PropertyName = s.Properties_Name == null ? string.Empty : s.Properties_Name,
+                        UnitName = s.Unit_Property_Name == null ? string.Empty : s.Unit_Property_Name,
+                        TenantName = s.Ag_Tenant_Name == null ? string.Empty : s.Ag_Tenant_Name,
                     }).ToListAsync();                
                 return data;
             }

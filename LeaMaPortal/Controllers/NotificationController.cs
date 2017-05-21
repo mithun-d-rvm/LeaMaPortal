@@ -73,24 +73,27 @@ namespace LeaMaPortal.Controllers
                 throw ex;
             }
          }
-        [HttpPost]
-        public bool approveContract(int id)
+        [HttpGet]
+        public ActionResult approveContract(int id)
         {
+            MessageResult res = new MessageResult();
             try
-            {
+            {                
                 var data = db.tbl_agreement.FirstOrDefault(f => f.id == id);
                 if (data != null)
                 {
                     data.Approval_Flag = 1;
                 }
                 db.SaveChangesAsync();
-                return true;
+                res.Message = "Contract approved";
+                //return Json(res, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                //throw ex;
-                return false;
+                res.Message = "Contract failed to approve";
+                //return Json(res, JsonRequestBehavior.AllowGet);
             }
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
         protected override void Dispose(bool disposing)
         {

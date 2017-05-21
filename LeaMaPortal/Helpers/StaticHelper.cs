@@ -151,6 +151,7 @@ namespace LeaMaPortal.Helpers
             options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_RENEWAL });
             options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_RENTAL_DUE });
             options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_UTILITY_DUES });
+            options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_CONTRACT_APPROVED });
             return options;
         }
         public static List<OptionModel> GetStaticData(byte dataModelType)
