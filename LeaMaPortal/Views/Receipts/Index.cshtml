@@ -1,6 +1,4 @@
-﻿@model LeaMaPortal.Models.ReceiptViewModel
-
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -38,6 +36,10 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+        $("#TopNavBarFilter").empty();
+        getReceipt();
+    });
     IsAddAllow();
     function IsAddAllow() {
         var isAllow = $("#IsAllowAdd").val();
@@ -46,31 +48,40 @@
         else
             $("#ContainerAddOrUpdate").hide();
     }
-    getReceipt();
+    
+    function getReceiptAddorUpdate() {
+        $.ajax(
+       {
+           url: "../Receipts/AddOrUpdate",
+           type: "Get",
+           data: {},
+           //contentType: "application/json",
+           //processData: false,
+           success: function (html) {
+               $("#ContainerAddOrUpdate").html(html);
+           },
+           error: function (jqXhr, textStatus, errorThrown) {
+               //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+               $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+               $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+               $(".result-title").text("Failure");
+               $(".result-modal-body span").text(masterResultError);
+               $('#masterResultModal').modal('show');
+           },
+           complete: function () {
+               //$("#img-loader").addClass("hide");
+               $("#master-loader").addClass("hide");
+           }
+       });
+    }
     function getReceipt() {
         debugger;
+        getReceiptAddorUpdate();
         //$("#img-loader").removeClass("hide");
-        $("#master-loader").removeClass("hide");
+        //$("#master-loader").removeClass("hide");
         $("#ContainerAddOrUpdate").empty();
-        //$("#ContainerList").empty();
-        $.ajax(
-        {
-            url: "../Receipts/AddOrUpdate",
-            type: "Get",
-            data: {},
-            //contentType: "application/json",
-            //processData: false,
-            success: function (html) {
-                $("#ContainerAddOrUpdate").html(html);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                //$("#img-loader").addClass("hide");
-                $("#master-loader").addClass("hide");
-            }
-        });
+        $("#ContainerList").empty();
+       
         //$("#img-loader").removeClass("hide");
         $("#master-loader").removeClass("hide");
         $.ajax(
@@ -84,7 +95,12 @@
                 $("#ContainerList").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text(masterResultError);
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 //$("#img-loader").addClass("hide");

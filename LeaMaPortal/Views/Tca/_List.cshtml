@@ -57,7 +57,7 @@
                                 @Html.ActionLink(" ", "Closue", null, new { @class = "glyphicon glyphicon-save agreement-closure", title = "Closure", @data_toggle = "modal", @data_target = "#closureModal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-closure" })  |
                             </span>
                         }
-                        @if (@ViewBag.IsAgreementStatusVisible)
+                        @if (@ViewBag.IsAgreementStatusVisible&&item.Approval_Flag==0)
                         {
                             <span>
                                 @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-stats agreement-stats", title = "Status", @data_toggle = "modal", @data_target = "#statusModal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-status" })  |
@@ -75,7 +75,12 @@
                                 @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash agreement-delete", @style = "color:red", title = "Delete", @data_agreementno = @item.Agreement_No }) |
                             </span>
                         }
-                        @Html.ActionLink(" ", "Print", null, new { @class = "glyphicon glyphicon-print agreement-print", title = "Print", @data_toggle = "modal", @data_target = "#contractModal", @data_agreementno = @item.Agreement_No })
+                        @if (item.Approval_Flag == 1)
+                        {
+                            @Html.ActionLink(" ", "Print", null, new { @class = "glyphicon glyphicon-print agreement-print", title = "Print", @data_toggle = "modal", @data_target = "#contractModal", @data_agreementno = @item.Agreement_No })
+                        }
+                        @Html.ActionLink(" ", "Print", null, new { @class = "glyphicon glyphicon-print agreement-print", title = "sample Print", @data_toggle = "modal", @data_target = "#contractModal", @data_agreementno = @item.Agreement_No })
+
                         @*<a target="_blank" href="../Tca/PrintAgreement?AgreementNo=@item.Agreement_No" class="glyphicon glyphicon-print"></a>*@
                     </div>
                 </div>
