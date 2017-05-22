@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using MvcPaging;
 using MySql.Data.MySqlClient;
+using System.Threading;
 
 namespace LeaMaPortal.Controllers
 {
@@ -57,13 +58,14 @@ namespace LeaMaPortal.Controllers
                 //IList<CountryViewModel> list;
                 if (string.IsNullOrWhiteSpace(Search))
                 {
-                    var list = db.tbl_agreement.Where(x => x.Delmark != "*" && x.Status == null).OrderByDescending(x => x.Agreement_No).Select(x => new AgreementFormViewModel()
+                    var list =db.tbl_agreement.Where(x => x.Delmark != "*" && x.Status == null).OrderByDescending(x => x.Agreement_No).Select(x => new AgreementFormViewModel()
                     {
                         Agreement_No = x.Agreement_No,
                         Properties_Name = x.Properties_Name,
                         Ag_Tenant_Name = x.Ag_Tenant_Name,
-                        Unit_Property_Name = x.Unit_Property_Name
-
+                        Unit_Property_Name = x.Unit_Property_Name,
+                        Approval_Flag= x.Approval_Flag.HasValue ? x.Approval_Flag.Value:0,
+                         
                     }).ToPagedList(currentPageIndex, PageSize);
                     return PartialView("../Tca/_List", list);
                 }
@@ -111,6 +113,12 @@ namespace LeaMaPortal.Controllers
                 ViewBag.CaretakerName = new SelectList(caretaker, "Caretaker_id", "Caretaker_Name");
                 model.New_Renewal_flag = Common.NewAgreement;
                 model.Agreement_No = 0;
+                model.Agreement_Start_Date = DateTime.Now;
+                model.Agreement_End_Date = DateTime.Now;
+                model.Vacantstartdate = DateTime.Now;
+                model.Agreement_Date = DateTime.Now;
+                
+
                 //model.AgreementPd = new AgreementPdcViewModel();
                 return PartialView("../Tca/Agreement/_AgreementForm", model);
             }
@@ -471,17 +479,20 @@ namespace LeaMaPortal.Controllers
             }
         }
 
-        public async Task<PartialViewResult> Print(int AgreementNo)
+        public async Task<PartialViewResult> Print(int AgreementNo,string OtherTerms)
         {
             try
             {
+                Thread.Sleep(1000);
                 TcaPrintModel model = new TcaPrintModel();
                 var agreementDet = await db.tbl_agreement.FirstOrDefaultAsync(x => x.Agreement_No == AgreementNo && x.Delmark != "*");
-
+                var property = await db.tbl_propertiesmaster.FirstOrDefaultAsync(x => x.Property_Id == agreementDet.property_id);
+                if (property != null)
+                    model.Property_Usage = property.Property_Usage;
                 ViewBag.Renewal_Close_Flag = new SelectList(Common.Renewal_Close_Flag);
                 model.Tenant_Type = agreementDet.Tenant_Type;
                 model.Ag_Tenant_Name = agreementDet.Ag_Tenant_Name;
-                if (agreementDet.Tenant_Type.ToLower().Trim() == "Individual".ToLower().Trim())
+                if (agreementDet.Tenant_Type == "Individual")
                 {
                     var tenant = await db.tbl_tenant_individual.FirstOrDefaultAsync(x => x.Tenant_Id == agreementDet.Ag_Tenant_id);
                     if (tenant != null)
@@ -541,6 +552,7 @@ namespace LeaMaPortal.Controllers
                 model.IssueDate = System.DateTime.Now.ToString(Common.DisplayDateFormat);
                 model.Total_Rental_amount = agreementDet.Total_Rental_amount;
                 model.TotalAmountInWords = agreementDet.Total_Rental_amount.HasValue ? Common.NumberToWords(Convert.ToInt64(agreementDet.Total_Rental_amount.Value)) : "";
+                model.OtherTerms = OtherTerms;
                 //model.AgreementPd = new AgreementPdcViewModel();
                 return PartialView("../Tca/Contract/_ContractDetails", model);
             }
@@ -1147,7 +1159,7 @@ namespace LeaMaPortal.Controllers
             }
         }
         [HttpGet]
-        public async Task<ActionResult> PrintAgreement(int AgreementNo)
+        public async Task<ActionResult> PrintAgreement(int AgreementNo,string OtherTerms)
         {
             AgreementFormViewModel model = new AgreementFormViewModel();
             try

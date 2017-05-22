@@ -279,21 +279,21 @@
 <script>
     $('input[type=radio][name=Single_Multiple_Flag]').change(function () {
         
-        if (this.value == 'Multiple') {
-            //$('#UnitIDTawtheeq').attr('disabled', true);
-            //$('#UnitPropertyName').attr('disabled', true);
-            $("#UnitPropertyId").hide();
-            $("#Unitpropertyname").hide();
-            $("#AgreementUnit").show();
+        //if (this.value == 'Multiple') {
+        //    //$('#UnitIDTawtheeq').attr('disabled', true);
+        //    //$('#UnitPropertyName').attr('disabled', true);
+        //    $("#UnitPropertyId").hide();
+        //    $("#Unitpropertyname").hide();
+        //    $("#AgreementUnit").show();
             
-        }
-        else {
-            //$('#UnitIDTawtheeq').removeAttr('disabled');
-            //$('#UnitPropertyName').removeAttr('disabled');
-            $("#UnitPropertyId").show();
-            $("#Unitpropertyname").show();
-            $("#AgreementUnit").hide();
-        }
+        //}
+        //else {
+        //    //$('#UnitIDTawtheeq').removeAttr('disabled');
+        //    //$('#UnitPropertyName').removeAttr('disabled');
+        //    $("#UnitPropertyId").show();
+        //    $("#Unitpropertyname").show();
+        //    $("#AgreementUnit").hide();
+        //}
         $("#property_id").val(null);
         $.ajax(
                {

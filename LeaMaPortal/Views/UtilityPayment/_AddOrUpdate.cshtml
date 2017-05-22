@@ -129,7 +129,7 @@
                             @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required", @onkeypress = "allow_only_Float(event,'TotalAmount');" } })
+                            @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required", @onkeypress = "allow_only_Float(event,'TotalAmount');" , @onchange = "AmountInWords()" } })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -137,54 +137,53 @@
                             @Html.LabelFor(model => model.AmtInWords, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                           @Html.EditorFor(model => model.AmtInWords, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                           @Html.EditorFor(model => model.AmtInWords, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly="readonly" } })
                         </div>
                     </div>
 
                 </div>
 
                 <div class="col-md-6">
-                    <div class="col-md-12 form-input-padding" id="advanceAcCode">
+                    <div class="col-md-12 form-input-padding" id="advancePayment">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.AdvAcCode, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
                             @*@Html.EditorFor(model => model.Unit_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                            @Html.DropDownList("AdvAcCode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                            @Html.DropDownList("AdvAcCode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding" id="ddChequeNumber">
+                    <div class="col-md-12 form-input-padding" id="ddChequeNumber" name="cheque">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.DDChequeNo, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.DDChequeNo, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                            @Html.EditorFor(model => model.DDChequeNo, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding" id="ddChequeDate">
+                    <div class="col-md-12 form-input-padding" id="ddChequeDate" name="cheque">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.Cheqdate, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Cheqdate, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                            @Html.EditorFor(model => model.Cheqdate, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    @*<div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.pdcstatus, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @*@Html.EditorFor(model => model.Unit_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
                             @Html.DropDownList("pdcstatus", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                         </div>
-                    </div>
+                    </div>*@
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.BankAcCode, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
                             @*@Html.EditorFor(model => model.Unit_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                            @Html.DropDownList("BankAcCode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                            @Html.DropDownList("BankAcCode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -193,7 +192,7 @@
                         </div>
                         <div class="col-md-8">
                             @*@Html.EditorFor(model => model.Unit_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                            @Html.DropDownList("BankAcName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                            @Html.DropDownList("BankAcName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -201,7 +200,7 @@
                             @Html.LabelFor(model => model.Narration, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -216,11 +215,11 @@
             <div class="pull-left" id="invoice">
                 @if (Model.UtilityPaymentDetails != null)
                 {
-                    <input type="hidden" id="init-company-contact-det-count" value="@Model.UtilityPaymentDetails.Count" />
+                    <input type="hidden" id="init-details-count" value="@Model.UtilityPaymentDetails.Count" />
                 }
                 else
                 {
-                    <input type="hidden" id="init-company-contact-det-count" value="0" />
+                    <input type="hidden" id="init-details-count" value="0" />
                 }
                 <br />
                 <div class="p-b-25">
@@ -230,35 +229,35 @@
                     <div id="Gridview" class="row document-row">
                         <div class="col-md-12">
                             <div class="col-md-3 form-group">
-                                <label for="Billno">Bill Entry Number</label>
+                                <label for="Billno">Bill Entry Number*</label>
                                 @Html.DropDownList("Refno", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                             </div>
                             <div class="col-md-3 form-group">
-                                <label for="description">Meter Number</label>
+                                <label for="description">Meter Number*</label>
                                 @Html.DropDownList("Meterno", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                             </div>
                             <div class="col-md-3 form-group">
-                                <label for="description">Bill Number</label>
+                                <label for="description">Bill Number*</label>
                                 @Html.DropDownList("billNo", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                             </div>
                             <div class="col-md-3 form-group">
-                                <label for="quantity">Bill Date</label>
+                                <label for="quantity">Bill Date*</label>
                                 <input type="date" class="form-control master-form-input" id="billDate" />
                             </div>
                             <div class="col-md-2 form-group">
-                                <label for="amount">Bill Amount</label>
+                                <label for="amount">Bill Amount*</label>
                                 <input id="BillAmount" type="text" class="form-control master-form-input" readonly />
                             </div>
                             <div class="col-md-2 form-group">
-                                <label for="amount">Received Amount</label>
+                                <label for="amount">Paid Amount*</label>
                                 <input id="ReceivedAmount" type="text" class="form-control master-form-input" onkeypress = "allow_only_Float(event, 'ReceivedAmount');"/>
                             </div>
                             <div class="col-md-2 form-group">
-                                <label for="DebitAmount">Debit Amount</label>
+                                <label for="DebitAmount">Debit Amount*</label>
                                 <input id="DebitAmount" type="text" class="form-control master-form-input" onkeypress = "allow_only_Float(event, 'DebitAmount');"/>
                             </div>
                             <div class="col-md-3 form-group">
-                                <label for="Remarks">Remarks</label>
+                                <label for="Remarks">Remarks*</label>
                                 <input id="Remarks" type="text" class="form-control master-form-input" />
                             </div>
                             <div class="col-md-3 btn-group">
@@ -397,7 +396,7 @@
     function formReset() {
         getUtilityAddOrUpdate();
     }
-    var i = 0;
+    var i = $("#init-details-count").val();
     function add() {
         debugger;
         var refno = $("#Refno option:selected").text();
@@ -408,7 +407,14 @@
         var ReceivedAmount = document.getElementById("ReceivedAmount").value;
         var DebitAmount = document.getElementById("DebitAmount").value;
         var Remarks = document.getElementById("Remarks").value;
-        
+        if ((refno == null || refno == "") || (meterno == null || meterno == "") || (billNo == null || billNo == "") || (billDate == null || billDate == "") || (BillAmount == null || BillAmount == "") || (ReceivedAmount == null || ReceivedAmount == "") || (DebitAmount == null || DebitAmount == "") || (Remarks == null || Remarks == "")) {
+            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            $(".result-title").text("Failure");
+            $(".result-modal-body span").text("Enter required fields");
+            $('#masterResultModal').modal('show');
+            return false;
+        }
         var html = "</tr><tr><td>";
         html = html + " <div><input style='border: none;background: none;box-shadow: none;' id='Refno" + i + "'  type='hidden' value='" + refno + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + i + "].Refno' data-name='Refno'/></div>";
         html = html + " <div><input style='border: none;background: none;box-shadow: none;' id='Meterno" + i + "'  type='hidden' value='" + meterno + "' class='form-control master-form-input' name='UtilityPaymentDetails[" + i + "].Meterno' data-name='Meterno' /></div>";
@@ -510,6 +516,18 @@
         $("#Supplier_name").val($("#Suppliername option:selected").text());
     });
 
+    $("#AdvAcCode").on('change', function (e) {
+        debugger;
+        var advanceCode = $("#AdvAcCode").val();
+        if (advanceCode == "") {
+            $("#TotalAmount").val(0);
+            $("#TotalAmount").trigger("change");
+        }
+        else {
+            get_advance_payment_amount(advanceCode);
+        }
+    });
+
     //$("#PaymentType").on('change', function (e) {
     //    debugger;
     //    var paymentType = $("#PaymentType").val();
@@ -517,23 +535,93 @@
     //        $("#AdvAcCode").show();
     //    }
     //});
+    function showHideChequeField(value) {
+        debugger;
+        $("[name='cheque'] :input").attr("disabled", value);
+        if (value) {
+            $("[name='cheque']").hide();
+        }
+        else {
+            $("[name='cheque']").show();
+        }
+    }
+    function showhideAdvancePayment(value) {
+        $("#advancePayment :input").attr("disabled", value);
+        if (value) {
+            $("#advancePayment").hide();
+        }
+        else {
+            $("#advancePayment").show();
+        }
+    }
+    function ShowHidePaymentModeFields(paymentModeValue) {
+        debugger;
+        if (paymentModeValue == "cheque") {
+            showHideChequeField(false);
+            showhideAdvancePayment(true);
+            if ($("#PaymentType").val() == "against invoice") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
+        }
+        else if (paymentModeValue == "cash") {
+            showHideChequeField(true);
+            showhideAdvancePayment(true);
+            if ($("#PaymentType").val() == "against invoice") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
+        }
+        else if (paymentModeValue == "online") {
+            showHideChequeField(false);
+            showhideAdvancePayment(true);
+            if ($("#PaymentType").val() == "against invoice") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
+        }
+        //else if (paymentModeValue == "pdc") {
+        //    showHideChequeField(true);
+        //    showhideAdvancePayment(true);
+        //    if ($("#PaymentType").val() == "against invoice") {
+        //        $("#TotalAmount").prop("readonly", true);
+        //    }
+        //    else {
+        //        $("#TotalAmount").prop("readonly", false);
+        //    }
+        //}
+        else if (paymentModeValue == "Advance adjust") {
+            showHideChequeField(true);
+            showhideAdvancePayment(false);
+            $("#TotalAmount").prop("readonly", true);
+            //if ($("#PaymentType").val() == "against invoice") {
+            //    $("#TotalAmount").prop("readonly", true);
+            //}
+            //else {
+            //    $("#TotalAmount").prop("readonly", false);
+            //}
+        }
+        else {
+            showHideChequeField(true);
+            showhideAdvancePayment(true);
+            if ($("#PaymentType").val() == "against invoice") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
+        }
+    }
     $("#PaymentMode").on('change', function (e) {
         debugger;
         var paymentMode = $("#PaymentMode").val();
-        if (paymentMode == "cheque") {
-            $("#ddChequeNumber").show();
-            $("#ddChequeDate").show();
-        }
-        else {
-            $("#ddChequeNumber").hide();
-            $("#ddChequeDate").hide();
-        }
-        if (paymentMode == "Advance adjust") {
-            $("#advanceAcCode").show();
-        }
-        else {
-            $("#advanceAcCode").hide();
-        }
+        ShowHidePaymentModeFields(paymentMode);
     });
     
     $("#BankAcCode").on('change', function (e) {
@@ -615,12 +703,38 @@
 
                 });
     }
+    function AmountInWords(totalAmount) {
+        $.ajax(
+        {
+            url: "../Receipts/AmountInWords",
+            type: "Get",
+            data: { amount: $("#TotalAmount").val() },
+            success: function (response) {
+                $("#AmtInWords").val(response);
+                $("#TotalAmount").trigger("change");
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
     //Add or update
     $("form#UtllityPayment").off("submit").on("submit", function (e) {
         //return;
         e.preventDefault();
         // $("#icon-success").addClass("hide");
         //$("#VerifyIdDetailsLoader").removeClass("hide");
+        if (i == 0) {
+            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            $(".result-title").text("Failure");
+            $(".result-modal-body span").text("Enter required fields");
+            $('#masterResultModal').modal('show');
+            return false;
+        }
         debugger;
         try {
             var form = $("form#UtllityPayment");
@@ -678,28 +792,32 @@
     $(document).ready(function () {
         debugger;
         var paymentMode = $("#PaymentMode").val();
-        if (paymentMode == "cheque") {
-            $("#ddChequeNumber").show();
-            $("#ddChequeDate").show();
-        }
-        else {
-            $("#ddChequeNumber").hide();
-            $("#ddChequeDate").hide();
-        }
-        if (paymentMode == "Advance adjust") {
-            $("#advanceAcCode").show();
-        }
-        else {
-            $("#advanceAcCode").hide();
-        }
-        $("#AddUtilityPayment").prop('disabled', false);
+        ShowHidePaymentModeFields(paymentMode);
 
+        $("#AddUtilityPayment").prop('disabled', false);
         var id = $("#id").val();
         if (id != 0) {
             document.getElementById("btnSubmit").innerHTML = 'Update';
         }
-        
     });
-
+    function get_advance_payment_amount(value) {
+        $.ajax(
+        {
+            url: "../UtilityPayment/GetAdvanceAdjustmentAmount",
+            type: "Get",
+            data: { advanceCode: value },
+            success: function (response) {
+                debugger;
+                $("#TotalAmount").val(response);
+                $("#TotalAmount").trigger("change");
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+            }
+        });
+    }
 </script>
 

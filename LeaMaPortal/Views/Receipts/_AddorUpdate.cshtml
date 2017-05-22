@@ -2,6 +2,7 @@
 @model LeaMaPortal.Models.ReceiptViewModel
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Receipts" }))
 {
+    @Html.HiddenFor(model=>model.Id)
     <div class="row">
         <div class="col-md-6">
             <div class="col-md-12 form-input-padding">
@@ -10,7 +11,7 @@
                 </div>
                 <div class="col-md-8">
 
-                    @Html.EditorFor(model => model.ReceiptNo, new { htmlAttributes = new { @class = "master-form-input", disabled = "disabled" } })
+                    @Html.EditorFor(model => model.ReceiptNo, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly="readonly", @required = "required" } })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -18,7 +19,7 @@
                     @Html.LabelFor(model => model.ReceiptDate, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.ReceiptDate, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.ReceiptDate, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -28,7 +29,7 @@
                 </div>
                 <div class="col-md-8">
                     @*@Html.DropDownListFor(model => model.Reccategory, null, htmlAttributes: new { @class = "master-form-input" })*@
-                    @Html.DropDownList("Reccategory", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                    @Html.DropDownList("Reccategory", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -37,15 +38,15 @@
                     @Html.LabelFor(model => model.RecpType, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.DropDownListFor(model => model.RecpType, null, htmlAttributes: new { @class = "master-form-input", @id = "RecpType" })
+                    @Html.DropDownListFor(model => model.RecpType, null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @id = "RecpType", @required = "required" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding" id="advaccode">
+            <div class="col-md-12 form-input-padding" id="advancePayment">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.AdvAcCode, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.DropDownList("AdvAcCode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                    @Html.DropDownList("AdvAcCode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                 </div>
             </div>
 
@@ -54,7 +55,7 @@
                     @Html.LabelFor(model => model.agreement_no, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.DropDownList("agreement_no", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })                        
+                    @Html.DropDownList("agreement_no", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })                        
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -62,7 +63,7 @@
                     @Html.LabelFor(model => model.ContracAgreementDate, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.ContracAgreementDate, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.ContracAgreementDate, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required",@readonly="readonly" } })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -70,7 +71,7 @@
                     @Html.LabelFor(model => model.Tenant_id, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.DropDownList("Tenant_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                    @Html.DropDownList("Tenant_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control",@placeholder="--Select--", @required = "required" })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -78,7 +79,7 @@
                     @Html.LabelFor(model => model.Tenant_Name, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.DropDownList("Tenant_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                    @Html.DropDownList("Tenant_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                 </div>
             </div>
 
@@ -87,14 +88,14 @@
                     @Html.LabelFor(model => model.Property_id, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.DropDownList("Property_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })                        
+                    @Html.DropDownList("Property_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })                        
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.Property_Name, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
-                <div class="col-md-8">@Html.DropDownList("Property_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                <div class="col-md-8">@Html.DropDownList("Property_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                 </div>
             </div>
 
@@ -124,7 +125,7 @@
                     @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'TotalAmount');", @required = "required", @onchange = "AmountInWords()" } })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -132,33 +133,52 @@
                     @Html.LabelFor(model => model.AmtInWords, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.AmtInWords, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.AmtInWords, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required",@readonly="readonly" } })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding" id="PDCStatus" style="display:none">
+            <div class="col-md-12 form-input-padding" id="pdcstatus">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.PDCstatus, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.DropDownListFor(model => model.PDCstatus, null, htmlAttributes: new { @class = "master-form-input" })
+                    @Html.DropDownListFor(model => model.PDCstatus, null, htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding" id="txtCheque" name="cheque">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.DDChequeNo, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.DDChequeNo, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.DDChequeNo, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding" name="cheque" id="drpCheque">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.DDChequeNo, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    <select id="ddChequeNumber" class = "master-form-input form-control">
+
+                    </select>
+                    @*@Html.DropDownList("DDChequeNo",null,"--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })*@
+                </div>
+            </div>
+            <div class="col-md-12 form-input-padding" id="txtChequeDate" name="cheque">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.DDChequeDate, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.DDChequeDate, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.DDChequeDate, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                 </div>
             </div>
+            @*<div class="col-md-12 form-input-padding" name="cheque" id="drpChequeDate">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.DDChequeDate, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    <select id="ddChequeDate" class="master-form-input form-control"></select>
+                </div>
+            </div>*@
             <div class="col-md-12 form-input-padding">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.BankAcCode, htmlAttributes: new { @class = "label-default-remove" })
@@ -168,7 +188,7 @@
                     @*<select class="col-md-12 leama-field">
                             <option value="BankAcCode">Bank Account Code</option>
                         </select>*@
-                    @Html.DropDownListFor(model => model.BankAcCode, null, htmlAttributes: new { @class = "master-form-input", Id = "BankAcCode" })
+                    @Html.DropDownListFor(model => model.BankAcCode, null, htmlAttributes: new { @class = "master-form-input form-control", Id = "BankAcCode", @required = "required" })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -180,7 +200,7 @@
                     @*<select class="col-md-12 leama-field">
                             <option value="Bank Account Name">Bank Account Name</option>
                         </select>*@
-                    @Html.DropDownListFor(model => model.BankAcName, null, htmlAttributes: new { @class = "master-form-input", Id = "BankAcName" })
+                    @Html.DropDownListFor(model => model.BankAcName, null, htmlAttributes: new { @class = "master-form-input form-control", Id = "BankAcName", @required = "required" })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -188,17 +208,10 @@
                     @Html.LabelFor(model => model.Narration, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input" } })
+                    @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
-                <div class="col-md-4">
-                    &nbsp;
-                </div>
-                <div class="col-md-4">
-                    <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
-                </div>
-            </div>
+            
         </div>
 
     </div>
@@ -307,11 +320,11 @@
         <div class="pull-left" id="invoice" >
             @if (Model.ReceiptDetailsList != null)
             {
-                <input type="hidden" id="init-company-contact-det-count" value="@Model.ReceiptDetailsList.Count" />
+                <input type="hidden" id="receipt-count" value="@Model.ReceiptDetailsList.Count" />
             }
             else
             {
-                <input type="hidden" id="init-company-contact-det-count" value="0" />
+                <input type="hidden" id="receipt-count" value="0" />
             }
             <br />
             <div class="p-b-25">
@@ -321,42 +334,42 @@
                 <div id="Gridview" class="row document-row">
                     <div class="col-md-12">
                         <div class="col-md-2 form-group">
-                            <label for="itemtype">Invoice Type</label>
-                            <input type="text" class="form-control master-form-input" id="InvoiceType" />
+                            <label for="itemtype">Invoice Type*</label>
+                            <input type="text" class="form-control master-form-input" id="InvoiceType" readonly/>
                         </div>
                         <div class="col-md-2 form-group">
-                            <label for="description">Invoice Number</label>
+                            <label for="description">Invoice Number*</label>
                             @Html.DropDownList("InvoiceNumber", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                         </div>
                         <div class="col-md-2 form-group">
-                            <label for="quantity">Invoice Date</label>
+                            <label for="quantity">Invoice Date*</label>
                             <input type="date" class="form-control master-form-input" id="InvoiceDate" />
                         </div>
                         <div class="col-md-2 form-group">
-                            <label for="amount">Invoice Description</label>
+                            <label for="amount">Invoice Description*</label>
                             <input id="InvoiceDescription" type="text" class="form-control master-form-input" />
                         </div>
                         <div class="col-md-2 form-group">
-                            <label for="amount">Remarks</label>
+                            <label for="amount">Remarks*</label>
                             <input class="form-control master-form-input" id="Remarks" />
                         </div>
                         </div>
                         <div class="col-md-12">
                             <div class="col-md-2 form-group">
-                                <label for="itemtype">Invoice Amount</label>
-                                <input type="text" class="form-control master-form-input" id="InvoiceAmount" />
+                                <label for="itemtype">Invoice Amount*</label>
+                                <input type="text" class="form-control master-form-input" id="InvoiceAmount" onkeypress = "allow_only_Float(event, 'InvoiceAmount');" readonly/>
                             </div>
                             <div class="col-md-2 form-group">
-                                <label for="description">Credit Amount</label>
-                                <input type="text" class="form-control master-form-input" onchange="calculateBalance()" id="CreditAmount" />
+                                <label for="description">Credit Amount*</label>
+                                <input type="text" class="form-control master-form-input" onkeypress = "allow_only_Float(event, 'CreditAmount');" onchange="calculateBalance()" id="CreditAmount" />
                             </div>
                             <div class="col-md-2 form-group">
-                                <label for="quantity">Received Amount</label>
-                                <input type="text" class="form-control master-form-input" onchange="calculateBalance()" id="ReceivedAmount" />
+                                <label for="quantity">Received Amount*</label>
+                                <input type="text" class="form-control master-form-input" onchange="calculateBalance()" id="ReceivedAmount" onkeypress = "allow_only_Float(event, 'ReceivedAmount');" />
                             </div>
                             <div class="col-md-2 form-group">
-                                <label for="amount">Balance Amount</label>
-                                <input class="form-control master-form-input" id="BalanceAmount" />
+                                <label for="amount">Balance Amount*</label>
+                                <input class="form-control master-form-input" id="BalanceAmount" onkeypress = "allow_only_Float(event, 'BalanceAmount');" />
                             </div>
                             <div class="col-md-2 btn-group">
                                 <br />
@@ -409,15 +422,15 @@
                     var html = "<div class='col-md-12 document-row' id='GridViewCompanyContact" + @j + "'>";
 
                     html = html + "<div class='col-md-12'>";
-                    html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceType" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].Invtype + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceType' data-name='Invoice Type'/></div>";
-                    html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceNumber" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].Invno + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceNumber' data-name='Invoice Number' /></div>";
+                    html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceType" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].Invtype + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].Invtype' data-name='Invtype'/></div>";
+                    html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceNumber" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].Invno + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].Invno' data-name='Invno' /></div>";
                     html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='date' id='InvoiceDate" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceDate' data-name='InvoiceDate' value='" + Model.ReceiptDetailsList[@j].InvoiceDate + "'/></div>";
-                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='InvoiceDescription" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceDescription' data-name='InvoiceDescription' value='" + Model.ReceiptDetailsList[@j].Description + "'/></div>";
+                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='InvoiceDescription" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].Description' data-name='InvoiceDescription' value='" + Model.ReceiptDetailsList[@j].Description + "'/></div>";
                     html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='Remarks" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].Remarks' data-name='Remarks' value='" + Model.ReceiptDetailsList[@j].Remarks + "'/></div></div><div class='col-md-12'>";
-                    html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceAmount" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].InvoiceAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceAmount' data-name='Invoice Amount'/></div>";
-                    html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='CreditAmount" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].CreditAmt + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].CreditAmount' data-name='Credit Amount' /></div>";
+                    html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceAmount" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].InvoiceAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].InvoiceAmount' data-name='InvoiceAmount'/></div>";
+                    html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='CreditAmount" + @j + "'  type='text' value='" + Model.ReceiptDetailsList[@j].CreditAmt + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].CreditAmt' data-name='CreditAmt' /></div>";
                     html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='ReceivedAmount" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].ReceivedAmount' data-name='ReceivedAmount' value='" + Model.ReceiptDetailsList[@j].ReceivedAmount + "'/></div>";
-                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='BalanceAmount" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].BalanceAmount' data-name='BalanceAmount' value='" + Model.ReceiptDetailsList[@j].Balance + "'/></div>";
+                    html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='BalanceAmount" + @j + "' class='form-control master-form-input' name='ReceiptDetailsList[" + j + "].Balance' data-name='Balance' value='" + Model.ReceiptDetailsList[@j].Balance + "'/></div>";
                     html = html + "<div class='col-md-2 form-group'></br><input type='button' class='document-btn removebutton' id='Delete" + @j + "'value='Delete' />  </div>";
                     html = html + "</div>";
 
@@ -440,6 +453,21 @@
     </div>
     <div class="row ht-5">
         &nbsp;
+    </div>
+    <div class="col-md-12 form-input-padding btn-group-justified">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-3">
+            <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>
+        </div>
+        <div class="col-md-3">
+            <button class="btn master-form-btn" id="btnCancel" type="reset" onclick="formReset()">Cancel</button>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+
     </div>
 }
 <script>
@@ -571,7 +599,7 @@
     $("#InvoiceNumber").change(function () { getInvoice($("#InvoiceNumber option:selected").val()) });
 
     function showHideSubForm(Reccategory) {
-        if (Reccategory != "against") {
+        if (Reccategory != "against invoice") {
             document.getElementById('invoice').style.display = "none";
             document.getElementById('ReceiptDetailsListForms').style.display = "none";
         }
@@ -583,19 +611,21 @@
 
     $("#Reccategory").on('change', function () {
         showHideSubForm($("#Reccategory option:selected").val());
-        ddlChange();
-    });
-    showHideSubForm($("#Reccategory option:selected").val());
-
-    $("#RecpType").on('change', function () {        
-        ddlChange();
+        $("#RecpType").prop("selected", false);
+        ShowHidePaymentModeFields($("#RecpType").val());
+        //ddlChange();
     });
     
 
+    //$("#RecpType").on('change', function () {        
+    //    ddlChange();
+    //});
+    
+
     function calculateBalance() {
-        var InvoiceAmount = document.getElementById("InvoiceAmount").value != null ? document.getElementById("InvoiceAmount").value : 0;
-        var CreditAmount = document.getElementById("CreditAmount").value != null ? document.getElementById("CreditAmount").value : 0;
-        var ReceivedAmount = document.getElementById("ReceivedAmount").value != null ? document.getElementById("ReceivedAmount").value : 0;
+        var InvoiceAmount = document.getElementById("InvoiceAmount").value != null ? Number(document.getElementById("InvoiceAmount").value) : 0;
+        var CreditAmount = document.getElementById("CreditAmount").value != null ? Number(document.getElementById("CreditAmount").value) : 0;
+        var ReceivedAmount = document.getElementById("ReceivedAmount").value != null ? Number(document.getElementById("ReceivedAmount").value) : 0;
 
         var Balance = InvoiceAmount - (ReceivedAmount + CreditAmount);
         document.getElementById("BalanceAmount").value = Balance;
@@ -603,28 +633,110 @@
 
     $("#advaccode").hide();
 
-    function ddlChange() {
-        var type = $("#Reccategory").val(); // type
-        var mode = $("#RecpType").val();
+    //function ddlChange() {
+    //    var type = $("#Reccategory").val(); // type
+    //    var mode = $("#RecpType").val();
 
-        if (type == 'against' && mode == 'advance adjustment') {
-            $("#advaccode").show();
-            GetReceiptNumber();
-        }
-        if (type == 'advance' && mode == 'Pdc') {
-            GetAgreementNoByPdc();
-        }
-        if (type == 'against' && mode != 'advance adjustment') {
-            GetAgreementNoByInvoice();
-        }
-        if (type == 'security') {
-            GetAgreementNoBySecurity();
-        }
-        if (mode == 'Pdc') {
-            $("#PDCStatus").show();
-        }
+    //    if (type == 'against' && mode == 'advance adjustment') {
+    //        $("#advaccode").show();
+    //        GetReceiptNumber();
+    //    }
+    //    if (type == 'advance' && mode == 'Pdc') {
+    //        GetAgreementNoByPdc();
+    //    }
+    //    if (type == 'against' && mode != 'advance adjustment') {
+    //        GetAgreementNoByInvoice();
+    //    }
+    //    if (type == 'security') {
+    //        GetAgreementNoBySecurity();
+    //    }
+    //    if (mode == 'Pdc') {
+    //        $("#PDCStatus").show();
+    //    }
 
-    }
+    //}
+    $("#agreement_no").on('change', function (e) {
+        var agreement_no = $("#agreement_no").val();
+        $.ajax(
+                {
+                    url: "../Receipts/GetAgreementDetails",
+                    // dataType: "jsonp",
+                    method: "GET",
+                    data: { agreement_no: agreement_no, Mode: $("#RecpType").val() }, //FormData(form.get(0)),
+                    contentType: "application/json",
+
+                    success: function (response) {
+                        debugger;
+                        $("#Tenant_id").empty();
+                        var options = agreement_no == null ? '<option vlaue="">--Select---</option>' : '';
+                        $.each(response.Tenants, function (index, data) {
+                            options += '<option value="' + data.Tenantid + '">' + data.Tenantid + '</option>';
+                        });
+                        $('#Tenant_id').append(options);
+
+                        $("#Tenant_Name").empty();
+                        var options = agreement_no == null ? '<option vlaue="">--Select---</option>' : '';
+                        $.each(response.Tenants, function (index, data) {
+                            options += '<option value="' + data.Tenantid + '">' + data.TenantName + '</option>';
+                        });
+                        $('#Tenant_Name').append(options);
+
+                        $("#Property_id").empty();
+                        var options = agreement_no == null ? '<option vlaue="">--Select---</option>' : '';
+                        $.each(response.Properties, function (index, data) {
+                            options += '<option value="' + data.Propertyid + '">' + data.Propertyid + '</option>';
+                        });
+                        $('#Property_id').append(options);
+
+                        $("#Property_Name").empty();
+                        var options = agreement_no == null ? '<option vlaue="">--Select---</option>' : '';
+                        $.each(response.Properties, function (index, data) {
+                            options += '<option value="' + data.Propertyid + '">' + data.PropertyName + '</option>';
+                        });
+                        $('#Property_Name').append(options);
+
+                        $("#Unit_ID").empty();
+                        var options = agreement_no == null ? '<option vlaue="">--Select---</option>' : '';
+                        $.each(response.Units, function (index, data) {
+                            options += '<option value="' + data.Unitid + '">' + data.Unitid + '</option>';
+                        });
+                        $('#Unit_ID').append(options);
+
+                        $("#unit_Name").empty();
+                        var options = agreement_no == null ? '<option vlaue="">--Select---</option>' : '';
+                        $.each(response.Units, function (index, data) {
+                            options += '<option value="' + data.Unitid + '">' + data.unitName + '</option>';
+                        });
+                        $('#unit_Name').append(options);
+
+                        $("#ddChequeNumber").empty();
+                        //var options = agreement_no == null ? '<option vlaue="">--Select---</option>' : '';
+                        var options = '<option vlaue="">--Select---</option>';
+                        $.each(response.Cheques, function (index, data) {
+                            options += '<option value="' + data.Cheque_No + '">' + data.Cheque_No + '</option>';
+                        });
+                        $('#ddChequeNumber').append(options);
+
+                        //$("#DDChequeDate").empty();
+                        //var options = '<option value="">--Select--</option>';
+                        //$.each(response.Units, function (index, data) {
+                        //    options += '<option value="' + data.Cheque_No + '">' + data.cheque_date + '</option>';
+                        //});
+                        //$('#DDChequeDate').append(options); 
+                        if(response.AgreementDate!=null)
+                            $("#ContracAgreementDate").val(ToJavaScriptDate(response.AgreementDate));
+                        if ($("#RecpType").val() == "cash" && $("#Reccategory").val()=="advance")
+                            getChequeDetails($("#RecpType").val(), $("#agreement_no").val(), $("#DDChequeNo").val());
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                        // $("#").addClass("hide");
+                    }
+
+                });
+    });
    
     $("#TotalAmount").on('change', function () {
         debugger;
@@ -639,6 +751,48 @@
             data: { amount: totalAmount },
             success: function (response) {
                 $("#AmtInWords").val(response);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function getAgreementNumbers() {
+        $.ajax(
+        {
+            url: "../Receipts/GetAggrementNumbers",
+            type: "Get",
+            data: {},
+            success: function (response) {
+                $("#agreement_no").empty();
+                var Agreement_No = '<option value="">--Select--</option>';
+                $.each(response, function (index, data) {
+                    Agreement_No += '<option value="' + data + '">' + data + '</option>';
+                });
+                $('#agreement_no').append(Agreement_No);
+                $('#agreement_no').change();
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function getChequeDetails(Mode,agreement_no,cheque_no) {
+        $.ajax(
+        {
+            url: "../Receipts/GetAggrementDetailsByMode",
+            type: "Get",
+            data: { Mode: Mode, agreement_no: agreement_no, cheque_no: cheque_no },
+            success: function (response) {
+                $("#DDChequeDate").val(ToJavaScriptDate(response.cheque_date));
+                $("#TotalAmount").val(response.Cheque_Amount);
+                $("#TotalAmount").trigger("change");
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -715,6 +869,7 @@
                 $('#unit_Name').append(Unit_Name);
 
                 $('#TotalAmount').val(response.TotalAmount[0].Text);
+                $("#TotalAmount").trigger("change");
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -794,6 +949,7 @@
                 //$('#TotalAmount').val(response.TotalAmount[0].Text);
 
                 $('#TotalAmount').val(response.pdc_Amount[0].Text);
+                $("#TotalAmount").trigger("change");
 
                 $('#DDChequeNo').val(response.DDChequeNo[0].Text);
 
@@ -874,6 +1030,7 @@
                 $('#unit_Name').append(Unit_Name);
 
                 $('#TotalAmount').val(response.TotalAmount[0].Text);
+                $("#TotalAmount").trigger("change");
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -883,7 +1040,7 @@
             }
         });
     }
-    var i = 0;
+    var i = parseInt($("#receipt-count").val());
     function add() {
         var InvoiceType = document.getElementById("InvoiceType").value;
         var InvoiceNumber = document.getElementById("InvoiceNumber").value;
@@ -895,19 +1052,29 @@
         var ReceivedAmount = document.getElementById("ReceivedAmount").value;
         var BalanceAmount = document.getElementById("BalanceAmount").value;
         var Remarks = document.getElementById("Remarks").value;
-
+        if ((InvoiceType == null || InvoiceType == "") || (InvoiceNumber == null || InvoiceNumber == "") || (InvoiceDate == null || InvoiceDate == "") || (InvoiceDescription == null || InvoiceDescription == "") || (InvoiceAmount == null || InvoiceAmount == "") || (CreditAmount == null || CreditAmount == "") || (ReceivedAmount == null || ReceivedAmount == "") || (BalanceAmount == null || BalanceAmount == "")) {
+            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            $(".result-title").text("Failure");
+            $(".result-modal-body span").text("Enter required fields");
+            $('#masterResultModal').modal('show');
+            return false;
+        }
+        $("#TotalAmount").val(Number($("#TotalAmount").val()) + Number(BalanceAmount));
+        $("#TotalAmount").trigger("change");
         var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + i + "'>";
 
         html = html + "<div class='col-md-12'>";
-        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceType" + i + "'  type='text' value='" + InvoiceType + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceType' data-name='Invoice Type'/></div>";
-        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceNumber" + i + "'  type='text' value='" + InvoiceNumber + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceNumber' data-name='Invoice Number' /></div>";
-        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='date' id='InvoiceDate" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceDate' data-name='InvoiceDate' value='" + InvoiceDate + "'/></div>";
-        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='InvoiceDescription" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceDescription' data-name='InvoiceDescription' value='" + InvoiceDescription + "'/></div>";
-        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='Remarks" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].Remarks' data-name='Remarks' value='" + Remarks + "'/></div></div><div class='col-md-12'>";
-        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceAmount" + i + "'  type='text' value='" + InvoiceAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceAmount' data-name='Invoice Amount'/></div>";
-        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='CreditAmount" + i + "'  type='text' value='" + CreditAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].CreditAmount' data-name='Credit Amount' /></div>";
-        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='ReceivedAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].ReceivedAmount' data-name='ReceivedAmount' value='" + ReceivedAmount + "'/></div>";
-        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='BalanceAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].BalanceAmount' data-name='BalanceAmount' value='" + BalanceAmount + "'/></div>";        
+        
+        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceType" + i + "'  type='text' value='" + InvoiceType + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].Invtype' data-name='Invtype' readonly/></div>";
+        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceNumber" + i + "'  type='text' value='" + InvoiceNumber + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].Invno' data-name='Invno' readonly/></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='date' id='InvoiceDate" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceDate' data-name='InvoiceDate' value='" + InvoiceDate + "' readonly/></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='InvoiceDescription" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].Description' data-name='Description' value='" + InvoiceDescription + "' readonly/></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='Remarks" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].Remarks' data-name='Remarks' value='" + Remarks + "' readonly/></div></div><div class='col-md-12'>";
+        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceAmount" + i + "'  type='text' value='" + InvoiceAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceAmount' data-name='InvoiceAmount' readonly/></div>";
+        html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='CreditAmount" + i + "'  type='text' value='" + CreditAmount + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].CreditAmt' data-name='CreditAmt' readonly/></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='ReceivedAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].ReceivedAmount' data-name='ReceivedAmount' value='" + ReceivedAmount + "' readonly/></div>";
+        html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='text' id='BalanceAmount" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].Balance' data-name='Balance' value='" + BalanceAmount + "' readonly/></div>";
         html = html + "<div class='col-md-2 form-group'></br><Input type='button' class='document-btn removebutton' id='Delete" + i + "'value='Delete' /> </div>";
         html = html + "</div>";
 
@@ -956,14 +1123,19 @@
         try {
 
             var form = $("form#Receipts");
-            $("#Tenant_id").val($("#Supplierid option:selected").text() == "--Select--" ? null : $("#Tenant_id option:selected").text());
-            $("#Tenant_Name").val($("#SupplierName option:selected").text() == "--Select--" ? null : $("#Tenant_Name option:selected").text());
+            //$("#Tenant_id").val($("#Supplierid option:selected").text() == "--Select--" ? null : $("#Tenant_id option:selected").text());
+            //$("#Tenant_Name").val($("#SupplierName option:selected").text() == "--Select--" ? null : $("#Tenant_Name option:selected").text());
 
-            $("#Property_id").val($("#Propertyid option:selected").text() == "--Select--" ? null : $("#Propertyid option:selected").text());
-            $("#Property_Name").val($("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
+            //$("#Property_id").val($("#Propertyid option:selected").text() == "--Select--" ? null : $("#Propertyid option:selected").text());
+            //$("#Property_Name").val($("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
 
-            $("#Unit_ID").val($("#UnitID option:selected").text() == "--Select--" ? null : $("#UnitID option:selected").text());
-            $("#unit_Name").val($("#unitName option:selected").text() == "--Select--" ? null : $("#unitName option:selected").text());
+            //$("#Unit_ID").val($("#UnitID option:selected").text() == "--Select--" ? null : $("#UnitID option:selected").text());
+            //$("#unit_Name").val($("#unitName option:selected").text() == "--Select--" ? null : $("#unitName option:selected").text());
+            ////if ($("#RecpType").val() == "cheque" && Reccategory == "advance")
+            ////{
+            ////    $("#DDChequeNo").val($("#ddChequeDate").val())
+            ////    $("#DDChequeDate").val($("#ddChequeDate").text())
+            ////}
             $.ajax(
                 {
                     url: "../Receipts/AddOrUpdate",
@@ -977,7 +1149,7 @@
                         $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
                         $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
                         $(".result-title").text("Success");
-                        $(".result-modal-body span").text(receiptsAdded);
+                        $(".result-modal-body span").text(response.Message);
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -1012,4 +1184,239 @@
         });
         return o;
     };
+    function formReset() {
+        getReceiptAddorUpdate();
+    }
+    $(document).ready(function () {
+        var id = $("#Id").val();
+        if (id != 0) {
+            document.getElementById("btnSubmit").innerHTML = 'Update';
+        }
+        showHideSubForm($("#Reccategory option:selected").val());
+        ShowHidePaymentModeFields($("#RecpType").val())
+    });
+    //function showHideCheque(paymentMode) {
+    //    if (paymentMode != "cheque") {
+    //        document.getElementById('chequeNo').style.display = "none";
+    //        document.getElementById('chequeDate').style.display = "none";
+    //    }
+    //    else {
+    //        document.getElementById('chequeNo').style.display = "block";
+    //        document.getElementById('chequeDate').style.display = "block";
+    //    }
+    //}
+    function showHideChequeField(value) {
+        debugger;
+        if (value) {
+            $("[name='cheque'] :input").attr("disabled", value);
+            $("[name='cheque']").hide();
+        }
+        else {
+            $("#txtChequeDate :input").attr("disabled", value);
+            $("#txtChequeDate").show();
+            if ($("#Reccategory").val() == "advance") {
+                $("#drpCheque :input").attr("disabled", false);
+                $("#drpCheque").show();
+                $("#drpChequeDate :input").attr("disabled", false);
+                $("#drpChequeDate").show();
+                //$("#txtCheque :input").attr("disabled", true);
+                $("#txtCheque").hide();
+                //$("#txtChequeDate").hide();
+            }
+            else {
+                $("#txtCheque :input").attr("disabled", false);
+                $("#txtCheque").show();
+                //$("#txtChequeDate").show();
+                $("#drpCheque :input").attr("disabled", true);
+                $("#drpCheque").hide();
+                $("#drpChequeDate :input").attr("disabled", true);
+                $("#drpChequeDate").hide();
+                //$("#drpCheque :input").attr("disabled", !value);
+            }
+            //$("[name='cheque']").show();
+        }
+        
+        //if (value) {
+        //    $("[name='cheque']").hide();
+        //}
+        //else {
+        //    $("[name='cheque']").show();
+        //}
+        
+    }
+    function showhideAdvancePayment(value) {
+        $("#advancePayment :input").attr("disabled", value);
+        if (value) {
+            $("#advancePayment").hide();
+        }
+        else {
+            $("#advancePayment").show();
+        }
+    }
+    function showhidePDC(value) {
+        $("#pdcstatus :input").attr("disabled", value);
+        if (value) {
+            $("#pdcstatus").hide();
+        }
+        else {
+            $("#pdcstatus").show();
+        }
+    }
+    function ShowHidePaymentModeFields(paymentModeValue) {
+        debugger;
+        if (paymentModeValue == "cheque") {
+            showHideChequeField(false);
+            showhideAdvancePayment(true);
+            showhidePDC(false);
+            if ($("#Reccategory").val() == "against invoice" || $("#Reccategory").val() =="advance") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
+            if ($("#Reccategory").val() == "advance") {
+                $("#DDChequeNo").prop("readonly", true);
+                getAgreementNoByMode(paymentModeValue);
+            }
+            
+            
+        }
+        else if (paymentModeValue == "cash") {
+            showHideChequeField(true);
+            showhideAdvancePayment(true);
+            showhidePDC(true);
+            if ($("#Reccategory").val() == "against invoice" || $("#Reccategory").val() == "advance") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
+            if ($("#Reccategory").val() == "advance") {
+                getAgreementNoByMode(paymentModeValue);
+            }
+        }
+        else if (paymentModeValue == "online") {
+            showHideChequeField(false);
+            showhideAdvancePayment(true);
+            showhidePDC(true);
+            if ($("#Reccategory").val() == "against invoice" || $("#Reccategory").val() == "advance") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
+            if ($("#Reccategory").val() == "advance") {
+                $("#DDChequeNo").prop("readonly", true);
+                getAgreementNoByMode(paymentModeValue);
+            }
+        }
+        else if (paymentModeValue == "pdc") {
+            showHideChequeField(false);
+            showhideAdvancePayment(true);
+            showhidePDC(false);
+            if ($("#Reccategory").val() == "against invoice" || $("#Reccategory").val() == "advance") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
+            if ($("#Reccategory").val() == "advance") {
+                $("#DDChequeNo").prop("readonly", true);
+                getAgreementNoByMode(paymentModeValue);
+            }
+        }
+        else if (paymentModeValue == "Advance adjust") {
+            showHideChequeField(true);
+            showhideAdvancePayment(false);
+            showhidePDC(true);
+            $("#TotalAmount").prop("readonly", true);
+            if ($("#Reccategory").val() == "against invoice" || $("#Reccategory").val() == "advance") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
+            if ($("#Reccategory").val() == "advance") {
+                getAgreementNoByMode(paymentModeValue);
+            }
+        }
+        else {
+            showHideChequeField(true);
+            showhideAdvancePayment(true);
+            showhidePDC(true);
+            if ($("#Reccategory").val() == "against invoice") {
+                $("#TotalAmount").prop("readonly", true);
+            }
+            else {
+                $("#TotalAmount").prop("readonly", false);
+            }
+            if ($("#Reccategory").val() != "advance") {
+                getAgreementNumbers();
+            }
+        }
+    }
+    $("#RecpType").change(function () { ShowHidePaymentModeFields($("#RecpType").val()) });
+    $("#ddChequeNumber").change(function () {
+        $("#DDChequeNo").val($("#ddChequeNumber").val())
+        getChequeDetails($("#RecpType").val(), $("#agreement_no").val(), $("#DDChequeNo").val())
+    });
+   
+    function getAgreementNoByMode(mode) {
+        $.ajax(
+        {
+            url: "../Receipts/GetAggrementNumberByMode",
+            type: "Get",
+            data: { Mode: mode },
+            success: function (response) {
+                debugger;
+                $("#agreement_no").empty();
+                var Agreement_No = '<option value="">--Select--</option>';
+                $.each(response, function (index, data) {
+                    Agreement_No += '<option value="' + data + '">' + data + '</option>';
+                });
+                $('#agreement_no').append(Agreement_No);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+    function getAdvancePaymentDetail(value) {
+        $.ajax(
+        {
+            url: "../Payment/GetAdvanceAdjustmentAmount",
+            type: "Get",
+            data: { advanceCode: value },
+            success: function (response) {
+                $("#TotalAmount").val(response);
+                $("#TotalAmount").trigger("change");
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                //$("#img-loader").addClass("hide");
+            }
+        });
+    }
+    $("#AdvAcCode").on('change', function (e) {
+        debugger;
+        if ($("#AdvAcCode").val() != "") {
+            getAdvancePaymentDetail($("#AdvAcCode").val());
+        }
+        else {
+            $("#TotalAmount").val(0);
+            $("#TotalAmount").trigger("change");
+        }
+
+    });
+    function ToJavaScriptDate(value) {
+        var pattern = /Date\(([^)]+)\)/;
+        var results = pattern.exec(value);
+        var dt = new Date(parseFloat(results[1]));
+        return dt.getFullYear() + "-" + ("0" + (dt.getMonth() + 1)).slice(-2) + "-" + ("0" + dt.getDate()).slice(-2);
+    }
 </script>
