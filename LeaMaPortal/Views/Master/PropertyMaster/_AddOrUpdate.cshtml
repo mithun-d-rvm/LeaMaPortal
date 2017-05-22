@@ -5,7 +5,8 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("Create", "PropertyMaster", FormMethod.Post, new { @id = "PropertyMaster" }))
+@*@using (Html.BeginForm("Create", "PropertyMaster", FormMethod.Post, new { @id = "PropertyMaster" }))*@
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "PropertyMaster", @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -62,7 +63,7 @@
 
             <div class="col-md-12 form-input-padding">
                 <div class="col-md-4">
-                    Property Thwtheeq ID:
+                    Tawtheeq Id:
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.Property_ID_Tawtheeq, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", title = "Property Thwtheeq ID should be letters or numbers" } })
@@ -592,7 +593,7 @@
             </div>
             <div class="col-md-12 form-input-padding">
                 <div class="col-md-4">
-                    Unit Tawteeq ID:
+                    Unit Tawtheeq Id:
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.Unit_ID_Tawtheeq, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })
@@ -700,7 +701,7 @@
             </div>
             <div class="col-md-12 form-input-padding">
                 <div class="col-md-4">
-                    FLoor Level:
+                    Floor Level:
                 </div>
                 <div class="col-md-8">
                     @*<input type="text" class="form-control master-form-input" />*@
@@ -834,7 +835,7 @@
 
     <div class="m-t-5-p col-md-10 document-row" id="GridView">
         <div class="p-b-25">
-            <span> <strong> Fecility Details </strong> </span>
+            <span> <strong> Facility Details </strong> </span>
         </div>
 
         <div class="">
@@ -842,11 +843,11 @@
                 <tr>
                     <td>
                         <div class="col-md-3">
-                            Fecility ID
+                            Facility Id
                             @Html.DropDownList("Facility_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                         </div>
                         <div class="col-md-4">
-                            Fecility Name
+                            Facility Name
                             @Html.DropDownList("Facility_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                         </div>
                         <div class="col-md-3">
@@ -1325,4 +1326,67 @@
     function formReset() {
         getPropertyMasterAddorUpdate();
     }
+</script>
+<script>
+    $("form#PropertyMaster").off("submit").on("submit", function (e) {
+        $("#img-add-or-update-loader").removeClass("hide");
+        e.preventDefault();
+        var formData = new FormData($(this)[0]);
+        try {
+            $.ajax(
+                {
+                    url: "../PropertyMaster/Create",
+                    method: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    cache: false,
+                    async: false,
+                    success: function (response) {
+                        GetPropertyMaster();
+                        if (response.Errors == null || response.Errors == "") {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Message);
+                        }
+                        else {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(response.Errors);
+                        }
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(masterResultError);
+                    },
+                    complete: function () {
+                        $("#img-add-or-update-loader").addClass("hide");
+                        $('#masterResultModal').modal('show');
+                    }
+                });
+        }
+        catch (ex) {
+            alert(ex);
+        }
+    });
+
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
 </script>

@@ -63,7 +63,7 @@
                                 @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-stats agreement-stats", title = "Status", @data_toggle = "modal", @data_target = "#statusModal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-status" })  |
                             </span>
                         }
-                        @if (@ViewBag.IsEditable == 1)
+                        @if (@ViewBag.IsEditable == 1 && item.Approval_Flag == 0)
                         {
                             <span>
                                 @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit agreement-edit", title = "Edit", @data_agreementno = @item.Agreement_No })  |
@@ -75,7 +75,12 @@
                                 @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash agreement-delete", @style = "color:red", title = "Delete", @data_agreementno = @item.Agreement_No }) |
                             </span>
                         }
-                        @Html.ActionLink(" ", "Print", null, new { @class = "glyphicon glyphicon-print agreement-print", title = "Print", @data_toggle = "modal", @data_target = "#contractModal", @data_agreementno = @item.Agreement_No })
+                        @if (item.Approval_Flag == 1)
+                        {
+                            @Html.ActionLink(" ", "Print", null, new { @class = "glyphicon glyphicon-print agreement-print", title = "Print", @data_toggle = "modal", @data_target = "#contractModal", @data_agreementno = @item.Agreement_No })
+                        }
+                        @*@Html.ActionLink(" ", "Print", null, new { @class = "glyphicon glyphicon-print agreement-print", title = "sample Print", @data_toggle = "modal", @data_target = "#contractModal", @data_agreementno = @item.Agreement_No })*@
+
                         @*<a target="_blank" href="../Tca/PrintAgreement?AgreementNo=@item.Agreement_No" class="glyphicon glyphicon-print"></a>*@
                     </div>
                 </div>

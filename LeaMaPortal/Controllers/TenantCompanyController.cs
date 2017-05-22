@@ -506,8 +506,8 @@ namespace LeaMaPortal.Controllers
                     };
                     var tenantCompany = await db.Database.SqlQuery<object>("CALL Usp_Tenant_Company_All(@PFlag, @PTenant_Id, @PCompanyName, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser, @Ptenant_companydt, @Ptenant_companydt1, @Ptenant_companydoc)", parameters).ToListAsync();
                 }
-                return RedirectToAction("../Master/Index", new { selected = 10 });
-                //return Json(result, JsonRequestBehavior.AllowGet);
+                //return RedirectToAction("../Master/Index", new { selected = 10 });
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch(Exception e)
             {

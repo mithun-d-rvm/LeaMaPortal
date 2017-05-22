@@ -10,8 +10,8 @@
 @*<h2>Create</h2>*@
 
 
-@using (Html.BeginForm("Create","MasterIndividual", FormMethod.Post,new { @id = "TenantIndividualAddOrUpdate", @enctype = "multipart/form-data" }))
-
+@*@using (Html.BeginForm("Create","MasterIndividual", FormMethod.Post,new { @id = "TenantIndividualAddOrUpdate", @enctype = "multipart/form-data" }))*@
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "TenantIndividualAddOrUpdate", @enctype = "multipart/form-data" }))
 {
     @*@Html.AntiForgeryToken()*@
 
@@ -622,18 +622,18 @@
     });
     $("form#TenantIndividualAddOrUpdate").off("submit").on("submit", function (e) {
         $("#img-add-or-update-loader").removeClass("hide");
-        return;
         e.preventDefault();
+        var formData = new FormData($(this)[0]);
         try {
-            var form = $("form#TenantIndividualAddOrUpdate");
             $.ajax(
                 {
                     url: "../MasterIndividual/Create",
-                    // dataType: "jsonp",
                     method: "POST",
-                    data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
-                    contentType: "application/json",
+                    data: formData,
+                    contentType: false,
                     processData: false,
+                    cache: false,
+                    async: false,
                     success: function (response) {
                             GetTenantIndividual();
                             if (response.Errors == null || response.Errors =="") {

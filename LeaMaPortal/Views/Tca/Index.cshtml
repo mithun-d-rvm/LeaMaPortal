@@ -12,12 +12,21 @@
 }
 
 <div class="inner-block p-t-5-p">
-    <div class="blank">
+    <input type="hidden" value="@ViewBag.IsAdd" id="IsAllowAdd" />
+    <div class="blank" id="">
         @using (Html.BeginForm("AddOrUpdate", "Tca", FormMethod.Post, new { @id = "Tca", @enctype = "multipart/form-data" }))
         {
             <div id="AgreementForm">
             </div>
             <div>
+                <!-- BEGIN AGREEMENT UNIT -->
+                <div class="p-lr-20" id="AgreementUnit">
+                    @*@Html.Partial("_AgreementUnit")*@
+                </div>
+                <!-- END AGREEMENT UNIT -->
+                <div class="row ht-5">
+                    &nbsp;
+                </div>
                 <!-- BEGIN AGREEMENT PDC -->
                 <div class="p-lr-20" id="AgreementPdc">
                     @*@Html.Partial("_AgreementPdc")*@
@@ -35,11 +44,7 @@
                 <div class="row ht-5">
                     &nbsp;
                 </div>
-                <!-- BEGIN AGREEMENT DOCUMENT -->
-                <div class="p-lr-20" id="AgreementDocument">
-                    @*@Html.Partial("_AgreementDocument")*@
-                </div>
-                <!-- END AGREEMENT DOCUMENT -->
+               
                 <div class="row ht-5">
                     &nbsp;
                 </div>
@@ -51,24 +56,22 @@
                 <div class="row ht-5">
                     &nbsp;
                 </div>
-                <!-- BEGIN AGREEMENT UNIT -->
-                <div class="p-lr-20" id="AgreementUnit">
-                    @*@Html.Partial("_AgreementUnit")*@
-                </div>
-                <!-- END AGREEMENT UNIT -->
-                <div class="row ht-5">
-                    &nbsp;
-                </div>
+               
                 <!-- BEGIN AGREEMENT UNIT -->
                 <div class="p-lr-20" id="AgreementCheckList">
                     @*@Html.Partial("_AgreementCheckList")*@
                 </div>
                 @*END AGREEMENT UNIT*@
+                <!-- BEGIN AGREEMENT DOCUMENT -->
+                <div class="p-lr-20" id="AgreementDocument">
+                    @*@Html.Partial("_AgreementDocument")*@
+                </div>
+                <!-- END AGREEMENT DOCUMENT -->
             </div>
             <div class="p-b-10">
                 &nbsp;
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 form-input-padding" id="formSubmitBtn">
                 <div class="col-md-6">
                     &nbsp;
                 </div>
@@ -146,7 +149,7 @@
 
 </script>
 <script type="text/javascript">
-   
+
     function printData() {
         //alert(1);
         var divToPrint = document.getElementById("PrintelementID");
@@ -171,19 +174,25 @@
 
 <script>
     $("#TopNavBarFilter").empty();
-    CreateAgreement();
-    var AgreementNo = 0;//$("#Agreement_No").val();
-    AgreementPdc(AgreementNo);
-    AgreementFacility(AgreementNo);
-    AgreementDocument(AgreementNo);
-    AgreementUtility(AgreementNo);
-    AgreementUnit(AgreementNo);
-    AgreementCheckList(AgreementNo);
-    //AgreementPdc();
-    //AgreementDocument();
-    //AgreementUtility();
-    //AgreementUnit();
-    //AgreementCheckList();
+    //
+    var isAllow = $("#IsAllowAdd").val();
+    if (isAllow == 1)
+        IsAddAllow();
+    else
+        $("#formSubmitBtn").hide();
+
+    function IsAddAllow() {
+        
+        CreateAgreement();
+        var AgreementNo = 0;//$("#Agreement_No").val();
+        AgreementPdc(AgreementNo);
+        AgreementFacility(AgreementNo);
+        AgreementDocument(AgreementNo);
+        AgreementUtility(AgreementNo);
+        AgreementUnit(AgreementNo);
+        AgreementCheckList(AgreementNo);
+    }
+    //
     getAgreementList();
     function CreateAgreement() {
 

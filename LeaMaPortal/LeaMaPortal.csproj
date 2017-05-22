@@ -481,6 +481,7 @@
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\MasterViewModel.cs" />
     <Compile Include="Models\NotificationAgreementApprovalModel.cs" />
+    <Compile Include="Models\NotificationContractApprovalModel.cs" />
     <Compile Include="Models\NotificationPdcModel.cs" />
     <Compile Include="Models\NotificationRenewalModel.cs" />
     <Compile Include="Models\NotificationRentalDueModel.cs" />

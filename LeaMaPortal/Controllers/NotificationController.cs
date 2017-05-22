@@ -29,6 +29,7 @@ namespace LeaMaPortal.Controllers
                 List<NotificationRentalDueModel> RentalDueData = new List<NotificationRentalDueModel>();
                 List<NotificationUtilityDuesModel> UtilityDuesData = new List<NotificationUtilityDuesModel>();
                 List<NotificationAgreementApprovalModel> AgreementData = new List<NotificationAgreementApprovalModel>();
+                List< NotificationContractApprovalModel > ContractData = new List<NotificationContractApprovalModel>();
                 NotificationHelper notify = new NotificationHelper();
                 switch (filter)
                 {
@@ -47,6 +48,9 @@ namespace LeaMaPortal.Controllers
                     case StaticHelper.NOTIFICATION_AGREEMENT_APPROVAL:
                         AgreementData = await notify.getNotificationAgreementApproval();
                         return Json(AgreementData, JsonRequestBehavior.AllowGet);
+                    case StaticHelper.NOTIFICATION_CONTRACT_APPROVED:
+                        ContractData = await notify.getNotificationContractApproval();
+                        return Json(ContractData, JsonRequestBehavior.AllowGet);
                     default :
                         return Json(data, JsonRequestBehavior.AllowGet);
                 }                
@@ -69,6 +73,28 @@ namespace LeaMaPortal.Controllers
                 throw ex;
             }
          }
+        [HttpGet]
+        public ActionResult approveContract(int id)
+        {
+            MessageResult res = new MessageResult();
+            try
+            {                
+                var data = db.tbl_agreement.FirstOrDefault(f => f.id == id);
+                if (data != null)
+                {
+                    data.Approval_Flag = 1;
+                }
+                db.SaveChangesAsync();
+                res.Message = "Contract approved";
+                //return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                res.Message = "Contract failed to approve";
+                //return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
