@@ -371,7 +371,7 @@
                         Issue Date : @Model.IssueDate
                     </div>
                 </div>
-                @if (Model.Property_Usage.ToLower().Trim() == "Commercial".ToLower())
+                @if (Model.Property_Usage == "Commercial")
                 {            
                     @Html.Partial("Contract/_TermsCommercial")
                 }
@@ -400,7 +400,16 @@
 </div>
 <hr />
 <div class="row">
-    <textarea rows="5" class="form-control" id="otherTerms"  placeholder="other terms"></textarea>
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-8">
+        <textarea rows="5" class="form-control" id="otherTerms" placeholder="other terms"></textarea>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+    
 
 </div>
 <div class="row" style="padding-top:8%; text-align:center;">

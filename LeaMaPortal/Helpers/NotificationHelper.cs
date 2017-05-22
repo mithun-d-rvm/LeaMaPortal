@@ -130,7 +130,10 @@ namespace LeaMaPortal.Helpers
         {
             try
             {
-                List<NotificationContractApprovalModel> data = 
+                List<NotificationContractApprovalModel> data = new List<NotificationContractApprovalModel>();
+                if (db.tbl_approvalconfig.Any(x => x.Userid == HttpContext.Current.User.Identity.Name && x.Approval_flag=="Yes"))
+                {
+                    data =
                     await db.tbl_agreement.Where(w => w.Approval_Flag != 1)
                     .Select(s => new NotificationContractApprovalModel
                     {
@@ -139,7 +142,9 @@ namespace LeaMaPortal.Helpers
                         PropertyName = s.Properties_Name == null ? string.Empty : s.Properties_Name,
                         UnitName = s.Unit_Property_Name == null ? string.Empty : s.Unit_Property_Name,
                         TenantName = s.Ag_Tenant_Name == null ? string.Empty : s.Ag_Tenant_Name,
-                    }).ToListAsync();                
+                    }).ToListAsync();
+                }
+                
                 return data;
             }
             catch
