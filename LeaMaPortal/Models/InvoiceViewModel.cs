@@ -82,6 +82,14 @@ namespace LeaMaPortal.Models
         public string Unitid { get; set; }
         public string unitName { get; set; }
     }
+    public class ChequeDropdown
+    {
+        public string Cheque_No { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? cheque_date { get; set; }
+    }
+    
     public class InvoiceDropdown
     {
         public InvoiceDropdown()
@@ -89,9 +97,14 @@ namespace LeaMaPortal.Models
             Tenants = new List<TenantDropdown>();
             Units = new List<UnitDropdown>();
             Properties = new List<PropertyDropdown>();
+            Cheques = new List<ChequeDropdown>();
         }
         public List<TenantDropdown> Tenants { get; set; }
         public List<UnitDropdown> Units { get; set; }
         public List<PropertyDropdown> Properties { get; set; }
+        public List<ChequeDropdown> Cheques { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? AgreementDate { get; set; }
     }
 }
