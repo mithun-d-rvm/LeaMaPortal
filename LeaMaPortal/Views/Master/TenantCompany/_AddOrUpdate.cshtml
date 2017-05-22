@@ -1124,31 +1124,26 @@
 
 </script>
 
-
-
-
-
 <script>
     //Add or update
     $("form#TenantCompany").off("submit").on("submit", function (e) {
-        return;
         e.preventDefault();
-        // $("#icon-success").addClass("hide");
-        //$("#VerifyIdDetailsLoader").removeClass("hide");
         try {
-            var form = $("form#TenantCompany");
-
-            // var form = $('"form#VerifyId')[0]; // You need to use standart javascript object here
-            //var formData = new FormData(form);
+            debugger;
+            var formData = new FormData($(this)[0]);
             $.ajax(
                 {
                     url: "../TenantCompany/AddOrUpdate",
-                    // dataType: "jsonp",
                     method: "POST",
-                    data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
-                    contentType: "application/json",
+                    //data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
+                    data : formData,
+                    contentType: false,
                     processData: false,
-                    success: function (response) {                        
+                    cache: false,
+                    async: false,
+                    success: function (response) {
+                        //console.log("Success");
+                        debugger;
                         GetTenantCompany();
                         if (response.Errors == null) {
                             $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");

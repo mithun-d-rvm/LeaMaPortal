@@ -5,7 +5,8 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("Create", "PropertyMaster", FormMethod.Post, new { @id = "PropertyMaster" }))
+@*@using (Html.BeginForm("Create", "PropertyMaster", FormMethod.Post, new { @id = "PropertyMaster" }))*@
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "PropertyMaster", @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -1325,4 +1326,67 @@
     function formReset() {
         getPropertyMasterAddorUpdate();
     }
+</script>
+<script>
+    $("form#PropertyMaster").off("submit").on("submit", function (e) {
+        $("#img-add-or-update-loader").removeClass("hide");
+        e.preventDefault();
+        var formData = new FormData($(this)[0]);
+        try {
+            $.ajax(
+                {
+                    url: "../PropertyMaster/Create",
+                    method: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    cache: false,
+                    async: false,
+                    success: function (response) {
+                        GetPropertyMaster();
+                        if (response.Errors == null || response.Errors == "") {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                            $(".result-title").text("Success");
+                            $(".result-modal-body span").text(response.Message);
+                        }
+                        else {
+                            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                            $(".result-title").text("Failure");
+                            $(".result-modal-body span").text(response.Errors);
+                        }
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(masterResultError);
+                    },
+                    complete: function () {
+                        $("#img-add-or-update-loader").addClass("hide");
+                        $('#masterResultModal').modal('show');
+                    }
+                });
+        }
+        catch (ex) {
+            alert(ex);
+        }
+    });
+
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
 </script>

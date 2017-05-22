@@ -191,9 +191,9 @@ namespace LeaMaPortal.Controllers
                 //ViewBag.FormMasterSelected = 11;
                 //ViewBag.FormMasterId = new SelectList(db.tbl_formmaster.OrderBy(x => x.MenuName), "Id", "MenuName");
                 //return View("../Master/Index", mastermodel);
-                //return Json(result, JsonRequestBehavior.AllowGet);
+                return Json(result, JsonRequestBehavior.AllowGet);
                 //return PartialView("../Master/TenantIndividual/_AddOrUpdate");
-                return RedirectToAction("../Master/Index", new { selected=11 });
+                //return RedirectToAction("../Master/Index", new { selected=11 });
             }
             catch (Exception ex)
             {
