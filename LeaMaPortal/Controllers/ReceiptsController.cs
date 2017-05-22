@@ -411,6 +411,7 @@ namespace LeaMaPortal.Controllers
                 ViewBag.BankAcName = new SelectList(Common.BankDetails, "AccountNumber", "BankName");
                 ViewBag.PDCstatus = new SelectList(Common.Receipts_PDCStatus);
                 ViewBag.InvoiceNumber = new SelectList(db.view_invoice_receipt_pending.OrderBy(o => o.invno).Distinct(), "invno", "invno");
+                ViewBag.DDChequeNo = new SelectList("", "");
                 return PartialView("../Receipts/_AddorUpdate", model);
             }
             catch
@@ -441,10 +442,11 @@ namespace LeaMaPortal.Controllers
                 {
                     foreach (var item in model.ReceiptDetailsList)
                     {
+                        var invoicedate = item.InvoiceDate.HasValue ? "'" + item.InvoiceDate.Value.Date.ToString("yyyy-MM-dd") + "'" : "null";
                         if (string.IsNullOrWhiteSpace(recDet))
                         {
-                            recDet = "(" + model.ReceiptNo + ",'" + item.Invno + "','" + item.InvoiceDate +
-                                "'," + item.Invtype + "," + item.InvoiceAmount + "," + item.CreditAmt + "," + item.ReceivedAmount + "," + item.Remarks + "," + item.Description + ")";
+                            recDet = "(" + model.ReceiptNo + ",'" + item.Invno + "'," + invoicedate +
+                                ",'" + item.Invtype + "'," + item.InvoiceAmount + "," + item.CreditAmt + "," + item.ReceivedAmount + ",'" + item.Remarks + "','" + item.Description + "')";
                         }
                         else
                         {
@@ -599,7 +601,7 @@ namespace LeaMaPortal.Controllers
             //return View();
         }
         [HttpGet]
-        public async Task<string> AmountInWords(decimal amount)
+        public string AmountInWords(decimal amount)
         {
             string amountInWords = NumberToText.Convert(amount);
             //string amountInWords = amount.Humanize();
@@ -612,6 +614,105 @@ namespace LeaMaPortal.Controllers
             {
                 var invoice = await db.view_invoice_receipt_pending.FirstOrDefaultAsync(f => f.invno == InvoiceNumber);
                 return Json(new { invtype = invoice.invtype, day = invoice.date.Value.Date, month = invoice.date.Value.Month, year = invoice.date.Value.Year, InvoiceAmount = invoice.InvoiceAmount });
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task<JsonResult> GetAggrementNumberByMode(string Mode)
+        {
+            try
+            {
+                var agreementNumbers = await db.Database.SqlQuery<int>("select Agreement_No from view_receipt_screen_advance_pending where balanceamount<>0 and payment_mode='" + Mode + "'").ToListAsync();
+                return Json(agreementNumbers.Distinct(), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task<JsonResult> GetAggrementNumbers(string Mode)
+        {
+            try
+            {
+                var agreementNumbers = await db.tbl_agreement.Where(x => x.Delmark != "*").OrderBy(x => x.Agreement_No).Select(x => x.Agreement_No).ToListAsync();
+                return Json(agreementNumbers, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task<ActionResult> GetAgreementDetails(int? agreement_no,string Mode)
+        {
+            try
+            {
+                var receiptsDropdown = new InvoiceDropdown();
+                if (agreement_no == null)
+                {
+                    receiptsDropdown.Properties = await db.tbl_propertiesmaster.Where(x => x.Delmark != "*" && x.Property_Flag == "Property").OrderBy(x => x.Property_Id).Select(x => new PropertyDropdown { PropertyName = x.Property_Name, Propertyid = x.Property_ID_Tawtheeq }).ToListAsync();
+
+                    receiptsDropdown.Units = await db.tbl_propertiesmaster.Where(x => x.Delmark != "*" && x.Property_Flag == "Unit").OrderBy(x => x.Unit_ID_Tawtheeq).Select(x => new UnitDropdown { Unitid = x.Unit_ID_Tawtheeq, unitName = x.Unit_Property_Name }).ToListAsync();
+
+                    receiptsDropdown.Tenants = await db.view_tenant.Select(x => new TenantDropdown{ Tenantid = x.Tenant_id, TenantName = x.First_Name}).ToListAsync();
+                    
+                }
+                else
+                {
+                    var agreement = await db.tbl_agreement.FirstOrDefaultAsync(x => x.Agreement_No == agreement_no);
+                if (agreement != null)
+                {
+                    var tenant = new TenantDropdown()
+                    {
+                        Tenantid = agreement.Ag_Tenant_id,
+                        TenantName = agreement.Ag_Tenant_Name
+                    };
+                    var property = new PropertyDropdown()
+                    {
+                        Propertyid = agreement.Property_ID_Tawtheeq,
+                        PropertyName = agreement.Properties_Name
+                    };
+                    var unit = new UnitDropdown()
+                    {
+                        Unitid = agreement.Unit_ID_Tawtheeq,
+                        unitName = agreement.Unit_Property_Name,
+                    };
+                    var query = String.Format("select Cheque_No,cheque_date from view_receipt_screen_advance_pending where balanceamount<>0 and payment_mode='{0}' and Agreement_No={1}", Mode, agreement_no);
+                    //var query = String.Format("select Cheque_No,cheque_date from view_receipt_screen_advance_pending where balanceamount<>0", Mode, agreement_no);
+                    List<ChequeDropdown> cheques = await db.Database.SqlQuery<ChequeDropdown>(query).ToListAsync();
+                    receiptsDropdown.Properties.Add(property);
+                    receiptsDropdown.Tenants.Add(tenant);
+                    receiptsDropdown.Units.Add(unit);
+                    receiptsDropdown.Cheques.AddRange(cheques);
+                    receiptsDropdown.AgreementDate = agreement.Agreement_Date;
+                }
+                }
+                
+                return Json(receiptsDropdown, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+        public async Task<JsonResult> GetAggrementDetailsByMode(string Mode,int agreement_no,string cheque_no)
+        {
+            try
+            {
+                string query;
+                if (Mode == "cash")
+                {
+                    query = String.Format("select cheque_date,Cheque_Amount from view_receipt_screen_advance_pending where balanceamount<>0 and payment_mode='{0}' and Agreement_No={1}", Mode, agreement_no);
+                }
+                else
+                {
+                    query = String.Format("select cheque_date,Cheque_Amount from view_receipt_screen_advance_pending where balanceamount<>0 and payment_mode='{0}' and Agreement_No={1} and Cheque_No={2}", Mode, agreement_no, cheque_no);
+                }
+                
+                ChequeDetails cheques = await db.Database.SqlQuery<ChequeDetails>(query).FirstOrDefaultAsync();
+                return Json(cheques, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
