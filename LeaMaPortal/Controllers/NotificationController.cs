@@ -29,7 +29,7 @@ namespace LeaMaPortal.Controllers
                 List<NotificationRentalDueModel> RentalDueData = new List<NotificationRentalDueModel>();
                 List<NotificationUtilityDuesModel> UtilityDuesData = new List<NotificationUtilityDuesModel>();
                 List<NotificationAgreementApprovalModel> AgreementData = new List<NotificationAgreementApprovalModel>();
-                List< NotificationContractApprovalModel > ContractData = new List<NotificationContractApprovalModel>();
+                List<NotificationContractApprovalModel> ContractData = new List<NotificationContractApprovalModel>();
                 NotificationHelper notify = new NotificationHelper();
                 switch (filter)
                 {
@@ -94,6 +94,19 @@ namespace LeaMaPortal.Controllers
                 //return Json(res, JsonRequestBehavior.AllowGet);
             }
             return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public bool getUserDetails()
+        {
+            try
+            {
+                bool res = db.tbl_approvalconfig.Any(f => f.Userid == System.Web.HttpContext.Current.User.Identity.Name);
+                return res;                
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
         protected override void Dispose(bool disposing)
         {

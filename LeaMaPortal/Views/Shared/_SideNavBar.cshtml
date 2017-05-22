@@ -145,8 +145,8 @@
                             <span class="notification-filter notify-menu">Utility Dues</span>
                             <span class="notification-filter-line"> &nbsp; </span>
                             <span class="notification-filter notify-menu">Agreement approval</span>
-                            <span class="notification-filter-line"> &nbsp; </span>
-                            <span class="notification-filter notify-menu">Contract Approval</span>
+                            <span class="notification-filter-line contract-approval-sec"> &nbsp; </span>
+                            <span class="notification-filter notify-menu contract-approval-sec">Contract Approval</span>
                             <span class="pull-right"> Expand to page </span>
                         </div>
                         <div class="notification-filter-content"></div>
@@ -162,6 +162,9 @@
 </div>
 
 <script>
+    var allRecordCount = 0;
+    var isValidUser = true;
+    getUserDetails();
     $('.modal-white').on('show.bs.modal', function () {
         setTimeout(function () {
             $('.modal-backdrop').css('background', 'white');
@@ -169,6 +172,7 @@
         }, 10);
     });
     $(".notification-filter").click(function () {
+        debugger;
         $(".notification-filter").removeClass('active');
         $(this).addClass('active');
         var filter = $(this).text();
@@ -185,6 +189,7 @@
                     type: "GET",
                     data: { filter: filter },
                     contentType: "application/json",
+                    async: false,
                     success: function (response) {
                         debugger;
                         var data = "";
@@ -241,7 +246,7 @@
                                 data += '<span class="notification-vr-2"> ' + obj.Agreement_No + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Total_Rental_amount + '</span>';
                             }
-                            else if (filter == "Contract Approval") {
+                            else if (filter == "Contract Approval" ) {
                                 data += '<input type="hidden" id="contractId_'+i+'" value="' + obj.Id + '" />';
                                 data += '<span class="notification-vr-1"> ' + obj.AgreementNo + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.TenantName + ' </span>';
@@ -261,8 +266,7 @@
                     complete: function () {
                     }
                 });
-    }
-    var allRecordCount = 0;
+    }    
     function getMenu() {
         $.ajax(
                 {
@@ -274,8 +278,51 @@
                         var data = "";
                         $(".notification-filter-content").empty();
                         $.each(response, function (index, obj) {
-                            getData(obj.Name);
+                            var isAllow = true;
+                            if (obj.Name == "Contract Approval")
+                            {
+                                if(isValidUser)
+                                {
+                                    isAllow = true;
+                                }
+                                else
+                                {
+                                    isAllow = false;
+                                }
+                            }
+                            if (isAllow) {
+                                getData(obj.Name);
+                            }
                         });
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+                });
+    }
+    function getUserDetails() {
+        $.ajax(
+                {
+                    url: "../Notification/getUserDetails",
+                    type: "GET",
+                    contentType: "application/json",
+                    async : false,
+                    success: function (response) {
+                        debugger;
+                        var sec = '<span class="notification-filter-line"> &nbsp; </span><span class="notification-filter notify-menu">Contract Approval</span><span class="pull-right"> Expand to page </span>';
+                        //$(".notification-menu").append(sec);
+                        isValidUser = (response == "True");
+                        if (isValidUser)
+                        {
+                            //$(".contract-approval-sec").css("display", "block");
+                            $(".contract-approval-sec").removeAttr("style");
+                        }
+                        else
+                        {
+                            $(".contract-approval-sec").attr("style", "display:none");
+                        }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -352,12 +399,10 @@
         $("#menu-home-utility-payments").hide();
     }
     function GetMenuRights() {
-        debugger;
         var user = $.cookie("CurrentUser");
         var currentUser = JSON.parse(user);
         menus = currentUser.MenuConfig.split(",");
         jQuery.each(menus, function (index, item) {
-            debugger;
             //if (item == 2) {
             $("#menu-home-notification").show();
             // }

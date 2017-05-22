@@ -5,6 +5,11 @@ using System.Web;
 
 namespace LeaMaPortal.Models
 {
+    public class NotificationContractModel
+    {
+        public bool IsValidUser { get; set; }
+        public List<NotificationContractApprovalModel> List { get; set; }
+    }
     public class NotificationContractApprovalModel
     {
         public int Id { get; set; }
