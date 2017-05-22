@@ -15,7 +15,7 @@ namespace LeaMaPortal.Models
             ReceiptDetailsList = new List<ReceiptDetailsViewModel>();
         }
         public int Id { get; set; }
-        [DisplayName("Receipt No")]
+        [DisplayName("Receipt Number")]
         public int ReceiptNo { get; set; }
 
         [DataType(DataType.Date)]
@@ -33,7 +33,7 @@ namespace LeaMaPortal.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Contract Agreement Date")]
-        public DateTime ContracAgreementDate { get; set; }
+        public DateTime? ContracAgreementDate { get; set; }
 
         [DisplayName("Contract Agreement Number")]
         public int? agreement_no { get; set; }
@@ -130,6 +130,30 @@ namespace LeaMaPortal.Models
 
     }
 
+    public class ReceiptsDDLChangeModel
+    {
+        //public string ReceiptNo { get; set; }
+        public string Agreement_No { get; set; }
+        public string Prperty_id { get; set; }
+        public string Property_Name { get; set; }
+        public string Unit_id { get; set; }
+        public string Unitname { get; set; }
+        public string Ag_Tenant_id { get; set; }
+        public string Ag_Tenant_Name { get; set; }
+        public string TotalAmount { get; set; }
+        public string pdc_Amount { get; set; }
+        public string DDChequeNo { get; set; }
+        public string invno { get; set; }
+        public string month { get; set; }
+        public string year { get; set; }
+        public string date { get; set; }
+        public string incno { get; set; }
+        public string invtype { get; set; }
+        public string totalamt { get; set; }
+        public string InvoiceAmount { get; set; }
+
+    }
+
     public class AdvancePendingSelectList
     {
         public SelectList ReceiptNo { get; set; }
@@ -151,5 +175,12 @@ namespace LeaMaPortal.Models
         public SelectList invtype { get; set; }
         public SelectList totalamt { get; set; }
         public SelectList InvoiceAmount { get; set; }
+    }
+    public class ChequeDetails
+    {
+        public float Cheque_Amount { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? cheque_date { get; set; }
     }
 }
