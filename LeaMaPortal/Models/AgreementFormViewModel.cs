@@ -82,7 +82,7 @@ namespace LeaMaPortal.Models
         public DateTime Security_chequedate { get; set; }
         [DisplayName("Contract Notice Period Days")]
         public int Notice_Period { get; set; }
-
+        public int Approval_Flag { get; set; }
 
         //newly  added fields
 
@@ -97,12 +97,14 @@ namespace LeaMaPortal.Models
         public int Emp_id { get; set; }
         [StringLength(100)]
         public string Emp_name { get; set; }
-        public int Approval_Flag { get; set; }
+        
         public string Approved_By { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Approved_Date { get; set; }
         [StringLength(150)]
         public string Createduser { get; set; }
+
+        
         //lists longtext
         public string Agpdc { get; set; }
         public string Agdoc { get; set; }
