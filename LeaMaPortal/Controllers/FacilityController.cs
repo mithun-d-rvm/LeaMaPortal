@@ -76,7 +76,7 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (db.tbl_facilitymaster.Any(a => a.Facility_Name == model.Facility_Name && a.Delmark != "*") && model.Id == 0)
+                    if (db.tbl_facilitymaster.Any(a => a.Facility_Name == model.Facility_Name && a.Delmark != "*" && a.Id != model.Id))
                     {
                         result.Errors = "Facility name already exists";
                     }
@@ -86,7 +86,7 @@ namespace LeaMaPortal.Controllers
                         string PFlag = "INSERT";
 
                         if (model.Id != 0)
-                        { 
+                        {
                             PFlag = "UPDATE";
                             result.Message = "Facility updated successfully";
                         }

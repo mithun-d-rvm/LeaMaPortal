@@ -78,7 +78,12 @@ namespace LeaMaPortal.Controllers
                 {
                     MySqlParameter pa = new MySqlParameter();
                     string PFlag = "INSERT";
-
+                    bool isDataAvailable = await db.tbl_approvalconfig.AnyAsync(x => x.Delmark != "*");
+                    if (isDataAvailable)
+                    {
+                        result.Errors = "You can't add more than one user for approval";
+                        return Json(result, JsonRequestBehavior.AllowGet);
+                    }
                     if (model.Id == 0)
                     {
                         result.Message = "Tca approval setting added successfully";

@@ -26,7 +26,7 @@
                     @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4 ">
-                    @Html.DropDownList("Country", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Country", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" })
+                    @Html.DropDownList("Country", null,"--Select--", htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Country", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
