@@ -390,7 +390,7 @@ namespace LeaMaPortal.Controllers
                 var receipts = db.tbl_receipthd.OrderByDescending(x => x.id).FirstOrDefault();
                 model.ReceiptNo = receipts != null ? receipts.id + 1 : 1;
 
-                model.ReceiptDate = DateTime.Today;
+                model.ReceiptDate = DateTime.Today.Date;
                 ViewBag.Reccategory = new SelectList(Common.Reccategory);
                 ViewBag.RecpType = new SelectList(Common.ReceiptMode);
                 ViewBag.agreement_no = new SelectList(db.tbl_agreement.Where(x => x.Delmark != "*").OrderBy(x => x.Agreement_No).Select(x => x.Agreement_No));

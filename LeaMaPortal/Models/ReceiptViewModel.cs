@@ -18,8 +18,8 @@ namespace LeaMaPortal.Models
         [DisplayName("Receipt Number")]
         public int ReceiptNo { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Receipt Date")]
         public DateTime? ReceiptDate { get; set; }
 
