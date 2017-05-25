@@ -58,7 +58,7 @@ namespace LeaMaPortal.Controllers
             try
             {
                 TenantIndividualViewModel model = new TenantIndividualViewModel();
-                model.Marital_Status = Common.DefaultMaridalStatus;
+                //model.Marital_Status = Common.DefaultMaridalStatus;
                 //model.Title = Common.DefaultTitle;
                 //var _titleResult = db.Database.SqlQuery<string>(@"call usp_split('Tenant individual','Title',',',null)").ToList();
                 var _titleResult = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant individual" && x.comboname == "Title");
@@ -110,10 +110,10 @@ namespace LeaMaPortal.Controllers
                 MessageResult result = new MessageResult();
                 model.Type = "Individual";
                 string PFlag =Common.UPDATE;
-                result.Message = "Tenant individual updated successfully";
+                result.Message = "Tenant person updated successfully";
                 if (model.Tenant_Id==0)
                 {
-                    result.Message = "Tenant individual created successfully";
+                    result.Message = "Tenant person created successfully";
                     PFlag = Common.INSERT;
                     var tenant = db.tbl_tenant_individual.OrderByDescending(x => x.Tenant_Id).FirstOrDefault();
                     model.Tenant_Id = tenant != null ? tenant.Tenant_Id + 1 : 1;
@@ -337,7 +337,7 @@ namespace LeaMaPortal.Controllers
                 ,@PCreateduser  
                 ,@Ptenantdocdetails 
                                     )", param).ToListAsync();
-                result.Message = "Tenant individual deleted successfully";
+                result.Message = "Tenant person deleted successfully";
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch
