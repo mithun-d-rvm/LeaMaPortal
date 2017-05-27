@@ -170,7 +170,7 @@
                             </div>
                             <div class="col-md-6" style="margin-left: 32%;width: 64%;position: absolute;">
                                 @*<input type="text" class="form-control master-form-input">*@
-                                @Html.EditorFor(model => model.Mobile_No, new { htmlAttributes = new { @class = "form-control master-form-input", @maxlength = "15", @required = "required", @type = "number", @pattern = "[0-9]+", title = "Enter valid mobile no" } })
+                                @Html.EditorFor(model => model.Mobile_No, new { htmlAttributes = new { @class = "form-control master-form-input", @maxlength = "15", @onkeypress = "allow_only_numbers(event);", @required = "required",@pattern = "[0-9]+", title = "Enter valid mobile no" } })
                                 @Html.ValidationMessageFor(model => model.Mobile_No, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -202,7 +202,7 @@
                             <div class="col-md-6" style="margin-left: 32%;width: 64%;position: absolute;">
                                 @*<input type="text" class="form-control master-form-input">*@
 
-                                @Html.EditorFor(model => model.Landline_No, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @maxlength = "15", @pattern = "[0-9]+", @type = "number", title = "Enter valid landline no" } })
+                                @Html.EditorFor(model => model.Landline_No, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onkeypress = "allow_only_numbers(event);", @maxlength = "15", @pattern = "[0-9]+", title = "Enter valid landline no" } })
                                 @Html.ValidationMessageFor(model => model.Landline_No, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -279,7 +279,7 @@
                         <div class="col-md-8">
                             @*<input type="text" class="form-control master-form-input"  />*@
                             @*@Html.EditorFor(model => model.License_issueDate, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onblur = "setMin()", @id = "License_issueDate" } })*@
-                            @Html.EditorFor(model => model.License_issueDate, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required",  @id = "License_issueDate" } })
+                            @Html.EditorFor(model => model.License_issueDate, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @id = "License_issueDate" } })
                             @Html.ValidationMessageFor(model => model.License_issueDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -608,7 +608,7 @@
         }
         var today = yyyy + '-' + mm + '-' + dd;
         $("#License_ExpiryDate").prop('min', today);
-       // }
+        // }
     }
     $("#TitleDisplay").on('change', function (e) {
         $("#Title").val($("#TitleDisplay").val());
