@@ -20,6 +20,17 @@
 #menu li a:active{
     background-color: #eb9a15;
 }
+.left-content {
+    width: 91% !important;
+}
+
+.fixed{
+	position: relative !important;
+	 width:100% !important;
+}
+.sidebar-menu{
+    width:155px !important;
+}
 
 /* Bootstrap styles */
 
