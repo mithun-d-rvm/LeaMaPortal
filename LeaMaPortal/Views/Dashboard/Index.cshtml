@@ -15,7 +15,7 @@
                 <div class="panel-body">
                     <div class="row earning-header">
                         <div class="col-md-6 font-12">
-                            <strong>  EARNING HISTORY </strong>
+                            EARNING HISTORY
                         </div>
                         <div class="col-md-6">
                             <div class="">
@@ -35,7 +35,9 @@
                                 <span class="per-month">AED</span>
                             </div>
                             <div>
-                                <i class="fa fa-chevron-up earning-up-icon"></i>
+                                @*<i class="fa fa-chevron-up earning-up-icon"></i>*@
+                                <img src="~/Images/next_32.png" class="image-rotate-270 earning-profit-loss-arrow" /> <!-- For up arrow, which is profit -->
+                                @*<img src="~/Images/next_32.png" class="image-rotate-90" earning-profit-loss-arrow/> <!-- For down arrow, which is loss --> *@
                                 <span class="earning-month" id="EarningHistoryMonth">
                                     JAN <span id="EarningHistoryYear">2017</span>
                                 </span>
@@ -52,9 +54,12 @@
 
             <div class="portlet-grid panel-primary" id="vacant-div">
                 <div class="row">
-                    <div class="col-md-6 text-center vacant-portlet">
+                    <div class="col-md-1">
+                        <div class="tile-left-line"> </div>
+                    </div>
+                    <div class="col-md-4 text-center vacant-portlet">
                         <div class="p-b-18">
-                            <strong>  VACANT PROPERTIES </strong>
+                             VACANT PROPERTIES
                         </div>
                         <div class="vacant-total" id="VacantCount">
                             0
@@ -66,17 +71,17 @@
                                 Lease Expired &gt; <span class="vacant-lease-number">18</span>
                             </div>*@
                     </div>
-                    <div class="col-md-6 text-center vacant-second-tab">
+                    <div class="col-md-7 text-center vacant-second-tab" style="margin-left: -10px;">
                         <div class="col-md-12 vacant-residential-div">
                             <div class="vacant-residential-number">
-                                <i class="fa fa-home"></i>
+                                <img src="~/Images/home_32.png" class="m-t-m-10" />
                                 <span id="VacantCountRes"> 0</span>
                             </div>
                             <div class="vacant-residential-text">Residential</div>
                         </div>
                         <div class="col-md-12 vacant-commercial-div">
                             <div class="vacant-residential-number">
-                                <i class="fa fa-home"></i>
+                                <img src="~/Images/shop_32.png" class="m-t-m-10" />
                                 <span id="VacantCountCom"> 0</span>
                             </div>
                             <div class="vacant-commercial-text">Commercial</div>
@@ -88,33 +93,40 @@
 
             <div class="portlet-grid panel-primary" id="total-loss-div">
                 <div class="panel-body">
-                    <div class="row">
+                    <div class="row" style="margin-top: -15px;
+    margin-left: -30px;">
 
-                        <div class="col-md-7 total-loss-div">
-                            Total loss from vacant properties
+                        <div class="col-md-1">
+                            <div class="tile-left-line"> </div>
                         </div>
-                        <div class="col-md-5">
-                            <i class="fa fa-chevron-down total-loss-down-arrow"></i> <span class="total-loss-number" id="VacantLoss">0</span>
-                        </div>
+                        <div class="col-md-11 m-l-m-15 m-t-8">
 
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 total-loss-resid-div">
-                            <div class="m-t-16">
-                                <span class="total-loss-res-text" id="VacantLossRes-count">RES</span> 0
+                            <div class="col-md-7 total-loss-div">
+                                Total loss from vacant properties
                             </div>
-                            <div class="total-loss-res-amt">
-                                <span id="VacantLossRes"> 0</span>
-                                <span class="per-month">AED</span>
+                            <div class="col-md-5">
+                                <i class="fa fa-chevron-down total-loss-down-arrow"></i> <span class="total-loss-number" id="VacantLoss">0</span>
                             </div>
+
                         </div>
-                        <div class="col-md-6 total-loss-comm-div">
-                            <div class="m-t-16">
-                                <span class="total-loss-comm-text" id="VacantLossCom-count">COM</span> 0
+                        <div class="w-md-90">
+                            <div class="col-md-6 total-loss-resid-div">
+                                <div class="m-t-16">
+                                    <span class="total-loss-res-text" id="VacantLossRes-count">RES</span> 0
+                                </div>
+                                <div class="total-loss-res-amt">
+                                    <span id="VacantLossRes"> 0</span>
+                                    <span class="per-month">AED</span>
+                                </div>
                             </div>
-                            <div class="total-loss-res-amt">
-                                <span id="VacantLossCom"> 0</span>
-                                <span class="per-month">AED</span>
+                            <div class="col-md-6 total-loss-comm-div">
+                                <div class="m-t-16">
+                                    <span class="total-loss-comm-text" id="VacantLossCom-count">COM</span> 0
+                                </div>
+                                <div class="total-loss-res-amt">
+                                    <span id="VacantLossCom"> 0</span>
+                                    <span class="per-month">AED</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -125,159 +137,15 @@
             @*<div class="portlet-grid" style="width:98%;" id="earning-table">*@
             <div class="home-common-table" id="earning-table">
 
-                @*<table class="table table-responsive tbl-dahboard">
-                        <tr class="tbl-head">
-                            <th class="p-15"> Receipt No </th>
-                            <th class="p-15"> Receipt Date </th>
-                            <th class="p-15"> Property Name </th>
-                            <th class="p-15"> Unit Name </th>
-                            <th class="p-15"> Tenant Name </th>
-                            <th class="p-15"> Total Amount </th>
-                        </tr>
-                        <tr>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                        </tr>
-                    </table>*@
-
-                @*<div class="panel-body">
-                        @*<div class="col-md-12" style="background-color:white;">
-                        <div class="divTable leama-fieldset">
-                            <div class="divTableBody divFontBodyTable">
-                                <div class="divTableHeading">
-                                    <div class="divTableCell">ReceiptNo</div>
-                                    <div class="divTableCell">ReceiptDate</div>
-                                    <div class="divTableCell">Property_Name</div>
-                                    <div class="divTableCell">unit_Name</div>
-                                    <div class="divTableCell">Tenant_Name</div>
-                                    <div class="divTableCell">TotalAmount</div>
-                                </div>
-                                <div class="divTableRow" id="earning-table-row">
-
-                                </div>
-                                @*<div class="divTableRow">
-                                        <div class="divTableCell">TenantId</div>
-                                        <div class="divTableCell">CompanyName</div>
-                                        <div class="divTableCell">TenantType</div>
-                                        <div class="divTableCell">TradelicenseNo</div>
-                                        <div class="divTableCell">
-                                            <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
-                                            <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
-                                        </div>
-
-                                    </div>
-                                    <div class="divTableRow">
-                                        <div class="divTableCell">TenantId</div>
-                                        <div class="divTableCell">CompanyName</div>
-                                        <div class="divTableCell">TenantType</div>
-                                        <div class="divTableCell">TradelicenseNo</div>
-                                        <div class="divTableCell">
-                                            <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
-                                            <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
-                                        </div>
-
-                                    </div>
-
-
-                            </div>
-                        </div>
-                        @*</div>
-                    </div>*@
+              
             </div>
 
             <div class="home-common-table" id="vacant-table">
-                @*<div class="panel-body">
-                        @*<div class="col-md-12" style="background-color:white;">
-                        <div class="divTable leama-fieldset">
-                            <div class="divTableBody divFontBodyTable">
-                                <div class="divTableHeading">
-                                    <div class="divTableCell">Property Name </div>
-                                    <div class="divTableCell">Unit Name</div>
-                                    <div class="divTableCell">Property Usage</div>
-                                    <div class="divTableCell">Region Name</div>
-                                    <div class="divTableCell">Caretaker Name</div>
-                                    <div class="divTableCell">Country</div>
-                                    <div class="divTableCell">Rental Rate Month</div>
-                                    <div class="divTableCell">Vacant Start Date</div>
-                                    <div class="divTableCell">Aging Days</div>
-                                </div>
-
-                                @*<div class="divTableRow">
-                                    <div class="divTableCell">TenantId</div>
-                                    <div class="divTableCell">CompanyName</div>
-                                    <div class="divTableCell">TenantType</div>
-                                    <div class="divTableCell">TradelicenseNo</div>
-                                    <div class="divTableCell">
-                                        <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
-                                        <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
-                                    </div>
-
-                                </div>
-                                <div class="divTableRow">
-                                    <div class="divTableCell">TenantId</div>
-                                    <div class="divTableCell">CompanyName</div>
-                                    <div class="divTableCell">TenantType</div>
-                                    <div class="divTableCell">TradelicenseNo</div>
-                                    <div class="divTableCell">
-                                        <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
-                                        <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </div>
-                        @*</div>
-                    </div>*@
+               
             </div>
 
             <div class="home-common-table" id="loss-table">
-                @*<div class="panel-body">
-                        @*<div class="col-md-12" style="background-color:white;">
-                        <div class="divTable leama-fieldset">
-                            <div class="divTableBody divFontBodyTable">
-                                <div class="divTableHeading">
-                                    <div class="divTableCell">Loss ID</div>
-                                    <div class="divTableCell">Company Name</div>
-                                    <div class="divTableCell">Tenant Type</div>
-                                    <div class="divTableCell">Trade License Number</div>
-                                    <div class="divTableCell">Action</div>
-
-                                </div>
-
-                                <div class="divTableRow">
-                                    <div class="divTableCell">TenantId</div>
-                                    <div class="divTableCell">CompanyName</div>
-                                    <div class="divTableCell">TenantType</div>
-                                    <div class="divTableCell">TradelicenseNo</div>
-                                    <div class="divTableCell">
-                                        <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
-                                        <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
-                                    </div>
-
-                                </div>
-                                <div class="divTableRow">
-                                    <div class="divTableCell">TenantId</div>
-                                    <div class="divTableCell">CompanyName</div>
-                                    <div class="divTableCell">TenantType</div>
-                                    <div class="divTableCell">TradelicenseNo</div>
-                                    <div class="divTableCell">
-                                        <a class="glyphicon glyphicon-edit tenant-edit" href="/LeaMaPortal/Dashboard/Edit" title="Edit"> </a>  |
-                                        <a class="glyphicon glyphicon-trash tenant-delete" href="/LeaMaPortal/Dashboard/Delete" style="color:red" title="Delete"> </a>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </div>
-                        @*</div>
-                    </div>*@
+               
             </div>
 
             <!-- End Grid View -->
@@ -322,66 +190,12 @@
             <!-- Begin Grid View -->
 
             <div class="home-common-table" id="utility-table">
-                @*<table class="table table-responsive tbl-dahboard">
-                        <tr class="tbl-head">
-                            <th class="p-15"> Receipt No </th>
-                            <th class="p-15"> Receipt Date </th>
-                            <th class="p-15"> Property Name </th>
-                            <th class="p-15"> Unit Name </th>
-                            <th class="p-15"> Tenant Name </th>
-                            <th class="p-15"> Total Amount </th>
-                        </tr>
-                        <tr>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                        </tr>
-                    </table>*@
             </div>
 
             <div class="home-common-table" id="rent-table">
-                @*<table class="table table-responsive tbl-dahboard">
-                        <tr class="tbl-head">
-                            <th class="p-15"> Receipt Name </th>
-                            <th class="p-15"> Receipt Date </th>
-                            <th class="p-15"> Property Name </th>
-                            <th class="p-15"> Unit Name </th>
-                            <th class="p-15"> Tenant Name </th>
-                            <th class="p-15"> Total Amount </th>
-                        </tr>
-                        <tr>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                        </tr>
-                    </table>*@
             </div>
 
             <div class="home-common-table" id="expense-table">
-                @*<table class="table table-responsive tbl-dahboard">
-                        <tr class="tbl-head">
-                            <th class="p-15"> Receipt Desc </th>
-                            <th class="p-15"> Receipt Date </th>
-                            <th class="p-15"> Property Name </th>
-                            <th class="p-15"> Unit Name </th>
-                            <th class="p-15"> Tenant Name </th>
-                            <th class="p-15"> Total Amount </th>
-                        </tr>
-                        <tr>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                            <td class="p-15"> test 1 </td>
-                        </tr>
-                    </table>*@
             </div>
 
             <!-- End Grid View -->

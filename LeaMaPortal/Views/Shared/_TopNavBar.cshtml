@@ -87,8 +87,17 @@
 
 <div class="sub-header-main">
     <div class="col-md-6 pull-left" style="padding: 35px;" id="TopNavBarFilter">
-        <span> <i class="fa fa-filter"></i> FILTER PERFORMANCE BY :  </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span>
+        <span> 
+        <img src="~/Images/settings.png" class="image-rotate-270" />
+            &nbsp;&nbsp;&nbsp;
+            <span style="border-right :1px solid #eee; color:#554289;">
+                FILTER PERFORMANCE BY
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>    
+        </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+        @*<span class="filter-span">
             By Month
             <span class="input-group input-append date" id="datePicker" style="width: 1px;
     position: absolute;
@@ -98,9 +107,18 @@
                 <span class="input-group-addon add-on" style="background: transparent;
     border: none;"><span class="fa fa-calendar"></span></span>
             </span>
+        </span>*@
+
+        <span class="regionDropdown filter-span" style="width: 80px;">
+            By Month 
+            <span class="input-group input-append date" id="datePicker" style="top: -20px;left: 70px;">
+                <input type="hidden" class="form-control" name="date" />
+                    <i class="fa fa-calendar regionDropBtn"></i>
+            </span>
         </span>
+
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span class="regionDropdown">
+        <span class="regionDropdown filter-span" style="margin-right: 10px;">
             By Region <i class="fa fa-angle-down regionDropBtn" onclick="showRegionList()"></i>
 
             <span id="dropDownRegion" class="region-dropdown-content">
@@ -115,7 +133,7 @@
             </span>
 
         </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span class="propDropdown">
+        <span class="propDropdown filter-span">
             By Property <i class="fa fa-angle-down propDropBtn" onclick="showPropList()"></i>
 
             <span id="dropDownProp" class="prop-dropdown-content">
@@ -143,9 +161,9 @@
                             <p>Logged in as:</p>
                         </div>
                         <div class="user-name">
-                            <p>@user.Name</p>
+                            <p class="logName">@user.Name</p>
                             <span>@user.Category</span>
-                            <label class="width-35">
+                            <label class="width-35 logged-arrow">
                                 <i class="fa fa-angle-down"></i>
                                 <i class="fa fa-angle-up"></i>
                             </label>

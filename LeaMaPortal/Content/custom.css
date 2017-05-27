@@ -31,6 +31,19 @@
 .sidebar-menu{
     width:155px !important;
 }
+.user-name p {
+    color: #9fa9ba !important;
+    font-weight:normal;
+}
+.user-name span{
+    font-family: ProximaNova;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #7f8fa4 !important;
+}
+.user-name .logName {
+    color: #1a91eb !important;
+}
 
 /* Bootstrap styles */
 
