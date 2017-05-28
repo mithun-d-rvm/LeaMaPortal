@@ -33,6 +33,13 @@
 
 /* Common Styles */
 
+body{
+    font-family: 'Abel', sans-serif!important;
+}
+
+/*.font-type-abel{
+    font-family:abel !important;
+}*/
 .p-t-17{
     padding-top:17px;
 }
@@ -66,11 +73,23 @@
 .m-l-5 {
     margin-left: 5px;
 }
+.m-l-m-15{
+    margin-left:-15px;
+}
 .m-l-m-40{
     margin-left: -40px;
 }
+.m-l-15{
+    margin-left: 15px;
+}
 .m-t-20{
     margin-top:20px;
+}
+.m-t-8{
+    margin-top: 8px;
+}
+.m-t-m-10{
+    margin-top: -10px;
 }
 .p-b-10{
     padding-bottom:10px;
@@ -114,11 +133,17 @@
 .font-x-large{
     font-size:x-large;
 }
+.font-9{
+    font-size:9px;
+}
 .font-40{
     font-size: 40px !important;
 }
 .ht-50{
     height:50px !important;
+}
+.top-m-20{
+    top:-20px !important;
 }
 .border-btm {
     border-bottom: 1px solid;
@@ -128,6 +153,23 @@
 }
 .white-bg{
     background-color:white;
+}
+.no-radius{
+    border-radius: 0 !important;
+}
+.image-rotate-270{
+     -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+.image-rotate-90{
+     -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 
 
@@ -147,6 +189,10 @@
 }
 .w-md-10{
     width:10% !important;
+}
+.w-md-90 {
+    width: 90%;
+    float: left;
 }
 
 /* Modal for success/error result */
@@ -172,20 +218,86 @@
     cursor: pointer;
 }
 
-/* Dashboard */
+/* Topnavbar */
 
+.filter-span{
+    color:#9fa9ba;
+    font-size:14px;
+}
+.logged-arrow {
+    position: absolute;
+    top: 12px;
+    left: 85%;
+}
+
+/* Dashboard */
+.earning-graph {
+    font-size: x-small;
+    color: white;
+}
+.graph-revenue-div {
+    float: left;
+    width: 30%;
+}
+.graph-loss-div {
+    float: left;
+    width: 30%;
+    position: absolute;
+    bottom: 0;
+    margin-left: 42px;
+}
+.graph-revenue-color {
+    color: #52ce6f;
+}
+.graph-loss-color {
+    color: #ff806f;
+}
+.graph-revenue {
+    float: left;
+    width: 40px;
+    height: 70px;
+    border-radius: 4px;
+    background-image: linear-gradient(206deg, #52ce6f, #529ace);
+}
+.graph-loss {
+    float: left;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-image: linear-gradient(219deg, #d04242, #9e4141);
+}
+.graph-text-center {
+    text-align: center;
+    width: 40px;
+}
+.earning-profit-loss-arrow{
+    background-image: linear-gradient(to left, #664279, #54428b);
+    border-style: solid;
+    border-width: 1px;
+    padding: 7px;
+    border-radius: 25px;
+    margin-right: 7px;
+}
+.tile-left-line{
+    border: 2px solid #594286;
+    height: 170px;
+    margin-left: 4px;
+    margin-top: 3px;
+    background-color: #594286;
+    border-radius: 4px;
+}
 .logo-thumb{
     padding:21px;
     background-color: #182730;
     color:white;
     margin-bottom: -7px;
 }
-.report-text{
+/*.report-text{
     color:#ac8fe9;
-}
-.report-text:hover{
+}*/
+.report-text{
     border-radius: 15px !important;
-    padding: 5px;
+    padding: 5px 17px;
     /*width: 100% !important;*/
     border: solid 1px #1a91eb; 
     color:white;
@@ -193,8 +305,13 @@
 .dashboard-bg {
     background: #eff3f6;
 }
+.dashboard-blank {
+    margin-left: 25px;
+    margin-right: -25px;
+}
 .earning-bg {
-    background-color: #554289 !important;
+    /* background-color: #554289 !important; */
+    background-image: linear-gradient(242deg, #52428c, #684279);
 }
 .earning-header {
     padding-bottom: 18px;
@@ -202,16 +319,25 @@
     color: white;
 }
 .earning-money {
-    font-size: 28px;
-    color: #52ce6f;
+    font-size: 35px;
+    /*color: #52ce6f;*/
     padding-bottom: 18px;
+}
+#EarningHistory{
+    color: #52ce6f;
+}
+.earning-money .per-month{
+    color:white;
 }
 .earning-up-icon {
     font-size: 34px;
-    background-color: rgba(73, 50, 123, 0.57);
+    /*background-color: rgba(73, 50, 123, 0.57);*/
     padding: 6px;
     border-radius: 20px;
     color: #52ce6f;
+    background-image: linear-gradient(to left, #664279, #54428b);
+    /*border-image-source: linear-gradient(to bottom, rgba(73, 50, 123, 0.57), #785791);
+    border-image-slice: 1;*/
 }
 .earning-month {
     color: white;
@@ -265,12 +391,13 @@
     margin-top: 7px;
 }
 .vacant-residential-text {
-    font-size: 8px;
+    font-size: 10px;
     background-color: #0474c8;
-    padding: 3px;
+    padding: 3px 10px;
     color: white;
     border-radius: 4px;
     text-transform: uppercase;
+    text-align:center;
     /* width: 50%; */
 }
 .vacant-commercial-div {
@@ -279,12 +406,13 @@
     /* padding-top: 8px; */
 }
 .vacant-commercial-text {
-    font-size: 8px;
+    font-size: 10px;
     background-color: #b24a9a;
-    padding: 3px;
+    padding: 3px 10px;
     color: white;
     border-radius: 4px;
     text-transform: uppercase;
+    text-align:center;
     /* width: 50%; */
 }
 .total-loss-div {
@@ -305,16 +433,16 @@
 }
 .total-loss-resid-div{
     background-color: #f9f9f9;
-    height: 110px;
+    height: 120px;
     margin-top: 10px;
-    width: 44% !important;
-    margin-left: 9px;
+    width: 48% !important;
+    /*margin-left: 9px;*/
 }
 .total-loss-res-text{
     background-color: #0474c8;
     font-size: 10px;
     color: white;
-    padding: 2px;
+    padding: 2px 10px;
     border-radius: 5px;
 }
 .total-loss-res-amt {
@@ -324,7 +452,7 @@
 }
 .total-loss-comm-div {
     background-color: #f9f9f9;
-    height: 110px;
+    height: 120px;
     margin-top: 10px;
     margin-left: 5px;
 }
@@ -332,7 +460,7 @@
     background-color: #b24a9a;
     font-size: 10px;
     color: white;
-    padding: 2px;
+    padding: 2px 10px;
     border-radius: 5px;
 }
 .dues-text {
@@ -406,10 +534,11 @@
 
 /* Sub Header Menu */
 .sub-header-main{
-    height: 100px; 
+    height: 95px; 
     font-size: 12px;
-    margin-top: 95px;
+    /*margin-top: 95px;*/
     border-bottom: 1px solid black;
+    margin-left: 20px;
 }
 .subheader-profile{
     padding:6%;
@@ -419,7 +548,7 @@
     text-transform: uppercase;
     height: 40px;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 16px;    
 }
 .subheader-select option{
     padding:2px;
@@ -429,7 +558,7 @@
 .sidebar-btn {
     border: 1px solid white;
     color: black;
-    border-radius: 15px !important;
+    border-radius: 25px !important;
     padding: 5px;
     /*background-color: #ffb100;*/
     text-decoration: none;
@@ -458,7 +587,7 @@
 .master-form-btn {
     background-color: #554289;
     color: white;
-    border-radius: 15px !important;
+    border-radius: 30px !important;
     width: 200px;
     padding: 10px !important;
 }
@@ -501,6 +630,7 @@
 .tca-modal-md{
     width: 1100px !important;
     margin-right: 40px !important;
+    padding-left: 15px;
 }
 
 .search-btn{
@@ -508,14 +638,49 @@
 }
 
 /* Notification */
+.notification-msg-line{
+    float: left;
+    border: 2px solid #d35847;
+    height: 35px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+.notification-icon{
+    height: 96px;
+    padding-top: 40px !important;
+}
+.notification-badge{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    background-color: red !important;
+}
+.menu-home-notification-div {
+    background-image: linear-gradient(297deg, #564593, #252243);
+}
 .notification-modal-content{
-    margin-top: 11%;
-    margin-left: -4%;
-    width: 129%;
+    /*margin-top: 11%;*/
+    /*margin-left: -4%;
+    width: 129%;*/
     background-color: #3a3939 !important;
     box-shadow: 0 16px 17px 0 rgba(0, 0, 0, 0.5) !important;
 }
-
+.notification-left-yellow-line {
+    float: left;
+    background-color: #eb9a15;
+    height: 328px;
+    border: 2px solid #eb9a15;
+    margin-left: -5px;
+    margin-top: 1px;
+}
+.notification-left-black-line {
+    background-color: #2c2c2c;
+    position: absolute;
+    height: 328px;
+    border: 2px solid #2c2c2c;
+    margin-top: -15px;
+    width: 20px;
+}
 .notification-hr {
     border-color: #797979 !important;
 }
@@ -527,13 +692,13 @@
     font-family: Abel;
 }
 .notification-text{
-    font-size: 25px;
+    font-size: 20px;
     color: #f5a623;
     text-transform: uppercase;
     padding-top: 15px;
 }
 .notification-number{
-    font-size: 75px;
+    font-size: 72px;
     color: #f5a623;
     text-transform: uppercase;    
     padding-top: 35px;
@@ -545,23 +710,35 @@
 .notification-filter-line{
     border-left: 1px solid white;
 }
-.notification-filter-div{
+.notification-filter-div {
     color: #8a93a3;
-    font-size: 13px;
+    font-size: 12px;
     font-family: Abel;
-    border-left: 1px solid #797979;    
+    border-left: 1px solid #797979;
+    padding-top: 20px;
+    height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .notification-filter {
     color: white;
-    padding: 2px 10px;
-    border-radius: 4px;
-    margin-left: 10px;
-    margin-right: 10px;
+    padding: 2px 20px;
+    border-radius: 4px 0px 0px 4px;
+    /*margin-left: 10px;
+    margin-right: 10px;*/
     text-transform: uppercase;
     cursor:pointer;
+    border-right: 1px solid white;
 }
-.notification-filter.active{
-    background-color: #52ce6f;
+    .notification-filter.active {
+        background-color: #52ce6f;
+        border-radius: 4px;
+        margin-left: -6px;
+        border : 2px solid #52ce6f;
+    }
+.notification-modal-filter{
+    float: left;
+    width: 13%;
 }
 .notification-vr-1{
     padding-right: 10px;
@@ -579,16 +756,24 @@
 .notification-approve{
     background-color: #f6a623;
     color: white;
-    padding: 2px 10px;
+    /*padding: 2px 10px;*/
     border-radius: 3px;
+    line-height: 10px !important;
 }
 .notification-reject{
     background-color: #d35847;
     color: white;
-    padding: 2px 10px;
+    /*padding: 2px 10px;*/
     border-radius: 3px;
+    line-height: 10px !important;
 }
-
+.notification-view{
+    background-color: #52428c;
+    color: white;
+    /*padding: 2px 10px;*/
+    border-radius: 3px;
+    line-height: 10px !important;
+}
 /* Pagination */
 .pagination-btn {
     background: #554289;
