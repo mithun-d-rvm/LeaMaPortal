@@ -45,7 +45,7 @@ namespace LeaMaPortal.Controllers
                     case StaticHelper.NOTIFICATION_UTILITY_DUES:
                         UtilityDuesData = await notify.getNotificationUtilityDues();
                         return Json(UtilityDuesData, JsonRequestBehavior.AllowGet);
-                    case StaticHelper.NOTIFICATION_AGREEMENT_APPROVAL:
+                    case StaticHelper.NOTIFICATION_TCA_APPROVAL:
                         AgreementData = await notify.getNotificationAgreementApproval();
                         return Json(AgreementData, JsonRequestBehavior.AllowGet);
                     case StaticHelper.NOTIFICATION_CONTRACT_APPROVED:

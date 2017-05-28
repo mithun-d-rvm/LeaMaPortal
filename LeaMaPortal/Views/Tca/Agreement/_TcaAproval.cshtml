@@ -10,20 +10,20 @@
 {
     @Html.HiddenFor(x => x.Ag_Tenant_id)
     @Html.HiddenFor(x => x.Ag_Tenant_Name)
-    @Html.HiddenFor(x=>x.property_id)
+    @Html.HiddenFor(x => x.property_id)
     @Html.HiddenFor(x => x.Property_ID_Tawtheeq)
     @Html.HiddenFor(x => x.Properties_Name)
     @Html.HiddenFor(x => x.Unit_ID_Tawtheeq)
     @Html.HiddenFor(x => x.Unit_Property_Name)
     @Html.HiddenFor(x => x.Caretaker_id)
     @Html.HiddenFor(x => x.Caretaker_Name)
-    @Html.HiddenFor(x=>x.Agreement_No)
+    @Html.HiddenFor(x => x.Agreement_No)
     @*@Html.HiddenFor(x => x.Tenant_Type)*@
     <div class="font-smaller">
         @Html.HiddenFor(m => m.New_Renewal_flag)
         <button type="button" class="close font-40" data-dismiss="modal"> &times;</button>
         <div class="text-uppercase popup-heading">
-            Contract Tenancy Agreement - Renewal
+            Contract Tenancy Agreement - Aproval
         </div>
         <div class="p-b-25"> &nbsp; </div>
         <div class="row" style="pointer-events: none;">
@@ -63,9 +63,9 @@
                         @Html.LabelFor(model => model.Agreement_No, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                       
-                        @*@Html.EditorFor(model => model.Agreement_No, new { htmlAttributes = new { @class = "master-form-input form-control",@readonly = "readonly"} })*@  
-                        <input type="text" value="@Model.Agreement_No"  class="master-form-input form-control" disabled />
+
+                        @*@Html.EditorFor(model => model.Agreement_No, new { htmlAttributes = new { @class = "master-form-input form-control",@readonly = "readonly"} })*@
+                        <input type="text" value="@Model.Agreement_No" class="master-form-input form-control" disabled />
                         @*@Html.EditorFor(model => model.Agreement_No, new { htmlAttributes = new { @class = "master-form-input" } })*@
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                       @Html.EditorFor(model => model.Ag_Tenant_Name, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
+                        @Html.EditorFor(model => model.Ag_Tenant_Name, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -130,7 +130,7 @@
                     </div>
                     <div class="col-md-6">
                         <input type="text" value="@Model.property_id" class="master-form-input form-control" disabled />
-                        
+
                         @*@Html.EditorFor(model => model.property_id, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })*@
                         @*@Html.DropDownList("TcaPropertyId", null, "-- Select --", new { @class = "master-form-input" })*@
                     </div>
@@ -301,7 +301,7 @@
         <div class="row ht-5">
             &nbsp;
         </div>
-        
+
         <!-- BEGIN AGREEMENT UTILITY -->
         <div class="p-lr-20" id="AgreementUtilityR">
             @*@Html.Partial("_AgreementUtility")*@
@@ -310,7 +310,7 @@
         <div class="row ht-5">
             &nbsp;
         </div>
-       
+
         <!-- BEGIN AGREEMENT UNIT -->
         <div class="p-lr-20" id="AgreementCheckListR">
             @*@Html.Partial("_AgreementCheckList")*@
@@ -328,155 +328,26 @@
             &nbsp;
         </div>
         <div class="col-md-12 form-input-padding">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 &nbsp;
             </div>
-            <div class="col-md-4">
-                <input type="submit" class="btn master-form-btn" value="Submit" />
+            <div class="col-md-2">
+                <input type="button" class="btn master-form-btn tca-approve" data-dismiss="modal" data-agreementno="@Model.Agreement_No" value="Aprove" />
+            </div>
+            <div class="col-md-1">&nbsp;</div>
+            <div class="col-md-2">
+                <input type="button" class="btn master-form-btn tca-reject" data-dismiss="modal" data-agreementno="@Model.Agreement_No" value="Reject" />
+            </div>
+            <div class="col-md-3">
+                &nbsp;
             </div>
         </div>
     </div>
 }
 <script>
-   
 
-    $("#TcaRenewal #Tenant_Type").on('change', function (e) {
-        debugger;
-        var Tenant_Type = $("#TcaRenewal #Tenant_Type").val();
-        $("#TcaRenewal #Ag_Tenant_id").val(null);
-        $("#TcaRenewal #Ag_Tenant_Name").val(null);
-        if (Tenant_Type != "" && Tenant_Type != null) {
-            $.ajax(
-                {
-                    url: "../Tca/GetTenentDetails",
-                    // dataType: "jsonp",
-                    method: "GET",
-                    data: { Type: $("#TcaRenewal #Tenant_Type").val() }, //FormData(form.get(0)),
-                    contentType: "application/json",
 
-                    success: function (response) {
-                        debugger;
-                        if (response != null) {
-                            $("#TcaRenewal #Ag_Tenantid").empty();
-                            $("#TcaRenewal #Ag_TenantName").empty();
-                            var tenantIdoptions = '<option value="" selected>--Select--</option>';
-                            var tenantNameoptions = '<option value="" selected>--Select--</option>';
-                            $.each(response, function (index, data) {
-                                tenantIdoptions += '<option value="' + data.Tenant_Id + '">' + data.Tenant_Id + '</option>';
-                                tenantNameoptions += '<option value="' + data.Tenant_Id + '">' + data.Tenant_Name + '</option>';
-                            });
-                            $('#Ag_Tenantid').append(tenantIdoptions);
-                            $('#Ag_TenantName').append(tenantNameoptions);
-                        }
-                    },
-                    error: function (jqXhr, textStatus, errorThrown) {
-                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-                    },
-                    complete: function () {
-                        // $("#TcaRenewal #").addClass("hide");
-                    }
-
-                });
-        }
-    });
-
-    $("#TcaRenewal #SecurityFlag").change(function () {
-        debugger;
-        var SecurityFlag = $("#TcaRenewal #SecurityFlag").val();
-        if (SecurityFlag != undefined && (SecurityFlag == "Cheque" || SecurityFlag == "Online" || SecurityFlag == "Cheque without date")) {
-            $('#Security_chequeno').removeAttr('disabled');
-            $('#Security_chequedate').removeAttr('disabled');
-            //$("SecurityChequeno").prop("disabled", false);
-            //$("SecurityChequedate").prop("disabled", false);
-        }
-        else {
-            $('#Security_chequeno').attr('disabled', true);
-            $('#Security_chequedate').attr('disabled', true);
-        }
-        return;
-    });
-
-    $("#TcaRenewal #Ag_Tenantid").change(function () {
-        debugger;
-        var tenantid = $("#TcaRenewal #Ag_Tenantid").val();
-        $("#TcaRenewal #Ag_TenantName").val($("#TcaRenewal #Ag_Tenantid option:selected").val());
-
-        $("#TcaRenewal #Ag_Tenant_id").val($("#TcaRenewal #Ag_Tenantid option:selected").text() == "--Select--" ? null : $("#TcaRenewal #Ag_Tenantid option:selected").text());
-        $("#TcaRenewal #Ag_Tenant_Name").val($("#TcaRenewal #Ag_TenantName option:selected").text() == "--Select--" ? null : $("#TcaRenewal #Ag_TenantName option:selected").text());
-       // $("#TcaRenewal #Ag_Tenant_Name").val($("#TcaRenewal #Ag_Tenant_id option:selected").text());
-        return;
-    });
-    $("#TcaRenewal #Ag_TenantName").change(function () {
-        var tenantid = $("#TcaRenewal #Ag_TenantName").val();
-        $("#TcaRenewal #Ag_Tenantid").val($("#TcaRenewal #Ag_TenantName option:selected").val());
-        $("#TcaRenewal #Ag_Tenant_id").val($("#TcaRenewal #Ag_Tenantid option:selected").text() == "--Select--" ? null : $("#TcaRenewal #Ag_Tenantid option:selected").text());
-        $("#TcaRenewal #Ag_Tenant_Name").val($("#TcaRenewal #Ag_TenantName option:selected").text() == "--Select--" ? null : $("#TcaRenewal #Ag_TenantName option:selected").text());
-        //$("#TcaRenewal #Ag_Tenant_id").val($("#TcaRenewal #Ag_Tenant_Name option:selected").text());
-        return;
-    });
-
-    $("#TcaRenewal #Caretakerid").change(function () {
-        var Caretakerid = $("#TcaRenewal #Caretakerid").val();
-        $("#TcaRenewal #CaretakerName").val($("#TcaRenewal #Caretakerid option:selected").val());
-
-        $("#TcaRenewal #Caretaker_id").val($("#TcaRenewal #Caretakerid option:selected").text() == "--Select--" ? null : $("#TcaRenewal #Caretakerid option:selected").text());
-        $("#TcaRenewal #Caretaker_Name").val($("#TcaRenewal #CaretakerName option:selected").text() == "--Select--" ? null : $("#TcaRenewal #CaretakerName option:selected").text());
-
-        // $("#TcaRenewal #Ag_Tenant_Name").val($("#TcaRenewal #Ag_Tenant_id option:selected").text());
-        return;
-    });
-    $("#TcaRenewal #CaretakerName").change(function () {
-        var Caretakerid = $("#TcaRenewal #CaretakerName").val();
-        $("#TcaRenewal #Caretakerid").val($("#TcaRenewal #CaretakerName option:selected").val());
-
-        $("#TcaRenewal #Caretaker_id").val($("#TcaRenewal #Caretakerid option:selected").text() == "--Select--" ? null : $("#TcaRenewal #Caretakerid option:selected").text());
-        $("#TcaRenewal #Caretaker_Name").val($("#TcaRenewal #CaretakerName option:selected").text() == "--Select--" ? null : $("#TcaRenewal #CaretakerName option:selected").text());
-        //$("#TcaRenewal #Ag_Tenant_id").val($("#TcaRenewal #Ag_Tenant_Name option:selected").text());
-        return;
-    });
-
-    $("#TcaRenewal #TcaPropertyIDTawtheeq").change(function () {
-        var propertyid = $("#TcaRenewal #TcaPropertyIDTawtheeq").val();
-        $("#TcaRenewal #TcaPropertyName").val($("#TcaRenewal #TcaPropertyIDTawtheeq option:selected").val());
-        $("#TcaRenewal #UnitIDTawtheeq").val($("#TcaRenewal #TcaPropertyIDTawtheeq option:selected").val());
-        $("#TcaRenewal #UnitPropertyName").val($("#TcaRenewal #TcaPropertyIDTawtheeq option:selected").val());
-        $("#TcaRenewal #property_id").val(propertyid);
-        setpropertyFields();
-        // $("#TcaRenewal #Ag_Tenant_Name").val($("#TcaRenewal #Ag_Tenant_id option:selected").text());
-        return;
-    });
-    $("#TcaRenewal #TcaPropertyName").change(function () {
-        var propertyid = $("#TcaRenewal #TcaPropertyName").val();
-        $("#TcaRenewal #TcaPropertyIDTawtheeq").val($("#TcaRenewal #TcaPropertyName option:selected").val());
-        $("#TcaRenewal #UnitIDTawtheeq").val($("#TcaRenewal #TcaPropertyName option:selected").val());
-        $("#TcaRenewal #UnitPropertyName").val($("#TcaRenewal #TcaPropertyName option:selected").val());
-        $("#TcaRenewal #property_id").val(propertyid);
-        setpropertyFields();
-        //$("#TcaRenewal #Ag_Tenant_id").val($("#TcaRenewal #Ag_Tenant_Name option:selected").text());
-        return;
-    });
-
-    $("#TcaRenewal #UnitIDTawtheeq").change(function () {
-        var propertyid = $("#TcaRenewal #UnitIDTawtheeq").val();
-        $("#TcaRenewal #TcaPropertyIDTawtheeq").val($("#TcaRenewal #UnitIDTawtheeq option:selected").val());
-        $("#TcaRenewal #TcaPropertyName").val($("#TcaRenewal #UnitIDTawtheeq option:selected").val());
-        $("#TcaRenewal #UnitPropertyName").val($("#TcaRenewal #UnitIDTawtheeq option:selected").val());
-        $("#TcaRenewal #property_id").val(propertyid);
-        setpropertyFields();
-        //$("#TcaRenewal #Ag_Tenant_id").val($("#TcaRenewal #Ag_Tenant_Name option:selected").text());
-        return;
-    });
-
-    $("#TcaRenewal #UnitPropertyName").change(function () {
-        var propertyid = $("#TcaRenewal #UnitPropertyName").val();
-        $("#TcaRenewal #TcaPropertyIDTawtheeq").val($("#TcaRenewal #UnitPropertyName option:selected").val());
-        $("#TcaRenewal #TcaPropertyName").val($("#TcaRenewal #UnitPropertyName option:selected").val());
-        $("#TcaRenewal #UnitIDTawtheeq").val($("#TcaRenewal #UnitPropertyName option:selected").val());
-        $("#TcaRenewal #property_id").val(propertyid);
-        setpropertyFields();
-        //$("#TcaRenewal #Ag_Tenant_id").val($("#TcaRenewal #Ag_Tenant_Name option:selected").text());
-        return;
-    });
+    
 
     $(document).ready(function () {
         debugger;
@@ -499,6 +370,7 @@
     $("#TcaRenewal #Total_Rental_amount").change(function () {
         setContractAmountPerDayRenewal();
     });
+    
     function setContractAmountPerDayRenewal() {
         var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
         var firstDate = new Date($("#TcaRenewal #Agreement_Start_Date").val());
@@ -517,13 +389,12 @@
 
         $("#TcaRenewal #Perday_Rental").val(amountperday);
     }
-    setContractAmountPerDay();
-   
+    //setContractAmountPerDay();
 </script>
 
 <script>
     $("form#TcaRenewal").off("submit").on("submit", function (e) {
-        // e.preventDefault();
+         e.preventDefault();
         try {
             var firstDate = new Date($("#TcaRenewal #Agreement_Start_Date").val());
             var secondDate = new Date($("#TcaRenewal #Agreement_End_Date").val());
@@ -538,5 +409,79 @@
             alert(ex);
         }
 
+    });
+    function AgreementApproved(AgreementNo) {
+        //$("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Tca/TcaApprove",
+            type: "Get",
+            data: { AgreementNo: AgreementNo },
+            //contentType: "application/json",
+            //processData: false,
+            success: function (html) {
+                //alert("Agreement approved successfully");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                $(".result-title").text("Success");
+                $(".result-modal-body span").text("TCA approved successfully");
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text(masterResultError);
+            },
+            complete: function () {
+                $('#masterResultModal').modal('show');
+                $(".notification-filter-content").empty();
+                getData("TCA approval");
+            }
+        });
+    }
+    function AgreementRejected(AgreementNo) {
+        //$("#img-loader").removeClass("hide");
+        $.ajax(
+        {
+            url: "../Tca/TcaReject",
+            type: "Get",
+            data: { AgreementNo: AgreementNo },
+            //contentType: "application/json",
+            //processData: false,
+            success: function (html) {
+                //alert("Agreement rejected successfully");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                $(".result-title").text("Success");
+                $(".result-modal-body span").text("TCA rejected successfully");
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text(masterResultError);
+            },
+            complete: function () {
+                $('#masterResultModal').modal('show');
+                $(".notification-filter-content").empty();
+                getData("TCA approval");
+            }
+        });
+    }
+    $(".tca-approve").click(function (e) {
+        // $("#img-loader").removeClass("hide");
+        e.preventDefault();
+        var id = $(this).data("agreementno");
+        AgreementApproved(id);
+       
+    });
+    $(".tca-reject").click(function (e) {
+        // $("#img-loader").removeClass("hide");
+        e.preventDefault();
+        var id = $(this).data("agreementno");
+        AgreementRejected(id);
+      
     });
 </script>
