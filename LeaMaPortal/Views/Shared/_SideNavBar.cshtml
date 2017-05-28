@@ -170,10 +170,14 @@
 
 <script>
     $('.modal-white').on('show.bs.modal', function () {
-        setTimeout(function () {
+        $('.menu-home-notification-div').css({ 'background-image': 'none', 'background-color': '#eb9a15' });
+        setTimeout(function () {            
             $('.modal-backdrop').css('background', 'white');
             $('.modal-backdrop').css('opacity', 0);
         }, 10);
+    });
+    $('.modal-white').on('hide.bs.modal', function () {
+        $('.menu-home-notification-div').css({ 'background-image': 'linear-gradient(297deg, #564593, #252243)' });
     });
     $(".notification-filter").click(function () {
         $(".notification-filter").removeClass('active');
@@ -199,7 +203,7 @@
                         $("#count").text(allRecordCount);
                         var i = 1;
                         $.each(response, function (index, obj) {
-                            data = "<div>";
+                            data = "<div class='notification-msg-line'></div><div>";
                             debugger;
                             if (filter == "Renewals") {
                                 data += '<span class="notification-vr-1"> ' + obj.region_name + ' </span>';

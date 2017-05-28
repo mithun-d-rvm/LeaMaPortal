@@ -74,6 +74,9 @@
 .m-l-m-40{
     margin-left: -40px;
 }
+.m-l-15{
+    margin-left: 15px;
+}
 .m-t-20{
     margin-top:20px;
 }
@@ -124,6 +127,9 @@
 }
 .font-x-large{
     font-size:x-large;
+}
+.font-9{
+    font-size:9px;
 }
 .font-40{
     font-size: 40px !important;
@@ -215,11 +221,50 @@
 }
 .logged-arrow {
     position: absolute;
-    top: 16px;
+    top: 12px;
     left: 85%;
 }
 
 /* Dashboard */
+.earning-graph {
+    font-size: x-small;
+    color: white;
+}
+.graph-revenue-div {
+    float: left;
+    width: 30%;
+}
+.graph-loss-div {
+    float: left;
+    width: 30%;
+    position: absolute;
+    bottom: 0;
+    margin-left: 42px;
+}
+.graph-revenue-color {
+    color: #52ce6f;
+}
+.graph-loss-color {
+    color: #ff806f;
+}
+.graph-revenue {
+    float: left;
+    width: 40px;
+    height: 70px;
+    border-radius: 4px;
+    background-image: linear-gradient(206deg, #52ce6f, #529ace);
+}
+.graph-loss {
+    float: left;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-image: linear-gradient(219deg, #d04242, #9e4141);
+}
+.graph-text-center {
+    text-align: center;
+    width: 40px;
+}
 .earning-profit-loss-arrow{
     background-image: linear-gradient(to left, #664279, #54428b);
     border-style: solid;
@@ -341,12 +386,13 @@
     margin-top: 7px;
 }
 .vacant-residential-text {
-    font-size: 8px;
+    font-size: 10px;
     background-color: #0474c8;
-    padding: 3px;
+    padding: 3px 10px;
     color: white;
     border-radius: 4px;
     text-transform: uppercase;
+    text-align:center;
     /* width: 50%; */
 }
 .vacant-commercial-div {
@@ -355,12 +401,13 @@
     /* padding-top: 8px; */
 }
 .vacant-commercial-text {
-    font-size: 8px;
+    font-size: 10px;
     background-color: #b24a9a;
-    padding: 3px;
+    padding: 3px 10px;
     color: white;
     border-radius: 4px;
     text-transform: uppercase;
+    text-align:center;
     /* width: 50%; */
 }
 .total-loss-div {
@@ -390,7 +437,7 @@
     background-color: #0474c8;
     font-size: 10px;
     color: white;
-    padding: 2px;
+    padding: 2px 10px;
     border-radius: 5px;
 }
 .total-loss-res-amt {
@@ -408,7 +455,7 @@
     background-color: #b24a9a;
     font-size: 10px;
     color: white;
-    padding: 2px;
+    padding: 2px 10px;
     border-radius: 5px;
 }
 .dues-text {
@@ -496,7 +543,7 @@
     text-transform: uppercase;
     height: 40px;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 16px;    
 }
 .subheader-select option{
     padding:2px;
@@ -578,6 +625,7 @@
 .tca-modal-md{
     width: 1100px !important;
     margin-right: 40px !important;
+    padding-left: 15px;
 }
 
 .search-btn{
@@ -585,6 +633,13 @@
 }
 
 /* Notification */
+.notification-msg-line{
+    float: left;
+    border: 2px solid #d35847;
+    height: 35px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
 .notification-icon{
     height: 96px;
     padding-top: 40px !important;

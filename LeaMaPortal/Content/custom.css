@@ -23,7 +23,6 @@
 .left-content {
     width: 91% !important;
 }
-
 .fixed{
 	position: relative !important;
 	 width:100% !important;
@@ -33,7 +32,8 @@
 }
 .user-name p {
     color: #9fa9ba !important;
-    font-weight:normal;
+    font-weight: normal;
+    margin: 0px 0 5px !important;
 }
 .user-name span{
     font-family: ProximaNova;
@@ -43,6 +43,9 @@
 }
 .user-name .logName {
     color: #1a91eb !important;
+}
+#menu li a{
+    text-decoration:none !important;
 }
 
 /* Bootstrap styles */

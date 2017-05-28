@@ -4,7 +4,7 @@
 }
 <script src="~/theme/js/Chart.min.js"></script>
 
-<div class="inner-block p-t-5-p dashboard-bg">
+<div class="inner-block p-t-5-p dashboard-bg" style="padding-left:2em;">
     <div class="blank dashboard-blank">
 
         <div class="portlet-grid-page">
@@ -29,28 +29,68 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <div class="earning-money">
                                 <span id="EarningHistory"> 0 </span>
                                 <span class="per-month">AED</span>
                             </div>
                             <div>
-                                @*<i class="fa fa-chevron-up earning-up-icon"></i>*@
                                 <img src="~/Images/next_32.png" class="image-rotate-270 earning-profit-loss-arrow" /> <!-- For up arrow, which is profit -->
-                                @*<img src="~/Images/next_32.png" class="image-rotate-90" earning-profit-loss-arrow/> <!-- For down arrow, which is loss --> *@
+                                <!-- <img src="~/Images/next_32.png" class="image-rotate-90 earning-profit-loss-arrow" />  --> <!-- For down arrow, which is loss --> 
                                 <span class="earning-month" id="EarningHistoryMonth">
                                     JAN <span id="EarningHistoryYear">2017</span>
                                 </span>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <canvas id="barChart" height="300" width="470" style="width: 168px; height: 120px;margin-left: -15px;"></canvas>
+                        
+                        <div class="col-md-5 earning-graph">
+                            <div class="graph-revenue-div">
+                                <span class="font-9">AED</span>
+                                <span class="graph-revenue-color">134,569</span>
+                                <span class="graph-revenue"></span>
+                                <div class="graph-text-center">
+                                    <span>  Revenue </span>
+                                </div>
+                            </div>
+                            <div class="graph-loss-div">
+                                <span class="font-9">AED</span>
+                                <span class="graph-loss-color">36,100</span>
+                                <span class="graph-loss"></span>
+                                <div class="graph-text-center">
+                                    <span>  Loss </span>
+                                </div>
+                            </div>
+                            @*<canvas id="barChart" height="300" width="470" style="width: 168px; height: 120px;margin-left: -15px;"></canvas>*@
                         </div>
                     </div>
                 </div>
             </div>
 
+
+            @*<div class="portlet-grid panel-primary earning-bg" id="earning-div">
+                <div class="panel-body">
+                    <div class="row earning-header">
+                        <div class="col-md-12 font-12 text-center earning-month">
+                            <span> EARNING HISTORY </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <div class="earning-money" style="padding-bottom: 10px;">
+                                <span id="EarningHistory"> 78380 </span>
+                                <span class="per-month">AED</span>
+                            </div>
+                            <div>
+                                <img src="~/Images/next_32.png" class="image-rotate-270 earning-profit-loss-arrow" />
+                                <span class="earning-month" id="EarningHistoryMonth">
+                                    JAN <span id="EarningHistoryYear">2017</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
 
             <div class="portlet-grid panel-primary" id="vacant-div">
                 <div class="row">
@@ -77,14 +117,18 @@
                                 <img src="~/Images/home_32.png" class="m-t-m-10" />
                                 <span id="VacantCountRes"> 0</span>
                             </div>
-                            <div class="vacant-residential-text">Residential</div>
+                            <div>
+                                <span class="vacant-residential-text"> Residential </span>
+                            </div>
                         </div>
                         <div class="col-md-12 vacant-commercial-div">
                             <div class="vacant-residential-number">
                                 <img src="~/Images/shop_32.png" class="m-t-m-10" />
                                 <span id="VacantCountCom"> 0</span>
                             </div>
-                            <div class="vacant-commercial-text">Commercial</div>
+                            <div>
+                                <span class="vacant-commercial-text">Commercial</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -227,31 +271,6 @@
 </div>
 
 <script>
-
-    var data = {
-        labels: ["REVENUE", "LOSS"],
-        datasets: [
-            {
-                fillColor: "#529ace",
-                data: [95, 67]
-            }
-        ]
-    }
-
-    var options = {
-        animation: true,
-        scaleFontColor: "#FFFFFF"
-    };
-
-    //Get the context of the canvas element we want to select
-    var c = $('#barChart');
-    var ct = c.get(0).getContext('2d');
-    var ctx = document.getElementById("barChart").getContext("2d");
-    /*********************/
-    window.homeBarChart = new Chart(ctx).Bar(data, options);
-    homeBarChart.datasets[0].bars[0].fillColor = "#529ace"; //bar1
-    homeBarChart.datasets[0].bars[1].fillColor = "#d04242"; //bar 2
-
 
     $(document).ready(function () {
         $("#earning-table").hide();
@@ -930,4 +949,29 @@
             }
         });
     }
+
+    var data = {
+        labels: ["REVENUE", "LOSS"],
+        datasets: [
+            {
+                fillColor: "#529ace",
+                data: [95, 67]
+            }
+        ]
+    }
+
+    var options = {
+        animation: true,
+        scaleFontColor: "#FFFFFF"
+    };
+
+    //Get the context of the canvas element we want to select
+    var c = $('#barChart');
+    var ct = c.get(0).getContext('2d');
+    var ctx = document.getElementById("barChart").getContext("2d");
+    /*********************/
+    window.homeBarChart = new Chart(ctx).Bar(data, options);
+    homeBarChart.datasets[0].bars[0].fillColor = "#529ace"; //bar1
+    homeBarChart.datasets[0].bars[1].fillColor = "#d04242"; //bar 2
+
 </script>
