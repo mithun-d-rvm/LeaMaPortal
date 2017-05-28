@@ -18,22 +18,22 @@
             </div>
         </a>
         <ul id="menu">
-            @*<li id="menu-home">
-                    <div class="header-right">
-                        <a href="index.html">
-                            <i class="fa fa-bell"></i>
-                            <span class="badge">3</span>
-                            @*<img src="~/Images/Notification.png" /> <br />
-                            <div class="p-t-17"> &nbsp; </div>
-                        </a>
-                    </div>
-                </li>*@
             <li id="menu-home-notification" data-toggle="modal" data-target="#myModal">
+                <div class="menu-home-notification-div">
+                    <a href="#" class="notification-icon">
+                        @*<i class="fa fa-bell"></i>*@
+                        <span class="badge notification-badge" id="count"> 0 </span>
+                        <img src="~/Images/alarm_32.png" /> <br />
+                        <div class="p-t-17"> &nbsp; </div>
+                    </a>
+                </div>
+            </li>
+            @*<li id="menu-home-notification" data-toggle="modal" data-target="#myModal">
                 <a href="#">
                     <i class="fa fa-bell" style="color:white;"></i> <br />
                     <div class="p-t-17">NOTIFICATION</div>
                 </a>
-            </li>
+            </li>*@
             <li id="menu-home-tca">
                 <a href="~/Tca/Index">
                     <img src="~/Images/PropertyProf.png" /><br />
@@ -85,7 +85,7 @@
             <li id="menu-home-utility-billentry">
                 <a href="~/EbWater/Index">
                     <img src="~/Images/Reciepts.png" /><br />
-                    <div class="p-t-17">
+                    <div class="p-t-17" style="margin-left: -10px;">
                         UTILITY BILL ENTRY
                     </div>
                 </a>
@@ -93,7 +93,7 @@
             <li id="menu-home-utility-payments">
                 <a href="~/UtilityPayment/Index">
                     <img src="~/Images/Reciepts.png" /><br />
-                    <div class="p-t-17">
+                    <div class="p-t-17" style="margin-left: -10px;">
                         UTILITY PAYMENT
                     </div>
                 </a>
@@ -110,17 +110,22 @@
 
 
 <div id="myModal" class="modal modal-white" role="dialog">
-    <div class="modal-dialog modal-lg">
-
+    <div class="modal-dialog modal-lg" style="margin-left: 160px;width: auto;top: 60px;">
+        <div class="notification-left-yellow-line">
+            &nbsp;
+        </div>
         <!-- Modal content-->
-        <div class="modal-content notification-modal-content">
+        <div class="modal-content notification-modal-content no-radius">
             @*<div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Modal Header</h4>
                 </div>*@
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-3 notification-tab-1">
+            <div class="modal-body" style="height: 328px;padding-left: 0px; padding-right: 5px;">
+                <div class="notification-left-black-line">
+                    &nbsp;
+                </div>
+                <div class="row" style="margin-left: 5px;">
+                    <div class="col-md-2 notification-tab-1">
                         <div class="notification-text">
                             Notifications
                         </div>
@@ -128,26 +133,28 @@
                             <label id="count">0</label>
                         </div>
                         <div class="notification-down-arrow">
-                            <i class="fa fa-chevron-down"></i>
+                            @*<i class="fa fa-chevron-down"></i>*@
+                            <img src="~/Images/next_white_32.png" class="image-rotate-90" />
                         </div>
                     </div>
-                    <div class="col-md-9 notification-filter-div">
+                    <div class="col-md-10 notification-filter-div">
                         <div class="p-b-25 notification-menu">
-                            <span class="color-f5a623">Filter notifications by</span>
+                            <span class="color-f5a623 notification-modal-filter">Filter notifications by</span>
                             <span class="notification-filter" onclick="getMenu()">All</span>
-                            <span class="notification-filter-line"> &nbsp; </span>
+                            @*<span class="notification-filter-line"> &nbsp; </span>*@
                             <span class="notification-filter notify-menu active ">PDC Deposits</span>
-                            <span class="notification-filter-line"> &nbsp; </span>
+                            @*<span class="notification-filter-line"> &nbsp; </span>*@
                             <span class="notification-filter notify-menu">Renewals</span>
-                            <span class="notification-filter-line"> &nbsp; </span>
+                            @*<span class="notification-filter-line"> &nbsp; </span>*@
                             <span class="notification-filter notify-menu">Rental Due</span>
-                            <span class="notification-filter-line"> &nbsp; </span>
+                            @*<span class="notification-filter-line"> &nbsp; </span>*@
                             <span class="notification-filter notify-menu">Utility Dues</span>
-                            <span class="notification-filter-line"> &nbsp; </span>
-                            <span class="notification-filter notify-menu">Agreement approval</span>
-                            <span class="notification-filter-line"> &nbsp; </span>
+                            @*<span class="notification-filter-line"> &nbsp; </span>*@
+                            @*<span class="notification-filter notify-menu">Agreement approval</span>*@
+                            <span class="notification-filter notify-menu">TCA</span>
+                            @*<span class="notification-filter-line"> &nbsp; </span>*@
                             <span class="notification-filter notify-menu">Contract Approval</span>
-                            <span class="pull-right"> Expand to page </span>
+                            @*<span class="pull-right"> Expand to page </span>*@
                         </div>
                         <div class="notification-filter-content"></div>
                     </div>
@@ -163,10 +170,14 @@
 
 <script>
     $('.modal-white').on('show.bs.modal', function () {
-        setTimeout(function () {
+        $('.menu-home-notification-div').css({ 'background-image': 'none', 'background-color': '#eb9a15' });
+        setTimeout(function () {            
             $('.modal-backdrop').css('background', 'white');
             $('.modal-backdrop').css('opacity', 0);
         }, 10);
+    });
+    $('.modal-white').on('hide.bs.modal', function () {
+        $('.menu-home-notification-div').css({ 'background-image': 'linear-gradient(297deg, #564593, #252243)' });
     });
     $(".notification-filter").click(function () {
         $(".notification-filter").removeClass('active');
@@ -192,7 +203,7 @@
                         $("#count").text(allRecordCount);
                         var i = 1;
                         $.each(response, function (index, obj) {
-                            data = "<div>";
+                            data = "<div class='notification-msg-line'></div><div>";
                             debugger;
                             if (filter == "Renewals") {
                                 data += '<span class="notification-vr-1"> ' + obj.region_name + ' </span>';
@@ -247,9 +258,9 @@
                                 data += '<span class="notification-vr-2"> ' + obj.TenantName + ' </span>';
                                 data += '<span class="notification-vr-2"> ' + obj.PropertyName + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.UnitName + '</span>';                                
-                                data += '<span class="notification-vr-2"><button type="button" onclick="approveContract('+i+')">Approve</button></span>';
-                                data += '<span class="notification-vr-2"><button type="button">Reject</button></span>';
-                                data += '<span class="notification-vr-2"><button type="button">View</button></span>';
+                                data += '<span class="notification-vr-2"><button class="btn notification-approve" type="button" onclick="approveContract(' + i + ')">Approve</button></span>';
+                                data += '<span class="notification-vr-2"><button class="btn notification-reject" type="button">Reject</button></span>';
+                                data += '<span class="notification-vr-2"><button class="btn notification-view" type="button">View</button></span>';
                             }
                             data += '</div><hr class="notification-hr" />';
                             $(".notification-filter-content").append(data);
