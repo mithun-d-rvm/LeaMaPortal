@@ -144,10 +144,10 @@
                             <span class="notification-filter-line"> &nbsp; </span>
                             <span class="notification-filter notify-menu">Utility Dues</span>
                             <span class="notification-filter-line"> &nbsp; </span>
-                            <span class="notification-filter notify-menu">Agreement approval</span>
-                            <span class="notification-filter-line"> &nbsp; </span>
+                            <span class="notification-filter notify-menu">TCA approval</span>
+                            @*<span class="notification-filter-line"> &nbsp; </span>
                             <span class="notification-filter notify-menu">Contract Approval</span>
-                            <span class="pull-right"> Expand to page </span>
+                            <span class="pull-right"> Expand to page </span>*@
                         </div>
                         <div class="notification-filter-content"></div>
                     </div>
@@ -166,6 +166,7 @@
     </div>
 </div>
 <script>
+    var allRecordCount = 0;
     $('.modal-white').on('show.bs.modal', function () {
         setTimeout(function () {
             $('.modal-backdrop').css('background', 'white');
@@ -193,7 +194,11 @@
                     success: function (response) {
                         debugger;
                         var data = "";
-                        allRecordCount = allRecordCount + (response ? response.length : 0);
+                        allRecordCount = allRecordCount + response.length;
+                        if (allRecordCount == "NaN")
+                        {
+                            allRecordCount = 0;
+                        }
                         $("#count").text(allRecordCount);
                         var i = 1;
                         $.each(response, function (index, obj) {
@@ -238,7 +243,7 @@
                                 data += '<span class="notification-vr-2"> ' + obj.Billamount + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.DDate + '</span>';
                             }
-                            else if (filter == "Agreement approval") {
+                            else if (filter == "TCA approval") {
                                 data += '<span class="notification-vr-1"> ' + obj.Region_Name + ' </span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Properties_Name + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Unit_Property_Name + '</span>';
@@ -256,6 +261,7 @@
                                 data += '<span class="notification-vr-2"><button type="button" onclick="approveContract('+i+')">Approve</button></span>';
                                 data += '<span class="notification-vr-2"><button type="button">Reject</button></span>';
                                 data += '<span class="notification-vr-2"><button type="button">View</button></span>';
+                                i = i + 1;
                             }
                             data += '</div><hr class="notification-hr" />';
                             $(".notification-filter-content").append(data);
@@ -268,7 +274,7 @@
                     }
                 });
     }
-    var allRecordCount = 0;
+    
     function getMenu() {
         $.ajax(
                 {

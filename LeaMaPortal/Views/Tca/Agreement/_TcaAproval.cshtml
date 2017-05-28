@@ -420,14 +420,23 @@
             //contentType: "application/json",
             //processData: false,
             success: function (html) {
-                alert("Agreement approved successfully");
+                //alert("Agreement approved successfully");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                $(".result-title").text("Success");
+                $(".result-modal-body span").text("TCA approved successfully");
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text(masterResultError);
             },
             complete: function () {
+                $('#masterResultModal').modal('show');
                 $(".notification-filter-content").empty();
-                getData("Agreement approval");
+                getData("TCA approval");
             }
         });
     }
@@ -441,14 +450,23 @@
             //contentType: "application/json",
             //processData: false,
             success: function (html) {
-                alert("Agreement rejected successfully");
+                //alert("Agreement rejected successfully");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                $(".result-title").text("Success");
+                $(".result-modal-body span").text("TCA rejected successfully");
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text(masterResultError);
             },
             complete: function () {
+                $('#masterResultModal').modal('show');
                 $(".notification-filter-content").empty();
-                getData("Agreement approval");
+                getData("TCA approval");
             }
         });
     }
