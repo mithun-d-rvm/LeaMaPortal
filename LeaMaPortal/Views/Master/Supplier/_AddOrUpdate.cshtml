@@ -26,7 +26,7 @@
                             Supplier Id
                         </div>
                         <div class="col-md-8">
-                            
+
                             @Html.HiddenFor(model => model.Supplier_Id)
                             <input type="text" value="@ViewBag.SupplierId" disabled class="form-control master-form-input" />
 
@@ -47,9 +47,9 @@
                             Marital Status
                         </div>
                         <div class="col-md-8">
-                            
-                            @Html.RadioButtonFor(model => model.Marital_Status, "Family") Family
-                            @Html.RadioButtonFor(model => model.Marital_Status, "Single") Single
+
+                            @Html.RadioButtonFor(model => model.Marital_Status, false, "Family") Family
+                            @Html.RadioButtonFor(model => model.Marital_Status, false, "Single") Single
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -57,8 +57,8 @@
                             Title
                         </div>
                         <div class="col-md-8">
-                           
-                            @Html.DropDownList("Title",null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
+
+                            @Html.DropDownList("Title", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                         </div>
                     </div>
                     <div class="col-md-12 form-input-padding">
@@ -76,7 +76,7 @@
                             Middle Name:
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Middle_Name, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" } })
+                            @Html.EditorFor(model => model.Middle_Name, new { htmlAttributes = new { @class = "form-control master-form-input", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" } })
                             @Html.ValidationMessageFor(model => model.Middle_Name, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -108,16 +108,16 @@
                             @Html.ValidationMessageFor(model => model.address1, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            Location link:
-                        </div>
-                        <div class="col-md-8">
-                            @*<input type="text" class="form-control master-form-input" />*@
-                            @Html.EditorFor(model => model.Locationlink, new { htmlAttributes = new { @class = "form-control master-form-input" } })
-                            @Html.ValidationMessageFor(model => model.Locationlink, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                    @*<div class="col-md-12 form-input-padding">
+                            <div class="col-md-4">
+                                Location link:
+                            </div>
+                            <div class="col-md-8">
+                                @*<input type="text" class="form-control master-form-input" />
+                                @Html.EditorFor(model => model.Locationlink, new { htmlAttributes = new { @class = "form-control master-form-input" } })
+                                @Html.ValidationMessageFor(model => model.Locationlink, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
                             Emirate:
@@ -170,19 +170,19 @@
                             </div>
                             <div class="col-md-6" style="margin-left: 32%;width: 64%;position: absolute;">
                                 @*<input type="text" class="form-control master-form-input">*@
-                                @Html.EditorFor(model => model.Mobile_No, new { htmlAttributes = new { @class = "form-control master-form-input", @maxlength = "15", @required = "required", @pattern = "[0-9]+", title = "Enter valid mobile no" } })
+                                @Html.EditorFor(model => model.Mobile_No, new { htmlAttributes = new { @class = "form-control master-form-input", @maxlength = "15", @onkeypress = "allow_only_numbers(event);", @required = "required",@pattern = "[0-9]+", title = "Enter valid mobile no" } })
                                 @Html.ValidationMessageFor(model => model.Mobile_No, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
 
 
 
 
                 <div class="col-md-6">
-                    
+
                     <div class="col-md-12 form-input-padding">
                         <div class="col-md-4">
                             Landline:
@@ -202,7 +202,7 @@
                             <div class="col-md-6" style="margin-left: 32%;width: 64%;position: absolute;">
                                 @*<input type="text" class="form-control master-form-input">*@
 
-                                @Html.EditorFor(model => model.Landline_No, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @maxlength = "15", @pattern = "[0-9]+", title = "Enter valid landline no" } })
+                                @Html.EditorFor(model => model.Landline_No, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onkeypress = "allow_only_numbers(event);", @maxlength = "15", @pattern = "[0-9]+", title = "Enter valid landline no" } })
                                 @Html.ValidationMessageFor(model => model.Landline_No, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -234,7 +234,7 @@
                             Nationality:
                         </div>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Nationality, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required"} })
+                            @Html.EditorFor(model => model.Nationality, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })
                             @*@Html.DropDownList("Nationality", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })*@
                         </div>
                     </div>
@@ -278,7 +278,8 @@
                         </div>
                         <div class="col-md-8">
                             @*<input type="text" class="form-control master-form-input"  />*@
-                            @Html.EditorFor(model => model.License_issueDate, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onblur = "setMin()", @id = "License_issueDate" } })
+                            @*@Html.EditorFor(model => model.License_issueDate, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onblur = "setMin()", @id = "License_issueDate" } })*@
+                            @Html.EditorFor(model => model.License_issueDate, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @id = "License_issueDate" } })
                             @Html.ValidationMessageFor(model => model.License_issueDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -288,7 +289,8 @@
                         </div>
                         <div class="col-md-8">
                             @*<input type="text" class="form-control master-form-input" />*@
-                            @Html.EditorFor(model => model.License_ExpiryDate, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onblur = "setMax()", @id = "License_ExpiryDate" } })
+                            @*@Html.EditorFor(model => model.License_ExpiryDate, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onblur = "setMax()", @id = "License_ExpiryDate" } })*@
+                            @Html.EditorFor(model => model.License_ExpiryDate, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @id = "License_ExpiryDate" } })
                             @Html.ValidationMessageFor(model => model.License_ExpiryDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -311,14 +313,14 @@
                             @Html.ValidationMessageFor(model => model.ADWEA_Regid, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="row" style="display: none;" id="companyDetails">
                 <div class="row p-b-25 p-t-17">
                     <h3> Company Details</h3>
                 </div>
-                
+
                 <div class="row ht-5">
                     &nbsp;
                 </div>
@@ -340,11 +342,11 @@
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="city">City</label>
-                                <input type="text" class="form-control master-form-input" id="city"  />
+                                <input type="text" class="form-control master-form-input" id="city" />
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="state">State</label>
-                                <input type="text" class="form-control master-form-input" id="state"  />
+                                <input type="text" class="form-control master-form-input" id="state" />
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="country">Country</label>
@@ -358,11 +360,11 @@
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="phno">Phone Number</label>
-                                <input type="text" class="form-control master-form-input" id="phno"/>
+                                <input type="text" class="form-control master-form-input" id="phno" />
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="emailid">Email id</label>
-                                <input type="text" class="form-control master-form-input" id="emailid"/>
+                                <input type="text" class="form-control master-form-input" id="emailid" />
                             </div>
                             <div class="col-md-2 form-group">
                                 <label for="fax">Fax</label>
@@ -570,19 +572,43 @@
     function formReset() {
         GetSupplierAddOrUpdate();
     }
-    function setMax() {
-        debugger;
-        var to = $("#License_ExpiryDate").val();
-        if (to != "") {
-            $("#License_issueDate").prop('max', to);
-        }
-    }
+    //function setMax() {
+    //    debugger;
+    //    var to = $("#License_ExpiryDate").val();
+    //    if (to != "") {
+    //        $("#License_issueDate").prop('max', to);
+    //    }
+    //}
+    //function setMin() {
+    //    debugger;
+    //    var from = $("#License_issueDate").val();
+    //    if (from != "") {
+    //        $("#License_ExpiryDate").prop('min', from);
+    //    }
+    //}
     function setMin() {
         debugger;
-        var from = $("#License_issueDate").val();
-        if (from != "") {
-            $("#License_ExpiryDate").prop('min', from);
+        //var to = $("#License_ExpiryDate").val();
+        //if (to != "") {
+        $("#License_issueDate").prop('max', new Date());
+        //}
+    }
+    function setMax() {
+        debugger;
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
         }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        var today = yyyy + '-' + mm + '-' + dd;
+        $("#License_ExpiryDate").prop('min', today);
+        // }
     }
     $("#TitleDisplay").on('change', function (e) {
         $("#Title").val($("#TitleDisplay").val());
@@ -603,7 +629,7 @@
         var fax = document.getElementById("fax").value;
 
 
-        var html = "<tr><td><div class='col-md-12 document-row' id='GridView"+i+"'>";
+        var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + i + "'>";
         //html=html+"<div class='col-md-1'>";
         //html = html + count;
         //html=html+" </div>";
@@ -627,22 +653,22 @@
         html = html + "</div>";
 
         html = html + "</div>";
-        html=html+"<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
+        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
         $('#companyDetailsForm').append(html);
         i++;
 
 
-        document.getElementById("branch").value="";
-        document.getElementById("city").value="";
-        document.getElementById("add01").value="";
-        document.getElementById("add02").value="";
-        document.getElementById("state").value="";
-        document.getElementById("country").value="";
-        document.getElementById("pincode").value="";
-        document.getElementById("phno").value="";
-        document.getElementById("remarks").value="";
-        document.getElementById("emailid").value="";
-        document.getElementById("fax").value="";
+        document.getElementById("branch").value = "";
+        document.getElementById("city").value = "";
+        document.getElementById("add01").value = "";
+        document.getElementById("add02").value = "";
+        document.getElementById("state").value = "";
+        document.getElementById("country").value = "";
+        document.getElementById("pincode").value = "";
+        document.getElementById("phno").value = "";
+        document.getElementById("remarks").value = "";
+        document.getElementById("emailid").value = "";
+        document.getElementById("fax").value = "";
 
 
     }
@@ -655,7 +681,7 @@
 
             $(this).find("input").each(function () {
                 var dataname = $(this).data("name");
-               // alert(dataname + $(this) .val()+ '-' + newindex)
+                // alert(dataname + $(this) .val()+ '-' + newindex)
                 $(this).attr({
                     'id': function (_, id) {
                         return id + newindex
@@ -675,8 +701,7 @@
     });
 
     var j = parseInt($("#init-company-contact-det-count").val());
-    function addcontact(e)
-    {
+    function addcontact(e) {
 
         var ContactPersonName = $("#ContactPersonName").val();
         var Designation = $("#Designation").val();
@@ -707,10 +732,10 @@
         j++;
 
 
-         $("#ContactPersonName").val('');
+        $("#ContactPersonName").val('');
         $("#Designation").val('');
         $("#Department").val('');
-       $("#Phone").val('');
+        $("#Phone").val('');
         $("#Extension").val('');
         $("#MobileNo").val('');
         $("#Salutations").val('');
@@ -853,8 +878,7 @@
                             $(".result-title").text("Success");
                             $(".result-modal-body span").text(response.Message);
                         }
-                        else
-                        {
+                        else {
                             $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
                             $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
                             $(".result-title").text("Failure");
@@ -928,10 +952,25 @@
             $("#companyDetails").hide();
         }
         var id = $("#Id").val();
-            if (id != 0) {
-                document.getElementById("btnSubmit").innerHTML = 'Update';
-            }
+        if (id != 0) {
+            document.getElementById("btnSubmit").innerHTML = 'Update';
+        }
         //$("#property").prop('checked', true).change();
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        var today = yyyy + '-' + mm + '-' + dd;
+        //$("#License_ExpiryDate").prop('min', today);
+        $("#License_issueDate").prop('max', today);
     });
 </script>
 
