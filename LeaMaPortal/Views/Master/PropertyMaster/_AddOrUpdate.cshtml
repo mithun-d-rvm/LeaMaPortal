@@ -1056,8 +1056,6 @@
     {        
         var pf = $('input[name=Property_Flag]:checked').val();
         var noofUnits = $("#Noofunits").val();
-        alert(pf);
-        alert(parseInt(noofUnits));
         if(pf == "Property" && parseInt(noofUnits) > 0){
             //document.getElementById("Rental_Rate_Month_unit").required = false;
             $("input").prop('required', false);
@@ -1229,7 +1227,6 @@
             $(this).find("input").each(function () {
                 var dataname = $(this).data("name");
                 console.log(this);
-                alert(this);
                 var name = 'PropertiesdtList[' + newindex + '].' + dataname;
                 //$("input[name=" + name + "]").val();
                 //$("#Utility_ID option[value*='n/a']").prop('disabled', true);

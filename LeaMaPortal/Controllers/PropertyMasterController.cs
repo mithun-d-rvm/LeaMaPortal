@@ -64,12 +64,12 @@ namespace LeaMaPortal.Controllers
             model.Caretaker_IDList = new SelectList("", "", "");
 
             var propertyTypeData = db.tbl_propertytypemaster.Where(x => x.Type_Flag == "Property").Select(x => new PropertyTypeModel { PropertyCategory = x.Type_name, Usage_name = x.Usage_name }).ToList();
-            ViewBag.Property_Usage = new SelectList(propertyTypeData.Select(x => x.Usage_name));
+            ViewBag.Property_Usage = new SelectList(propertyTypeData.Select(x => x.Usage_name).Distinct());
             ViewBag.Property_Type = new SelectList(propertyTypeData.Select(x => x.PropertyCategory));
 
 
             propertyTypeData = db.tbl_propertytypemaster.Where(x => x.Type_Flag == "Unit").Select(x => new PropertyTypeModel { PropertyCategory = x.Type_name, Usage_name = x.Usage_name }).ToList();
-            ViewBag.Property_Usage_unit = new SelectList(propertyTypeData.Select(x => x.Usage_name));
+            ViewBag.Property_Usage_unit = new SelectList(propertyTypeData.Select(x => x.Usage_name).Distinct());
             ViewBag.Property_Type_unit = new SelectList(propertyTypeData.Select(x => x.PropertyCategory));
 
             var propertyMasterData = db.tbl_propertiesmaster.Where(x => x.Noofunits > 0 && x.Status != "Avail" && x.Delmark != "*").ToList();
@@ -252,12 +252,12 @@ namespace LeaMaPortal.Controllers
                 model.Caretaker_IDList = new SelectList("", "", "");
 
                 var propertyTypeData = db.tbl_propertytypemaster.Where(x => x.Type_Flag == "Property").Select(x => new PropertyTypeModel { PropertyCategory = x.Type_name, Usage_name = x.Usage_name }).ToList();
-                ViewBag.Property_Usage = new SelectList(propertyTypeData.Select(x => x.Usage_name), model.Property_Usage);
+                ViewBag.Property_Usage = new SelectList(propertyTypeData.Select(x => x.Usage_name).Distinct(), model.Property_Usage);
                 ViewBag.Property_Type = new SelectList(propertyTypeData.Select(x => x.PropertyCategory), model.Property_Type);
 
 
                 propertyTypeData = db.tbl_propertytypemaster.Where(x => x.Type_Flag == "Unit").Select(x => new PropertyTypeModel { PropertyCategory = x.Type_name, Usage_name = x.Usage_name }).ToList();
-                ViewBag.Property_Usage_unit = new SelectList(propertyTypeData.Select(x => x.Usage_name), model.Property_Usage_unit);
+                ViewBag.Property_Usage_unit = new SelectList(propertyTypeData.Select(x => x.Usage_name).Distinct(), model.Property_Usage_unit);
                 ViewBag.Property_Type_unit = new SelectList(propertyTypeData.Select(x => x.PropertyCategory), model.Property_Type_unit);
 
                 var propertyMasterData = db.tbl_propertiesmaster.Where(x => x.Noofunits > 0 && x.Status != "Avail" && x.Delmark != "*").ToList();
