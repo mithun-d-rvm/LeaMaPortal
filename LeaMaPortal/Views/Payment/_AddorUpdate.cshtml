@@ -7,7 +7,7 @@
 {
     @*@Html.AntiForgeryToken()
 
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
     @Html.HiddenFor(model => model.Id, new { @id = "Id" })
     @Html.HiddenFor(model => model.Supplier_id)
     @Html.HiddenFor(model => model.Supplier_Name)
@@ -15,7 +15,7 @@
     @Html.HiddenFor(model => model.Property_Name)
     @Html.HiddenFor(model => model.Unit_ID)
     @Html.HiddenFor(model => model.unit_Name)
-<div class="inner-block">
+<div class="">
     <div class="blank">
         <div class="row">
             <div class="col-md-6">
@@ -25,199 +25,199 @@
                     </div>
                     <div class="col-md-8">
 
-                        @Html.EditorFor(model => model.PaymentNo, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly= "readonly"} })
+                            @Html.EditorFor(model => model.PaymentNo, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.PaymentDate, htmlAttributes: new { @class = "label-default-remove" })
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.PaymentDate, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
+                        </div>
                     </div>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.PaymentType, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownList("PaymentType", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.PaymentType, htmlAttributes: new { @class = "label-default-remove" })
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownList("PaymentMode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
+                        </div>
                     </div>
-                    <div class="col-md-8">
-                        @Html.DropDownList("PaymentType",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Supplier_id, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownList("Supplierid", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "label-default-remove" })
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Supplier_Name, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownList("SupplierName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
+                        </div>
                     </div>
-                    <div class="col-md-8">
-                        @Html.DropDownList("PaymentMode",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.Supplier_id, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.DropDownList("Supplierid",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.Supplier_Name, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.DropDownList("SupplierName",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
-                    </div>
-                </div>
 
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.agreement_no, htmlAttributes: new { @class = "label-default-remove" })
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.agreement_no, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownList("agreement_no", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        </div>
                     </div>
-                    <div class="col-md-8">
-                        @Html.DropDownList("agreement_no", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })                        
-                    </div>
-                </div>
-
-
-
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.Property_id, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.Property_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("Propertyid", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })                        
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.Property_Name, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("PropertyName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })                        
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.Unit_ID, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.Unit_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("UnitID", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control"})                        
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.unit_Name, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.unit_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("unitName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })                        
-                    </div>
-                </div>
 
 
 
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "label-default-remove" })
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Property_id, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @*@Html.EditorFor(model => model.Property_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                            @Html.DropDownList("Propertyid", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
+                        </div>
                     </div>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required", @onchange= "AmountInWords()", @onkeypress = "allow_only_Float(event,'TotalAmount');" } })
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Property_Name, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @*@Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                            @Html.DropDownList("PropertyName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
+                        </div>
                     </div>
-                </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Unit_ID, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @*@Html.EditorFor(model => model.Unit_ID, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                            @Html.DropDownList("UnitID", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.unit_Name, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @*@Html.EditorFor(model => model.unit_Name, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                            @Html.DropDownList("unitName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                        </div>
+                    </div>
 
+
+
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required", @onchange = "AmountInWords()", @onkeypress = "allow_only_Float(event,'TotalAmount');" } })
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-md-6">
+
+
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.AmtInWords, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.AmtInWords, new { htmlAttributes = new { @class = "master-form-input", @required = "required", @readonly = "readonly" } })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding" id="advancePayment">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.AdvAcCode, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownList("AdvAcCode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding" id="pdcstatus">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.PDCstatus, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownList("PDCStatus", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding" name="cheque" id="chequeNo">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.DDChequeNo, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.DDChequeNo, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding" name="cheque" id="chequeDate">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.DDChequeDate, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.DDChequeDate, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.BankAcCode, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownList("BankAcCode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.BankAcName, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownList("BankAcName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-input-padding">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Narration, htmlAttributes: new { @class = "label-default-remove" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
+                        </div>
+                    </div>
+
+                </div>
 
             </div>
-            <div class="col-md-6">
-
-
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.AmtInWords, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.AmtInWords, new { htmlAttributes = new { @class = "master-form-input", @required = "required", @readonly="readonly" } })
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding" id="advancePayment">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.AdvAcCode, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.DropDownList("AdvAcCode",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding" id="pdcstatus">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.PDCstatus, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.DropDownList("PDCStatus",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding" name="cheque" id="chequeNo">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.DDChequeNo, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.DDChequeNo, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding" name="cheque" id="chequeDate">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.DDChequeDate, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.DDChequeDate, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.BankAcCode, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.DropDownList("BankAcCode",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.BankAcName, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.DropDownList("BankAcName",null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
-                    </div>
-                </div>
-                <div class="col-md-12 form-input-padding">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.Narration, htmlAttributes: new { @class = "label-default-remove" })
-                    </div>
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
-                    </div>
-                </div>
-                
-            </div>
-
-        </div>
-        <div class="row" id="paymentDetail">
-            @if (Model.PaymentDetailsViewModel != null)
+            <div class="row" id="paymentDetail">
+                @if (Model.PaymentDetailsViewModel != null)
                 {
-                <input type="hidden" id="Payment-count" value="@Model.PaymentDetailsViewModel.Count" />
-            }
-            else
-            {
-                <input type="hidden" id="Payment-count" value="0" />
-            }
-            <div class="p-b-25">
-                <h3>Invoice Details</h3>
-            </div>
+                    <input type="hidden" id="Payment-count" value="@Model.PaymentDetailsViewModel.Count" />
+                }
+                else
+                {
+                    <input type="hidden" id="Payment-count" value="0" />
+                }
+                <div class="p-b-25">
+                    <h3>Invoice Details</h3>
+                </div>
                 <div class="row">
-                    <div class="col-md-12 document-row" id="GridView">                        
+                    <div class="col-md-12 document-row" id="GridView">
                         @*<div class="col-md-2">
-                            Invoice Type
-                        </div>*@
+                                Invoice Type
+                            </div>*@
                         <div class="col-md-2">
                             Invoice Number*
                         </div>
@@ -236,10 +236,10 @@
                     &nbsp;
                 </div>
                 <div class="row">
-                    <div class="col-md-12 document-row" id="GridView">                        
+                    <div class="col-md-12 document-row" id="GridView">
                         @*<div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="Invtype" />
-                        </div>*@
+                                <input type="text" class="form-control master-form-input" id="Invtype" />
+                            </div>*@
                         <div class="col-md-2">
                             <input type="text" class="form-control master-form-input" id="Invno" />
                         </div>
@@ -276,18 +276,18 @@
                 <div class="row">
                     <div class="col-md-12 document-row" id="GridView">
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="InvoiceAmount" onchange="calculateBalance('')" onkeypress = "allow_only_Float(event,'InvoiceAmount');"/>
+                            <input type="text" class="form-control master-form-input" id="InvoiceAmount" onchange="calculateBalance('')" onkeypress="allow_only_Float(event,'InvoiceAmount');" />
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="DebitAmount" onchange="calculateBalance('')" onkeypress = "allow_only_Float(event,'DebitAmount');"/>
+                            <input type="text" class="form-control master-form-input" id="DebitAmount" onchange="calculateBalance('')" onkeypress="allow_only_Float(event,'DebitAmount');" />
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="PaidAmount" onchange="calculateBalance('')" onkeypress = "allow_only_Float(event,'PaidAmount');"/>
+                            <input type="text" class="form-control master-form-input" id="PaidAmount" onchange="calculateBalance('')" onkeypress="allow_only_Float(event,'PaidAmount');" />
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="form-control master-form-input" id="Balance" readonly/>
+                            <input type="text" class="form-control master-form-input" id="Balance" readonly />
                         </div>
-                        <div class="col-md-2" >
+                        <div class="col-md-2">
                             <button type="button" class="document-btn" onclick="Add()">Add</button>
                         </div>
                     </div>
@@ -296,8 +296,8 @@
                 <div class="row ht-5">
                     &nbsp;
                 </div>
-            <table class="row m-t-20" id="PaymentDetailsForm">
-                @if (Model.PaymentDetailsViewModel != null)
+                <table class="row m-t-20" id="PaymentDetailsForm">
+                    @if (Model.PaymentDetailsViewModel != null)
                     {
                         for (int j = 0; j < Model.PaymentDetailsViewModel.Count; j++)
                         {
@@ -323,39 +323,39 @@
                             html += "</div></div><div class='row ht-5'>&nbsp;</div>";
 
                             html += "<div class='row'><div class='col-md-12 document-row' id='GridView'>";
-                            html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].InvoiceAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceAmount' data-name='Invoice Amount' id='InvoiceAmount" + @j + "' onchange='calculateBalance("+@j+ ")' onkeypress = 'allow_only_Float(event,'InvoiceAmount" + @j + "');' readonly/></div>";
-                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].DebitAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].DebitAmount' data-name='Debit Amount' id='DebitAmount" + @j + "' onchange='calculateBalance(" + @j + ")' onkeypress = 'allow_only_Float(event,'DebitAmount" + @j + "');' readonly/></div>";
-                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].PaidAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PaidAmount' data-name='Paid Amount' id='PaidAmount" + @j + "' onchange='calculateBalance(" + @j + ")' onkeypress = 'allow_only_Float(event,'PaidAmount" + @j + "');' readonly/></div>";
-                        html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Balance + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Balance' data-name='Balance' id='Balance" + @j + "' readonly/></div>";
-                        html += "<div class='col-md-2'><button type='button' id='Deleter" + @j + "' class='document-btn removebutton'>Delete</button></div>";
-                        html += "</div></div><div class='row ht-5'>&nbsp;</div>";
-                        <tr>
-                            <td>
-                                @Html.Raw(html)
-                            </td>
-                        </tr>
-                                <tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                </tr>                        
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].InvoiceAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].InvoiceAmount' data-name='Invoice Amount' id='InvoiceAmount" + @j + "' onchange='calculateBalance(" + @j + ")' onkeypress = 'allow_only_Float(event,'InvoiceAmount" + @j + "');' readonly/></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].DebitAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].DebitAmount' data-name='Debit Amount' id='DebitAmount" + @j + "' onchange='calculateBalance(" + @j + ")' onkeypress = 'allow_only_Float(event,'DebitAmount" + @j + "');' readonly/></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].PaidAmount + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].PaidAmount' data-name='Paid Amount' id='PaidAmount" + @j + "' onchange='calculateBalance(" + @j + ")' onkeypress = 'allow_only_Float(event,'PaidAmount" + @j + "');' readonly/></div>";
+                            html += "<div class='col-md-2'><input type='text' value='" + @Model.PaymentDetailsViewModel[j].Balance + "' class='form-control master-form-input' name='PaymentDetailsViewModel[" + j + "].Balance' data-name='Balance' id='Balance" + @j + "' readonly/></div>";
+                            html += "<div class='col-md-2'><button type='button' id='Deleter" + @j + "' class='document-btn removebutton'>Delete</button></div>";
+                            html += "</div></div><div class='row ht-5'>&nbsp;</div>";
+                            <tr>
+                                <td>
+                                    @Html.Raw(html)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                        }
                     }
-                }
-            </table>
+                </table>
 
 
-                </div>
-        <div class="col-md-12 form-input-padding">
-            <div class="col-md-3">
-                &nbsp;
             </div>
-            <div class="col-md-6">
-                <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>&nbsp;&nbsp;
-<button class="btn master-form-btn" id="btnCancel" type="button" onclick="formReset()">Cancel</button>
+            <div class="col-md-12 form-input-padding">
+                <div class="col-md-3">
+                    &nbsp;
+                </div>
+                <div class="col-md-6">
+                    <button class="btn master-form-btn" id="btnSubmit" type="submit">Submit</button>&nbsp;&nbsp;
+                    <button class="btn master-form-btn" id="btnCancel" type="button" onclick="formReset()">Cancel</button>
+                </div>
             </div>
         </div>
-</div>
-</div>
+    </div>
 }
 <script>
     function formReset() {
@@ -599,6 +599,8 @@
             }
         }
         else if (paymentModeValue == "cash") {
+            $("#BankAcCode").removeAttr('required');
+            $("#BankAcName").removeAttr('required');
             showHideChequeField(true);
             showhideAdvancePayment(true);
             showhidePDC(true);
@@ -608,6 +610,7 @@
             else {
                 $("#TotalAmount").prop("readonly", false);
             }
+
         }
         else if (paymentModeValue == "online") {
             showHideChequeField(false);
@@ -674,9 +677,9 @@
             $("#TotalAmount").val(0);
             $("#TotalAmount").trigger("change");
         }
-        
+
     });
-    $("#PaymentMode").change(function () { ShowHidePaymentModeFields($("#PaymentMode").val()) });
+    $("#PaymentMode").change(function () { debugger; ShowHidePaymentModeFields($("#PaymentMode").val()) });
     //showHideCheque($("#PaymentMode").val());
 
     function calculateBalance(pos) {
@@ -700,41 +703,41 @@
     //    }
     //}
 
-        //$.ajax(
-        //        {
-        //            url: "../Payment/GetUnitId",
-        //            method: "POST",
-        //            async: false,
-        //            data: { PropertyId: PropertyId },
-        //            success: function (response) {
-        //                $("#unit_id").empty();
-        //                $("#unit_name").empty();
-        //                $("#agreement_number").empty();
-        //                var unit_id_options = '';
-        //                var unit_name_options = '';
-        //                var agreement_options = '';
-        //                $.each(response.UnitId, function (index, data) {
-        //                    unit_id_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
-        //                });
-        //                $.each(response.UnitName, function (index, data) {
-        //                    unit_name_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
-        //                });
-        //                $.each(response.AgreementNo, function (index, data) {
-        //                    agreement_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
-        //                });
+    //$.ajax(
+    //        {
+    //            url: "../Payment/GetUnitId",
+    //            method: "POST",
+    //            async: false,
+    //            data: { PropertyId: PropertyId },
+    //            success: function (response) {
+    //                $("#unit_id").empty();
+    //                $("#unit_name").empty();
+    //                $("#agreement_number").empty();
+    //                var unit_id_options = '';
+    //                var unit_name_options = '';
+    //                var agreement_options = '';
+    //                $.each(response.UnitId, function (index, data) {
+    //                    unit_id_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
+    //                });
+    //                $.each(response.UnitName, function (index, data) {
+    //                    unit_name_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
+    //                });
+    //                $.each(response.AgreementNo, function (index, data) {
+    //                    agreement_options += '<option value="' + data.Value + '">' + data.Value + '</option>';
+    //                });
 
-        //                $('#unit_id').append(unit_id_options);
-        //                $('#unit_name').append(unit_name_options);
-        //                $('#agreement_number').append(agreement_options);
-        //                $("#property_id").val(PropertyId);
-        //                $("#property_name").val(PropertyId);
-        //            },
-        //            error: function (jqXhr, textStatus, errorThrown) {
-        //                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-        //            },
-        //            complete: function () {
-        //            }
-        //        });
+    //                $('#unit_id').append(unit_id_options);
+    //                $('#unit_name').append(unit_name_options);
+    //                $('#agreement_number').append(agreement_options);
+    //                $("#property_id").val(PropertyId);
+    //                $("#property_name").val(PropertyId);
+    //            },
+    //            error: function (jqXhr, textStatus, errorThrown) {
+    //                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+    //            },
+    //            complete: function () {
+    //            }
+    //        });
     //$("#property_id").change(function () { getUnitId(1) });
     //$("#property_name").change(function () { getUnitId(2) });
     ////getUnitId(0);

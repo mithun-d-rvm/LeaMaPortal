@@ -31,7 +31,7 @@ namespace LeaMaPortal.Models
         public string Last_Name { get; set; }
 
         [StringLength(100)]
-        [Display(Name = "Company Name/ Educational Institute:")]
+        [Display(Name = "Company Name/ Edu Institute:")]
         public string Company_Educational { get; set; }
 
         [StringLength(100)]
@@ -105,7 +105,7 @@ namespace LeaMaPortal.Models
         [Display(Name = "Emirates ID:")]
         public string Emiratesid { get; set; }
 
-        [Display(Name = "Emirate Issue Date:")]
+        [Display(Name = "Emirate ID Issue Date:")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? Emirate_issuedate { get; set; }

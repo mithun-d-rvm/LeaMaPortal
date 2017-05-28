@@ -80,7 +80,7 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var checkList = await db.tbl_checklistmaster.FirstOrDefaultAsync(r => r.Checklist_Name.ToLower() == model.Checklist_Name.ToLower());
+                    var checkList = await db.tbl_checklistmaster.FirstOrDefaultAsync(r => r.Checklist_Name.ToLower() == model.Checklist_Name.ToLower() && r.Check_type == model.Checklist_Type && r.Id != model.Id);
                     if (checkList != null)
                     {
                         result.Errors = "Check list name already added";

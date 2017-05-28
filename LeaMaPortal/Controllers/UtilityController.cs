@@ -76,7 +76,7 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (db.tbl_utilitiesmaster.Any(a => a.Utility_Name == model.Utility_Name && a.Delmark != "*") && model.Id == 0)
+                    if (db.tbl_utilitiesmaster.Any(a => a.Utility_Name == model.Utility_Name && a.Delmark != "*" && a.id != model.Id))
                     {
                         result.Errors = "Utility name already exists";
                     }

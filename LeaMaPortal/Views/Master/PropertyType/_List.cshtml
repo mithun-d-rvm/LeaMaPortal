@@ -4,9 +4,7 @@
 @{
     Layout = null;
 }
-<link href="~/content/bootstrap.css" rel="stylesheet" />
-<link href="~/theme/css/leemastyle.css" rel="stylesheet" />
-<link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
+
 <!DOCTYPE html>
 
 <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
@@ -32,18 +30,18 @@
 
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
-                    <div class="divTableCell ">Property Type Name</div>
+                    <div class="divTableCell ">Property Type</div>
+                    <div class="divTableCell">Usage</div>
                     <div class="divTableCell">Property Category</div>
-                    <div class="divTableCell">Usage Name</div>
                     <div class="divTableCell">Action</div>
 
                 </div>
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
-                        <div class="divTableCell">@item.PropertyType</div>
                         <div class="divTableCell">@item.PropertyCategory</div>
                         <div class="divTableCell">@item.Usage_name</div>
+                        <div class="divTableCell">@item.PropertyType</div>
                         <div class="divTableCell">
                             @if (@ViewBag.IsEditable == 1)
                             {

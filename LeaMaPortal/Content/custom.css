@@ -20,6 +20,33 @@
 #menu li a:active{
     background-color: #eb9a15;
 }
+.left-content {
+    width: 91% !important;
+}
+.fixed{
+	position: relative !important;
+	 width:100% !important;
+}
+.sidebar-menu{
+    width:155px !important;
+}
+.user-name p {
+    color: #9fa9ba !important;
+    font-weight: normal;
+    margin: 0px 0 5px !important;
+}
+.user-name span{
+    font-family: ProximaNova;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #7f8fa4 !important;
+}
+.user-name .logName {
+    color: #1a91eb !important;
+}
+#menu li a{
+    text-decoration:none !important;
+}
 
 /* Bootstrap styles */
 
