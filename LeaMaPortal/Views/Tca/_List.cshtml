@@ -61,7 +61,7 @@
                                 @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-stats agreement-stats", title = "Status", @data_toggle = "modal", @data_target = "#statusModal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-status" })  |
                             </span>
                         }
-                        @if (@ViewBag.IsEditable == 1 && item.Approval_Flag == 0)
+                        @if (@ViewBag.IsEditable == 1 && item.Approval_Flag !=1)
                         {
                             <span>
                                 @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit agreement-edit", title = "Edit", @data_agreementno = @item.Agreement_No })  |

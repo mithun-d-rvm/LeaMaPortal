@@ -902,6 +902,7 @@
     <Content Include="Views\Tca\PrintAgreement.cshtml" />
     <Content Include="Views\Tca\Contract\_TermsResidential.cshtml" />
     <Content Include="Views\Tca\Contract\_TermsCommercial.cshtml" />
+    <Content Include="Views\Tca\Agreement\_TcaAproval.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
