@@ -26,13 +26,13 @@ namespace LeaMaPortal.Models
         public string Supplier_Name { get; set; }
         [DisplayName("Contract Agreement Number")]
         public int? agreement_no { get; set; }
-        [DisplayName("Property ID")]
+        [DisplayName("Property Tawtheeq ID")]
         public string Property_id { get; set; }
-        [DisplayName("Property Name")]
+        [DisplayName("Property Tawtheeq Name")]
         public string Property_Name { get; set; }
-        [DisplayName("Unit ID")]
+        [DisplayName("Unit Tawtheeq ID")]
         public string Unit_ID { get; set; }
-        [DisplayName("Unit Name")]
+        [DisplayName("Unit Tawtheeq Name")]
         public string unit_Name { get; set; }
         [DisplayName("Total Amount")]
         public float? TotalAmount { get; set; }
