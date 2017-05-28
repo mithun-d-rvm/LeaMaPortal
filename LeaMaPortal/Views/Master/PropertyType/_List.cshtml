@@ -30,18 +30,18 @@
 
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
-                    <div class="divTableCell ">Property Type Name</div>
+                    <div class="divTableCell ">Property Type</div>
+                    <div class="divTableCell">Usage</div>
                     <div class="divTableCell">Property Category</div>
-                    <div class="divTableCell">Usage Name</div>
                     <div class="divTableCell">Action</div>
 
                 </div>
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
-                        <div class="divTableCell">@item.PropertyType</div>
                         <div class="divTableCell">@item.PropertyCategory</div>
                         <div class="divTableCell">@item.Usage_name</div>
+                        <div class="divTableCell">@item.PropertyType</div>
                         <div class="divTableCell">
                             @if (@ViewBag.IsEditable == 1)
                             {

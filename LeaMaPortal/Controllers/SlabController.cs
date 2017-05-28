@@ -98,6 +98,11 @@ namespace LeaMaPortal.Controllers
                     MySqlParameter pa = new MySqlParameter();
                     string PFlag = "INSERT";
                     result.Message = "Slab created successfully";
+                    if (db.tbl_slabmaster.Any(x => x.Residence_type == model.Residence_type && x.Utility_id == model.Utility_id && x.Colour == model.Colour && x.id != model.Id))
+                    {
+                        result.Errors = "Combination of residence, utility and colour already exists";
+                        return Json(result, JsonRequestBehavior.AllowGet);
+                    }
                     if (model.Id == 0)
                     {
                         model.SlabId = db.tbl_slabmaster.OrderByDescending(o => o.id).Select(s => s.slabid).FirstOrDefault();

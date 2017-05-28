@@ -89,27 +89,42 @@ namespace LeaMaPortal.Controllers
             MessageResult result = new MessageResult();
             try
             {
-                if (ModelState.IsValid)
-                {
-                    if (db.tbl_metermaster.Any(a => a.Delmark != "*" && a.Meter_no == model.Meter_no) && model.Id == 0)
+                //if (ModelState.IsValid)
+                //{
+                    if (db.tbl_metermaster.Any(a => a.Delmark != "*" && a.Meter_no == model.Meter_no && a.Utility_id == model.Utility_id && a.id != model.Id))
                     {
                         result.Errors = "Meter number already exists!";
+                        return Json(result, JsonRequestBehavior.AllowGet);
+                    }
+                    if (model.unit_id == null)
+                    {
+                        if (db.tbl_metermaster.Any(x => x.Delmark != "*" && x.Utility_id == model.Utility_id && x.Property_id == model.Property_id && x.id!=model.Id))
+                        {
+                            result.Errors = "Combination of utility and property already exists";
+                            return Json(result, JsonRequestBehavior.AllowGet);
+                        }
                     }
                     else
                     {
-                        MySqlParameter pa = new MySqlParameter();
-                        string PFlag = "INSERT";
+                        if (db.tbl_metermaster.Any(x => x.Delmark != "*" && x.Utility_id == model.Utility_id && x.Property_id == model.Property_id && x.unit_id == model.unit_id && x.id != model.Id))
+                        {
+                            result.Errors = "Combination of utility, property and unit already exists";
+                            return Json(result, JsonRequestBehavior.AllowGet);
+                        }
+                    }
+                    MySqlParameter pa = new MySqlParameter();
+                    string PFlag = "INSERT";
 
-                        if (model.Id != 0)
-                        {
-                            PFlag = "UPDATE";
-                            result.Message = "Meter details updated successfully";
-                        }
-                        else
-                        {
-                            result.Message = "Meter details created successfully";
-                        }
-                        object[] param = { new MySqlParameter("@PFlag", PFlag),
+                    if (model.Id != 0)
+                    {
+                        PFlag = "UPDATE";
+                        result.Message = "Meter details updated successfully";
+                    }
+                    else
+                    {
+                        result.Message = "Meter details created successfully";
+                    }
+                    object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PId", model.Id),
                                            new MySqlParameter("@PUtility_id",model.Utility_id),
                                             new MySqlParameter("@PUtility_Name",model.Utility_Name),
@@ -120,10 +135,9 @@ namespace LeaMaPortal.Controllers
                                             new MySqlParameter("@PDueday",model.Dueday),
                                            new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
                                          };
-                        var RE = await db.Database.SqlQuery<object>("CALL Usp_Metermaster_All(@PFlag,@PId,@PUtility_id,@PUtility_Name,@PMeter_no,@PAccno,@PProperty_id,@Punit_id,@PDueday,@PCreateduser)", param).ToListAsync();
-                        await db.SaveChangesAsync();
-                    }
-                }
+                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Metermaster_All(@PFlag,@PId,@PUtility_id,@PUtility_Name,@PMeter_no,@PAccno,@PProperty_id,@Punit_id,@PDueday,@PCreateduser)", param).ToListAsync();
+                    await db.SaveChangesAsync();
+                //}
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
