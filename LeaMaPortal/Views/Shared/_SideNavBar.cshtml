@@ -130,7 +130,7 @@
                             Notifications
                         </div>
                         <div class="notification-number">
-                            <label id="count">0</label>
+                            <label id="notify-count">0</label>
                         </div>
                         <div class="notification-down-arrow">
                             @*<i class="fa fa-chevron-down"></i>*@
@@ -205,12 +205,15 @@
                     success: function (response) {
                         debugger;
                         var data = "";
+                        //alert(allRecordCount);
+                        //alert(response.length);
                         allRecordCount = allRecordCount + response.length;
                         if (allRecordCount == "NaN")
                         {
                             allRecordCount = 0;
                         }
                         $("#count").text(allRecordCount);
+                        $("#notify-count").text(allRecordCount);                        
                         var i = 1;
                         $.each(response, function (index, obj) {
                             data = "<div class='notification-msg-line'></div><div>";
