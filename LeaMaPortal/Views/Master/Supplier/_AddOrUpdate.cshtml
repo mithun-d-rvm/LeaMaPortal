@@ -9,14 +9,12 @@
 @{
     Layout = null;
 }
-<link href="~/content/bootstrap.css" rel="stylesheet" />
-<link href="~/theme/css/leemastyle.css" rel="stylesheet" />
-<link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
+
 <!DOCTYPE html>
 @using (Html.BeginForm("AddOrUpdate", "Supplier", FormMethod.Post, new { @id = "Supplier", @enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(m => m.id, new { @id = "Id" })
-    <div class="inner-block">
+    <div class="">
         <div class="blank">
             <div class="row">
                 <div class="col-md-6">
