@@ -13,6 +13,7 @@ using MvcPaging;
 
 namespace LeaMaPortal.Controllers
 {
+    [Authorize]
     public class RegionController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
