@@ -4,9 +4,7 @@
 @{
     Layout = null;
 }
-<link href="~/content/bootstrap.css" rel="stylesheet" />
-<link href="~/theme/css/leemastyle.css" rel="stylesheet" />
-<link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
+
 
 <div class="col-md-12">
     <div class="col-md-12 leama-fieldset ">
@@ -63,7 +61,7 @@
                                 @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-stats agreement-stats", title = "Status", @data_toggle = "modal", @data_target = "#statusModal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-status" })  |
                             </span>
                         }
-                        @if (@ViewBag.IsEditable == 1 && item.Approval_Flag == 0)
+                        @if (@ViewBag.IsEditable == 1 && item.Approval_Flag !=1)
                         {
                             <span>
                                 @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit agreement-edit", title = "Edit", @data_agreementno = @item.Agreement_No })  |

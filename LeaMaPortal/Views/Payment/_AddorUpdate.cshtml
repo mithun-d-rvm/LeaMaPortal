@@ -15,15 +15,15 @@
     @Html.HiddenFor(model => model.Property_Name)
     @Html.HiddenFor(model => model.Unit_ID)
     @Html.HiddenFor(model => model.unit_Name)
-    <div class="inner-block">
-        <div class="blank">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="col-md-12 form-input-padding">
-                        <div class="col-md-4">
-                            @Html.LabelFor(model => model.PaymentNo, htmlAttributes: new { @class = "label-default-remove" })
-                        </div>
-                        <div class="col-md-8">
+<div class="">
+    <div class="blank">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.PaymentNo, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
 
                             @Html.EditorFor(model => model.PaymentNo, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
                         </div>
