@@ -34,7 +34,10 @@ namespace LeaMaPortal.Controllers
                 {
                     query = query.Where(x => x.Property_Name.Contains(Search));
                 }
-                var list = await query.OrderBy(x => x.id).ToListAsync();
+                var list = await query.OrderBy(x => x.Vacant_Start_Date)
+                            .OrderBy(x => x.Property_ID_Tawtheeq)
+                            .OrderBy(x => x.Property_Type)
+                            .OrderBy(x => x.Unit_ID_Tawtheeq).ToListAsync();
                 return PartialView("../Master/PropertyMaster/_List", list.Select(x => Map(x)).ToPagedList(currentPageIndex, PageSize));
             }
             catch (Exception e)
@@ -78,7 +81,7 @@ namespace LeaMaPortal.Controllers
                     propertyMaster.Add(data);
                 }
             }
-            ViewBag.Ref_unit_Property_ID_Tawtheeq = new SelectList(propertyMaster.Select(x => new { PropertyIdTawtheeq = x.Property_ID_Tawtheeq, PropertyId = x.Property_Id }), "PropertyId", "PropertyIdTawtheeq");
+            ViewBag.RefUnitPropertyIDTawtheeq = new SelectList(propertyMaster.Select(x => new { PropertyIdTawtheeq = x.Property_ID_Tawtheeq, PropertyId = x.Property_Id }), "PropertyId", "PropertyIdTawtheeq");
 
             ViewBag.Ref_Unit_Property_ID = new SelectList(propertyMaster.Select(x => x.Property_Id));
             ViewBag.Ref_Unit_Property_Name = new SelectList(propertyMaster.Select(x => new { PropertyName = x.Property_Name, PropertyId = x.Property_Id }), "PropertyId", "PropertyName");
@@ -86,7 +89,8 @@ namespace LeaMaPortal.Controllers
 
             ViewBag.Region_Name = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
             ViewBag.City = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
-            ViewBag.Caretaker_ID = new SelectList(db.tbl_caretaker.Where(x => x.Delmark != "*").OrderBy(x => x.Id), "Caretaker_id", "Caretaker_id");
+            ViewBag.CaretakerName = new SelectList(db.tbl_caretaker.Where(x => x.Delmark != "*").OrderBy(x => x.Id), "Caretaker_id", "Caretaker_Name");
+            ViewBag.CaretakerID = new SelectList(db.tbl_caretaker.Where(x => x.Delmark != "*").OrderBy(x => x.Id), "Caretaker_id", "Caretaker_id");
             //var country = db.tbl_country.Where(x => x.Delmark != "*").Select(x => x.Country_name);
             ViewBag.Nationality = new SelectList(db.tbl_country.Where(x => x.Delmark != "*").OrderBy(x => x.Country_name), "Country_name", "Country_name");
             ViewBag.Profession = new SelectList(Common.Profession);
@@ -139,7 +143,11 @@ namespace LeaMaPortal.Controllers
             {
                 MessageResult result = new MessageResult();
                 if (model.Property_Id == 0 &&
-                    db.tbl_propertiesmaster.Any(a => a.Property_ID_Tawtheeq == model.Property_ID_Tawtheeq && !string.IsNullOrEmpty(model.Property_ID_Tawtheeq)))
+                    db.tbl_propertiesmaster.Any(a => a.Property_ID_Tawtheeq == model.Property_ID_Tawtheeq 
+                                && a.Property_Name.ToLower() == model.Property_Name.ToLower()
+                                && a.Unit_ID_Tawtheeq == model.Unit_ID_Tawtheeq
+                                && a.Unit_Property_Name == model.Unit_Property_Name
+                                && a.Region_Name == model.Region_Name))
                 {
                     result.Errors = "Property already exists!";
                     return Json(result, JsonRequestBehavior.AllowGet);
@@ -216,7 +224,8 @@ namespace LeaMaPortal.Controllers
                 //                                Doc_Path = x.Doc_Path
                 //                            }).ToListAsync();
                 PropertyViewModel model = Map(properties);
-                ViewBag.Caretaker_ID = new SelectList(db.tbl_caretaker.Where(x => x.Delmark != "*").OrderBy(x => x.Id), "Caretaker_id", "Caretaker_id", model.Caretaker_ID);
+                ViewBag.CaretakerID = new SelectList(db.tbl_caretaker.Where(x => x.Delmark != "*").OrderBy(x => x.Id), "Caretaker_id", "Caretaker_id", model.Caretaker_ID);
+                ViewBag.CaretakerName = new SelectList(db.tbl_caretaker.Where(x => x.Delmark != "*").OrderBy(x => x.Id), "Caretaker_id", "Caretaker_Name", model.Caretaker_ID);
                 ViewBag.PropertyId = model.Property_Id;
 
                 model.PropertiesdtList = db.tbl_propertiesdt.Where(x => x.Property_Id == model.Property_Id).Select(x => new Propertiesdt()
@@ -260,7 +269,7 @@ namespace LeaMaPortal.Controllers
                     propertyMaster.Add(data);
                     //}
                 }
-                ViewBag.Ref_unit_Property_ID_Tawtheeq = new SelectList(propertyMaster.Select(x => new { PropertyIdTawtheeq = x.Property_ID_Tawtheeq, PropertyId = x.Property_Id }), "PropertyId", "PropertyIdTawtheeq", model.Ref_Unit_Property_ID);
+                ViewBag.RefUnitPropertyIDTawtheeq = new SelectList(propertyMaster.Select(x => new { PropertyIdTawtheeq = x.Property_ID_Tawtheeq, PropertyId = x.Property_Id }), "PropertyId", "PropertyIdTawtheeq", model.Ref_Unit_Property_ID);
                 ViewBag.Ref_Unit_Property_ID = new SelectList(propertyMaster.Select(x => x.Property_Id), model.Ref_Unit_Property_ID);
                 ViewBag.Ref_Unit_Property_Name = new SelectList(propertyMaster.Select(x => new { PropertyName = x.Property_Name, PropertyId = x.Property_Id }), "PropertyId", "PropertyName", model.Ref_Unit_Property_ID);
 

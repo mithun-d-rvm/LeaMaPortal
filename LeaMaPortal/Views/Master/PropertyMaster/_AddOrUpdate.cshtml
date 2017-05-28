@@ -12,6 +12,9 @@
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Property_Id, new { @id = "Id" })
+    @Html.HiddenFor(model => model.Caretaker_ID)
+    @Html.HiddenFor(model => model.Caretaker_Name)
+    @Html.HiddenFor(model => model.Ref_unit_Property_ID_Tawtheeq)
     @*<div class="inner-block">
         <div class="blank">*@
     <div class="row">
@@ -76,7 +79,7 @@
                     Property Name:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", title = "Property name should be letters or numbers" } })
+                    @Html.EditorFor(model => model.Property_Name, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[a-zA-Z0-9.,\\s]+", title = "Property name should be letters or numbers" } })
                     @Html.ValidationMessageFor(model => model.Property_Name, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -308,7 +311,7 @@
                 </div>
                 <div class="col-md-8">
                     @*<textarea class="form-control master-form-input"></textarea>*@
-                    @Html.TextAreaFor(model => model.Address2, new { @class = "form-control master-form-input", @rows = "4", @required = "required" })
+                    @Html.TextAreaFor(model => model.Address2, new { @class = "form-control master-form-input", @rows = "4" })
                     @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -391,8 +394,9 @@
                 </div>
                 <div class="col-md-8">
                     @*<input type="text" class="form-control master-form-input" />*@
-                    @Html.EditorFor(model => model.Builtarea, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onkeypress = "allow_only_Float(event,'Builtarea');" } })
-                    @Html.ValidationMessageFor(model => model.Builtarea, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Builtarea, new { htmlAttributes = new { @class = "form-control master-form-input", @onkeypress = "allow_only_Float(event,'Builtarea');" }
+               })
+                    @*@Html.ValidationMessageFor(model => model.Builtarea, "", new { @class = "text-danger" })*@
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -400,8 +404,8 @@
                     Plot Area:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Plotarea, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onkeypress = "allow_only_Float(event,'Plotarea');" } })
-                    @Html.ValidationMessageFor(model => model.Plotarea, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Plotarea, new { htmlAttributes = new { @class = "form-control master-form-input", @onkeypress = "allow_only_Float(event,'Plotarea');" } })
+                    @*@Html.ValidationMessageFor(model => model.Plotarea, "", new { @class = "text-danger" })*@
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -409,8 +413,8 @@
                     Leasable Area:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Leasablearea, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onkeypress = "allow_only_Float(event,'Leasablearea');" } })
-                    @Html.ValidationMessageFor(model => model.Leasablearea, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Leasablearea, new { htmlAttributes = new { @class = "form-control master-form-input", @onkeypress = "allow_only_Float(event,'Leasablearea');" } })
+                    @*@Html.ValidationMessageFor(model => model.Leasablearea, "", new { @class = "text-danger" })*@
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -518,7 +522,7 @@
                             });
                         }*@
 
-                    @Html.DropDownList("Ref_unit_Property_ID_Tawtheeq", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-- Select --", @required = "required" })
+                    @Html.DropDownList("RefUnitPropertyIDTawtheeq", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @placeholder = "-- Select --", @required = "required" })
 
 
                 </div>
@@ -789,7 +793,8 @@
                     Caretaker Name:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Caretaker_Name, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })
+                    @*@Html.EditorFor(model => model.Caretaker_Name, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })*@
+                    @Html.DropDownList("CaretakerName", null, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                     @Html.ValidationMessageFor(model => model.Caretaker_Name, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -803,7 +808,7 @@
                             <option> ID 2 </option>
                             <option> ID 3 </option>
                         </select>*@
-                    @Html.DropDownList("Caretaker_ID", null, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
+                    @Html.DropDownList("CaretakerID", null, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -1023,7 +1028,7 @@
         debugger;
         var to = $("#completion_Date").val();
         if (to != "") {
-            $("#Purchased_date").prop('min', to);
+            //$("#Purchased_date").prop('min', to);
         }
     }
     function setMinForPropertyDate() {
@@ -1047,25 +1052,52 @@
             $("#Valued_Date_unit").prop('min', to);
         }
     }
+    function removeRequired()
+    {        
+        var pf = $('input[name=Property_Flag]:checked').val();
+        var noofUnits = $("#Noofunits").val();
+        alert(pf);
+        alert(parseInt(noofUnits));
+        if(pf == "Property" && parseInt(noofUnits) > 0){
+            //document.getElementById("Rental_Rate_Month_unit").required = false;
+            $("input").prop('required', false);
+        }
+        else {
+            $("input").prop('required', true);
+        }
+    }
+    $("#Property_Type").change(function () {
+        removeRequired();
+    });
+    $("#Noofunits").change(function () {
+        removeRequired();
+    });
     
-    $("#Ref_unit_Property_ID_Tawtheeq").change(function () {
+    $("#RefUnitPropertyIDTawtheeq").change(function () {
         debugger;
-        $("#Ref_Unit_Property_ID").val($("#Ref_unit_Property_ID_Tawtheeq option:selected").val());
-        $("#Ref_Unit_Property_Name").val($("#Ref_unit_Property_ID_Tawtheeq option:selected").val());
+        $("#Ref_Unit_Property_ID").val($("#RefUnitPropertyIDTawtheeq option:selected").val());
+        $("#Ref_Unit_Property_Name").val($("#RefUnitPropertyIDTawtheeq option:selected").val());
         return;
     });
     $("#Ref_Unit_Property_ID").change(function () {
-        $("#Ref_unit_Property_ID_Tawtheeq").val($("#Ref_Unit_Property_ID option:selected").val());
+        $("#RefUnitPropertyIDTawtheeq").val($("#Ref_Unit_Property_ID option:selected").val());
         $("#Ref_Unit_Property_Name").val($("#Ref_Unit_Property_ID option:selected").val());
         return;
     });
     $("#Ref_Unit_Property_Name").change(function () {
         $("#Ref_Unit_Property_ID").val($("#Ref_Unit_Property_Name option:selected").val());
-        $("#Ref_unit_Property_ID_Tawtheeq").val($("#Ref_Unit_Property_Name option:selected").val());
+        $("#RefUnitPropertyIDTawtheeq").val($("#Ref_Unit_Property_Name option:selected").val());
         return;
     });
 
-
+    $("#CaretakerID").on('change', function (e) {
+        var tenantid = $("#CaretakerID").val();
+        $("#CaretakerName").val($("#CaretakerID option:selected").val());
+    });
+    $("#CaretakerName").on('change', function (e) {
+        var tenantid = $("#CaretakerName").val();
+        $("#CaretakerID").val($("#CaretakerName option:selected").val());
+    });
     $("#Utility_ID").change(function () {
         $("#Utility_Name").val($("#Utility_ID option:selected").text());
         return;
@@ -1076,8 +1108,24 @@
     });
     var i = parseInt($("#propertiesdt1-list-count").val());
     function addPropertiesdt1(e) {
+        //$("#Utility_ID option[value*='n/a']").prop('disabled', true);
+        //$("#Utility_ID option:selected").prop('disabled', true);        
         var Utility_id = $("#Utility_ID option:selected").text();
         var Utility_Name = $("#Utility_ID").val();
+        for (var temp = 0; temp < i; temp++)
+        {
+            var name = "Propertiesdt1List[" + temp + "].Utility_id";
+            var val = document.getElementsByName(name)[0].value;;
+            if(val == Utility_id)
+            {
+                $('#masterResultModal').modal('show');
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Utility details already exists");
+                return;
+            }
+        }
         var html = "<tr class=''> <td class='p-t-25'>" +
  "<div class='col-md-5'>" +
                                                     "<input type='hidden' name='Propertiesdt1List[" + i + "].Utility_id' value='" + Utility_id + "' data-name='Utility_id' />" +
@@ -1137,10 +1185,22 @@
 
         //var fid = $("#Facility_id option:selected").text();
         //var fname = $("#Facility_id").val();
-
+        //$("#Facility_id option:selected").prop('disabled', true);
         var Facility_id = $("#Facility_id option:selected").text();
         var Facility_Name = $("#Facility_id").val();
         var Numbers_available = $("#Numbers_available").val();
+        for (var temp = 0; temp < j; temp++) {
+            var name = "PropertiesdtList[" + temp + "].Facility_id";
+            var val = document.getElementsByName(name)[0].value;;
+            if (val == Facility_id) {
+                $('#masterResultModal').modal('show');
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Facility details already exists");
+                return;
+            }
+        }
         var html = "<tr class=''> <td class='p-t-25'>" +
  "<div class='col-md-3'>" +
                                                     "<input type='hidden' name='PropertiesdtList[" + j + "].Facility_id' value='" + Facility_id + "' data-name='Facility_id' />" +
@@ -1165,10 +1225,14 @@
         $(this).closest('tr').remove();
         var existfilelist = document.getElementById('facility-details-list');
         var newindex = 0;
-        $(existfilelist).find('> tbody > tr').each(function () {
-
+        $(existfilelist).find('> tbody > tr').each(function () {            
             $(this).find("input").each(function () {
                 var dataname = $(this).data("name");
+                console.log(this);
+                alert(this);
+                var name = 'PropertiesdtList[' + newindex + '].' + dataname;
+                //$("input[name=" + name + "]").val();
+                //$("#Utility_ID option[value*='n/a']").prop('disabled', true);
                 //alert(dataname + $(this).val() + '-' + newindex)
                 $(this).attr({
                     'id': function (_, id) {
@@ -1332,6 +1396,9 @@
         $("#img-add-or-update-loader").removeClass("hide");
         e.preventDefault();
         var formData = new FormData($(this)[0]);
+        $("#Caretaker_ID").val($("#CaretakerID option:selected").text() == "--Select--" ? null : $("#CaretakerID option:selected").text());
+        $("#Caretaker_Name").val($("#CaretakerName option:selected").text() == "--Select--" ? null : $("#CaretakerName option:selected").text());
+        $("#Ref_unit_Property_ID_Tawtheeq").val($("#RefUnitPropertyIDTawtheeq option:selected").text() == "--Select--" ? null : $("#RefUnitPropertyIDTawtheeq option:selected").text());
         try {
             $.ajax(
                 {
