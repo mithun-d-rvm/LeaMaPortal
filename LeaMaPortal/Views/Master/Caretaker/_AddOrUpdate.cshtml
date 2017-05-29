@@ -194,7 +194,7 @@
 }
 <script>
     $(document).ready(function () {
-        debugger;
+         
         var id = $("#CaretakerId").val();
         //alert(id);
         if (id != 0) {
@@ -208,7 +208,7 @@
     }
 
     $("#Region_Name").on('change', function (e) {
-        debugger;
+         
         var region = $("#Region_Name").val();
         if (region != "" && region != null) {
             $.ajax(
@@ -220,7 +220,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         if (response != null) {
                             $("#Country").val(response);
                         }
@@ -318,7 +318,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         if (response != null) {
                             $("#Country").val(response);
                         }

@@ -113,7 +113,15 @@
         var Payable = $("#AgreementUtilityDivRenewal #Payable").val();
         var Amount_Type = $("#AgreementUtilityDivRenewal #Amount_Type").val();
         var Amount = $("#AgreementUtilityDivRenewal #Amount").val();
-
+        if (Utility_id == '' || Payable == '' || Amount_Type == '' || Amount == '') {
+            alert("Please fill mandatory fields");
+            return;
+        }
+        var isExist = isExistUtilityRenewal(Utility_id);
+        if (isExist) {
+            alert("Already exist");
+            return;
+        }
         var html = "<tr><td>" +
                       "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCountRenewal + "].Utility_id' id='AgreementUtilityList[" + AgreementUtilityCountRenewal + "].Utility_id' value='" + Utility_id + "' data-name='Utility_id' />" +
                       "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCountRenewal + "].Utility_Name' id='AgreementUtilityList[" + AgreementUtilityCountRenewal + "].Utility_Name' value='" + Utility_Name + "' data-name='Utility_Name' />" +
@@ -152,8 +160,33 @@
 
         $("#AgreementUtilityListRenewal").append(html);
         AgreementUtilityCountRenewal++;
+        $("#AgreementUtilityListCountRenewal").val(AgreementUtilityCountRenewal);
     }
-    
+    function isExistUtilityRenewal(Utility_id) {
+
+        var isExist = false;
+        var existfilelist = document.getElementById('AgreementUtilityListRenewal');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+            var existUtility_id = "";
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                switch (dataname) {
+                    case "Utility_id":
+                        existUtility_id = $(this).val();
+                        break;
+                }
+
+            });
+
+            if (Utility_id == existUtility_id) {
+                isExist = true;
+            }
+
+        });
+        return isExist;
+    }
     $(document).on('click', 'button.AgreementUtilityListRenewal-remove', function () {
         $(this).closest('tr').remove();
         var existfilelist = document.getElementById('AgreementUtilityListRenewal');
@@ -178,10 +211,10 @@
 
         });
         AgreementUtilityCountRenewal = newindex;
+        $("#AgreementUtilityListCountRenewal").val(AgreementUtilityCountRenewal);
     });
 
     $("#AgreementUtilityDivRenewal #Utility_id").change(function () {
-        debugger;
         var utility_id = $("#AgreementUtilityDivRenewal #Utility_id").val();
         $("#AgreementUtilityDivRenewal #Utility_Name").val(utility_id);
         return;
