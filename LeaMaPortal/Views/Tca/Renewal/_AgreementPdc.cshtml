@@ -2,7 +2,7 @@
 
 @model LeaMaPortal.Models.AgreementPdcViewModel
 <div class="row p-b-25 text-uppercase">
-    <span> <strong> Agreement PDC </strong> </span>
+    <span> <strong> Agreement Payment Details </strong> </span>
 </div>
 
 <div class="row" id="AgreementPdRenewal">
@@ -37,7 +37,8 @@
             @Html.DropDownList("Month", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
         </div>
         <div class="col-md-1 w-md-10">
-            @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);" } })
+            <input type="number" name="Year" id="Year" step="1" class="master-form-input form-control" onkeypress = "allow_only_numbers(event);" min="@DateTime.Now.Year" />
+            @*@Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);", @min = DateTime.Now.Year } })*@
         </div>
         <div class="col-md-1 w-md-13">
             @Html.DropDownList("Payment_Mode", null,"--Select--", new { @class = "form-control master-form-input AgreementPdPaymentMode" })
@@ -55,7 +56,7 @@
             @Html.EditorFor(model => model.Cheque_Amount, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'AgreementPdRenewal #Cheque_Amount');" } })
         </div>
         <div class="col-md-1 w-md-10">
-            <button class="document-btn" onclick="addAgreementPdcDetailsRenewal(event);">Add</button>
+            <button class="document-btn" onclick="addAgreementPdcDetailsRenewal(event);" id="btnAddAgreementRenewalPdc">Add</button>
         </div>
     </div>
 </div>
@@ -156,8 +157,21 @@
         var BankName = $("#AgreementPdRenewal #BankName").val();
         var Cheque_No = $("#AgreementPdRenewal #Cheque_No").val();
         var Cheque_Date = $("#AgreementPdRenewal #Cheque_Date").val();
-        var Cheque_Amount =parseFloat($("#AgreementPdRenewal #Cheque_Amount").val());
-
+        var Cheque_Amount = parseFloat($("#AgreementPdRenewal #Cheque_Amount").val());
+        var cYear = new Date().getFullYear();
+        if (Year < cYear) {
+            alert("Year not past");
+            return;
+        }
+        if (Month == '' || Year == '' || Payment_Mode == '' || $("#AgreementPdRenewal #Cheque_Amount").val() == '') {
+            alert("Please fill mandatory fields");
+            return;
+        }
+        var isExist = isExistAgreementPdcRenewal(Month, Year, Payment_Mode);
+        if (isExist) {
+            alert("Already exist");
+            return;
+        }
         var html = "<tr><td>" +
                       "<input type='hidden' name='AgreementPdcList[" + AgreementPdCountRenewal + "].Month' id='AgreementPdcList[" + AgreementPdCountRenewal + "].Month' value='" + Month + "' data-name='Month' />" +
                       "<input type='hidden' name='AgreementPdcList[" + AgreementPdCountRenewal + "].Year' id='AgreementPdcList[" + AgreementPdCountRenewal + "].Year' value='" + Year + "' data-name='Year' />" +
@@ -205,10 +219,44 @@
 
         $("#AgreementPdcDetailsList-Renewal").append(html);
         AgreementPdCountRenewal++;
+        $("#AgreementPdcListCountRenewal").val(AgreementPdCountRenewal);
     }
 
-    function removeAgreementPdcDetails() {
-        debugger;
+    function isExistAgreementPdcRenewal(Month, Year, Payment_Mode) {
+
+        var isExist = false;
+        var existfilelist = document.getElementById('AgreementPdcDetailsList');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+            var existMonth = "";
+            var existYear = "";
+            var existPayment_Mode = "";
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                switch (dataname) {
+                    case "Month":
+                        existMonth = $(this).val();
+                        break;
+                    case "Year":
+                        existYear = $(this).val();
+                        break;
+                    case "Payment_Mode":
+                        existPayment_Mode = $(this).val();
+                        break;
+                }
+
+            });
+
+            if (Month == existMonth || Year == existYear || existPayment_Mode == Payment_Mode) {
+                isExist = true;
+            }
+
+        });
+        return isExist;
+    }
+
+    function removeAgreementPdcDetails() {        
         $(this).closest('tr').remove();
         var existfilelist = document.getElementById('AgreementPdcDetailsList-Renewal');
         var newindex = 0;
@@ -261,9 +309,10 @@
 
         });
         AgreementPdCountRenewal = newindex;
+        $("#AgreementPdcListCountRenewal").val(AgreementPdCountRenewal);
     });
     $("#AgreementPdRenewal #Payment_Mode").change(function () {
-        debugger;
+         
         var type = $("#AgreementPdRenewal #Payment_Mode").val();
         if (type == "Cheque") {
             $("#AgreementPdRenewal #Cheque_No").attr("disabled", false);

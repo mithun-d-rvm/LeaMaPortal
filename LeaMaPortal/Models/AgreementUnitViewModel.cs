@@ -17,7 +17,7 @@ namespace LeaMaPortal.Models
         public string Property_ID { get; set; }
         [DisplayName("Property Tawtheeq ID")]
         public string Property_ID_Tawtheeq { get; set; }
-        [DisplayName("Properties Name")]
+        [DisplayName("Property Name")]
         public string Properties_Name { get; set; }
         
         [DisplayName("Unit Tawtheeq ID")]

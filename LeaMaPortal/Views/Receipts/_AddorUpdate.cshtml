@@ -475,24 +475,24 @@
 }
 <script>
     $("#Tenant_id").on('change', function (e) {
-        debugger;
+         
         var tenantid = $("#Tenant_id").val();
         $("#Tenant_Name").val($("#Tenant_id option:selected").val());
     });
     $("#Tenant_Name").on('change', function (e) {
-        debugger;
+         
         var tenantid = $("#Tenant_Name").val();
         $("#Tenant_id").val($("#Tenant_Name option:selected").val());
     });
     $("#Property_id").on('change', function (e) {
-        debugger;
+         
         var propertyid = $("#Property_id").val();
         $("#Property_Name").val($("#Property_id option:selected").val());
         var id = $("#Property_id option:selected").text() == "--Select--" ? null : propertyid;
         getunits(id);
     });
     $("#Property_Name").on('change', function (e) {
-        debugger;
+         
         var propertyid = $("#Property_Name").val();
         $("#Property_id").val($("#Property_Name option:selected").val());
         var id = $("#Property_Name option:selected").text() == "--Select--" ? null : propertyid;
@@ -501,14 +501,14 @@
 
 
     $("#Unit_ID").on('change', function (e) {
-        debugger;
+         
         var unitid = $("#Unit_ID").val();
         $("#unit_Name").val($("#Unit_ID option:selected").val());
         var id = $("#Unit_ID option:selected").text() == "--Select--" ? null : unitid;
         getproperty(id);
     });
     $("#unit_Name").on('change', function (e) {
-        debugger;
+         
         var unitid = $("#unit_Name").val();
         $("#Unit_ID").val($("#unit_Name option:selected").val());
         var id = $("#unit_Name option:selected").text() == "--Select--" ? null : unitid;
@@ -526,7 +526,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         var options = '<option value="" selected>--Select--</option>';
                         $("#UnitID").empty();
 
@@ -565,7 +565,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         $("#Propertyid").val(response);
                         $("#PropertyName").val(response);
                     },
@@ -580,14 +580,14 @@
 
     }
     function getInvoice(invoiceNo) {
-        debugger;
+         
         $.ajax(
                 {
                     url: "../Receipts/GetInvoiceDetails",
                     method: "POST",
                     data: { InvoiceNumber : invoiceNo },
                     success: function (response) {
-                        debugger;
+                         
                         $("#InvoiceType").val(response.invtype);
                         //$("#InvoiceDate").val(response.month+"/"+response.day+"/"+response.year);
                         $("#InvoiceAmount").val(response.InvoiceAmount);
@@ -669,7 +669,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         $("#Tenant_id").empty();
                         var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
                         $.each(response.Tenants, function (index, data) {
@@ -742,7 +742,7 @@
     });
    
     $("#TotalAmount").on('change', function () {
-        debugger;
+         
         var totalAmount = $("#TotalAmount").val(); // type
         AmountInWords(totalAmount);
     });
@@ -787,7 +787,7 @@
         });
     }
     function getChequeDetails(Mode, agreement_no, cheque_no) {
-        debugger;
+         
         if (cheque_no == "--Select--") {
             $("#TotalAmount").val("");
             $("#AmtInWords").val("");
@@ -800,7 +800,7 @@
             type: "Get",
             data: { Mode: Mode, agreement_no: agreement_no, cheque_no: cheque_no },
             success: function (response) {
-                debugger;
+                 
                 $("#TotalAmount").val(response.Cheque_Amount);
                 $("#TotalAmount").trigger("change");
                 if (response.cheque_date!=null)
@@ -823,7 +823,7 @@
     //        //contentType: "application/json",
     //        //processData: false,
     //        success: function (response) {
-    //            debugger;
+    //             
     //            $("#AdvAcCode").empty();
     //            var AdvAcCode = '';
     //            $.each(response.ReceiptNo, function (index, data) {
@@ -901,7 +901,7 @@
     //        //contentType: "application/json",
     //        //processData: false,
     //        success: function (response) {
-    //            debugger;
+    //             
     //            //$("#AdvAcCode").empty();
     //            //var AdvAcCode = '';
     //            //$.each(response.ReceiptNo, function (index, data) {
@@ -984,7 +984,7 @@
     //        //contentType: "application/json",
     //        //processData: false,
     //        success: function (response) {
-    //            debugger;
+    //             
     //            //$("#AdvAcCode").empty();
     //            //var AdvAcCode = '';
     //            //$.each(response.ReceiptNo, function (index, data) {
@@ -1130,7 +1130,7 @@
         i = newindex;
     });
     $("form#Receipts").off("submit").on("submit", function (e) {
-        debugger;
+         
         e.preventDefault();
         try {
 
@@ -1156,7 +1156,7 @@
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
-                        debugger;
+                         
                         getReceipt();
                         $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
                         $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
@@ -1218,7 +1218,7 @@
     //    }
     //}
     function showHideChequeField(value) {
-        debugger;
+         
         if (value) {
             $("[name='cheque'] :input").attr("disabled", value);
             $("[name='cheque']").hide();
@@ -1284,7 +1284,7 @@
         }
     }
     function ShowHidePaymentModeFields(paymentModeValue) {
-        debugger;
+         
         if (paymentModeValue == "cheque") {
             showHideChequeField(false);
             showhideAdvancePayment(true);
@@ -1395,7 +1395,7 @@
             type: "Get",
             data: { Mode: mode },
             success: function (response) {
-                debugger;
+                 
                 $("#agreement_no").empty();
                 var Agreement_No = '<option value="">--Select--</option>';
                 $.each(response, function (index, data) {
@@ -1430,7 +1430,7 @@
         });
     }
     $("#AdvAcCode").on('change', function (e) {
-        debugger;
+         
         if ($("#AdvAcCode").val() != "") {
             getAdvancePaymentDetail($("#AdvAcCode").val());
         }

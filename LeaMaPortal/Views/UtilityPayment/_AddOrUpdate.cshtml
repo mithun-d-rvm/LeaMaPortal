@@ -398,7 +398,7 @@
     }
     var i = $("#init-details-count").val();
     function add() {
-        debugger;
+         
         var refno = $("#Refno option:selected").text();
         var meterno = $("#Meterno option:selected").text();
         var billNo = $("#billNo option:selected").text();
@@ -476,7 +476,7 @@
         return false;
     }
     $(document).on('click', 'button.utilitypayment-remove', function () {
-        debugger;
+         
         $(this).closest('tr').remove();
         var existfilelist = document.getElementById('UtilityPaymentDetailsListForms');
         var newindex = 0;
@@ -503,21 +503,21 @@
         i = newindex;
     });
     $("#Utiltiyname").on('change', function (e) {
-        debugger;
+         
         var utilityid = $("#Utiltiyname").val();
         $("#Utility_id").val(utilityid);
         $("#Utiltiy_name").val($("#Utiltiyname option:selected").text());
     });
 
     $("#Suppliername").on('change', function (e) {
-        debugger;
+         
         var Supplierid = $("#Suppliername").val();
         $("#Supplier_id").val(Supplierid);
         $("#Supplier_name").val($("#Suppliername option:selected").text());
     });
 
     $("#AdvAcCode").on('change', function (e) {
-        debugger;
+         
         var advanceCode = $("#AdvAcCode").val();
         if (advanceCode == "") {
             $("#TotalAmount").val(0);
@@ -529,14 +529,14 @@
     });
 
     //$("#PaymentType").on('change', function (e) {
-    //    debugger;
+    //     
     //    var paymentType = $("#PaymentType").val();
     //    if (paymentType == "advance") {
     //        $("#AdvAcCode").show();
     //    }
     //});
     function showHideChequeField(value) {
-        debugger;
+         
         $("[name='cheque'] :input").attr("disabled", value);
         if (value) {
             $("[name='cheque']").hide();
@@ -555,7 +555,7 @@
         }
     }
     function ShowHidePaymentModeFields(paymentModeValue) {
-        debugger;
+         
         if (paymentModeValue == "cheque") {
             showHideChequeField(false);
             showhideAdvancePayment(true);
@@ -619,23 +619,23 @@
         }
     }
     $("#PaymentMode").on('change', function (e) {
-        debugger;
+         
         var paymentMode = $("#PaymentMode").val();
         ShowHidePaymentModeFields(paymentMode);
     });
     
     $("#BankAcCode").on('change', function (e) {
-        debugger;
+         
         var bankAcCode = $("#BankAcCode").val();
         $("#BankAcName").val(bankAcCode);
     });
     $("#BankAcName").on('change', function (e) {
-        debugger;
+         
         var bankAcCode = $("#BankAcName").val();
         $("#BankAcCode").val(bankAcCode);
     });
     $("#Refno").on('change', function (e) {
-        debugger;
+         
         var refno = $("#Refno").val();
         if (refno != "" && refno != null) {
             $("#AddUtilityPayment").prop('disabled', false);
@@ -650,7 +650,7 @@
     });
 
     $("#Meterno").on('change', function (e) {
-        debugger;
+         
         var refno = $("#Meterno").val();
         if (refno != "" && refno != null) {
             $("#AddUtilityPayment").prop('disabled', false);
@@ -665,7 +665,7 @@
     });
 
     $("#billNo").on('change', function (e) {
-        debugger;
+         
         var refno = $("#billNo").val();
         if (refno != "" && refno != null) {
             $("#AddUtilityPayment").prop('disabled', false);
@@ -688,7 +688,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         if (response != null) {
                             //$("#billDate").val(response);
                             $("#BillAmount").val(response.amount);
@@ -735,7 +735,7 @@
             $('#masterResultModal').modal('show');
             return false;
         }
-        debugger;
+         
         try {
             var form = $("form#UtllityPayment");
             $.ajax(
@@ -790,7 +790,7 @@
         return o;
     };
     $(document).ready(function () {
-        debugger;
+         
         var paymentMode = $("#PaymentMode").val();
         ShowHidePaymentModeFields(paymentMode);
 
@@ -807,7 +807,7 @@
             type: "Get",
             data: { advanceCode: value },
             success: function (response) {
-                debugger;
+                 
                 $("#TotalAmount").val(response);
                 $("#TotalAmount").trigger("change");
             },

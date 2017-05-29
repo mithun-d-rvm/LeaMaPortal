@@ -411,7 +411,7 @@
             success: function (response) {
 
                 $.each(response, function (index, el) {
-                    debugger;
+                     
                     $("#RentDue").text(el.Total_Value);
                 });
             },
@@ -433,7 +433,7 @@
             processData: false,
             success: function (response) {
                 $.each(response, function (index, el) {
-                    debugger;
+                     
                     if (el.Month == "N/A")
                         $("#TotalExpense").text(el.Total_Value);
                 });
@@ -456,7 +456,7 @@
             processData: false,
             success: function (response) {
                 $.each(response, function (index, el) {
-                    debugger;
+                     
                     $("#VacantLoss").text(el.Total_Value);
                     $("#VacantLossRes").text(el.Residential);
                     $("#VacantLossCom").text(el.Commercial);
@@ -580,7 +580,7 @@
         });
     }
     function GetEarningDataSet() {
-        debugger;
+         
         $.ajax(
         {
             url: "../Dashboard/GetEarningDataSet",
@@ -589,7 +589,7 @@
             processData: false,
             success: function (response) {
                 $('#earning-table').empty();
-                debugger;
+                 
                 //var header = "";
                 //header += "<div class='panel-body'>";
                 //header += "<div class='divTable leama-fieldset'>";
@@ -605,7 +605,7 @@
                 //$('#earning-table').append(header);
                 //var html = "";
                 //$.each(response, function (index, data) {
-                //    debugger;
+                //     
 
                 //    html += "<div class='divTableRow'>";
                 //    html += "<div class='divTableCell'>" + response[index].ReceiptNo + "</div>";
@@ -634,7 +634,7 @@
                 //$('#earning-table').append(header);
                 //var html = "";
                 $.each(response, function (index, data) {
-                    debugger;
+                     
 
                     html += "<tr>";
                     html += "<td class='p-15'>" + response[index].ReceiptNo + "</td>";
@@ -670,7 +670,7 @@
             processData: false,
             success: function (response) {
                 $('#vacant-table').empty();
-                debugger;
+                 
                 var html = "";
                 //header += "<div class='panel-body'>";
                 //header += "<div class='divTable leama-fieldset'>";
@@ -704,7 +704,7 @@
                 //$('#vacant-table').append(header);
                 //var html = "";
                 $.each(response, function (index, data) {
-                    debugger;
+                     
 
                     html += "<tr>";
                     html += "<td class='p-15'>" + response[index].Property_Name + "</td>";
@@ -740,7 +740,7 @@
             processData: false,
             success: function (response) {
                 $('#loss-table').empty();
-                debugger;
+                 
                 var html = "";
                 //header += "<div class='panel-body'>";
                 //header += "<div class='divTable leama-fieldset'>";
@@ -775,7 +775,7 @@
                 //$('#loss-table').append(header);
                 //var html = "";
                 $.each(response, function (index, data) {
-                    debugger;
+                     
 
                     html += "<tr>";
                     html += "<td class='p-15'>" + response[index].Property_Name + "</td>";
@@ -813,7 +813,7 @@
             processData: false,
             success: function (response) {
                 $('#utility-table').empty();
-                debugger;
+                 
                 var html = "";
 
                 html += "<table class='table table-responsive tbl-dahboard'>";
@@ -828,7 +828,7 @@
                 //$('#loss-table').append(header);
                 //var html = "";
                 $.each(response, function (index, data) {
-                    debugger;
+                     
 
                     html += "<tr>";
                     html += "<td class='p-15'>" + response[index].refno + "</td>";
@@ -859,7 +859,7 @@
             processData: false,
             success: function (response) {
                 $('#rent-table').empty();
-                debugger;
+                 
                 var html = "";
 
                 html += "<table class='table table-responsive tbl-dahboard'>";
@@ -877,7 +877,7 @@
                 //$('#loss-table').append(header);
                 //var html = "";
                 $.each(response, function (index, data) {
-                    debugger;
+                     
 
                     html += "<tr>";
                     html += "<td class='p-15'>" + response[index].Agreement_No + "</td>";
@@ -912,7 +912,7 @@
             processData: false,
             success: function (response) {
                 $('#expense-table').empty();
-                debugger;
+                 
                 var html = "";
 
 
@@ -930,7 +930,7 @@
                 //$('#loss-table').append(header);
                 //var html = "";
                 $.each(response, function (index, data) {
-                    debugger;
+                     
 
                     html += "<tr>";
                     html += "<td class='p-15'>" + response[index].PaymentNo + "</td>";

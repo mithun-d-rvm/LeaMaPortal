@@ -1017,7 +1017,7 @@
                         }
 <script>
     function setMinForFromDate() {
-        debugger;
+         
         var to = $("#Valued_Date").val();
         console.log(to);
         if (to != "") {
@@ -1025,28 +1025,28 @@
         }
     }
     function setMinForPurchasedDate() {
-        debugger;
+         
         var to = $("#completion_Date").val();
         if (to != "") {
             //$("#Purchased_date").prop('min', to);
         }
     }
     function setMinForPropertyDate() {
-        debugger;
+         
         var to = $("#Purchased_date").val();
         if (to != "") {
             $("#Valued_Date").prop('min', to);
         }
     }
     function setMinForUnitFromDate() {
-        debugger;
+         
         var to = $("#Valued_Date_unit").val();
         if (to != "") {
             $("#Vacant_Start_Date_Unit").prop('min', to);
         }
     }
     function setMinForUnitValueDate() {
-        debugger;
+         
         var to = $("#Purchased_date_unit").val();
         if (to != "") {
             $("#Valued_Date_unit").prop('min', to);
@@ -1072,7 +1072,7 @@
     });
     
     $("#RefUnitPropertyIDTawtheeq").change(function () {
-        debugger;
+         
         $("#Ref_Unit_Property_ID").val($("#RefUnitPropertyIDTawtheeq option:selected").val());
         $("#Ref_Unit_Property_Name").val($("#RefUnitPropertyIDTawtheeq option:selected").val());
         return;
@@ -1177,7 +1177,7 @@
     });
 
     function addPropertiesdt(e) {
-        debugger;
+         
         //var Utility_id = $("#Utility_ID option:selected").text();
         //var Utility_Name = $("#Utility_ID").val();
 
@@ -1261,7 +1261,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         if (response != null) {
                             $("#Caretaker_Name").val(response);
                         }
@@ -1277,7 +1277,7 @@
         }
     });
     $('input[type=checkbox][id=ChkCompany_occupied_Flag]').change(function () {
-        debugger;
+         
         if (this.checked) {
             $("#hdnCompany_occupied_Flag").val(1);
         }
@@ -1317,7 +1317,7 @@
         }
     });
     $("#Region_Name").on('change', function (e) {
-        debugger;
+         
         var region = $("#Region_Name").val();
         if (region != "" && region != null) {
             $.ajax(
@@ -1329,7 +1329,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         if (response != null) {
                             $("#Country").val(response);
                         }
@@ -1346,7 +1346,7 @@
         // $("#Title").val($("#TitleDisplay").val());
     });
     $(document).ready(function () {
-        debugger;
+         
         $('#Status_unit').attr('disabled', 'disabled');
         $('#Status').attr('disabled', 'disabled');
         if ($("#unit")[0].checked) {

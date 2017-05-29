@@ -15,8 +15,8 @@
     @Html.HiddenFor(x => x.Properties_Name)
     @Html.HiddenFor(x => x.Unit_ID_Tawtheeq)
     @Html.HiddenFor(x => x.Unit_Property_Name)
-    @Html.HiddenFor(x => x.Caretaker_id)
-    @Html.HiddenFor(x => x.Caretaker_Name)
+    @*@Html.HiddenFor(x => x.Caretaker_id)
+    @Html.HiddenFor(x => x.Caretaker_Name)*@
     @Html.HiddenFor(x=>x.Agreement_No)
     @*@Html.HiddenFor(x => x.Tenant_Type)*@
     <div class="font-smaller">
@@ -112,7 +112,8 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("Caretakerid", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @readonly = "readonly" })
+                        @*@Html.DropDownList("Caretakerid", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @readonly = "readonly" })*@
+                        @Html.EditorFor(model => model.Caretaker_id, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -121,7 +122,8 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("CaretakerName", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @readonly = "readonly" })
+                        @*@Html.DropDownList("CaretakerName", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @readonly = "readonly" })*@
+                        @Html.EditorFor(model => model.Caretaker_Name, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -181,7 +183,7 @@
                         @Html.LabelFor(model => model.Vacantstartdate, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Vacantstartdate, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Vacantstartdate, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -221,7 +223,7 @@
                         @Html.LabelFor(model => model.nofopayments, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);" } })
+                        @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);", @min = "0" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -266,7 +268,7 @@
                         @Html.LabelFor(model => model.Notice_Period, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Notice_Period, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);" } })
+                        @Html.EditorFor(model => model.Notice_Period, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);", @min = "0" } })
                     </div>
                 </div>
 
@@ -338,10 +340,28 @@
     </div>
 }
 <script>
-   
+    sigleOrMultiple();
+    function sigleOrMultiple() {
+        var single_multiple = $('input[name=radioName]:checked', '#TcaRenewal').val();
+        if (single_multiple == 'Multiple') {
+            //$('#UnitIDTawtheeq').attr('disabled', true);
+            //$('#UnitPropertyName').attr('disabled', true);
+            $("#TcaRenewal #UnitPropertyId").hide();
+            $("#TcaRenewal #Unitpropertyname").hide();
+            $("#AgreementUnitR").show();
+
+        }
+        else {
+            //$('#editAgreementForm #UnitIDTawtheeq').removeAttr('disabled');
+            //$('#editAgreementForm #UnitPropertyName').removeAttr('disabled');
+            $("#TcaRenewal #UnitPropertyId").show();
+            $("#TcaRenewal #Unitpropertyname").show();
+            $("#AgreementUnitR").hide();
+        }
+    }
 
     $("#TcaRenewal #Tenant_Type").on('change', function (e) {
-        debugger;
+         
         var Tenant_Type = $("#TcaRenewal #Tenant_Type").val();
         $("#TcaRenewal #Ag_Tenant_id").val(null);
         $("#TcaRenewal #Ag_Tenant_Name").val(null);
@@ -355,7 +375,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         if (response != null) {
                             $("#TcaRenewal #Ag_Tenantid").empty();
                             $("#TcaRenewal #Ag_TenantName").empty();
@@ -381,7 +401,7 @@
     });
 
     $("#TcaRenewal #SecurityFlag").change(function () {
-        debugger;
+         
         var SecurityFlag = $("#TcaRenewal #SecurityFlag").val();
         if (SecurityFlag != undefined && (SecurityFlag == "Cheque" || SecurityFlag == "Online" || SecurityFlag == "Cheque without date")) {
             $('#Security_chequeno').removeAttr('disabled');
@@ -397,7 +417,7 @@
     });
 
     $("#TcaRenewal #Ag_Tenantid").change(function () {
-        debugger;
+         
         var tenantid = $("#TcaRenewal #Ag_Tenantid").val();
         $("#TcaRenewal #Ag_TenantName").val($("#TcaRenewal #Ag_Tenantid option:selected").val());
 
@@ -479,7 +499,7 @@
     });
 
     $(document).ready(function () {
-        debugger;
+         
         if ($("#TcaRenewal #single")[0].checked) {
             $("#TcaRenewal #single").prop('checked', true).change();
             //$("select option").prop("selected", false);
@@ -527,11 +547,23 @@
         try {
             var firstDate = new Date($("#TcaRenewal #Agreement_Start_Date").val());
             var secondDate = new Date($("#TcaRenewal #Agreement_End_Date").val());
-            if (firstDate.getDate() > secondDate.getDate()) {
+            var AgreementUtilityCount = parseInt($("#AgreementUtilityListCountRenewal").val());
+            var nofopayments = parseInt($("#TcaRenewal #nofopayments").val());
+            var AgreementPdcListCount = parseInt($("#TcaRenewal #AgreementPdcListCountRenewal").val());
+            if (firstDate.getDate() >= secondDate.getDate()) {
                 e.preventDefault();
                 $("#TcaRenewal #Agreement_End_Date").focus();
-                alert("Agreement Start Date less than or equal to Agreement End Date");
+                alert("Agreement Start Date less than Agreement End Date");
 
+            }
+            else if (nofopayments != AgreementPdcListCount) {
+                e.preventDefault();
+                $("#btnAddAgreementRenewalPdc").focus();
+                alert("No of payments and Payment details mismatch");
+            }
+            else if (AgreementUtilityCount < 2) {
+                e.preventDefault();
+                alert("Minimum 2 utilities required");
             }
         }
         catch (ex) {

@@ -52,7 +52,7 @@
         GetPropertyTypeAddOrUpdate();
     }
     function getUsage() {
-        debugger;
+         
         var PropertyType = $("#PropertyType").val();
         if (PropertyType != null) {
             $.ajax(
@@ -62,13 +62,13 @@
                         async: false,
                         data: { PropertyType: PropertyType },
                         success: function (response) {
-                            debugger;
+                             
                             $("#UsageName").empty();
                             var options = '<option value="">--SELECT--</option>';;
                             $.each(response, function (index, data) {
                                 options += '<option value="' + data.Value + '">' + data.Value + '</option>';
                             });
-                            debugger;
+                             
                             $('#UsageName').append(options);
                         },
                         error: function (jqXhr, textStatus, errorThrown) {

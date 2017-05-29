@@ -15,8 +15,8 @@
     @Html.HiddenFor(x => x.Properties_Name)
     @Html.HiddenFor(x=>x.Unit_ID_Tawtheeq)
     @Html.HiddenFor(x=>x.Unit_Property_Name)
-    @Html.HiddenFor(x=>x.Caretaker_id)
-    @Html.HiddenFor(x=>x.Caretaker_Name)
+    @*@Html.HiddenFor(x=>x.Caretaker_id)
+    @Html.HiddenFor(x=>x.Caretaker_Name)*@
     <div class="font-smaller">
         @Html.HiddenFor(m => m.New_Renewal_flag)
         <div class="text-uppercase">
@@ -110,7 +110,8 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("Caretakerid", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required" })
+                        @Html.EditorFor(m => m.Caretaker_id, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly", @required = "required" } })
+                        @*@Html.DropDownList("Caretakerid", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required" })*@
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -119,7 +120,8 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("CaretakerName", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required" })
+                        @Html.EditorFor(m => m.Caretaker_Name, new { htmlAttributes = new { @class = "master-form-input form-control",@readonly = "readonly", @required = "required" } })
+                        @*@Html.DropDownList("CaretakerName", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required" })*@
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -178,7 +180,7 @@
                         @Html.LabelFor(model => model.Vacantstartdate, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Vacantstartdate, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
+                        @Html.EditorFor(model => model.Vacantstartdate, new { htmlAttributes = new { @class = "master-form-input form-control",@readonly= "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -218,7 +220,7 @@
                         @Html.LabelFor(model => model.nofopayments, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);", @required = "required" } })
+                        @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);", @required = "required",@min="0" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -263,7 +265,7 @@
                         @Html.LabelFor(model => model.Notice_Period, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Notice_Period, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);" } })  
+                        @Html.EditorFor(model => model.Notice_Period, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);", @min = "0" } })  
                     </div>
                 </div>
 
@@ -277,23 +279,41 @@
     </div>
 }
 <script>
+    singleOrMultiple();
+    function singleOrMultiple()
+    {
+        var value = $('input[type=radio][name=Single_Multiple_Flag]').val();
+        if (value == 'Multiple') {
+            //$('#UnitIDTawtheeq').attr('disabled', true);
+            //$('#UnitPropertyName').attr('disabled', true);
+            $("#UnitPropertyId").hide();
+            $("#Unitpropertyname").hide();
+            $("#AgreementUnit").show();
+        }
+        else {
+            //$('#UnitIDTawtheeq').removeAttr('disabled');
+            //$('#UnitPropertyName').removeAttr('disabled');
+            $("#UnitPropertyId").show();
+            $("#Unitpropertyname").show();
+            $("#AgreementUnit").hide();
+        }
+    }
     $('input[type=radio][name=Single_Multiple_Flag]').change(function () {
-        
-        //if (this.value == 'Multiple') {
-        //    //$('#UnitIDTawtheeq').attr('disabled', true);
-        //    //$('#UnitPropertyName').attr('disabled', true);
-        //    $("#UnitPropertyId").hide();
-        //    $("#Unitpropertyname").hide();
-        //    $("#AgreementUnit").show();
-            
-        //}
-        //else {
-        //    //$('#UnitIDTawtheeq').removeAttr('disabled');
-        //    //$('#UnitPropertyName').removeAttr('disabled');
-        //    $("#UnitPropertyId").show();
-        //    $("#Unitpropertyname").show();
-        //    $("#AgreementUnit").hide();
-        //}
+        singleOrMultiple();
+        if (this.value == 'Multiple') {
+            //$('#UnitIDTawtheeq').attr('disabled', true);
+            //$('#UnitPropertyName').attr('disabled', true);
+            $("#UnitPropertyId").hide();
+            $("#Unitpropertyname").hide();
+            $("#AgreementUnit").show();
+        }
+        else {
+            //$('#UnitIDTawtheeq').removeAttr('disabled');
+            //$('#UnitPropertyName').removeAttr('disabled');
+            $("#UnitPropertyId").show();
+            $("#Unitpropertyname").show();
+            $("#AgreementUnit").hide();
+        }
         $("#property_id").val(null);
         $.ajax(
                {
@@ -304,7 +324,7 @@
                    contentType: "application/json",
 
                    success: function (response) {
-                       debugger;
+                        
                        //var propertyidOptions = '<option value="" selected>--Select--</option>';
                        //$("#TcaPropertyId").empty();
 
@@ -345,7 +365,7 @@
     });
 
     $("#Tenant_Type").on('change', function (e) {
-        debugger;
+         
         var Tenant_Type = $("#Tenant_Type").val();
         $("#Ag_Tenant_id").val(null);
         $("#Ag_Tenant_Name").val(null);
@@ -359,7 +379,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         if (response != null) {
                             $("#Ag_Tenantid").empty();
                             $("#Ag_TenantName").empty();
@@ -385,7 +405,7 @@
     });
 
     $("#SecurityFlag").change(function () {
-        debugger;
+         
         var SecurityFlag = $("#SecurityFlag").val();
         if (SecurityFlag != undefined && (SecurityFlag == "Cheque" || SecurityFlag == "Online" || SecurityFlag == "Cheque without date")) {
             $('#Security_chequeno').removeAttr('disabled');
@@ -401,7 +421,7 @@
     });
 
     $("#Ag_Tenantid").change(function () {
-        debugger;
+         
         var tenantid = $("#Ag_Tenantid").val();
         $("#Ag_TenantName").val($("#Ag_Tenantid option:selected").val());
 
@@ -482,7 +502,7 @@
     });
 
     $(document).ready(function () {
-        debugger;
+         
         if ($("#single")[0].checked) {
             $("#single").prop('checked', true).change();
             //$("select option").prop("selected", false);
@@ -500,8 +520,8 @@
        // alert(propertyid);
         if($.isNumeric(propertyid))
         {
-           
             getUnit(propertyid);
+            GetPropertyOnChange();
         }  
     }
     function getUnit(propertyId)
@@ -515,7 +535,7 @@
                    contentType: "application/json",
 
                    success: function (response) {
-                       debugger;
+                        
                        //var propertyidOptions = '<option value="" selected>--Select--</option>';
                        //$("#TcaPropertyId").empty();
 
@@ -589,6 +609,34 @@
         }
         
         $("#Perday_Rental").val(amountperday);
+    }
+    //GetPropertyOnChange
+    function GetPropertyOnChange()
+    {
+        if($("#TcaPropertyName").val()=="")
+        {
+            return;
+        }
+        $.ajax(
+        {
+            url: "../Tca/GetPropertyOnChange",
+            // dataType: "jsonp",
+            method: "GET",
+            data: { propertyId: $("#TcaPropertyName").val() }, //FormData(form.get(0)),
+            contentType: "application/json",
+            success: function (response) {
+                if (response != null) {
+                    $.each(response, function (index, data) {
+                        $("#Caretaker_id").val(data.Caretaker_ID);
+                        $("#Caretaker_Name").val(data.Caretaker_Name);
+                        $("#Vacantstartdate").val(data.Vacantstartdate);
+                        //break;
+                    });
+                }
+
+            }
+        });
+
     }
 </script>
 
