@@ -5,14 +5,12 @@
     ViewBag.Title = "Index";
 }
 
-<link href="~/content/bootstrap.css" rel="stylesheet" />
-<link href="~/theme/css/leemastyle.css" rel="stylesheet" />
-<link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
+
 <!DOCTYPE html>
 
 
 
-<div class="inner-block">
+<div class="">
     @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "UserCreation" }))
     {
         @Html.HiddenFor(m => m.id, new { @id = "UserId" })

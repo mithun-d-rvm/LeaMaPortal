@@ -708,7 +708,7 @@ namespace LeaMaPortal.Controllers
                 }
                 else
                 {
-                    query = String.Format("select cheque_date,Cheque_Amount from view_receipt_screen_advance_pending where balanceamount<>0 and payment_mode='{0}' and Agreement_No={1} and Cheque_No={2}", Mode, agreement_no, cheque_no);
+                    query = String.Format("select cheque_date,Cheque_Amount from view_receipt_screen_advance_pending where balanceamount<>0 and payment_mode='{0}' and Agreement_No={1} and Cheque_No='{2}'", Mode, agreement_no, cheque_no);
                 }
                 
                 ChequeDetails cheques = await db.Database.SqlQuery<ChequeDetails>(query).FirstOrDefaultAsync();

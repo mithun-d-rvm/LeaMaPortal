@@ -55,7 +55,7 @@
                     @Html.LabelFor(model => model.agreement_no, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.DropDownList("agreement_no", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })                        
+                    @Html.DropDownList("agreement_no", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })                        
                 </div>
             </div>
             <div class="col-md-12 form-input-padding">
@@ -179,30 +179,33 @@
                     <select id="ddChequeDate" class="master-form-input form-control"></select>
                 </div>
             </div>*@
-            <div class="col-md-12 form-input-padding">
-                <div class="col-md-4">
-                    @Html.LabelFor(model => model.BankAcCode, htmlAttributes: new { @class = "label-default-remove" })
+            <div id="bankDetails">
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.BankAcCode, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.BankAcCode, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        @*<select class="col-md-12 leama-field">
+                    <option value="BankAcCode">Bank Account Code</option>
+                </select>*@
+                        @Html.DropDownListFor(model => model.BankAcCode, null, htmlAttributes: new { @class = "master-form-input form-control", Id = "BankAcCode", @required = "required" })
+                    </div>
                 </div>
-                <div class="col-md-8">
-                    @*@Html.EditorFor(model => model.BankAcCode, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                    @*<select class="col-md-12 leama-field">
-                            <option value="BankAcCode">Bank Account Code</option>
-                        </select>*@
-                    @Html.DropDownListFor(model => model.BankAcCode, null, htmlAttributes: new { @class = "master-form-input form-control", Id = "BankAcCode", @required = "required" })
+                <div class="col-md-12 form-input-padding">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.BankAcName, htmlAttributes: new { @class = "label-default-remove" })
+                    </div>
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.BankAcName, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        @*<select class="col-md-12 leama-field">
+                    <option value="Bank Account Name">Bank Account Name</option>
+                </select>*@
+                        @Html.DropDownListFor(model => model.BankAcName, null, htmlAttributes: new { @class = "master-form-input form-control", Id = "BankAcName", @required = "required" })
+                    </div>
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
-                <div class="col-md-4">
-                    @Html.LabelFor(model => model.BankAcName, htmlAttributes: new { @class = "label-default-remove" })
-                </div>
-                <div class="col-md-8">
-                    @*@Html.EditorFor(model => model.BankAcName, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                    @*<select class="col-md-12 leama-field">
-                            <option value="Bank Account Name">Bank Account Name</option>
-                        </select>*@
-                    @Html.DropDownListFor(model => model.BankAcName, null, htmlAttributes: new { @class = "master-form-input form-control", Id = "BankAcName", @required = "required" })
-                </div>
-            </div>
+            
             <div class="col-md-12 form-input-padding">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.Narration, htmlAttributes: new { @class = "label-default-remove" })
@@ -668,50 +671,50 @@
                     success: function (response) {
                         debugger;
                         $("#Tenant_id").empty();
-                        var options = agreement_no == null ? '<option vlaue="">--Select---</option>' : '';
+                        var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
                         $.each(response.Tenants, function (index, data) {
                             options += '<option value="' + data.Tenantid + '">' + data.Tenantid + '</option>';
                         });
                         $('#Tenant_id').append(options);
 
                         $("#Tenant_Name").empty();
-                        var options = agreement_no == null ? '<option vlaue="">--Select---</option>' : '';
+                        var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
                         $.each(response.Tenants, function (index, data) {
                             options += '<option value="' + data.Tenantid + '">' + data.TenantName + '</option>';
                         });
                         $('#Tenant_Name').append(options);
 
                         $("#Property_id").empty();
-                        var options = agreement_no == null ? '<option vlaue="">--Select---</option>' : '';
+                        var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
                         $.each(response.Properties, function (index, data) {
                             options += '<option value="' + data.Propertyid + '">' + data.Propertyid + '</option>';
                         });
                         $('#Property_id').append(options);
 
                         $("#Property_Name").empty();
-                        var options = agreement_no == null ? '<option vlaue="">--Select---</option>' : '';
+                        var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
                         $.each(response.Properties, function (index, data) {
                             options += '<option value="' + data.Propertyid + '">' + data.PropertyName + '</option>';
                         });
                         $('#Property_Name').append(options);
 
                         $("#Unit_ID").empty();
-                        var options = agreement_no == null ? '<option vlaue="">--Select---</option>' : '';
+                        var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
                         $.each(response.Units, function (index, data) {
                             options += '<option value="' + data.Unitid + '">' + data.Unitid + '</option>';
                         });
                         $('#Unit_ID').append(options);
 
                         $("#unit_Name").empty();
-                        var options = agreement_no == null ? '<option vlaue="">--Select---</option>' : '';
+                        var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
                         $.each(response.Units, function (index, data) {
                             options += '<option value="' + data.Unitid + '">' + data.unitName + '</option>';
                         });
                         $('#unit_Name').append(options);
 
                         $("#ddChequeNumber").empty();
-                        //var options = agreement_no == null ? '<option vlaue="">--Select---</option>' : '';
-                        var options = '<option vlaue="">--Select---</option>';
+                        //var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
+                        var options = '<option vlaue="">--Select--</option>';
                         $.each(response.Cheques, function (index, data) {
                             options += '<option value="' + data.Cheque_No + '">' + data.Cheque_No + '</option>';
                         });
@@ -783,16 +786,25 @@
             }
         });
     }
-    function getChequeDetails(Mode,agreement_no,cheque_no) {
+    function getChequeDetails(Mode, agreement_no, cheque_no) {
+        debugger;
+        if (cheque_no == "--Select--") {
+            $("#TotalAmount").val("");
+            $("#AmtInWords").val("");
+            $("#DDChequeDate").val("");
+            return false;
+        }
         $.ajax(
         {
             url: "../Receipts/GetAggrementDetailsByMode",
             type: "Get",
             data: { Mode: Mode, agreement_no: agreement_no, cheque_no: cheque_no },
             success: function (response) {
-                $("#DDChequeDate").val(ToJavaScriptDate(response.cheque_date));
+                debugger;
                 $("#TotalAmount").val(response.Cheque_Amount);
                 $("#TotalAmount").trigger("change");
+                if (response.cheque_date!=null)
+                $("#DDChequeDate").val(ToJavaScriptDate(response.cheque_date));
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -802,244 +814,244 @@
             }
         });
     }
-    function GetReceiptNumber() {
-        $.ajax(
-        {
-            url: "../Receipts/GetReceiptNumber",
-            type: "Get",
-            data: {},
-            //contentType: "application/json",
-            //processData: false,
-            success: function (response) {
-                debugger;
-                $("#AdvAcCode").empty();
-                var AdvAcCode = '';
-                $.each(response.ReceiptNo, function (index, data) {
-                    AdvAcCode += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#AdvAcCode').append(AdvAcCode);
+    //function GetReceiptNumber() {
+    //    $.ajax(
+    //    {
+    //        url: "../Receipts/GetReceiptNumber",
+    //        type: "Get",
+    //        data: {},
+    //        //contentType: "application/json",
+    //        //processData: false,
+    //        success: function (response) {
+    //            debugger;
+    //            $("#AdvAcCode").empty();
+    //            var AdvAcCode = '';
+    //            $.each(response.ReceiptNo, function (index, data) {
+    //                AdvAcCode += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#AdvAcCode').append(AdvAcCode);
 
-                $("#agreement_no").empty();
-                var Agreement_No = '';
-                $.each(response.Agreement_No, function (index, data) {
-                    Agreement_No += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#agreement_no').append(Agreement_No);
+    //            $("#agreement_no").empty();
+    //            var Agreement_No = '';
+    //            $.each(response.Agreement_No, function (index, data) {
+    //                Agreement_No += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#agreement_no').append(Agreement_No);
 
-                $("#Property_id").empty();
-                var Property_Id = '';
-                $.each(response.Property_Id, function (index, data) {
-                    Property_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#Property_id').append(Property_Id);
+    //            $("#Property_id").empty();
+    //            var Property_Id = '';
+    //            $.each(response.Property_Id, function (index, data) {
+    //                Property_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#Property_id').append(Property_Id);
 
-                $("#Property_Name").empty();
-                var Property_Name = '';
-                $.each(response.Property_Name, function (index, data) {
-                    Property_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#Property_Name').append(Property_Name);
+    //            $("#Property_Name").empty();
+    //            var Property_Name = '';
+    //            $.each(response.Property_Name, function (index, data) {
+    //                Property_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#Property_Name').append(Property_Name);
 
-                $("#Tenant_id").empty();
-                var Tenant_Id = '';
-                $.each(response.Tenant_Id, function (index, data) {
-                    Tenant_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#Tenant_id').append(Tenant_Id);
+    //            $("#Tenant_id").empty();
+    //            var Tenant_Id = '';
+    //            $.each(response.Tenant_Id, function (index, data) {
+    //                Tenant_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#Tenant_id').append(Tenant_Id);
 
-                $("#Tenant_Name").empty();
-                var Tenant_Name = '';
-                $.each(response.Tenant_Name, function (index, data) {
-                    Tenant_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#Tenant_Name').append(Tenant_Name);
+    //            $("#Tenant_Name").empty();
+    //            var Tenant_Name = '';
+    //            $.each(response.Tenant_Name, function (index, data) {
+    //                Tenant_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#Tenant_Name').append(Tenant_Name);
 
-                $("#Unit_ID").empty();
-                var Unit_Id = '';
-                $.each(response.Unit_Id, function (index, data) {
-                    Unit_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#Unit_ID').append(Unit_Id);
+    //            $("#Unit_ID").empty();
+    //            var Unit_Id = '';
+    //            $.each(response.Unit_Id, function (index, data) {
+    //                Unit_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#Unit_ID').append(Unit_Id);
 
-                $("#unit_Name").empty();
-                var Unit_Name = '';
-                $.each(response.Unit_Name, function (index, data) {
-                    Unit_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#unit_Name').append(Unit_Name);
+    //            $("#unit_Name").empty();
+    //            var Unit_Name = '';
+    //            $.each(response.Unit_Name, function (index, data) {
+    //                Unit_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#unit_Name').append(Unit_Name);
 
-                $('#TotalAmount').val(response.TotalAmount[0].Text);
-                $("#TotalAmount").trigger("change");
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                $("#img-loader").addClass("hide");
-            }
-        });
-    }
+    //            $('#TotalAmount').val(response.TotalAmount[0].Text);
+    //            $("#TotalAmount").trigger("change");
+    //        },
+    //        error: function (jqXhr, textStatus, errorThrown) {
+    //            alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+    //        },
+    //        complete: function () {
+    //            $("#img-loader").addClass("hide");
+    //        }
+    //    });
+    //}
 
-    function GetAgreementNoByPdc() {
-        $.ajax(
-        {
-            url: "../Receipts/GetAgreementNoByPdc",
-            type: "Get",
-            data: {},
-            //contentType: "application/json",
-            //processData: false,
-            success: function (response) {
-                debugger;
-                //$("#AdvAcCode").empty();
-                //var AdvAcCode = '';
-                //$.each(response.ReceiptNo, function (index, data) {
-                //    AdvAcCode += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                //});
-                //$('#AdvAcCode').append(AdvAcCode);
+    //function GetAgreementNoByPdc() {
+    //    $.ajax(
+    //    {
+    //        url: "../Receipts/GetAgreementNoByPdc",
+    //        type: "Get",
+    //        data: {},
+    //        //contentType: "application/json",
+    //        //processData: false,
+    //        success: function (response) {
+    //            debugger;
+    //            //$("#AdvAcCode").empty();
+    //            //var AdvAcCode = '';
+    //            //$.each(response.ReceiptNo, function (index, data) {
+    //            //    AdvAcCode += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            //});
+    //            //$('#AdvAcCode').append(AdvAcCode);
 
-                $("#agreement_no").empty();
-                var Agreement_No = '';
-                $.each(response.Agreement_No, function (index, data) {
-                    Agreement_No += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#agreement_no').append(Agreement_No);
+    //            $("#agreement_no").empty();
+    //            var Agreement_No = '';
+    //            $.each(response.Agreement_No, function (index, data) {
+    //                Agreement_No += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#agreement_no').append(Agreement_No);
 
-                $("#Property_id").empty();
-                var Property_Id = '';
-                $.each(response.Property_Id, function (index, data) {
-                    Property_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#Property_id').append(Property_Id);
+    //            $("#Property_id").empty();
+    //            var Property_Id = '';
+    //            $.each(response.Property_Id, function (index, data) {
+    //                Property_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#Property_id').append(Property_Id);
 
-                $("#Property_Name").empty();
-                var Property_Name = '';
-                $.each(response.Property_Name, function (index, data) {
-                    Property_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#Property_Name').append(Property_Name);
+    //            $("#Property_Name").empty();
+    //            var Property_Name = '';
+    //            $.each(response.Property_Name, function (index, data) {
+    //                Property_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#Property_Name').append(Property_Name);
 
-                $("#Tenant_id").empty();
-                var Tenant_Id = '';
-                $.each(response.Tenant_Id, function (index, data) {
-                    Tenant_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#Tenant_id').append(Tenant_Id);
+    //            $("#Tenant_id").empty();
+    //            var Tenant_Id = '';
+    //            $.each(response.Tenant_Id, function (index, data) {
+    //                Tenant_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#Tenant_id').append(Tenant_Id);
 
-                $("#Tenant_Name").empty();
-                var Tenant_Name = '';
-                $.each(response.Tenant_Name, function (index, data) {
-                    Tenant_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#Tenant_Name').append(Tenant_Name);
+    //            $("#Tenant_Name").empty();
+    //            var Tenant_Name = '';
+    //            $.each(response.Tenant_Name, function (index, data) {
+    //                Tenant_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#Tenant_Name').append(Tenant_Name);
 
-                $("#Unit_ID").empty();
-                var Unit_Id = '';
-                $.each(response.Unit_Id, function (index, data) {
-                    Unit_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#Unit_ID').append(Unit_Id);
+    //            $("#Unit_ID").empty();
+    //            var Unit_Id = '';
+    //            $.each(response.Unit_Id, function (index, data) {
+    //                Unit_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#Unit_ID').append(Unit_Id);
 
-                $("#unit_Name").empty();
-                var Unit_Name = '';
-                $.each(response.Unit_Name, function (index, data) {
-                    Unit_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#unit_Name').append(Unit_Name);
+    //            $("#unit_Name").empty();
+    //            var Unit_Name = '';
+    //            $.each(response.Unit_Name, function (index, data) {
+    //                Unit_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#unit_Name').append(Unit_Name);
 
-                //$('#TotalAmount').val(response.TotalAmount[0].Text);
+    //            //$('#TotalAmount').val(response.TotalAmount[0].Text);
 
-                $('#TotalAmount').val(response.pdc_Amount[0].Text);
-                $("#TotalAmount").trigger("change");
+    //            $('#TotalAmount').val(response.pdc_Amount[0].Text);
+    //            $("#TotalAmount").trigger("change");
 
-                $('#DDChequeNo').val(response.DDChequeNo[0].Text);
+    //            $('#DDChequeNo').val(response.DDChequeNo[0].Text);
 
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                $("#img-loader").addClass("hide");
-            }
-        });
-    }
+    //        },
+    //        error: function (jqXhr, textStatus, errorThrown) {
+    //            alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+    //        },
+    //        complete: function () {
+    //            $("#img-loader").addClass("hide");
+    //        }
+    //    });
+    //}
 
-    function GetAgreementNoByInvoice() {
-        $.ajax(
-        {
-            url: "../Receipts/GetAgreementNoByInvoice",
-            type: "Get",
-            data: {},
-            //contentType: "application/json",
-            //processData: false,
-            success: function (response) {
-                debugger;
-                //$("#AdvAcCode").empty();
-                //var AdvAcCode = '';
-                //$.each(response.ReceiptNo, function (index, data) {
-                //    AdvAcCode += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                //});
-                //$('#AdvAcCode').append(AdvAcCode);
+    //function GetAgreementNoByInvoice() {
+    //    $.ajax(
+    //    {
+    //        url: "../Receipts/GetAgreementNoByInvoice",
+    //        type: "Get",
+    //        data: {},
+    //        //contentType: "application/json",
+    //        //processData: false,
+    //        success: function (response) {
+    //            debugger;
+    //            //$("#AdvAcCode").empty();
+    //            //var AdvAcCode = '';
+    //            //$.each(response.ReceiptNo, function (index, data) {
+    //            //    AdvAcCode += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            //});
+    //            //$('#AdvAcCode').append(AdvAcCode);
 
-                $("#agreement_no").empty();
-                var Agreement_No = '';
-                $.each(response.Agreement_No, function (index, data) {
-                    Agreement_No += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#agreement_no').append(Agreement_No);
+    //            $("#agreement_no").empty();
+    //            var Agreement_No = '<option value="">--Select--</select>';
+    //            $.each(response.Agreement_No, function (index, data) {
+    //                Agreement_No += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#agreement_no').append(Agreement_No);
 
-                $("#Property_id").empty();
-                var Property_Id = '';
-                $.each(response.Property_Id, function (index, data) {
-                    Property_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#Property_id').append(Property_Id);
+    //            $("#Property_id").empty();
+    //            var Property_Id = '<option value="">--Select--</select>';
+    //            $.each(response.Property_Id, function (index, data) {
+    //                Property_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#Property_id').append(Property_Id);
 
-                $("#Property_Name").empty();
-                var Property_Name = '';
-                $.each(response.Property_Name, function (index, data) {
-                    Property_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#Property_Name').append(Property_Name);
+    //            $("#Property_Name").empty();
+    //            var Property_Name = '<option value="">--Select--</select>';
+    //            $.each(response.Property_Name, function (index, data) {
+    //                Property_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#Property_Name').append(Property_Name);
 
-                $("#Tenant_id").empty();
-                var Tenant_Id = '';
-                $.each(response.Tenant_Id, function (index, data) {
-                    Tenant_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#Tenant_id').append(Tenant_Id);
+    //            $("#Tenant_id").empty();
+    //            var Tenant_Id = '<option value="">--Select--</select>';
+    //            $.each(response.Tenant_Id, function (index, data) {
+    //                Tenant_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#Tenant_id').append(Tenant_Id);
 
-                $("#Tenant_Name").empty();
-                var Tenant_Name = '';
-                $.each(response.Tenant_Name, function (index, data) {
-                    Tenant_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#Tenant_Name').append(Tenant_Name);
+    //            $("#Tenant_Name").empty();
+    //            var Tenant_Name = '<option value="">--Select--</select>';
+    //            $.each(response.Tenant_Name, function (index, data) {
+    //                Tenant_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#Tenant_Name').append(Tenant_Name);
 
-                $("#Unit_ID").empty();
-                var Unit_Id = '';
-                $.each(response.Unit_Id, function (index, data) {
-                    Unit_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#Unit_ID').append(Unit_Id);
+    //            $("#Unit_ID").empty();
+    //            var Unit_Id = '<option value="">--Select--</select>';
+    //            $.each(response.Unit_Id, function (index, data) {
+    //                Unit_Id += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#Unit_ID').append(Unit_Id);
 
-                $("#unit_Name").empty();
-                var Unit_Name = '';
-                $.each(response.Unit_Name, function (index, data) {
-                    Unit_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
-                });
-                $('#unit_Name').append(Unit_Name);
+    //            $("#unit_Name").empty();
+    //            var Unit_Name = '<option value="">--Select--</select>';
+    //            $.each(response.Unit_Name, function (index, data) {
+    //                Unit_Name += '<option value="' + data.Text + '">' + data.Text + '</option>';
+    //            });
+    //            $('#unit_Name').append(Unit_Name);
 
-                $('#TotalAmount').val(response.TotalAmount[0].Text);
-                $("#TotalAmount").trigger("change");
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            },
-            complete: function () {
-                $("#img-loader").addClass("hide");
-            }
-        });
-    }
+    //            $('#TotalAmount').val(response.TotalAmount[0].Text);
+    //            $("#TotalAmount").trigger("change");
+    //        },
+    //        error: function (jqXhr, textStatus, errorThrown) {
+    //            alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+    //        },
+    //        complete: function () {
+    //            $("#img-loader").addClass("hide");
+    //        }
+    //    });
+    //}
     var i = parseInt($("#receipt-count").val());
     function add() {
         var InvoiceType = document.getElementById("InvoiceType").value;
@@ -1244,6 +1256,15 @@
         //}
         
     }
+    function showhideBankDetails(value) {
+        $("#bankDetails :input").attr("disabled", value);
+        if (value) {
+            $("#bankDetails").hide();
+        }
+        else {
+            $("#bankDetails").show();
+        }
+    }
     function showhideAdvancePayment(value) {
         $("#advancePayment :input").attr("disabled", value);
         if (value) {
@@ -1268,6 +1289,7 @@
             showHideChequeField(false);
             showhideAdvancePayment(true);
             showhidePDC(false);
+            showhideBankDetails(false);
             if ($("#Reccategory").val() == "against invoice" || $("#Reccategory").val() =="advance") {
                 $("#TotalAmount").prop("readonly", true);
             }
@@ -1284,6 +1306,7 @@
         else if (paymentModeValue == "cash") {
             showHideChequeField(true);
             showhideAdvancePayment(true);
+            showhideBankDetails(true);
             showhidePDC(true);
             if ($("#Reccategory").val() == "against invoice" || $("#Reccategory").val() == "advance") {
                 $("#TotalAmount").prop("readonly", true);
@@ -1298,6 +1321,7 @@
         else if (paymentModeValue == "online") {
             showHideChequeField(false);
             showhideAdvancePayment(true);
+            showhideBankDetails(false);
             showhidePDC(true);
             if ($("#Reccategory").val() == "against invoice" || $("#Reccategory").val() == "advance") {
                 $("#TotalAmount").prop("readonly", true);
@@ -1313,6 +1337,7 @@
         else if (paymentModeValue == "pdc") {
             showHideChequeField(false);
             showhideAdvancePayment(true);
+            showhideBankDetails(false);
             showhidePDC(false);
             if ($("#Reccategory").val() == "against invoice" || $("#Reccategory").val() == "advance") {
                 $("#TotalAmount").prop("readonly", true);
@@ -1328,6 +1353,7 @@
         else if (paymentModeValue == "Advance adjust") {
             showHideChequeField(true);
             showhideAdvancePayment(false);
+            showhideBankDetails(false);
             showhidePDC(true);
             $("#TotalAmount").prop("readonly", true);
             if ($("#Reccategory").val() == "against invoice" || $("#Reccategory").val() == "advance") {
@@ -1343,6 +1369,7 @@
         else {
             showHideChequeField(true);
             showhideAdvancePayment(true);
+            showhideBankDetails(false);
             showhidePDC(true);
             if ($("#Reccategory").val() == "against invoice") {
                 $("#TotalAmount").prop("readonly", true);

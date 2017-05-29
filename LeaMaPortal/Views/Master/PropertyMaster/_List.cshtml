@@ -4,9 +4,7 @@
 @{
     Layout = null;
 }
-<link href="~/content/bootstrap.css" rel="stylesheet" />
-<link href="~/theme/css/leemastyle.css" rel="stylesheet" />
-<link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
+
 <!DOCTYPE html>
 <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
     <div class="row" id="property-list">
@@ -27,25 +25,28 @@
         </div>
 
         <div class="divTable leama-fieldset col-md-12">
-
-
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
                     <div class="divTableCell">Property Id</div>
-                    <div class="divTableCell">Property Flag</div>
+                    <div class="divTableCell">Property Type</div>
+                    <div class="divTableCell">Property Category</div>
                     <div class="divTableCell">Property Id Tawtheeq</div>
+                    <div class="divTableCell">Unit Id Tawtheeq</div>
                     <div class="divTableCell">Property Name</div>
+                    <div class="divTableCell">Unit Name</div>
                     <div class="divTableCell">Status</div>
                     <div class="divTableCell">Action</div>
-
                 </div>
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
                         <div class="divTableCell">@item.Property_Id</div>
+                        <div class="divTableCell">@item.Property_Type</div>
                         <div class="divTableCell">@item.Property_Flag</div>
                         <div class="divTableCell">@item.Property_ID_Tawtheeq</div>
+                        <div class="divTableCell">@item.Unit_ID_Tawtheeq</div>
                         <div class="divTableCell">@item.Property_Name</div>
+                        <div class="divTableCell">@item.Unit_Property_Name</div>
                         <div class="divTableCell">@item.Status</div>
                         <div class="divTableCell">
                             @if (@ViewBag.IsEditable == 1)
@@ -59,16 +60,11 @@
                                     |  @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash property-delete", @style = "color:red", @title = "Delete", @data_id = @item.Property_Id })
                                 </span>
                             }
-
                             @*| @Html.ActionLink(" ", "Details", null, new { @class = "glyphicon glyphicon-th-list", title = "Details" })*@
                         </div>
-
                     </div>
                 }
-
-
             </div>
-
         </div>
 
         <div class="col-md-12">

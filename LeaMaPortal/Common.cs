@@ -216,7 +216,7 @@ namespace LeaMaPortal
            new FormMaster() {Id=8,MenuName="Property Type Master",MenuId=8 },
            new FormMaster() {Id=9,MenuName="Property Master",MenuId=9 },
            new FormMaster() {Id=10,MenuName="Tenant Master - Company" ,MenuId=10},
-           new FormMaster() {Id=11,MenuName="Tenant Master - Individual",MenuId=11 },
+           new FormMaster() {Id=11,MenuName="Tenant Master - Person",MenuId=11 },
            new FormMaster() {Id=12,MenuName="Checklist Master",MenuId=12 },
            new FormMaster() {Id=13,MenuName="Facility Master",MenuId=13 },
            new FormMaster() {Id=14,MenuName="Utility Master" ,MenuId=14},

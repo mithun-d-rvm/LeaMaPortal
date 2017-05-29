@@ -91,7 +91,7 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (db.tbl_country.Any(a => a.Delmark != "*" && a.Country_name.ToLower() == model.Country.ToLower()) && model.Id == 0)
+                    if (db.tbl_country.Any(a => a.Delmark != "*" && a.Country_name.ToLower() == model.Country.ToLower() && a.Id != model.Id))
                     {
                         result.Errors = "Country already exists!";
                     }

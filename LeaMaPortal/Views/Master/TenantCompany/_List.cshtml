@@ -10,9 +10,7 @@
 @{
     Layout = null;
 }
-<link href="~/content/bootstrap.css" rel="stylesheet" />
-<link href="~/theme/css/leemastyle.css" rel="stylesheet" />
-<link href="~/theme/css/leametablestyle.css" rel="stylesheet" />
+
 <!DOCTYPE html>
 <div class="col-md-12 leama-fieldset leama-header-top" style="background-color:white;">
     <div id="master-loader-list" class="fa hide">
@@ -39,20 +37,28 @@
 
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
-                    <div class="divTableCell">Tenant ID</div>
-                    <div class="divTableCell">Company Name</div>
                     <div class="divTableCell">Tenant Type</div>
+                    <div class="divTableCell">First Name</div>
+                    <div class="divTableCell">Last Name Type</div>
+                    <div class="divTableCell">Company Name</div>
+                    <div class="divTableCell">Emirate</div>
+                    <div class="divTableCell">Region</div>
                     <div class="divTableCell">Trade License Number</div>
+                    <div class="divTableCell">Trade License Expiry Date</div>
                     <div class="divTableCell">Action</div>
 
                 </div>
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
-                        <div class="divTableCell">@item.TenantId</div>
-                        <div class="divTableCell">@item.CompanyName</div>
                         <div class="divTableCell">@item.TenantType</div>
+                        <div class="divTableCell">@item.FirstName</div>
+                        <div class="divTableCell">@item.LastName</div>
+                        <div class="divTableCell">@item.CompanyName</div>
+                        <div class="divTableCell">@item.Emirate</div>
+                        <div class="divTableCell">@item.ADWEARegid</div>
                         <div class="divTableCell">@item.TradelicenseNo</div>
+                        <div class="divTableCell">@item.LicenseExpiryDate</div>
                         <div class="divTableCell">
                             @if (@ViewBag.IsEditable == 1)
                             {
@@ -71,7 +77,7 @@
                         </div>
 
                     </div>
-                            }
+                }
 
 
             </div>
