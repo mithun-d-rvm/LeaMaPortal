@@ -266,7 +266,7 @@
                         @Html.LabelFor(model => model.Notice_Period, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Notice_Period, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);" } })
+                        @Html.EditorFor(model => model.Notice_Period, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);", @min = "0" } })
                     </div>
                 </div>
 

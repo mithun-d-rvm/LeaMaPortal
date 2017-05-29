@@ -23,7 +23,7 @@
                 @Html.DropDownList("Facility_Name", null, "--Select--", new { @class = "form-control master-form-input" })
             </div>
             <div class="col-md-2">
-                @Html.EditorFor(model => model.Numbers_available, new { htmlAttributes = new { @class = "master-form-input" } })
+                @Html.EditorFor(model => model.Numbers_available, new { htmlAttributes = new { @class = "master-form-input",@min = "0" } })
             </div>
             <div class="col-md-1">
                 &nbsp;
@@ -104,7 +104,16 @@
         var Facility_id = $("#agreementFacilityRenewal #Facility_Name").val();
         var Facility_Name = $("#agreementFacilityRenewal #Facility_Name option:selected").text();
         var Numbers_available = $("#agreementFacilityRenewal #Numbers_available").val();
-
+        if (Facility_id == '' || Numbers_available == '') {
+            alert("Please fill mandatory fields");
+            return;
+        }
+        var isExist = isExistFacilityRenewal(Facility_id);
+        alert(isExist);
+        if (isExist) {
+            alert("Already exist");
+            return;
+        }
         var html="<tr><td>"+
         "<input type='hidden' name='agreementFacilityList["+aFacilityListRenewalCount+"].Facility_id' id='agreementFacilityList["+aFacilityListRenewalCount+"].Facility_id'"+
         "value='"+Facility_id+"' data-name='Facility_id' />" +
@@ -136,7 +145,31 @@
         aFacilityListRenewalCount++;
         return;
     }
+    function isExistFacilityRenewal(Facility_id) {
 
+        var isExist = false;
+        var existfilelist = document.getElementById('AgreementFacilityList');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+            var existFacility_id = "";
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                switch (dataname) {
+                    case "Facility_id":
+                        existFacility_id = $(this).val();
+                        break;
+                }
+
+            });
+
+            if (Facility_id == existFacility_id) {
+                isExist = true;
+            }
+
+        });
+        return isExist;
+    }
     $(document).on('click', 'button.agreementFacilitylist-remove', function (e) {
         e.preventDefault();
         $(this).closest('tr').remove();

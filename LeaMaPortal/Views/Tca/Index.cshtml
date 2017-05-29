@@ -374,10 +374,16 @@
         try {
             var firstDate = new Date($("#Agreement_Start_Date").val());
             var secondDate = new Date($("#Agreement_End_Date").val());
+            var AgreementUtilityCount = parseInt($("#AgreementUtilityListCount").val());
             if (firstDate.getDate() > secondDate.getDate()) {
                 e.preventDefault();
                 $("#Agreement_End_Date").focus();
                 alert("Agreement Start Date less than or equal to Agreement End Date");
+            }
+            else if(AgreementUtilityCount<2)
+            {
+                e.preventDefault();
+                alert("Minimum 2 utilities required");
             }
         }
         catch (ex) {

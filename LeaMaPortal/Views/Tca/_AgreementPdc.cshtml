@@ -2,7 +2,7 @@
 
 @model LeaMaPortal.Models.AgreementPdcViewModel
 <div class="row p-b-25 text-uppercase">
-    <span> <strong> Agreement PDC </strong> </span>
+    <span> <strong> Agreement Payment Details </strong> </span>
 </div>
 
 <div class="row" id="AgreementPd">
@@ -86,7 +86,17 @@
         var BankName = $("#AgreementPd #BankName").val();
         var Cheque_No = $("#AgreementPd #Cheque_No").val();
         var Cheque_Date = $("#AgreementPd #Cheque_Date").val();
-        var Cheque_Amount =parseFloat($("#AgreementPd #Cheque_Amount").val());
+        var Cheque_Amount = parseFloat($("#AgreementPd #Cheque_Amount").val());
+       
+        if (Month == '' || Year == '' || Payment_Mode == '' || $("#AgreementPd #Cheque_Amount").val() == '') {
+            alert("Please fill mandatory fields");
+            return;
+        }
+        var isExist = isExistAgreementPdc(Month, Year, Payment_Mode);
+        if (isExist) {
+            alert("Already exist");
+            return;
+        }
 
         var html = "<tr><td>" +
                       "<input type='hidden' name='AgreementPdcList[" + AgreementPdCount + "].Month' id='AgreementPdcList[" + AgreementPdCount + "].Month' value='" + Month + "' data-name='Month' />" +
@@ -136,7 +146,41 @@
         $("#AgreementPdcDetailsList").append(html);
         AgreementPdCount++;
     }
+    function isExistAgreementPdc(Month, Year, Payment_Mode) {
+        
+        var isExist = false;
+        var existfilelist = document.getElementById('AgreementPdcDetailsList');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+            var existMonth = "";
+            var existYear = "";
+            var existPayment_Mode = "";
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                switch(dataname)
+                {
+                    case "Month":
+                        existMonth = $(this).val();
+                        break;
+                    case "Year":
+                        existYear = $(this).val();
+                        break;
+                    case "Payment_Mode":
+                        existPayment_Mode = $(this).val();
+                        break;
+                }
+                
+            });
 
+            if(Month==existMonth||Year==existYear||existPayment_Mode==Payment_Mode)
+            {
+                isExist = true;
+            }
+
+        });
+        return isExist;
+    }
     function removeAgreementPdcDetails() {
         debugger;
         $(this).closest('tr').remove();

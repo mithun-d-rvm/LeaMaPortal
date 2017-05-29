@@ -45,7 +45,7 @@
                     <span> Yes </span>
                 </div>
                 <div class="col-md-1">
-                    @Html.RadioButtonFor(model=>model.AgreementCheckList[i].Status, "1", new { @class = "input-checkbox" })
+                    @Html.RadioButtonFor(model=>model.AgreementCheckList[i].Status, "1", new { @class = "input-checkbox",@data_id=i })
                     @*<input type="radio" class="input-checkbox" name="verified">*@
                 </div>
             </div>
@@ -54,12 +54,12 @@
                     <span> No </span>
                 </div>
                 <div class="col-md-1">
-                    @Html.RadioButtonFor(model => model.AgreementCheckList[i].Status, "0", new { @class = "input-checkbox" })
+                    @Html.RadioButtonFor(model => model.AgreementCheckList[i].Status, "0", new { @class = "input-checkbox", @data_id = i })
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            @Html.EditorFor(model => model.AgreementCheckList[i].Remarks, new { htmlAttributes = new { @class = "master-form-input",@maxlength="1000" } })
+            @Html.EditorFor(model => model.AgreementCheckList[i].Remarks, new { htmlAttributes = new { @class = "master-form-input",@maxlength="1000", @data_id = i } })
         </div>
     </div>
     }

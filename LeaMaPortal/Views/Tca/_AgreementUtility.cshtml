@@ -120,7 +120,15 @@
         var Payable = $("#Payable").val();
         var Amount_Type = $("#Amount_Type").val();
         var Amount = $("#AgreementUtilityDiv #Amount").val();
-
+        if (Utility_id == '' || Payable == '' || Amount_Type=='' || Amount == '') {
+            alert("Please fill mandatory fields");
+            return;
+        }
+        var isExist = isExistUtility(Utility_id);
+        if (isExist) {
+            alert("Already exist");
+            return;
+        }
         var html = "<tr><td>" +
                       "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Utility_id' id='AgreementUtilityList[" + AgreementUtilityCount + "].Utility_id' value='" + Utility_id + "' data-name='Utility_id' />" +
                       "<input type='hidden' name='AgreementUtilityList[" + AgreementUtilityCount + "].Utility_Name' id='AgreementUtilityList[" + AgreementUtilityCount + "].Utility_Name' value='" + Utility_Name + "' data-name='Utility_Name' />" +
@@ -159,8 +167,33 @@
 
         $("#AgreementUtilityList").append(html);
         AgreementUtilityCount++;
+        $("#AgreementUtilityListCount").val(AgreementUtilityCount);
     }
-    
+    function isExistUtility(Utility_id) {
+
+        var isExist = false;
+        var existfilelist = document.getElementById('AgreementUtilityList');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+            var existUtility_id = "";
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                switch (dataname) {
+                    case "Utility_id":
+                        existUtility_id = $(this).val();
+                        break;
+                }
+
+            });
+
+            if (Utility_id == existUtility_id) {
+                isExist = true;
+            }
+
+        });
+        return isExist;
+    }
     $(document).on('click', 'button.AgreementUtilityList-remove', function () {
         $(this).closest('tr').remove();
         var existfilelist = document.getElementById('AgreementUtilityList');
@@ -185,6 +218,7 @@
 
         });
         AgreementUtilityCount = newindex;
+        $("#AgreementUtilityListCount").val(AgreementUtilityCount);
     });
 
     $("#Utility_id").change(function () {
