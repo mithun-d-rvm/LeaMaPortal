@@ -220,7 +220,7 @@
                         @Html.LabelFor(model => model.nofopayments, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);", @required = "required" } })
+                        @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);", @required = "required",@min="0" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">

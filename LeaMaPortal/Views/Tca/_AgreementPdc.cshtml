@@ -55,7 +55,7 @@
             @Html.EditorFor(model => model.Cheque_Amount, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'Cheque_Amount');" } })
         </div>
         <div class="col-md-1 w-md-10">
-            <button class="document-btn" onclick="addAgreementPdcDetails(event);">Add</button>
+            <button class="document-btn" onclick="addAgreementPdcDetails(event);" id="btnAddAgreementPdc">Add</button>
         </div>
     </div>
 </div>
@@ -145,6 +145,7 @@
 
         $("#AgreementPdcDetailsList").append(html);
         AgreementPdCount++;
+        $("#AgreementPdcListCount").val(AgreementPdCount);
     }
     function isExistAgreementPdc(Month, Year, Payment_Mode) {
         
@@ -235,6 +236,7 @@
 
         });
         AgreementPdCount = newindex;
+        $("#AgreementPdcListCount").val(AgreementPdCount);
     });
     $("#Payment_Mode").change(function () {
         debugger;

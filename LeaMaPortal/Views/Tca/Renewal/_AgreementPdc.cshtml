@@ -55,7 +55,7 @@
             @Html.EditorFor(model => model.Cheque_Amount, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'AgreementPdRenewal #Cheque_Amount');" } })
         </div>
         <div class="col-md-1 w-md-10">
-            <button class="document-btn" onclick="addAgreementPdcDetailsRenewal(event);">Add</button>
+            <button class="document-btn" onclick="addAgreementPdcDetailsRenewal(event);" id="btnAddAgreementRenewalPdc">Add</button>
         </div>
     </div>
 </div>
@@ -213,6 +213,7 @@
 
         $("#AgreementPdcDetailsList-Renewal").append(html);
         AgreementPdCountRenewal++;
+        $("#AgreementPdcListCountRenewal").val(AgreementPdCountRenewal);
     }
 
     function isExistAgreementPdcRenewal(Month, Year, Payment_Mode) {
@@ -249,8 +250,7 @@
         return isExist;
     }
 
-    function removeAgreementPdcDetails() {
-        debugger;
+    function removeAgreementPdcDetails() {        
         $(this).closest('tr').remove();
         var existfilelist = document.getElementById('AgreementPdcDetailsList-Renewal');
         var newindex = 0;
@@ -303,6 +303,7 @@
 
         });
         AgreementPdCountRenewal = newindex;
+        $("#AgreementPdcListCountRenewal").val(AgreementPdCountRenewal);
     });
     $("#AgreementPdRenewal #Payment_Mode").change(function () {
         debugger;

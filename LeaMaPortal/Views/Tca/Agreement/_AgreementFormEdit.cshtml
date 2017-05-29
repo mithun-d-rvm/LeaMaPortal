@@ -222,7 +222,7 @@
                             @Html.LabelFor(model => model.nofopayments, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);" } })
+                            @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);",@min="0" } })
                         </div>
                     </div>
                     <div class="col-md-12 p-b-7">
@@ -337,14 +337,16 @@
     </div>
 }
 <script>
-    $('#editAgreementForm input[type=radio][name=Single_Multiple_Flag]').change(function () {
-
-        if (this.value == 'Multiple') {
+    sigleOrMultiple();
+    function sigleOrMultiple()
+    {
+        var single_multiple = $('input[name=radioName]:checked', '#editAgreementForm').val();
+        if (single_multiple == 'Multiple') {
             //$('#UnitIDTawtheeq').attr('disabled', true);
             //$('#UnitPropertyName').attr('disabled', true);
             $("#editAgreementForm #UnitPropertyId").hide();
             $("#editAgreementForm #Unitpropertyname").hide();
-            $("#editAgreementForm #AgreementUnitR").show();
+            $("#AgreementUnitR").show();
 
         }
         else {
@@ -352,7 +354,24 @@
             //$('#editAgreementForm #UnitPropertyName').removeAttr('disabled');
             $("#editAgreementForm #UnitPropertyId").show();
             $("#editAgreementForm #Unitpropertyname").show();
-            $("#editAgreementForm #AgreementUnitR").hide();
+            $("#AgreementUnitR").hide();
+        }
+    }
+    $('#editAgreementForm input[type=radio][name=Single_Multiple_Flag]').change(function () {
+        if (this.value == 'Multiple') {
+            //$('#UnitIDTawtheeq').attr('disabled', true);
+            //$('#UnitPropertyName').attr('disabled', true);
+            $("#editAgreementForm #UnitPropertyId").hide();
+            $("#editAgreementForm #Unitpropertyname").hide();
+            $("#AgreementUnitR").show();
+
+        }
+        else {
+            //$('#editAgreementForm #UnitIDTawtheeq').removeAttr('disabled');
+            //$('#editAgreementForm #UnitPropertyName').removeAttr('disabled');
+            $("#editAgreementForm #UnitPropertyId").show();
+            $("#editAgreementForm #Unitpropertyname").show();
+            $("#AgreementUnitR").hide();
         }
         //$("#editAgreementForm #property_id").val(null);
         $.ajax(
@@ -737,11 +756,18 @@
             var firstDate = new Date($("#TcaRenewal #Agreement_Start_Date").val());
             var secondDate = new Date($("#TcaRenewal #Agreement_End_Date").val());
             var AgreementUtilityCount =parseInt($("#AgreementUtilityListCountRenewal").val());
-            if (firstDate.getDate() > secondDate.getDate()) {
+            var nofopayments = parseInt($("#TcaRenewal #nofopayments").val());
+            var AgreementPdcListCount = parseInt($("#TcaRenewal #AgreementPdcListCountRenewal").val());
+            if (firstDate.getDate() >= secondDate.getDate()) {
                 e.preventDefault();
                 $("#TcaRenewal #Agreement_End_Date").focus();
-                alert("Agreement Start Date less than or equal to Agreement End Date");
+                alert("Agreement Start Date less than Agreement End Date");
 
+            }
+            else if (nofopayments != AgreementPdcListCount) {
+                e.preventDefault();
+                $("#btnAddAgreementRenewalPdc").focus();
+                alert("No of payments and Payment details mismatch");
             }
             else if (AgreementUtilityCount < 2) {
                 e.preventDefault();

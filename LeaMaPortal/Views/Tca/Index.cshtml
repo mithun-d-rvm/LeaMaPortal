@@ -375,10 +375,18 @@
             var firstDate = new Date($("#Agreement_Start_Date").val());
             var secondDate = new Date($("#Agreement_End_Date").val());
             var AgreementUtilityCount = parseInt($("#AgreementUtilityListCount").val());
-            if (firstDate.getDate() > secondDate.getDate()) {
+            var nofopayments = parseInt($("#nofopayments").val());
+            var AgreementPdcListCount = parseInt($("#AgreementPdcListCount").val());
+            if (firstDate.getDate() >= secondDate.getDate()) {
                 e.preventDefault();
                 $("#Agreement_End_Date").focus();
-                alert("Agreement Start Date less than or equal to Agreement End Date");
+                alert("Agreement Start Date less than Agreement End Date");
+            }
+            else if(nofopayments!=AgreementPdcListCount)
+            {
+                e.preventDefault();
+                $("#btnAddAgreementPdc").focus();
+                alert("No of payments and Payment details mismatch");
             }
             else if(AgreementUtilityCount<2)
             {
