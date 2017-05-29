@@ -324,7 +324,7 @@
                    contentType: "application/json",
 
                    success: function (response) {
-                       debugger;
+                        
                        //var propertyidOptions = '<option value="" selected>--Select--</option>';
                        //$("#TcaPropertyId").empty();
 
@@ -365,7 +365,7 @@
     });
 
     $("#Tenant_Type").on('change', function (e) {
-        debugger;
+         
         var Tenant_Type = $("#Tenant_Type").val();
         $("#Ag_Tenant_id").val(null);
         $("#Ag_Tenant_Name").val(null);
@@ -379,7 +379,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         if (response != null) {
                             $("#Ag_Tenantid").empty();
                             $("#Ag_TenantName").empty();
@@ -405,7 +405,7 @@
     });
 
     $("#SecurityFlag").change(function () {
-        debugger;
+         
         var SecurityFlag = $("#SecurityFlag").val();
         if (SecurityFlag != undefined && (SecurityFlag == "Cheque" || SecurityFlag == "Online" || SecurityFlag == "Cheque without date")) {
             $('#Security_chequeno').removeAttr('disabled');
@@ -421,7 +421,7 @@
     });
 
     $("#Ag_Tenantid").change(function () {
-        debugger;
+         
         var tenantid = $("#Ag_Tenantid").val();
         $("#Ag_TenantName").val($("#Ag_Tenantid option:selected").val());
 
@@ -502,7 +502,7 @@
     });
 
     $(document).ready(function () {
-        debugger;
+         
         if ($("#single")[0].checked) {
             $("#single").prop('checked', true).change();
             //$("select option").prop("selected", false);
@@ -535,7 +535,7 @@
                    contentType: "application/json",
 
                    success: function (response) {
-                       debugger;
+                        
                        //var propertyidOptions = '<option value="" selected>--Select--</option>';
                        //$("#TcaPropertyId").empty();
 

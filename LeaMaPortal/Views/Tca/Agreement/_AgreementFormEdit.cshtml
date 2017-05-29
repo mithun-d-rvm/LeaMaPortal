@@ -383,7 +383,7 @@
                    contentType: "application/json",
 
                    success: function (response) {
-                       debugger;
+                        
                        //var propertyidOptions = '<option value="" selected>--Select--</option>';
                        //$("#editAgreementForm #TcaPropertyId").empty();
 
@@ -424,7 +424,7 @@
     });
 
     $("#editAgreementForm #Tenant_Type").on('change', function (e) {
-        debugger;
+         
         var Tenant_Type = $("#editAgreementForm #Tenant_Type").val();
         $("#editAgreementForm #Ag_Tenant_id").val(null);
         $("#editAgreementForm #Ag_Tenant_Name").val(null);
@@ -438,7 +438,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         if (response != null) {
                             $("#editAgreementForm #Ag_Tenantid").empty();
                             $("#editAgreementForm #Ag_TenantName").empty();
@@ -464,7 +464,7 @@
     });
 
     $("#editAgreementForm #SecurityFlag").change(function () {
-        debugger;
+         
         var SecurityFlag = $("#editAgreementForm #SecurityFlag").val();
         if (SecurityFlag != undefined && (SecurityFlag == "Cheque" || SecurityFlag == "Online" || SecurityFlag == "Cheque without date")) {
             $('#editAgreementForm #Security_chequeno').removeAttr('disabled');
@@ -616,7 +616,7 @@
     });
 
     //$(document).ready(function () {
-    //    debugger;
+    //     
     //    if ($("#editAgreementForm #single")[0].checked) {
     //        $("#editAgreementForm #single").prop('checked', true).change();
     //        //$("select option").prop("selected", false);
@@ -676,7 +676,7 @@
                    contentType: "application/json",
 
                    success: function (response) {
-                       debugger;
+                        
                        //var propertyidOptions = '<option value="" selected>--Select--</option>';
                        //$("#editAgreementForm #TcaPropertyId").empty();
 

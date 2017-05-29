@@ -112,7 +112,7 @@
             //GetMenuRights();
             function GetMenuRights() {
 
-                debugger;
+                 
                 $("#menu-home-tca-renewal").hide();
                 $("#menu-home-tca-closure").hide();
                 $("#menu-home-tca-status").hide();
@@ -120,7 +120,7 @@
                 var currentUser = JSON.parse(user);
                 menus = currentUser.MenuConfig.split(",");
                 jQuery.each(menus, function (index, item) {
-                    debugger;
+                     
                     if (item == 22) {
                         $("#menu-home-tca-renewal").show();
                     } if (item == 23) {
@@ -203,7 +203,7 @@
                 type: "Get",
                 data: { AgreementNo: id },
                 success: function (result) {
-                    debugger;
+                     
                     //var data=jQuery.parseJSON(result);
                     if (result.Errors == undefined || result.Errors == "") {
                         $("#closureContainer").empty();
@@ -243,7 +243,7 @@
                 type: "Get",
                 data: { AgreementNo: id },
                 success: function (result) {
-                    debugger;
+                     
                     //var data=jQuery.parseJSON(result);
                     if (result.Errors == undefined || result.Errors == "") {
                         $("#renewalAddOrUpdateContainer").empty();
@@ -283,7 +283,7 @@
                 type: "Get",
                 data: { AgreementNo: id },
                 success: function (result) {
-                    debugger;
+                     
                     //var data=jQuery.parseJSON(result);
                     if (result.Errors == undefined || result.Errors == "") {
                         $("#renewalAddOrUpdateContainer").empty();
@@ -323,7 +323,7 @@
                 type: "Get",
                 data: { AgreementNo: id },
                 success: function (result) {
-                    debugger;
+                     
                     //var data=jQuery.parseJSON(result);
                     if (result.Errors == undefined || result.Errors == "") {
                         $("#StatusContainer").empty();
@@ -402,7 +402,7 @@
 
 
     function AgreementClosurePdc(AgreementNo) {
-        debugger;
+         
         $("#img-loader").removeClass("hide");
         $.ajax(
         {
@@ -423,7 +423,7 @@
         });
     }
     function AgreementPdc(AgreementNo) {
-        debugger;
+         
         $("#img-loader").removeClass("hide");
         $.ajax(
         {
@@ -444,7 +444,7 @@
         });
     }
     function AgreementFacility(AgreementNo) {
-        debugger;
+         
         $("#img-loader").removeClass("hide");
         $.ajax(
         {
@@ -465,7 +465,7 @@
         });
     }
     function AgreementDocument(AgreementNo) {
-        debugger;
+         
         $("#img-loader").removeClass("hide");
         $.ajax(
         {

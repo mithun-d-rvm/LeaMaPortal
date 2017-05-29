@@ -361,7 +361,7 @@
     }
 
     $("#TcaRenewal #Tenant_Type").on('change', function (e) {
-        debugger;
+         
         var Tenant_Type = $("#TcaRenewal #Tenant_Type").val();
         $("#TcaRenewal #Ag_Tenant_id").val(null);
         $("#TcaRenewal #Ag_Tenant_Name").val(null);
@@ -375,7 +375,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         if (response != null) {
                             $("#TcaRenewal #Ag_Tenantid").empty();
                             $("#TcaRenewal #Ag_TenantName").empty();
@@ -401,7 +401,7 @@
     });
 
     $("#TcaRenewal #SecurityFlag").change(function () {
-        debugger;
+         
         var SecurityFlag = $("#TcaRenewal #SecurityFlag").val();
         if (SecurityFlag != undefined && (SecurityFlag == "Cheque" || SecurityFlag == "Online" || SecurityFlag == "Cheque without date")) {
             $('#Security_chequeno').removeAttr('disabled');
@@ -417,7 +417,7 @@
     });
 
     $("#TcaRenewal #Ag_Tenantid").change(function () {
-        debugger;
+         
         var tenantid = $("#TcaRenewal #Ag_Tenantid").val();
         $("#TcaRenewal #Ag_TenantName").val($("#TcaRenewal #Ag_Tenantid option:selected").val());
 
@@ -499,7 +499,7 @@
     });
 
     $(document).ready(function () {
-        debugger;
+         
         if ($("#TcaRenewal #single")[0].checked) {
             $("#TcaRenewal #single").prop('checked', true).change();
             //$("select option").prop("selected", false);

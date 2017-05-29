@@ -362,7 +362,7 @@
         GetPaymentAddOrUpdate();
     }
     $("#Supplierid").on('change', function (e) {
-        debugger;
+         
         //var tenantid = $("#Supplier_id").val();
         $("#SupplierName").val($("#Supplierid option:selected").val());
         //$("#Tenant_id").val($("#Tenantid option:selected").text() == "--Select--" ? null : $("#Tenantid option:selected").text());
@@ -371,7 +371,7 @@
         //$("#TenantName").prop('selected', true).change();
     });
     $("#SupplierName").on('change', function (e) {
-        debugger;
+         
         //var tenantid = $("#TenantName").val();
         $("#Supplierid").val($("#SupplierName option:selected").val());
         //$("#Tenant_Name").val($("#TenantName option:selected").text() == "--Select--" ? null : $("#TenantName option:selected").text());
@@ -379,11 +379,11 @@
     });
 
     $("#agreement_no").on('change', function (e) {
-        debugger; getAgreementDetails()
+          getAgreementDetails()
     });
 
     $("#Propertyid").on('change', function (e) {
-        debugger;
+         
         var propertyid = $("#Propertyid").val();
         $("#PropertyName").val($("#Propertyid option:selected").val());
 
@@ -400,7 +400,7 @@
         //$("#TenantName").prop('selected', true).change();
     });
     $("#PropertyName").on('change', function (e) {
-        debugger;
+         
         var propertyid = $("#PropertyName").val();
         $("#Propertyid").val($("#PropertyName option:selected").val());
         //$("#Property_Name").val($("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
@@ -412,7 +412,7 @@
 
 
     $("#UnitID").on('change', function (e) {
-        debugger;
+         
         var unitid = $("#UnitID").val();
         $("#unitName").val($("#UnitID option:selected").val());
         //$("#Unit_Id").val($("#UnitId option:selected").text() == "--Select--" ? null : $("#UnitId option:selected").text());
@@ -424,7 +424,7 @@
         //$("#TenantName").prop('selected', true).change();
     });
     $("#unitName").on('change', function (e) {
-        debugger;
+         
         var unitid = $("#unitName").val();
         $("#UnitID").val($("#unitName option:selected").val());
         //$("#unit_Name").val($("#unitName option:selected").text() == "--Select--" ? null : $("#unitName option:selected").text());
@@ -448,7 +448,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         var options = '<option value="" selected>--Select--</option>';
                         //if (id==null) {
                         //    options = '<option value="" selected>--Select--</option>';
@@ -496,7 +496,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         $("#Propertyid").val(response);
                         $("#PropertyName").val(response);
                         //var options = '';
@@ -558,7 +558,7 @@
         }
     }
     function showHideChequeField(value) {
-        debugger;
+         
         $("[name='cheque'] :input").attr("disabled", value);
         if (value) {
             $("[name='cheque']").hide();
@@ -586,7 +586,7 @@
         }
     }
     function ShowHidePaymentModeFields(paymentModeValue) {
-        debugger;
+         
         if (paymentModeValue == "cheque") {
             showHideChequeField(false);
             showhideAdvancePayment(true);
@@ -659,17 +659,17 @@
         }
     }
     $("#BankAcCode").on('change', function (e) {
-        debugger;
+         
         var bankAcCode = $("#BankAcCode").val();
         $("#BankAcName").val(bankAcCode);
     });
     $("#BankAcName").on('change', function (e) {
-        debugger;
+         
         var bankAcCode = $("#BankAcName").val();
         $("#BankAcCode").val(bankAcCode);
     });
     $("#AdvAcCode").on('change', function (e) {
-        debugger;
+         
         if ($("#AdvAcCode").val() != "") {
             get_advance_payment_amount($("#AdvAcCode").val());
         }
@@ -679,11 +679,11 @@
         }
 
     });
-    $("#PaymentMode").change(function () { debugger; ShowHidePaymentModeFields($("#PaymentMode").val()) });
+    $("#PaymentMode").change(function () {   ShowHidePaymentModeFields($("#PaymentMode").val()) });
     //showHideCheque($("#PaymentMode").val());
 
     function calculateBalance(pos) {
-        debugger;
+         
         var InvoiceAmount = Number(document.getElementById("InvoiceAmount" + pos).value);
         var DebitAmount = Number(document.getElementById("DebitAmount" + pos).value);
         var PaidAmount = Number(document.getElementById("PaidAmount" + pos).value);
@@ -773,7 +773,7 @@
     $("#unit_id").change(function () { getProperty(1) });
     $("#unit_name").change(function () { getProperty(2) });
     function getAgreementDetails() {
-        debugger;
+         
         var agreement_selected_text = $("#agreement_no option:selected").text();
         var agreement_no = $("#agreement_no").val();
         if (agreement_selected_text != "--Select--") {
@@ -786,7 +786,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         //$("#Tenantid").empty();
                         //var options = '';
                         //$.each(response.Tenants, function (index, data) {
@@ -849,7 +849,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         //$("#Tenantid").empty();
                         //var options = '<option value="" selected>--Select--</option>';
                         //$.each(response.Tenants, function (index, data) {
@@ -945,11 +945,11 @@
         //            }
         //        });
     }
-    //$("#agreement_no").change(function () { debugger; getAgreementDetails() });
+    //$("#agreement_no").change(function () {   getAgreementDetails() });
     //var i = parseInt($("#propertiesdt1-list-count").val());
     var j = parseInt($("#Payment-count").val());
     function Add() {
-        debugger;
+         
         //var Invtype = document.getElementById("Invtype").value;
         var Invno = document.getElementById("Invno").value;
         var InvoiceDate = document.getElementById("InvoiceDate").value;
@@ -1034,7 +1034,7 @@
         j = newindex;
     });
     $("form#Payment").off("submit").on("submit", function (e) {
-        debugger;
+         
         e.preventDefault();
         try {
             if ($("#PaymentType").val() == "against invoice") {

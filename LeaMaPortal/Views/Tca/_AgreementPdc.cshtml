@@ -190,7 +190,7 @@
         return isExist;
     }
     function removeAgreementPdcDetails() {
-        debugger;
+         
         $(this).closest('tr').remove();
         var existfilelist = document.getElementById('AgreementPdcDetailsList');
         var newindex = 0;
@@ -246,7 +246,7 @@
         $("#AgreementPdcListCount").val(AgreementPdCount);
     });
     $("#Payment_Mode").change(function () {
-        debugger;
+         
         var type = $("#Payment_Mode").val();
         if (type == "Cheque") {
             $("#Cheque_No").attr("disabled", false);

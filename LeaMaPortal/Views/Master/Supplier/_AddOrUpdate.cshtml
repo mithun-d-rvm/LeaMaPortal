@@ -571,28 +571,28 @@
         GetSupplierAddOrUpdate();
     }
     //function setMax() {
-    //    debugger;
+    //     
     //    var to = $("#License_ExpiryDate").val();
     //    if (to != "") {
     //        $("#License_issueDate").prop('max', to);
     //    }
     //}
     //function setMin() {
-    //    debugger;
+    //     
     //    var from = $("#License_issueDate").val();
     //    if (from != "") {
     //        $("#License_ExpiryDate").prop('min', from);
     //    }
     //}
     function setMin() {
-        debugger;
+         
         //var to = $("#License_ExpiryDate").val();
         //if (to != "") {
         $("#License_issueDate").prop('max', new Date());
         //}
     }
     function setMax() {
-        debugger;
+         
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth() + 1; //January is 0!
@@ -935,7 +935,7 @@
         // $("#Title").val($("#TitleDisplay").val());
     });
     $(document).ready(function () {
-        debugger;
+         
         var type = $("#Type").val();
         if (type == "Company") {
             $("#ADWEARegisterId :input").attr("disabled", false);

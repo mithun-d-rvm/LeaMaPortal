@@ -162,7 +162,7 @@
         e.preventDefault();
         $("#master-loader-edit").removeClass("hide");
         $("#ContainerAddOrUpdate").hide();
-        debugger;
+         
         var id = $(this).data("id");
         //var propertytype = $(this).data("propertytype");
         //var propertycategory = $(this).data("propertycategory");
@@ -176,7 +176,7 @@
                 data: { id: id },
                 success: function (result) {
                     if (result.Errors == undefined || result.Errors == "") {
-                        debugger;
+                         
                         $("#PropertyTypeId").val(result.Id);
                         $("#PropertyType").val(result.PropertyType);
                         $("#UsageName").val(result.Usage_name);
