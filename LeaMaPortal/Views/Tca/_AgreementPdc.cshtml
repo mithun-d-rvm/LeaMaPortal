@@ -37,7 +37,8 @@
             @Html.DropDownList("Month", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
         </div>
         <div class="col-md-1 w-md-10">
-            @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);" } })
+            <input type="number" name="Year" id="Year" step="1" class="master-form-input form-control" onkeypress="allow_only_numbers(event);" min="@DateTime.Now.Year" />
+            @*@Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);",@min=DateTime.Now.Year } })*@
         </div>
         <div class="col-md-1 w-md-13">
             @Html.DropDownList("Payment_Mode", null,"--Select--", new { @class = "form-control master-form-input AgreementPdPaymentMode" })
@@ -87,6 +88,12 @@
         var Cheque_No = $("#AgreementPd #Cheque_No").val();
         var Cheque_Date = $("#AgreementPd #Cheque_Date").val();
         var Cheque_Amount = parseFloat($("#AgreementPd #Cheque_Amount").val());
+        var cYear = new Date().getFullYear();
+        if (Year < cYear)
+        {
+            alert("Year not past");
+            return;
+        }
        
         if (Month == '' || Year == '' || Payment_Mode == '' || $("#AgreementPd #Cheque_Amount").val() == '') {
             alert("Please fill mandatory fields");
