@@ -761,17 +761,33 @@
             if (firstDate.getDate() >= secondDate.getDate()) {
                 e.preventDefault();
                 $("#TcaRenewal #Agreement_End_Date").focus();
-                alert("Agreement Start Date less than Agreement End Date");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Agreement Start Date less than Agreement End Date");
+                $('#masterResultModal').modal('show');
+                //alert("Agreement Start Date less than Agreement End Date");
 
             }
             else if (nofopayments != AgreementPdcListCount) {
                 e.preventDefault();
                 $("#btnAddAgreementRenewalPdc").focus();
-                alert("No of payments and Payment details mismatch");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("No of payments and Payment details mismatch");
+                $('#masterResultModal').modal('show');
+                //alert("No of payments and Payment details mismatch");
             }
             else if (AgreementUtilityCount < 2) {
                 e.preventDefault();
-                alert("Minimum 2 utilities required");
+                $("#btnAddAgreementRenewalPdc").focus();
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Minimum 2 utilities required");
+                $('#masterResultModal').modal('show');
+                //alert("Minimum 2 utilities required");
             }
         }
         catch (ex) {

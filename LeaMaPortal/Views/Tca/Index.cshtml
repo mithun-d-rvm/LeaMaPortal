@@ -213,7 +213,12 @@
                 $("#AgreementForm").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
 
@@ -244,7 +249,12 @@
                 $("#AgreementPdc").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
@@ -265,7 +275,12 @@
                 $("#AgreementFacility").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
@@ -286,7 +301,12 @@
                 $("#AgreementDocument").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
@@ -306,7 +326,12 @@
                 $("#AgreementUtility").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
@@ -326,7 +351,12 @@
                 $("#AgreementUnit").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
@@ -346,7 +376,12 @@
                 $("#AgreementCheckList").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
@@ -363,7 +398,12 @@
                    $("#agreementList").html(html);
                },
                error: function (jqXhr, textStatus, errorThrown) {
-                   alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                   $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                   $(".result-title").text("Failure");
+                   $(".result-modal-body span").text("Could not able to process your requests");
+                   $('#masterResultModal').modal('show');
                },
                complete: function () {
                    //   $("#VerifyIdDetailsLoader").addClass("hide");
@@ -375,6 +415,7 @@
 
 <script>
     $("form#Tca").off("submit").on("submit", function (e) {
+        debugger;
         // e.preventDefault();
         try {
             var firstDate = new Date($("#Agreement_Start_Date").val());
@@ -385,18 +426,78 @@
             if (firstDate.getDate() >= secondDate.getDate()) {
                 e.preventDefault();
                 $("#Agreement_End_Date").focus();
-                alert("Agreement Start Date less than Agreement End Date");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Agreement Start Date less than Agreement End Date");
+                $('#masterResultModal').modal('show');
+                //alert("Agreement Start Date less than Agreement End Date");
             }
             else if(nofopayments!=AgreementPdcListCount)
             {
                 e.preventDefault();
                 $("#btnAddAgreementPdc").focus();
-                alert("No of payments and Payment details mismatch");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Number of payments and Payment details mismatch");
+                $('#masterResultModal').modal('show');
+                //alert("No of payments and Payment details mismatch");
             }
             else if(AgreementUtilityCount<2)
             {
                 e.preventDefault();
-                alert("Minimum 2 utilities required");
+                $("#btnAddAgreementPdc").focus();
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Minimum 2 utilities required");
+                $('#masterResultModal').modal('show');
+                //alert("Minimum 2 utilities required");
+            }
+            else {
+                e.preventDefault();
+                var formData = new FormData($(this)[0]);
+                try {
+                    $.ajax(
+                        {
+                            url: "../Tca/AddOrUpdate",
+                            method: "POST",
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            cache: false,
+                            async: false,
+                            success: function (response) {
+                                //GetPropertyMaster();
+                                if (response.Errors == null || response.Errors == "") {
+                                    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                                    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                                    $(".result-title").text("Success");
+                                    $(".result-modal-body span").text(response.Message);
+                                }
+                                else {
+                                    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                                    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                                    $(".result-title").text("Failure");
+                                    $(".result-modal-body span").text(response.Errors);
+                                }
+                            },
+                            error: function (jqXhr, textStatus, errorThrown) {
+                                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                                $(".result-title").text("Failure");
+                                $(".result-modal-body span").text(masterResultError);
+                            },
+                            complete: function () {
+                                $("#img-add-or-update-loader").addClass("hide");
+                                $('#masterResultModal').modal('show');
+                            }
+                        });
+                }
+                catch (ex) {
+                    alert(ex);
+                }
             }
         }
         catch (ex) {
