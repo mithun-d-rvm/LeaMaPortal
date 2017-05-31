@@ -63,11 +63,11 @@
             </div>
 
         }*@
-    <div class="">
+    <div class="font-smaller">
         <div class="blank">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.PaymentNo, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -75,7 +75,7 @@
                             @Html.EditorFor(model => model.PaymentNo, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.PaymentDate, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -83,7 +83,7 @@
                             @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.Utiltiy_name, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -91,7 +91,7 @@
                             @Html.DropDownList("Utiltiyname", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.Supplier_name, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -99,7 +99,7 @@
                             @Html.DropDownList("Suppliername", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.PaymentType, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -108,7 +108,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -116,7 +116,7 @@
                             @Html.DropDownList("PaymentMode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
-                    @*<div class="col-md-12 form-input-padding">
+                    @*<div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.Agreement_No, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -124,7 +124,7 @@
                             @Html.DropDownList("Agreement_No", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                         </div>
                     </div>*@
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -132,7 +132,7 @@
                             @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required", @onkeypress = "allow_only_Float(event,'TotalAmount');" , @onchange = "AmountInWords()" } })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.AmtInWords, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -144,7 +144,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div class="col-md-12 form-input-padding" id="advancePayment">
+                    <div class="col-md-12 p-b-7" id="advancePayment">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.AdvAcCode, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -153,7 +153,7 @@
                             @Html.DropDownList("AdvAcCode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding" id="ddChequeNumber" name="cheque">
+                    <div class="col-md-12 p-b-7" id="ddChequeNumber" name="cheque">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.DDChequeNo, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -161,7 +161,7 @@
                             @Html.EditorFor(model => model.DDChequeNo, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding" id="ddChequeDate" name="cheque">
+                    <div class="col-md-12 p-b-7" id="ddChequeDate" name="cheque">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.Cheqdate, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -169,7 +169,7 @@
                             @Html.EditorFor(model => model.Cheqdate, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                         </div>
                     </div>
-                    @*<div class="col-md-12 form-input-padding">
+                    @*<div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.pdcstatus, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -177,7 +177,7 @@
                             @Html.DropDownList("pdcstatus", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                         </div>
                     </div>*@
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.BankAcCode, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -186,7 +186,7 @@
                             @Html.DropDownList("BankAcCode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.BankAcName, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -195,7 +195,7 @@
                             @Html.DropDownList("BankAcName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.Narration, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -203,7 +203,7 @@
                             @Html.EditorFor(model => model.Narration, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             &nbsp;
                         </div>
@@ -211,7 +211,9 @@
                 </div>
 
             </div>
-
+            <div class="p-t-5-p">
+                &nbsp;
+            </div>
             <div class="pull-left" id="invoice">
                 @if (Model.UtilityPaymentDetails != null)
                 {
