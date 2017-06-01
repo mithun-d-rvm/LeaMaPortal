@@ -418,12 +418,17 @@
         debugger;
         // e.preventDefault();
         try {
-            var firstDate = new Date($("#Agreement_Start_Date").val());
-            var secondDate = new Date($("#Agreement_End_Date").val());
+            var SDate = new Date($("#Agreement_Start_Date").val());
+            var EDate = new Date($("#Agreement_End_Date").val());
+            //alert(SDate.getFullYear() + "" + SDate.getMonth() + "" + SDate.getDay());
+            var startDt = parseInt(SDate.getFullYear() + "" + SDate.getMonth() + "" + SDate.getDay());
+            var endDt = parseInt(EDate.getFullYear() + "" + EDate.getMonth() + "" + EDate.getDay());
+           // alert(SDate + "-----" + EDate)
+           // alert(startDt + "   " + endDt);
             var AgreementUtilityCount = parseInt($("#AgreementUtilityListCount").val());
             var nofopayments = parseInt($("#nofopayments").val());
             var AgreementPdcListCount = parseInt($("#AgreementPdcListCount").val());
-            if (firstDate.getDate() >= secondDate.getDate()) {
+            if (endDt <= startDt) {
                 e.preventDefault();
                 $("#Agreement_End_Date").focus();
                 $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
@@ -474,7 +479,9 @@
                                     $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
                                     $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
                                     $(".result-title").text("Success");
-                                    $(".result-modal-body span").text(response.Message);
+                                    $(".result-modal-body span").text("Data saved successfully!");
+                                    IsAddAllow();
+                                    getAgreementList();
                                 }
                                 else {
                                     $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");

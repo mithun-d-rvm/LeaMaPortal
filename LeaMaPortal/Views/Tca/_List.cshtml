@@ -630,12 +630,12 @@
             }
         });
     }
-    function getAgreementList() {
+    function getAgreementList(search, page, defaultPageSize) {
         $.ajax(
            {
                url: "../Tca/List",
                type: "Get",
-               data: { Search: "", page: 1 },
+               data: { Search: search, page: page, defaultPageSize: defaultPageSize },
                success: function (html) {
                    $("#agreementList").empty();
                    $("#agreementList").html(html);

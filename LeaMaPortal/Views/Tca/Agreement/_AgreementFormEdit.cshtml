@@ -753,12 +753,17 @@
     $("form#TcaRenewal").off("submit").on("submit", function (e) {
         // e.preventDefault();
         try {
-            var firstDate = new Date($("#TcaRenewal #Agreement_Start_Date").val());
-            var secondDate = new Date($("#TcaRenewal #Agreement_End_Date").val());
+            var SDate = new Date($("#TcaRenewal #Agreement_Start_Date").val());
+            var EDate = new Date($("#TcaRenewal #Agreement_End_Date").val());
+            //alert(SDate.getFullYear() + "" + SDate.getMonth() + "" + SDate.getDay());
+            var startDt = parseInt(SDate.getFullYear() + "" + SDate.getMonth() + "" + SDate.getDay());
+            var endDt = parseInt(EDate.getFullYear() + "" + EDate.getMonth() + "" + EDate.getDay());
+
+
             var AgreementUtilityCount =parseInt($("#AgreementUtilityListCountRenewal").val());
             var nofopayments = parseInt($("#TcaRenewal #nofopayments").val());
             var AgreementPdcListCount = parseInt($("#TcaRenewal #AgreementPdcListCountRenewal").val());
-            if (firstDate.getDate() >= secondDate.getDate()) {
+            if (endDt <= startDt) {
                 e.preventDefault();
                 $("#TcaRenewal #Agreement_End_Date").focus();
                 $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
