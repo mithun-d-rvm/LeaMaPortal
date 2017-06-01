@@ -879,14 +879,14 @@
         GetTenantCompanyAddOrUpdate();
     }
     function setMax(toid, fromid) {
-        debugger;
+         
         var to = $("#" + fromid).val();
         if (to != "") {
             $("#" + toid).prop('max', to);
         }
     }
     function setMin(fromid, toid) {
-        debugger;
+         
         var from = $("#" + fromid).val();
         if (from != "") {
             $("#" + toid).prop('min', from);
@@ -1127,7 +1127,7 @@
     $("form#TenantCompany").off("submit").on("submit", function (e) {
         e.preventDefault();
         try {
-            debugger;
+             
             var formData = new FormData($(this)[0]);
             $.ajax(
                 {
@@ -1141,7 +1141,7 @@
                     async: false,
                     success: function (response) {
                         //console.log("Success");
-                        debugger;
+                         
                         GetTenantCompany();
                         if (response.Errors == null) {
                             $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
@@ -1233,7 +1233,7 @@
             mm = '0' + mm;
         }
         //2017 - 05 - 01
-        debugger;
+         
         var today = yyyy + '-' + mm + '-' + dd;
         //$("#LicenseExpiryDate").prop('max', today);
         $("#LicenseIssueDate").prop('max', today);

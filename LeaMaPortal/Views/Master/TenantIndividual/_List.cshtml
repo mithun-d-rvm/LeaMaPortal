@@ -31,26 +31,26 @@
         <div class="divTable leama-fieldset col-md-12">
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
-                    <div class="divTableCell">Tenant ID</div>
-                    <div class="divTableCell">Title</div>
-                    <div class="divTableCell">Name</div>
-                    <div class="divTableCell">Company Name</div>
-                    <div class="divTableCell">Profession</div>
-                    <div class="divTableCell">Address</div>
+                    <div class="divTableCell">First Name</div>
+                    <div class="divTableCell">Last Name</div>
+                    <div class="divTableCell">Company/Edu Name</div>
                     <div class="divTableCell">City</div>
+                    <div class="divTableCell">Nationality</div>
+                    <div class="divTableCell">Emirate Id</div>
+                    <div class="divTableCell">Emirate Expiry Date</div>
                     <div class="divTableCell">Action</div>
                 </div>
 
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
-                        <div class="divTableCell">@item.Id</div>
-                        <div class="divTableCell">@item.Title</div>
-                        <div class="divTableCell">@item.First_Name  @item.Last_Name</div>
+                        <div class="divTableCell">@item.First_Name</div>
+                        <div class="divTableCell">@item.Last_Name</div>
                         <div class="divTableCell">@item.Company_Educational</div>
-                        <div class="divTableCell">@item.Profession</div>
-                        <div class="divTableCell">@item.address</div>
                         <div class="divTableCell">@item.City</div>
+                        <div class="divTableCell">@item.Nationality</div>
+                        <div class="divTableCell">@item.Emiratesid</div>
+                        <div class="divTableCell">@item.Emirate_expirydate</div>
                         <div class="divTableCell">
                             @if (@ViewBag.IsEditable == 1)
                 {

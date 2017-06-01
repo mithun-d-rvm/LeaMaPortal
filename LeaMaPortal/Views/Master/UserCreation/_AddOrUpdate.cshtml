@@ -228,7 +228,7 @@
 <script>
 
     function checkUserName(input) {
-        debugger;
+         
         //$("#master-loader").removeClass("hide");
         $.ajax(
         {
@@ -268,7 +268,7 @@
             var form = $("form#UserCreation");
             var menuCheckBoxes = $(".menurights");
             var menuIds = "";
-            debugger;
+             
             $('input.menurights:checkbox:checked').each(function () {
                 menuIds = menuIds == "" ? $(this.name).selector : menuIds + "," + $(this.name).selector;
             });
@@ -379,7 +379,7 @@
     //                contentType: "application/json",
 
     //                success: function (response) {
-    //                    debugger;
+    //                     
     //                    if (response != null) {
     //                        $("#Country").val(response);
     //                    }

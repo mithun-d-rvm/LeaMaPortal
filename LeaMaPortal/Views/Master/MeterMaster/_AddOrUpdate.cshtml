@@ -34,7 +34,7 @@
                     @Html.LabelFor(model => model.Utility_Name, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4 ">
-                    @Html.DropDownList("Utility_Name", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Utility_Name" })
+                    @Html.DropDownList("Utility_Name", null,"--Select--", htmlAttributes: new { @class = "master-form-input", @required = "required", @id = "Utility_Name" })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
@@ -47,32 +47,33 @@
             </div>
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-2 pull-left">
-                    @Html.LabelFor(model => model.unit_id, htmlAttributes: new { @class = "leama-field-name" })
+                    @Html.LabelFor(model => model.Property_id, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4 ">
-                    @Html.DropDownList("unit_id", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "unit_id" })
+                    @Html.DropDownList("Property_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input", @required = "required", @id = "Property_id" })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-2 pull-left">
-                    @Html.LabelFor(model => model.Property_id, htmlAttributes: new { @class = "leama-field-name" })
+                    @Html.LabelFor(model => model.unit_id, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4 ">
-                    @Html.DropDownList("Property_id", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Property_id" })
+                    @Html.DropDownList("unit_id", null, "--Select--", htmlAttributes: new { @class = "master-form-input", @id = "unit_id" })
                 </div>
             </div>
+            
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-2 pull-left">
                     @Html.LabelFor(model => model.Dueday, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4 ">
-                    @Html.DropDownList("Dueday", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "Dueday" })
+                    @Html.DropDownList("Dueday", null, "--Select--", htmlAttributes: new { @class = "master-form-input", @required = "required", @id = "Dueday" })
                 </div>
             </div>
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-12 pull-left">
                     <button type="submit" class="col-md-offset-2 leama-btn">Submit</button>&nbsp;&nbsp;
-<button class="btn master-form-btn" id="btnCancel" type="button" onclick="formReset()">Cancel</button>
+                    <button class="btn master-form-btn" id="btnCancel" type="button" onclick="formReset()">Cancel</button>
                 </div>
             </div>
         </div>
@@ -84,6 +85,10 @@
     }
     function getUtilityId() {
         var UtilityName = $("#Utility_Name").val();
+        if (UtilityName == "") {
+            $("#Utility_id").val("");
+            return false;
+        }
         if (UtilityName != null) {
             $.ajax(
                     {
@@ -104,10 +109,16 @@
         }
     }
     $("#Utility_Name").change(function () { getUtilityId() });
-    getUtilityId();
+    //getUtilityId();
 
     function getUnitId() {
         var PropertyId = $("#Property_id").val();
+        if (PropertyId == "") {
+            $("#unit_id").empty();
+            var options = '<option value="">--Select--</option>';
+            $('#unit_id').append(options);
+            return false;
+        }
         $.ajax(
                 {
                     url: "../Meter/GetUnitId",
@@ -116,11 +127,11 @@
                     data: { PropertyId: PropertyId },
                     success: function (response) {
                         $("#unit_id").empty();
-                        var options = '';
+                        var options = '<option value="">--Select--</option>';
                         $.each(response, function (index, data) {
                             options += '<option value="' + data.Value + '">' + data.Value + '</option>' ;
                         });
-                        debugger;
+                         
                         $('#unit_id').append(options);
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
@@ -131,7 +142,7 @@
                 });
     }
     $("#Property_id").change(function () { getUnitId() });
-    getUnitId();
+    //getUnitId();
 
     //Add or update
     $("form#Meter").off("submit").on("submit", function (e) {
@@ -146,12 +157,12 @@
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
-                        GetMeter();
                         if (response.Errors == null) {
                             $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
                             $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
                             $(".result-title").text("Success");
                             $(".result-modal-body span").text(response.Message);
+                            GetMeter();
                         }
                         else
                         {

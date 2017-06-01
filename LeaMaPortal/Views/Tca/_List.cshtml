@@ -43,25 +43,25 @@
                     <div class="divTableCell">@item.Ag_Tenant_Name</div>
                     <div class="divTableCell">@item.Unit_Property_Name</div>
                     <div class="divTableCell">
-                        @if (@ViewBag.IsRenewalVisible)
+                        @if (@ViewBag.IsRenewalVisible && item.Approval_Flag==1)
                         {
                             <span>
                                 @Html.ActionLink(" ", "Renewal", null, new { @class = "glyphicon glyphicon-open agreement-renewal", title = "Renewal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-renewal" })  |
                             </span>
                         }
-                        @if (@ViewBag.IsClosureVisible)
+                        @if (@ViewBag.IsClosureVisible && item.Approval_Flag == 1)
                         {
                             <span>
                                 @Html.ActionLink(" ", "Closue", null, new { @class = "glyphicon glyphicon-save agreement-closure", title = "Closure", @data_toggle = "modal", @data_target = "#closureModal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-closure" })  |
                             </span>
                         }
-                        @if (@ViewBag.IsAgreementStatusVisible)
+                        @if (@ViewBag.IsAgreementStatusVisible && item.Approval_Flag == 1)
                         {
                             <span>
                                 @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-stats agreement-stats", title = "Status", @data_toggle = "modal", @data_target = "#statusModal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-status" })  |
                             </span>
                         }
-                        @if (@ViewBag.IsEditable == 1 && item.Approval_Flag == 0)
+                        @if (@ViewBag.IsEditable == 1 && item.Approval_Flag !=1)
                         {
                             <span>
                                 @Html.ActionLink(" ", "Edit", null, new { @class = "glyphicon glyphicon-edit agreement-edit", title = "Edit", @data_agreementno = @item.Agreement_No })  |
@@ -112,7 +112,7 @@
             //GetMenuRights();
             function GetMenuRights() {
 
-                debugger;
+                 
                 $("#menu-home-tca-renewal").hide();
                 $("#menu-home-tca-closure").hide();
                 $("#menu-home-tca-status").hide();
@@ -120,7 +120,7 @@
                 var currentUser = JSON.parse(user);
                 menus = currentUser.MenuConfig.split(",");
                 jQuery.each(menus, function (index, item) {
-                    debugger;
+                     
                     if (item == 22) {
                         $("#menu-home-tca-renewal").show();
                     } if (item == 23) {
@@ -203,7 +203,7 @@
                 type: "Get",
                 data: { AgreementNo: id },
                 success: function (result) {
-                    debugger;
+                     
                     //var data=jQuery.parseJSON(result);
                     if (result.Errors == undefined || result.Errors == "") {
                         $("#closureContainer").empty();
@@ -243,7 +243,7 @@
                 type: "Get",
                 data: { AgreementNo: id },
                 success: function (result) {
-                    debugger;
+                     
                     //var data=jQuery.parseJSON(result);
                     if (result.Errors == undefined || result.Errors == "") {
                         $("#renewalAddOrUpdateContainer").empty();
@@ -283,7 +283,7 @@
                 type: "Get",
                 data: { AgreementNo: id },
                 success: function (result) {
-                    debugger;
+                     
                     //var data=jQuery.parseJSON(result);
                     if (result.Errors == undefined || result.Errors == "") {
                         $("#renewalAddOrUpdateContainer").empty();
@@ -323,7 +323,7 @@
                 type: "Get",
                 data: { AgreementNo: id },
                 success: function (result) {
-                    debugger;
+                     
                     //var data=jQuery.parseJSON(result);
                     if (result.Errors == undefined || result.Errors == "") {
                         $("#StatusContainer").empty();
@@ -402,7 +402,7 @@
 
 
     function AgreementClosurePdc(AgreementNo) {
-        debugger;
+         
         $("#img-loader").removeClass("hide");
         $.ajax(
         {
@@ -423,7 +423,7 @@
         });
     }
     function AgreementPdc(AgreementNo) {
-        debugger;
+         
         $("#img-loader").removeClass("hide");
         $.ajax(
         {
@@ -444,7 +444,7 @@
         });
     }
     function AgreementFacility(AgreementNo) {
-        debugger;
+         
         $("#img-loader").removeClass("hide");
         $.ajax(
         {
@@ -465,7 +465,7 @@
         });
     }
     function AgreementDocument(AgreementNo) {
-        debugger;
+         
         $("#img-loader").removeClass("hide");
         $.ajax(
         {

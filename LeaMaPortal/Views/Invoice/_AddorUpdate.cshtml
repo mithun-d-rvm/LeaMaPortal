@@ -347,7 +347,7 @@ Layout = null;
     }
     function myFunction() {
         var val = $("#dropDownId option:selected").val();
-        alert(val);
+        //alert(val);
 
         $.ajax(
        {
@@ -370,7 +370,7 @@ Layout = null;
     }
     $('#dropDownId').change(function () {
         var val = $("#dropDownId option:selected").val();
-        alert(val);
+        //alert(val);
 
     });
     $('#model-close').click(function () {
@@ -435,7 +435,7 @@ Layout = null;
 
     }
     $(document).on('click', 'button.removebutton', function () {
-        debugger;
+         
         $(this).closest('tr').find(":input").each(function () {
             var dataname = $(this).data("name");
             if (dataname == "amount") {
@@ -468,7 +468,7 @@ Layout = null;
         i = newindex;
     });
     $("#Tenantid").on('change', function (e) {
-        debugger;
+         
         var tenantid = $("#Tenantid").val();
         $("#TenantName").val($("#Tenantid option:selected").val());
         //$("#Tenant_id").val($("#Tenantid option:selected").text() == "--Select--" ? null : $("#Tenantid option:selected").text());
@@ -477,7 +477,7 @@ Layout = null;
         //$("#TenantName").prop('selected', true).change();
     });
     $("#TenantName").on('change', function (e) {
-        debugger;
+         
         var tenantid = $("#TenantName").val();
         $("#Tenantid").val($("#TenantName option:selected").val());
         //$("#Tenant_Name").val($("#TenantName option:selected").text() == "--Select--" ? null : $("#TenantName option:selected").text());
@@ -485,7 +485,7 @@ Layout = null;
     });
 
     $("#PropertyId").on('change', function (e) {
-        debugger;
+         
         var propertyid = $("#PropertyId").val();
         $("#PropertyName").val($("#PropertyId option:selected").val());
 
@@ -502,7 +502,7 @@ Layout = null;
         //$("#TenantName").prop('selected', true).change();
     });
     $("#PropertyName").on('change', function (e) {
-        debugger;
+         
         var propertyid = $("#PropertyName").val();
         $("#PropertyId").val($("#PropertyName option:selected").val());
         //$("#Property_Name").val($("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
@@ -514,7 +514,7 @@ Layout = null;
 
 
     $("#UnitId").on('change', function (e) {
-        debugger;
+         
         var unitid = $("#UnitId").val();
         $("#unitName").val($("#UnitId option:selected").val());
         //$("#Unit_Id").val($("#UnitId option:selected").text() == "--Select--" ? null : $("#UnitId option:selected").text());
@@ -526,7 +526,7 @@ Layout = null;
         //$("#TenantName").prop('selected', true).change();
     });
     $("#unitName").on('change', function (e) {
-        debugger;
+         
         var unitid = $("#unitName").val();
         $("#UnitId").val($("#unitName option:selected").val());
         //$("#unit_Name").val($("#unitName option:selected").text() == "--Select--" ? null : $("#unitName option:selected").text());
@@ -537,7 +537,7 @@ Layout = null;
     });
 
     $("#invtype").on('change', function (e) {
-        debugger;
+         
         var invoiceType = $("#invtype option:selected").val();
         $("#item").val(invoiceType);
 
@@ -582,7 +582,7 @@ Layout = null;
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         var options = '<option value="" selected>--Select--</option>';
                         //if (id==null) {
                         //    options = '<option value="" selected>--Select--</option>';
@@ -630,7 +630,7 @@ Layout = null;
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         $("#PropertyId").val(response);
                         $("#PropertyName").val(response);
                         //var options = '';
@@ -666,7 +666,7 @@ Layout = null;
     }
 
     $("#Agreement_No").on('change', function (e) {
-        debugger;
+         
         var agreement_selected_text = $("#Agreement_No option:selected").text();
         var agreement_no = $("#Agreement_No").val();
         if (agreement_selected_text != "--Select--") {
@@ -679,7 +679,7 @@ Layout = null;
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         $("#Tenantid").empty();
                         var options = '';
                         $.each(response.Tenants, function (index, data) {
@@ -742,7 +742,7 @@ Layout = null;
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         $("#Tenantid").empty();
                         var options ='<option value="" selected>--Select--</option>';
                         $.each(response.Tenants, function (index, data) {
@@ -806,7 +806,7 @@ Layout = null;
         e.preventDefault();
         // $("#icon-success").addClass("hide");
         //$("#VerifyIdDetailsLoader").removeClass("hide");
-        debugger;
+         
         try {
             var form = $("form#Invoice");
             $("#Tenant_id").val($("#Tenantid option:selected").text() == "--Select--" ? null : $("#Tenantid option:selected").text());
@@ -876,7 +876,7 @@ Layout = null;
         return o;
     };
     $(document).ready(function () {
-        debugger;
+         
         if ($("#invtype").val() != null && $("#invtype").val() != "") {
             $("#item").val($("#invtype").val());
         }

@@ -13,6 +13,7 @@ using MvcPaging;
 
 namespace LeaMaPortal.Controllers
 {
+    [Authorize]
     public class RegionController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
@@ -92,7 +93,7 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (db.tbl_region.Any(a => a.Region_Name.ToLower() == model.Region_Name.ToLower() && a.Country == model.Country && a.Delmark != "*") && model.Id == 0)
+                    if (db.tbl_region.Any(a => a.Region_Name.ToLower() == model.Region_Name.ToLower() && a.Country == model.Country && a.Delmark != "*" && a.Id!=model.Id))
                     {
                         result.Errors = "Region already exists!";
                     }

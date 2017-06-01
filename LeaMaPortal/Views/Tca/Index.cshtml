@@ -231,7 +231,7 @@
         });
     }
     function AgreementPdc(AgreementNo) {
-        debugger;
+         
         $("#img-loader").removeClass("hide");
         $.ajax(
         {
@@ -252,7 +252,7 @@
         });
     }
     function AgreementFacility(AgreementNo) {
-        debugger;
+         
         $("#img-loader").removeClass("hide");
         $.ajax(
         {
@@ -273,7 +273,7 @@
         });
     }
     function AgreementDocument(AgreementNo) {
-        debugger;
+         
         $("#img-loader").removeClass("hide");
         $.ajax(
         {
@@ -379,10 +379,24 @@
         try {
             var firstDate = new Date($("#Agreement_Start_Date").val());
             var secondDate = new Date($("#Agreement_End_Date").val());
-            if (firstDate.getDate() > secondDate.getDate()) {
+            var AgreementUtilityCount = parseInt($("#AgreementUtilityListCount").val());
+            var nofopayments = parseInt($("#nofopayments").val());
+            var AgreementPdcListCount = parseInt($("#AgreementPdcListCount").val());
+            if (firstDate.getDate() >= secondDate.getDate()) {
                 e.preventDefault();
                 $("#Agreement_End_Date").focus();
-                alert("Agreement Start Date less than or equal to Agreement End Date");
+                alert("Agreement Start Date less than Agreement End Date");
+            }
+            else if(nofopayments!=AgreementPdcListCount)
+            {
+                e.preventDefault();
+                $("#btnAddAgreementPdc").focus();
+                alert("No of payments and Payment details mismatch");
+            }
+            else if(AgreementUtilityCount<2)
+            {
+                e.preventDefault();
+                alert("Minimum 2 utilities required");
             }
         }
         catch (ex) {

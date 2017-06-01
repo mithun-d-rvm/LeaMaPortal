@@ -114,8 +114,8 @@
 
         var html = "<tr class='document-row' id='GridView" + i + "'>";
         //html = html + "<div class=''>";
-        html = html + "<td class='col-md-4 p-t-25 form-group'> <input id='Designation" + i + "' type='text'  value='' class='master-form-input form-control' name='agreementDocumentList[" + i + "].Name' data-name='Name' /></td>";
-        html = html + " <td class='col-md-4 p-t-25 form-group'> <input type='file' id='File" + i + "' class='master-form-input form-control' name='agreementDocumentList[" + i + "].File' data-name='File' value=''/></td>";
+        html = html + "<td class='col-md-4 p-t-25 form-group'> <input id='Designation" + i + "' type='text'  value='' class='master-form-input form-control' name='agreementDocumentList[" + i + "].Name' required data-name='Name' /></td>";
+        html = html + " <td class='col-md-4 p-t-25 form-group'> <input type='file' id='File" + i + "' class='master-form-input form-control' name='agreementDocumentList[" + i + "].File' data-name='File' required value=''/></td>";
         html = html + "<td class='col-md-2 p-t-25'><button class='document-btn agreementdocumentlist-remove' id='Delete" + i + "'> Delete </button></td>";
 
         //html = html + "</div>";

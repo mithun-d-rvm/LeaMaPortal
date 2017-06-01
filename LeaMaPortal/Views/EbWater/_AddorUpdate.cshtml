@@ -327,7 +327,7 @@
     });
     function getMeterDetails() {
         var MeterNo = $("#MeterNo").val();
-        debugger;
+         
         $.ajax(
                 {
                     url: "../EbWater/getMeterDetails",
@@ -337,7 +337,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         $("#PropertyId").val(response.Property_id);
                         $("#UnitId").val(response.unit_id);
                     },
@@ -352,7 +352,7 @@
     }
     function getMeter() {
         var Utilityid = $("#UtilityId").val();
-        debugger;
+         
         $.ajax(
                 {
                     url: "../EbWater/getMeterDropdown",
@@ -362,7 +362,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                        debugger;
+                         
                         $("#MeterNo").empty();
                         var options = '<option value="" selected>--Select--</option>';
                         $.each(response, function (index, data) {
@@ -380,10 +380,10 @@
                 });
 
     }
-    //$("#agreement_no").change(function () { debugger; getAgreementDetails() });
+    //$("#agreement_no").change(function () {   getAgreementDetails() });
     var j = parseInt($("#init-details").val());
     function Add() {
-        debugger;
+         
         var MeterNo = document.getElementById("MeterNo").value;
         var PropertyId = document.getElementById("PropertyId").value;
         var UnitId = document.getElementById("UnitId").value;
@@ -515,7 +515,7 @@
 
     $(document).on('click', 'button.ebwater-remove', function () {
         $(this).closest('tr').remove();
-        debugger;
+         
         var existfilelist = document.getElementById('EbWaterDetailsForm');
         var newindex = 0;
         $(existfilelist).find('> tbody > tr').each(function () {
@@ -537,7 +537,7 @@
         j = newindex;
     });
     $("form#EbWater").off("submit").on("submit", function (e) {
-        debugger;
+         
         e.preventDefault();
         try {
 
@@ -550,7 +550,7 @@
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
-                        debugger;
+                         
                         GetEbWater();
                         $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
                         $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");

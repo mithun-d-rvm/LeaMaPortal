@@ -19,11 +19,11 @@ namespace LeaMaPortal.Models
         public string Utility_Name { get; set; }
         [DisplayName("Account Number")]
         public string Accno { get; set; }
-        [DisplayName("Unit Id")]
+        [DisplayName("Unit Tawtheeq Id")]
         public string unit_id { get; set; }
         [DisplayName("Due Day")]
         public int? Dueday { get; set; }
-        [DisplayName("Property Id")]
+        [DisplayName("Property Tawtheeq Id")]
         public string Property_id { get; set; }
 
     }

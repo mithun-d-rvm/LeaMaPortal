@@ -14,20 +14,21 @@
         <div class="row">
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-2 pull-left">
-                    @Html.LabelFor(model => model.Checklist_Type, htmlAttributes: new { @class = "leama-field-name" })
-                </div>
-                <div class="col-sm-4 ">
-                    @Html.DropDownList("Checklist_Type", null, htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "ChecklistType" })
-                </div>
-            </div>
-            <div class="col-md-12 leama-fieldset ">
-                <div class="col-md-2 pull-left">
                     @Html.LabelFor(model => model.Checklist_id, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
                     @Html.EditorFor(model => model.Checklist_id, new { htmlAttributes = new { @class = "leama-field form-control", @required = "required", @id = "CheckList_Id", @readonly = "readonly" } })
                 </div>
             </div>
+            <div class="col-md-12 leama-fieldset ">
+                <div class="col-md-2 pull-left">
+                    @Html.LabelFor(model => model.Checklist_Type, htmlAttributes: new { @class = "leama-field-name" })
+                </div>
+                <div class="col-sm-4 ">
+                    @Html.DropDownList("Checklist_Type", null,"--Select--", htmlAttributes: new { @class = "master-form-input subheader-select", @required = "required", @id = "ChecklistType" })
+                </div>
+            </div>
+            
             <div class="col-md-12 leama-fieldset ">
                 <div class="col-md-2 pull-left">
                     @Html.LabelFor(model => model.Checklist_Name, htmlAttributes: new { @class = "leama-field-name" })
@@ -73,7 +74,7 @@
 <script>
 
     $(document).ready(function () {
-        debugger;
+         
         var id = $("#CheckListId").val();
         //alert(id);
         if (id != 0) {

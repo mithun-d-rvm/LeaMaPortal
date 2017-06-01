@@ -77,10 +77,9 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (db.tbl_propertytypemaster.Any(a => a.Type_name == model.PropertyType
+                    if (db.tbl_propertytypemaster.Any(a => a.Type_name == model.PropertyCategory
                          && a.Usage_name == model.Usage_name
-                         && a.Delmark != "*")
-                        && model.Id == 0)
+                          && a.Type_Flag==model.PropertyType && a.Id!=model.Id))
                     {
                         result.Errors = "Property type already exists!";
                     }

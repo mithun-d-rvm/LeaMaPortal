@@ -45,7 +45,7 @@
                     <span> Yes </span>
                 </div>
                 <div class="col-md-1">
-                    @Html.RadioButtonFor(model=>model.AgreementCheckList[i].Status, "1", new { @class = "input-checkbox" })
+                    @Html.RadioButtonFor(model=>model.AgreementCheckList[i].Status, "1", new { @class = "input-checkbox checklistradio",@data_id=i, @required = "required",@onclick = "removeRemarkRenewalRequired(" + i + ");" })
                     @*<input type="radio" class="input-checkbox" name="verified">*@
                 </div>
             </div>
@@ -54,12 +54,21 @@
                     <span> No </span>
                 </div>
                 <div class="col-md-1">
-                    @Html.RadioButtonFor(model => model.AgreementCheckList[i].Status, "0", new { @class = "input-checkbox" })
+                    @Html.RadioButtonFor(model => model.AgreementCheckList[i].Status, "0", new { @class = "input-checkbox checklistradio", @data_id = i, @required = "required",@onclick = "addRemarkRenewalRequired(" + i + ");" })
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            @Html.EditorFor(model => model.AgreementCheckList[i].Remarks, new { htmlAttributes = new { @class = "master-form-input",@maxlength="1000" } })
+            
+            @if (Model.AgreementCheckList[i].Status == 1)
+            {
+                @Html.EditorFor(model => model.AgreementCheckList[i].Remarks, new { htmlAttributes = new { @class = "master-form-input RemarksRenewal" + i, @maxlength = "1000", @data_id = i } })
+            }
+            else
+            {
+                @Html.EditorFor(model => model.AgreementCheckList[i].Remarks, new { htmlAttributes = new { @class = "master-form-input RemarksRenewal" + i, @maxlength = "1000", @data_id = i,@required = "required" } })
+            }
+
         </div>
     </div>
     }
@@ -70,3 +79,13 @@
 <div class="row ht-5">
     &nbsp;
 </div>
+<script>
+function addRemarkRenewalRequired(id)
+{
+    $('.RemarksRenewal' + id).prop('required', true);;
+}
+function removeRemarkRenewalRequired(id) {
+    $('.RemarksRenewal' + id).removeAttr('required');
+}
+
+</script>

@@ -61,7 +61,7 @@ namespace LeaMaPortal.Helpers
         public const string NOTIFICATION_RENEWAL = "Renewals";
         public const string NOTIFICATION_RENTAL_DUE = "Rental Due";
         public const string NOTIFICATION_UTILITY_DUES = "Utility Dues";
-        public const string NOTIFICATION_AGREEMENT_APPROVAL = "Agreement approval";
+        public const string NOTIFICATION_TCA_APPROVAL = "TCA approval";
         public const string NOTIFICATION_CONTRACT_APPROVED = "Contract Approval";
 
         private static List<OptionModel> GetCheckListDropdown()
@@ -146,12 +146,12 @@ namespace LeaMaPortal.Helpers
         private static List<OptionModel> GetNotificationMenu()
         {
             List<OptionModel> options = new List<OptionModel>();
-            options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_AGREEMENT_APPROVAL });
+            options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_TCA_APPROVAL });
             options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_PDC });
             options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_RENEWAL });
             options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_RENTAL_DUE });
             options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_UTILITY_DUES });
-            options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_CONTRACT_APPROVED });
+            //options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_CONTRACT_APPROVED });
             return options;
         }
         public static List<OptionModel> GetStaticData(byte dataModelType)

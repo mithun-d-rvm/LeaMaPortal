@@ -77,7 +77,8 @@ namespace LeaMaPortal.Controllers
                                        Agreement_No = x.Agreement_No,
                                        Properties_Name = x.Properties_Name,
                                        Ag_Tenant_Name = x.Ag_Tenant_Name,
-                                       Unit_Property_Name = x.Unit_Property_Name
+                                       Unit_Property_Name = x.Unit_Property_Name,
+                                       Approval_Flag = x.Approval_Flag.HasValue ? x.Approval_Flag.Value : 0,
                                    }).ToPagedList(currentPageIndex, PageSize);
                     return PartialView("../Tca/_List", list);
                 }
@@ -339,13 +340,13 @@ namespace LeaMaPortal.Controllers
                 ViewBag.Tenant_Type = new SelectList(Common.TcaTenantType, agreementDet.Tenant_Type);
                 if (agreementDet.Tenant_Type == "Company")
                 {
-                    var query = await db.tbl_tenant_company.Where(x => x.Delmark != "*").OrderBy(x => x.Tenant_Id).Select(x => new { Tenant_Id = x.Tenant_Id, Tenant_Name = x.First_Name }).ToListAsync();
+                    var query = await db.tbl_tenant_company.Where(x => x.Delmark != "*").OrderBy(x => x.Tenant_Id).Select(x => new { Tenant_Id = x.Tenant_Id, Tenant_Name = x.CompanyName }).ToListAsync();
                     ViewBag.Ag_Tenantid = new SelectList(query, "Tenant_Id", "Tenant_Id", agreementDet.Ag_Tenant_id);
                     ViewBag.Ag_TenantName = new SelectList(query, "Tenant_Id", "Tenant_Name", agreementDet.Ag_Tenant_id);
                 }
                 else
                 {
-                    var query = await db.tbl_tenant_individual.Where(x => x.Delmark != "*").OrderBy(x => x.Tenant_Id).Select(x => new { Tenant_Id = x.Tenant_Id, Tenant_Name = x.First_Name }).ToListAsync();
+                    var query = await db.tbl_tenant_individual.Where(x => x.Delmark != "*").OrderBy(x => x.Tenant_Id).Select(x => new { Tenant_Id = x.Tenant_Id, Tenant_Name = string.Concat(x.First_Name, " ", x.Middle_Name, " ", x.Last_Name) }).ToListAsync();
                     ViewBag.Ag_Tenantid = new SelectList(query, "Tenant_Id", "Tenant_Id", agreementDet.Ag_Tenant_id);
                     ViewBag.Ag_TenantName = new SelectList(query, "Tenant_Id", "Tenant_Name", agreementDet.Ag_Tenant_id);
                 }
@@ -366,15 +367,15 @@ namespace LeaMaPortal.Controllers
                 ViewBag.UnitPropertyName = new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_Property_Name", agreementDet.Unit_ID_Tawtheeq);
                 ViewBag.SecurityFlag = new SelectList(Common.SecurityFlag, agreementDet.Security_Flag);
                 ViewBag.Agreement_No = AgreementNo; //db.tbl_agreement.OrderByDescending(x => x.Agreement_No).FirstOrDefault()?.Agreement_No + 1;
-                var caretaker = await db.tbl_caretaker.Where(x => x.Delmark != "*").ToListAsync();
-                model.Caretaker_id = agreementDet.Caretaker_id;
-                model.Caretaker_Name = agreementDet.Caretaker_Name;
-                ViewBag.Caretakerid = new SelectList(caretaker, "Caretaker_id", "Caretaker_id", agreementDet.Caretaker_id);
-                ViewBag.CaretakerName = new SelectList(caretaker, "Caretaker_id", "Caretaker_Name", agreementDet.Caretaker_id);
+                //var caretaker = await db.tbl_caretaker.Where(x => x.Delmark != "*").ToListAsync();
+                //model.Caretaker_id = agreementDet.Caretaker_id;
+                //model.Caretaker_Name = agreementDet.Caretaker_Name;
+                //ViewBag.Caretakerid = new SelectList(caretaker, "Caretaker_id", "Caretaker_id", agreementDet.Caretaker_id);
+                //ViewBag.CaretakerName = new SelectList(caretaker, "Caretaker_id", "Caretaker_Name", agreementDet.Caretaker_id);
                 model.New_Renewal_flag = agreementDet.New_Renewal_flag;
                 model.Agreement_No = AgreementNo;
                 model.Agreement_Refno = AgreementNo;
-
+                
                 //model.AgreementPd = new AgreementPdcViewModel();
                 return PartialView("../Tca/Agreement/_AgreementFormEdit", model);
             }
@@ -437,6 +438,66 @@ namespace LeaMaPortal.Controllers
 
                 //model.AgreementPd = new AgreementPdcViewModel();
                 return PartialView("../Tca/Agreement/_AgreementFormRenewal", model);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        public async Task<PartialViewResult> Approval(int AgreementNo)
+        {
+            try
+            {
+                AgreementFormViewModel model = new AgreementFormViewModel();
+                var agreementDet = await db.tbl_agreement.FirstOrDefaultAsync(x => x.Agreement_No == AgreementNo);
+                AgreementRenwalMap(agreementDet, model);
+                //ViewBag.Tenant_Type = new SelectList(Common.TcaTenantType);
+                //ViewBag.Ag_Tenantid = new SelectList("", "");
+                //ViewBag.Ag_TenantName = new SelectList("", "");
+                //var property = await db.tbl_propertiesmaster.Where(x => x.Delmark != "*").ToListAsync();
+                //ViewBag.TcaPropertyId = new SelectList(property, "Property_Id", "Property_Id");
+                //ViewBag.TcaPropertyIDTawtheeq = new SelectList(property, "Property_Id", "Property_ID_Tawtheeq");
+                //ViewBag.TcaPropertyName = new SelectList(property, "Property_Id", "Property_Name");
+                ////var unit = property.Where(x => x.Property_Flag == "Unit").ToList();
+                //ViewBag.UnitIDTawtheeq = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
+                //ViewBag.UnitPropertyName = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_Property_Name");
+                //ViewBag.SecurityFlag = new SelectList(Common.SecurityFlag);
+                //ViewBag.Agreement_No = db.tbl_agreement.OrderByDescending(x => x.Agreement_No).FirstOrDefault()?.Agreement_No + 1;
+                //var caretaker = await db.tbl_caretaker.Where(x => x.Delmark != "*").ToListAsync();
+                //ViewBag.Caretakerid = new SelectList(caretaker, "Caretaker_id", "Caretaker_id");
+                //ViewBag.CaretakerName = new SelectList(caretaker, "Caretaker_id", "Caretaker_Name");
+
+                ViewBag.Tenant_Type = new SelectList(Common.TcaTenantType, agreementDet.Tenant_Type);
+                model.Tenant_Type = agreementDet.Tenant_Type;
+                model.Ag_Tenant_id = agreementDet.Ag_Tenant_id;
+                model.Ag_Tenant_Name = agreementDet.Ag_Tenant_Name;
+                ViewBag.Ag_Tenantid = new SelectList("", "");
+                ViewBag.Ag_TenantName = new SelectList("", "");
+                var property = await db.tbl_propertiesmaster.Where(x => x.Delmark != "*").ToListAsync();
+                model.property_id = agreementDet.property_id;
+                model.Property_ID_Tawtheeq = agreementDet.Property_ID_Tawtheeq;
+                model.Properties_Name = agreementDet.Properties_Name;
+                ViewBag.TcaPropertyId = new SelectList(property, "Property_Id", "Property_Id", agreementDet.property_id);
+                ViewBag.TcaPropertyIDTawtheeq = new SelectList(property, "Property_ID_Tawtheeq", "Property_ID_Tawtheeq", agreementDet.Property_ID_Tawtheeq);
+                ViewBag.TcaPropertyName = new SelectList(property, "Property_Name", "Property_Name", agreementDet.Properties_Name);
+                //var unit = property.Where(x => x.Property_Flag == "Unit").ToList();
+                var unit = property.Where(x => x.Ref_Unit_Property_ID == agreementDet.property_id).ToList();
+                ViewBag.UnitIDTawtheeq = new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq", agreementDet.Unit_ID_Tawtheeq);
+                ViewBag.UnitPropertyName = new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_Property_Name", agreementDet.Unit_Property_Name);
+                ViewBag.SecurityFlag = new SelectList(Common.SecurityFlag, agreementDet.Security_Flag);
+                ViewBag.Agreement_No = AgreementNo; //db.tbl_agreement.OrderByDescending(x => x.Agreement_No).FirstOrDefault()?.Agreement_No + 1;
+                var caretaker = await db.tbl_caretaker.Where(x => x.Delmark != "*").ToListAsync();
+                model.Caretaker_id = agreementDet.Caretaker_id;
+                model.Caretaker_Name = agreementDet.Caretaker_Name;
+                ViewBag.Caretakerid = new SelectList(caretaker, "Caretaker_id", "Caretaker_id", agreementDet.Caretaker_id);
+                ViewBag.CaretakerName = new SelectList(caretaker, "Caretaker_Name", "Caretaker_Name", agreementDet.Caretaker_Name);
+                model.New_Renewal_flag = Common.Renewal;
+                model.Agreement_No = AgreementNo;
+                model.Agreement_Refno = AgreementNo;
+
+                //model.AgreementPd = new AgreementPdcViewModel();
+                return PartialView("../Tca/Agreement/_TcaAproval", model);
             }
             catch (Exception e)
             {
@@ -785,23 +846,28 @@ namespace LeaMaPortal.Controllers
         #region mapper
         public void AgreementRenwalMap(tbl_agreement from, AgreementFormViewModel to)
         {
-            to.Single_Multiple_Flag = from.Single_Multiple_Flag;
-            to.nofopayments = from.nofopayments.HasValue ? from.nofopayments.Value : 0;
-            to.Agreement_Date = from.Agreement_Date.HasValue ? from.Agreement_Date.Value : DateTime.Now;
-            to.Vacantstartdate = from.Vacantstartdate.HasValue ? from.Vacantstartdate.Value : DateTime.MinValue;
-            to.Agreement_Start_Date = from.Agreement_Start_Date.HasValue ? from.Agreement_Start_Date.Value : DateTime.Now;
-            to.Agreement_End_Date = from.Agreement_End_Date.HasValue ? from.Agreement_End_Date.Value : DateTime.Now;
-            to.Total_Rental_amount = from.Total_Rental_amount.HasValue ? from.Total_Rental_amount.Value : 0;
-            to.Perday_Rental = from.Perday_Rental.HasValue ? from.Perday_Rental.Value : 0;
-            to.nofopayments = from.nofopayments.HasValue ? from.nofopayments.Value : 0;
-            to.Advance_Security_Amount = from.Advance_Security_Amount.HasValue ? from.Advance_Security_Amount.Value : 0;
-            to.Security_Flag = from.Security_Flag;
-            to.Security_chequeno = from.Security_chequeno;
-            to.Security_chequedate = from.Security_chequedate.HasValue ? from.Security_chequedate.Value : DateTime.MinValue;
-            to.Notice_Period = from.Notice_Period.HasValue ? from.Notice_Period.Value : 0;
-            to.Approval_Flag = from.Approval_Flag.HasValue ? from.Approval_Flag.Value : 0;
-            to.Approved_By = from.Approved_By;
-            to.Approved_Date = from.Approved_Date.HasValue ? from.Approved_Date.Value : DateTime.MinValue;
+            if (from != null)
+            {
+                to.Single_Multiple_Flag = from.Single_Multiple_Flag;
+                to.nofopayments = from.nofopayments.HasValue ? from.nofopayments.Value : 0;
+                to.Agreement_Date = from.Agreement_Date.HasValue ? from.Agreement_Date.Value : DateTime.Now;
+                to.Vacantstartdate = from.Vacantstartdate.HasValue ? from.Vacantstartdate.Value : DateTime.MinValue;
+                to.Agreement_Start_Date = from.Agreement_Start_Date.HasValue ? from.Agreement_Start_Date.Value : DateTime.Now;
+                to.Agreement_End_Date = from.Agreement_End_Date.HasValue ? from.Agreement_End_Date.Value : DateTime.Now;
+                to.Total_Rental_amount = from.Total_Rental_amount.HasValue ? from.Total_Rental_amount.Value : 0;
+                to.Perday_Rental = from.Perday_Rental.HasValue ? from.Perday_Rental.Value : 0;
+                to.nofopayments = from.nofopayments.HasValue ? from.nofopayments.Value : 0;
+                to.Advance_Security_Amount = from.Advance_Security_Amount.HasValue ? from.Advance_Security_Amount.Value : 0;
+                to.Security_Flag = from.Security_Flag;
+                to.Security_chequeno = from.Security_chequeno;
+                to.Security_chequedate = from.Security_chequedate.HasValue ? from.Security_chequedate.Value : DateTime.MinValue;
+                to.Notice_Period = from.Notice_Period.HasValue ? from.Notice_Period.Value : 0;
+                to.Approval_Flag = from.Approval_Flag.HasValue ? from.Approval_Flag.Value : 0;
+                to.Approved_By = from.Approved_By;
+                to.Approved_Date = from.Approved_Date.HasValue ? from.Approved_Date.Value : DateTime.MinValue;
+                to.Caretaker_id = from.Caretaker_id;
+                to.Caretaker_Name = from.Caretaker_Name;
+            }
         }
         public void AgreementClosureMap(tbl_agreement from, AgreementClosureViewModel to)
         {
@@ -1039,12 +1105,12 @@ namespace LeaMaPortal.Controllers
             {
                 if (Type == "Company")
                 {
-                    var query = await db.tbl_tenant_company.Where(x => x.Delmark != "*").OrderBy(x => x.Tenant_Id).Select(x => new { Tenant_Id = x.Tenant_Id, Tenant_Name = x.First_Name }).ToListAsync();
+                    var query = await db.tbl_tenant_company.Where(x => x.Delmark != "*").OrderBy(x => x.Tenant_Id).Select(x => new { Tenant_Id = x.Tenant_Id, Tenant_Name = x.CompanyName }).ToListAsync();
                     return Json(query, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    var query = await db.tbl_tenant_individual.Where(x => x.Delmark != "*").OrderBy(x => x.Tenant_Id).Select(x => new { Tenant_Id = x.Tenant_Id, Tenant_Name = x.First_Name }).ToListAsync();
+                    var query = await db.tbl_tenant_individual.Where(x => x.Delmark != "*").OrderBy(x => x.Tenant_Id).Select(x => new { Tenant_Id = x.Tenant_Id, Tenant_Name =string.Concat(x.First_Name," ",x.Middle_Name," ",x.Last_Name) }).ToListAsync();
                     return Json(query, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -1117,6 +1183,31 @@ namespace LeaMaPortal.Controllers
         }
 
         [HttpGet]
+        public async Task<ActionResult> GetPropertyOnChange(int propertyId)
+        {
+            try
+            {
+                var propertyDet = await db.tbl_propertiesmaster.Where(x => x.Property_Id == propertyId).FirstOrDefaultAsync();
+                List<PropertyDropdownModel> list = new List<PropertyDropdownModel>();
+                
+                PropertyDropdownModel model = new PropertyDropdownModel();
+                model.Caretaker_ID = propertyDet.Caretaker_ID.HasValue ? propertyDet.Caretaker_ID.Value : 0;
+                model.Caretaker_Name = propertyDet.Caretaker_Name;
+                model.Vacantstartdate = propertyDet.Vacant_Start_Date.HasValue ? propertyDet.Vacant_Start_Date.Value.ToString("yyyy-MM-dd") : "";
+
+                list.Add(model);
+                //var json=
+                //property.Caretaker_Name;
+                return Json(list, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+
+        [HttpGet]
         public async Task<ActionResult> Delete(int AgreementNo)
         {
             try
@@ -1173,7 +1264,54 @@ namespace LeaMaPortal.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<ActionResult> TcaApprove(int AgreementNo)
+        {
+            try
+            {
+                var agreementDet = await db.tbl_agreement.FirstOrDefaultAsync(x => x.Agreement_No == AgreementNo && x.Delmark != "*");
+                if(agreementDet!=null)
+                {
+                    agreementDet.Approval_Flag = 1;
+                    agreementDet.Approved_Date = DateTime.Now;
+                    agreementDet.Approved_By = User.Identity.Name;
+                    await db.SaveChangesAsync();
+                }
+                MessageResult result = new MessageResult();
+                AgreementFormViewModel model = new AgreementFormViewModel();
+                model.Agreement_No = AgreementNo;
+                //var agreemet=db.
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
+        [HttpGet]
+        public async Task<ActionResult> TcaReject(int AgreementNo)
+        {
+            try
+            {
+                var agreementDet = await db.tbl_agreement.FirstOrDefaultAsync(x => x.Agreement_No == AgreementNo && x.Delmark != "*");
+                if (agreementDet != null)
+                {
+                    agreementDet.Approval_Flag = 2;
+                    agreementDet.Approved_Date = DateTime.Now;
+                    await db.SaveChangesAsync();
+                }
+                MessageResult result = new MessageResult();
+                AgreementFormViewModel model = new AgreementFormViewModel();
+                model.Agreement_No = AgreementNo;
+                //var agreemet=db.
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
 
 

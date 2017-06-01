@@ -2,7 +2,7 @@
 @model LeaMaPortal.Models.AgreementUnitViewModel
 
 <div class="row p-b-25 text-uppercase">
-    <span> <strong> Agreement unit inner - only for multiple units </strong> </span>
+    <span> <strong> Agreement unit - only for multiple units </strong> </span>
 </div>
 
 <div class="row" id="AgreementUnit-Renewal">
@@ -118,7 +118,16 @@
         var Property_ID_Tawtheeq = $("#AgreementUnit-Renewal #Property_ID_Tawtheeq option:selected").text();
         var Unit_ID_Tawtheeq = $("#AgreementUnit-Renewal #Unit_ID_Tawtheeq option:selected").text();
         var Unit_Property_Name = $("#AgreementUnit-Renewal #Unit_Property_Name option:selected").text();
-        
+        if (Unit_ID_Tawtheeq == '' || Property_ID == '') {
+            alert("Please select Unit Tawtheeq ID");
+            return;
+        }
+        var isExist = isExistAgreementUnit(Unit_ID_Tawtheeq);
+        if (isExist)
+        {
+            alert("Already exist");
+            return;
+        }
         var html = "<tr><td>" +
                       "<input type='hidden' name='AgreementUnitList[" + AgreementUnitListCount + "].Property_ID' id='AgreementUnitList[" + AgreementUnitListCount + "].Property_ID' value='" + Property_ID + "' data-name='Property_ID' />" +
                       "<input type='hidden' name='AgreementUnitList[" + AgreementUnitListCount + "].Properties_Name' id='AgreementUnitList[" + AgreementUnitListCount + "].Properties_Name' value='" + Properties_Name + "' data-name='Properties_Name' />" +
@@ -160,6 +169,27 @@
         AgreementUnitListCount++;
     }
 
+    function isExistAgreementUnit(Unit_ID_Tawtheeq)
+    {
+        var existfilelist = document.getElementById('AgreementUnitList-Renewal');
+        var isExist = false;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                if(dataname=="Unit_ID_Tawtheeq")
+                {
+                    if($(this).val().toLowerCase().trim()==Unit_ID_Tawtheeq.toLowerCase().trim())
+                    {
+                        isExist = true;
+                        
+                    }
+                }
+            });
+        });
+        return isExist;
+    }
+
     $(document).on('click', 'button.AgreementUnitList-Renewal-remove', function () {
         $(this).closest('tr').remove();
         var existfilelist = document.getElementById('AgreementUnitList-Renewal');
@@ -186,7 +216,7 @@
         AgreementUnitListCount = newindex;
     });
     $("#AgreementUnit-Renewal #Property_ID").change(function () {
-        debugger;
+         
         var propertyid = $("#AgreementUnit-Renewal #Property_ID").val();
         $("#AgreementUnit-Renewal #Properties_Name").val(propertyid);
         $("#AgreementUnit-Renewal #Property_ID_Tawtheeq").val(propertyid);
