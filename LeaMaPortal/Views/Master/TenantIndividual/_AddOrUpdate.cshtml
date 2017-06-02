@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-md-6">
 
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Tenant ID:*@
                     @Html.LabelFor(model => model.Tenant_Id, htmlAttributes: new { @class = "control-label" })
@@ -35,7 +35,7 @@
                     @Html.ValidationMessageFor(model => model.Tenant_Id, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*First Name:*@
                     @Html.LabelFor(model => model.First_Name, htmlAttributes: new { @class = "control-label" })
@@ -45,7 +45,7 @@
                     @Html.ValidationMessageFor(model => model.First_Name, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Last Name:*@
                     @Html.LabelFor(model => model.Last_Name, htmlAttributes: new { @class = "control-label" })
@@ -55,7 +55,7 @@
                     @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Marital Status*@
                     @Html.LabelFor(model => model.Marital_Status, htmlAttributes: new { @class = "control-label" })
@@ -66,7 +66,7 @@
                     @Html.RadioButtonFor(model => model.Marital_Status, "Single") Single
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Address:*@
                     @Html.LabelFor(model => model.address, htmlAttributes: new { @class = "control-label" })
@@ -76,7 +76,7 @@
                     @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*City:*@
                     @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label" })
@@ -86,8 +86,7 @@
                     @*@Html.DropDownList("City", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input" })*@
                                 </div>
             </div>
-
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Emirate:*@
                     @Html.LabelFor(model => model.Emirate, htmlAttributes: new { @class = "control-label" })
@@ -96,7 +95,7 @@
                     @Html.DropDownList("Emirate", null, "--Select--", htmlAttributes: new { @class = "form-control", @placeholder = "-Select-", @required = "required" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Landline:*@
                     @Html.LabelFor(model => model.Landline_No, htmlAttributes: new { @class = "control-label" })
@@ -118,7 +117,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Fax:*@
                     @Html.LabelFor(model => model.Fax_No, htmlAttributes: new { @class = "control-label" })
@@ -140,7 +139,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Emirates ID:*@
                     @Html.LabelFor(model => model.Emiratesid, htmlAttributes: new { @class = "control-label" })
@@ -151,7 +150,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Emirates Expiry Date:*@
                     @Html.LabelFor(model => model.Emirate_expirydate, htmlAttributes: new { @class = "control-label", @required = "required", @onblur = "setMax('Emirate_issuedate','Emirate_expirydate')" })
@@ -161,7 +160,7 @@
                     @Html.ValidationMessageFor(model => model.Emirate_expirydate, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding other-nationality">
+            <div class="col-md-12 p-b-7 other-nationality">
                 <div class="col-md-4">
                     @*Passport Number:*@
                     @Html.LabelFor(model => model.Passportno, htmlAttributes: new { @class = "control-label" })
@@ -171,7 +170,7 @@
                     @Html.ValidationMessageFor(model => model.Passportno, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding  other-nationality">
+            <div class="col-md-12 p-b-7 other-nationality">
                 <div class="col-md-4">
                     @*Passport Expiry Date:*@
                     @Html.LabelFor(model => model.Passport_Expirydate, htmlAttributes: new { @class = "control-label" })
@@ -180,8 +179,8 @@
                     @Html.EditorFor(model => model.Passport_Expirydate, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @onblur = "setMax('Passport_Issuedate','Passport_Expirydate')" } })
                     @Html.ValidationMessageFor(model => model.Passport_Expirydate, "", new { @class = "text-danger" })
                 </div>
-            </div>            
-            <div class="col-md-12 form-input-padding other-nationality">
+            </div>
+            <div class="col-md-12 p-b-7 other-nationality">
                 <div class="col-md-4">
                     @*Visa Type:*@
                     @Html.LabelFor(model => model.VisaType, htmlAttributes: new { @class = "control-label" })
@@ -191,7 +190,7 @@
                     @Html.ValidationMessageFor(model => model.VisaType, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding other-nationality">
+            <div class="col-md-12 p-b-7 other-nationality">
                 <div class="col-md-4">
                     @*Visa Expiry Date:*@
                     @Html.LabelFor(model => model.Visa_ExpiryDate, htmlAttributes: new { @class = "control-label" })
@@ -201,7 +200,7 @@
                     @Html.ValidationMessageFor(model => model.Visa_ExpiryDate, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Family Book City:*@
                     @Html.LabelFor(model => model.Familybookcity, htmlAttributes: new { @class = "control-label" })
@@ -211,7 +210,7 @@
                     @Html.ValidationMessageFor(model => model.Familybookcity, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*ADWEA Resigtration Id:*@
                     @Html.LabelFor(model => model.ADWEA_Regid, htmlAttributes: new { @class = "control-label" })
@@ -224,7 +223,7 @@
         </div>
         <div class="col-md-6">
 
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Title:*@
                     @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
@@ -236,7 +235,7 @@
 
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.Middle_Name, htmlAttributes: new { @class = "control-label" })
                     @*Middle Name:*@
@@ -247,7 +246,7 @@
                     @*<input type="text" class="form-control master-form-input" />*@
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Company Name/ Educational Institute:*@
                     @Html.LabelFor(model => model.Company_Educational, htmlAttributes: new { @class = "control-label" })
@@ -258,7 +257,7 @@
                     @*<input type="text" class="form-control master-form-input" />*@
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Profession:*@
                     @Html.LabelFor(model => model.Profession, htmlAttributes: new { @class = "control-label" })
@@ -267,7 +266,7 @@
                     @Html.DropDownList("Profession", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Address 01:*@
                     @Html.LabelFor(model => model.address1, htmlAttributes: new { @class = "control-label" })
@@ -276,8 +275,8 @@
                     @Html.TextAreaFor(model => model.address1, new { @class = "form-control master-form-input", @rows = "4" })
                     @Html.ValidationMessageFor(model => model.address1, "", new { @class = "text-danger" })
                 </div>
-            </div>            
-            <div class="col-md-12 form-input-padding">
+            </div>
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Post Box:*@
                     @Html.LabelFor(model => model.PostboxNo, htmlAttributes: new { @class = "control-label" })
@@ -287,7 +286,7 @@
                     @Html.ValidationMessageFor(model => model.PostboxNo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Email:*@
                     @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
@@ -296,8 +295,8 @@
                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", title = "Enter valid email id" } })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
-            </div>            
-            <div class="col-md-12 form-input-padding">
+            </div>
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Mobile:*@
                     @Html.LabelFor(model => model.Mobile_No, htmlAttributes: new { @class = "control-label" })
@@ -319,7 +318,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Nationality:*@
                     @Html.LabelFor(model => model.Nationality, htmlAttributes: new { @class = "control-label" })
@@ -340,7 +339,7 @@
                     @Html.ValidationMessageFor(model => model.Emirate_issuedate, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Date of Birth:*@
                     @Html.LabelFor(model => model.Dob, htmlAttributes: new { @class = "control-label" })
@@ -350,7 +349,7 @@
                     @Html.ValidationMessageFor(model => model.Dob, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding other-nationality">
+            <div class="col-md-12 p-b-7 other-nationality">
                 <div class="col-md-4">
                     @*Passport Issue Date:*@
                     @Html.LabelFor(model => model.Passport_Issuedate, htmlAttributes: new { @class = "control-label" })
@@ -360,7 +359,7 @@
                     @Html.ValidationMessageFor(model => model.Passport_Issuedate, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding other-nationality">
+            <div class="col-md-12 p-b-7 other-nationality">
                 <div class="col-md-4">
                     @*Place of Insurance:*@
                     @Html.LabelFor(model => model.Placeofissuance, htmlAttributes: new { @class = "control-label" })
@@ -371,7 +370,7 @@
                 </div>
             </div>
             
-            <div class="col-md-12 form-input-padding other-nationality">
+            <div class="col-md-12 p-b-7 other-nationality">
                 <div class="col-md-4">
                     @*Visa Issue Date:*@
                     @Html.LabelFor(model => model.Visa_IssueDate, htmlAttributes: new { @class = "control-label" })
@@ -381,7 +380,7 @@
                     @Html.ValidationMessageFor(model => model.Visa_IssueDate, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 form-input-padding">
+            <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
                     @*Family Number:*@
                     @Html.LabelFor(model => model.Familyno, htmlAttributes: new { @class = "control-label" })
