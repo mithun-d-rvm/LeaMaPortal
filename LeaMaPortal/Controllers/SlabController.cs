@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace LeaMaPortal.Controllers
 {
+    [Authorize]
     public class SlabController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();

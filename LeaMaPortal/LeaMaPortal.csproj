@@ -180,7 +180,6 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CaretakerController.cs" />
     <Compile Include="Controllers\ChecklistController.cs" />
-    <Compile Include="Controllers\ContractApprovalSettingController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EbWaterController.cs" />
@@ -200,7 +199,6 @@
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\SlabController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
-    <Compile Include="Controllers\UtilityBillEntryController.cs" />
     <Compile Include="Controllers\UtilityController.cs" />
     <Compile Include="Controllers\TenantCompanyController.cs" />
     <Compile Include="Controllers\TcaController.cs" />
@@ -744,7 +742,6 @@
     <Content Include="theme\product.html" />
     <Content Include="theme\signup.html" />
     <Content Include="theme\typography.html" />
-    <Content Include="Views\Dashboard\blank.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -758,9 +755,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
@@ -779,45 +773,17 @@
     <Content Include="theme\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="theme\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Views\Authentication\Login.cshtml" />
-    <Content Include="Views\Dashboard\Details.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
-    <Content Include="Views\Country\Create.cshtml" />
-    <Content Include="Views\Country\Delete.cshtml" />
-    <Content Include="Views\Country\Details.cshtml" />
-    <Content Include="Views\Country\Edit.cshtml" />
-    <Content Include="Views\Country\Index.cshtml" />
-    <Content Include="Views\Master\Create.cshtml" />
-    <Content Include="Views\Master\Delete.cshtml" />
-    <Content Include="Views\Master\Details.cshtml" />
-    <Content Include="Views\Master\Edit.cshtml" />
     <Content Include="Views\Master\Index.cshtml" />
     <Content Include="Views\Master\Country\_List.cshtml" />
     <Content Include="Views\Master\Country\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\_Filter.cshtml" />
-    <Content Include="Views\MasterIndividual\Index.cshtml" />
     <Content Include="Views\Master\Index.cshtml" />
     <Content Include="Views\Shared\_SubHeaderMenu.cshtml" />
-    <Content Include="Views\MasterIndividual\_DocumentDetailsRow.cshtml" />
-    <Content Include="Views\Master\PropertyMaster\Index.cshtml" />
-    <Content Include="Views\Master\PropertyMaster\_FecilityDetails.cshtml" />
-    <Content Include="Views\Master\PropertyMaster\_UtilityDetails.cshtml" />
-    <Content Include="Views\Region\Index.cshtml" />
-    <Content Include="Views\Facility\Index.cshtml" />
-    <Content Include="Views\Checklist\Index.cshtml" />
-    <Content Include="Views\Utility\Index.cshtml" />
-    <Content Include="Views\Meter\Index.cshtml" />
-    <Content Include="Views\ContractApprovalSetting\Index.cshtml" />
-    <Content Include="Views\Caretaker\Index.cshtml" />
     <Content Include="Views\Master\TenantCompany\_List.cshtml" />
-    <Content Include="Views\EmailTemplate\Index.cshtml" />
-    <Content Include="Views\PropertyType\Index.cshtml" />
-    <Content Include="Views\Slab\Index.cshtml" />
     <Content Include="Views\Master\TenantCompany\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\Region\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\Region\_List.cshtml" />
-    <Content Include="Views\MasterIndividual\Create.cshtml" />
-    <Content Include="Views\MasterIndividual\List.cshtml" />
-    <Content Include="Views\Master\TenantIndividual\Create.cshtml" />
     <Content Include="Views\Master\TenantIndividual\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\PropertyMaster\_AddOrUpdate.cshtml" />
     <Content Include="Views\Master\Utility\_AddOrUpdate.cshtml" />
@@ -834,7 +800,6 @@
     <Content Include="Views\Tca\Closure\_ClosureDetails.cshtml" />
     <Content Include="Views\Tca\_AgreementDocument.cshtml" />
     <Content Include="Views\Tca\_AgreementDocumentDetails.cshtml" />
-    <Content Include="Views\UserCreation\Index.cshtml" />
     <Content Include="Views\Tca\_AgreementUtility.cshtml" />
     <Content Include="Views\Tca\_AgreementUtilityDetails.cshtml" />
     <Content Include="Views\Tca\_AgreementUnitDetails.cshtml" />
@@ -846,9 +811,7 @@
     <Content Include="Views\Tca\Agreement\_AgreementForm.cshtml" />
     <Content Include="Views\Master\TenantIndividual\_List.cshtml" />
     <Content Include="Views\Invoice\_AddorUpdate.cshtml" />
-    <Content Include="Views\Invoice\_InvoiceDetails.cshtml" />
     <Content Include="Views\Receipts\_AddorUpdate.cshtml" />
-    <Content Include="Views\Receipts\_ReceiptDetails.cshtml" />
     <Content Include="Views\Payment\_AddorUpdate.cshtml" />
     <Content Include="Views\Payment\_PaymentDetails.cshtml" />
     <Content Include="Views\Invoice\Index.cshtml" />
@@ -888,9 +851,6 @@
     <Content Include="Views\Tca\Renewal\_AgreementUtility.cshtml" />
     <Content Include="Views\Tca\Renewal\_AgreementUtilityDetails.cshtml" />
     <Content Include="Views\Tca\Closure\_AgreementPdcDetails.cshtml" />
-    <Content Include="Views\EbWater\Billing.cshtml" />
-    <Content Include="Views\EbWater\Payment.cshtml" />
-    <Content Include="Views\UtilityBillEntry\Index.cshtml" />
     <Content Include="Views\UtilityPayment\Index.cshtml" />
     <Content Include="Views\UtilityPayment\_AddOrUpdate.cshtml" />
     <Content Include="Views\UtilityPayment\_List.cshtml" />
@@ -908,10 +868,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Documents\TenantIndividual\" />
     <Folder Include="Models\DBContext\" />
-    <Folder Include="Views\Base\" />
-    <Folder Include="Views\Notification\" />
-    <Folder Include="Views\PropertyMaster\" />
-    <Folder Include="Views\Supplier\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

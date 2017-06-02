@@ -13,6 +13,7 @@ using System.Threading;
 
 namespace LeaMaPortal.Controllers
 {
+    [Authorize]
     public class TcaController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();

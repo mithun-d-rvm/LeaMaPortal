@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace LeaMaPortal.Controllers
 {
+    [Authorize]
     public class EbWaterController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
