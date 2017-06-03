@@ -55,15 +55,15 @@ namespace LeaMaPortal.Models
         [DisplayName("Property Available From")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
-        public DateTime Vacantstartdate { get; set; }
+        public DateTime? Vacantstartdate { get; set; }
         [DisplayName("Contract Agreement Start Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
-        public DateTime Agreement_Start_Date { get; set; }
+        public DateTime? Agreement_Start_Date { get; set; }
         [DisplayName("Contract Agreement End Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
-        public DateTime Agreement_End_Date { get; set; }
+        public DateTime? Agreement_End_Date { get; set; }
         [DisplayName("Contract Total Rental amount")]
         public float Total_Rental_amount { get; set; }
         [DisplayName("Contract Perday Rental")]
@@ -79,7 +79,7 @@ namespace LeaMaPortal.Models
         [DisplayName("Security Cheque date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
-        public DateTime Security_chequedate { get; set; }
+        public DateTime? Security_chequedate { get; set; }
         [DisplayName("Contract Notice Period Days")]
         public int Notice_Period { get; set; }
         public int Approval_Flag { get; set; }

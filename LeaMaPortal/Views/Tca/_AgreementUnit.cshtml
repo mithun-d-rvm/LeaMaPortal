@@ -69,12 +69,22 @@
         var Unit_Property_Name = $("#AgreementUnit #Unit_Property_Name option:selected").text();
         if (Unit_ID_Tawtheeq == '' || Property_ID == '')
         {
-            alert("Please select Unit Tawtheeq ID");
+            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            $(".result-title").text("Failure");
+            $(".result-modal-body span").text("Please select Unit");
+            $('#masterResultModal').modal('show');
+            //alert("Please select Unit Tawtheeq ID");
             return;
         }
         var isExist = isExistAgreementUnit(Unit_ID_Tawtheeq);
         if (isExist) {
-            alert("Already exist");
+            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            $(".result-title").text("Failure");
+            $(".result-modal-body span").text("Record already exist!");
+            $('#masterResultModal').modal('show');
+            //alert("Already exist");
             return;
         }
         var html = "<tr><td>" +

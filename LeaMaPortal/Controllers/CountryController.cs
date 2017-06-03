@@ -14,6 +14,7 @@ using MvcPaging;
 
 namespace LeaMaPortal.Controllers
 {
+    [Authorize]
     public class CountryController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();

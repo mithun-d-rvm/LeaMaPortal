@@ -91,17 +91,33 @@
         var cYear = new Date().getFullYear();
         if (Year < cYear)
         {
-            alert("Year not past");
+            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            $(".result-title").text("Failure");
+            $(".result-modal-body span").text("Year should not be past");
+            $('#masterResultModal').modal('show');
+            //alert("Year not past");
             return;
         }
        
         if (Month == '' || Year == '' || Payment_Mode == '' || $("#AgreementPd #Cheque_Amount").val() == '') {
-            alert("Please fill mandatory fields");
+            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            $(".result-title").text("Failure");
+            $(".result-modal-body span").text("Please fill mandatory fields");
+            $('#masterResultModal').modal('show');
+            //alert("Please fill mandatory fields");
             return;
         }
-        var isExist = isExistAgreementPdc(Month, Year, Payment_Mode);
+        var isExist = isExistAgreementPdc(Month, Year, Payment_Mode, BankName, Cheque_No, Cheque_Date, Cheque_Amount);
+        debugger;
         if (isExist) {
-            alert("Already exist");
+            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            $(".result-title").text("Failure");
+            $(".result-modal-body span").text("Record already exists!");
+            $('#masterResultModal').modal('show');
+            //alert("Already exist");
             return;
         }
 
@@ -154,7 +170,7 @@
         AgreementPdCount++;
         $("#AgreementPdcListCount").val(AgreementPdCount);
     }
-    function isExistAgreementPdc(Month, Year, Payment_Mode) {
+    function isExistAgreementPdc(Month, Year, Payment_Mode, BankName, Cheque_No, Cheque_Date, Cheque_Amount) {
         
         var isExist = false;
         var existfilelist = document.getElementById('AgreementPdcDetailsList');
@@ -177,11 +193,23 @@
                     case "Payment_Mode":
                         existPayment_Mode = $(this).val();
                         break;
+                    case "BankName":
+                        existBankName = $(this).val();
+                        break;
+                    case "Cheque_No":
+                        existCheque_No = $(this).val();
+                        break;
+                    case "Cheque_Date":
+                        existCheque_Date = $(this).val();
+                        break;
+                    case "Cheque_Amount":
+                        existCheque_Amount = $(this).val();
+                        break;
                 }
                 
             });
 
-            if(Month==existMonth||Year==existYear||existPayment_Mode==Payment_Mode)
+            if (Month == existMonth && Year == existYear && existPayment_Mode == Payment_Mode && existBankName == BankName && Cheque_No == existCheque_No && Cheque_Date == existCheque_Date && existCheque_Amount == Cheque_Amount)
             {
                 isExist = true;
             }

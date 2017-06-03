@@ -114,12 +114,22 @@
         var Amount_Type = $("#AgreementUtilityDivRenewal #Amount_Type").val();
         var Amount = $("#AgreementUtilityDivRenewal #Amount").val();
         if (Utility_id == '' || Payable == '' || Amount_Type == '' || Amount == '') {
-            alert("Please fill mandatory fields");
+            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            $(".result-title").text("Failure");
+            $(".result-modal-body span").text("Please fill mandatory fields");
+            $('#masterResultModal').modal('show');
+            //alert("Please fill mandatory fields");
             return;
         }
         var isExist = isExistUtilityRenewal(Utility_id);
         if (isExist) {
-            alert("Already exist");
+            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            $(".result-title").text("Failure");
+            $(".result-modal-body span").text("Record already exists!");
+            $('#masterResultModal').modal('show');
+            //alert("Already exist");
             return;
         }
         var html = "<tr><td>" +

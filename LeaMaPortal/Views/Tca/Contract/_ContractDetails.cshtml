@@ -446,7 +446,12 @@
 
                     }
                     else {
-                        alert(data.Errors);
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(data.Errors);
+                        $('#masterResultModal').modal('show');
+                        //alert(data.Errors);
                     }
                 },
                 error: function (jqXhr, textStatus, errorThrown) {

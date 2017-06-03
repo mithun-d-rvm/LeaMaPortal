@@ -167,7 +167,12 @@
                            $("#agreementList").html(html);
                        },
                        error: function (jqXhr, textStatus, errorThrown) {
-                           alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                           $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                           $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                           $(".result-title").text("Failure");
+                           $(".result-modal-body span").text("Could not retrive records!");
+                           $('#masterResultModal').modal('show');
+                           //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                        },
                        complete: function () {
                            //   $("#VerifyIdDetailsLoader").addClass("hide");
@@ -186,7 +191,12 @@
             }
 
             function failurePaging() {
-                alert("Could not retrieve list.");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not retrive records!");
+                $('#masterResultModal').modal('show');
+                //alert("Could not retrieve list.");
             }
 
         </script>
@@ -213,11 +223,21 @@
                         //$("#CountryName").val(result.Country);
                     }
                     else {
-                        alert(data.Errors);
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(data.Errors);
+                        $('#masterResultModal').modal('show');
+                        //alert(data.Errors);
                     }
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
-                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                    $(".result-title").text("Failure");
+                    $(".result-modal-body span").text("Could not able to process your requests");
+                    $('#masterResultModal').modal('show');
+                    //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
                     var AgreementNo = id;
@@ -253,11 +273,21 @@
                         //$("#CountryName").val(result.Country);
                     }
                     else {
-                        alert(data.Errors);
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(result.Errors);
+                        $('#masterResultModal').modal('show');
+                        //alert(data.Errors);
                     }
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
-                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                    $(".result-title").text("Failure");
+                    $(".result-modal-body span").text("Could not able to process your requests");
+                    $('#masterResultModal').modal('show');
+                    //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
                     var AgreementNo = id;
@@ -293,11 +323,21 @@
                         //$("#CountryName").val(result.Country);
                     }
                     else {
-                        alert(data.Errors);
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(result.Errors);
+                        $('#masterResultModal').modal('show');
+                        //alert(data.Errors);
                     }
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
-                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                    $(".result-title").text("Failure");
+                    $(".result-modal-body span").text("Could not able to process your requests");
+                    $('#masterResultModal').modal('show');
+                    //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
                     var AgreementNo = id;
@@ -332,11 +372,21 @@
 
                     }
                     else {
-                        alert(data.Errors);
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(result.Errors);
+                        $('#masterResultModal').modal('show');
+                        //alert(data.Errors);
                     }
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
-                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                    $(".result-title").text("Failure");
+                    $(".result-modal-body span").text("Could not able to process your requests");
+                    $('#masterResultModal').modal('show');
+                    //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
                     // $("body").scrollTop(0);
@@ -373,7 +423,7 @@
                     },
                     complete: function () {
                         // $("#").addClass("hide");
-                        //$('#masterResultModal').modal('show');
+                        $('#masterResultModal').modal('show');
                     }
 
                 });
@@ -415,7 +465,12 @@
                 $("#TcaRenewal #AgreementPdcR").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
@@ -436,7 +491,12 @@
                 $("#TcaRenewal #AgreementPdcR").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
@@ -457,7 +517,12 @@
                 $("#TcaRenewal #AgreementFacilityR").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
@@ -478,7 +543,12 @@
                 $("#TcaRenewal #AgreementDocumentR").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
@@ -498,7 +568,12 @@
                 $("#TcaRenewal #AgreementUtilityR").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
@@ -518,7 +593,12 @@
                 $("#TcaRenewal #AgreementUnitR").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
@@ -538,25 +618,35 @@
                 $("#TcaRenewal #AgreementCheckListR").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
             }
         });
     }
-    function getAgreementList() {
+    function getAgreementList(search, page, defaultPageSize) {
         $.ajax(
            {
                url: "../Tca/List",
                type: "Get",
-               data: { Search: "", page: 1 },
+               data: { Search: search, page: page, defaultPageSize: defaultPageSize },
                success: function (html) {
                    $("#agreementList").empty();
                    $("#agreementList").html(html);
                },
                error: function (jqXhr, textStatus, errorThrown) {
-                   alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                   $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                   $(".result-title").text("Failure");
+                   $(".result-modal-body span").text("Could not able to process your requests");
+                   $('#masterResultModal').modal('show');
                },
                complete: function () {
                    //   $("#VerifyIdDetailsLoader").addClass("hide");
@@ -584,7 +674,12 @@
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
 
-                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text("Could not able to process your requests");
+                        $('#masterResultModal').modal('show');
                     },
                     complete: function () {
                         //GetCountry();
@@ -612,11 +707,21 @@
 
                     }
                     else {
-                        alert(data.Errors);
+                        //alert(data.Errors);
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(result.Errors);
+                        $('#masterResultModal').modal('show');
                     }
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
-                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                    $(".result-title").text("Failure");
+                    $(".result-modal-body span").text("Could not able to process your requests");
+                    $('#masterResultModal').modal('show');
                 },
                 complete: function () {
                     // $("body").scrollTop(0);
