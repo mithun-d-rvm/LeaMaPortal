@@ -753,28 +753,29 @@
     $("form#TcaRenewal").off("submit").on("submit", function (e) {
         // e.preventDefault();
         try {
-            var SDate = new Date($("#TcaRenewal #Agreement_Start_Date").val());
-            var EDate = new Date($("#TcaRenewal #Agreement_End_Date").val());
+            //var SDate = new Date($("#TcaRenewal #Agreement_Start_Date").val());
+            //var EDate = new Date($("#TcaRenewal #Agreement_End_Date").val());
             //alert(SDate.getFullYear() + "" + SDate.getMonth() + "" + SDate.getDay());
-            var startDt = parseInt(SDate.getFullYear() + "" + SDate.getMonth() + "" + SDate.getDay());
-            var endDt = parseInt(EDate.getFullYear() + "" + EDate.getMonth() + "" + EDate.getDay());
+            //var startDt = parseInt(SDate.getFullYear() + "" + SDate.getMonth() + "" + SDate.getDay());
+            //var endDt = parseInt(EDate.getFullYear() + "" + EDate.getMonth() + "" + EDate.getDay());
 
 
             var AgreementUtilityCount =parseInt($("#AgreementUtilityListCountRenewal").val());
             var nofopayments = parseInt($("#TcaRenewal #nofopayments").val());
             var AgreementPdcListCount = parseInt($("#TcaRenewal #AgreementPdcListCountRenewal").val());
-            if (endDt <= startDt) {
-                e.preventDefault();
-                $("#TcaRenewal #Agreement_End_Date").focus();
-                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
-                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
-                $(".result-title").text("Failure");
-                $(".result-modal-body span").text("Agreement Start Date less than Agreement End Date");
-                $('#masterResultModal').modal('show');
-                //alert("Agreement Start Date less than Agreement End Date");
+            //if (endDt <= startDt) {
+            //    e.preventDefault();
+            //    $("#TcaRenewal #Agreement_End_Date").focus();
+            //    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            //    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            //    $(".result-title").text("Failure");
+            //    $(".result-modal-body span").text("Agreement Start Date less than Agreement End Date");
+            //    $('#masterResultModal').modal('show');
+            //    //alert("Agreement Start Date less than Agreement End Date");
 
-            }
-            else if (nofopayments != AgreementPdcListCount) {
+            //}
+        //else 
+            if (nofopayments != AgreementPdcListCount) {
                 e.preventDefault();
                 $("#btnAddAgreementRenewalPdc").focus();
                 $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
@@ -793,6 +794,53 @@
                 $(".result-modal-body span").text("Minimum 2 utilities required");
                 $('#masterResultModal').modal('show');
                 //alert("Minimum 2 utilities required");
+            }
+            else {
+                e.preventDefault();
+                var formData = new FormData($(this)[0]);
+                try {
+                    $.ajax(
+                        {
+                            url: "../Tca/AddOrUpdate",
+                            method: "POST",
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            cache: false,
+                            async: false,
+                            success: function (response) {
+                                //GetPropertyMaster();
+                                if (response.Errors == null || response.Errors == "") {
+                                    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                                    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                                    $(".result-title").text("Success");
+                                    $(".result-modal-body span").text(response.Message);
+                                    IsAddAllow();
+                                    getAgreementList();
+                                }
+                                else {
+                                    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                                    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                                    $(".result-title").text("Failure");
+                                    $(".result-modal-body span").text(response.Errors);
+                                }
+                            },
+                            error: function (jqXhr, textStatus, errorThrown) {
+                                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                                $(".result-title").text("Failure");
+                                $(".result-modal-body span").text(masterResultError);
+                            },
+                            complete: function () {
+                                $('#renewalModal').modal('hide');
+                                $("#img-add-or-update-loader").addClass("hide");
+                                $('#masterResultModal').modal('show');
+                            }
+                        });
+                }
+                catch (ex) {
+                    alert(ex);
+                }
             }
         }
         catch (ex) {

@@ -188,7 +188,7 @@
                         @Html.LabelFor(model => model.Agreement_Start_Date, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Agreement_Start_Date, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
+                        @Html.EditorFor(model => model.Agreement_Start_Date, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required", @onblur = "setMinForAgreementDate()" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7"> 
@@ -279,6 +279,13 @@
     </div>
 }
 <script>
+    function setMinForAgreementDate() {
+
+        var to = $("#Agreement_Start_Date").val();
+        if (to != "") {
+            $("#Agreement_End_Date").prop('min', to);
+        }
+    }
     singleOrMultiple();
     function singleOrMultiple()
     {

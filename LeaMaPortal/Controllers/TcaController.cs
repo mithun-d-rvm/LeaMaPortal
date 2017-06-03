@@ -115,12 +115,11 @@ namespace LeaMaPortal.Controllers
                 ViewBag.CaretakerName = new SelectList(caretaker, "Caretaker_id", "Caretaker_Name");
                 model.New_Renewal_flag = Common.NewAgreement;
                 model.Agreement_No = 0;
-                model.Agreement_Start_Date = DateTime.Now;
-                model.Agreement_End_Date = DateTime.Now;
-                model.Vacantstartdate = DateTime.Now;
+                //model.Agreement_Start_Date = DateTime.Now;
+               // model.Agreement_End_Date = DateTime.Now;
+                //model.Vacantstartdate = DateTime.Now;
                 model.Agreement_Date = DateTime.Now;
                 
-
                 //model.AgreementPd = new AgreementPdcViewModel();
                 return PartialView("../Tca/Agreement/_AgreementForm", model);
             }
@@ -135,12 +134,14 @@ namespace LeaMaPortal.Controllers
             try
             {
                 string PFlag = Common.UPDATE;
-
+                MessageResult result = new MessageResult();
+                result.Message = "TCA updated successfully";
                 if (model.Agreement_No == 0)
                 {
                     PFlag = Common.INSERT;
                     var Agreement = await db.tbl_agreement.OrderByDescending(r => r.Agreement_No).FirstOrDefaultAsync();
                     model.Agreement_No = Agreement != null ? Agreement.Agreement_No + 1 : 1;
+                    result.Message = "TCA added successfully";
                     //Agreement = await db.tbl_agreement.OrderByDescending(r => r.id).FirstOrDefaultAsync();
                     //model.Id = Agreement != null ? Agreement.id + 1 : 1;
                 }
@@ -306,13 +307,12 @@ namespace LeaMaPortal.Controllers
                 string paramNames = "@PFlag, @PSingle_Multiple_Flag, @PAgreement_Refno, @PNew_Renewal_flag, @PAgreement_No, @PAgreement_Date, @PAg_Tenant_id, @PAg_Tenant_Name, @Pproperty_id, @PProperty_ID_Tawtheeq, @PProperties_Name, @PUnit_ID_Tawtheeq, @PUnit_Property_Name, @PCaretaker_id, @PCaretaker_Name, @PVacantstartdate, @PAgreement_Start_Date, @PAgreement_End_Date, @PTotal_Rental_amount, @PPerday_Rental, @PAdvance_Security_Amount, @PSecurity_Flag, @PSecurity_chequeno, @PSecurity_chequedate, @PNotice_Period, @Pnofopayments, @PApproval_Flag, @PApproved_By, @PApproved_Date, @PTenant_Type, @PCreateduser, @PAgpdc, @PAgdoc, @PAgfac, @PAguti, @PAgchk, @PAgunit";
 
                 var tenantCompany = await db.Database.SqlQuery<object>("CALL Usp_Agreement_All(" + paramNames + ")", parameters).ToListAsync();
-
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
-
+                throw e;
             }
-            return View("Index");
         }
 
         public async Task<PartialViewResult> Edit(int AgreementNo)
