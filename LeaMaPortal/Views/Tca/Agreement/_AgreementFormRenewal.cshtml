@@ -545,25 +545,44 @@
     $("form#TcaRenewal").off("submit").on("submit", function (e) {
         // e.preventDefault();
         try {
-            var firstDate = new Date($("#TcaRenewal #Agreement_Start_Date").val());
-            var secondDate = new Date($("#TcaRenewal #Agreement_End_Date").val());
+            var SDate = new Date($("#TcaRenewal #Agreement_Start_Date").val());
+            var EDate = new Date($("#TcaRenewal #Agreement_End_Date").val());
+            //alert(SDate.getFullYear() + "" + SDate.getMonth() + "" + SDate.getDay());
+            var startDt = parseInt(SDate.getFullYear() + "" + SDate.getMonth() + "" + SDate.getDay());
+            var endDt = parseInt(EDate.getFullYear() + "" + EDate.getMonth() + "" + EDate.getDay());
+
             var AgreementUtilityCount = parseInt($("#AgreementUtilityListCountRenewal").val());
             var nofopayments = parseInt($("#TcaRenewal #nofopayments").val());
             var AgreementPdcListCount = parseInt($("#TcaRenewal #AgreementPdcListCountRenewal").val());
-            if (firstDate.getDate() >= secondDate.getDate()) {
+            if (endDt <= startDt) {
                 e.preventDefault();
                 $("#TcaRenewal #Agreement_End_Date").focus();
-                alert("Agreement Start Date less than Agreement End Date");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Agreement Start Date less than Agreement End Date");
+                $('#masterResultModal').modal('show');
+                //alert("Agreement Start Date less than Agreement End Date");
 
             }
             else if (nofopayments != AgreementPdcListCount) {
                 e.preventDefault();
                 $("#btnAddAgreementRenewalPdc").focus();
-                alert("No of payments and Payment details mismatch");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("No of payments and Payment details mismatch");
+                $('#masterResultModal').modal('show');
+                //alert("No of payments and Payment details mismatch");
             }
             else if (AgreementUtilityCount < 2) {
                 e.preventDefault();
-                alert("Minimum 2 utilities required");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Minimum 2 utilities required");
+                $('#masterResultModal').modal('show');
+                //alert("Minimum 2 utilities required");
             }
         }
         catch (ex) {

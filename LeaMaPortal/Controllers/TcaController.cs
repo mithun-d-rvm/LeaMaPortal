@@ -13,6 +13,7 @@ using System.Threading;
 
 namespace LeaMaPortal.Controllers
 {
+    [Authorize]
     public class TcaController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
@@ -100,12 +101,12 @@ namespace LeaMaPortal.Controllers
                 ViewBag.Ag_Tenantid = new SelectList("", "");
                 ViewBag.Ag_TenantName = new SelectList("", "");
                 var property = await db.tbl_propertiesmaster.Where(x => x.Delmark != "*").ToListAsync();
-                ViewBag.TcaPropertyId = new SelectList(property, "Property_Id", "Property_Id");
-                ViewBag.TcaPropertyIDTawtheeq = new SelectList(property, "Property_Id", "Property_ID_Tawtheeq");
-                ViewBag.TcaPropertyName = new SelectList(property, "Property_Id", "Property_Name");
+                ViewBag.TcaPropertyId = new SelectList(property.Where(x => x.Property_Flag == "Property").ToList(), "Property_Id", "Property_Id");
+                ViewBag.TcaPropertyIDTawtheeq = new SelectList(property.Where(x => x.Property_Flag == "Property").ToList(), "Property_Id", "Property_ID_Tawtheeq");
+                ViewBag.TcaPropertyName = new SelectList(property.Where(x => x.Property_Flag == "Property").ToList(), "Property_Id", "Property_Name");
                 //var unit = property.Where(x => x.Property_Flag == "Unit").ToList();
-                ViewBag.UnitIDTawtheeq = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
-                ViewBag.UnitPropertyName = new SelectList(property, "Unit_ID_Tawtheeq", "Unit_Property_Name");
+                ViewBag.UnitIDTawtheeq = new SelectList(property.Where(x=>x.Property_Flag== "Unit").ToList(), "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
+                ViewBag.UnitPropertyName = new SelectList(property.Where(x => x.Property_Flag == "Unit").ToList(), "Unit_ID_Tawtheeq", "Unit_Property_Name");
                 ViewBag.SecurityFlag = new SelectList(Common.SecurityFlag);
                 var agreement = db.tbl_agreement.OrderByDescending(x => x.Agreement_No).FirstOrDefault();
                 ViewBag.Agreement_No = agreement == null ? 1 : agreement.Agreement_No + 1;
@@ -114,12 +115,11 @@ namespace LeaMaPortal.Controllers
                 ViewBag.CaretakerName = new SelectList(caretaker, "Caretaker_id", "Caretaker_Name");
                 model.New_Renewal_flag = Common.NewAgreement;
                 model.Agreement_No = 0;
-                model.Agreement_Start_Date = DateTime.Now;
-                model.Agreement_End_Date = DateTime.Now;
-                model.Vacantstartdate = DateTime.Now;
+                //model.Agreement_Start_Date = DateTime.Now;
+               // model.Agreement_End_Date = DateTime.Now;
+                //model.Vacantstartdate = DateTime.Now;
                 model.Agreement_Date = DateTime.Now;
                 
-
                 //model.AgreementPd = new AgreementPdcViewModel();
                 return PartialView("../Tca/Agreement/_AgreementForm", model);
             }
@@ -134,12 +134,14 @@ namespace LeaMaPortal.Controllers
             try
             {
                 string PFlag = Common.UPDATE;
-
+                MessageResult result = new MessageResult();
+                result.Message = "TCA updated successfully";
                 if (model.Agreement_No == 0)
                 {
                     PFlag = Common.INSERT;
                     var Agreement = await db.tbl_agreement.OrderByDescending(r => r.Agreement_No).FirstOrDefaultAsync();
                     model.Agreement_No = Agreement != null ? Agreement.Agreement_No + 1 : 1;
+                    result.Message = "TCA added successfully";
                     //Agreement = await db.tbl_agreement.OrderByDescending(r => r.id).FirstOrDefaultAsync();
                     //model.Id = Agreement != null ? Agreement.id + 1 : 1;
                 }
@@ -305,13 +307,12 @@ namespace LeaMaPortal.Controllers
                 string paramNames = "@PFlag, @PSingle_Multiple_Flag, @PAgreement_Refno, @PNew_Renewal_flag, @PAgreement_No, @PAgreement_Date, @PAg_Tenant_id, @PAg_Tenant_Name, @Pproperty_id, @PProperty_ID_Tawtheeq, @PProperties_Name, @PUnit_ID_Tawtheeq, @PUnit_Property_Name, @PCaretaker_id, @PCaretaker_Name, @PVacantstartdate, @PAgreement_Start_Date, @PAgreement_End_Date, @PTotal_Rental_amount, @PPerday_Rental, @PAdvance_Security_Amount, @PSecurity_Flag, @PSecurity_chequeno, @PSecurity_chequedate, @PNotice_Period, @Pnofopayments, @PApproval_Flag, @PApproved_By, @PApproved_Date, @PTenant_Type, @PCreateduser, @PAgpdc, @PAgdoc, @PAgfac, @PAguti, @PAgchk, @PAgunit";
 
                 var tenantCompany = await db.Database.SqlQuery<object>("CALL Usp_Agreement_All(" + paramNames + ")", parameters).ToListAsync();
-
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
-
+                throw e;
             }
-            return View("Index");
         }
 
         public async Task<PartialViewResult> Edit(int AgreementNo)
@@ -358,11 +359,11 @@ namespace LeaMaPortal.Controllers
                 model.property_id = agreementDet.property_id;
                 model.Property_ID_Tawtheeq = agreementDet.Property_ID_Tawtheeq;
                 model.Properties_Name = agreementDet.Properties_Name;
-                ViewBag.TcaPropertyId = new SelectList(property, "Property_Id", "Property_Id", agreementDet.property_id);
-                ViewBag.TcaPropertyIDTawtheeq = new SelectList(property, "Property_Id", "Property_ID_Tawtheeq", agreementDet.property_id);
-                ViewBag.TcaPropertyName = new SelectList(property, "Property_Id", "Property_Name", agreementDet.property_id);
+                ViewBag.TcaPropertyId = new SelectList(property.Where(x => x.Property_Flag == "Property").ToList(), "Property_Id", "Property_Id", agreementDet.property_id);
+                ViewBag.TcaPropertyIDTawtheeq = new SelectList(property.Where(x => x.Property_Flag == "Property").ToList(), "Property_Id", "Property_ID_Tawtheeq", agreementDet.property_id);
+                ViewBag.TcaPropertyName = new SelectList(property.Where(x => x.Property_Flag == "Property").ToList(), "Property_Id", "Property_Name", agreementDet.property_id);
                 //var unit = property.Where(x => x.Property_Flag == "Unit").ToList();
-                var unit = property.Where(x => x.Ref_Unit_Property_ID == agreementDet.property_id).ToList();
+                var unit = property.Where(x => x.Ref_Unit_Property_ID == agreementDet.property_id && x.Property_Flag == "Unit").ToList();
                 ViewBag.UnitIDTawtheeq = new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq", agreementDet.Unit_ID_Tawtheeq);
                 ViewBag.UnitPropertyName = new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_Property_Name", agreementDet.Unit_ID_Tawtheeq);
                 ViewBag.SecurityFlag = new SelectList(Common.SecurityFlag, agreementDet.Security_Flag);
@@ -1048,11 +1049,11 @@ namespace LeaMaPortal.Controllers
         {
             AgreementUnitViewModel model = new AgreementUnitViewModel();
             var property = await db.tbl_propertiesmaster.Where(x => x.Delmark != "*").ToListAsync();
-            ViewBag.Property_ID = new SelectList(property, "Property_ID", "Property_ID");
-            ViewBag.Properties_Name = new SelectList(property, "Property_ID", "Property_Name");
-            ViewBag.Property_ID_Tawtheeq = new SelectList(property, "Property_ID", "Property_ID_Tawtheeq");
-            ViewBag.Unit_ID_Tawtheeq = new SelectList(property, "Property_ID", "Unit_ID_Tawtheeq");
-            ViewBag.Unit_Property_Name = new SelectList(property, "Property_ID", "Unit_Property_Name");
+            ViewBag.Property_ID = new SelectList(property.Where(x => x.Property_Flag == "Property").ToList(), "Property_ID", "Property_ID");
+            ViewBag.Properties_Name = new SelectList(property.Where(x => x.Property_Flag == "Property").ToList(), "Property_ID", "Property_Name");
+            ViewBag.Property_ID_Tawtheeq = new SelectList(property.Where(x => x.Property_Flag == "Property").ToList(), "Property_ID", "Property_ID_Tawtheeq");
+            ViewBag.Unit_ID_Tawtheeq = new SelectList(property.Where(x => x.Property_Flag == "Unit").ToList(), "Ref_Unit_Property_ID", "Unit_ID_Tawtheeq");
+            ViewBag.Unit_Property_Name = new SelectList(property.Where(x => x.Property_Flag == "Unit").ToList(), "Ref_Unit_Property_ID", "Unit_Property_Name");
             if (AgreementNo != 0)
             {
                 model.AgreementUnitList = await db.tbl_agreement_unit_inner.Where(x => x.Delmark != "*" && x.Agreement_No == AgreementNo).Select(x => new AgreementUnitViewModel()

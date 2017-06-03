@@ -105,12 +105,22 @@
         var Facility_Name = $("#Facility_Name option:selected").text();
         var Numbers_available = $("#Numbers_available").val();
         if (Facility_id == '' || Numbers_available == '') {
-            alert("Please fill mandatory fields");
+            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            $(".result-title").text("Failure");
+            $(".result-modal-body span").text("Please fill mandatory fields");
+            $('#masterResultModal').modal('show');
+            //alert("Please fill mandatory fields");
             return;
         }
         var isExist = isExistFacility(Facility_id);
         if (isExist) {
-            alert("Already exist");
+            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            $(".result-title").text("Failure");
+            $(".result-modal-body span").text("Record already exist!");
+            $('#masterResultModal').modal('show');
+            //alert("Already exist");
             return;
         }
         var html="<tr><td>"+

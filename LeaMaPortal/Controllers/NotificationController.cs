@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace LeaMaPortal.Controllers
 {
+    [Authorize]
     public class NotificationController : Controller
     {
         private LeamaEntities db = new LeamaEntities();

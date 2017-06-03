@@ -15,6 +15,7 @@ using LeaMaPortal.Helpers;
 
 namespace LeaMaPortal.Controllers
 {
+    [Authorize]
     public class ApprovalSettingsController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();

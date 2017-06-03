@@ -12,6 +12,7 @@ using System.Data.Entity;
 
 namespace LeaMaPortal.Controllers
 {
+    [Authorize]
     public class SupplierController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();

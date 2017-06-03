@@ -25,7 +25,7 @@
             </div>
             <div>
                 <!-- BEGIN AGREEMENT UNIT -->
-                <div class="p-lr-20" id="AgreementUnit">
+                <div class="p-lr-20 font-smaller" id="AgreementUnit">
                     @*@Html.Partial("_AgreementUnit")*@
                 </div>
                 <!-- END AGREEMENT UNIT -->
@@ -33,7 +33,7 @@
                     &nbsp;
                 </div>
                 <!-- BEGIN AGREEMENT PDC -->
-                <div class="p-lr-20" id="AgreementPdc">
+                <div class="p-lr-20 font-smaller" id="AgreementPdc">
                     @*@Html.Partial("_AgreementPdc")*@
                 </div>
                 <!-- END AGREEMENT Facility -->
@@ -41,7 +41,7 @@
                     &nbsp;
                 </div>
                 <!-- BEGIN AGREEMENT Facility -->
-                <div class="p-lr-20" id="AgreementFacility">
+                <div class="p-lr-20 font-smaller" id="AgreementFacility">
                     @*@Html.Partial("_AgreementDocument")*@
                 </div>
                 <!-- END AGREEMENT Facility -->
@@ -54,7 +54,7 @@
                     &nbsp;
                 </div>
                 <!-- BEGIN AGREEMENT UTILITY -->
-                <div class="p-lr-20" id="AgreementUtility">
+                <div class="p-lr-20 font-smaller" id="AgreementUtility">
                     @*@Html.Partial("_AgreementUtility")*@
                 </div>
                 <!-- END AGREEMENT UTILITY -->
@@ -63,12 +63,12 @@
                 </div>
                
                 <!-- BEGIN AGREEMENT UNIT -->
-                <div class="p-lr-20" id="AgreementCheckList">
+                <div class="p-lr-20 font-smaller" id="AgreementCheckList">
                     @*@Html.Partial("_AgreementCheckList")*@
                 </div>
                 @*END AGREEMENT UNIT*@
                 <!-- BEGIN AGREEMENT DOCUMENT -->
-                <div class="p-lr-20" id="AgreementDocument">
+                <div class="p-lr-20 font-smaller" id="AgreementDocument">
                     @*@Html.Partial("_AgreementDocument")*@
                 </div>
                 <!-- END AGREEMENT DOCUMENT -->
@@ -190,12 +190,12 @@
         
         CreateAgreement();
         var AgreementNo = 0;//$("#Agreement_No").val();
-        AgreementPdc(AgreementNo);
-        AgreementFacility(AgreementNo);
-        AgreementDocument(AgreementNo);
-        AgreementUtility(AgreementNo);
-        AgreementUnit(AgreementNo);
-        AgreementCheckList(AgreementNo);
+        AgreementPdcIndex(AgreementNo);
+        AgreementFacilityIndex(AgreementNo);
+        AgreementDocumentIndex(AgreementNo);
+        AgreementUtilityIndex(AgreementNo);
+        AgreementUnitIndex(AgreementNo);
+        AgreementCheckListIndex(AgreementNo);
     }
     //
     getAgreementList();
@@ -213,7 +213,12 @@
                 $("#AgreementForm").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
 
@@ -230,7 +235,7 @@
             }
         });
     }
-    function AgreementPdc(AgreementNo) {
+    function AgreementPdcIndex(AgreementNo) {
          
         $("#img-loader").removeClass("hide");
         $.ajax(
@@ -244,14 +249,19 @@
                 $("#AgreementPdc").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
             }
         });
     }
-    function AgreementFacility(AgreementNo) {
+    function AgreementFacilityIndex(AgreementNo) {
          
         $("#img-loader").removeClass("hide");
         $.ajax(
@@ -265,14 +275,19 @@
                 $("#AgreementFacility").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
             }
         });
     }
-    function AgreementDocument(AgreementNo) {
+    function AgreementDocumentIndex(AgreementNo) {
          
         $("#img-loader").removeClass("hide");
         $.ajax(
@@ -286,14 +301,19 @@
                 $("#AgreementDocument").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
             }
         });
     }
-    function AgreementUtility(AgreementNo) {
+    function AgreementUtilityIndex(AgreementNo) {
         $("#img-loader").removeClass("hide");
         $.ajax(
         {
@@ -306,14 +326,19 @@
                 $("#AgreementUtility").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
             }
         });
     }
-    function AgreementUnit(AgreementNo) {
+    function AgreementUnitIndex(AgreementNo) {
         $("#img-loader").removeClass("hide");
         $.ajax(
         {
@@ -326,14 +351,19 @@
                 $("#AgreementUnit").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
             }
         });
     }
-    function AgreementCheckList(AgreementNo) {
+    function AgreementCheckListIndex(AgreementNo) {
         $("#img-loader").removeClass("hide");
         $.ajax(
         {
@@ -346,7 +376,12 @@
                 $("#AgreementCheckList").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Could not able to process your requests");
+                $('#masterResultModal').modal('show');
             },
             complete: function () {
                 $("#img-loader").addClass("hide");
@@ -363,7 +398,12 @@
                    $("#agreementList").html(html);
                },
                error: function (jqXhr, textStatus, errorThrown) {
-                   alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                   $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                   $(".result-title").text("Failure");
+                   $(".result-modal-body span").text("Could not able to process your requests");
+                   $('#masterResultModal').modal('show');
                },
                complete: function () {
                    //   $("#VerifyIdDetailsLoader").addClass("hide");
@@ -375,28 +415,95 @@
 
 <script>
     $("form#Tca").off("submit").on("submit", function (e) {
+        debugger;
         // e.preventDefault();
         try {
-            var firstDate = new Date($("#Agreement_Start_Date").val());
-            var secondDate = new Date($("#Agreement_End_Date").val());
+            //var SDate = new Date($("#Agreement_Start_Date").val());
+            //var EDate = new Date($("#Agreement_End_Date").val());
+            //alert(SDate.getFullYear() + "" + SDate.getMonth() + "" + SDate.getDay());
+            //var startDt = parseInt(SDate.getFullYear() + "" + SDate.getMonth() + "" + SDate.getDay());
+            //var endDt = parseInt(EDate.getFullYear() + "" + EDate.getMonth() + "" + EDate.getDay());
+           // alert(SDate + "-----" + EDate)
+           // alert(startDt + "   " + endDt);
             var AgreementUtilityCount = parseInt($("#AgreementUtilityListCount").val());
             var nofopayments = parseInt($("#nofopayments").val());
             var AgreementPdcListCount = parseInt($("#AgreementPdcListCount").val());
-            if (firstDate.getDate() >= secondDate.getDate()) {
-                e.preventDefault();
-                $("#Agreement_End_Date").focus();
-                alert("Agreement Start Date less than Agreement End Date");
-            }
-            else if(nofopayments!=AgreementPdcListCount)
+            //if (endDt <= startDt) {
+            //    e.preventDefault();
+            //    $("#Agreement_End_Date").focus();
+            //    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+            //    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+            //    $(".result-title").text("Failure");
+            //    $(".result-modal-body span").text("Agreement Start Date less than Agreement End Date");
+            //    $('#masterResultModal').modal('show');
+                //alert("Agreement Start Date less than Agreement End Date");
+            //}
+            if(nofopayments!=AgreementPdcListCount)
             {
                 e.preventDefault();
                 $("#btnAddAgreementPdc").focus();
-                alert("No of payments and Payment details mismatch");
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Number of payments and Payment details mismatch");
+                $('#masterResultModal').modal('show');
+                //alert("No of payments and Payment details mismatch");
             }
             else if(AgreementUtilityCount<2)
             {
                 e.preventDefault();
-                alert("Minimum 2 utilities required");
+                $("#btnAddAgreementPdc").focus();
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Minimum 2 utilities required");
+                $('#masterResultModal').modal('show');
+                //alert("Minimum 2 utilities required");
+            }
+            else {
+                e.preventDefault();
+                var formData = new FormData($(this)[0]);
+                try {
+                    $.ajax(
+                        {
+                            url: "../Tca/AddOrUpdate",
+                            method: "POST",
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            cache: false,
+                            async: false,
+                            success: function (response) {
+                                if (response.Errors == null || response.Errors == "") {
+                                    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
+                                    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
+                                    $(".result-title").text("Success");
+                                    $(".result-modal-body span").text(response.Message);
+                                    IsAddAllow();
+                                    getAgreementList();
+                                }
+                                else {
+                                    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                                    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                                    $(".result-title").text("Failure");
+                                    $(".result-modal-body span").text(response.Errors);
+                                }
+                            },
+                            error: function (jqXhr, textStatus, errorThrown) {
+                                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                                $(".result-title").text("Failure");
+                                $(".result-modal-body span").text(masterResultError);
+                            },
+                            complete: function () {
+                                $("#img-add-or-update-loader").addClass("hide");
+                                $('#masterResultModal').modal('show');
+                            }
+                        });
+                }
+                catch (ex) {
+                    alert(ex);
+                }
             }
         }
         catch (ex) {

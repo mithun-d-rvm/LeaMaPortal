@@ -19,7 +19,7 @@
         <div class="blank">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Tenant Type:
                         </div>
@@ -55,7 +55,7 @@
 
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Title:
                         </div>
@@ -91,7 +91,7 @@
                             @*@Html.DropDownListFor(model => model.Title, Title, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input" })*@
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Middle Name:
                         </div>
@@ -101,7 +101,7 @@
                             @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Company Name:
                         </div>
@@ -111,7 +111,7 @@
                             @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Marital Status
                         </div>
@@ -136,7 +136,7 @@
                             @Html.RadioButtonFor(model => model.MaritalStatus, false, "Single") Single
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Address 01:
                         </div>
@@ -146,7 +146,7 @@
                             @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Region:
                         </div>
@@ -179,7 +179,7 @@
                             @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Email:
                         </div>
@@ -189,7 +189,7 @@
                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Landline:
                         </div>
@@ -213,7 +213,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Nationality:
                         </div>
@@ -247,7 +247,7 @@
                             @Html.EditorFor(model => model.Nationality, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Chamber of Commerce & Industry Unified ID:
                         </div>
@@ -258,7 +258,7 @@
                             @Html.ValidationMessageFor(model => model.Cocandindustryuid, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Trade License issue Date:
                         </div>
@@ -269,7 +269,7 @@
                             @Html.ValidationMessageFor(model => model.LicenseIssueDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding" style="display: none;" id="ADWEARegisterId">
+                    <div class="col-md-12 p-b-7" style="display: none;" id="ADWEARegisterId">
                         <div class="col-md-4">
                             ADWEA registration Id:
                         </div>
@@ -280,7 +280,7 @@
                             @Html.ValidationMessageFor(model => model.ADWEARegid, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    @*<div class="col-md-12 form-input-padding">
+                    @*<div class="col-md-12 p-b-7">
                             <div class="col-md-4">
                                 Visa Type:
                             </div>
@@ -288,7 +288,7 @@
                                 <input type="text" class="form-control master-form-input" />
                             </div>
                         </div>
-                        <div class="col-md-12 form-input-padding">
+                        <div class="col-md-12 p-b-7">
                             <div class="col-md-4">
                                 Visa Expiry Date:
                             </div>
@@ -296,7 +296,7 @@
                                 <input type="text" class="form-control master-form-input" />
                             </div>
                         </div>
-                        <div class="col-md-12 form-input-padding">
+                        <div class="col-md-12 p-b-7">
                             <div class="col-md-4">
                                 Family Number:
                             </div>
@@ -304,7 +304,7 @@
                                 <input type="text" class="form-control master-form-input" />
                             </div>
                         </div>
-                        <div class="col-md-12 form-input-padding">
+                        <div class="col-md-12 p-b-7">
                             <div class="col-md-4">
                                 ADWEA Resigtration Id:
                             </div>
@@ -312,7 +312,7 @@
                                 <input type="text" class="form-control master-form-input" />
                             </div>
                         </div>*@
-                    @*<div class="col-md-12 form-input-padding">
+                    @*<div class="col-md-12 p-b-7">
                             <div class="col-md-4">
                                 &nbsp;
                             </div>
@@ -323,7 +323,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Tenant ID:
                         </div>
@@ -335,7 +335,7 @@
                             @Html.ValidationMessageFor(model => model.TenantId, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             First Name:
                         </div>
@@ -345,7 +345,7 @@
                             @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Last Name:
                         </div>
@@ -355,7 +355,7 @@
                             @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    @*<div class="col-md-12 form-input-padding">
+                    @*<div class="col-md-12 p-b-7">
                             <div class="col-md-4">
                                 Profession:
                             </div>
@@ -367,7 +367,7 @@
                                 </select>
                             </div>
                         </div>*@
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Address:
                         </div>
@@ -377,7 +377,7 @@
                             @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Emirate:
                         </div>
@@ -388,7 +388,7 @@
                             @Html.DropDownList("Emirate", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Post Box:
                         </div>
@@ -398,7 +398,7 @@
                             @Html.ValidationMessageFor(model => model.PostboxNo, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Mobile:
                         </div>
@@ -420,7 +420,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Fax:
                         </div>
@@ -442,7 +442,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Company Activity:
                         </div>
@@ -453,7 +453,7 @@
                                 </select>*@
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Trade License Number:
                         </div>
@@ -463,7 +463,7 @@
                             @Html.ValidationMessageFor(model => model.TradelicenseNo, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Trade License Expiry Date:
                         </div>
@@ -474,7 +474,7 @@
                             @Html.ValidationMessageFor(model => model.LicenseExpiryDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Issuance authority:
                         </div>
@@ -486,7 +486,7 @@
                         </div>
                     </div>
 
-                    @*<div class="col-md-12 form-input-padding">
+                    @*<div class="col-md-12 p-b-7">
                             <div class="col-md-4">
                                 Visa Issue Date:
                             </div>
@@ -494,7 +494,7 @@
                                 <input type="text" class="form-control master-form-input" />
                             </div>
                         </div>
-                        <div class="col-md-12 form-input-padding">
+                        <div class="col-md-12 p-b-7">
                             <div class="col-md-4">
                                 Date of Birth:
                             </div>
@@ -502,7 +502,7 @@
                                 <input type="text" class="form-control master-form-input" />
                             </div>
                         </div>
-                        <div class="col-md-12 form-input-padding">
+                        <div class="col-md-12 p-b-7">
                             <div class="col-md-4">
                                 Family Book City:
                             </div>
@@ -510,7 +510,7 @@
                                 <input type="text" class="form-control master-form-input" />
                             </div>
                         </div>*@
-                    @*<div class="col-md-12 form-input-padding">
+                    @*<div class="col-md-12 p-b-7">
                             <div class="col-md-4">
                                 &nbsp;
                             </div>

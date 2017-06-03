@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace LeaMaPortal.Controllers
 {
+    [Authorize]
     public class PropertyMasterController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();

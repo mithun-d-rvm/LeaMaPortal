@@ -618,6 +618,7 @@
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                 },
                 complete: function () {
+                    $('#myModal').modal('hide');
                     var AgreementNo = id;
                     AgreementPdc(AgreementNo);
                     AgreementFacility(AgreementNo);

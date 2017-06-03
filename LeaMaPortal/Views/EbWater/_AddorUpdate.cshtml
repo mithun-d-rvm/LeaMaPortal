@@ -14,11 +14,11 @@
     @Html.HiddenFor(model => model.UtilityId)
     @Html.HiddenFor(model => model.SupplierName)
     @Html.HiddenFor(model => model.UtilityName)
-    <div class="">
+    <div class="font-smaller">
         <div class="blank">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.BillEnteryNo, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -27,7 +27,7 @@
                             @Html.EditorFor(model => model.BillEnteryNo, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.BillEntryDate, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -35,7 +35,7 @@
                             @Html.EditorFor(model => model.BillEntryDate, new { htmlAttributes = new { @class = "master-form-input form-control", @type="date", @required="required" } })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.SupplierName, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -43,7 +43,7 @@
                             @Html.DropDownList("Supplier_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.UtilityName, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
@@ -54,6 +54,9 @@
                 </div>
                 
 
+            </div>
+            <div class="p-t-5-p">
+                &nbsp;
             </div>
             <div class="" id="billDetail">
                 <div class="p-b-25">

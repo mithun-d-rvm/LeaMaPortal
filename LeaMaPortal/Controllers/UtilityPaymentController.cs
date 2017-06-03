@@ -13,6 +13,7 @@ using MySql.Data.MySqlClient;
 
 namespace LeaMaPortal.Controllers
 {
+    [Authorize]
     public class UtilityPaymentController : BaseController
     {
         LeamaEntities db = new LeamaEntities();

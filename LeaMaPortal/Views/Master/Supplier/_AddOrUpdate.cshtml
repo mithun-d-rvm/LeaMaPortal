@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-6">
 
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Supplier Id
                         </div>
@@ -32,7 +32,7 @@
 
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Supplier Name
                         </div>
@@ -40,7 +40,7 @@
                             @Html.EditorFor(model => model.Supplier_Name, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required", @pattern = "[a-zA-Z0-9\\s]+", @title = "Alphanumeric only" } })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Marital Status
                         </div>
@@ -50,7 +50,7 @@
                             @Html.RadioButtonFor(model => model.Marital_Status, false, "Single") Single
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Title
                         </div>
@@ -59,7 +59,7 @@
                             @Html.DropDownList("Title", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             First Name:
                         </div>
@@ -69,7 +69,7 @@
                             @Html.ValidationMessageFor(model => model.First_Name, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Middle Name:
                         </div>
@@ -78,7 +78,7 @@
                             @Html.ValidationMessageFor(model => model.Middle_Name, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Last Name:
                         </div>
@@ -87,7 +87,7 @@
                             @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Address:
                         </div>
@@ -96,7 +96,7 @@
                             @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Address 01:
                         </div>
@@ -106,7 +106,7 @@
                             @Html.ValidationMessageFor(model => model.address1, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    @*<div class="col-md-12 form-input-padding">
+                    @*<div class="col-md-12 p-b-7">
                             <div class="col-md-4">
                                 Location link:
                             </div>
@@ -116,7 +116,7 @@
                                 @Html.ValidationMessageFor(model => model.Locationlink, "", new { @class = "text-danger" })
                             </div>
                         </div>*@
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Emirate:
                         </div>
@@ -124,7 +124,7 @@
                             @Html.DropDownList("Emirate", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             City:
                         </div>
@@ -133,7 +133,7 @@
                             @*@Html.DropDownList("City", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })*@
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Post Box:
                         </div>
@@ -142,7 +142,7 @@
                             @Html.ValidationMessageFor(model => model.PostboxNo, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Email:
                         </div>
@@ -151,7 +151,7 @@
                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Mobile:
                         </div>
@@ -181,7 +181,7 @@
 
                 <div class="col-md-6">
 
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Landline:
                         </div>
@@ -205,7 +205,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Fax:
                         </div>
@@ -227,7 +227,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Nationality:
                         </div>
@@ -236,7 +236,7 @@
                             @*@Html.DropDownList("Nationality", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })*@
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Activity:
                         </div>
@@ -244,7 +244,7 @@
                             @Html.DropDownList("Actitvity", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Chamber of Commerce & Industry Unified ID:
                         </div>
@@ -253,7 +253,7 @@
                             @Html.ValidationMessageFor(model => model.Cocandindustryuid, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Trade License Number:
                         </div>
@@ -262,7 +262,7 @@
                             @Html.ValidationMessageFor(model => model.TradelicenseNo, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Type:
                         </div>
@@ -270,7 +270,7 @@
                             @Html.DropDownList("Type", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             License issue Date:
                         </div>
@@ -281,7 +281,7 @@
                             @Html.ValidationMessageFor(model => model.License_issueDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             License Expiry Date:
                         </div>
@@ -292,7 +292,7 @@
                             @Html.ValidationMessageFor(model => model.License_ExpiryDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12 form-input-padding">
+                    <div class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             Issuance authority:
                         </div>
@@ -300,7 +300,7 @@
                             @Html.DropDownList("Issuance_authority", null, "--Select--", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
                         </div>
                     </div>
-                    <div id="ADWEARegisterId" class="col-md-12 form-input-padding">
+                    <div id="ADWEARegisterId" class="col-md-12 p-b-7">
                         <div class="col-md-4">
                             ADWEA registration Id:
                         </div>

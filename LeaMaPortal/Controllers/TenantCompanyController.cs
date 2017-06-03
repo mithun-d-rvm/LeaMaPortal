@@ -13,6 +13,7 @@ using System.IO;
 
 namespace LeaMaPortal.Controllers
 {
+    [Authorize]
     public class TenantCompanyController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();

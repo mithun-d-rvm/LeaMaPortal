@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace LeaMaPortal.Controllers
 {
+    [Authorize]
     public class CaretakerController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
