@@ -1,0 +1,169 @@
+Notification:
+=============
+
+TCA Approval
+*************
+select ifnull(y1.Region_Name , '') as Region_Name,ifnull(x.Properties_Name,'') as Properties_Name,ifnull(x.Unit_Property_Name,'') as Unit_Property_Name, Ag_Tenant_Name,Agreement_No,Total_Rental_amount from tbl_agreement x inner join view_tenant y on x.Ag_Tenant_Name = y.First_Name inner join tbl_caretaker z1 on z1.Caretaker_id = x.Caretaker_id inner join tbl_propertiesmaster y1 on y1.Property_ID_Tawtheeq = ifnull(x.Property_ID_Tawtheeq, (select Ref_unit_Property_ID_Tawtheeq from tbl_propertiesmaster where x.Unit_ID_Tawtheeq = Unit_ID_Tawtheeq) ) inner join tbl_emailtemplate z on z.templatename = 'Agreement Approval' and ifnull(Approval_Flag,0)= 0 where ifnull(x.Delmark,'') <> '*' order by agreement_no
+
+
+PDC:
+*****
+
+select distinct ifnull(y1.Region_Name, '') as region_name, ifnull(x.Property_Name, '') as Property_Name,ifnull(x.unit_Name, '') as unit_Name,Tenant_Name,Agreement_No,DDChequeNo,DDChequedate,pdc_Amount from view_pdc_pending x inner join view_tenant y on x.Tenant_id = y.Tenant_id inner join tbl_propertiesmaster y1 on y1.Property_ID_Tawtheeq = ifnull(x.Property_ID, (select Ref_unit_Property_ID_Tawtheeq from tbl_propertiesmaster where x.Unit_ID = Unit_ID_Tawtheeq)  )  inner join tbl_caretaker z1 on z1.Caretaker_id = y1.Caretaker_id inner join tbl_emailtemplate z on z.templatename = 'Pdc pending' where current_date() + INTERVAL 5 DAY >= ddchequedate; 
+
+pdc regionwise
+-------------
+select distinct ifnull(x.Region_Name, '') as region_name, ifnull(x.Property_Name, '') as Property_Name,ifnull(x.unit_Name, '') as unit_Name,Tenant_Name,Agreement_No,DDChequeNo,DDChequedate,pdc_Amount 
+from view_pdc_pending x 
+inner join view_tenant y on x.Tenant_id = y.Tenant_id 
+inner join tbl_emailtemplate z on z.templatename = 'Pdc pending' where current_date() + INTERVAL 5 DAY >= ddchequedate
+ -- and x.region_name='Al Ain'; 
+-- Abudabi
+--Al Ain
+
+
+
+Renewal
+********
+select y1.region_name ,x.Properties_Name,x.Unit_Property_Name,Agreement_No ,Agreement_Start_Date,Agreement_End_Date from tbl_agreement x inner join tbl_propertiesmaster y1 on y1.Property_ID_Tawtheeq = ifnull(x.Property_ID_Tawtheeq,(select Ref_unit_Property_ID_Tawtheeq from tbl_propertiesmaster where x.Unit_ID_Tawtheeq = Unit_ID_Tawtheeq) )  where current_date() + INTERVAL Notice_Period DAY >= agreement_End_date  and ifnull(x.status, '') = '' and ifnull(x.delmark, '') <> '*' and ifnull(x.Approval_Flag, 0) = 1
+
+renewal regionwise
+------------------
+select x.region_name ,x.Properties_Name,x.Unit_Property_Name,Agreement_No ,Agreement_Start_Date,Agreement_End_Date 
+from tbl_agreement x 
+ where current_date() + INTERVAL Notice_Period DAY >= agreement_End_date  and ifnull(x.status, '') = '' 
+ and ifnull(x.delmark, '') <> '*' and ifnull(x.Approval_Flag, 0) = 1
+ and x.Region_name='Abudabi'
+
+Rentaldue
+**********
+SELECT distinct Y.Region_Name ,ifnull(x.Properties_Name, y2.Ref_Unit_Property_Name) as 'Properties_Name',ifnull(x.Unit_Property_Name, '') as 'Unit_Property_Name' ,x.Ag_Tenant_Name as 'Ag_Tenant_Name',x.Agreement_No as 'Agreement_No',z.payment_mode as 'payment_mode',z.Cheque_No as 'Cheque_No' ,ifnull(z.cheque_date, '') as 'cheque_date',z.Cheque_Amount as 'Cheque_Amount',z4.Amount from tbl_agreement x inner join tbl_propertiesmaster y2 on x.property_id = y2.Property_Id inner join tbl_propertiesmaster y on y.Property_ID_Tawtheeq = ifnull(x.Property_ID_Tawtheeq,  (select  Ref_unit_Property_ID_Tawtheeq from  tbl_propertiesmaster where x.Unit_ID_Tawtheeq = Unit_ID_Tawtheeq)  ) inner JOIN TBL_AGREEMENT_PDC Z ON Z.agreement_no = x.agreement_no inner join view_tenant y1 on x.Ag_Tenant_Name = y1.First_Name inner join tbl_caretaker z2 on z2.Caretaker_id = x.Caretaker_id inner join tbl_emailtemplate z3 on z3.templatename = 'Rental overdue single' inner join view_agree_recp_chequenowise_pending z4 on z4.agreement_no = z.agreement_no and ifnull(z4.Cheque_No, '')= ifnull(z.Cheque_No, '') and ifnull(z4.Cheque_Date, '')= ifnull(z.cheque_date, '') and ifnull(z4.Payment_Mode, '')= ifnull(z.Payment_Mode, '') where ifnull(x.Approval_Flag, 0)= 1 and ifnull(x.status, '')= '' and ifnull(x.delmark, '')<> '*' and(z.payment_mode <> 'pdc' or z.payment_mode = 'pdc') and z.cheque_date <= current_date() order by x.agreement_no;
+
+
+Rentaldue regionwise
+-------------------
+view_agree_recp_chequenowise
+view_agree_recp_chequenowise_pending
+
+SELECT distinct z.Region_Name ,ifnull(x.Properties_Name, y2.Ref_Unit_Property_Name) as 'Properties_Name'
+,ifnull(x.Unit_Property_Name, '') as 'Unit_Property_Name' ,x.Ag_Tenant_Name as 'Ag_Tenant_Name'
+,x.Agreement_No as 'Agreement_No',z.payment_mode as 'payment_mode',z.Cheque_No as 'Cheque_No'
+,ifnull(z.cheque_date, '') as 'cheque_date',z.Cheque_Amount as 'Cheque_Amount',z4.Amount from tbl_agreement x 
+inner join tbl_propertiesmaster y2 on x.property_id = y2.Property_Id 
+ inner JOIN TBL_AGREEMENT_PDC Z ON Z.agreement_no = x.agreement_no 
+ inner join view_tenant y1 on x.Ag_Tenant_Name = y1.First_Name 
+ inner join tbl_caretaker z2 on z2.Caretaker_id = x.Caretaker_id 
+ inner join tbl_emailtemplate z3 on z3.templatename = 'Rental overdue single' 
+ inner join view_agree_recp_chequenowise_pending z4 on z4.agreement_no = z.agreement_no
+ and z4.Region_name=z.Region_name
+ and ifnull(z4.Cheque_No, '')= ifnull(z.Cheque_No, '') and ifnull(z4.Cheque_Date, '')= ifnull(z.cheque_date, '')
+ and ifnull(z4.Payment_Mode, '')= ifnull(z.Payment_Mode, '') where ifnull(x.Approval_Flag, 0)= 1 
+ and ifnull(x.status, '')= '' and ifnull(x.delmark, '')<> '*' and(z.payment_mode <> 'pdc' or z.payment_mode = 'pdc')
+ and z.cheque_date <= current_date() 
+and z.region_name='Abudabi'
+ order by x.agreement_no;
+
+
+
+
+
+Utility Dues
+************
+SELECT q.Region_Name ,ifnull(q.Property_Name,q.Ref_Unit_Property_Name) as 'Property_Name'  ,q.Unit_Property_Name , x.Meterno ,p.Utility_Name ,x.billdate ,x.billno ,sum(x.amount) as Billamount,x.duedate FROM  tbl_eb_water_billentrydt x inner join tbl_eb_water_billentryhd x1 on x.refno = x1.refno inner join view_ebbill_payment_pending y on x.refno = y.refno and x.billno = y.billno and x.meterno = y.meterno inner join tbl_metermaster p on p.Meter_no = x.Meterno inner join tbl_propertiesmaster q on ifnull(q.Property_ID_Tawtheeq, Ref_unit_Property_ID_Tawtheeq)= ifnull(p.property_id, '') and ifnull(p.unit_id, '')= ifnull(q.Unit_ID_Tawtheeq, '') inner join tbl_caretaker z1 on z1.Caretaker_id = q.Caretaker_id inner join tbl_emailtemplate z on z.templatename = 'eb water pending' group by x.Refno,x.Meterno ,x.property_id ,q.Property_Name,q.Ref_Unit_Property_Name,x.Unit_id ,q.Unit_Property_Name,x.Total_units ,x.Meterreadingno,x.Reading_date ,x.billdate ,x.billno ,x.duedate ,p.utility_id,p.Utility_Name,q.Region_Name,q.country,q.Caretaker_Name,q.Caretaker_ID,z1.Email,TemplateID,z.TemplateName,z.toid ,z.cc,z.bcc,Subject,Body,SubjectParameter,BodyParameter,toparameter,ccparameter,bccparameter,signature; 
+
+
+Utility Dues regionwise
+------------------------
+view_ebbill
+view_ebbill_payment_pending
+
+
+SELECT x.Region_Name ,ifnull(q.Property_Name,q.Ref_Unit_Property_Name) as 'Property_Name' 
+ ,q.Unit_Property_Name , x.Meterno ,p.Utility_Name ,x.billdate ,x.billno ,sum(x.amount) as Billamount,x.duedate 
+ FROM  tbl_eb_water_billentrydt x
+ inner join tbl_eb_water_billentryhd x1 on x.refno = x1.refno
+ inner join view_ebbill_payment_pending y on x.refno = y.refno and x.billno = y.billno and x.meterno = y.meterno
+ and y.Region_Name=x.Region_Name
+ inner join tbl_metermaster p on p.Meter_no = x.Meterno 
+ inner join tbl_propertiesmaster q on ifnull(q.Property_ID_Tawtheeq, Ref_unit_Property_ID_Tawtheeq)
+ = ifnull(p.property_id, '') and ifnull(p.unit_id, '')= ifnull(q.Unit_ID_Tawtheeq, '') 
+ inner join tbl_caretaker z1 on z1.Caretaker_id = q.Caretaker_id 
+ inner join tbl_emailtemplate z on z.templatename = 'eb water pending' 
+ -- where x.Region_Name='abudabi'
+ group by x.Refno,x.Meterno ,x.property_id ,q.Property_Name,q.Ref_Unit_Property_Name,x.Unit_id 
+ ,q.Unit_Property_Name,x.Total_units ,x.Meterreadingno,x.Reading_date ,x.billdate ,x.billno ,x.duedate 
+ ,p.utility_id,p.Utility_Name,x.Region_Name,q.country,q.Caretaker_Name,q.Caretaker_ID,z1.Email,TemplateID
+ ,z.TemplateName,z.toid ,z.cc,z.bcc,Subject,Body,SubjectParameter,BodyParameter,toparameter,ccparameter
+ ,bccparameter,signature; 
+
+
+
+
+
+License Expiry
+**************
+view_expirydate_notifications
+select * from view_expirydate_notifications
+
+
+view_properties_status
+view_properties_status_new
+
+
+
+
+========================views
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `msqladmin`@`%` 
+    SQL SECURITY DEFINER
+VIEW `view_ebbill` AS
+    SELECT 
+        `x`.`Refno` AS `refno`,
+        `x`.`Meterno` AS `meterno`,
+        `x`.`billno` AS `billno`,
+        `x`.`billdate` AS `billdate`,
+        `x`.`amount` AS `amount`,
+        `y`.`Supplier_name` AS `Supplier_name`,
+        `y`.`utility_name` AS `utility_name`,
+        `x`.`Region_Name` AS `Region_Name`
+    FROM
+        (`tbl_eb_water_billentrydt` `x`
+        JOIN `tbl_eb_water_billentryhd` `y` ON (((`x`.`Refno` = `y`.`Refno`)
+            AND (`x`.`Region_Name` = `y`.`Region_Name`))))
+    WHERE
+        (IFNULL(`x`.`Delmark`, '') <> '*') 
+    UNION ALL SELECT 
+        `x`.`Refno` AS `refno`,
+        `x`.`Meterno` AS `meterno`,
+        `x`.`billNo` AS `billno`,
+        `x`.`billDate` AS `billDate`,
+        ((`x`.`PaidAmount` + IFNULL(`x`.`Debitamt`, 0)) * -(1)) AS `totalamount`,
+        `y`.`Supplier_name` AS `Supplier_name`,
+        `y`.`Utiltiy_name` AS `Utiltiy_name`,
+        `x`.`Region_Name` AS `Region_Name`
+    FROM
+        (`tbl_eb_water_paymentdt` `x`
+        JOIN `tbl_eb_water_paymenthd` `y` ON ((`x`.`PaymentNo` = `y`.`PaymentNo`)))
+    WHERE
+        (IFNULL(`x`.`Delmark`, '') <> '*')
+
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `msqladmin`@`%` 
+    SQL SECURITY DEFINER
+VIEW `view_ebbill_payment_pending` AS
+    SELECT 
+        `view_ebbill`.`refno` AS `refno`,
+        `view_ebbill`.`meterno` AS `meterno`,
+        `view_ebbill`.`billno` AS `billno`,
+        `view_ebbill`.`billdate` AS `billDate`,
+        SUM(`view_ebbill`.`amount`) AS `amount`,
+        `view_ebbill`.`Supplier_name` AS `Supplier_name`,
+        `view_ebbill`.`utility_name` AS `utility_name`,
+        `view_ebbill`.`Region_Name` AS `Region_Name`
+    FROM
+        `view_ebbill`
+    GROUP BY `view_ebbill`.`refno` , `view_ebbill`.`meterno` , `view_ebbill`.`billno` , `view_ebbill`.`Supplier_name` , `view_ebbill`.`utility_name` , `view_ebbill`.`billdate` , `view_ebbill`.`Region_Name`
+    HAVING (SUM(`view_ebbill`.`amount`) > 0)

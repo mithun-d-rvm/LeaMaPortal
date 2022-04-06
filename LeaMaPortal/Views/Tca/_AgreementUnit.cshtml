@@ -25,19 +25,19 @@
     </div>
     <div class="col-md-12 document-row">
         <div class="col-md-2">
-            @Html.DropDownList("Property_ID", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
+            @Html.DropDownList("Property_ID", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth", @disabled = "disabled" })
         </div>
         <div class="col-md-3">
-          @Html.DropDownList("Properties_Name", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
+          @Html.DropDownList("Properties_Name", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth", @disabled = "disabled" }) 
         </div>
         <div class="col-md-2">
-           @Html.DropDownList("Property_ID_Tawtheeq", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
+           @Html.DropDownList("Property_ID_Tawtheeq", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth", @disabled = "disabled" })
         </div>
         <div class="col-md-2">
-            @Html.DropDownList("Unit_ID_Tawtheeq", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
+            @Html.DropDownList("Unit_ID_Tawtheeq", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth", @disabled = "disabled" })
         </div>
         <div class="col-md-2">
-           @Html.DropDownList("Unit_Property_Name", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
+           @Html.DropDownList("Unit_Property_Name", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth", @disabled = "disabled" })
         </div>
         <div class="col-md-1">
             <button class="document-btn" onclick="addAgreementUnitList(event);">Add</button>
@@ -62,7 +62,7 @@
     function addAgreementUnitList(event) {
         event.preventDefault();
 
-        var Property_ID = $("#AgreementUnit #Property_ID").val();
+        var Property_ID = $("#AgreementUnit #Property_ID option:selected").text();
         var Properties_Name = $("#AgreementUnit #Properties_Name option:selected").text();
         var Property_ID_Tawtheeq = $("#AgreementUnit #Property_ID_Tawtheeq option:selected").text();
         var Unit_ID_Tawtheeq = $("#AgreementUnit #Unit_ID_Tawtheeq option:selected").text();
@@ -169,47 +169,131 @@
         });
         AgreementUnitListCount = newindex;
     });
-    $("#AgreementUnit #Property_ID").change(function () {
+    //$("#AgreementUnit #Property_ID").change(function () {
          
-        var propertyid = $("#AgreementUnit #Property_ID").val();
-        $("#AgreementUnit #Properties_Name").val(propertyid);
-        $("#AgreementUnit #Property_ID_Tawtheeq").val(propertyid); 
-        $("#AgreementUnit #Unit_ID_Tawtheeq").val(propertyid);
-        $("#AgreementUnit #Unit_Property_Name").val(propertyid);
-        return;
-    });
+    //    var propertyid = $("#AgreementUnit #Property_ID").val();
+    //    $("#AgreementUnit #Properties_Name").val(propertyid);
+    //    $("#AgreementUnit #Property_ID_Tawtheeq").val(propertyid); 
+    //    $("#AgreementUnit #Unit_ID_Tawtheeq").val(propertyid);
+    //    $("#AgreementUnit #Unit_Property_Name").val(propertyid);
+    //    return;
+    //});
     $("#AgreementUnit #Properties_Name").change(function () {
-        var propertyid = $("#AgreementUnit #Properties_Name").val();
-        $("#AgreementUnit #Property_ID").val(propertyid);
-        $("#AgreementUnit #Property_ID_Tawtheeq").val(propertyid);
-        $("#AgreementUnit #Unit_ID_Tawtheeq").val(propertyid);
-        $("#AgreementUnit #Unit_Property_Name").val(propertyid);
+        var propertyid;
+        //debugger;
+        if ($("#AgreementUnit #Properties_Name option:selected").text() == "--Select--") {
+            $("#AgreementUnit #Unit_Property_Name").attr("disabled", true);
+            propertyid = 0;
+        }
+        else if ($("#AgreementUnit #Properties_Name option:selected").text() != "--Select--") {
+            //alert($("#AgreementUnit #Properties_Name").val());
+            //alert(propertyid);
+            $("#AgreementUnit #Unit_Property_Name").attr("disabled", false);
+            propertyid = $("#AgreementUnit #Properties_Name").val();
+            //alert(propertyid);
+        }
+        
+       
+        //$("#AgreementUnit #Property_ID_Tawtheeq").val($("#AgreementUnit #Properties_Name option:selected").val());
+        //$("#AgreementUnit #Property_ID").val(propertyid);
+        $("#AgreementUnit #Property_ID option:selected").text($("#AgreementUnit #Properties_Name option:selected").text() == "--Select--" ? "--Select--" : $("#AgreementUnit #Properties_Name").val());
+        $("#AgreementUnit #Property_ID_Tawtheeq").val($("#AgreementUnit #Properties_Name option:selected").text() == "--Select--" ? null : $("#AgreementUnit #Properties_Name option:selected").val());
+        //$('#AgreementUnit #Unit_Property_Name').empty();
+        //alert(propertyid);
+        getUnit(propertyid);
+
+        //$("#AgreementUnit #Property_ID").val(propertyid);
+        //$("#AgreementUnit #Property_ID_Tawtheeq").val(propertyid);
+        //$("#AgreementUnit #Unit_ID_Tawtheeq").val(propertyid);
+        //$("#AgreementUnit #Unit_Property_Name").val(propertyid);
         return;
     });
-    $("#AgreementUnit #Property_ID_Tawtheeq").change(function () {
-        var propertyid = $("#AgreementUnit #Property_ID_Tawtheeq").val();
-        $("#AgreementUnit #Property_ID").val(propertyid);
-        $("#AgreementUnit #Properties_Name").val(propertyid);
-        $("#AgreementUnit #Unit_ID_Tawtheeq").val(propertyid);
-        $("#AgreementUnit #Unit_Property_Name").val(propertyid);
+    //$("#AgreementUnit #Property_ID_Tawtheeq").change(function () {
+    //    var propertyid = $("#AgreementUnit #Property_ID_Tawtheeq").val();
+    //    $("#AgreementUnit #Property_ID").val(propertyid);
+    //    $("#AgreementUnit #Properties_Name").val(propertyid);
+    //    $("#AgreementUnit #Unit_ID_Tawtheeq").val(propertyid);
+    //    $("#AgreementUnit #Unit_Property_Name").val(propertyid);
+    //    return;
+    //});
+
+    //$("#AgreementUnit #Unit_ID_Tawtheeq").change(function () {
+    //    var propertyid = $("#AgreementUnit #Unit_ID_Tawtheeq").val();
+    //    $("#AgreementUnit #Property_ID").val(propertyid);
+    //    $("#AgreementUnit #Properties_Name").val(propertyid);
+    //    $("#AgreementUnit #Property_ID_Tawtheeq").val(propertyid);
+    //    $("#AgreementUnit #Unit_Property_Name").val(propertyid);
+    //    return;
+    //});
+    $("#AgreementUnit #Unit_Property_Name").change(function () {
+        //var propertyid = $("#AgreementUnit #Unit_Property_Name").val();
+        //$("#AgreementUnit #Property_ID").val(propertyid);
+        //$("#AgreementUnit #Properties_Name").val(propertyid);
+        //$("#AgreementUnit #Unit_ID_Tawtheeq option:selected").text(propertyid);
+        $("#AgreementUnit #Unit_ID_Tawtheeq option:selected").text($("#AgreementUnit #Unit_Property_Name option:selected").text() == "--Select--" ? "--Select--" : $("#AgreementUnit #Unit_Property_Name").val());
+        //$("#AgreementUnit #Property_ID_Tawtheeq").val(propertyid);
         return;
     });
 
-    $("#AgreementUnit #Unit_ID_Tawtheeq").change(function () {
-        var propertyid = $("#AgreementUnit #Unit_ID_Tawtheeq").val();
-        $("#AgreementUnit #Property_ID").val(propertyid);
-        $("#AgreementUnit #Properties_Name").val(propertyid);
-        $("#AgreementUnit #Property_ID_Tawtheeq").val(propertyid);
-        $("#AgreementUnit #Unit_Property_Name").val(propertyid);
-        return;
-    });
-    $("#AgreementUnit #Unit_Property_Name").change(function () {
-        var propertyid = $("#AgreementUnit #Unit_Property_Name").val();
-        $("#AgreementUnit #Property_ID").val(propertyid);
-        $("#AgreementUnit #Properties_Name").val(propertyid);
-        $("#AgreementUnit #Unit_ID_Tawtheeq").val(propertyid);
-        $("#AgreementUnit #Property_ID_Tawtheeq").val(propertyid);
-        return;
-    });
+    //$('#Properties_Name').prop('disabled', true);
+    //$('#Property_ID').prop('disabled', true);
+    
+    // $('#Property_ID_Tawtheeq').prop('disabled', true);
+
+  
+
+    function getUnit(propertyId) {
+        $.ajax(
+               {
+                   url: "../Tca/GetPropertiesUnitDetails",
+                   // dataType: "jsonp",
+                   method: "GET",
+                   data: { propertyId: propertyId }, //FormData(form.get(0)),
+                   contentType: "application/json",
+
+                   success: function (response) {
+                       //alert("s0");
+                       //var propertyidOptions = '<option value="" selected>--Select--</option>';
+                       //$("#TcaPropertyId").empty();
+
+                       //var propertyidTawtheeqOptions = '<option value="" selected>--Select--</option>';
+                       //$("#TcaPropertyIDTawtheeq").empty();
+
+                       var propertyNameOptions = '<option value="" selected>--Select--</option>';
+                       //$("#TcaPropertyName").empty();
+
+                       $("#AgreementUnit #Unit_ID_Tawtheeq").empty();
+                       var unitidOptions = '<option value="" selected>--Select--</option>';
+                       
+
+                       $("#AgreementUnit #Unit_Property_Name").empty();
+                       var unitnameOptions = '<option value="" selected>--Select--</option>';
+                       
+
+                      // alert("s");
+
+                       $.each(response, function (index, data) {
+                           //propertyidOptions += '<option value="' + data.property_id + '">' + data.property_id + '</option>';
+                           //propertyidTawtheeqOptions += '<option value="' + data.Property_ID_Tawtheeq + '">' + data.Property_ID_Tawtheeq + '</option>';
+                           // propertyNameOptions += '<option value="' + data.Property_ID_Tawtheeq + '">' + data.Property_Name + '</option>';
+
+                           unitidOptions += '<option value="' + data.Ref_Unit_Property_ID + '">' + data.Unit_ID_Tawtheeq + '</option>';
+                           unitnameOptions += '<option value="' + data.Unit_ID_Tawtheeq + '">' + data.Unit_Property_Name + '</option>';
+
+                       });
+                       //$('#TcaPropertyIDTawtheeq').append(propertyidTawtheeqOptions);
+                       //$('#TcaPropertyName').append(propertyNameOptions);
+                       $('#AgreementUnit #Unit_ID_Tawtheeq').append(unitidOptions);
+                       $('#AgreementUnit #Unit_Property_Name').append(unitnameOptions);
+                   },
+                   error: function (jqXhr, textStatus, errorThrown) {
+                       alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   },
+                   complete: function () {
+                       // $("#").addClass("hide");
+                   }
+
+               });
+    }
 
 </script>

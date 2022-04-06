@@ -25,6 +25,8 @@ namespace LeaMaPortal.DBContext
         public Nullable<float> Debitamt { get; set; }
         public string Remarks { get; set; }
         public string Delmark { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     
         public virtual tbl_eb_water_paymenthd tbl_eb_water_paymenthd { get; set; }
     }

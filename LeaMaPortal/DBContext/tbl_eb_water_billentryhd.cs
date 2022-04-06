@@ -31,6 +31,8 @@ namespace LeaMaPortal.DBContext
         public Nullable<System.DateTime> Createddatetime { get; set; }
         public string Createduser { get; set; }
         public string Delmark { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_eb_water_billentrydt> tbl_eb_water_billentrydt { get; set; }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LeaMaPortal.DBContext;
+using System.Threading;
 using System.Threading.Tasks;
 using LeaMaPortal.Models;
 using MySql.Data.MySqlClient;
@@ -22,6 +23,10 @@ namespace LeaMaPortal.Controllers
         // GET: Payments
         public ActionResult Index()
         {
+            if (Session["Region"] == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
             return View();
         }
         [HttpGet]
@@ -34,9 +39,9 @@ namespace LeaMaPortal.Controllers
             var PaymentDetails = db.tbl_paymenthd.Where(x => x.Delmark != "*");
             if (!string.IsNullOrWhiteSpace(Search))
             {
-                PaymentDetails = PaymentDetails.Where(x => x.PaymentNo.ToString().Contains(Search));
+                PaymentDetails = PaymentDetails.Where(x => x.PaymentNo.ToString().Contains(Search) || x.PaymentType .Contains (Search ) || x.PaymentMode.Contains (Search ) || x.agreement_no.ToString ().Contains (Search ) || x.Property_ID.ToString ().Contains(Search) || x.Supplier_Name.ToString().Contains(Search));
             }
-            var invoice = PaymentDetails.OrderBy(x => x.id).Select(x => new PaymentViewModel()
+            var invoice = PaymentDetails.OrderByDescending(x => x.id).Select(x => new PaymentViewModel()
             {
                 AdvAcCode = x.AdvAcCode,
                 agreement_no = x.agreement_no,
@@ -94,7 +99,7 @@ namespace LeaMaPortal.Controllers
                 }
 
                 //var paymentMode_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','RecpType',',',null)").ToList();
-                var paymentMode_result = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Receipts" && x.comboname == "RecpType");
+                var paymentMode_result = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Payment" && x.comboname == "PaymentMode");
                 if (paymentMode_result != null)
                 {
                     ViewBag.PaymentMode = new SelectList(paymentMode_result.combovalue.Split(','), model.PaymentMode);
@@ -122,7 +127,7 @@ namespace LeaMaPortal.Controllers
                 ViewBag.unitName = new SelectList(units, "Unit_ID_Tawtheeq", "Unit_Property_Name");
 
 
-                ViewBag.agreement_no = new SelectList(db.tbl_agreement.Where(w => w.Delmark != "*").OrderBy(o => o.id).Distinct(), "Agreement_No", "Agreement_No");
+                ViewBag.agreement_no = new SelectList(db.tbl_agreement.Where(w => w.Delmark != "*" && w.Approval_Flag != 1 && string.IsNullOrEmpty(w.Status)).OrderBy(o => o.id).Distinct(), "Agreement_No", "Agreement_No");
                 ViewBag.BankAcCode = new SelectList(Common.BankDetails, "AccountNumber", "AccountNumber");
                 ViewBag.BankAcName = new SelectList(Common.BankDetails, "AccountNumber", "BankName");
 
@@ -538,6 +543,234 @@ namespace LeaMaPortal.Controllers
             {
                 throw e;
             }
+        }
+        public async Task<PartialViewResult> Print(int PaymentNo, string OtherTerms)
+        {
+            try
+            {
+                Thread.Sleep(1000);
+                PaymentPrintModel model = new PaymentPrintModel();
+                //TcaPrintModel model = new TcaPrintModel();
+                var printPayment = await db.tbl_paymenthd.FirstOrDefaultAsync(x => x.PaymentNo == PaymentNo);
+
+                //var property = await db.tbl_propertiesmaster.FirstOrDefaultAsync(x => x.Property_Id == agreementDet.property_id);
+                if (printPayment != null)
+                    model.Id = printPayment.id;
+                model.PaymentNo = printPayment.PaymentNo;
+                model.Paymentdate = printPayment.PaymentDate.Value.ToShortDateString();
+                model.Agreement_No = int.Parse(printPayment.agreement_no.ToString());
+                model.Properties_ID = printPayment.Property_ID;
+                model.Property_Name = printPayment.Property_Name;
+                model.Unit_ID = printPayment.Unit_ID;
+                model.unit_Name = printPayment.unit_Name;
+                model.SupplierId = int.Parse(printPayment.Supplier_id.ToString());
+                model.SupplierName = printPayment.Supplier_Name;
+                model.Paymenttype = printPayment.PaymentType;
+                model.PaymentMode = printPayment.PaymentMode;
+                model.totalamt = printPayment.TotalAmount;
+                //if (model.totalamt > 0)
+                //{ 
+                //string decimalPart = "", text = "";
+                //decimal amount = 0;
+                //decimal amt1 = decimal.Parse(model.totalamt.ToString());
+                //int i = (int)amt1;
+                //decimal n1 = amt1 - i;
+                //if (n1 > 0)
+                //{
+                //    decimalPart = amt1.ToString().Split('.')[1];
+                //}
+
+                //string t1 = LeaMaPortal.Helpers.NumberToText1.NumberToText(i, true, false);
+                //    // string t2 = LeaMaPortal.Helpers.NumberToText1.DecimalToText(decimalPart);
+                //string t2 = LeaMaPortal.Helpers.NumberToText1.NumberToText (int.Parse ( decimalPart),true ,false );
+                //    if (t1 != "" && t2 != "")
+                //{ text = t1 + "" + " " + "Dirhams " + "and " + t2 +  " Fils"; }
+                //else
+                //{ text = t1 +  " Dirhams "; }
+                //model.Amountinwords =  text;
+                //}
+                string decimalPart = "";
+                if (printPayment.TotalAmount > 0)
+                {
+                    float amt1 = float.Parse(printPayment.TotalAmount.ToString());
+                    int i = (int)amt1;
+                    float n1 = amt1 - i;
+                    if (n1 > 0)
+                    {
+                        decimalPart = amt1.ToString().Split('.')[1];
+                    }
+                    model.Dhirams = Convert.ToString(i);
+                    if(decimalPart != "")
+                    { 
+                    model.Fils = decimalPart;
+                    }
+                    else
+                    { model.Fils = "0"; }
+                }
+                model.Amountinwords = printPayment.AmtInWords;
+                model.Amountinwords = AmountInWords(Convert.ToDecimal(printPayment.TotalAmount));
+                model.DDChequeNo = printPayment.DDChequeNo;
+                if (printPayment.Cheqdate.HasValue)
+                { model.Cheqdate = printPayment.Cheqdate.Value.ToShortDateString(); }
+
+                model.pdcstatus = printPayment.pdcstatus;
+                model.BankAcCode = printPayment.BankAcCode;
+                model.BankAcName = printPayment.BankAcName;
+                model.AdvAcCode = printPayment.AdvAcCode;
+                model.Narration = printPayment.Narration;
+                //model.IssueDate = printInvoicehd.date ;
+                var agreementDet = await db.tbl_agreement.FirstOrDefaultAsync(x => x.Agreement_No == printPayment.agreement_no);
+
+                var property = await db.tbl_propertiesmaster.FirstOrDefaultAsync(x => x.Property_Id == agreementDet.property_id);
+                model.Properties_Name = property.Property_Name;
+                model.Properties_Address = property.Address1;
+
+
+                model.Agreementdate = agreementDet.Agreement_Date.Value.ToShortDateString();
+
+
+                var supplier = await db.tbl_suppliermaster.FirstAsync(x => x.Supplier_Id == printPayment.Supplier_id);
+                if (supplier != null)
+                {
+                    model.Ag_Tenant_Faxno = string.IsNullOrWhiteSpace(supplier.Fax_No) ? "" : supplier.Fax_Countrycode + "-" + supplier.Fax_Areacode + "-" + supplier.Fax_No;
+                    model.Ag_Tenant_Address = supplier.address + ", " + supplier.address1 + ", " + supplier.City;
+                    model.Ag_Tenant_Telephone = string.IsNullOrWhiteSpace(supplier.Landline_No) ? "" : supplier.Landline_Countrycode + "-" + supplier.Landline_Areacode + "-" + supplier.Landline_No;
+                    model.Ag_Tenant_Name = supplier.Supplier_Name;
+                }
+
+
+                //else
+                //{
+                //    var tenant = await db.tbl_tenant_company.FirstOrDefaultAsync(x => x.Tenant_Id == agreementDet.Ag_Tenant_id);
+                //    if (tenant != null)
+                //    {
+                //        model.Ag_Tenant_Faxno = string.IsNullOrWhiteSpace(tenant.Fax_No) ? "" : tenant.Fax_Countrycode + "-" + tenant.Fax_Areacode + "-" + tenant.Fax_No;
+                //        model.Ag_Tenant_Address = tenant.address + ", " + tenant.address1 + ", " + tenant.City;
+                //        model.Ag_Tenant_Telephone = string.IsNullOrWhiteSpace(tenant.Landline_No) ? "" : tenant.Landline_Countrycode + "-" + tenant.Landline_Areacode + "-" + tenant.Landline_No;
+                //        model.Ag_Tenant_Name = tenant.Title + " " + tenant.First_Name + tenant.Last_Name;
+                //    }
+                //}
+
+                LeamaEntities l = new LeamaEntities();
+                var filter = l.tbl_paymentdt.Where(x => x.PaymentNo == model.PaymentNo);
+                var Paymentdata = filter.ToList();
+
+                //var invdata = printInvoicedt .ToString().ToList();
+                ViewBag.Paymentdtas = Paymentdata;
+                //  //  model.Property_Usage = property.Property_Usage;
+                return PartialView("../Payment/_PaymentPrint", model);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+
+        //public async Task<PartialViewResult> Print(int PaymentNo, string OtherTerms)
+        //{
+        //    try
+        //    {
+        //        Thread.Sleep(1000);
+        //        PaymentPrintModel model = new PaymentPrintModel();
+        //        //TcaPrintModel model = new TcaPrintModel();
+        //        var printPayment = await db.tbl_paymenthd.FirstOrDefaultAsync(x => x.PaymentNo == PaymentNo);
+
+        //        //var property = await db.tbl_propertiesmaster.FirstOrDefaultAsync(x => x.Property_Id == agreementDet.property_id);
+        //        if (printPayment != null)
+        //            model.Id = printPayment.id;
+        //        model.PaymentNo = printPayment.PaymentNo;
+        //        model.Paymentdate = printPayment.PaymentDate.Value.ToShortDateString();
+        //        model.Agreement_No = int.Parse(printPayment.agreement_no.ToString());
+        //        model.Properties_ID = printPayment.Property_ID;
+        //        model.Property_Name = printPayment.Property_Name;
+        //        model.Unit_ID = printPayment.Unit_ID;
+        //        model.unit_Name = printPayment.unit_Name;
+        //        model.SupplierId = int.Parse(printPayment.Supplier_id.ToString());
+        //        model.SupplierName = printPayment.Supplier_Name;
+        //        model.Paymenttype = printPayment.PaymentType;
+        //        model.PaymentMode = printPayment.PaymentMode;
+        //        model.totalamt = printPayment.TotalAmount;
+        //        model.Amountinwords = printPayment.AmtInWords;
+        //        model.DDChequeNo = printPayment.DDChequeNo;
+        //        if (printPayment.Cheqdate.HasValue)
+        //        { model.Cheqdate = printPayment.Cheqdate.Value.ToShortDateString(); }
+
+        //        model.pdcstatus = printPayment.pdcstatus;
+        //        model.BankAcCode = printPayment.BankAcCode;
+        //        model.BankAcName = printPayment.BankAcName;
+        //        model.AdvAcCode = printPayment.AdvAcCode;
+        //        model.Narration = printPayment.Narration;
+        //        //model.IssueDate = printInvoicehd.date ;
+        //        var agreementDet = await db.tbl_agreement.FirstOrDefaultAsync(x => x.Agreement_No == printPayment.agreement_no);
+
+        //        var property = await db.tbl_propertiesmaster.FirstOrDefaultAsync(x => x.Property_Id == agreementDet.property_id);
+        //        model.Properties_Name = property.Property_Name;
+        //        model.Properties_Address = property.Address1;
+
+
+        //        model.Agreementdate = agreementDet.Agreement_Date.Value.ToShortDateString();
+
+
+        //            var supplier = await db.tbl_suppliermaster.FirstAsync(x => x.Supplier_Id == printPayment.Supplier_id);
+        //            if (supplier != null)
+        //            {
+        //                model.Ag_Tenant_Faxno = string.IsNullOrWhiteSpace(supplier.Fax_No) ? "" : supplier.Fax_Countrycode + "-" + supplier.Fax_Areacode + "-" + supplier.Fax_No;
+        //                model.Ag_Tenant_Address = supplier.address + ", " + supplier.address1 + ", " + supplier.City;
+        //                model.Ag_Tenant_Telephone = string.IsNullOrWhiteSpace(supplier.Landline_No) ? "" : supplier.Landline_Countrycode + "-" + supplier.Landline_Areacode + "-" + supplier.Landline_No;
+        //                model.Ag_Tenant_Name = supplier.Supplier_Name ;
+        //            }
+
+
+        //        //else
+        //        //{
+        //        //    var tenant = await db.tbl_tenant_company.FirstOrDefaultAsync(x => x.Tenant_Id == agreementDet.Ag_Tenant_id);
+        //        //    if (tenant != null)
+        //        //    {
+        //        //        model.Ag_Tenant_Faxno = string.IsNullOrWhiteSpace(tenant.Fax_No) ? "" : tenant.Fax_Countrycode + "-" + tenant.Fax_Areacode + "-" + tenant.Fax_No;
+        //        //        model.Ag_Tenant_Address = tenant.address + ", " + tenant.address1 + ", " + tenant.City;
+        //        //        model.Ag_Tenant_Telephone = string.IsNullOrWhiteSpace(tenant.Landline_No) ? "" : tenant.Landline_Countrycode + "-" + tenant.Landline_Areacode + "-" + tenant.Landline_No;
+        //        //        model.Ag_Tenant_Name = tenant.Title + " " + tenant.First_Name + tenant.Last_Name;
+        //        //    }
+        //        //}
+
+        //        LeamaEntities l = new LeamaEntities();
+        //        var filter = l.tbl_paymentdt.Where(x => x.PaymentNo == model.PaymentNo);
+        //        var Paymentdata = filter.ToList();
+
+        //        //var invdata = printInvoicedt .ToString().ToList();
+        //        ViewBag.Paymentdtas = Paymentdata;
+        //        //  //  model.Property_Usage = property.Property_Usage;
+        //        return PartialView("../Payment/_PaymentPrint", model);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw;
+        //    }
+        //}
+
+        [HttpGet]
+        public string AmountInWords(decimal amount)
+        {
+            string decimalPart = "", text = "";
+            decimal amt1 = amount;
+            int i = (int)amt1;
+            decimal n1 = amount - (int)amount;
+            if (n1 > 0)
+            {
+                decimalPart = amt1.ToString().Split('.')[1];
+            }
+
+            string t1 = NumberToText1.NumberToText(i, true, false);
+            string t2 = NumberToText1.DecimalToText(decimalPart);
+            string t3 = "";
+            //string text = NumberToText1.NumberToText (i, true, false) +"" +""+ "Dirhams " + "and"+ NumberToText1. DecimalToText(decimalPart) +""+ ""+"fils";
+            if (t1 != "" && t2 != "")
+            { text = t1 + "" + t3 + " Dirhams " + "and" + t2 + "" + "" + " fils "; }
+            else
+            { text = t1 + "" + t3 + " Dirhams "; }
+            return text;
+
         }
 
         protected override void Dispose(bool disposing)

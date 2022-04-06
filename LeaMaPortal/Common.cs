@@ -42,6 +42,15 @@ namespace LeaMaPortal
                 return GetPaymentMode();
             }
         }
+
+        public static List<string> AmountType
+        {
+            get
+            {
+                return GetAmountType();
+            }
+        }
+
         public static List<string> TenantType
         {
             get
@@ -125,9 +134,18 @@ namespace LeaMaPortal
         {
             using (LeamaEntities db = new LeamaEntities())
             {
-                return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Tenancy Contract Agreement" && x.comboname == "Security_Flag")?.combovalue.Split(',').ToList();
+                return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Tenancy Contract Agreement" && x.comboname == "PaymentMode")?.combovalue.Split(',').ToList();
             }
         }
+
+        public static List<string> GetAmountType()
+        {
+            using (LeamaEntities db = new LeamaEntities())
+            {
+                return db.tbl_combo_master.FirstOrDefault(x => x.screen_name == "Tenancy Contract Agreement" && x.comboname == "Amount_Type")?.combovalue.Split(',').ToList();
+            }
+        }
+
         public static List<string> GetTenantType()
         {
             using (LeamaEntities db = new LeamaEntities())
@@ -194,7 +212,8 @@ namespace LeaMaPortal
         public static List<string> Months = new List<string>() { "Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec" };
         //public static List<string> PaymentMode = new List<string>() { "Cash", "Cheque", "Online", "Cheque without date", "DD" };
         //public const string DefaultTitle = "Mr.";
-        public static List<string> Role = new List<string>() { "Admin", "Management", "Caretaker" };
+        //public static List<string> Role = new List<string>() { "Admin", "Management", "Caretaker" };
+        public static List<string> Role = new List<string>() { "Admin", "Management", "Users" };
         //public static List<string> City = new List<string>() { "Abudhabi", "Sharja" };
         public static List<string> Profession = new List<string>() { "Engineer", "Teacher", "Shop keeper", "Doctor", "Farmer" };
 
@@ -223,7 +242,8 @@ namespace LeaMaPortal
            new FormMaster() {Id=15,MenuName="Supplier Master",MenuId=15 },
            new FormMaster() {Id=16,MenuName="Slab Master",MenuId=16 },
            new FormMaster() {Id=17,MenuName="Meter Master",MenuId=17 },
-           new FormMaster() {Id=18,MenuName="Email Template",MenuId=18 },
+           new FormMaster() {Id=18,MenuName="Email Template",MenuId=18 }
+           
            //new FormMaster() {Id=19,FormName="" },
            //new FormMaster() {Id=20,FormName="" }
 
@@ -235,19 +255,23 @@ namespace LeaMaPortal
         public const int DefaultReport = 1;
         public static List<ReportListModel> ReportList = new List<ReportListModel>()
         {
-           new ReportListModel() {Id=1,ReportName="Vacancy Report" },
-           new ReportListModel() {Id=2,ReportName="Tenancy Contract Report" },
-           new ReportListModel() {Id=3,ReportName="Outstanding Report" },
+           new ReportListModel() {Id=1,ReportName="Vacant Properties Report" },
+           new ReportListModel() {Id=3,ReportName="Rental Outstanding Report" },
+           new ReportListModel() {Id=6,ReportName="Rental Collection Summary Report" },
+           new ReportListModel() {Id=2,ReportName="TCA Renewal Report" },
+           new ReportListModel() {Id=5,ReportName="Tenant PDC Status Report" },
            new ReportListModel() {Id=4,ReportName="Utility Outstanding Payments Report" },
-           new ReportListModel() {Id=5,ReportName="PDC Report" },
-           new ReportListModel() {Id=6,ReportName="Collection Report Summary" },
-           new ReportListModel() {Id=7,ReportName="Summary Ebwater Report" },
+           new ReportListModel() {Id=7,ReportName="Utility Payments Summary Report" },
+           new ReportListModel() {Id=8,ReportName="Tally Report" },
+           new ReportListModel() {Id=9,ReportName="Utility Trend and RAG Report" },
+           new ReportListModel() {Id=10,ReportName="Property Status Report" },
+
         };
         //tenant company
         //public static List<string> TenantType = new List<string>() { "Government", "Person", "Company" };
         //public static List<string> Emirate = new List<string>() { "Default" };
         //public static List<string> ComapanyActivity = new List<string>() { "Activity1" };
-        public static List<string> Issuance_authority = new List<string>() { "List-1" };
+        public static List<string> Issuance_authority = new List<string>() { "Department of Economic Development" };
         public const string TenantCompanyDocumentContainer = "Documents/TenantCompany/";
         public const string TenantCompanyDocumentDirectoryName = "TenantCompany";
 
@@ -431,4 +455,6 @@ namespace LeaMaPortal
         public int Id { get; set; }
         public string ReportName { get; set; }
     }
+
+
 }

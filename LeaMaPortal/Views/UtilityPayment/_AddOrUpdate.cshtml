@@ -255,11 +255,11 @@
                                 <input id="ReceivedAmount" type="text" class="form-control master-form-input" onkeypress = "allow_only_Float(event, 'ReceivedAmount');"/>
                             </div>
                             <div class="col-md-2 form-group">
-                                <label for="DebitAmount">Debit Amount*</label>
+                                <label for="DebitAmount">Debit Amount</label>@*Debit Amount**@
                                 <input id="DebitAmount" type="text" class="form-control master-form-input" onkeypress = "allow_only_Float(event, 'DebitAmount');"/>
                             </div>
                             <div class="col-md-3 form-group">
-                                <label for="Remarks">Remarks*</label>
+                                <label for="Remarks">Remarks</label>@*Remarks**@
                                 <input id="Remarks" type="text" class="form-control master-form-input" />
                             </div>
                             <div class="col-md-3 btn-group">
@@ -409,7 +409,9 @@
         var ReceivedAmount = document.getElementById("ReceivedAmount").value;
         var DebitAmount = document.getElementById("DebitAmount").value;
         var Remarks = document.getElementById("Remarks").value;
-        if ((refno == null || refno == "") || (meterno == null || meterno == "") || (billNo == null || billNo == "") || (billDate == null || billDate == "") || (BillAmount == null || BillAmount == "") || (ReceivedAmount == null || ReceivedAmount == "") || (DebitAmount == null || DebitAmount == "") || (Remarks == null || Remarks == "")) {
+        //|| (Remarks == null || Remarks == "") || (DebitAmount == null || DebitAmount == ""))
+        //alert($("#PaymentType option:selected").text());
+        if ((refno == null || refno == "") || (meterno == null || meterno == "") || (billNo == null || billNo == "") || (billDate == null || billDate == "") || (BillAmount == null || BillAmount == "") || (ReceivedAmount == null || ReceivedAmount == "")) {
             $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
             $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
             $(".result-title").text("Failure");
@@ -509,6 +511,9 @@
         var utilityid = $("#Utiltiyname").val();
         $("#Utility_id").val(utilityid);
         $("#Utiltiy_name").val($("#Utiltiyname option:selected").text());
+        //alert($("#Utiltiyname option:selected").val());
+        //alert($("#Suppliername option:selected").val());
+        getUtilityDetails($("#Utiltiyname option:selected").text(), $("#Suppliername option:selected").text());
     });
 
     $("#Suppliername").on('change', function (e) {
@@ -516,6 +521,9 @@
         var Supplierid = $("#Suppliername").val();
         $("#Supplier_id").val(Supplierid);
         $("#Supplier_name").val($("#Suppliername option:selected").text());
+        //alert($("#Utiltiyname option:selected").val());
+        //alert($("#Suppliername option:selected").val());
+        getUtilityDetails($("#Utiltiyname option:selected").text(), $("#Suppliername option:selected").text());
     });
 
     $("#AdvAcCode").on('change', function (e) {
@@ -537,6 +545,55 @@
     //        $("#AdvAcCode").show();
     //    }
     //});
+
+    $("#PaymentType").on('change', function (e) {
+        //alert($("#PaymentType option:selected").text());
+        if($("#PaymentType option:selected").text() == "advance")
+        {
+            $("#invoice").hide();
+        }
+        else
+        {
+            $("#invoice").show();
+        }
+    });
+
+    function getUtilityDetails(utilityname,suppliername)
+    {
+        if(utilityname != "" && suppliername != "")
+        {
+          $.ajax(
+          {
+              url: "../UtilityPayment/GetUtilityBillDetails",
+           type: "Get",
+           data: { UtilityName: utilityname, SupplierName: suppliername },
+           success: function (response) {
+               $("#Refno").empty();
+               $("#Meterno").empty();
+               $("#billNo").empty();
+               var Refno = '<option value="">--Select--</option>';
+               var Meterno = '<option value="">--Select--</option>';
+               var billNo = '<option value="">--Select--</option>';
+               $.each(response, function (index, data) {
+                   Refno += '<option value="' + data.Refno + '">' + data.Refno + '</option>';
+                   Meterno += '<option value="' + data.Refno + '">' + data.Meterno + '</option>';
+                   billNo += '<option value="' + data.Refno + '">' + data.billNo + '</option>';
+               });
+               $('#Refno').append(Refno);
+               $('#Meterno').append(Meterno);
+               $('#billNo').append(billNo);
+               //$('#Refno').change();
+           },
+           error: function (jqXhr, textStatus, errorThrown) {
+               alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+           },
+           complete: function () {
+               $("#img-loader").addClass("hide");
+           }
+          });
+        }
+    }
+
     function showHideChequeField(value) {
          
         $("[name='cheque'] :input").attr("disabled", value);
@@ -558,34 +615,34 @@
     }
     function ShowHidePaymentModeFields(paymentModeValue) {
          
-        if (paymentModeValue == "cheque") {
+        if (paymentModeValue == "cheque" || paymentModeValue == "DD") {
             showHideChequeField(false);
             showhideAdvancePayment(true);
             if ($("#PaymentType").val() == "against invoice") {
-                $("#TotalAmount").prop("readonly", true);
+                //$("#TotalAmount").prop("readonly", true);
             }
             else {
-                $("#TotalAmount").prop("readonly", false);
+                //$("#TotalAmount").prop("readonly", false);
             }
         }
         else if (paymentModeValue == "cash") {
             showHideChequeField(true);
             showhideAdvancePayment(true);
             if ($("#PaymentType").val() == "against invoice") {
-                $("#TotalAmount").prop("readonly", true);
+                //$("#TotalAmount").prop("readonly", true);
             }
             else {
-                $("#TotalAmount").prop("readonly", false);
+                //$("#TotalAmount").prop("readonly", false);
             }
         }
         else if (paymentModeValue == "online") {
             showHideChequeField(false);
             showhideAdvancePayment(true);
             if ($("#PaymentType").val() == "against invoice") {
-                $("#TotalAmount").prop("readonly", true);
+                //$("#TotalAmount").prop("readonly", true);
             }
             else {
-                $("#TotalAmount").prop("readonly", false);
+                //$("#TotalAmount").prop("readonly", false);
             }
         }
         //else if (paymentModeValue == "pdc") {
@@ -601,7 +658,7 @@
         else if (paymentModeValue == "Advance adjust") {
             showHideChequeField(true);
             showhideAdvancePayment(false);
-            $("#TotalAmount").prop("readonly", true);
+            //$("#TotalAmount").prop("readonly", true);
             //if ($("#PaymentType").val() == "against invoice") {
             //    $("#TotalAmount").prop("readonly", true);
             //}
@@ -613,10 +670,10 @@
             showHideChequeField(true);
             showhideAdvancePayment(true);
             if ($("#PaymentType").val() == "against invoice") {
-                $("#TotalAmount").prop("readonly", true);
+                //$("#TotalAmount").prop("readonly", true);
             }
             else {
-                $("#TotalAmount").prop("readonly", false);
+                //$("#TotalAmount").prop("readonly", false);
             }
         }
     }
@@ -692,7 +749,7 @@
                     success: function (response) {
                          
                         if (response != null) {
-                            //$("#billDate").val(response);
+                            $("#billDate").val(ToJavaScriptDate(response.billdate));
                             $("#BillAmount").val(response.amount);
                         }
                     },
@@ -729,10 +786,11 @@
         e.preventDefault();
         // $("#icon-success").addClass("hide");
         //$("#VerifyIdDetailsLoader").removeClass("hide");
-        if (i == 0) {
+        if (i == 0 && $("#PaymentType option:selected").text() != "advance") {
             $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
             $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
             $(".result-title").text("Failure");
+            //alert("error");
             $(".result-modal-body span").text("Enter required fields");
             $('#masterResultModal').modal('show');
             return false;
@@ -820,6 +878,13 @@
                 //$("#img-loader").addClass("hide");
             }
         });
+    }
+
+    function ToJavaScriptDate(value) {
+        var pattern = /Date\(([^)]+)\)/;
+        var results = pattern.exec(value);
+        var dt = new Date(parseFloat(results[1]));
+        return dt.getFullYear() + "-" + ("0" + (dt.getMonth() + 1)).slice(-2) + "-" + ("0" + dt.getDate()).slice(-2);
     }
 </script>
 

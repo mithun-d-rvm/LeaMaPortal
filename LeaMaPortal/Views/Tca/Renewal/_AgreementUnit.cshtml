@@ -25,19 +25,19 @@
     </div>
     <div class="col-md-12 document-row">
         <div class="col-md-2">
-            @Html.DropDownList("Property_ID", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
+            @Html.DropDownList("Property_ID", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth", @disabled = "disabled" })
         </div>
         <div class="col-md-3">
-          @Html.DropDownList("Properties_Name", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
+          @Html.DropDownList("Properties_Name", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth", @disabled = "disabled" })
         </div>
         <div class="col-md-2">
-           @Html.DropDownList("Property_ID_Tawtheeq", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
+           @Html.DropDownList("Property_ID_Tawtheeq", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth", @disabled = "disabled" })
         </div>
         <div class="col-md-2">
-            @Html.DropDownList("Unit_ID_Tawtheeq", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
+            @Html.DropDownList("Unit_ID_Tawtheeq", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth", @disabled = "disabled" })
         </div>
         <div class="col-md-2">
-           @Html.DropDownList("Unit_Property_Name", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
+           @Html.DropDownList("Unit_Property_Name", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" }) @*, @disabled = "disabled"*@
         </div>
         <div class="col-md-1">
             <button class="document-btn" onclick="addAgreementUnitListRenewal(event);">Add</button>
@@ -225,47 +225,111 @@
         });
         AgreementUnitListCount = newindex;
     });
-    $("#AgreementUnit-Renewal #Property_ID").change(function () {
+    //$("#AgreementUnit-Renewal #Property_ID").change(function () {
          
-        var propertyid = $("#AgreementUnit-Renewal #Property_ID").val();
-        $("#AgreementUnit-Renewal #Properties_Name").val(propertyid);
-        $("#AgreementUnit-Renewal #Property_ID_Tawtheeq").val(propertyid);
-        $("#AgreementUnit-Renewal #Unit_ID_Tawtheeq").val(propertyid);
-        $("#AgreementUnit-Renewal #Unit_Property_Name").val(propertyid);
-        return;
-    });
+    //    var propertyid = $("#AgreementUnit-Renewal #Property_ID").val();
+    //    $("#AgreementUnit-Renewal #Properties_Name").val(propertyid);
+    //    $("#AgreementUnit-Renewal #Property_ID_Tawtheeq").val(propertyid);
+    //    $("#AgreementUnit-Renewal #Unit_ID_Tawtheeq").val(propertyid);
+    //    $("#AgreementUnit-Renewal #Unit_Property_Name").val(propertyid);
+    //    return;
+    //});
     $("#AgreementUnit-Renewal #Properties_Name").change(function () {
-        var propertyid = $("#AgreementUnit-Renewal #Properties_Name").val();
-        $("#AgreementUnit-Renewal #Property_ID").val(propertyid);
-        $("#AgreementUnit-Renewal #Property_ID_Tawtheeq").val(propertyid);
-        $("#AgreementUnit-Renewal #Unit_ID_Tawtheeq").val(propertyid);
-        $("#AgreementUnit-Renewal #Unit_Property_Name").val(propertyid);
+        var propertyid = $("#editAgreementForm #property_id").val();
+        //alert(propertyid);
+        //$("#AgreementUnit-Renewal #Property_ID").val(propertyid);
+        //$("#AgreementUnit-Renewal #Property_ID_Tawtheeq").val(propertyid);
+        getUnit(propertyid);
+        //$("#AgreementUnit-Renewal #Unit_ID_Tawtheeq").val(propertyid);
+        //$("#AgreementUnit-Renewal #Unit_Property_Name").val(propertyid);
         return;
     });
-    $("#AgreementUnit-Renewal #Property_ID_Tawtheeq").change(function () {
-        var propertyid = $("#AgreementUnit-Renewal #Property_ID_Tawtheeq").val();
-        $("#AgreementUnit-Renewal #Property_ID").val(propertyid);
-        $("#AgreementUnit-Renewal #Properties_Name").val(propertyid);
-        $("#AgreementUnit-Renewal #Unit_ID_Tawtheeq").val(propertyid);
-        $("#AgreementUnit-Renewal #Unit_Property_Name").val(propertyid);
-        return;
-    });
+    //$("#AgreementUnit-Renewal #Property_ID_Tawtheeq").change(function () {
+    //    var propertyid = $("#AgreementUnit-Renewal #Property_ID_Tawtheeq").val();
+    //    $("#AgreementUnit-Renewal #Property_ID").val(propertyid);
+    //    $("#AgreementUnit-Renewal #Properties_Name").val(propertyid);
+    //    $("#AgreementUnit-Renewal #Unit_ID_Tawtheeq").val(propertyid);
+    //    $("#AgreementUnit-Renewal #Unit_Property_Name").val(propertyid);
+    //    return;
+    //});
 
-    $("#AgreementUnit-Renewal #Unit_ID_Tawtheeq").change(function () {
-        var propertyid = $("#AgreementUnit-Renewal #Unit_ID_Tawtheeq").val();
-        $("#AgreementUnit-Renewal #Property_ID").val(propertyid);
-        $("#AgreementUnit-Renewal #Properties_Name").val(propertyid);
-        $("#AgreementUnit-Renewal #Property_ID_Tawtheeq").val(propertyid);
-        $("#AgreementUnit-Renewal #Unit_Property_Name").val(propertyid);
-        return;
-    });
+    //$("#AgreementUnit-Renewal #Unit_ID_Tawtheeq").change(function () {
+    //    var propertyid = $("#AgreementUnit-Renewal #Unit_ID_Tawtheeq").val();
+    //    $("#AgreementUnit-Renewal #Property_ID").val(propertyid);
+    //    $("#AgreementUnit-Renewal #Properties_Name").val(propertyid);
+    //    $("#AgreementUnit-Renewal #Property_ID_Tawtheeq").val(propertyid);
+    //    $("#AgreementUnit-Renewal #Unit_Property_Name").val(propertyid);
+    //    return;
+    //});
     $("#AgreementUnit-Renewal #Unit_Property_Name").change(function () {
-        var propertyid = $("#AgreementUnit-Renewal #Unit_Property_Name").val();
-        $("#AgreementUnit-Renewal #Property_ID").val(propertyid);
-        $("#AgreementUnit-Renewal #Properties_Name").val(propertyid);
-        $("#AgreementUnit-Renewal #Unit_ID_Tawtheeq").val(propertyid);
-        $("#AgreementUnit-Renewal #Property_ID_Tawtheeq").val(propertyid);
+        //var propertyid = $("#AgreementUnit-Renewal #Unit_Property_Name").val();
+        //$("#AgreementUnit-Renewal #Property_ID").val(propertyid);
+        //$("#AgreementUnit-Renewal #Properties_Name").val(propertyid);
+        //$("#AgreementUnit-Renewal #Unit_ID_Tawtheeq").val(propertyid);
+        $("#AgreementUnit-Renewal #Unit_ID_Tawtheeq option:selected").text($("#AgreementUnit-Renewal #Unit_Property_Name option:selected").text() == "--Select--" ? "--Select--" : $("#AgreementUnit-Renewal #Unit_Property_Name").val());
+        //$("#AgreementUnit-Renewal #Property_ID_Tawtheeq").val(propertyid);
         return;
     });
 
+    
+    function getUnit(propertyId) {
+        $.ajax(
+               {
+                   url: "../Tca/GetPropertiesUnitDetails",
+                   // dataType: "jsonp",
+                   method: "GET",
+                   data: { propertyId: propertyId }, //FormData(form.get(0)),
+                   contentType: "application/json",
+
+                   success: function (response) {
+
+                       //var propertyidOptions = '<option value="" selected>--Select--</option>';
+                       //$("#TcaPropertyId").empty();
+
+                       //var propertyidTawtheeqOptions = '<option value="" selected>--Select--</option>';
+                       //$("#TcaPropertyIDTawtheeq").empty();
+
+                       var propertyNameOptions = '<option value="" selected>--Select--</option>';
+                       //$("#TcaPropertyName").empty();
+
+                       var unitidOptions = '<option value="" selected>--Select--</option>';
+                       $("#AgreementUnit-Renewal #Unit_ID_Tawtheeq").empty();
+
+                       var unitnameOptions = '<option value="" selected>--Select--</option>';
+                       $("#AgreementUnit-Renewal #Unit_Property_Name").empty();
+
+                       $.each(response, function (index, data) {
+                           //propertyidOptions += '<option value="' + data.property_id + '">' + data.property_id + '</option>';
+                           //propertyidTawtheeqOptions += '<option value="' + data.Property_ID_Tawtheeq + '">' + data.Property_ID_Tawtheeq + '</option>';
+                           // propertyNameOptions += '<option value="' + data.Property_ID_Tawtheeq + '">' + data.Property_Name + '</option>';
+
+                           unitidOptions += '<option value="' + data.Ref_Unit_Property_ID + '">' + data.Unit_ID_Tawtheeq + '</option>';
+                           unitnameOptions += '<option value="' + data.Unit_ID_Tawtheeq + '">' + data.Unit_Property_Name + '</option>';
+
+                       });
+                       //$('#TcaPropertyIDTawtheeq').append(propertyidTawtheeqOptions);
+                       //$('#TcaPropertyName').append(propertyNameOptions);
+                       $('#AgreementUnit-Renewal #Unit_ID_Tawtheeq').append(unitidOptions);
+                       $('#AgreementUnit-Renewal #Unit_Property_Name').append(unitnameOptions);
+                   },
+                   error: function (jqXhr, textStatus, errorThrown) {
+                       alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   },
+                   complete: function () {
+                       // $("#").addClass("hide");
+                   }
+
+               });
+    }
+
+    $(document).ready(function () {
+        //$("#editAgreementForm #TcaEditPropertyName").trigger("change");
+        var propertyid = $("#editAgreementForm #property_id").val();
+        //alert(propertyid);
+        //alert($("#TcaEditPropertyName option:selected").val());
+        $("#AgreementUnit-Renewal #Properties_Name").val(propertyid);
+        $("#AgreementUnit-Renewal #Property_ID").val(propertyid);
+        $("#AgreementUnit-Renewal #Property_ID_Tawtheeq").val(propertyid);//$("#TcaEditPropertyName option:selected").val()
+        $("#AgreementUnit-Renewal #Properties_Name").trigger("change");
+    });
 </script>

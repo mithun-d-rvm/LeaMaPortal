@@ -1,0 +1,449 @@
+﻿
+@ViewBag.Recdtas
+@model LeaMaPortal.Models.ReceiptPrintModel
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+
+<div class="modal-content">
+    <button type="button" class="close" data-dismiss="modal" style="margin-top: -1px;margin-right: -26px;font-size:10px; color:black;background-color:white">×</button>
+    <div id="PrintelementID">
+        <div class="modal-body">
+            <div style="padding:0px 20px 0px 10px">
+                    <div style="width:25%; text-align:left; float:left;">
+                        <p style="margin-bottom:2px !important;font-size:12px;">Tel: +971-2-2222844</p>
+                        <p style="margin-bottom:2px !important;font-size:12px;">Fax: +971-2-2222874</p>
+                        <p style="margin-bottom:2px !important;font-size:12px;">P.O. Box: 60885</p>
+                        <p style="margin-bottom:2px !important;font-size:12px;">Abu Dhabi, U.A.E</p>
+                        <p style="margin-bottom:2px !important;font-size:12px;">E-Mail: info@hameeminvest.com</p>
+                        <p style="margin-bottom:2px !important;font-size:10px;">Limited Liability Company, Paid up Capital 150,000</p>
+                    </div>
+
+                    <div style="width:25%; text-align:right; float:right;">
+                        <p style="margin-bottom:2px !important;font-size:12px;">+هاتف ٢٢٢٢٨٤٤-٢-٩٧١</p>  
+                        <p style="margin-bottom:2px !important;font-size:12px;">+فاكس ٢٢٢٢٨٧٤-٢-٩٧١</p>
+                        <p style="margin-bottom:2px !important;font-size:12px;">صندوق بريد: ٦٠٨٨٥</p>
+                        <p style="margin-bottom:2px !important;font-size:12px;">ابو ظبي أ.غ.م</p>
+                        <p style="margin-bottom:2px !important;font-size:12px;">   بريد اليكترونى </p>
+                        <p style="margin-bottom:2px !important;font-size:10px;">ذات مسؤولية محدودة رأس المال المدفوع150,000</p>
+                    </div>
+                    <div style="width:25%; text-align:center;margin:auto;height:5px;">
+                        @*<img src="~/Images/Logo-Bitmap.png">*@
+                        <img src="~/Images/logoR.jpg">
+                    </div>             
+                    
+            </div>
+
+            <div >
+            <div style="padding:0px 20px 0px 10px; clear:both;">
+                <div style="width:33.33%; text-align:center; float:left;">
+                    @if (Model.Dhirams != "")
+                    { 
+                    <table style="text-align:center;">
+                        <tr>
+                            <td style="padding:3px 5px">Dhs   درهم   </td>
+                            <td style="padding:3px 5px 3px 5px">Fils	فلس</td>
+                        </tr>
+                        <tr>
+                            @*<th style="font-size:10px;text-align:center;">4500</th>*@
+                            <th style="font-size:14px;text-align:center;">@Model.Dhirams </th>
+                            <th style="font-size:14px;text-align:center;">@Model.Fills </th>
+                        </tr>
+                    </table>
+                    }
+                </div>
+
+                <div style="width:33.33%; text-align:right; float:right;">
+                    <div style="margin-bottom:2px !important;"><strong><i>No.</i>HI/ </strong>@Model.ReceiptNo</div>
+                    <div style="margin-bottom:2px !important;">Date:&nbsp;<span style="border-bottom:3px dotted #b5b5b5;">&nbsp; @Model.ReceiptDate &nbsp;</span>:التاري</div>
+                 </div>
+                <div style="width:33.33%; text-align:center;margin:auto;">
+                    <div style="font-size:25px; font-weight:bold;">سند القبض</div>
+                    <div style="font-size:25px; font-weight:bold; text-decoration:overline;">Receipt Voucher</divstyle="font-size:25px;>
+                </div>
+            </div>
+
+            <div style="padding:10px 20px 10px 10px; clear:both;">
+                <div>
+                    <div style="width:29%; text-align:left; float:left;height:20px;">
+                        <p style="margin-bottom:0px !important;">Recieved From Mr. / M /s.</p>
+                    </div>
+                    <div style="width:25%; text-align:right; float:right;">
+                        <p style="margin-bottom:0px !important;">استلمنا من السيد/ السادة</p>
+                    </div>
+                  
+                    <div style="width:47%; text-align:left;border-bottom:2px dotted #b5b5b5; margin:auto;height:30px;">
+                        <p>@Model.Tenant_Name</p>
+                    </div>
+                </div>
+                <div style="clear:both; padding-top:5px;">
+                    <div style="width:30%; text-align:left; float:left;">
+                        <p style="margin-bottom:0px !important;">The sum of Dhs.</p>
+                    </div>
+                    <div style="width:15%; text-align:right; float:right;">
+                        <p style="margin-bottom:0px !important;">:مبلغ و قدره</p>
+                    </div>
+                    <div style="width:67%; text-align:left;border-bottom:2px dotted #b5b5b5; margin:auto;height:20px;">
+                      <p>@Model.AmtInWords</p> 
+                    </div>
+                </div>
+                @*<div style="clear:both; padding-top:40px; ">
+                    <div style="width:100%;border-bottom:3px dotted #b5b5b5;margin:auto;"></div>
+                </div>*@
+                <div style="padding-top:20px;">
+                    <div style="text-align:left; float:left;height:30px;">
+                        <p>Cash / Cheque No</p>
+                    </div>
+                    @if(Model.RecpType == "cash") { 
+                    <div style="width:33.33%; text-align:left; float:left;border-bottom:2px dotted #b5b5b5;height: 30px;">
+                        <p>@Model.RecpType </p>
+                    
+                    </div>
+                    }
+                    @if (Model.RecpType == "cheque")
+                    {
+                        <div style="width:33.33%; text-align:center; float:left;border-bottom:2px dotted #b5b5b5;height: 30px;">
+                            <p>@Model.DDChequeNo </p>
+                        </div>
+                    }
+                    @if (Model.RecpType == "pdc")
+                    {
+                        <div style="width:33.33%; text-align:center; float:left;border-bottom:2px dotted #b5b5b5;height: 30px;">
+                            <p>@Model.DDChequeNo </p>
+                        </div>
+                    }
+                    @if (Model.RecpType == "online")
+                    {
+                        <div style="width:33.33%; text-align:center; float:left;border-bottom:2px dotted #b5b5b5;height: 30px;">
+                            <p>@Model.RecpType</p>
+                        </div>
+                    }
+                    <div style="width:15%; text-align:left; float:left;height: 30px;">
+                        <p>:شيك رقم    </p>
+                    </div>
+                    <div style=" text-align:right; float:right;">
+                        <p>:التاريخ</p>
+                    </div>
+                    @if(Model.RecpType =="cash")
+                    {
+                    <div style="width:16.66%; text-align:center; float:right;border-bottom:2px dotted #b5b5b5;height: 30px;">
+                        <p>@Model.ReceiptDate </p>
+                    </div>
+                    }
+                    @if (Model.RecpType == "cheque")
+                    { 
+                     <div style="width:16.66%; text-align:center; float:right;border-bottom:2px dotted #b5b5b5;height: 30px;">
+                        <p>@Model.DDChequeDate </p>
+                    </div>
+
+                    }
+                    @if (Model.RecpType == "pdc")
+                    {
+                        <div style="width:16.66%; text-align:center; float:right;border-bottom:2px dotted #b5b5b5;height: 30px;">
+                           <p>@Model.DDChequeDate</p>
+                        </div>
+
+                    }
+                    @if (Model.RecpType == "online")
+                    {
+                        <div style="width:33.33%; text-align:center; float:left;border-bottom:2px dotted #b5b5b5;height: 30px;">
+                            <p>@Model.ReceiptDate</p>
+                        </div>
+                    }
+                    <div style="width:8.33%; text-align:right; float:right;">
+                        <p>Dated </p>
+                    </div>
+                    
+                    
+                </div>
+
+                <div style="clear:both;">
+                    <div  style="width:8.33%; text-align:left; float:left;">
+                        <p>Bank: </p>
+                    </div>
+                    <div style="width:8.33%; text-align:right; float:right;">
+                        <p>   :بنك</p>
+                    </div>
+                    <div style="width:83.33%; text-align:left; float:right;border-bottom:2px dotted #b5b5b5;height: 30px;">
+                       <p>@Model.BankAcName</p>
+                    </div>
+                    
+                </div>
+                <div style="clear:both;">
+                    <div style="width:8.33%; text-align:left; float:left;">
+                        <p>Being: </p>
+                    </div>
+                    <div style="width:8.33%; text-align:right; float:right;">
+                        <p>    :وذلك عن</p>
+                    </div>
+                    @*<div style="width:89.5%; text-align:left; float:right;border-bottom:2px dotted #b5b5b5;height:30px;">*@
+                    <div style="width:83.33%; text-align:left; float:right;border-bottom:2px dotted #b5b5b5;height: 30px;">
+                        <p>  @Model.Narration</p>
+                    </div>
+                  
+                </div>
+
+                </div>
+                <div style="padding-bottom:10px;">
+                    <div style="padding-top:70px;">
+                        <div style="width:16.66%; text-align:center; float:left;border-bottom:2px dotted #b5b5b5;"></div>
+                        
+                        <div style="width:16.66%; text-align:center; float:right;border-bottom:2px dotted #b5b5b5;"></div>
+                    </div>
+                    <div style="clear: both;">
+                        <div style="width:16.66%; text-align:center; float:left;">Prepared By</div>
+                        <div class="col-xs-6 tecent padzero"></div>
+                        <div style="width:16.66%; text-align:center; float:right;">Recieved By</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ <!--       <div>
+            <table>
+                <tr>
+                    <td>
+                        &nbsp; &nbsp; &nbsp;
+                        To,
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp; &nbsp; &nbsp;
+                        Tenant Name :@Model.Ag_Tenant_Name
+
+                    </td>
+                    <td>
+                       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        
+                          Receipt No :@Model.ReceiptNo
+                    </td>
+                                       </tr>
+                <tr>
+                    <td>
+                        &nbsp; &nbsp; &nbsp;
+                          Address:@Model.Ag_Tenant_Address
+                    </td>
+                    <td>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        
+                        Receipt Date:@Model.ReceiptDate
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+        
+        <br />
+        <div>
+            <table>
+                
+                <tr>
+                    <td>
+                        &nbsp; &nbsp; &nbsp;
+                        Property Name :@Model.Property_Name 
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        &nbsp; &nbsp; &nbsp;
+                        Unit Name:
+                    </td>
+                </tr>
+                
+                </table> 
+        </div> -->
+
+    </div>
+</div>
+
+@*@if (ViewBag.Recdtas.Count > 0)
+{
+
+    <div style="padding-left:2px">
+        <table class="beta">
+            <thead> 
+                      
+            <th>Invoice No</th>
+            &nbsp;&nbsp;&nbsp;
+            <th>Invoice Date</th>
+            &nbsp;&nbsp;&nbsp;
+            <th>Invoice Type</th>
+            &nbsp;&nbsp;&nbsp;
+            <th>Invoice Amount</th>
+            &nbsp;&nbsp;&nbsp;
+            <th>Credit Amount</th>
+            &nbsp;&nbsp;&nbsp;
+            <th>Received Amount</th>
+            &nbsp;&nbsp;&nbsp;
+            <th>Remarks</th>
+            &nbsp;&nbsp;&nbsp;
+            <th>Description</th>
+            &nbsp;&nbsp;&nbsp;
+
+            </thead>
+            @foreach (var item in ViewBag.Recdtas)
+            {
+
+                <tr>
+                    
+                    <td align="center" >
+                        @item.Invno
+                    </td>
+                    <td align="center">
+                        @item.InvoiceDate
+                    </td>
+                    <td align="center">
+                        @item.Invtype
+                    </td>
+                    <td align="center">
+                        @item.InvoiceAmount
+                    </td>
+                    <td align="center">
+                        @item.CreditAmt
+                    </td>
+                    <td align="center">
+                        @item.ReceivedAmount
+                    </td>
+                    <td align="center">
+                        @item.Remarks
+                    </td>
+                    <td align="center">
+                        @item.Description
+                    </td>
+                </tr>
+
+            }
+
+        
+
+        </table>
+    </div>
+
+}*@
+
+
+
+
+     
+<hr />
+<div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-8">
+        <textarea rows="5" class="form-control" id="otherTerms" placeholder="other terms" style="display:none"></textarea>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+
+
+</div>
+
+
+<div class="row" style="padding-top:8%; text-align:center;">
+    <input type="button" style="background-color: #554289;
+    color: white;
+    border-radius: 15px !important;
+    width: 200px;
+    padding: 10px !important;" value="Print" id="btnPrint" />
+
+    <input type="button" class="receipt-print-update" style="background-color: #554289;
+    color: white;
+    border-radius: 15px !important;
+    width: 200px;
+
+    padding: 10px !important; display:none" value="Update Other Terms" data_receiptno="@Model.ReceiptNo" target="#ReceiptModal" />
+    @*@Html.ActionLink(" ", "Print", null, new { @class = "glyphicon glyphicon-print  agreement-print-update", title = "Update other terms", @data_toggle = "modal", @data_target = "#contractModal", @data_agreementno = Model.Agreement_No })*@
+</div>
+
+<style>
+    .beta td,th {
+       
+    
+        border: 1px solid black;
+        border-collapse: collapse;
+  
+
+    
+        padding: 5px;
+        text-align: left;
+    }
+</style>
+
+
+
+
+<script type="text/javascript">
+
+    $(".receipt-print-update").click(function (e) {
+        // $("#img-loader").removeClass("hide");
+        e.preventDefault();
+        var id = $(this).data("receiptno");
+    //alert(id);
+        $.ajax(
+            {
+                url: "../Receipts/Print",
+                type: "Get",
+                data: { ReceiptNo: id, otherTerms:$("#otherTerms").val() },
+                success: function (result) {
+                    //var data=jQuery.parseJSON(result);
+                    if (result.Errors == undefined || result.Errors == "") {
+                        $("#PrintContainer").empty();
+                        $("#PrintContainer").html(result);
+                        
+                        $("#ReceiptModal").modal('show');
+
+
+
+
+                    }
+                    else {
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(data.Errors);
+                        $('#masterResultModal').modal('show');
+                        //alert(data.Errors);
+                    }
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    // $("body").scrollTop(0);
+                }
+            });
+    });
+    function printData() {
+       // alert(1);
+        var divToPrint = document.getElementById("PrintelementID");
+        newWin = window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+        //$("#contractModal").modal('hide');
+    }
+    //printData();
+        $(document).ready()
+        {
+
+         //btnPrint button id
+            $('#btnPrint').on('click', function () {
+                               printData();
+            })
+
+        }
+</script>
+

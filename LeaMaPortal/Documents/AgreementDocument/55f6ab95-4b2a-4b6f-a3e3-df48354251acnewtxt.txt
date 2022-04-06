@@ -1,0 +1,34 @@
+Contract Agreement Date: 06/06/2017
+Contract Tenant Type   : Individual
+Tenant ID              : 200
+Tenant Name            : XXX
+Contract Agreement     : 06/06/2017 
+Start Date
+Contract Agreement     : 06/20/2017
+End Date          
+Contract Total Rental  : 40000
+Amount 
+Total Number of Payments : 1
+Contract 	
+Contract Security Deposit : 4000
+Amount
+Security Deposit Payment Mode : Cheque
+Security Deposit Cheque/Ref no : 6644
+Security Cheque Date : 06/06/2017
+Contract Notice Period Days : 40
+
+
+**********************************
+Ag_Tenant_id
+Ag_Tenant_Name
+Security_Flag
+Security_chequeno
+Security_chequedate
+
+AgreementUnit
+
+
+TcaRenewalUnitIDTawtheeq
+
+TcaRenewalUnitPropertyName
+

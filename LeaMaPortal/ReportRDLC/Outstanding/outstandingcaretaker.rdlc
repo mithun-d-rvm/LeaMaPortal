@@ -1,72 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="outstanding_caretakerds">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>b08c6502-d58c-46d9-933c-3dcf1cdbed40</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="Caretaker_id">
-          <DataField>Caretaker_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Caretaker_Name">
-          <DataField>Caretaker_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Region_Name">
-          <DataField>Region_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Country">
-          <DataField>Country</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Noof_properties">
-          <DataField>Noof_properties</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Remaining_Days">
-          <DataField>Remaining_Days</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Remaining_Range">
-          <DataField>Remaining_Range</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Amont_Range">
-          <DataField>Amont_Range</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="outstanding_amt">
-          <DataField>outstanding_amt</DataField>
-          <rd:TypeName>System.Single</rd:TypeName>
-        </Field>
-        <Field Name="user">
-          <DataField>user</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>outstanding_caretakerds</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>outstandingcaretakerds1</rd:DataSetName>
-        <rd:SchemaPath>D:\mysql\RDLC\RDLCApplicationWithParamstest\RDLCApplicationWithParams\outstandingcaretakerds1.xsd</rd:SchemaPath>
-        <rd:TableName>outstanding_caretaker_report</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>outstanding_caretaker_reportTableAdapter</rd:TableAdapterName>
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
@@ -128,7 +61,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>No of Vacant</Value>
+                              <Value>No of Properties</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -807,7 +740,7 @@
                               <Paragraph>
                                 <TextRuns>
                                   <TextRun>
-                                    <Value>Region Name</Value>
+                                    <Value>Region </Value>
                                     <Style>
                                       <FontWeight>Bold</FontWeight>
                                     </Style>
@@ -1252,7 +1185,7 @@
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Top>3.17375in</Top>
-        <Left>0.16333in</Left>
+        <Left>0.15632in</Left>
         <Height>1.5in</Height>
         <Width>11.77082in</Width>
         <Visibility>
@@ -1482,6 +1415,9 @@
                 <CrossAt>NaN</CrossAt>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
               <ChartAxis Name="Secondary">
                 <Style>
@@ -1516,6 +1452,9 @@
                 <Location>Opposite</Location>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
             </ChartCategoryAxes>
             <ChartValueAxes>
@@ -1550,6 +1489,9 @@
                 <CrossAt>NaN</CrossAt>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
               <ChartAxis Name="Secondary">
                 <Style>
@@ -1583,6 +1525,9 @@
                 <Location>Opposite</Location>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
             </ChartValueAxes>
             <Style>
@@ -1636,8 +1581,8 @@
           </Style>
         </ChartNoDataMessage>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.30556in</Top>
-        <Left>1.23966in</Left>
+        <Top>0.31945in</Top>
+        <Left>1.22577in</Left>
         <Height>2.78486in</Height>
         <Width>10.69451in</Width>
         <ZIndex>2</ZIndex>
@@ -1672,8 +1617,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox72</rd:DefaultName>
-        <Top>0.34389in</Top>
-        <Left>0.17021in</Left>
+        <Top>0.30556in</Top>
+        <Left>0.15632in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>3</ZIndex>
@@ -1708,8 +1653,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox73</rd:DefaultName>
-        <Top>0.63555in</Top>
-        <Left>0.17021in</Left>
+        <Top>0.63889in</Top>
+        <Left>0.15632in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>4</ZIndex>
@@ -1738,6 +1683,74 @@
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
-  <rd:ReportID>492eaab7-aa18-41f3-bebf-81e7a856c6c4</rd:ReportID>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="outstanding_caretakerds">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>b08c6502-d58c-46d9-933c-3dcf1cdbed40</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>outstanding_caretakerds</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Caretaker_id">
+          <DataField>Caretaker_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Caretaker_Name">
+          <DataField>Caretaker_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Region_Name">
+          <DataField>Region_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Country">
+          <DataField>Country</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Noof_properties">
+          <DataField>Noof_properties</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Remaining_Days">
+          <DataField>Remaining_Days</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Remaining_Range">
+          <DataField>Remaining_Range</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Amont_Range">
+          <DataField>Amont_Range</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="outstanding_amt">
+          <DataField>outstanding_amt</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
+        </Field>
+        <Field Name="user">
+          <DataField>user</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>outstandingcaretakerds1</rd:DataSetName>
+        <rd:SchemaPath>D:\mysql\RDLC\RDLCApplicationWithParamstest\RDLCApplicationWithParams\outstandingcaretakerds1.xsd</rd:SchemaPath>
+        <rd:TableName>outstanding_caretaker_report</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>outstanding_caretaker_reportTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>492eaab7-aa18-41f3-bebf-81e7a856c6c4</rd:ReportID>
 </Report>

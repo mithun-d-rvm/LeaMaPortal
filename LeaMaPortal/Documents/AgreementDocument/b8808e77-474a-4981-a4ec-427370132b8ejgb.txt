@@ -1,0 +1,63 @@
+BEGIN
+
+Declare opname varchar(50);
+
+  -- declare  x int;
+ DECLARE EXIT HANDLER FOR SQLEXCEPTION
+  begin
+         
+         GET DIAGNOSTICS CONDITION 1 @sqlstate = RETURNED_SQLSTATE, @errno = MYSQL_ERRNO,
+         @text = MESSAGE_TEXT; 
+         SET @full_error = CONCAT("ERROR ", @errno, " (", @sqlstate, "): ", @text); 
+         
+         
+
+         rollback;
+        
+
+          INSERT INTO tbl_Errorlog(Procedure_Name,Error_Text, Createddatetime,user,Machine_Name)
+		  VALUES ('Usp_approval_All',@full_error, current_timestamp(),PCreateduser,@@hostname);
+ resignal;
+
+          
+      end;
+     start transaction;
+    
+
+ -- set x="zzzzzzzzzzz";
+   
+-- SELECT
+	IF PFlag = "SELECT" THEN
+		SELECT *
+		FROM tbl_agreement where ifnull(Delmark,'')<>'*' and ifnull(Approval_Flag,0) in(0,2);
+	 END IF;
+
+
+	IF PFlag = 'update' THEN
+		UPDATE tbl_Agreement
+		SET 
+      
+Approval_flag=PApproval_flag
+		WHERE agreement_no = PAgreement_no  and ifnull(Delmark,'')<>'*' ;
+END IF;
+
+    -- INSERT INTO LOG
+    IF PFlag IN("INSERT","UPDATE","DELETE") THEN
+   
+    	INSERT INTO tbl_log(Table_Name, Operations,Opeartion_Datetime,Login_username,Keyfield,Keyfieldvalue,Machine_Name,procedure_name)
+		VALUES ('tbl_approval', PFlag, current_timestamp(),'','Agreement_no',PAgreement_no,@@hostname,'Usp_approval_All');
+	END IF;
+    commit;
+END
+
+
+
+
+
+
+
+
+
+
+[?8/?1/?2017 3:59 PM]  Priyanka Sebastin:  
+VINO1234---8220013289-vinothini Change her status from reject into offer status 

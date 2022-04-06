@@ -66,6 +66,18 @@
             case 7:
                 GetSummaryEBWaterReport();
                 break;
+    case 8:
+    GetTallyReport();
+    break;
+
+            case 9:
+                GetUtilityTrendragReport();
+                break;
+
+            case 10:
+                GetPropertyStatusReport();
+                break;
+
         }
     }
     function GetVacancyReport() {
@@ -223,4 +235,75 @@
                 }
             });
         }
+    function GetTallyReport(){
+     $("#img-loader").removeClass("hide");
+        $("#ReportArea").empty();
+        $.ajax(
+        {
+            url: "../Report/GetTallyReport",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ReportArea").html('');
+                $("#ReportArea").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+
+    }
+
+    function GetUtilityTrendragReport() {
+
+        $("#img-loader").removeClass("hide");
+        $("#ReportArea").empty();
+        $.ajax(
+        {
+            url: "../Report/GetUtilityTrendRAGReport",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ReportArea").html('');
+                $("#ReportArea").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
+
+    function GetPropertyStatusReport() {
+
+        $("#img-loader").removeClass("hide");
+        $("#ReportArea").empty();
+        $.ajax(
+        {
+            url: "../Report/GetPropertyStatusReport",
+            type: "Get",
+            data: {},
+            contentType: "application/json",
+            processData: false,
+            success: function (html) {
+                $("#ReportArea").html('');
+                $("#ReportArea").html(html);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
 </script>

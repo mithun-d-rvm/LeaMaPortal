@@ -1,0 +1,27 @@
+select Cheque_No,cheque_date from view_receipt_screen_advance_pending where balanceamount<>0 and payment_mode='cheque' and Agreement_No=13 and region_name='Abudabi'
+
+502781
+567804
+
+502781
+
+Daddy 
+=====
+A/c Name    : MOHANASUNDARAM G
+A/c No      : 10869374189
+Bank Name   : STATE BANK OF INDIA
+IFSC Code   : SBIN0000899
+Branch      : Pollachi
+
+
+********************************************
+
+Novels Inn
+===========
+A/c Name    : Noels Inn
+A/c No      : 158501306674288
+Bank Name   : TAMILNAD MERCANTILE BANK LTD
+IFSC Code   : TMBL0000158
+Branch      : THIRUVANMIYUR,CHENNAI (TMR)
+
+

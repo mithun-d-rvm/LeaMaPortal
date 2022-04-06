@@ -1,64 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="summaryebwater_caretakerds">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>0c4da73b-9a8e-49d0-a742-c35e139e81e1</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="Caretaker_id">
-          <DataField>Caretaker_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Caretaker_Name">
-          <DataField>Caretaker_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Region_Name">
-          <DataField>Region_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Country">
-          <DataField>Country</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Noof_properties">
-          <DataField>Noof_properties</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Billamount">
-          <DataField>Billamount</DataField>
-          <rd:TypeName>System.Single</rd:TypeName>
-        </Field>
-        <Field Name="Paidamount">
-          <DataField>Paidamount</DataField>
-          <rd:TypeName>System.Single</rd:TypeName>
-        </Field>
-        <Field Name="user">
-          <DataField>user</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>summaryebwater_caretakerds</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>summaryebwater_caretakerds</rd:DataSetName>
-        <rd:SchemaPath>D:\mysql\RDLC\RDLCApplicationWithParamstest\RDLCApplicationWithParams\summaryebwater_caretakerds.xsd</rd:SchemaPath>
-        <rd:TableName>summaryebwater_caretaker_report</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>summaryebwater_caretaker_reportTableAdapter</rd:TableAdapterName>
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
@@ -68,7 +9,7 @@
               <Width>1in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.97222in</Width>
+              <Width>1.16181in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.97222in</Width>
@@ -156,7 +97,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Billamount</Value>
+                              <Value>Bill amount</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -189,7 +130,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Paidamount</Value>
+                              <Value>Received Amount</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -995,7 +936,7 @@
                               <Paragraph>
                                 <TextRuns>
                                   <TextRun>
-                                    <Value>Region Name</Value>
+                                    <Value>Region </Value>
                                     <Style>
                                       <FontWeight>Bold</FontWeight>
                                     </Style>
@@ -1424,7 +1365,7 @@
         <Top>3.52792in</Top>
         <Left>0.11125in</Left>
         <Height>1.5in</Height>
-        <Width>12.66667in</Width>
+        <Width>11.85626in</Width>
         <Visibility>
           <ToggleItem>Textbox73</ToggleItem>
         </Visibility>
@@ -1441,7 +1382,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Summary Ebwater Report - Caretakerwise</Value>
+                <Value>Utility Payment Summary Report - Caretakerwise</Value>
                 <Style>
                   <FontSize>12pt</FontSize>
                   <FontWeight>Bold</FontWeight>
@@ -1457,7 +1398,7 @@
         <Top>0.13208in</Top>
         <Left>0.11125in</Left>
         <Height>0.25in</Height>
-        <Width>12.66667in</Width>
+        <Width>11.85626in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -1690,6 +1631,9 @@
                 <CrossAt>NaN</CrossAt>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
               <ChartAxis Name="Secondary">
                 <Style>
@@ -1724,6 +1668,9 @@
                 <Location>Opposite</Location>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
             </ChartCategoryAxes>
             <ChartValueAxes>
@@ -1758,6 +1705,9 @@
                 <CrossAt>NaN</CrossAt>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
               <ChartAxis Name="Secondary">
                 <Style>
@@ -1791,6 +1741,9 @@
                 <Location>Opposite</Location>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
             </ChartValueAxes>
             <Style>
@@ -1818,7 +1771,7 @@
         </ChartLegends>
         <ChartTitles>
           <ChartTitle Name="Default">
-            <Caption>Summary Ebwater Report - Caretakerwise</Caption>
+            <Caption>Utility Payment Summary Report - Caretakerwise</Caption>
             <Style>
               <BackgroundGradientType>None</BackgroundGradientType>
               <FontWeight>Bold</FontWeight>
@@ -1844,10 +1797,10 @@
           </Style>
         </ChartNoDataMessage>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.46541in</Top>
+        <Top>0.45152in</Top>
         <Left>1.19111in</Left>
         <Height>3.00695in</Height>
-        <Width>10.90973in</Width>
+        <Width>10.7764in</Width>
         <ZIndex>2</ZIndex>
         <Visibility>
           <ToggleItem>Textbox72</ToggleItem>
@@ -1879,8 +1832,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox72</rd:DefaultName>
-        <Top>0.51056in</Top>
-        <Left>0.12167in</Left>
+        <Top>0.45152in</Top>
+        <Left>0.11125in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>3</ZIndex>
@@ -1912,8 +1865,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox73</rd:DefaultName>
-        <Top>0.80222in</Top>
-        <Left>0.12167in</Left>
+        <Top>0.77097in</Top>
+        <Left>0.11125in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>4</ZIndex>
@@ -1939,6 +1892,66 @@
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
-  <rd:ReportID>1d8d66fd-65b2-45db-b35b-66728c7ddf8e</rd:ReportID>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="summaryebwater_caretakerds">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>0c4da73b-9a8e-49d0-a742-c35e139e81e1</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>summaryebwater_caretakerds</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Caretaker_id">
+          <DataField>Caretaker_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Caretaker_Name">
+          <DataField>Caretaker_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Region_Name">
+          <DataField>Region_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Country">
+          <DataField>Country</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Noof_properties">
+          <DataField>Noof_properties</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Billamount">
+          <DataField>Billamount</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
+        </Field>
+        <Field Name="Paidamount">
+          <DataField>Paidamount</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
+        </Field>
+        <Field Name="user">
+          <DataField>user</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>summaryebwater_caretakerds</rd:DataSetName>
+        <rd:SchemaPath>D:\mysql\RDLC\RDLCApplicationWithParamstest\RDLCApplicationWithParams\summaryebwater_caretakerds.xsd</rd:SchemaPath>
+        <rd:TableName>summaryebwater_caretaker_report</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>summaryebwater_caretaker_reportTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>1d8d66fd-65b2-45db-b35b-66728c7ddf8e</rd:ReportID>
 </Report>

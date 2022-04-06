@@ -14,7 +14,10 @@ namespace LeaMaPortal.ReportASPX.SummaryEBWater
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(!IsPostBack)
+            { 
             txt_CreatedUser.Text = System.Web.HttpContext.Current.User.Identity.Name;
+            }
         }
         protected void filterbyChange(object sender, EventArgs e)
         {
@@ -35,7 +38,7 @@ namespace LeaMaPortal.ReportASPX.SummaryEBWater
             if (dropDown_Group.SelectedItem.Value == "Property")
             {
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "--Select--", Value = "--Select--", Selected = true });
-                dropDown_FilterBy.Items.Add(new ListItem() { Text = "id", Value = "id" });
+
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "Refno", Value = "Refno" });
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "Meterno", Value = "Meterno" });
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "property_id", Value = "property_id" });
@@ -145,7 +148,7 @@ namespace LeaMaPortal.ReportASPX.SummaryEBWater
                 if (dropDown_Group.SelectedItem.Value == "Property")
                 {
                     SummaryEBWaterReportViewer.LocalReport.ReportPath = "ReportRDLC\\SummaryEBWater\\summaryebwaterprop.rdlc";
-                    var property = entities.Database.SqlQuery<SummaryEBWaterpropertyReportModel>("Select id,Refno,Meterno,property_id,Property_Name,Unit_id,Unit_Property_Name,Total_units,Meterreadingno,Reading_date,billdate,billno,duedate,utility_id,Utility_Name,Region_Name,country,Caretaker_Name,Caretaker_ID,Billamount,Paidamount,OutstandingAmt,Aging_Days,user from ebwater_report where user='" + txt_CreatedUser.Text + "'").ToList();
+                    var property = entities.Database.SqlQuery<SummaryEBWaterpropertyReportModel>("Select Refno,Meterno,property_id,Property_Name,Unit_id,Unit_Property_Name,Total_units,Meterreadingno,Reading_date,billdate,billno,duedate,utility_id,Utility_Name,Region_Name,country,Caretaker_Name,Caretaker_ID,Billamount,Paidamount,OutstandingAmt,Aging_Days,user from ebwater_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC

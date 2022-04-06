@@ -1,72 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="vacancy_caretakerds">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>d50e3f8a-3fd9-4029-bbf1-b845561b50f8</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="Caretaker_id">
-          <DataField>Caretaker_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Caretaker_Name">
-          <DataField>Caretaker_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Region_Name">
-          <DataField>Region_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Country">
-          <DataField>Country</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Noof_properties">
-          <DataField>Noof_properties</DataField>
-          <rd:TypeName>System.Int64</rd:TypeName>
-        </Field>
-        <Field Name="Aging_days">
-          <DataField>Aging_days</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Aging_Range">
-          <DataField>Aging_Range</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Amont_Range">
-          <DataField>Amont_Range</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Loss_Amt">
-          <DataField>Loss_Amt</DataField>
-          <rd:TypeName>System.Double</rd:TypeName>
-        </Field>
-        <Field Name="user">
-          <DataField>user</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>vacancy_caretakerds</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>vacancycaretakerds1</rd:DataSetName>
-        <rd:SchemaPath>D:\mysql\RDLC\RDLCApplicationWithParamstest\RDLCApplicationWithParams\vacancycaretakerds1.xsd</rd:SchemaPath>
-        <rd:TableName>vacancy_caretaker_report</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>vacancy_caretaker_reportTableAdapter</rd:TableAdapterName>
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
@@ -76,7 +9,7 @@
               <Width>1.64193in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.4362in</Width>
+              <Width>1.1862in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.64193in</Width>
@@ -842,7 +775,7 @@
                               <Paragraph>
                                 <TextRuns>
                                   <TextRun>
-                                    <Value>Region Name</Value>
+                                    <Value>Region </Value>
                                     <Style>
                                       <FontWeight>Bold</FontWeight>
                                     </Style>
@@ -1274,7 +1207,7 @@
         <Top>4.39583in</Top>
         <Left>0.10083in</Left>
         <Height>1.5in</Height>
-        <Width>9.99089in</Width>
+        <Width>9.74089in</Width>
         <Visibility>
           <ToggleItem>Textbox75</ToggleItem>
         </Visibility>
@@ -1291,7 +1224,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Vacancy Report - Caretakerwise</Value>
+                <Value>Vacant Report - Caretakerwise</Value>
                 <Style>
                   <FontSize>12pt</FontSize>
                   <FontWeight>Bold</FontWeight>
@@ -1307,7 +1240,7 @@
         <Top>0.17375in</Top>
         <Left>0.10083in</Left>
         <Height>0.25in</Height>
-        <Width>9.99091in</Width>
+        <Width>9.74089in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -1373,7 +1306,7 @@
                       <Label>Loss Amt</Label>
                     </ChartMember>
                     <ChartMember>
-                      <Label>Noof Vacant</Label>
+                      <Label>Noof properties</Label>
                     </ChartMember>
                   </ChartMembers>
                   <Label>=Fields!Region_Name.Value</Label>
@@ -1504,6 +1437,9 @@
                 <CrossAt>NaN</CrossAt>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
               <ChartAxis Name="Secondary">
                 <Style>
@@ -1538,6 +1474,9 @@
                 <Location>Opposite</Location>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
             </ChartCategoryAxes>
             <ChartValueAxes>
@@ -1572,6 +1511,9 @@
                 <CrossAt>NaN</CrossAt>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
               <ChartAxis Name="Secondary">
                 <Style>
@@ -1605,6 +1547,9 @@
                 <Location>Opposite</Location>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
             </ChartValueAxes>
             <Style>
@@ -1632,7 +1577,7 @@
         </ChartLegends>
         <ChartTitles>
           <ChartTitle Name="Default">
-            <Caption>Vacancy Report - Caretakerwise</Caption>
+            <Caption>Vacant Report - Caretakerwise</Caption>
             <Style>
               <BackgroundGradientType>None</BackgroundGradientType>
               <FontWeight>Bold</FontWeight>
@@ -1658,10 +1603,10 @@
           </Style>
         </ChartNoDataMessage>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.50708in</Top>
-        <Left>1.17027in</Left>
+        <Top>0.49319in</Top>
+        <Left>1.18416in</Left>
         <Height>3.83319in</Height>
-        <Width>8.92147in</Width>
+        <Width>8.67145in</Width>
         <ZIndex>2</ZIndex>
         <Visibility>
           <ToggleItem>Textbox74</ToggleItem>
@@ -1729,7 +1674,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox73</rd:DefaultName>
-        <Top>0.78485in</Top>
+        <Top>0.81264in</Top>
         <Left>0.10083in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
@@ -1759,6 +1704,74 @@
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
-  <rd:ReportID>1e41b6f2-f62a-4ad9-83ff-0de77739eb7f</rd:ReportID>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="vacancy_caretakerds">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>d50e3f8a-3fd9-4029-bbf1-b845561b50f8</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>vacancy_caretakerds</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Caretaker_id">
+          <DataField>Caretaker_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Caretaker_Name">
+          <DataField>Caretaker_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Region_Name">
+          <DataField>Region_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Country">
+          <DataField>Country</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Noof_properties">
+          <DataField>Noof_properties</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="Aging_days">
+          <DataField>Aging_days</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Aging_Range">
+          <DataField>Aging_Range</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Amont_Range">
+          <DataField>Amont_Range</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Loss_Amt">
+          <DataField>Loss_Amt</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="user">
+          <DataField>user</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>vacancycaretakerds1</rd:DataSetName>
+        <rd:SchemaPath>D:\mysql\RDLC\RDLCApplicationWithParamstest\RDLCApplicationWithParams\vacancycaretakerds1.xsd</rd:SchemaPath>
+        <rd:TableName>vacancy_caretaker_report</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>vacancy_caretaker_reportTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>1e41b6f2-f62a-4ad9-83ff-0de77739eb7f</rd:ReportID>
 </Report>

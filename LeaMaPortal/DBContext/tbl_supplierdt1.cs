@@ -26,6 +26,8 @@ namespace LeaMaPortal.DBContext
         public string Salutations { get; set; }
         public Nullable<int> Accyear { get; set; }
         public string Delmark { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     
         public virtual tbl_suppliermaster tbl_suppliermaster { get; set; }
     }

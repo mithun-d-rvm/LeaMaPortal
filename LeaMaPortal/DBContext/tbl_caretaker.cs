@@ -14,12 +14,6 @@ namespace LeaMaPortal.DBContext
     
     public partial class tbl_caretaker
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_caretaker()
-        {
-            this.tbl_agreement = new HashSet<tbl_agreement>();
-        }
-    
         public int Id { get; set; }
         public int Caretaker_id { get; set; }
         public string Caretaker_Name { get; set; }
@@ -38,8 +32,5 @@ namespace LeaMaPortal.DBContext
         public Nullable<System.DateTime> Createddatetime { get; set; }
         public string Createduser { get; set; }
         public string Delmark { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_agreement> tbl_agreement { get; set; }
     }
 }

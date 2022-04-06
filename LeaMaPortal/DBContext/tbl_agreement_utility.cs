@@ -22,7 +22,7 @@ namespace LeaMaPortal.DBContext
         public string Amount_Type { get; set; }
         public Nullable<float> Amount { get; set; }
         public string Delmark { get; set; }
-    
-        public virtual tbl_agreement tbl_agreement { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     }
 }

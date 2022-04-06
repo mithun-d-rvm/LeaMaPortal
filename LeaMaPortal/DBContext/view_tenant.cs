@@ -19,6 +19,12 @@ namespace LeaMaPortal.DBContext
         public string Middle_Name { get; set; }
         public string Last_Name { get; set; }
         public string Emailid { get; set; }
+        public string PrimaryGroup { get; set; }
+        public string SubGroup1 { get; set; }
+        public string SubGroup2 { get; set; }
+        public string SubGroup3 { get; set; }
         public string type { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     }
 }

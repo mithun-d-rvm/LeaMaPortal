@@ -116,7 +116,7 @@ Layout = null;
                     </div>
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.Agreement_No, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.DropDownList("Agreement_No", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
+                        @Html.DropDownList("Agreement_No", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control"}) @*, @required = "required"*@ 
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -182,7 +182,7 @@ Layout = null;
                         @Html.LabelFor(model => model.totalamt, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.totalamt, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
+                        @Html.EditorFor(model => model.totalamt, new { htmlAttributes = new { @class = "master-form-input form-control"} }) @*, @readonly = "readonly"*@ 
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">

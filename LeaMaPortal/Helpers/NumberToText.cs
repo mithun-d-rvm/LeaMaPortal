@@ -70,6 +70,7 @@ namespace LeaMaPortal.Helpers
         public static string Convert(decimal value)
         {
             string digits, temp;
+          
             bool showThousands = false;
             bool allZeros = true;
 
@@ -77,6 +78,7 @@ namespace LeaMaPortal.Helpers
             StringBuilder builder = new StringBuilder();
             // Convert integer portion of value to string
             digits = ((long)value).ToString();
+            
             // Traverse characters in reverse order
             for (int i = digits.Length - 1; i >= 0; i--)
             {
@@ -122,9 +124,10 @@ namespace LeaMaPortal.Helpers
                         {
                             if (column > 0)
                             {
-                                temp = String.Format("{0}{1}{2}",
+                                //  temp = String.Format("{0}{1}{2}",
+                                temp = String.Format("{0}{1}",
                                     temp,
-                                    _thousands[column / 3],
+                                    _thousands[column / 2],
                                     allZeros ? " " : ", ");
                             }
                             // Indicate non-zero digit encountered
@@ -152,14 +155,27 @@ namespace LeaMaPortal.Helpers
                         break;
                 }
             }
+           
 
             // Append fractional portion/cents
-            builder.AppendFormat("and {0:00}/100", (value - (long)value) * 100);
+            //  builder.AppendFormat("and {0:00}/100", (value - (long)value) * 100);
+            decimal value1 ;
+            value1 = (value - (long)value) * 100;
+            builder.AppendFormat("and {0:00}", value);
+
+            //  builder.AppendFormat("and {0:00}", (value - (long)value) * 100);
 
             // Capitalize first letter
             return String.Format("{0}{1}",
                 Char.ToUpper(builder[0]),
                 builder.ToString(1, builder.Length - 1));
+
+
+
         }
+
+
+
+
     }
 }

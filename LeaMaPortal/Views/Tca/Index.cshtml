@@ -21,6 +21,8 @@
     <div class="blank" id="">
         @using (Html.BeginForm("AddOrUpdate", "Tca", FormMethod.Post, new { @id = "Tca", @enctype = "multipart/form-data" }))
         {
+           
+
             <div id="AgreementForm">
             </div>
             <div>
@@ -97,7 +99,7 @@
             </div>
         </div>
         <div id="renewalModal" class="modal fade" role="dialog">
-            <div class="modal-dialog tca-modal-md" id="renewalAddOrUpdateContainer" style="background-color: white;">
+            <div class="modal-dialog tca-modal-md" id="renewalAddOrUpdateContainer" style="background-color: white; margin-right:190px !important">
 
             </div>
         </div>
@@ -209,7 +211,7 @@
             data: {},
             contentType: "application/json",
             processData: false,
-            success: function (html) {
+            success: function (html) {                
                 $("#AgreementForm").html(html);
             },
             error: function (jqXhr, textStatus, errorThrown) {
@@ -411,6 +413,10 @@
            });
     }
 
+    $("#renewalModal").on('hide', function () {
+        alert("i");
+        window.location.reload();
+    });
 </script>
 
 <script>
@@ -428,6 +434,9 @@
             var AgreementUtilityCount = parseInt($("#AgreementUtilityListCount").val());
             var nofopayments = parseInt($("#nofopayments").val());
             var AgreementPdcListCount = parseInt($("#AgreementPdcListCount").val());
+            var AgreementDocumentCount = parseInt($("#agreementDocumentListCount").val());
+            //alert($("#nofopayments").val());
+            //alert($("#AgreementPdcListCount").val());
             //if (endDt <= startDt) {
             //    e.preventDefault();
             //    $("#Agreement_End_Date").focus();
@@ -460,8 +469,25 @@
                 $('#masterResultModal').modal('show');
                 //alert("Minimum 2 utilities required");
             }
+            else if (AgreementDocumentCount < 1)
+            {
+                e.preventDefault();
+                $("#btnAddAgreementPdc").focus();
+                $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                $(".result-title").text("Failure");
+                $(".result-modal-body span").text("Minimum 1 document required");
+                $('#masterResultModal').modal('show');
+            }
             else {
                 e.preventDefault();
+                //alert($("Unit_ID_Tawtheeq").val());
+                //alert($("#Unit_Property_Name").val());
+                //debugger;
+                //alert($("#SecurityFlag option:selected").text());
+                $("#Security_Flag").val($("#SecurityFlag option:selected").text() == "--Select--" ? null : $("#SecurityFlag option:selected").text());
+                $("#Security_chequeno").val($("#Securitycheq").val());
+                $("#Security_chequedate").val($("#SecuritycheqDate").val());
                 var formData = new FormData($(this)[0]);
                 try {
                     $.ajax(
@@ -480,7 +506,7 @@
                                     $(".result-title").text("Success");
                                     $(".result-modal-body span").text(response.Message);
                                     IsAddAllow();
-                                    getAgreementList();
+                                    getAgreementList("","","");
                                 }
                                 else {
                                     $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");

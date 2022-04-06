@@ -29,9 +29,10 @@ namespace LeaMaPortal.Controllers
                 int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
                 ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, defaultPageSize);
                 IList<EmailTemplateViewModel> list;
+                string regname = Session["Region"].ToString();
                 if (string.IsNullOrWhiteSpace(Search))
                 {
-                    list = db.tbl_emailtemplate.Where(x => x.Delmark != "*").OrderBy(x => x.TemplateName).Select(x => new EmailTemplateViewModel()
+                    list = db.tbl_emailtemplate.Where(x => x.Delmark != "*" && x.Region_Name == regname ).OrderBy(x => x.TemplateName).Select(x => new EmailTemplateViewModel()
                     {
                         Id = x.Id,
                         TemplateID = x.TemplateID,
@@ -44,7 +45,7 @@ namespace LeaMaPortal.Controllers
                 }
                 else
                 {
-                    list = db.tbl_emailtemplate.Where(x => x.Delmark != "*"
+                    list = db.tbl_emailtemplate.Where(x => x.Delmark != "*" && x.Region_Name == regname
                                     && x.TemplateName.ToLower().Contains(Search.ToLower()))
                                   .OrderBy(x => x.TemplateName).Select(x => new EmailTemplateViewModel()
                                   {
@@ -104,9 +105,11 @@ namespace LeaMaPortal.Controllers
                                             new MySqlParameter("@PSubjectParameter",model.SubjectParameter),
                                             new MySqlParameter("@PBodyParameter",""),
                                             new MySqlParameter("@PInActive",false),
-                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name),
+                                           new MySqlParameter ("@PRegion_Name",model.Region_Name ),
+                                           new MySqlParameter ("@PCountry",model.Country )
                                          };
-                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Emailtemplate_All(@PFlag,@PId,@PTemplateID,@PTemplateName,@PSubject,@PBodytext,@PBody,@PSubjectParameter,@PBodyParameter,@PInActive,@PCreateduser)", param).ToListAsync();
+                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Emailtemplate_All(@PFlag,@PId,@PTemplateID,@PTemplateName,@PSubject,@PBodytext,@PBody,@PSubjectParameter,@PBodyParameter,@PInActive,@PCreateduser,@PRegion_Name,@PCountry)", param).ToListAsync();
                     await db.SaveChangesAsync();
 
                 }
@@ -173,9 +176,11 @@ namespace LeaMaPortal.Controllers
                                             new MySqlParameter("@PSubjectParameter",tbl_email.SubjectParameter),
                                             new MySqlParameter("@PBodyParameter",tbl_email.BodyParameter),
                                             new MySqlParameter("@PInActive",true),
-                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name),
+                                              new MySqlParameter ("@PRegion_Name",tbl_email.Region_Name ),
+                                           new MySqlParameter ("@PCountry",tbl_email.Country )
                                          };
-                var spResult = await db.Database.SqlQuery<object>("Usp_Emailtemplate_All(@PFlag,@PId,@PTemplateID,@PTemplateName,@PSubject,@PBodytext,@PBody,@PSubjectParameter,@PBodyParameter,@PInActive,@PCreateduser)", param).ToListAsync();
+                var spResult = await db.Database.SqlQuery<object>("Usp_Emailtemplate_All(@PFlag,@PId,@PTemplateID,@PTemplateName,@PSubject,@PBodytext,@PBody,@PSubjectParameter,@PBodyParameter,@PInActive,@PCreateduser,@PRegion_Name,@PCountry)", param).ToListAsync();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

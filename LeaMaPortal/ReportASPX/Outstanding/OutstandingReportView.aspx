@@ -93,7 +93,6 @@
             <rsweb:ReportViewer ID="OutstandingReportViewer" runat="server" width="100%" height="1033px" AsyncRendering="False" Font-Names="Verdana" Font-Size="8pt" WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt">
             </rsweb:ReportViewer>
         </div>
-    </div>
     </form>
 </body>
 </html>

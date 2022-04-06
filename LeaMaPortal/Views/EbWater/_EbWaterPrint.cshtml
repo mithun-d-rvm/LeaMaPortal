@@ -1,0 +1,243 @@
+﻿@ViewBag.Ebdtas
+@model LeaMaPortal.Models.EBWaterPrintModel 
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<div class="modal-content">
+    <button type="button" class="close" data-dismiss="modal" style="margin-top: -25px;margin-right: -26px;font-size: xx-large; color:black;background-color:white">×</button>
+    <div id="PrintelementID">
+        <div class="modal-body" style="padding:0%; font-size:larger;">
+
+            <div class="row" style="font-size: large;text-transform:uppercase;">
+                <div style="float:left;">
+                    <div style="float:left;">
+                        <img src="~/Images/logo.jpg"> @*Logo-Bitmap.png*@
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row" style="font-size:x-large;color:#973132;font-weight:bold;padding-top:3%;text-align:center;">
+
+                <div> Utility Bill Entry Details </div>
+            </div>
+
+
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        &nbsp; &nbsp; 
+                        To,
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp; &nbsp; 
+                        Supplier Name :@Model.Supplier_name
+
+                    </td>
+                    <td>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        Entry No :@Model.Refno
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp; &nbsp; 
+                        Supplier Address:@Model.Supplier_address
+                    </td>
+                    <td>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+                        Reference Date : @Model.refdate
+                    </td>
+                </tr>
+
+                </table> 
+            <table>
+                <tr>
+                    <td>
+                        &nbsp; &nbsp; 
+                        Utility Name   : @Model.utility_name
+
+                    </td>
+                </tr>
+            </table>
+            @if(ViewBag.Ebdtas.Count > 0)
+            { 
+                <table class="beta" width="90%">
+            <thead>
+               
+            <th width="auto">MeterNo</th>
+            &nbsp;&nbsp;&nbsp;
+            <th width="auto%">Meter Reading No</th>
+            &nbsp;&nbsp;&nbsp;
+            <th width="auto">Reading Date</th>
+            &nbsp;&nbsp;&nbsp;
+            <th width="auto">Bill No</th>
+            &nbsp;&nbsp;&nbsp;
+            <th width="auto">Bill Date</th>
+            &nbsp;&nbsp;&nbsp;
+            <th width="auto">Due Days</th>
+            &nbsp;&nbsp;&nbsp;
+            <th width="auto">Days of use</th>
+            &nbsp;&nbsp;&nbsp;
+            <th width="auto">Rate</th>
+            &nbsp;&nbsp;&nbsp;
+            <th width="auto">Amount</th>
+            </thead>
+            @foreach (var item in ViewBag.Ebdtas)
+            {
+                
+                <tr>
+                    <td align="center" >
+                        @item.Meterno
+                    </td>
+                    <td align="center">
+                        @item.Meterreadingno
+                    </td>
+                    <td align="center">
+                        @item.Reading_date
+                    </td>
+                    <td align="center">
+                        @item.billno
+                    </td>
+                    <td align="center">
+                        @item.billdate
+                    </td>
+                    <td align="center">
+                        @item.duedate
+                    </td>
+                    <td align="center">
+                        @item.daysofuse
+                    </td>
+                    <td align="center">
+                        @item.rate
+                    </td>
+                    <td align="center">
+                        @item.amount
+                    </td>
+                </tr>
+
+            }
+        </table>
+            }
+        </div>
+        <br />
+    
+    </div>
+    <div>
+       
+
+    </div>
+    <div>
+    
+    </div>
+</div>
+<hr />
+<style>
+    .beta td, th {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+</style>
+<div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-8" style="display:none">
+        <textarea rows="5" class="form-control" id="otherTerms" placeholder="other terms"></textarea>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+
+
+</div>
+<div class="row" style="padding-top:8%; text-align:center;">
+    <input type="button" style="background-color: #554289;
+    color: white;
+    border-radius: 15px !important;
+    width: 200px;
+    padding: 10px !important;" value="Print" id="btnPrint" />
+
+    <input type="button" class="ebwater-print-update" style="background-color: #554289;
+    color: white;
+    border-radius: 15px !important;
+    width: 200px;
+
+    padding: 10px !important;display:none" value="Update Other Terms" data-refno="@Model.Refno" target="#ebwaterModal" />
+    @*@Html.ActionLink(" ", "Print", null, new { @class = "glyphicon glyphicon-print  agreement-print-update", title = "Update other terms", @data_toggle = "modal", @data_target = "#contractModal", @data_agreementno = Model.Agreement_No })*@
+</div>
+
+
+<script type="text/javascript">
+
+    $(".ebwater-print-update").click(function (e) {
+        // $("#img-loader").removeClass("hide");
+        e.preventDefault();
+        var id = $(this).data("refno");
+    
+        $.ajax(
+            {
+                url: "../EbWater/Print",
+                type: "Get",
+                data: { ReferenceNo: id, otherTerms:$("#otherTerms").val() },
+                success: function (result) {
+                    //var data=jQuery.parseJSON(result);
+                    if (result.Errors == undefined || result.Errors == "") {
+                        $("#PrintContainer").empty();
+                        $("#PrintContainer").html(result);
+                        $("#ebwaterModal").modal('show');
+
+                    }
+                    else {
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(data.Errors);
+                        $('#masterResultModal').modal('show');
+                        //alert(data.Errors);
+                    }
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    // $("body").scrollTop(0);
+                }
+            });
+    });
+    function printData() {
+        //alert(1);
+        var divToPrint = document.getElementById("PrintelementID");
+        newWin = window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+        //$("#contractModal").modal('hide');
+    }
+    //printData();
+        $(document).ready()
+        {
+
+         //btnPrint button id
+            $('#btnPrint').on('click', function () {
+                               printData();
+            })
+
+        }
+</script>

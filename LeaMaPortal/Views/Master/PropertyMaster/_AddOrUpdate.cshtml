@@ -348,7 +348,7 @@
                     City:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control master-form-input",  } }) @*@required = "required"*@
                     @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -357,7 +357,7 @@
                     State:
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })
+                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control master-form-input", } })@*@required = "required"*@ 
                     @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -666,15 +666,17 @@
                     @Html.ValidationMessageFor(model => model.Valued_Date_unit, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12 p-b-7">
-                <div class="col-md-4">
-                    Occupancy Status (Unit):
-                </div>
-                <div class="col-md-8">
-                    @*<input type="text" class="master-form-input" />*@
-                    @Html.EditorFor(model => model.Status_unit, new { htmlAttributes = new { @class = "form-control master-form-input", @readonly = "readonly" } })
-                    @Html.ValidationMessageFor(model => model.Status_unit, "", new { @class = "text-danger" })
-                </div>
+           
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-4" >
+                        Occupancy Status (Unit):
+                    </div>
+                    <div class="col-md-8">
+                        @*<input type="text" class="master-form-input" />*@
+                        @Html.EditorFor(model => model.Status_unit, new { htmlAttributes = new { @class = "form-control master-form-input", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Status_unit, "", new { @class = "text-danger" })
+                    </div>
+               
             </div>
             <div class="col-md-12 p-b-7">
                 <div class="col-md-4">
@@ -794,7 +796,7 @@
                 </div>
                 <div class="col-md-8">
                     @*@Html.EditorFor(model => model.Caretaker_Name, new { htmlAttributes = new { @class = "form-control master-form-input", @required = "required" } })*@
-                    @Html.DropDownList("CaretakerName", null, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
+                    @Html.DropDownList("CaretakerName", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @required = "required" }) @*form-control*@ 
                     @Html.ValidationMessageFor(model => model.Caretaker_Name, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -808,17 +810,19 @@
                             <option> ID 2 </option>
                             <option> ID 3 </option>
                         </select>*@
-                    @Html.DropDownList("CaretakerID", null, "-- Select --", htmlAttributes: new { @class = "form-control master-form-input", @required = "required" })
+                    @Html.DropDownList("CaretakerID", null, "-- Select --", htmlAttributes: new { @class = "master-form-input", @required = "required" }) @*form-control*@ 
                 </div>
             </div>
-            <div class="col-md-12 p-b-7">
-                <div class="col-md-4">
-                    Occupancy Status:
-                </div>
-                <div class="col-md-8">
-                    @*<input type="text" class="master-form-input" />*@
-                    @Html.EditorFor(model => model.Status, new { disabled = "disabled", htmlAttributes = new { @class = "form-control master-form-input" } })
-                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            <div id="m1">
+                <div class="col-md-12 p-b-7">
+                    <div class="col-md-4">
+                        Occupancy Status:
+                    </div>
+                    <div class="col-md-8">
+                        @*<input type="text" class="master-form-input" />*@
+                        @Html.EditorFor(model => model.Status, new { disabled = "disabled", htmlAttributes = new { @class = "form-control master-form-input" } })
+                        @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -999,6 +1003,13 @@
 
                         @*</div>
                             </div>*@
+
+
+
+        
+                        <div class="row ht-5">
+                            &nbsp;
+                        </div>
                         <div class="col-md-12 form-input-padding btn-group-justified">
                             <div class="col-md-3">
 
@@ -1012,7 +1023,7 @@
                             <div class="col-md-3">
 
                             </div>
-
+                                                       `
                         </div>
                         }
 <script>
@@ -1061,7 +1072,7 @@
             $("input").prop('required', false);
         }
         else {
-            $("input").prop('required', true);
+            //$("input").prop('required', true);
         }
     }
     $("#Property_Type").change(function () {
@@ -1264,6 +1275,8 @@
                          
                         if (response != null) {
                             $("#Caretaker_Name").val(response);
+                            //alert($("#Caretaker_Name").val());
+                            //alert($("#Caretaker_ID").val());
                         }
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
@@ -1308,12 +1321,18 @@
             $("#TypeUnit :input").attr("disabled", true);
             $("#TypeProperty").show();
             $("#TypeUnit").hide();
+            $("#m1").show();
+
+            
         }
         else {
             $("#TypeProperty :input").attr("disabled", true);
             $("#TypeUnit :input").attr("disabled", false);
             $("#TypeProperty").hide();
             $("#TypeUnit").show();
+            $("#m1").hide();
+           
+          
         }
     });
     $("#Region_Name").on('change', function (e) {
@@ -1388,20 +1407,161 @@
         getPropertyMasterAddorUpdate();
     }
 </script>
+<script >
+
+    $(document).on('click', 'button.removebutton', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('companyDetailsForm');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                // alert(dataname + $(this) .val()+ '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'CompanyDetails[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+
+        i = newindex;
+    });
+
+        //company-remove-exist-file
+    $(document).on('click', 'button.remove-contact-button', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('companyContactDetailsForm');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'CompanyContactDetails[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+        j = newindex;
+    });
+
+    var k = 0;
+    function addFile(e) {
+       // alert("hi");
+        var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + k + "'>";
+        //html = html + "<div class='col-md-12'>";
+        //html = html + " <div class='col-md-4 form-group'> <label for='branch'>Type</label> <input id='type" + k + "'  type='text' value='' class='form-control master-form-input' name='CompanyNewDocuments[" + k + "].Type' data-name='Type' /></div>";
+        html = html + "<div class='col-md-4 form-group'> <label for='City'>Name</label><input id='Designation" + k + "' type='text'  value='' class='form-control master-form-input' name='CompanyNewDocuments[" + k + "].Name' data-name='Name' /></div>";
+        html = html + " <div class='col-md-3 form-group'> <label for='add01'>Document</label><input type='file' id='File" + k + "' class='form-control master-form-input' name='CompanyNewDocuments[" + k + "].File' data-name='File' value=''/></div>";
+        html = html + "<div class='col-md-1'></br>  <button class='document-btn remove-document-new-button' id='Delete" + k + "'> X </button></div>";
+
+        //html = html + "</div>";
+
+        html = html + "</div>";
+        html = html + "<div class='row ht-5'> &nbsp;</div></td></tr><tr><td>&nbsp;</td></tr>"
+        $('#companyNewFileDetails').append(html);
+        k++;
+        return false;
+    }
+    //company-remove-new-file
+    $(document).on('click', 'button.remove-document-new-button', function () {
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('companyNewFileDetails');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'CompanyNewDocuments[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+        k = newindex;
+    });
+
+    $(document).on('click', 'button.remove-document-exist-button', function () {
+
+        $(this).closest('tr').remove();
+        var existfilelist = document.getElementById('companyExistFileDetails');
+        var newindex = 0;
+        $(existfilelist).find('> tbody > tr').each(function () {
+
+            $(this).find("input").each(function () {
+                var dataname = $(this).data("name");
+                //alert(dataname + $(this).val() + '-' + newindex)
+                $(this).attr({
+                    'id': function (_, id) {
+                        return id + newindex
+                    },
+                    'name': function (_, name) {
+                        //return name + iTenantDocument[0].Name
+                        return 'CompanyDocumentsExist[' + newindex + '].' + dataname
+                    }
+                });
+            });
+
+            newindex++;
+
+        });
+    });
+
+
+
+</script>
 <script>
     $("form#PropertyMaster").off("submit").on("submit", function (e) {
         $("#img-add-or-update-loader").removeClass("hide");
         e.preventDefault();
-        var formData = new FormData($(this)[0]);
+
         $("#Caretaker_ID").val($("#CaretakerID option:selected").text() == "--Select--" ? null : $("#CaretakerID option:selected").text());
         $("#Caretaker_Name").val($("#CaretakerName option:selected").text() == "--Select--" ? null : $("#CaretakerName option:selected").text());
         $("#Ref_unit_Property_ID_Tawtheeq").val($("#RefUnitPropertyIDTawtheeq option:selected").text() == "--Select--" ? null : $("#RefUnitPropertyIDTawtheeq option:selected").text());
+
+        var formData = new FormData($(this)[0]);
+
+
+        //formData.append(model.Caretaker_ID, $("#CaretakerID option:selected").text())
+        //formData.append(model.Caretaker_Name, $("#CaretakerName option:selected").text())
+        //var form = $("form#PropertyMaster");       
+        //alert($("#Caretaker_ID").val());
+        //alert($("#Caretaker_Name").val());
+        //alert($("#CaretakerID option:selected").text());
+        //alert($("#CaretakerName option:selected").text());
         try {
             $.ajax(
                 {
                     url: "../PropertyMaster/Create",
                     method: "POST",
-                    data: formData,
+                    data: formData, //JSON.stringify($(form).serializeObject()),
                     contentType: false,
                     processData: false,
                     cache: false,
@@ -1439,13 +1599,17 @@
     });
 
     $.fn.serializeObject = function () {
+        //alert("serializeObject");
         var o = {};
         var a = this.serializeArray();
+        //alert(a);
         $.each(a, function () {
             if (o[this.name] !== undefined) {
                 if (!o[this.name].push) {
                     o[this.name] = [o[this.name]];
                 }
+                //alert(this.name);
+                //alert(this.value);
                 o[this.name].push(this.value || '');
             } else {
                 o[this.name] = this.value || '';

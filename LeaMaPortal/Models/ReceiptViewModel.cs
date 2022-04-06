@@ -63,9 +63,9 @@ namespace LeaMaPortal.Models
         [DisplayName("DD/Cheque Date")]
         public DateTime? DDChequeDate { get; set; }
 
-        [DisplayName("Bank Account Number")]
+        [DisplayName("Tenant Account Number")]
         public string BankAcCode { get; set; }
-        [DisplayName("Bank Account Name")]
+        [DisplayName("Tenant Bank Name")]
         public string BankAcName { get; set; }
         [DisplayName("Narration")]
         public string Narration { get; set; }
@@ -127,6 +127,7 @@ namespace LeaMaPortal.Models
         public string invtype { get; set; }
         public string totalamt { get; set; }
         public string InvoiceAmount { get; set; }
+        public string Description { get; set; }
 
     }
 
@@ -182,5 +183,25 @@ namespace LeaMaPortal.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? cheque_date { get; set; }
+        public string BankName { get; set; }
+    }
+
+    public class ViewInvoiceReceiptPending
+    {
+        public string invno { get; set; }
+        public DateTime date { get; set; }
+        public string invtype { get; set; }
+        public int incno { get; set; }
+        public string Description { get; set; }
+        public string InvoiceAmount { get; set; }
+
+    }
+
+    public class ViewSecurityPending
+    {
+        public Decimal Security_Amount { get; set; }
+        public String DDChequeNo { get; set; }
+        public String Security_Flag { get; set; }
+        public DateTime Security_chequedate { get; set; }
     }
 }

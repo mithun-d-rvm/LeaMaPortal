@@ -24,11 +24,17 @@ namespace LeaMaPortal.Controllers
         {
             try
             {
+                if (Session["Region"] == null)
+                {
+                    return RedirectToAction("Login", "Authentication");
+                }
+
                 ViewData["Search"] = Search;
                 int currentPageIndex = page.HasValue ? page.Value : 1;
                 int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
                 ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, defaultPageSize);
-                var caretakers = db.tbl_caretaker.Where(x => x.Delmark != "*");
+                string regname = Session["Region"].ToString();
+                var caretakers = db.tbl_caretaker.Where(x => x.Delmark != "*" && x.Region_Name == regname);
                 if (!string.IsNullOrWhiteSpace(Search))
                 {
                     caretakers = caretakers.Where(x => x.Caretaker_Name.Contains(Search));

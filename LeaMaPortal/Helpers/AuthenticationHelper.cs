@@ -51,6 +51,7 @@ namespace LeaMaPortal.Helpers
                     user.Category = userrights.Category;
                     user.MenuConfig = userrights.MenuConfig;
                     user.Name = userrights.Name;
+                    user.Region_Name = userrights.Region_Name;
                 }
                 string loggedUser = JsonConvert.SerializeObject(user);
                 context.Response.Cookies["CurrentUser"].Value = loggedUser;

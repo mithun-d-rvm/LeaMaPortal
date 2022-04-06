@@ -107,6 +107,7 @@ namespace LeaMaPortal.Models
         [StringLength(50)]
         public string Type { get; set; }
 
+        public string EmiratesId { get; set; }
         public int? Accyear { get; set; }
 
         public DateTime? Createddatetime { get; set; }
@@ -115,6 +116,8 @@ namespace LeaMaPortal.Models
         public string Createduser { get; set; }
 
         [StringLength(1)]
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
         public string Delmark { get; set; }
         public string supplierdt { get; set; }
         public string supplierdt1 { get; set; }

@@ -32,22 +32,26 @@
 
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
-                    <div class="divTableCell ">Meter Number</div>
                     <div class="divTableCell">Utility Name</div>
+                    <div class="divTableCell ">Meter Number</div>
                     <div class="divTableCell ">Account Number</div>
-                    <div class="divTableCell ">Property Id</div>
-                    <div class="divTableCell ">Unit Id</div>
+                    <div class="divTableCell ">Property Tawtheeq ID</div>
+                    <div class="divTableCell ">Property Name</div>
+                    <div class="divTableCell ">Unit Tawtheeq ID</div>
+                    <div class="divTableCell ">Unit Name</div>
                     <div class="divTableCell">Action</div>
 
                 </div>
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
-                        <div class="divTableCell">@item.Meter_no</div>
                         <div class="divTableCell">@item.Utility_Name</div>
+                        <div class="divTableCell">@item.Meter_no</div>
                         <div class="divTableCell">@item.Accno</div>
                         <div class="divTableCell">@item.Property_id</div>
+                        <div class="divTableCell">@item.Property_Name</div>
                         <div class="divTableCell">@item.unit_id</div>
+                        <div class="divTableCell">@item.Unit_Name</div>
                         <div class="divTableCell">
                             @if (@ViewBag.IsEditable == 1)
                             {
@@ -170,7 +174,8 @@
         $.ajax(
             {
                 url: "../Meter/Edit",
-                type: "Get",
+                method: "POST",
+                async: false,
                 data: { MeterId: param[1], MeterNumber: param[0] },
                 success: function (result) {
                     if (result.Errors == undefined || result.Errors == "") {
@@ -179,13 +184,28 @@
                         $("#Utility_id").val(result.Utility_id);
                         $("#Utility_Name").val(result.Utility_Name);
                         $("#Accno").val(result.Accno);
-                        $("#unit_id").val(result.unit_id);
-                        $("#Property_id").val(result.Property_id);
+                        //$("#unit_id").val(result.unit_id);
+                        //$("#Property_id").val(result.Property_id);
                         $("#Dueday").val(result.Dueday);
+                        $("#PropertyName option:selected").text(result.Property_Name);
+                        $("#UnitName option:selected").text(result.Unit_Name);
+                        $("#UnitThawtheeqID option:selected").text(result.unit_id);
+                        $("#PropertyThawtheeqID option:selected").text(result.Property_id);
                     }
                     else {
                         alert(data.Errors);
                     }
+                    //alert("1");
+                    //debugger;
+                    //$("#MeterId").val(result.id);
+                    //$("#Meter_no").val(result.Meter_no);
+                    //$("#Utility_id").val(response.Utility_id);
+                    //$("#Utility_Name").val(response.Utility_Name);
+                    //$("#Accno").val(response.Accno);
+                    //$("#unit_id option:selected").text(response.unit_id);
+                    //$("#Property_id option:selected").text(response.Property_id);
+                    //$("#Dueday").val(response.Dueday);
+                        
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");

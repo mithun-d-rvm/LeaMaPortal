@@ -40,6 +40,14 @@ namespace LeaMaPortal.Models
         [StringLength(100)]
         public string Phoneno { get; set; }
 
+        [DisplayName ("Region Name")]
+        [StringLength (100)]
+        public string Region_Name { get; set; }
+
+        [DisplayName("Country")]
+        [StringLength(100)]
+        public string Country { get; set; }
+
         [DisplayName("Add")]
         public int? AddConfig { get; set; }
 
@@ -58,6 +66,9 @@ namespace LeaMaPortal.Models
         [DisplayName("Active")]
         public int? Active { get; set; }
 
+        [StringLength(50)]
+        public string Activests { get; set; }
+        
     }
     public class MenuRights
     {

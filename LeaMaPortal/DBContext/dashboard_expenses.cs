@@ -15,26 +15,12 @@ namespace LeaMaPortal.DBContext
     public partial class dashboard_expenses
     {
         public int id { get; set; }
-        public int PaymentNo { get; set; }
-        public Nullable<System.DateTime> PaymentDate { get; set; }
-        public string Utility_id { get; set; }
-        public string Utiltiy_name { get; set; }
-        public Nullable<int> Supplier_id { get; set; }
+        public string PaymentNo { get; set; }
+        public string PaymentDate { get; set; }
+        public string Utility_name { get; set; }
         public string Supplier_name { get; set; }
         public string PaymentType { get; set; }
         public string PaymentMode { get; set; }
-        public Nullable<float> TotalAmount { get; set; }
-        public string AmtInWords { get; set; }
-        public string DDChequeNo { get; set; }
-        public Nullable<System.DateTime> Cheqdate { get; set; }
-        public string pdcstatus { get; set; }
-        public string BankAcCode { get; set; }
-        public string BankAcName { get; set; }
-        public string AdvAcCode { get; set; }
-        public string Narration { get; set; }
-        public Nullable<int> Accyear { get; set; }
-        public Nullable<System.DateTime> Createddatetime { get; set; }
-        public string Createduser { get; set; }
-        public string Delmark { get; set; }
+        public float TotalAmount { get; set; }
     }
 }

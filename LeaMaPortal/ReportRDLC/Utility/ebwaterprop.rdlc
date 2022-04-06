@@ -1,128 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="ebwater_propds">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>f23bf6c6-7270-47e9-aed7-261143ce9066</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="id">
-          <DataField>id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Refno">
-          <DataField>Refno</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Meterno">
-          <DataField>Meterno</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="property_id">
-          <DataField>property_id</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Property_Name">
-          <DataField>Property_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Unit_id">
-          <DataField>Unit_id</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Unit_Property_Name">
-          <DataField>Unit_Property_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Total_units">
-          <DataField>Total_units</DataField>
-          <rd:TypeName>System.Single</rd:TypeName>
-        </Field>
-        <Field Name="Meterreadingno">
-          <DataField>Meterreadingno</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Reading_date">
-          <DataField>Reading_date</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="billdate">
-          <DataField>billdate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="billno">
-          <DataField>billno</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="duedate">
-          <DataField>duedate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="utility_id">
-          <DataField>utility_id</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Utility_Name">
-          <DataField>Utility_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Region_Name">
-          <DataField>Region_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="country">
-          <DataField>country</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Caretaker_Name">
-          <DataField>Caretaker_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Caretaker_ID">
-          <DataField>Caretaker_ID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Billamount">
-          <DataField>Billamount</DataField>
-          <rd:TypeName>System.Double</rd:TypeName>
-        </Field>
-        <Field Name="Paidamount">
-          <DataField>Paidamount</DataField>
-          <rd:TypeName>System.Double</rd:TypeName>
-        </Field>
-        <Field Name="OutstandingAmt">
-          <DataField>OutstandingAmt</DataField>
-          <rd:TypeName>System.Double</rd:TypeName>
-        </Field>
-        <Field Name="Aging_Days">
-          <DataField>Aging_Days</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="user">
-          <DataField>user</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>ebwater_propds</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>ebwater_propds</rd:DataSetName>
-        <rd:SchemaPath>D:\mysql\RDLC\RDLCApplicationWithParamstest\RDLCApplicationWithParams\ebwater_propds.xsd</rd:SchemaPath>
-        <rd:TableName>ebwater_report</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>ebwater_reportTableAdapter</rd:TableAdapterName>
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
@@ -135,16 +12,16 @@
               <Width>1.39426in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.9151in</Width>
+              <Width>1.2401in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.33177in</Width>
+              <Width>1.44482in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.70677in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.9151in</Width>
+              <Width>1.0401in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.27968in</Width>
@@ -259,7 +136,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Unit Id</Value>
+                              <Value>Unit Tawtheeq Id</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -292,7 +169,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Unit Property Name</Value>
+                              <Value>Unit Name</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -325,7 +202,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>country</Value>
+                              <Value>Country</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -358,7 +235,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Region Name</Value>
+                              <Value>Region </Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -752,7 +629,7 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox5">
+                    <Textbox Name="Utility_Name1">
                       <CanGrow>true</CanGrow>
                       <ToggleImage>
                         <InitialState>true</InitialState>
@@ -762,14 +639,14 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Utility Name</Value>
+                              <Value>=Fields!Utility_Name.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox5</rd:DefaultName>
+                      <rd:DefaultName>Utility_Name1</rd:DefaultName>
                       <Visibility>
                         <ToggleItem>Group1</ToggleItem>
                       </Visibility>
@@ -2703,9 +2580,9 @@
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Top>3.35764in</Top>
-        <Left>0.05917in</Left>
+        <Left>0.15604in</Left>
         <Height>1in</Height>
-        <Width>19.87963in</Width>
+        <Width>20.44268in</Width>
         <Visibility>
           <Hidden>=false</Hidden>
           <ToggleItem>Textbox38</ToggleItem>
@@ -2739,7 +2616,7 @@
         <Top>0.13542in</Top>
         <Left>0.06264in</Left>
         <Height>0.25in</Height>
-        <Width>19.87616in</Width>
+        <Width>20.53608in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -2903,6 +2780,9 @@
                 <CrossAt>NaN</CrossAt>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
               <ChartAxis Name="Secondary">
                 <Style>
@@ -2937,6 +2817,9 @@
                 <Location>Opposite</Location>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
             </ChartCategoryAxes>
             <ChartValueAxes>
@@ -2971,6 +2854,9 @@
                 <CrossAt>NaN</CrossAt>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
               <ChartAxis Name="Secondary">
                 <Style>
@@ -3004,6 +2890,9 @@
                 <Location>Opposite</Location>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
             </ChartValueAxes>
             <Style>
@@ -3061,7 +2950,7 @@
         </ChartNoDataMessage>
         <DataSetName>DataSet1</DataSetName>
         <Top>0.45486in</Top>
-        <Left>1.05917in</Left>
+        <Left>1.07114in</Left>
         <Height>2.83333in</Height>
         <Width>9.27083in</Width>
         <ZIndex>2</ZIndex>
@@ -3097,8 +2986,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox36</rd:DefaultName>
-        <Top>0.44279in</Top>
-        <Left>0.06264in</Left>
+        <Top>0.45486in</Top>
+        <Left>0.07462in</Left>
         <Height>0.20833in</Height>
         <Width>0.92708in</Width>
         <ZIndex>3</ZIndex>
@@ -3132,8 +3021,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox36</rd:DefaultName>
-        <Top>0.72056in</Top>
-        <Left>0.06264in</Left>
+        <Top>0.73264in</Top>
+        <Left>0.07462in</Left>
         <Height>0.20833in</Height>
         <Width>0.92708in</Width>
         <ZIndex>4</ZIndex>
@@ -3159,6 +3048,130 @@
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
-  <rd:ReportID>80a40964-51e0-46ef-bb1f-ac5e0cad9bdf</rd:ReportID>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="ebwater_propds">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>f23bf6c6-7270-47e9-aed7-261143ce9066</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>ebwater_propds</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="id">
+          <DataField>id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Refno">
+          <DataField>Refno</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Meterno">
+          <DataField>Meterno</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="property_id">
+          <DataField>property_id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Property_Name">
+          <DataField>Property_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Unit_id">
+          <DataField>Unit_id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Unit_Property_Name">
+          <DataField>Unit_Property_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Total_units">
+          <DataField>Total_units</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
+        </Field>
+        <Field Name="Meterreadingno">
+          <DataField>Meterreadingno</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Reading_date">
+          <DataField>Reading_date</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="billdate">
+          <DataField>billdate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="billno">
+          <DataField>billno</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="duedate">
+          <DataField>duedate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="utility_id">
+          <DataField>utility_id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Utility_Name">
+          <DataField>Utility_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Region_Name">
+          <DataField>Region_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="country">
+          <DataField>country</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Caretaker_Name">
+          <DataField>Caretaker_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Caretaker_ID">
+          <DataField>Caretaker_ID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Billamount">
+          <DataField>Billamount</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Paidamount">
+          <DataField>Paidamount</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="OutstandingAmt">
+          <DataField>OutstandingAmt</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Aging_Days">
+          <DataField>Aging_Days</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="user">
+          <DataField>user</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>ebwater_propds</rd:DataSetName>
+        <rd:SchemaPath>D:\mysql\RDLC\RDLCApplicationWithParamstest\RDLCApplicationWithParams\ebwater_propds.xsd</rd:SchemaPath>
+        <rd:TableName>ebwater_report</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>ebwater_reportTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>80a40964-51e0-46ef-bb1f-ac5e0cad9bdf</rd:ReportID>
 </Report>

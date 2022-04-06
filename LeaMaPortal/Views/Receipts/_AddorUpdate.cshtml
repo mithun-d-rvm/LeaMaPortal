@@ -2,7 +2,16 @@
 @model LeaMaPortal.Models.ReceiptViewModel
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "Receipts" }))
 {
-    @Html.HiddenFor(model=>model.Id)
+    @Html.HiddenFor(model=>model.Id)    
+    @Html.HiddenFor(model=>model.Tenant_Name)
+    @Html.HiddenFor(model=>model.Property_Name)
+    @Html.HiddenFor(model=>model.unit_Name)
+    @*@Html.HiddenFor(model=>model.BankAcName)*@
+    @Html.HiddenFor(model=>model.DDChequeNo)
+
+    
+
+
     <div class="row font-smaller">
         <div class="col-md-6">
             <div class="col-md-12 p-b-7">
@@ -79,7 +88,7 @@
                     @Html.LabelFor(model => model.Tenant_Name, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.DropDownList("Tenant_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
+                    @Html.DropDownList("TenantName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                 </div>
             </div>
 
@@ -95,7 +104,7 @@
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.Property_Name, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
-                <div class="col-md-8">@Html.DropDownList("Property_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
+                <div class="col-md-8">@Html.DropDownList("PropertyName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                 </div>
             </div>
 
@@ -115,7 +124,7 @@
                     @Html.LabelFor(model => model.unit_Name, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.DropDownList("unit_Name", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
+                    @Html.DropDownList("unitName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control" })
                 </div>
             </div>
 
@@ -125,7 +134,8 @@
                     @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'TotalAmount');", @required = "required", @onchange = "AmountInWords()" } })
+                    @*@Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'TotalAmount');", @required = "required", @onchange = "AmountInWords()" } })*@
+                    @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "master-form-input form-control",  @required = "required", @onchange = "AmountInWords()" } })
                 </div>
             </div>
             <div class="col-md-12 p-b-7">
@@ -144,23 +154,26 @@
                     @Html.DropDownListFor(model => model.PDCstatus, null, htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                 </div>
             </div>
-            <div class="col-md-12 p-b-7" id="txtCheque" name="cheque">
-                <div class="col-md-4">
-                    @Html.LabelFor(model => model.DDChequeNo, htmlAttributes: new { @class = "label-default-remove" })
-                </div>
-                <div class="col-md-8">
-                    @Html.EditorFor(model => model.DDChequeNo, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required" } })
-                </div>
-            </div>
             <div class="col-md-12 p-b-7" name="cheque" id="drpCheque">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.DDChequeNo, htmlAttributes: new { @class = "label-default-remove" })
                 </div>
                 <div class="col-md-8">
-                    <select id="ddChequeNumber" class = "master-form-input form-control">
+                    @*<select id="ddChequeNumber" class = "master-form-input form-control">
 
-                    </select>
+                </select>*@
+                    @*@Html.DropDownListFor(model => model.DDChequeNo, null, htmlAttributes: new { @class = "master-form-input form-control", Id = "ddChequeNumber", @required = "required" })*@
+
+                    @Html.DropDownList("ddChequeNumber", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })
                     @*@Html.DropDownList("DDChequeNo",null,"--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })*@
+                </div>
+            </div>
+            <div class="col-md-12 p-b-7" id="txtCheque" name="cheque">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.DDChequeNo, htmlAttributes: new { @class = "label-default-remove" })
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.DDChequeNo, new { htmlAttributes = new { @class = "master-form-input form-control", @required = "required", @id = "txtChequeNo" } })
                 </div>
             </div>
             <div class="col-md-12 p-b-7" id="txtChequeDate" name="cheque">
@@ -185,11 +198,12 @@
                         @Html.LabelFor(model => model.BankAcCode, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.BankAcCode, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        @Html.EditorFor(model => model.BankAcCode, new { htmlAttributes = new { @class = "master-form-input" } })
                         @*<select class="col-md-12 leama-field">
                     <option value="BankAcCode">Bank Account Code</option>
                 </select>*@
-                        @Html.DropDownListFor(model => model.BankAcCode, null, htmlAttributes: new { @class = "master-form-input form-control", Id = "BankAcCode", @required = "required" })
+                        @*@Html.DropDownListFor(model => model.BankAcCode, null, htmlAttributes: new { @class = "master-form-input form-control", Id = "BankAcCode", @required = "required" })*@
+                        @*@Html.DropDownList("BankAcCode", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })*@
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -197,11 +211,12 @@
                         @Html.LabelFor(model => model.BankAcName, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.BankAcName, new { htmlAttributes = new { @class = "master-form-input" } })*@
+                        @Html.EditorFor(model => model.BankAcName, new { htmlAttributes = new { @class = "master-form-input",@id = "Bank_AcName" } })
                         @*<select class="col-md-12 leama-field">
                     <option value="Bank Account Name">Bank Account Name</option>
                 </select>*@
-                        @Html.DropDownListFor(model => model.BankAcName, null, htmlAttributes: new { @class = "master-form-input form-control", Id = "BankAcName", @required = "required" })
+                        @*@Html.DropDownListFor(model => model.BankAcName, null, htmlAttributes: new { @class = "master-form-input form-control", Id = "Bank_AcName", @required = "required" })*@
+                        @*@Html.DropDownList("Bank_AcName", null, "--Select--", htmlAttributes: new { @class = "master-form-input form-control", @required = "required" })*@
                     </div>
                 </div>
             </div>
@@ -353,7 +368,7 @@
                             <input id="InvoiceDescription" type="text" class="form-control master-form-input" />
                         </div>
                         <div class="col-md-2 form-group">
-                            <label for="amount">Remarks*</label>
+                            <label for="amount">Remarks</label>
                             <input class="form-control master-form-input" id="Remarks" />
                         </div>
                         </div>
@@ -475,43 +490,57 @@
 }
 <script>
     $("#Tenant_id").on('change', function (e) {
-         
+
         var tenantid = $("#Tenant_id").val();
-        $("#Tenant_Name").val($("#Tenant_id option:selected").val());
+        $("#TenantName").val($("#Tenant_id option:selected").val());
+        setTenantDetails();
+
     });
-    $("#Tenant_Name").on('change', function (e) {
-         
-        var tenantid = $("#Tenant_Name").val();
-        $("#Tenant_id").val($("#Tenant_Name option:selected").val());
+    $("#TenantName").on('change', function (e) {
+
+        var tenantid = $("#TenantName").val();
+        $("#Tenant_id").val($("#TenantName option:selected").val());
+
     });
+
+    function setTenantDetails()
+    {
+        //$("#Tenant_Name").val($("#TenantName option:selected").text() == "--Select--" ? null : $("#TcaPropertyIDTawtheeq option:selected").text());
+        //alert($("#Tenant_Name").val($("#TenantName option:selected").text() == "--Select--" ? null : $("#TcaPropertyIDTawtheeq option:selected").text()));
+        //alert($("Tenant_Name").val());
+        //alert($("Tenant_Name").text());
+        //var nm = $("#Tenant_Name").val();
+        //alert(nm);
+    }
+
     $("#Property_id").on('change', function (e) {
-         
+
         var propertyid = $("#Property_id").val();
-        $("#Property_Name").val($("#Property_id option:selected").val());
+        $("#PropertyName").val(propertyid);
         var id = $("#Property_id option:selected").text() == "--Select--" ? null : propertyid;
         getunits(id);
     });
-    $("#Property_Name").on('change', function (e) {
-         
-        var propertyid = $("#Property_Name").val();
-        $("#Property_id").val($("#Property_Name option:selected").val());
-        var id = $("#Property_Name option:selected").text() == "--Select--" ? null : propertyid;
+    $("#PropertyName").on('change', function (e) {
+
+        var propertyid = $("#PropertyName").val();
+        $("#Property_id").val($("#PropertyName option:selected").val());
+        var id = $("#PropertyName option:selected").text() == "--Select--" ? null : propertyid;
         getunits(id);
     });
 
 
     $("#Unit_ID").on('change', function (e) {
-         
+
         var unitid = $("#Unit_ID").val();
-        $("#unit_Name").val($("#Unit_ID option:selected").val());
+        $("#unitName").val(unitid);   //$("#Unit_ID option:selected").val()
         var id = $("#Unit_ID option:selected").text() == "--Select--" ? null : unitid;
         getproperty(id);
     });
-    $("#unit_Name").on('change', function (e) {
-         
-        var unitid = $("#unit_Name").val();
-        $("#Unit_ID").val($("#unit_Name option:selected").val());
-        var id = $("#unit_Name option:selected").text() == "--Select--" ? null : unitid;
+    $("#unitName").on('change', function (e) {
+
+        var unitid = $("#unitName").val();
+        $("#Unit_ID").val($("#unitName option:selected").val());
+        var id = $("#unitName option:selected").text() == "--Select--" ? null : unitid;
         getproperty(id);
     });
 
@@ -526,7 +555,7 @@
                     contentType: "application/json",
 
                     success: function (response) {
-                         
+
                         var options = '<option value="" selected>--Select--</option>';
                         $("#UnitID").empty();
 
@@ -561,11 +590,11 @@
                 {
                     url: "../Invoice/GetUnitProperty",
                     method: "GET",
-                    data: { unitid: id }, 
+                    data: { unitid: id },
                     contentType: "application/json",
 
                     success: function (response) {
-                         
+
                         $("#Propertyid").val(response);
                         $("#PropertyName").val(response);
                     },
@@ -580,17 +609,27 @@
 
     }
     function getInvoice(invoiceNo) {
-         
+
         $.ajax(
                 {
                     url: "../Receipts/GetInvoiceDetails",
-                    method: "POST",
-                    data: { InvoiceNumber : invoiceNo },
+                    method: "GET",
+                    data: { InvoiceNumber: invoiceNo },
+                    contentType: "application/json",
                     success: function (response) {
-                         
-                        $("#InvoiceType").val(response.invtype);
-                        //$("#InvoiceDate").val(response.month+"/"+response.day+"/"+response.year);
-                        $("#InvoiceAmount").val(response.InvoiceAmount);
+
+                        if (response != null)
+                        {
+                            $("#InvoiceType").val(response.invtype);
+                            //$("#InvoiceDate").val(response.month+"/"+response.day+"/"+response.year);
+                            //alert(response.day);
+                            $("#InvoiceDate").val(ToJavaScriptDate(response.date));
+                            $("#InvoiceDescription").val(response.Description);
+                            //$("#Remarks").val(response.Remark);
+                            //$("#ContracAgreementDate").val(ToJavaScriptDate(response.AgreementDate));
+                            $("#InvoiceAmount").val(response.InvoiceAmount);
+                        }
+
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -599,7 +638,21 @@
                     }
                 });
     }
-    $("#InvoiceNumber").change(function () { getInvoice($("#InvoiceNumber option:selected").val()) });
+    $("#InvoiceNumber").change(function ()
+    {
+        if ($("#InvoiceNumber option:selected").text() == "--Select--")
+        {
+            $("#InvoiceType").val("");
+            $("InvoiceDescription").val("");
+            $("Remarks").val("");
+            $("#InvoiceAmount").val("");
+            $("#InvoiceDate").val("mm/dd/yyyy");
+        }
+        else
+        {
+            getInvoice($("#InvoiceNumber option:selected").val())
+        }
+    });
 
     function showHideSubForm(Reccategory) {
         if (Reccategory != "against invoice") {
@@ -616,14 +669,29 @@
         showHideSubForm($("#Reccategory option:selected").val());
         $("#RecpType").prop("selected", false);
         ShowHidePaymentModeFields($("#RecpType").val());
+        if($("#Reccategory").val() == "against invoice")
+        {
+            $("#DDChequeNo").prop("readonly", false);
+            getAgreementNumbers(1);
+        }
+        else if($("#Reccategory").val() == "security deposit")
+        {
+            $("#DDChequeNo").prop("readonly", false);
+            getAgreementNumbers(2);
+        }
+        if ($("#Reccategory").val() == "advance")
+        {
+            //alert("advance");
+            //$("#RecpType option[value='Advance adjust']").remove();
+        }
         //ddlChange();
     });
-    
 
-    //$("#RecpType").on('change', function () {        
+
+    //$("#RecpType").on('change', function () {
     //    ddlChange();
     //});
-    
+
 
     function calculateBalance() {
         var InvoiceAmount = document.getElementById("InvoiceAmount").value != null ? Number(document.getElementById("InvoiceAmount").value) : 0;
@@ -665,38 +733,44 @@
                     url: "../Receipts/GetAgreementDetails",
                     // dataType: "jsonp",
                     method: "GET",
-                    data: { agreement_no: agreement_no, Mode: $("#RecpType").val() }, //FormData(form.get(0)),
+                    data: { agreement_no: agreement_no, Mode: $("#RecpType").val(), ReceiptCat: $("#Reccategory").val() }, //FormData(form.get(0)),
                     contentType: "application/json",
 
                     success: function (response) {
-                         
+
+
+                        //alert($("#Reccategory option:selected").text());
                         $("#Tenant_id").empty();
                         var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
+                        //var options = agreement_no == '<option vlaue="">--Select--</option>';
                         $.each(response.Tenants, function (index, data) {
                             options += '<option value="' + data.Tenantid + '">' + data.Tenantid + '</option>';
                         });
                         $('#Tenant_id').append(options);
 
-                        $("#Tenant_Name").empty();
+                        $("#TenantName").empty();
                         var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
+                        //var options = agreement_no == '<option vlaue="">--Select--</option>';
                         $.each(response.Tenants, function (index, data) {
                             options += '<option value="' + data.Tenantid + '">' + data.TenantName + '</option>';
                         });
-                        $('#Tenant_Name').append(options);
+                        $('#TenantName').append(options);
 
                         $("#Property_id").empty();
                         var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
+                        //var options = agreement_no == '<option vlaue="">--Select--</option>';
                         $.each(response.Properties, function (index, data) {
                             options += '<option value="' + data.Propertyid + '">' + data.Propertyid + '</option>';
                         });
                         $('#Property_id').append(options);
 
-                        $("#Property_Name").empty();
+                        $("#PropertyName").empty();
                         var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
+                        //var options = agreement_no =='<option vlaue="">--Select--</option>';
                         $.each(response.Properties, function (index, data) {
                             options += '<option value="' + data.Propertyid + '">' + data.PropertyName + '</option>';
                         });
-                        $('#Property_Name').append(options);
+                        $('#PropertyName').append(options);
 
                         $("#Unit_ID").empty();
                         var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
@@ -705,27 +779,47 @@
                         });
                         $('#Unit_ID').append(options);
 
-                        $("#unit_Name").empty();
+                        $("#unitName").empty();
                         var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
                         $.each(response.Units, function (index, data) {
                             options += '<option value="' + data.Unitid + '">' + data.unitName + '</option>';
                         });
-                        $('#unit_Name').append(options);
+                        $('#unitName').append(options);
 
-                        $("#ddChequeNumber").empty();
-                        //var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
-                        var options = '<option vlaue="">--Select--</option>';
-                        $.each(response.Cheques, function (index, data) {
-                            options += '<option value="' + data.Cheque_No + '">' + data.Cheque_No + '</option>';
-                        });
-                        $('#ddChequeNumber').append(options);
+                        //debugger;
+                        if ($("#Reccategory").val() == "security deposit")
+                        {
+                            $("#RecpType option:selected").text(response.Security_Flag).change();
+                            $("#ddChequeNumber").empty();
+                            //var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
+                            var options;
+                            $.each(response.Cheques, function (index, data) {
+                                options += '<option value="' + data.Cheque_No + '">' + data.Cheque_No + '</option>';
+                            });
+                            $('#ddChequeNumber').append(options);
+                            $("#DDChequeDate").val(ToJavaScriptDate(response.Security_chequedate));
+                            $("#TotalAmount").val(response.Security_Amount).change();
+
+                            //$("#RecpType option:selected").text() = response.Security_Flag;
+                        }
+                        else
+                        {
+                            $("#ddChequeNumber").empty();
+                            //var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
+                            var options = '<option vlaue="">--Select--</option>';
+                            $.each(response.Cheques, function (index, data) {
+                                options += '<option value="' + data.Cheque_No + '">' + data.Cheque_No + '</option>';
+                            });
+                            $('#ddChequeNumber').append(options);
+                        }
+
 
                         //$("#DDChequeDate").empty();
                         //var options = '<option value="">--Select--</option>';
                         //$.each(response.Units, function (index, data) {
                         //    options += '<option value="' + data.Cheque_No + '">' + data.cheque_date + '</option>';
                         //});
-                        //$('#DDChequeDate').append(options); 
+                        //$('#DDChequeDate').append(options);
                         if(response.AgreementDate!=null)
                             $("#ContracAgreementDate").val(ToJavaScriptDate(response.AgreementDate));
                         if ($("#RecpType").val() == "cash" && $("#Reccategory").val()=="advance")
@@ -739,10 +833,43 @@
                     }
 
                 });
+        getInvoiceNumber();
+
+
+        //$.ajax(
+        //           {
+        //               url: "../Receipts/GetRecBasInvoiceNo",
+        //               // dataType: "jsonp",
+        //               method: "GET",
+        //               data: { agreement_no: agreement_no}, //FormData(form.get(0)),
+        //               contentType: "application/json",
+
+        //               success: function (response) {
+
+
+
+        //                   $("#InvoiceNumber").empty();
+        //                   var options = '<option vlaue="">--Select--</option>';
+        //                   $.each(response.InvoiceNo, function (index, data) {
+        //                       options += '<option value="' + data.InvNum + '">' + data.InvNum + '</option>';
+        //                   });
+        //                   $('#InvoiceNumber').append(options);
+
+
+        //               },
+        //               error: function (jqXhr, textStatus, errorThrown) {
+        //                   alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+        //               },
+        //               complete: function () {
+        //                   // $("#").addClass("hide");
+        //               }
+
+        //           }
+        //      );
     });
-   
+
     $("#TotalAmount").on('change', function () {
-         
+
         var totalAmount = $("#TotalAmount").val(); // type
         AmountInWords(totalAmount);
     });
@@ -763,12 +890,12 @@
             }
         });
     }
-    function getAgreementNumbers() {
+    function getAgreementNumbers(flg) {
         $.ajax(
         {
             url: "../Receipts/GetAggrementNumbers",
             type: "Get",
-            data: {},
+            data: {Flg: flg},
             success: function (response) {
                 $("#agreement_no").empty();
                 var Agreement_No = '<option value="">--Select--</option>';
@@ -786,12 +913,36 @@
             }
         });
     }
+    function getInvoiceNumber() {
+        $.ajax(
+        {
+            url: "../Receipts/GetRecBasInvoiceNo",
+            type: "Get",
+            data: { agreement_no: $('#agreement_no').val()},
+            success: function (response) {
+                $("#InvoiceNumber").empty();
+                var InvoiceNo = '<option value="">--Select--</option>';
+                $.each(response, function (index, data) {
+                    InvoiceNo += '<option value="' + data + '">' + data + '</option>';
+                });
+                $('#InvoiceNumber').append(InvoiceNo);
+                //$('#InvoiceNumber').change();
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+            },
+            complete: function () {
+                $("#img-loader").addClass("hide");
+            }
+        });
+    }
     function getChequeDetails(Mode, agreement_no, cheque_no) {
-         
+
         if (cheque_no == "--Select--") {
             $("#TotalAmount").val("");
             $("#AmtInWords").val("");
             $("#DDChequeDate").val("");
+            $("#Bank_AcName").val("");
             return false;
         }
         $.ajax(
@@ -800,11 +951,15 @@
             type: "Get",
             data: { Mode: Mode, agreement_no: agreement_no, cheque_no: cheque_no },
             success: function (response) {
-                 
+
                 $("#TotalAmount").val(response.Cheque_Amount);
                 $("#TotalAmount").trigger("change");
+                //debugger;
+                //alert(response.BankName);
+                $("#Bank_AcName").val(response.BankName);
                 if (response.cheque_date!=null)
                 $("#DDChequeDate").val(ToJavaScriptDate(response.cheque_date));
+
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -823,7 +978,7 @@
     //        //contentType: "application/json",
     //        //processData: false,
     //        success: function (response) {
-    //             
+    //
     //            $("#AdvAcCode").empty();
     //            var AdvAcCode = '';
     //            $.each(response.ReceiptNo, function (index, data) {
@@ -901,7 +1056,7 @@
     //        //contentType: "application/json",
     //        //processData: false,
     //        success: function (response) {
-    //             
+    //
     //            //$("#AdvAcCode").empty();
     //            //var AdvAcCode = '';
     //            //$.each(response.ReceiptNo, function (index, data) {
@@ -984,7 +1139,7 @@
     //        //contentType: "application/json",
     //        //processData: false,
     //        success: function (response) {
-    //             
+    //
     //            //$("#AdvAcCode").empty();
     //            //var AdvAcCode = '';
     //            //$.each(response.ReceiptNo, function (index, data) {
@@ -1077,7 +1232,7 @@
         var html = "<tr><td><div class='col-md-12 document-row' id='GridView" + i + "'>";
 
         html = html + "<div class='col-md-12'>";
-        
+
         html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceType" + i + "'  type='text' value='" + InvoiceType + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].Invtype' data-name='Invtype' readonly/></div>";
         html = html + " <div class='col-md-3 form-group'><input style='border: none;background: none;box-shadow: none;' id='InvoiceNumber" + i + "'  type='text' value='" + InvoiceNumber + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].Invno' data-name='Invno' readonly/></div>";
         html = html + " <div class='col-md-2 form-group'><input style='border: none;background: none;box-shadow: none;' type='date' id='InvoiceDate" + i + "' class='form-control master-form-input' name='ReceiptDetailsList[" + i + "].InvoiceDate' data-name='InvoiceDate' value='" + InvoiceDate + "' readonly/></div>";
@@ -1130,10 +1285,25 @@
         i = newindex;
     });
     $("form#Receipts").off("submit").on("submit", function (e) {
-         
+          
         e.preventDefault();
         try {
 
+            $("#Tenant_Name").val($("#TenantName option:selected").text() == "--Select--" ? null : $("#TenantName option:selected").text());
+            $("#Property_Name").val($("#PropertyName option:selected").text() == "--Select--" ? null : $("#PropertyName option:selected").text());
+            $("#unit_Name").val($("#unitName option:selected").text() == "--Select--" ? null : $("#unitName option:selected").text());
+            //$("#BankAcName").val($("#Bank_AcName option:selected").text() == "--Select--" ? null : $("#Bank_AcName option:selected").text());
+            //$("#DDChequeNo").val($("#ddChequeNumber option:selected").text() == "--Select--" ? null : $("#ddChequeNumber option:selected").text())
+            if ($("#drpCheque").is(':visible')) {
+                //alert("hi");
+                $("#DDChequeNo").val($("#ddChequeNumber option:selected").text() == "--Select--" ? null : $("#ddChequeNumber option:selected").text());
+                //alert($("#DDChequeNo").val());
+            }
+            else {
+                //alert($("else").val());
+                $("#DDChequeNo").val($("#txtChequeNo").val());
+                //alert($("#DDChequeNo").val());
+            }
             var form = $("form#Receipts");
             //$("#Tenant_id").val($("#Supplierid option:selected").text() == "--Select--" ? null : $("#Tenant_id option:selected").text());
             //$("#Tenant_Name").val($("#SupplierName option:selected").text() == "--Select--" ? null : $("#Tenant_Name option:selected").text());
@@ -1156,7 +1326,7 @@
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
-                         
+
                         getReceipt();
                         $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-error");
                         $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
@@ -1218,7 +1388,7 @@
     //    }
     //}
     function showHideChequeField(value) {
-         
+
         if (value) {
             $("[name='cheque'] :input").attr("disabled", value);
             $("[name='cheque']").hide();
@@ -1226,7 +1396,7 @@
         else {
             $("#txtChequeDate :input").attr("disabled", value);
             $("#txtChequeDate").show();
-            if ($("#Reccategory").val() == "advance") {
+            if ($("#Reccategory").val() == "advance") { //|| $("#Reccategory").val() == "security deposit"
                 $("#drpCheque :input").attr("disabled", false);
                 $("#drpCheque").show();
                 $("#drpChequeDate :input").attr("disabled", false);
@@ -1247,14 +1417,14 @@
             }
             //$("[name='cheque']").show();
         }
-        
+
         //if (value) {
         //    $("[name='cheque']").hide();
         //}
         //else {
         //    $("[name='cheque']").show();
         //}
-        
+
     }
     function showhideBankDetails(value) {
         $("#bankDetails :input").attr("disabled", value);
@@ -1284,39 +1454,65 @@
         }
     }
     function ShowHidePaymentModeFields(paymentModeValue) {
-         
-        if (paymentModeValue == "cheque") {
+
+        if (paymentModeValue == "cheque" || paymentModeValue == "DD") {
             showHideChequeField(false);
             showhideAdvancePayment(true);
-            showhidePDC(false);
+            showhidePDC(true);
             showhideBankDetails(false);
             if ($("#Reccategory").val() == "against invoice" || $("#Reccategory").val() =="advance") {
-                $("#TotalAmount").prop("readonly", true);
+                //$("#TotalAmount").prop("readonly", true);
             }
             else {
-                $("#TotalAmount").prop("readonly", false);
+                //$("#TotalAmount").prop("readonly", false);
             }
             if ($("#Reccategory").val() == "advance") {
+
                 $("#DDChequeNo").prop("readonly", true);
-                getAgreementNoByMode(paymentModeValue);
+                getAgreementNoByMode(paymentModeValue,0);
             }
-            
-            
+            else if ($("#Reccategory").val() == "against invoice") {
+                getAgreementNumbers(1);
+            }
+            //else if ($("#Reccategory").val() == "security deposit")
+            //{
+            //    getAgreementNumbers(2);
+            //}
+            //else if($("#Reccategory").val() == "against invoice")
+            //{
+            //    $("#DDChequeNo").prop("readonly", false);
+            //    getAgreementNoByMode(paymentModeValue, 1);
+            //}
+
+
+
+
         }
         else if (paymentModeValue == "cash") {
             showHideChequeField(true);
             showhideAdvancePayment(true);
-            showhideBankDetails(true);
+            showhideBankDetails(false);
             showhidePDC(true);
             if ($("#Reccategory").val() == "against invoice" || $("#Reccategory").val() == "advance") {
-                $("#TotalAmount").prop("readonly", true);
+                //$("#TotalAmount").prop("readonly", true);
             }
             else {
-                $("#TotalAmount").prop("readonly", false);
+                //$("#TotalAmount").prop("readonly", false);
             }
             if ($("#Reccategory").val() == "advance") {
-                getAgreementNoByMode(paymentModeValue);
+                getAgreementNoByMode(paymentModeValue, 0);
             }
+            else if ($("#Reccategory").val() == "against invoice") {
+                getAgreementNumbers(1);
+            }
+            //else if ($("#Reccategory").val() == "security deposit") {
+            //    getAgreementNumbers(2);
+            //}
+
+            //else if ($("#Reccategory").val() == "against invoice") {
+            //    $("#DDChequeNo").prop("readonly", false);
+            //    getAgreementNoByMode(paymentModeValue, 1);
+            //}
         }
         else if (paymentModeValue == "online") {
             showHideChequeField(false);
@@ -1324,15 +1520,25 @@
             showhideBankDetails(false);
             showhidePDC(true);
             if ($("#Reccategory").val() == "against invoice" || $("#Reccategory").val() == "advance") {
-                $("#TotalAmount").prop("readonly", true);
+               //$("#TotalAmount").prop("readonly", true);
             }
             else {
-                $("#TotalAmount").prop("readonly", false);
+                //$("#TotalAmount").prop("readonly", false);
             }
             if ($("#Reccategory").val() == "advance") {
                 $("#DDChequeNo").prop("readonly", true);
-                getAgreementNoByMode(paymentModeValue);
+                getAgreementNoByMode(paymentModeValue, 0);
             }
+            else if ($("#Reccategory").val() == "against invoice") {
+                getAgreementNumbers(1);
+            }
+            //else if ($("#Reccategory").val() == "security deposit") {
+            //    getAgreementNumbers(2);
+            //}
+            //else if ($("#Reccategory").val() == "against invoice") {
+            //    $("#DDChequeNo").prop("readonly", false);
+            //    getAgreementNoByMode(paymentModeValue, 1);
+            //}
         }
         else if (paymentModeValue == "pdc") {
             showHideChequeField(false);
@@ -1340,31 +1546,50 @@
             showhideBankDetails(false);
             showhidePDC(false);
             if ($("#Reccategory").val() == "against invoice" || $("#Reccategory").val() == "advance") {
-                $("#TotalAmount").prop("readonly", true);
+                //$("#TotalAmount").prop("readonly", true);
             }
             else {
-                $("#TotalAmount").prop("readonly", false);
+                //$("#TotalAmount").prop("readonly", false);
             }
             if ($("#Reccategory").val() == "advance") {
                 $("#DDChequeNo").prop("readonly", true);
-                getAgreementNoByMode(paymentModeValue);
+                getAgreementNoByMode(paymentModeValue, 0);
             }
+            else if ($("#Reccategory").val() == "against invoice") {
+                getAgreementNumbers(1);
+            }
+            //else if ($("#Reccategory").val() == "security deposit") {
+            //    getAgreementNumbers(2);
+            //}
+            //else if ($("#Reccategory").val() == "against invoice") {
+            //    $("#DDChequeNo").prop("readonly", false);
+            //    getAgreementNoByMode(paymentModeValue, 1);
+            //}
         }
         else if (paymentModeValue == "Advance adjust") {
             showHideChequeField(true);
             showhideAdvancePayment(false);
             showhideBankDetails(false);
             showhidePDC(true);
-            $("#TotalAmount").prop("readonly", true);
+            //$("#TotalAmount").prop("readonly", true);
             if ($("#Reccategory").val() == "against invoice" || $("#Reccategory").val() == "advance") {
-                $("#TotalAmount").prop("readonly", true);
+                //$("#TotalAmount").prop("readonly", true);
             }
             else {
-                $("#TotalAmount").prop("readonly", false);
+                //$("#TotalAmount").prop("readonly", false);
             }
             if ($("#Reccategory").val() == "advance") {
-                getAgreementNoByMode(paymentModeValue);
+                getAgreementNoByMode(paymentModeValue, 0);
             }
+            //else if ($("#Reccategory").val() == "security deposit") {
+            //    getAgreementNumbers(2);
+            //}
+
+
+            //else if ($("#Reccategory").val() == "against invoice") {
+            //    $("#DDChequeNo").prop("readonly", false);
+            //    getAgreementNoByMode(paymentModeValue, 1);
+            //}
         }
         else {
             showHideChequeField(true);
@@ -1372,30 +1597,44 @@
             showhideBankDetails(false);
             showhidePDC(true);
             if ($("#Reccategory").val() == "against invoice") {
-                $("#TotalAmount").prop("readonly", true);
+                //$("#TotalAmount").prop("readonly", true);
             }
             else {
-                $("#TotalAmount").prop("readonly", false);
+                //$("#TotalAmount").prop("readonly", false);
             }
-            if ($("#Reccategory").val() != "advance") {
-                getAgreementNumbers();
+            if ($("#Reccategory").val() == "others" || $("#Reccategory").val() == "" || $("#Reccategory").val() == "advance") {
+                getAgreementNumbers(0);
             }
+            else if ($("#Reccategory").val() == "against invoice")
+            {
+                getAgreementNumbers(1);
+            }
+            //else if ($("#Reccategory").val() == "security deposit") {
+            //    getAgreementNumbers(2);
+            //}
+            //else if ($("#Reccategory").val() == "against invoice") {
+            //    $("#DDChequeNo").prop("readonly", false);
+            //    getAgreementNoByMode(paymentModeValue, 1);
+            //}
         }
     }
-    $("#RecpType").change(function () { ShowHidePaymentModeFields($("#RecpType").val()) });
+    $("#RecpType").change(function ()
+    {
+        ShowHidePaymentModeFields($("#RecpType").val())
+    });
     $("#ddChequeNumber").change(function () {
         $("#DDChequeNo").val($("#ddChequeNumber").val())
         getChequeDetails($("#RecpType").val(), $("#agreement_no").val(), $("#DDChequeNo").val())
     });
-   
-    function getAgreementNoByMode(mode) {
+
+    function getAgreementNoByMode(mode, flg) {
+        //alert("Hi");
         $.ajax(
         {
             url: "../Receipts/GetAggrementNumberByMode",
             type: "Get",
-            data: { Mode: mode },
+            data: { Mode: mode, FLG: flg },
             success: function (response) {
-                 
                 $("#agreement_no").empty();
                 var Agreement_No = '<option value="">--Select--</option>';
                 $.each(response, function (index, data) {
@@ -1414,7 +1653,7 @@
     function getAdvancePaymentDetail(value) {
         $.ajax(
         {
-            url: "../Payment/GetAdvanceAdjustmentAmount",
+            url: "../Receipts/GetAdvanceAdjustmentAmount",
             type: "Get",
             data: { advanceCode: value },
             success: function (response) {
@@ -1430,9 +1669,98 @@
         });
     }
     $("#AdvAcCode").on('change', function (e) {
-         
+
         if ($("#AdvAcCode").val() != "") {
+
+            $.ajax(
+               {
+                   url: "../Receipts/GetAgreementDetailsOnAdvAdj",
+                   // dataType: "jsonp",
+                   method: "GET",
+                   data: { AdvanceReceiptNo: $("#AdvAcCode").val() }, //FormData(form.get(0)),
+                   contentType: "application/json",
+
+                   success: function (response) {
+
+                       $("#agreement_no").empty();
+                       var options = '<option vlaue="">--Select--</option>';
+                       $.each(response.Agreement, function (index, data) {
+                           options += '<option value="' + data.AgreementNo + '">' + data.AgreementNo + '</option>';
+                       });
+                       $('#agreement_no').append(options);
+                       $("#agreement_no").val($("#agreement_no option").eq(1).val()).change();
+
+                       $("#Tenant_id").empty();
+                       var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
+                       $.each(response.Tenants, function (index, data) {
+                           options += '<option value="' + data.Tenantid + '">' + data.Tenantid + '</option>';
+                       });
+                       $('#Tenant_id').append(options);
+
+                       $("#TenantName").empty();
+                       var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
+                       $.each(response.Tenants, function (index, data) {
+                           options += '<option value="' + data.Tenantid + '">' + data.TenantName + '</option>';
+                       });
+                       $('#TenantName').append(options);
+
+                       $("#Property_id").empty();
+                       var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
+                       $.each(response.Properties, function (index, data) {
+                           options += '<option value="' + data.Propertyid + '">' + data.Propertyid + '</option>';
+                       });
+                       $('#Property_id').append(options);
+
+                       $("#PropertyName").empty();
+                       var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
+                       $.each(response.Properties, function (index, data) {
+                           options += '<option value="' + data.Propertyid + '">' + data.PropertyName + '</option>';
+                       });
+                       $('#PropertyName').append(options);
+
+                       $("#Unit_ID").empty();
+                       var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
+                       $.each(response.Units, function (index, data) {
+                           options += '<option value="' + data.Unitid + '">' + data.Unitid + '</option>';
+                       });
+                       $('#Unit_ID').append(options);
+
+                       $("#unitName").empty();
+                       var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
+                       $.each(response.Units, function (index, data) {
+                           options += '<option value="' + data.Unitid + '">' + data.unitName + '</option>';
+                       });
+                       $('#unitName').append(options);
+
+                       //$("#ddChequeNumber").empty();
+                       ////var options = agreement_no == null ? '<option vlaue="">--Select--</option>' : '';
+                       //var options = '<option vlaue="">--Select--</option>';
+                       //$.each(response.Cheques, function (index, data) {
+                       //    options += '<option value="' + data.Cheque_No + '">' + data.Cheque_No + '</option>';
+                       //});
+                       //$('#ddChequeNumber').append(options);
+
+                       //$("#DDChequeDate").empty();
+                       //var options = '<option value="">--Select--</option>';
+                       //$.each(response.Units, function (index, data) {
+                       //    options += '<option value="' + data.Cheque_No + '">' + data.cheque_date + '</option>';
+                       //});
+                       //$('#DDChequeDate').append(options);
+                       if (response.AgreementDate != null)
+                           $("#ContracAgreementDate").val(ToJavaScriptDate(response.AgreementDate));
+                       //if ($("#RecpType").val() == "cash" && $("#Reccategory").val() == "advance")
+                       //    getChequeDetails($("#RecpType").val(), $("#agreement_no").val(), $("#DDChequeNo").val());
+                   },
+                   error: function (jqXhr, textStatus, errorThrown) {
+                       alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   },
+                   complete: function () {
+                       // $("#").addClass("hide");
+                   }
+
+               });
             getAdvancePaymentDetail($("#AdvAcCode").val());
+            //getInvoiceNumber();
         }
         else {
             $("#TotalAmount").val(0);
@@ -1446,4 +1774,64 @@
         var dt = new Date(parseFloat(results[1]));
         return dt.getFullYear() + "-" + ("0" + (dt.getMonth() + 1)).slice(-2) + "-" + ("0" + dt.getDate()).slice(-2);
     }
+
+
+    //*********************
+    //Code By Rajesh
+
+    //$("#BankAcCode").change(function () {
+    //    $("#Bank_AcName").val($("#BankAcCode option:selected").val());
+    //});
+
+    //$("#Bank_AcName").change(function () {
+    //    $("#BankAcCode").val($("#Bank_AcName option:selected").val());
+    //});
+
+    function disablectrl() {
+        if ($("#btnSubmit").text() == "Update") {
+            $("#Reccategory option:not(:selected)").prop('disabled', true);
+            $("#RecpType option:not(:selected)").prop("disabled", true);
+            $("#Property_id option:not(:selected)").prop("disabled", true);
+            $("#PropertyName option:not(:selected)").prop("disabled", true);
+            $("#Unit_ID option:not(:selected)").prop("disabled", true);
+            $("#unitName option:not(:selected)").prop("disabled", true);
+            $("#ddChequeNumber option:not(:selected)").prop("disabled", true);
+            $("#agreement_no option:not(:selected)").prop("disabled", true);
+            $("#Tenant_id option:not(:selected)").prop("disabled", true);
+            $("#TenantName option:not(:selected)").prop("disabled", true);
+            //$("#txtChequeNo").prop("disabled", true);
+            //$("#agreeDD").hide();
+            //$("#agreeTB").show();
+            //$("#drpCheque").hide();
+            //$("#txtCheque").show();
+            //$("#txtChequeNo").attr("required", true);
+
+        }
+        else if ($("#btnSubmit").text() == "Submit") {
+            $("#Reccategory option:not(:selected)").prop("disabled", false);
+            $("#RecpType option:not(:selected)").prop("disabled", false);
+            $("#Property_id option:not(:selected)").prop("disabled", false);
+            $("#PropertyName option:not(:selected)").prop("disabled", false);
+            $("#Unit_ID option:not(:selected)").prop("disabled", false);
+            $("#unitName option:not(:selected)").prop("disabled", false);
+            $("#ddChequeNumber option:not(:selected)").prop("disabled", false);
+            $("#agreement_no option:not(:selected)").prop("disabled", false);
+            $("#Tenant_id option:not(:selected)").prop("disabled", false);
+            $("#TenantName option:not(:selected)").prop("disabled", false);
+            //$("#txtChequeNo").prop("disabled", false);
+            //$("#agreeDD").show();
+            //$("#agreeTB").hide();
+            //$("#drpCheque").hide();
+            //$("#txtCheque").show();
+        }
+    }
+
+    $(document).ready(function () {
+        disablectrl();
+        if ($("#btnSubmit").text() == "Update") {
+            //$("#agreementno").trigger("change");
+        }
+
+    });
+
 </script>

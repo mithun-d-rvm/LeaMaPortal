@@ -12,7 +12,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>*@
     <div class="modal-body font-smaller">
-        <button type="button" class="close font-40" data-dismiss="modal">&times;</button>
+        <button type="button" class="close font-40" onclick="javascript:window.location.reload()" data-dismiss="modal">&times;</button>
         <div class="text-uppercase popup-heading">
             Contract Tenancy Agreement - Closure 
         </div>
@@ -109,7 +109,7 @@
                     @Html.LabelFor(model => model.Agreement_Start_Date, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Agreement_Start_Date, new { htmlAttributes = new { @class = "master-form-input" } })
+                        @Html.EditorFor(model => model.Agreement_Start_Date, new { htmlAttributes = new { @class = "master-form-input", @readonly = "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -117,7 +117,7 @@
                         @Html.LabelFor(model => model.Agreement_End_Date, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Agreement_End_Date, new { htmlAttributes = new { @class = "master-form-input" } })
+                        @Html.EditorFor(model => model.Agreement_End_Date, new { htmlAttributes = new { @class = "master-form-input", @readonly = "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -125,7 +125,7 @@
                       @Html.LabelFor(model => model.Total_Contract_Amount, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Total_Contract_Amount, new { htmlAttributes = new { @class = "master-form-input", @onkeypress = "allow_only_Float(event,'Total_Contract_Amount');" } })
+                        @Html.EditorFor(model => model.Total_Contract_Amount, new { htmlAttributes = new { @class = "master-form-input", @onkeypress = "allow_only_Float(event,'Total_Contract_Amount');", @readonly = "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -133,7 +133,7 @@
                        @Html.LabelFor(model => model.Total_Amount_Paid, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Total_Amount_Paid, new { htmlAttributes = new { @class = "master-form-input", @onkeypress = "allow_only_Float(event,'Total_Amount_Paid');", @required = "required" } })
+                        @Html.EditorFor(model => model.Total_Amount_Paid, new { htmlAttributes = new { @class = "master-form-input", @onkeypress = "allow_only_Float(event,'Total_Amount_Paid');", @required = "required", @readonly = "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -141,7 +141,7 @@
                        @Html.LabelFor(model => model.Advance_pending, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                       @Html.EditorFor(model => model.Advance_pending, new { htmlAttributes = new { @class = "master-form-input", @onkeypress = "allow_only_Float(event,'Advance_pending');", @required = "required" } })
+                       @Html.EditorFor(model => model.Advance_pending, new { htmlAttributes = new { @class = "master-form-input", @onkeypress = "allow_only_Float(event,'Advance_pending');", @required = "required", @readonly = "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -149,7 +149,7 @@
                         @Html.LabelFor(model => model.Advance_Security_Amount_Paid, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Advance_Security_Amount_Paid, new { htmlAttributes = new { @class = "master-form-input", @onkeypress = "allow_only_Float(event,'Advance_Security_Amount_Paid');", @required = "required" } })
+                        @Html.EditorFor(model => model.Advance_Security_Amount_Paid, new { htmlAttributes = new { @class = "master-form-input", @onkeypress = "allow_only_Float(event,'Advance_Security_Amount_Paid');", @required = "required", @readonly = "readonly" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -165,7 +165,7 @@
                         @Html.LabelFor(model => model.Amount_to_be_refunded, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Amount_to_be_refunded, new { htmlAttributes = new { @class = "master-form-input", @onkeypress = "allow_only_Float(event,'Amount_to_be_refunded');", @required = "required" } })
+                        @Html.EditorFor(model => model.Amount_to_be_refunded, new { htmlAttributes = new { @class = "master-form-input", @onkeypress = "allow_only_Float(event,'Amount_to_be_refunded');" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -181,7 +181,7 @@
                         &nbsp;
                     </div>
                     <div class="col-md-4">
-                        <input type="submit" class="btn master-form-btn" value="Save" />
+                        <input type="submit" class="btn master-form-btn" value="Submit" />
                     </div>
                 </div>
             </div>
@@ -246,4 +246,12 @@
         <button type="button" class="btn btn-default" id="test-modal">Test</button>
     </div>*@
 </div>
+<script>
+
+    $('#closureModal').modal({
+        backdrop: 'static',
+        keyboard: false
+    })
+
+</script>
 

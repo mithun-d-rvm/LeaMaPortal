@@ -1,64 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="vacancy_regionds">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>8e7b5ebe-3966-4d2d-8fd2-269a8b35172a</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="Region_Name">
-          <DataField>Region_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Country">
-          <DataField>Country</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Noof_properties">
-          <DataField>Noof_properties</DataField>
-          <rd:TypeName>System.Int64</rd:TypeName>
-        </Field>
-        <Field Name="Aging_days">
-          <DataField>Aging_days</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Aging_Range">
-          <DataField>Aging_Range</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Amount_Range">
-          <DataField>Amount_Range</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Loss_Amt">
-          <DataField>Loss_Amt</DataField>
-          <rd:TypeName>System.Double</rd:TypeName>
-        </Field>
-        <Field Name="user">
-          <DataField>user</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>vacancy_regionds</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>vacancy_regionds1</rd:DataSetName>
-        <rd:SchemaPath>D:\mysql\RDLC\RDLCApplicationWithParamstest\RDLCApplicationWithParams\vacancy_regionds1.xsd</rd:SchemaPath>
-        <rd:TableName>vacancy_region_report</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>vacancy_region_reportTableAdapter</rd:TableAdapterName>
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
@@ -68,7 +9,7 @@
               <Width>1.78899in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.9378in</Width>
+              <Width>1.22947in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.78899in</Width>
@@ -681,7 +622,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Region Name</Value>
+                                <Value>Region </Value>
                                 <Style>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
@@ -949,10 +890,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>3.98958in</Top>
+        <Top>3.87514in</Top>
         <Left>0.17708in</Left>
         <Height>1.25in</Height>
-        <Width>9.03721in</Width>
+        <Width>8.32888in</Width>
         <Visibility>
           <Hidden>=false</Hidden>
           <ToggleItem>Textbox58</ToggleItem>
@@ -970,7 +911,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Vacancy Report- Regionwise</Value>
+                <Value>Vacant Report - Regionwise</Value>
                 <Style>
                   <FontSize>12pt</FontSize>
                   <FontWeight>Bold</FontWeight>
@@ -986,7 +927,7 @@
         <Top>0.12167in</Top>
         <Left>0.17708in</Left>
         <Height>0.25in</Height>
-        <Width>9.0372in</Width>
+        <Width>8.32888in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -1161,6 +1102,9 @@
                 <CrossAt>NaN</CrossAt>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
               <ChartAxis Name="Secondary">
                 <Style>
@@ -1195,6 +1139,9 @@
                 <Location>Opposite</Location>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
             </ChartCategoryAxes>
             <ChartValueAxes>
@@ -1229,6 +1176,9 @@
                 <CrossAt>NaN</CrossAt>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
               <ChartAxis Name="Secondary">
                 <Style>
@@ -1262,6 +1212,9 @@
                 <Location>Opposite</Location>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
             </ChartValueAxes>
             <Style>
@@ -1289,7 +1242,7 @@
         </ChartLegends>
         <ChartTitles>
           <ChartTitle Name="Default">
-            <Caption>Vacancy Report- Regionwise</Caption>
+            <Caption>Vacant Report - Regionwise</Caption>
             <Style>
               <BackgroundGradientType>None</BackgroundGradientType>
               <FontWeight>Bold</FontWeight>
@@ -1315,10 +1268,10 @@
           </Style>
         </ChartNoDataMessage>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.5in</Top>
+        <Top>0.44111in</Top>
         <Left>1.30208in</Left>
         <Height>3.36458in</Height>
-        <Width>7.9122in</Width>
+        <Width>7.20388in</Width>
         <ZIndex>2</ZIndex>
         <Visibility>
           <ToggleItem>Textbox51</ToggleItem>
@@ -1350,7 +1303,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox49</rd:DefaultName>
-        <Top>0.79166in</Top>
+        <Top>0.76056in</Top>
         <Left>0.17708in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
@@ -1386,7 +1339,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox50</rd:DefaultName>
-        <Top>0.5in</Top>
+        <Top>0.44111in</Top>
         <Left>0.17708in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
@@ -1413,6 +1366,66 @@
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
-  <rd:ReportID>7e71b96e-496c-4c45-8891-496cc9e6c74c</rd:ReportID>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="vacancy_regionds">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>8e7b5ebe-3966-4d2d-8fd2-269a8b35172a</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>vacancy_regionds</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Region_Name">
+          <DataField>Region_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Country">
+          <DataField>Country</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Noof_properties">
+          <DataField>Noof_properties</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="Aging_days">
+          <DataField>Aging_days</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Aging_Range">
+          <DataField>Aging_Range</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Amount_Range">
+          <DataField>Amount_Range</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Loss_Amt">
+          <DataField>Loss_Amt</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="user">
+          <DataField>user</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>vacancy_regionds1</rd:DataSetName>
+        <rd:SchemaPath>D:\mysql\RDLC\RDLCApplicationWithParamstest\RDLCApplicationWithParams\vacancy_regionds1.xsd</rd:SchemaPath>
+        <rd:TableName>vacancy_region_report</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>vacancy_region_reportTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>7e71b96e-496c-4c45-8891-496cc9e6c74c</rd:ReportID>
 </Report>

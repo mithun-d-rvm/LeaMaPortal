@@ -25,14 +25,16 @@ namespace LeaMaPortal.Controllers
         {
             try
             {
+
                 ViewData["Search"] = Search;
                 int currentPageIndex = page.HasValue ? page.Value : 1;
                 int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
                 ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, defaultPageSize);
+                string regname = Session["Region"].ToString();
                 IList<CheckListViewModel> list;
                 if (string.IsNullOrWhiteSpace(Search))
                 {
-                    list = db.tbl_checklistmaster.Where(x => x.Delmark != "*").OrderBy(x => x.Checklist_Name).Select(x => new CheckListViewModel()
+                    list = db.tbl_checklistmaster.Where(x => x.Delmark != "*" && x.Region_Name == regname ).OrderBy(x => x.Checklist_Name).Select(x => new CheckListViewModel()
                     {
                         Id = x.Id,
                         Checklist_id = x.Checklist_id,
@@ -42,7 +44,7 @@ namespace LeaMaPortal.Controllers
                 }
                 else
                 {
-                    list = db.tbl_checklistmaster.Where(x => x.Delmark != "*"
+                    list = db.tbl_checklistmaster.Where(x => x.Delmark != "*" && x.Region_Name == regname
                                     && (x.Checklist_id.ToLower().Contains(Search.ToLower())
                                     || x.Checklist_Name.ToLower().Contains(Search.ToLower())))
                                   .OrderBy(x => x.Checklist_Name).Select(x => new CheckListViewModel()
@@ -79,9 +81,10 @@ namespace LeaMaPortal.Controllers
             MessageResult result = new MessageResult();
             try
             {
+                string regname = Session["Region"].ToString();
                 if (ModelState.IsValid)
                 {
-                    var checkList = await db.tbl_checklistmaster.FirstOrDefaultAsync(r => r.Checklist_Name.ToLower() == model.Checklist_Name.ToLower() && r.Check_type == model.Checklist_Type && r.Id != model.Id);
+                    var checkList = await db.tbl_checklistmaster.FirstOrDefaultAsync(r => r.Checklist_Name.ToLower() == model.Checklist_Name.ToLower() && r.Check_type == model.Checklist_Type && r.Id != model.Id && r.Region_Name == regname);
                     if (checkList != null)
                     {
                         result.Errors = "Check list name already added";
@@ -98,14 +101,26 @@ namespace LeaMaPortal.Controllers
                     {
                         PFlag = "UPDATE";
                     }
+
+                 
+                    if (regname != "")
+                    {
+                        model.Region_Name = regname;
+
+                        var countryname = db.tbl_region.Where(x => x.Region_Name == model.Region_Name).OrderByDescending(x => x.Id).FirstOrDefault();
+
+                        model.Country = countryname.Country;
+                    }
                     object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PId", model.Id),
                                            new MySqlParameter("@PChecklist_id",model.Checklist_id),
                                             new MySqlParameter("@PChecklist_Name",model.Checklist_Name),
                                             new MySqlParameter("@Pcheck_type",model.Checklist_Type),
-                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name),
+                                           new MySqlParameter ("@PRegion_Name",model.Region_Name ),
+                                           new MySqlParameter ("@PCountry",model.Country )
                                          };
-                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Checklist_All(@PFlag,@PId,@PChecklist_id,@PChecklist_Name,@Pcheck_type,@PCreateduser)", param).ToListAsync();
+                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Checklist_All(@PFlag,@PId,@PChecklist_id,@PChecklist_Name,@Pcheck_type,@PCreateduser,@PRegion_Name,@PCountry)", param).ToListAsync();
                     await db.SaveChangesAsync();
 
                 }
@@ -165,9 +180,11 @@ namespace LeaMaPortal.Controllers
                                            new MySqlParameter("@PChecklist_id",tbl_checklist.Checklist_id),
                                            new MySqlParameter("@PChecklist_Name",tbl_checklist.Checklist_Name),
                                            new MySqlParameter("@Pcheck_type",tbl_checklist.Check_type),
-                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name),
+                                           new MySqlParameter("@PRegion_Name",tbl_checklist.Region_Name ),
+                                           new MySqlParameter ("@PCountry",tbl_checklist.Country )
                                          };
-                var spResult = await db.Database.SqlQuery<object>("Usp_Checklist_All(@PFlag,@PId,@PChecklist_id,@PChecklist_Name,@Pcheck_type,@PCreateduser)", param).ToListAsync();
+                var spResult = await db.Database.SqlQuery<object>("Usp_Checklist_All(@PFlag,@PId,@PChecklist_id,@PChecklist_Name,@Pcheck_type,@PCreateduser,@PRegion_Name,@PCountry)", param).ToListAsync();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

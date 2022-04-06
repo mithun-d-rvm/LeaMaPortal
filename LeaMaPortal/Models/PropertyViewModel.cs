@@ -277,8 +277,11 @@ namespace LeaMaPortal.Models
 
         public string propertiesdt { get; set; }
         public string propertiesdt1 { get; set; }
+        //public string propertiesdoc { get; set; }
         public List<Propertiesdt> PropertiesdtList { get; set; }
         public List<Propertiesdt1> Propertiesdt1List { get; set; }
+        public List<CompanyDocuments> CompanyDocumentsExist { get; set; }
+        public List<CompanyNewDocuments> CompanyNewDocuments { get; set; }
     }
     public class Propertiesdt
     {

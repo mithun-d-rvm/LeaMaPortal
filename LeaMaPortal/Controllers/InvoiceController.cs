@@ -8,9 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using LeaMaPortal.DBContext;
 using LeaMaPortal.Models;
+using System.Threading;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using MvcPaging;
+using LeaMaPortal.Helpers;
 
 
 namespace LeaMaPortal.Controllers
@@ -23,6 +25,10 @@ namespace LeaMaPortal.Controllers
         // GET: Invoice
         public ActionResult Index()
         {
+            if (Session["Region"] == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
             return View();
         }
         public PartialViewResult List(string Search, int? page, int? defaultPageSize)
@@ -32,14 +38,14 @@ namespace LeaMaPortal.Controllers
                 ViewData["Search"] = Search;
                 int currentPageIndex = page.HasValue ? page.Value : 1;
                 int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
-                ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, PageSize);
+                ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, PageSize);                
                 //TenantCompanyViewModel model = new TenantCompanyViewModel();
                 var invoiceDetails = db.tbl_invoicehd.Where(x => x.Delmark != "*");
                 if (!string.IsNullOrWhiteSpace(Search))
                 {
-                    invoiceDetails = invoiceDetails.Where(x => x.invno.Contains(Search));
+                    invoiceDetails = invoiceDetails.Where(x => x.invno.Contains(Search) || x.Tenant_Name.Contains(Search) || x.Property_Name.Contains(Search) || x.unit_Name.Contains(Search));
                 }
-                var invoice = invoiceDetails.OrderBy(x => x.id).Select(x => new InvoiceViewModel()
+                var invoice = invoiceDetails.OrderByDescending(x => x.id).Select(x => new InvoiceViewModel()
                 {
                     Agreement_No = x.Agreement_No,
                     invno = x.invno,
@@ -97,7 +103,7 @@ namespace LeaMaPortal.Controllers
                 var units = db.tbl_propertiesmaster.Where(x => x.Delmark != "*" && x.Property_Flag == "Unit").OrderBy(x => x.Unit_ID_Tawtheeq).Select(x => new { UnitId = x.Unit_ID_Tawtheeq, UnitName = x.Unit_Property_Name, GroupedValue = x.Unit_ID_Tawtheeq + ":" + x.Unit_Property_Name });
                 ViewBag.UnitId = new SelectList(units, "UnitId", "UnitId");
                 ViewBag.unitName = new SelectList(units, "UnitId", "UnitName");
-                ViewBag.Agreement_No = new SelectList(db.tbl_agreement.Where(x => x.Delmark != "*").OrderBy(x => x.Agreement_No).Select(x => x.Agreement_No));
+                ViewBag.Agreement_No = new SelectList(db.tbl_agreement.Where(x => x.Approval_Flag != 1 && x.Delmark != "*" && string.IsNullOrEmpty(x.Status)).OrderBy(x => x.Agreement_No).Select(x => x.Agreement_No));
                 ViewBag.invtype = new SelectList(Common.InvoiceType);
                 ViewBag.month = new SelectList(Common.Month, "Value", "Text");
                 var invoice = await db.tbl_invoicehd.Select(x => x.incno).DefaultIfEmpty(0).MaxAsync();
@@ -277,7 +283,7 @@ namespace LeaMaPortal.Controllers
                     Unit_ID = invoice.Unit_ID,
                     unit_Name = invoice.unit_Name,
                     year = invoice.year,
-                    InvoiceDetails = invoice.tbl_invoicedt.Select(x => new InvoiceDetailsViewModel()
+                    InvoiceDetails = invoice.tbl_invoicedt .Select(x => new InvoiceDetailsViewModel()
                     {
                         amount = x.amount,
                         description = x.description,
@@ -585,6 +591,191 @@ namespace LeaMaPortal.Controllers
             }
         }
 
+        public async Task<PartialViewResult> Print(string InvoiceNo, string OtherTerms)
+        {
+            try
+            {
+                Thread.Sleep(1000);
+                InvoicePrintModel model = new InvoicePrintModel();
+                //TcaPrintModel model = new TcaPrintModel();
+                var printInvoicehd = await db.tbl_invoicehd.FirstOrDefaultAsync(x => x.invno == InvoiceNo);
+                var printInvoicedt = await db.tbl_invoicedt.FirstOrDefaultAsync(x => x.invno == InvoiceNo);
+
+                if (printInvoicedt != null)
+                    model.Id = printInvoicehd.id;
+                model.invno = printInvoicehd.invno;
+
+                model.invdate = printInvoicehd.date.Value.ToShortDateString();
+                model.invtype = printInvoicehd.invtype;
+                //model.IssueDate = printInvoicehd.date ;
+                model.duedate = printInvoicehd.duedate;
+                model.Tenant_id = printInvoicehd.Tenant_id;
+                model.Tenant_Name = printInvoicehd.Tenant_Name;
+                model.totalamt = printInvoicehd.totalamt;
+                string decimalPart = "", text = "";
+                decimal amount = 0;
+                decimal amt1 = decimal.Parse(model.totalamt.ToString());
+                int i = (int)amt1;
+                decimal n1 = amt1 - i;
+                if (n1 > 0)
+                {
+                    decimalPart = amt1.ToString().Split('.')[1];
+                }
+                string t2 = "";
+                string t1 = LeaMaPortal.Helpers.NumberToText1.NumberToText(i, true, false);
+                //string t2 = LeaMaPortal.Helpers.NumberToText1.DecimalToText(decimalPart);
+                if (n1 > 0)
+                {
+                    t2 = LeaMaPortal.Helpers.NumberToText1.NumberToText(int.Parse(decimalPart), true, false);
+                }
+                if (t1 != "" && t2 != "")
+                { text = t1 + " " + "" + " Dirhams " + "and " + t2 + " " + "" + " Fils "; }
+                else
+                { text = t1 + " " + "" + " Dirhams "; }
+
+                // string text1 = t1 + "" + "" + "Dirhams " + "and" + t2 + "" + "" + "fils";
+                model.amtinwords = text;
+               // model.amtinwords = AmountInWords();
+                //NumberToText1
+                model.Agreement_No = printInvoicehd.Agreement_No;
+                model.Properties_ID = printInvoicehd.Property_ID;
+                //   model.Propertyid = int.Parse(model.Properties_ID);
+                var property = await db.tbl_propertiesmaster.FirstOrDefaultAsync(x => x.Property_ID_Tawtheeq == model.Properties_ID);
+                model.Property_Name = printInvoicehd.Property_Name;
+                model.Unit_ID = printInvoicehd.Unit_ID;
+                model.unit_Name = printInvoicehd.unit_Name;
+                model.year = printInvoicehd.year;
+                model.month = printInvoicehd.month;
+                model.bank_details = printInvoicehd.bank_details;
+                model.description = printInvoicedt.description;
+                model.qty = float.Parse(printInvoicedt.qty.ToString());
+                if (model.qty == 0)
+                {
+                    ViewBag.qty = 0;
+                    ViewBag.qts = "----";
+                }
+                var agreementDet = await db.tbl_agreement.FirstOrDefaultAsync(x => x.Agreement_No == printInvoicehd.Agreement_No);
+                model.Agreementdate = agreementDet.Agreement_Date.Value.ToShortDateString();
+                //var property = await db.tbl_propertiesmaster.FirstOrDefaultAsync(x => x.Property_Id == agreementDet.property_id);
+                if (agreementDet.Tenant_Type == "Individual")
+                {
+                    var tenant = await db.tbl_tenant_individual.FirstOrDefaultAsync(x => x.Tenant_Id == agreementDet.Ag_Tenant_id);
+                    if (tenant != null)
+                    {
+                        model.Ag_Tenant_Faxno = string.IsNullOrWhiteSpace(tenant.Fax_No) ? "" : tenant.Fax_Countrycode + "-" + tenant.Fax_Areacode + "-" + tenant.Fax_No;
+                        model.Ag_Tenant_Address = tenant.address + ", " + tenant.address1 + ", " + tenant.City;
+                        model.Ag_Tenant_Telephone = string.IsNullOrWhiteSpace(tenant.Landline_No) ? "" : tenant.Landline_Countrycode + "-" + tenant.Landline_Areacode + "-" + tenant.Landline_No;
+                        model.Ag_Tenant_Name = tenant.Title + " " + tenant.First_Name + tenant.Last_Name;
+                    }
+
+                }
+                else
+                {
+                    var tenant = await db.tbl_tenant_company.FirstOrDefaultAsync(x => x.Tenant_Id == agreementDet.Ag_Tenant_id);
+                    if (tenant != null)
+                    {
+                        model.Ag_Tenant_Faxno = string.IsNullOrWhiteSpace(tenant.Fax_No) ? "" : tenant.Fax_Countrycode + "-" + tenant.Fax_Areacode + "-" + tenant.Fax_No;
+                        model.Ag_Tenant_Address = tenant.address + ", " + tenant.address1 + ", " + tenant.City;
+                        model.Ag_Tenant_Telephone = string.IsNullOrWhiteSpace(tenant.Landline_No) ? "" : tenant.Landline_Countrycode + "-" + tenant.Landline_Areacode + "-" + tenant.Landline_No;
+                        model.Ag_Tenant_Name = tenant.Title + " " + tenant.First_Name + tenant.Last_Name;
+                    }
+                }
+
+                LeamaEntities l = new LeamaEntities();
+                var invfilter = l.tbl_invoicedt.Where(x => x.invno == model.invno);
+                var invdata = invfilter.ToList();
+
+                //var invdata = printInvoicedt .ToString().ToList();
+                //  ViewBag.invdtas = invdata;
+                ViewBag.invdtas = invdata.ToList();
+                //  //  model.Property_Usage = property.Property_Usage;
+                return PartialView("../Invoice/_InvoicePrint", model);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+
+        //public async Task<PartialViewResult> Print(string InvoiceNo, string OtherTerms)
+        //{
+        //    try
+        //    {
+        //        Thread.Sleep(1000);
+        //        InvoicePrintModel model = new InvoicePrintModel();
+        //        //TcaPrintModel model = new TcaPrintModel();
+        //        var printInvoicehd = await db.tbl_invoicehd.FirstOrDefaultAsync(x => x.invno == InvoiceNo);
+        //        var printInvoicedt = await db.tbl_invoicedt.FirstOrDefaultAsync(x => x.invno == InvoiceNo);
+
+        //        if (printInvoicedt != null)
+        //            model.Id = printInvoicehd.id;
+        //        model.invno = printInvoicehd.invno;
+
+        //        model.invdate = printInvoicehd.date.Value.ToShortDateString();
+        //        model.invtype = printInvoicehd.invtype;
+        //        //model.IssueDate = printInvoicehd.date ;
+        //        model.duedate = printInvoicehd.duedate;
+        //        model.Tenant_id = printInvoicehd.Tenant_id;
+        //        model.Tenant_Name = printInvoicehd.Tenant_Name;
+        //        model.totalamt = printInvoicehd.totalamt;
+        //        model.Agreement_No = printInvoicehd.Agreement_No;
+        //        model.Properties_ID = printInvoicehd.Property_ID;
+        //        //   model.Propertyid = int.Parse(model.Properties_ID);
+        //        var property = await db.tbl_propertiesmaster.FirstOrDefaultAsync(x => x.Property_ID_Tawtheeq == model.Properties_ID);
+        //        model.Property_Name = printInvoicehd.Property_Name;
+        //        model.Unit_ID = printInvoicehd.Unit_ID;
+        //        model.unit_Name = printInvoicehd.unit_Name;
+        //        model.year = printInvoicehd.year;
+        //        model.month = printInvoicehd.month;
+        //        model.bank_details = printInvoicehd.bank_details;
+        //        model.description = printInvoicedt.description;
+        //        model.qty = float.Parse(printInvoicedt.qty.ToString());
+        //        var agreementDet = await db.tbl_agreement.FirstOrDefaultAsync(x => x.Agreement_No == printInvoicehd.Agreement_No);
+        //        model.Agreementdate = agreementDet.Agreement_Date.Value.ToShortDateString();
+        //        //var property = await db.tbl_propertiesmaster.FirstOrDefaultAsync(x => x.Property_Id == agreementDet.property_id);
+        //        if (agreementDet.Tenant_Type == "Individual")
+        //        {
+        //            var tenant = await db.tbl_tenant_individual.FirstOrDefaultAsync(x => x.Tenant_Id == agreementDet.Ag_Tenant_id);
+        //            if (tenant != null)
+        //            {
+        //                model.Ag_Tenant_Faxno = string.IsNullOrWhiteSpace(tenant.Fax_No) ? "" : tenant.Fax_Countrycode + "-" + tenant.Fax_Areacode + "-" + tenant.Fax_No;
+        //                model.Ag_Tenant_Address = tenant.address + ", " + tenant.address1 + ", " + tenant.City;
+        //                model.Ag_Tenant_Telephone = string.IsNullOrWhiteSpace(tenant.Landline_No) ? "" : tenant.Landline_Countrycode + "-" + tenant.Landline_Areacode + "-" + tenant.Landline_No;
+        //                model.Ag_Tenant_Name = tenant.Title + " " + tenant.First_Name + tenant.Last_Name;
+        //            }
+
+        //        }
+        //        else
+        //        {
+        //            var tenant = await db.tbl_tenant_company.FirstOrDefaultAsync(x => x.Tenant_Id == agreementDet.Ag_Tenant_id);
+        //            if (tenant != null)
+        //            {
+        //                model.Ag_Tenant_Faxno = string.IsNullOrWhiteSpace(tenant.Fax_No) ? "" : tenant.Fax_Countrycode + "-" + tenant.Fax_Areacode + "-" + tenant.Fax_No;
+        //                model.Ag_Tenant_Address = tenant.address + ", " + tenant.address1 + ", " + tenant.City;
+        //                model.Ag_Tenant_Telephone = string.IsNullOrWhiteSpace(tenant.Landline_No) ? "" : tenant.Landline_Countrycode + "-" + tenant.Landline_Areacode + "-" + tenant.Landline_No;
+        //                model.Ag_Tenant_Name = tenant.Title + " " + tenant.First_Name + tenant.Last_Name ;
+        //            }
+        //        }
+
+        //        LeamaEntities l = new LeamaEntities();
+        //        var invfilter = l.tbl_invoicedt.Where(x => x.invno == model.invno);
+        //        var invdata = invfilter.ToList();
+
+        //        //var invdata = printInvoicedt .ToString().ToList();
+        //        //  ViewBag.invdtas = invdata;
+        //        ViewBag.invdtas = invdata.ToList ();
+        //        //  //  model.Property_Usage = property.Property_Usage;
+        //        return PartialView("../Invoice/_InvoicePrint", model);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw;
+        //    }
+        //}
+
+
+
         //// POST: Invoice/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
@@ -595,6 +786,27 @@ namespace LeaMaPortal.Controllers
         //    db.SaveChanges();
         //    return RedirectToAction("Index");
         //}
+
+        [HttpGet]
+        public string AmountInWords(decimal amount)
+        {
+            string decimalPart = "", text = "";
+            decimal amt1 = amount;
+            int i = (int)amt1;
+            decimal n1 = amount - (int)amount;
+            if (n1 > 0)
+            {
+                decimalPart = amt1.ToString().Split('.')[1];
+            }
+            string t1 = NumberToText1.NumberToText(i, true, false);
+            string t2 = NumberToText1.DecimalToText(decimalPart);
+            string t3 = "";            
+            if (t1 != "" && t2 != "")
+            { text = t1 + "" + t3 + " Dirhams " + "and" + t2 + "" + "" + " fils "; }
+            else
+            { text = t1 + "" + t3 + " Dirhams "; }            
+            return text;            
+        }
 
         protected override void Dispose(bool disposing)
         {

@@ -27,18 +27,12 @@ namespace LeaMaPortal.DBContext
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<dashboard_earning> dashboard_earning { get; set; }
         public virtual DbSet<dashboard_expenses> dashboard_expenses { get; set; }
         public virtual DbSet<dashboard_rental> dashboard_rental { get; set; }
+        public virtual DbSet<dashboard_utility> dashboard_utility { get; set; }
         public virtual DbSet<dashboard_vacancy> dashboard_vacancy { get; set; }
-        public virtual DbSet<ebwater_report> ebwater_report { get; set; }
         public virtual DbSet<email_output> email_output { get; set; }
         public virtual DbSet<eventtest> eventtests { get; set; }
-        public virtual DbSet<outstanding_report> outstanding_report { get; set; }
-        public virtual DbSet<pdc_report> pdc_report { get; set; }
-        public virtual DbSet<renewal_report> renewal_report { get; set; }
-        public virtual DbSet<summarycollection_report> summarycollection_report { get; set; }
-        public virtual DbSet<summaryebwater_report> summaryebwater_report { get; set; }
         public virtual DbSet<tbl_aging_range> tbl_aging_range { get; set; }
         public virtual DbSet<tbl_agreement> tbl_agreement { get; set; }
         public virtual DbSet<tbl_agreement_checklist> tbl_agreement_checklist { get; set; }
@@ -92,16 +86,35 @@ namespace LeaMaPortal.DBContext
         public virtual DbSet<tbl_tenant_individual_doc> tbl_tenant_individual_doc { get; set; }
         public virtual DbSet<tbl_userrights> tbl_userrights { get; set; }
         public virtual DbSet<tbl_utilitiesmaster> tbl_utilitiesmaster { get; set; }
-        public virtual DbSet<vacancy_report> vacancy_report { get; set; }
         public virtual DbSet<collection_summary> collection_summary { get; set; }
+        public virtual DbSet<dashboard_earning> dashboard_earning { get; set; }
+        public virtual DbSet<outstanding_report> outstanding_report { get; set; }
+        public virtual DbSet<pdc_report> pdc_report { get; set; }
+        public virtual DbSet<renewal_report> renewal_report { get; set; }
+        public virtual DbSet<summarycollection_report> summarycollection_report { get; set; }
+        public virtual DbSet<summaryebwater_colour> summaryebwater_colour { get; set; }
+        public virtual DbSet<summaryebwater_colour_prop> summaryebwater_colour_prop { get; set; }
+        public virtual DbSet<summaryebwater_treand> summaryebwater_treand { get; set; }
+        public virtual DbSet<summaryebwater_treand_property> summaryebwater_treand_property { get; set; }
+        public virtual DbSet<summaryebwater_treand_year> summaryebwater_treand_year { get; set; }
         public virtual DbSet<test_report1> test_report1 { get; set; }
         public virtual DbSet<test_report2> test_report2 { get; set; }
+        public virtual DbSet<utilitybill_notgenerated> utilitybill_notgenerated { get; set; }
         public virtual DbSet<vacancy_caretaker_report> vacancy_caretaker_report { get; set; }
+        public virtual DbSet<view_agree_recp_chequenowise_pending> view_agree_recp_chequenowise_pending { get; set; }
         public virtual DbSet<view_agreement_close_pending> view_agreement_close_pending { get; set; }
+        public virtual DbSet<view_agreement_update> view_agreement_update { get; set; }
         public virtual DbSet<view_auto_receipt> view_auto_receipt { get; set; }
+        public virtual DbSet<view_expirydate_notifications> view_expirydate_notifications { get; set; }
         public virtual DbSet<view_find_pdcstatus> view_find_pdcstatus { get; set; }
         public virtual DbSet<view_invoice_agreement> view_invoice_agreement { get; set; }
         public virtual DbSet<view_invoice_receipt_pending> view_invoice_receipt_pending { get; set; }
+        public virtual DbSet<view_invoice_receipt_pending_test> view_invoice_receipt_pending_test { get; set; }
+        public virtual DbSet<view_propertymastergridfill> view_propertymastergridfill { get; set; }
+        public virtual DbSet<view_receipt_screen_advance_pending> view_receipt_screen_advance_pending { get; set; }
+        public virtual DbSet<view_regionupdate> view_regionupdate { get; set; }
+        public virtual DbSet<view_security> view_security { get; set; }
+        public virtual DbSet<view_security_pending> view_security_pending { get; set; }
         public virtual DbSet<view_tenant> view_tenant { get; set; }
     
         public virtual ObjectResult<string> Usp_split(string screen_name, string combo_name, string deli, string target)
@@ -123,6 +136,2710 @@ namespace LeaMaPortal.DBContext
                 new ObjectParameter("target", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Usp_split", screen_nameParameter, combo_nameParameter, deliParameter, targetParameter);
+        }
+    
+        public virtual int Email_Agreement(string pAgreemwnt_No)
+        {
+            var pAgreemwnt_NoParameter = pAgreemwnt_No != null ?
+                new ObjectParameter("PAgreemwnt_No", pAgreemwnt_No) :
+                new ObjectParameter("PAgreemwnt_No", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_Agreement", pAgreemwnt_NoParameter);
+        }
+    
+        public virtual int Email_Agreementclose(string pAgreement_No)
+        {
+            var pAgreement_NoParameter = pAgreement_No != null ?
+                new ObjectParameter("PAgreement_No", pAgreement_No) :
+                new ObjectParameter("PAgreement_No", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_Agreementclose", pAgreement_NoParameter);
+        }
+    
+        public virtual int Email_Agreement_approval(string pAgreement_No)
+        {
+            var pAgreement_NoParameter = pAgreement_No != null ?
+                new ObjectParameter("PAgreement_No", pAgreement_No) :
+                new ObjectParameter("PAgreement_No", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_Agreement_approval", pAgreement_NoParameter);
+        }
+    
+        public virtual int Email_agreement_renewal_7daysinterval()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_agreement_renewal_7daysinterval");
+        }
+    
+        public virtual int Email_agreement_renewal_daily()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_agreement_renewal_daily");
+        }
+    
+        public virtual int Email_agreement_renewal_weekly()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_agreement_renewal_weekly");
+        }
+    
+        public virtual int Email_cheque_bounced(Nullable<int> pReceiptNo)
+        {
+            var pReceiptNoParameter = pReceiptNo.HasValue ?
+                new ObjectParameter("PReceiptNo", pReceiptNo) :
+                new ObjectParameter("PReceiptNo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_cheque_bounced", pReceiptNoParameter);
+        }
+    
+        public virtual int Email_cheque_cancelled(Nullable<int> pReceiptNo)
+        {
+            var pReceiptNoParameter = pReceiptNo.HasValue ?
+                new ObjectParameter("PReceiptNo", pReceiptNo) :
+                new ObjectParameter("PReceiptNo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_cheque_cancelled", pReceiptNoParameter);
+        }
+    
+        public virtual int Email_ebwaterpending()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_ebwaterpending");
+        }
+    
+        public virtual int Email_ebwater_single_pending()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_ebwater_single_pending");
+        }
+    
+        public virtual int Email_expirydate_notifications()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_expirydate_notifications");
+        }
+    
+        public virtual int Email_lessrentalvalue(string pAgreement_No)
+        {
+            var pAgreement_NoParameter = pAgreement_No != null ?
+                new ObjectParameter("PAgreement_No", pAgreement_No) :
+                new ObjectParameter("PAgreement_No", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_lessrentalvalue", pAgreement_NoParameter);
+        }
+    
+        public virtual int Email_pdcpending()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_pdcpending");
+        }
+    
+        public virtual int Email_pdc_single_pending()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_pdc_single_pending");
+        }
+    
+        public virtual int Email_procedure()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_procedure");
+        }
+    
+        public virtual int Email_procedureNew()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_procedureNew");
+        }
+    
+        public virtual int Email_rentaloverdue_single()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_rentaloverdue_single");
+        }
+    
+        public virtual int Email_Status_Update(Nullable<int> pid, string pstatus, string perr, string pcategory)
+        {
+            var pidParameter = pid.HasValue ?
+                new ObjectParameter("Pid", pid) :
+                new ObjectParameter("Pid", typeof(int));
+    
+            var pstatusParameter = pstatus != null ?
+                new ObjectParameter("Pstatus", pstatus) :
+                new ObjectParameter("Pstatus", typeof(string));
+    
+            var perrParameter = perr != null ?
+                new ObjectParameter("Perr", perr) :
+                new ObjectParameter("Perr", typeof(string));
+    
+            var pcategoryParameter = pcategory != null ?
+                new ObjectParameter("Pcategory", pcategory) :
+                new ObjectParameter("Pcategory", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Email_Status_Update", pidParameter, pstatusParameter, perrParameter, pcategoryParameter);
+        }
+    
+        public virtual int Usp_Agreement_All(string pFlag, string pSingle_Multiple_Flag, Nullable<int> pAgreement_Refno, string pNew_Renewal_flag, Nullable<int> pAgreement_No, Nullable<System.DateTime> pAgreement_Date, Nullable<int> pAg_Tenant_id, string pAg_Tenant_Name, Nullable<int> pproperty_id, string pProperty_ID_Tawtheeq, string pProperties_Name, string pUnit_ID_Tawtheeq, string pUnit_Property_Name, Nullable<int> pCaretaker_id, string pCaretaker_Name, Nullable<System.DateTime> pVacantstartdate, Nullable<System.DateTime> pAgreement_Start_Date, Nullable<System.DateTime> pAgreement_End_Date, Nullable<float> pTotal_Rental_amount, Nullable<float> pPerday_Rental, Nullable<float> pAdvance_Security_Amount, string pSecurity_Flag, string pSecurity_chequeno, Nullable<System.DateTime> pSecurity_chequedate, Nullable<int> pNotice_Period, Nullable<int> pnofopayments, Nullable<int> pApproval_Flag, string pApproved_By, Nullable<System.DateTime> pApproved_Date, string pTenant_Type, string pCreateduser, string pAgpdc, string pAgdoc, string pAgfac, string pAguti, string pAgchk, string pAgunit)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pSingle_Multiple_FlagParameter = pSingle_Multiple_Flag != null ?
+                new ObjectParameter("PSingle_Multiple_Flag", pSingle_Multiple_Flag) :
+                new ObjectParameter("PSingle_Multiple_Flag", typeof(string));
+    
+            var pAgreement_RefnoParameter = pAgreement_Refno.HasValue ?
+                new ObjectParameter("PAgreement_Refno", pAgreement_Refno) :
+                new ObjectParameter("PAgreement_Refno", typeof(int));
+    
+            var pNew_Renewal_flagParameter = pNew_Renewal_flag != null ?
+                new ObjectParameter("PNew_Renewal_flag", pNew_Renewal_flag) :
+                new ObjectParameter("PNew_Renewal_flag", typeof(string));
+    
+            var pAgreement_NoParameter = pAgreement_No.HasValue ?
+                new ObjectParameter("PAgreement_No", pAgreement_No) :
+                new ObjectParameter("PAgreement_No", typeof(int));
+    
+            var pAgreement_DateParameter = pAgreement_Date.HasValue ?
+                new ObjectParameter("PAgreement_Date", pAgreement_Date) :
+                new ObjectParameter("PAgreement_Date", typeof(System.DateTime));
+    
+            var pAg_Tenant_idParameter = pAg_Tenant_id.HasValue ?
+                new ObjectParameter("PAg_Tenant_id", pAg_Tenant_id) :
+                new ObjectParameter("PAg_Tenant_id", typeof(int));
+    
+            var pAg_Tenant_NameParameter = pAg_Tenant_Name != null ?
+                new ObjectParameter("PAg_Tenant_Name", pAg_Tenant_Name) :
+                new ObjectParameter("PAg_Tenant_Name", typeof(string));
+    
+            var pproperty_idParameter = pproperty_id.HasValue ?
+                new ObjectParameter("Pproperty_id", pproperty_id) :
+                new ObjectParameter("Pproperty_id", typeof(int));
+    
+            var pProperty_ID_TawtheeqParameter = pProperty_ID_Tawtheeq != null ?
+                new ObjectParameter("PProperty_ID_Tawtheeq", pProperty_ID_Tawtheeq) :
+                new ObjectParameter("PProperty_ID_Tawtheeq", typeof(string));
+    
+            var pProperties_NameParameter = pProperties_Name != null ?
+                new ObjectParameter("PProperties_Name", pProperties_Name) :
+                new ObjectParameter("PProperties_Name", typeof(string));
+    
+            var pUnit_ID_TawtheeqParameter = pUnit_ID_Tawtheeq != null ?
+                new ObjectParameter("PUnit_ID_Tawtheeq", pUnit_ID_Tawtheeq) :
+                new ObjectParameter("PUnit_ID_Tawtheeq", typeof(string));
+    
+            var pUnit_Property_NameParameter = pUnit_Property_Name != null ?
+                new ObjectParameter("PUnit_Property_Name", pUnit_Property_Name) :
+                new ObjectParameter("PUnit_Property_Name", typeof(string));
+    
+            var pCaretaker_idParameter = pCaretaker_id.HasValue ?
+                new ObjectParameter("PCaretaker_id", pCaretaker_id) :
+                new ObjectParameter("PCaretaker_id", typeof(int));
+    
+            var pCaretaker_NameParameter = pCaretaker_Name != null ?
+                new ObjectParameter("PCaretaker_Name", pCaretaker_Name) :
+                new ObjectParameter("PCaretaker_Name", typeof(string));
+    
+            var pVacantstartdateParameter = pVacantstartdate.HasValue ?
+                new ObjectParameter("PVacantstartdate", pVacantstartdate) :
+                new ObjectParameter("PVacantstartdate", typeof(System.DateTime));
+    
+            var pAgreement_Start_DateParameter = pAgreement_Start_Date.HasValue ?
+                new ObjectParameter("PAgreement_Start_Date", pAgreement_Start_Date) :
+                new ObjectParameter("PAgreement_Start_Date", typeof(System.DateTime));
+    
+            var pAgreement_End_DateParameter = pAgreement_End_Date.HasValue ?
+                new ObjectParameter("PAgreement_End_Date", pAgreement_End_Date) :
+                new ObjectParameter("PAgreement_End_Date", typeof(System.DateTime));
+    
+            var pTotal_Rental_amountParameter = pTotal_Rental_amount.HasValue ?
+                new ObjectParameter("PTotal_Rental_amount", pTotal_Rental_amount) :
+                new ObjectParameter("PTotal_Rental_amount", typeof(float));
+    
+            var pPerday_RentalParameter = pPerday_Rental.HasValue ?
+                new ObjectParameter("PPerday_Rental", pPerday_Rental) :
+                new ObjectParameter("PPerday_Rental", typeof(float));
+    
+            var pAdvance_Security_AmountParameter = pAdvance_Security_Amount.HasValue ?
+                new ObjectParameter("PAdvance_Security_Amount", pAdvance_Security_Amount) :
+                new ObjectParameter("PAdvance_Security_Amount", typeof(float));
+    
+            var pSecurity_FlagParameter = pSecurity_Flag != null ?
+                new ObjectParameter("PSecurity_Flag", pSecurity_Flag) :
+                new ObjectParameter("PSecurity_Flag", typeof(string));
+    
+            var pSecurity_chequenoParameter = pSecurity_chequeno != null ?
+                new ObjectParameter("PSecurity_chequeno", pSecurity_chequeno) :
+                new ObjectParameter("PSecurity_chequeno", typeof(string));
+    
+            var pSecurity_chequedateParameter = pSecurity_chequedate.HasValue ?
+                new ObjectParameter("PSecurity_chequedate", pSecurity_chequedate) :
+                new ObjectParameter("PSecurity_chequedate", typeof(System.DateTime));
+    
+            var pNotice_PeriodParameter = pNotice_Period.HasValue ?
+                new ObjectParameter("PNotice_Period", pNotice_Period) :
+                new ObjectParameter("PNotice_Period", typeof(int));
+    
+            var pnofopaymentsParameter = pnofopayments.HasValue ?
+                new ObjectParameter("Pnofopayments", pnofopayments) :
+                new ObjectParameter("Pnofopayments", typeof(int));
+    
+            var pApproval_FlagParameter = pApproval_Flag.HasValue ?
+                new ObjectParameter("PApproval_Flag", pApproval_Flag) :
+                new ObjectParameter("PApproval_Flag", typeof(int));
+    
+            var pApproved_ByParameter = pApproved_By != null ?
+                new ObjectParameter("PApproved_By", pApproved_By) :
+                new ObjectParameter("PApproved_By", typeof(string));
+    
+            var pApproved_DateParameter = pApproved_Date.HasValue ?
+                new ObjectParameter("PApproved_Date", pApproved_Date) :
+                new ObjectParameter("PApproved_Date", typeof(System.DateTime));
+    
+            var pTenant_TypeParameter = pTenant_Type != null ?
+                new ObjectParameter("PTenant_Type", pTenant_Type) :
+                new ObjectParameter("PTenant_Type", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            var pAgpdcParameter = pAgpdc != null ?
+                new ObjectParameter("PAgpdc", pAgpdc) :
+                new ObjectParameter("PAgpdc", typeof(string));
+    
+            var pAgdocParameter = pAgdoc != null ?
+                new ObjectParameter("PAgdoc", pAgdoc) :
+                new ObjectParameter("PAgdoc", typeof(string));
+    
+            var pAgfacParameter = pAgfac != null ?
+                new ObjectParameter("PAgfac", pAgfac) :
+                new ObjectParameter("PAgfac", typeof(string));
+    
+            var pAgutiParameter = pAguti != null ?
+                new ObjectParameter("PAguti", pAguti) :
+                new ObjectParameter("PAguti", typeof(string));
+    
+            var pAgchkParameter = pAgchk != null ?
+                new ObjectParameter("PAgchk", pAgchk) :
+                new ObjectParameter("PAgchk", typeof(string));
+    
+            var pAgunitParameter = pAgunit != null ?
+                new ObjectParameter("PAgunit", pAgunit) :
+                new ObjectParameter("PAgunit", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Agreement_All", pFlagParameter, pSingle_Multiple_FlagParameter, pAgreement_RefnoParameter, pNew_Renewal_flagParameter, pAgreement_NoParameter, pAgreement_DateParameter, pAg_Tenant_idParameter, pAg_Tenant_NameParameter, pproperty_idParameter, pProperty_ID_TawtheeqParameter, pProperties_NameParameter, pUnit_ID_TawtheeqParameter, pUnit_Property_NameParameter, pCaretaker_idParameter, pCaretaker_NameParameter, pVacantstartdateParameter, pAgreement_Start_DateParameter, pAgreement_End_DateParameter, pTotal_Rental_amountParameter, pPerday_RentalParameter, pAdvance_Security_AmountParameter, pSecurity_FlagParameter, pSecurity_chequenoParameter, pSecurity_chequedateParameter, pNotice_PeriodParameter, pnofopaymentsParameter, pApproval_FlagParameter, pApproved_ByParameter, pApproved_DateParameter, pTenant_TypeParameter, pCreateduserParameter, pAgpdcParameter, pAgdocParameter, pAgfacParameter, pAgutiParameter, pAgchkParameter, pAgunitParameter);
+        }
+    
+        public virtual int Usp_Agreement_Closuer_All(string pFlag, Nullable<int> pid, string pAgreement_No, Nullable<float> pAdvance_pending, string pAdvance_Security_Amount_Paid, string pLess_any_damanges, Nullable<float> pAmount_to_be_refunded, string pRemarks, Nullable<System.DateTime> pAvailabledate, string pCreateduser, string pAgclpdc, string pAgclfac, string pAgcluti, string pAgclchk)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pidParameter = pid.HasValue ?
+                new ObjectParameter("Pid", pid) :
+                new ObjectParameter("Pid", typeof(int));
+    
+            var pAgreement_NoParameter = pAgreement_No != null ?
+                new ObjectParameter("PAgreement_No", pAgreement_No) :
+                new ObjectParameter("PAgreement_No", typeof(string));
+    
+            var pAdvance_pendingParameter = pAdvance_pending.HasValue ?
+                new ObjectParameter("PAdvance_pending", pAdvance_pending) :
+                new ObjectParameter("PAdvance_pending", typeof(float));
+    
+            var pAdvance_Security_Amount_PaidParameter = pAdvance_Security_Amount_Paid != null ?
+                new ObjectParameter("PAdvance_Security_Amount_Paid", pAdvance_Security_Amount_Paid) :
+                new ObjectParameter("PAdvance_Security_Amount_Paid", typeof(string));
+    
+            var pLess_any_damangesParameter = pLess_any_damanges != null ?
+                new ObjectParameter("PLess_any_damanges", pLess_any_damanges) :
+                new ObjectParameter("PLess_any_damanges", typeof(string));
+    
+            var pAmount_to_be_refundedParameter = pAmount_to_be_refunded.HasValue ?
+                new ObjectParameter("PAmount_to_be_refunded", pAmount_to_be_refunded) :
+                new ObjectParameter("PAmount_to_be_refunded", typeof(float));
+    
+            var pRemarksParameter = pRemarks != null ?
+                new ObjectParameter("PRemarks", pRemarks) :
+                new ObjectParameter("PRemarks", typeof(string));
+    
+            var pAvailabledateParameter = pAvailabledate.HasValue ?
+                new ObjectParameter("PAvailabledate", pAvailabledate) :
+                new ObjectParameter("PAvailabledate", typeof(System.DateTime));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            var pAgclpdcParameter = pAgclpdc != null ?
+                new ObjectParameter("pAgclpdc", pAgclpdc) :
+                new ObjectParameter("pAgclpdc", typeof(string));
+    
+            var pAgclfacParameter = pAgclfac != null ?
+                new ObjectParameter("pAgclfac", pAgclfac) :
+                new ObjectParameter("pAgclfac", typeof(string));
+    
+            var pAgclutiParameter = pAgcluti != null ?
+                new ObjectParameter("pAgcluti", pAgcluti) :
+                new ObjectParameter("pAgcluti", typeof(string));
+    
+            var pAgclchkParameter = pAgclchk != null ?
+                new ObjectParameter("pAgclchk", pAgclchk) :
+                new ObjectParameter("pAgclchk", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Agreement_Closuer_All", pFlagParameter, pidParameter, pAgreement_NoParameter, pAdvance_pendingParameter, pAdvance_Security_Amount_PaidParameter, pLess_any_damangesParameter, pAmount_to_be_refundedParameter, pRemarksParameter, pAvailabledateParameter, pCreateduserParameter, pAgclpdcParameter, pAgclfacParameter, pAgclutiParameter, pAgclchkParameter);
+        }
+    
+        public virtual int Usp_Agreement_Status_All(string pFlag, Nullable<int> pId, string pAgreement_No, Nullable<int> pAg_Tenant_id, string pAg_Tenant_Name, Nullable<int> pProperties_ID, string pProperties_Name, Nullable<int> pCaretaker_id, string pCaretaker_Name, string pRenewal_Close_Flag, string pCreateduser)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pIdParameter = pId.HasValue ?
+                new ObjectParameter("PId", pId) :
+                new ObjectParameter("PId", typeof(int));
+    
+            var pAgreement_NoParameter = pAgreement_No != null ?
+                new ObjectParameter("PAgreement_No", pAgreement_No) :
+                new ObjectParameter("PAgreement_No", typeof(string));
+    
+            var pAg_Tenant_idParameter = pAg_Tenant_id.HasValue ?
+                new ObjectParameter("PAg_Tenant_id", pAg_Tenant_id) :
+                new ObjectParameter("PAg_Tenant_id", typeof(int));
+    
+            var pAg_Tenant_NameParameter = pAg_Tenant_Name != null ?
+                new ObjectParameter("PAg_Tenant_Name", pAg_Tenant_Name) :
+                new ObjectParameter("PAg_Tenant_Name", typeof(string));
+    
+            var pProperties_IDParameter = pProperties_ID.HasValue ?
+                new ObjectParameter("PProperties_ID", pProperties_ID) :
+                new ObjectParameter("PProperties_ID", typeof(int));
+    
+            var pProperties_NameParameter = pProperties_Name != null ?
+                new ObjectParameter("PProperties_Name", pProperties_Name) :
+                new ObjectParameter("PProperties_Name", typeof(string));
+    
+            var pCaretaker_idParameter = pCaretaker_id.HasValue ?
+                new ObjectParameter("PCaretaker_id", pCaretaker_id) :
+                new ObjectParameter("PCaretaker_id", typeof(int));
+    
+            var pCaretaker_NameParameter = pCaretaker_Name != null ?
+                new ObjectParameter("PCaretaker_Name", pCaretaker_Name) :
+                new ObjectParameter("PCaretaker_Name", typeof(string));
+    
+            var pRenewal_Close_FlagParameter = pRenewal_Close_Flag != null ?
+                new ObjectParameter("PRenewal_Close_Flag", pRenewal_Close_Flag) :
+                new ObjectParameter("PRenewal_Close_Flag", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Agreement_Status_All", pFlagParameter, pIdParameter, pAgreement_NoParameter, pAg_Tenant_idParameter, pAg_Tenant_NameParameter, pProperties_IDParameter, pProperties_NameParameter, pCaretaker_idParameter, pCaretaker_NameParameter, pRenewal_Close_FlagParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_approvalconfig_All(string pFlag, Nullable<int> pId, string pApproval_flag, string pUserid, string pCreateduser)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pIdParameter = pId.HasValue ?
+                new ObjectParameter("PId", pId) :
+                new ObjectParameter("PId", typeof(int));
+    
+            var pApproval_flagParameter = pApproval_flag != null ?
+                new ObjectParameter("PApproval_flag", pApproval_flag) :
+                new ObjectParameter("PApproval_flag", typeof(string));
+    
+            var pUseridParameter = pUserid != null ?
+                new ObjectParameter("PUserid", pUserid) :
+                new ObjectParameter("PUserid", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_approvalconfig_All", pFlagParameter, pIdParameter, pApproval_flagParameter, pUseridParameter, pCreateduserParameter);
+        }
+    
+        //public virtual int Usp_approval_Screen_All(string pFlag, string pAgreement_no, Nullable<int> pApproval_flag)
+        //{
+        //    var pFlagParameter = pFlag != null ?
+        //        new ObjectParameter("PFlag", pFlag) :
+        //        new ObjectParameter("PFlag", typeof(string));
+    
+        //    var pAgreement_noParameter = pAgreement_no != null ?
+        //        new ObjectParameter("PAgreement_no", pAgreement_no) :
+        //        new ObjectParameter("PAgreement_no", typeof(string));
+    
+        //    var pApproval_flagParameter = pApproval_flag.HasValue ?
+        //        new ObjectParameter("PApproval_flag", pApproval_flag) :
+        //        new ObjectParameter("PApproval_flag", typeof(int));
+    
+        //    return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_approval_Screen_All", pFlagParameter, pAgreement_noParameter, pApproval_flagParameter);
+        //}
+    
+        public virtual int Usp_Caretaker_All(string pFlag, Nullable<int> pId, string pCaretaker_id, string pCaretaker_Name, Nullable<System.DateTime> pDob, string pAddress1, string pAddress2, string pRegion_Name, string pCountry, string pCity, string pState, string pPincode, string pPhoneno, string pEmail, Nullable<System.DateTime> pDoj, string pCreateduser)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pIdParameter = pId.HasValue ?
+                new ObjectParameter("PId", pId) :
+                new ObjectParameter("PId", typeof(int));
+    
+            var pCaretaker_idParameter = pCaretaker_id != null ?
+                new ObjectParameter("PCaretaker_id", pCaretaker_id) :
+                new ObjectParameter("PCaretaker_id", typeof(string));
+    
+            var pCaretaker_NameParameter = pCaretaker_Name != null ?
+                new ObjectParameter("PCaretaker_Name", pCaretaker_Name) :
+                new ObjectParameter("PCaretaker_Name", typeof(string));
+    
+            var pDobParameter = pDob.HasValue ?
+                new ObjectParameter("PDob", pDob) :
+                new ObjectParameter("PDob", typeof(System.DateTime));
+    
+            var pAddress1Parameter = pAddress1 != null ?
+                new ObjectParameter("PAddress1", pAddress1) :
+                new ObjectParameter("PAddress1", typeof(string));
+    
+            var pAddress2Parameter = pAddress2 != null ?
+                new ObjectParameter("PAddress2", pAddress2) :
+                new ObjectParameter("PAddress2", typeof(string));
+    
+            var pRegion_NameParameter = pRegion_Name != null ?
+                new ObjectParameter("PRegion_Name", pRegion_Name) :
+                new ObjectParameter("PRegion_Name", typeof(string));
+    
+            var pCountryParameter = pCountry != null ?
+                new ObjectParameter("PCountry", pCountry) :
+                new ObjectParameter("PCountry", typeof(string));
+    
+            var pCityParameter = pCity != null ?
+                new ObjectParameter("PCity", pCity) :
+                new ObjectParameter("PCity", typeof(string));
+    
+            var pStateParameter = pState != null ?
+                new ObjectParameter("PState", pState) :
+                new ObjectParameter("PState", typeof(string));
+    
+            var pPincodeParameter = pPincode != null ?
+                new ObjectParameter("PPincode", pPincode) :
+                new ObjectParameter("PPincode", typeof(string));
+    
+            var pPhonenoParameter = pPhoneno != null ?
+                new ObjectParameter("PPhoneno", pPhoneno) :
+                new ObjectParameter("PPhoneno", typeof(string));
+    
+            var pEmailParameter = pEmail != null ?
+                new ObjectParameter("PEmail", pEmail) :
+                new ObjectParameter("PEmail", typeof(string));
+    
+            var pDojParameter = pDoj.HasValue ?
+                new ObjectParameter("PDoj", pDoj) :
+                new ObjectParameter("PDoj", typeof(System.DateTime));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Caretaker_All", pFlagParameter, pIdParameter, pCaretaker_idParameter, pCaretaker_NameParameter, pDobParameter, pAddress1Parameter, pAddress2Parameter, pRegion_NameParameter, pCountryParameter, pCityParameter, pStateParameter, pPincodeParameter, pPhonenoParameter, pEmailParameter, pDojParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_Checklist_All(string pFlag, Nullable<int> pId, string pChecklist_id, string pChecklist_Name, string pcheck_type, string pCreateduser)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pIdParameter = pId.HasValue ?
+                new ObjectParameter("PId", pId) :
+                new ObjectParameter("PId", typeof(int));
+    
+            var pChecklist_idParameter = pChecklist_id != null ?
+                new ObjectParameter("PChecklist_id", pChecklist_id) :
+                new ObjectParameter("PChecklist_id", typeof(string));
+    
+            var pChecklist_NameParameter = pChecklist_Name != null ?
+                new ObjectParameter("PChecklist_Name", pChecklist_Name) :
+                new ObjectParameter("PChecklist_Name", typeof(string));
+    
+            var pcheck_typeParameter = pcheck_type != null ?
+                new ObjectParameter("Pcheck_type", pcheck_type) :
+                new ObjectParameter("Pcheck_type", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Checklist_All", pFlagParameter, pIdParameter, pChecklist_idParameter, pChecklist_NameParameter, pcheck_typeParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_Collectionsummary_Report_all(string pgroup, Nullable<System.DateTime> pfromdate, Nullable<System.DateTime> ptodate, string pfilter_field, string pfilter_value, string pCreateduser)
+        {
+            var pgroupParameter = pgroup != null ?
+                new ObjectParameter("Pgroup", pgroup) :
+                new ObjectParameter("Pgroup", typeof(string));
+    
+            var pfromdateParameter = pfromdate.HasValue ?
+                new ObjectParameter("Pfromdate", pfromdate) :
+                new ObjectParameter("Pfromdate", typeof(System.DateTime));
+    
+            var ptodateParameter = ptodate.HasValue ?
+                new ObjectParameter("Ptodate", ptodate) :
+                new ObjectParameter("Ptodate", typeof(System.DateTime));
+    
+            var pfilter_fieldParameter = pfilter_field != null ?
+                new ObjectParameter("Pfilter_field", pfilter_field) :
+                new ObjectParameter("Pfilter_field", typeof(string));
+    
+            var pfilter_valueParameter = pfilter_value != null ?
+                new ObjectParameter("Pfilter_value", pfilter_value) :
+                new ObjectParameter("Pfilter_value", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Collectionsummary_Report_all", pgroupParameter, pfromdateParameter, ptodateParameter, pfilter_fieldParameter, pfilter_valueParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_Country_All(string pFlag, Nullable<int> pId, string pCountry_name, string pCreateduser)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pIdParameter = pId.HasValue ?
+                new ObjectParameter("PId", pId) :
+                new ObjectParameter("PId", typeof(int));
+    
+            var pCountry_nameParameter = pCountry_name != null ?
+                new ObjectParameter("PCountry_name", pCountry_name) :
+                new ObjectParameter("PCountry_name", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Country_All", pFlagParameter, pIdParameter, pCountry_nameParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_Dashboardreport()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Dashboardreport");
+        }
+    
+        public virtual int Usp_Dashboardreportpremonth()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Dashboardreportpremonth");
+        }
+    
+        public virtual int Usp_ebwatersummary_Report_all(string pgroup, Nullable<System.DateTime> pfromdate, Nullable<System.DateTime> ptodate, string pfilter_field, string pfilter_value, string pCreateduser)
+        {
+            var pgroupParameter = pgroup != null ?
+                new ObjectParameter("Pgroup", pgroup) :
+                new ObjectParameter("Pgroup", typeof(string));
+    
+            var pfromdateParameter = pfromdate.HasValue ?
+                new ObjectParameter("Pfromdate", pfromdate) :
+                new ObjectParameter("Pfromdate", typeof(System.DateTime));
+    
+            var ptodateParameter = ptodate.HasValue ?
+                new ObjectParameter("Ptodate", ptodate) :
+                new ObjectParameter("Ptodate", typeof(System.DateTime));
+    
+            var pfilter_fieldParameter = pfilter_field != null ?
+                new ObjectParameter("Pfilter_field", pfilter_field) :
+                new ObjectParameter("Pfilter_field", typeof(string));
+    
+            var pfilter_valueParameter = pfilter_value != null ?
+                new ObjectParameter("Pfilter_value", pfilter_value) :
+                new ObjectParameter("Pfilter_value", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_ebwatersummary_Report_all", pgroupParameter, pfromdateParameter, ptodateParameter, pfilter_fieldParameter, pfilter_valueParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_Ebwater_Report_all(string pgroup, Nullable<System.DateTime> pfromdate, Nullable<System.DateTime> ptodate, string pfilter_field, string pfilter_value, string pagin_Filter, Nullable<int> pagin_Filter_From, Nullable<int> pagin_Filter_To, string prentalamt_Filter, Nullable<int> prentalamt_Filter_From, Nullable<int> prentalamt_Filter_To, string pCreateduser)
+        {
+            var pgroupParameter = pgroup != null ?
+                new ObjectParameter("Pgroup", pgroup) :
+                new ObjectParameter("Pgroup", typeof(string));
+    
+            var pfromdateParameter = pfromdate.HasValue ?
+                new ObjectParameter("Pfromdate", pfromdate) :
+                new ObjectParameter("Pfromdate", typeof(System.DateTime));
+    
+            var ptodateParameter = ptodate.HasValue ?
+                new ObjectParameter("Ptodate", ptodate) :
+                new ObjectParameter("Ptodate", typeof(System.DateTime));
+    
+            var pfilter_fieldParameter = pfilter_field != null ?
+                new ObjectParameter("Pfilter_field", pfilter_field) :
+                new ObjectParameter("Pfilter_field", typeof(string));
+    
+            var pfilter_valueParameter = pfilter_value != null ?
+                new ObjectParameter("Pfilter_value", pfilter_value) :
+                new ObjectParameter("Pfilter_value", typeof(string));
+    
+            var pagin_FilterParameter = pagin_Filter != null ?
+                new ObjectParameter("Pagin_Filter", pagin_Filter) :
+                new ObjectParameter("Pagin_Filter", typeof(string));
+    
+            var pagin_Filter_FromParameter = pagin_Filter_From.HasValue ?
+                new ObjectParameter("Pagin_Filter_From", pagin_Filter_From) :
+                new ObjectParameter("Pagin_Filter_From", typeof(int));
+    
+            var pagin_Filter_ToParameter = pagin_Filter_To.HasValue ?
+                new ObjectParameter("Pagin_Filter_To", pagin_Filter_To) :
+                new ObjectParameter("Pagin_Filter_To", typeof(int));
+    
+            var prentalamt_FilterParameter = prentalamt_Filter != null ?
+                new ObjectParameter("Prentalamt_Filter", prentalamt_Filter) :
+                new ObjectParameter("Prentalamt_Filter", typeof(string));
+    
+            var prentalamt_Filter_FromParameter = prentalamt_Filter_From.HasValue ?
+                new ObjectParameter("Prentalamt_Filter_From", prentalamt_Filter_From) :
+                new ObjectParameter("Prentalamt_Filter_From", typeof(int));
+    
+            var prentalamt_Filter_ToParameter = prentalamt_Filter_To.HasValue ?
+                new ObjectParameter("Prentalamt_Filter_To", prentalamt_Filter_To) :
+                new ObjectParameter("Prentalamt_Filter_To", typeof(int));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Ebwater_Report_all", pgroupParameter, pfromdateParameter, ptodateParameter, pfilter_fieldParameter, pfilter_valueParameter, pagin_FilterParameter, pagin_Filter_FromParameter, pagin_Filter_ToParameter, prentalamt_FilterParameter, prentalamt_Filter_FromParameter, prentalamt_Filter_ToParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_Ebwater_Trend_Report(string pflag, Nullable<System.DateTime> pfromdate, Nullable<System.DateTime> ptodate, string putility, string pcountry, string pregion, string pproperty, string pCreateduser)
+        {
+            var pflagParameter = pflag != null ?
+                new ObjectParameter("Pflag", pflag) :
+                new ObjectParameter("Pflag", typeof(string));
+    
+            var pfromdateParameter = pfromdate.HasValue ?
+                new ObjectParameter("Pfromdate", pfromdate) :
+                new ObjectParameter("Pfromdate", typeof(System.DateTime));
+    
+            var ptodateParameter = ptodate.HasValue ?
+                new ObjectParameter("Ptodate", ptodate) :
+                new ObjectParameter("Ptodate", typeof(System.DateTime));
+    
+            var putilityParameter = putility != null ?
+                new ObjectParameter("Putility", putility) :
+                new ObjectParameter("Putility", typeof(string));
+    
+            var pcountryParameter = pcountry != null ?
+                new ObjectParameter("Pcountry", pcountry) :
+                new ObjectParameter("Pcountry", typeof(string));
+    
+            var pregionParameter = pregion != null ?
+                new ObjectParameter("Pregion", pregion) :
+                new ObjectParameter("Pregion", typeof(string));
+    
+            var ppropertyParameter = pproperty != null ?
+                new ObjectParameter("Pproperty", pproperty) :
+                new ObjectParameter("Pproperty", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Ebwater_Trend_Report", pflagParameter, pfromdateParameter, ptodateParameter, putilityParameter, pcountryParameter, pregionParameter, ppropertyParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_eb_water_All(string pFlag, Nullable<int> pRefno, Nullable<System.DateTime> prefdate, string pUtility_id, string pUtiltiy_name, Nullable<int> pSupplier_id, string pSupplier_name, string pCreateduser, string pelewaterdt)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pRefnoParameter = pRefno.HasValue ?
+                new ObjectParameter("PRefno", pRefno) :
+                new ObjectParameter("PRefno", typeof(int));
+    
+            var prefdateParameter = prefdate.HasValue ?
+                new ObjectParameter("Prefdate", prefdate) :
+                new ObjectParameter("Prefdate", typeof(System.DateTime));
+    
+            var pUtility_idParameter = pUtility_id != null ?
+                new ObjectParameter("PUtility_id", pUtility_id) :
+                new ObjectParameter("PUtility_id", typeof(string));
+    
+            var pUtiltiy_nameParameter = pUtiltiy_name != null ?
+                new ObjectParameter("PUtiltiy_name", pUtiltiy_name) :
+                new ObjectParameter("PUtiltiy_name", typeof(string));
+    
+            var pSupplier_idParameter = pSupplier_id.HasValue ?
+                new ObjectParameter("PSupplier_id", pSupplier_id) :
+                new ObjectParameter("PSupplier_id", typeof(int));
+    
+            var pSupplier_nameParameter = pSupplier_name != null ?
+                new ObjectParameter("PSupplier_name", pSupplier_name) :
+                new ObjectParameter("PSupplier_name", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            var pelewaterdtParameter = pelewaterdt != null ?
+                new ObjectParameter("Pelewaterdt", pelewaterdt) :
+                new ObjectParameter("Pelewaterdt", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_eb_water_All", pFlagParameter, pRefnoParameter, prefdateParameter, pUtility_idParameter, pUtiltiy_nameParameter, pSupplier_idParameter, pSupplier_nameParameter, pCreateduserParameter, pelewaterdtParameter);
+        }
+    
+        public virtual int Usp_eb_water_paymenthd_All(string pFlag, Nullable<int> pPaymentNo, Nullable<System.DateTime> pPaymentDate, string pUtility_id, string pUtiltiy_name, Nullable<int> pSupplier_id, string pSupplier_name, string pPaymentType, string pPaymentMode, Nullable<float> pTotalAmount, string pAmtInWords, string pDDChequeNo, Nullable<System.DateTime> pCheqdate, string ppdcstatus, string pBankAcCode, string pBankAcName, string pAdvAcCode, string pNarration, string pCreateduser, string pPaymentdt)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pPaymentNoParameter = pPaymentNo.HasValue ?
+                new ObjectParameter("PPaymentNo", pPaymentNo) :
+                new ObjectParameter("PPaymentNo", typeof(int));
+    
+            var pPaymentDateParameter = pPaymentDate.HasValue ?
+                new ObjectParameter("PPaymentDate", pPaymentDate) :
+                new ObjectParameter("PPaymentDate", typeof(System.DateTime));
+    
+            var pUtility_idParameter = pUtility_id != null ?
+                new ObjectParameter("PUtility_id", pUtility_id) :
+                new ObjectParameter("PUtility_id", typeof(string));
+    
+            var pUtiltiy_nameParameter = pUtiltiy_name != null ?
+                new ObjectParameter("PUtiltiy_name", pUtiltiy_name) :
+                new ObjectParameter("PUtiltiy_name", typeof(string));
+    
+            var pSupplier_idParameter = pSupplier_id.HasValue ?
+                new ObjectParameter("PSupplier_id", pSupplier_id) :
+                new ObjectParameter("PSupplier_id", typeof(int));
+    
+            var pSupplier_nameParameter = pSupplier_name != null ?
+                new ObjectParameter("PSupplier_name", pSupplier_name) :
+                new ObjectParameter("PSupplier_name", typeof(string));
+    
+            var pPaymentTypeParameter = pPaymentType != null ?
+                new ObjectParameter("PPaymentType", pPaymentType) :
+                new ObjectParameter("PPaymentType", typeof(string));
+    
+            var pPaymentModeParameter = pPaymentMode != null ?
+                new ObjectParameter("PPaymentMode", pPaymentMode) :
+                new ObjectParameter("PPaymentMode", typeof(string));
+    
+            var pTotalAmountParameter = pTotalAmount.HasValue ?
+                new ObjectParameter("PTotalAmount", pTotalAmount) :
+                new ObjectParameter("PTotalAmount", typeof(float));
+    
+            var pAmtInWordsParameter = pAmtInWords != null ?
+                new ObjectParameter("PAmtInWords", pAmtInWords) :
+                new ObjectParameter("PAmtInWords", typeof(string));
+    
+            var pDDChequeNoParameter = pDDChequeNo != null ?
+                new ObjectParameter("PDDChequeNo", pDDChequeNo) :
+                new ObjectParameter("PDDChequeNo", typeof(string));
+    
+            var pCheqdateParameter = pCheqdate.HasValue ?
+                new ObjectParameter("PCheqdate", pCheqdate) :
+                new ObjectParameter("PCheqdate", typeof(System.DateTime));
+    
+            var ppdcstatusParameter = ppdcstatus != null ?
+                new ObjectParameter("Ppdcstatus", ppdcstatus) :
+                new ObjectParameter("Ppdcstatus", typeof(string));
+    
+            var pBankAcCodeParameter = pBankAcCode != null ?
+                new ObjectParameter("PBankAcCode", pBankAcCode) :
+                new ObjectParameter("PBankAcCode", typeof(string));
+    
+            var pBankAcNameParameter = pBankAcName != null ?
+                new ObjectParameter("PBankAcName", pBankAcName) :
+                new ObjectParameter("PBankAcName", typeof(string));
+    
+            var pAdvAcCodeParameter = pAdvAcCode != null ?
+                new ObjectParameter("PAdvAcCode", pAdvAcCode) :
+                new ObjectParameter("PAdvAcCode", typeof(string));
+    
+            var pNarrationParameter = pNarration != null ?
+                new ObjectParameter("PNarration", pNarration) :
+                new ObjectParameter("PNarration", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            var pPaymentdtParameter = pPaymentdt != null ?
+                new ObjectParameter("PPaymentdt", pPaymentdt) :
+                new ObjectParameter("PPaymentdt", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_eb_water_paymenthd_All", pFlagParameter, pPaymentNoParameter, pPaymentDateParameter, pUtility_idParameter, pUtiltiy_nameParameter, pSupplier_idParameter, pSupplier_nameParameter, pPaymentTypeParameter, pPaymentModeParameter, pTotalAmountParameter, pAmtInWordsParameter, pDDChequeNoParameter, pCheqdateParameter, ppdcstatusParameter, pBankAcCodeParameter, pBankAcNameParameter, pAdvAcCodeParameter, pNarrationParameter, pCreateduserParameter, pPaymentdtParameter);
+        }
+    
+        public virtual int Usp_Emailconfiguration_All(string pFlag, Nullable<int> pID, string pMailServerName, string pEmail, string pPassWord, Nullable<int> pPort, Nullable<int> pInSSl, string pAttachmentDownloadPath, string pAliasName, string pOutFromId, string pMode, string pOutMailServerName, string pOutEmailId, string pOutPassword, Nullable<int> pOutPortNo, Nullable<int> pOutSSl, string pInMailID, string pServerTimeZone, Nullable<int> pServerType, string pCreateduser)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pIDParameter = pID.HasValue ?
+                new ObjectParameter("PID", pID) :
+                new ObjectParameter("PID", typeof(int));
+    
+            var pMailServerNameParameter = pMailServerName != null ?
+                new ObjectParameter("PMailServerName", pMailServerName) :
+                new ObjectParameter("PMailServerName", typeof(string));
+    
+            var pEmailParameter = pEmail != null ?
+                new ObjectParameter("PEmail", pEmail) :
+                new ObjectParameter("PEmail", typeof(string));
+    
+            var pPassWordParameter = pPassWord != null ?
+                new ObjectParameter("PPassWord", pPassWord) :
+                new ObjectParameter("PPassWord", typeof(string));
+    
+            var pPortParameter = pPort.HasValue ?
+                new ObjectParameter("PPort", pPort) :
+                new ObjectParameter("PPort", typeof(int));
+    
+            var pInSSlParameter = pInSSl.HasValue ?
+                new ObjectParameter("PInSSl", pInSSl) :
+                new ObjectParameter("PInSSl", typeof(int));
+    
+            var pAttachmentDownloadPathParameter = pAttachmentDownloadPath != null ?
+                new ObjectParameter("PAttachmentDownloadPath", pAttachmentDownloadPath) :
+                new ObjectParameter("PAttachmentDownloadPath", typeof(string));
+    
+            var pAliasNameParameter = pAliasName != null ?
+                new ObjectParameter("PAliasName", pAliasName) :
+                new ObjectParameter("PAliasName", typeof(string));
+    
+            var pOutFromIdParameter = pOutFromId != null ?
+                new ObjectParameter("POutFromId", pOutFromId) :
+                new ObjectParameter("POutFromId", typeof(string));
+    
+            var pModeParameter = pMode != null ?
+                new ObjectParameter("PMode", pMode) :
+                new ObjectParameter("PMode", typeof(string));
+    
+            var pOutMailServerNameParameter = pOutMailServerName != null ?
+                new ObjectParameter("POutMailServerName", pOutMailServerName) :
+                new ObjectParameter("POutMailServerName", typeof(string));
+    
+            var pOutEmailIdParameter = pOutEmailId != null ?
+                new ObjectParameter("POutEmailId", pOutEmailId) :
+                new ObjectParameter("POutEmailId", typeof(string));
+    
+            var pOutPasswordParameter = pOutPassword != null ?
+                new ObjectParameter("POutPassword", pOutPassword) :
+                new ObjectParameter("POutPassword", typeof(string));
+    
+            var pOutPortNoParameter = pOutPortNo.HasValue ?
+                new ObjectParameter("POutPortNo", pOutPortNo) :
+                new ObjectParameter("POutPortNo", typeof(int));
+    
+            var pOutSSlParameter = pOutSSl.HasValue ?
+                new ObjectParameter("POutSSl", pOutSSl) :
+                new ObjectParameter("POutSSl", typeof(int));
+    
+            var pInMailIDParameter = pInMailID != null ?
+                new ObjectParameter("PInMailID", pInMailID) :
+                new ObjectParameter("PInMailID", typeof(string));
+    
+            var pServerTimeZoneParameter = pServerTimeZone != null ?
+                new ObjectParameter("PServerTimeZone", pServerTimeZone) :
+                new ObjectParameter("PServerTimeZone", typeof(string));
+    
+            var pServerTypeParameter = pServerType.HasValue ?
+                new ObjectParameter("PServerType", pServerType) :
+                new ObjectParameter("PServerType", typeof(int));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Emailconfiguration_All", pFlagParameter, pIDParameter, pMailServerNameParameter, pEmailParameter, pPassWordParameter, pPortParameter, pInSSlParameter, pAttachmentDownloadPathParameter, pAliasNameParameter, pOutFromIdParameter, pModeParameter, pOutMailServerNameParameter, pOutEmailIdParameter, pOutPasswordParameter, pOutPortNoParameter, pOutSSlParameter, pInMailIDParameter, pServerTimeZoneParameter, pServerTypeParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_Emailparamspliter(string ptext, string pstartchar, string pendchar)
+        {
+            var ptextParameter = ptext != null ?
+                new ObjectParameter("Ptext", ptext) :
+                new ObjectParameter("Ptext", typeof(string));
+    
+            var pstartcharParameter = pstartchar != null ?
+                new ObjectParameter("Pstartchar", pstartchar) :
+                new ObjectParameter("Pstartchar", typeof(string));
+    
+            var pendcharParameter = pendchar != null ?
+                new ObjectParameter("Pendchar", pendchar) :
+                new ObjectParameter("Pendchar", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Emailparamspliter", ptextParameter, pstartcharParameter, pendcharParameter);
+        }
+    
+        public virtual int Usp_Emailtemplate_All(string pFlag, Nullable<int> pId, Nullable<int> pTemplateID, string pTemplateName, string pSubject, string pBody, string pBodytext, string pSubjectParameter, string pBodyParameter, Nullable<bool> pInActive, string pCreateduser)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pIdParameter = pId.HasValue ?
+                new ObjectParameter("PId", pId) :
+                new ObjectParameter("PId", typeof(int));
+    
+            var pTemplateIDParameter = pTemplateID.HasValue ?
+                new ObjectParameter("PTemplateID", pTemplateID) :
+                new ObjectParameter("PTemplateID", typeof(int));
+    
+            var pTemplateNameParameter = pTemplateName != null ?
+                new ObjectParameter("PTemplateName", pTemplateName) :
+                new ObjectParameter("PTemplateName", typeof(string));
+    
+            var pSubjectParameter1 = pSubject != null ?
+                new ObjectParameter("PSubject", pSubject) :
+                new ObjectParameter("PSubject", typeof(string));
+    
+            var pBodyParameter1 = pBody != null ?
+                new ObjectParameter("PBody", pBody) :
+                new ObjectParameter("PBody", typeof(string));
+    
+            var pBodytextParameter = pBodytext != null ?
+                new ObjectParameter("PBodytext", pBodytext) :
+                new ObjectParameter("PBodytext", typeof(string));
+    
+            var pSubjectParameterParameter = pSubjectParameter != null ?
+                new ObjectParameter("PSubjectParameter", pSubjectParameter) :
+                new ObjectParameter("PSubjectParameter", typeof(string));
+    
+            var pBodyParameterParameter = pBodyParameter != null ?
+                new ObjectParameter("PBodyParameter", pBodyParameter) :
+                new ObjectParameter("PBodyParameter", typeof(string));
+    
+            var pInActiveParameter = pInActive.HasValue ?
+                new ObjectParameter("PInActive", pInActive) :
+                new ObjectParameter("PInActive", typeof(bool));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Emailtemplate_All", pFlagParameter, pIdParameter, pTemplateIDParameter, pTemplateNameParameter, pSubjectParameter1, pBodyParameter1, pBodytextParameter, pSubjectParameterParameter, pBodyParameterParameter, pInActiveParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_Facility_All(string pFlag, Nullable<int> pId, string pFacility_id, string pFacility_Name, string pCreateduser)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pIdParameter = pId.HasValue ?
+                new ObjectParameter("PId", pId) :
+                new ObjectParameter("PId", typeof(int));
+    
+            var pFacility_idParameter = pFacility_id != null ?
+                new ObjectParameter("PFacility_id", pFacility_id) :
+                new ObjectParameter("PFacility_id", typeof(string));
+    
+            var pFacility_NameParameter = pFacility_Name != null ?
+                new ObjectParameter("PFacility_Name", pFacility_Name) :
+                new ObjectParameter("PFacility_Name", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Facility_All", pFlagParameter, pIdParameter, pFacility_idParameter, pFacility_NameParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_Form_All(string pFlag, Nullable<int> pId, string pMenuType, string pMenuName, string pCreateduser)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pIdParameter = pId.HasValue ?
+                new ObjectParameter("PId", pId) :
+                new ObjectParameter("PId", typeof(int));
+    
+            var pMenuTypeParameter = pMenuType != null ?
+                new ObjectParameter("PMenuType", pMenuType) :
+                new ObjectParameter("PMenuType", typeof(string));
+    
+            var pMenuNameParameter = pMenuName != null ?
+                new ObjectParameter("PMenuName", pMenuName) :
+                new ObjectParameter("PMenuName", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Form_All", pFlagParameter, pIdParameter, pMenuTypeParameter, pMenuNameParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_Getmenuauthenticate(string puserid)
+        {
+            var puseridParameter = puserid != null ?
+                new ObjectParameter("Puserid", puserid) :
+                new ObjectParameter("Puserid", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Getmenuauthenticate", puseridParameter);
+        }
+    
+        public virtual int Usp_Invoice_All(string pFlag, Nullable<int> pId, string pinvno, Nullable<System.DateTime> pdate, Nullable<int> pTenant_id, string pTenant_Name, string pinvtype, Nullable<int> pAgreement_No, string pProperty_ID, string pProperty_Name, string pUnit_ID, string punit_Name, Nullable<int> pmonth, Nullable<int> pyear, Nullable<float> ptotalamt, Nullable<System.DateTime> pduedate, string pbank_details, string premarks, Nullable<int> pincno, string pCreateduser, string pinvoicedt)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pIdParameter = pId.HasValue ?
+                new ObjectParameter("PId", pId) :
+                new ObjectParameter("PId", typeof(int));
+    
+            var pinvnoParameter = pinvno != null ?
+                new ObjectParameter("Pinvno", pinvno) :
+                new ObjectParameter("Pinvno", typeof(string));
+    
+            var pdateParameter = pdate.HasValue ?
+                new ObjectParameter("Pdate", pdate) :
+                new ObjectParameter("Pdate", typeof(System.DateTime));
+    
+            var pTenant_idParameter = pTenant_id.HasValue ?
+                new ObjectParameter("PTenant_id", pTenant_id) :
+                new ObjectParameter("PTenant_id", typeof(int));
+    
+            var pTenant_NameParameter = pTenant_Name != null ?
+                new ObjectParameter("PTenant_Name", pTenant_Name) :
+                new ObjectParameter("PTenant_Name", typeof(string));
+    
+            var pinvtypeParameter = pinvtype != null ?
+                new ObjectParameter("Pinvtype", pinvtype) :
+                new ObjectParameter("Pinvtype", typeof(string));
+    
+            var pAgreement_NoParameter = pAgreement_No.HasValue ?
+                new ObjectParameter("PAgreement_No", pAgreement_No) :
+                new ObjectParameter("PAgreement_No", typeof(int));
+    
+            var pProperty_IDParameter = pProperty_ID != null ?
+                new ObjectParameter("PProperty_ID", pProperty_ID) :
+                new ObjectParameter("PProperty_ID", typeof(string));
+    
+            var pProperty_NameParameter = pProperty_Name != null ?
+                new ObjectParameter("PProperty_Name", pProperty_Name) :
+                new ObjectParameter("PProperty_Name", typeof(string));
+    
+            var pUnit_IDParameter = pUnit_ID != null ?
+                new ObjectParameter("PUnit_ID", pUnit_ID) :
+                new ObjectParameter("PUnit_ID", typeof(string));
+    
+            var punit_NameParameter = punit_Name != null ?
+                new ObjectParameter("Punit_Name", punit_Name) :
+                new ObjectParameter("Punit_Name", typeof(string));
+    
+            var pmonthParameter = pmonth.HasValue ?
+                new ObjectParameter("Pmonth", pmonth) :
+                new ObjectParameter("Pmonth", typeof(int));
+    
+            var pyearParameter = pyear.HasValue ?
+                new ObjectParameter("Pyear", pyear) :
+                new ObjectParameter("Pyear", typeof(int));
+    
+            var ptotalamtParameter = ptotalamt.HasValue ?
+                new ObjectParameter("Ptotalamt", ptotalamt) :
+                new ObjectParameter("Ptotalamt", typeof(float));
+    
+            var pduedateParameter = pduedate.HasValue ?
+                new ObjectParameter("Pduedate", pduedate) :
+                new ObjectParameter("Pduedate", typeof(System.DateTime));
+    
+            var pbank_detailsParameter = pbank_details != null ?
+                new ObjectParameter("Pbank_details", pbank_details) :
+                new ObjectParameter("Pbank_details", typeof(string));
+    
+            var premarksParameter = premarks != null ?
+                new ObjectParameter("Premarks", premarks) :
+                new ObjectParameter("Premarks", typeof(string));
+    
+            var pincnoParameter = pincno.HasValue ?
+                new ObjectParameter("Pincno", pincno) :
+                new ObjectParameter("Pincno", typeof(int));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            var pinvoicedtParameter = pinvoicedt != null ?
+                new ObjectParameter("Pinvoicedt", pinvoicedt) :
+                new ObjectParameter("Pinvoicedt", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Invoice_All", pFlagParameter, pIdParameter, pinvnoParameter, pdateParameter, pTenant_idParameter, pTenant_NameParameter, pinvtypeParameter, pAgreement_NoParameter, pProperty_IDParameter, pProperty_NameParameter, pUnit_IDParameter, punit_NameParameter, pmonthParameter, pyearParameter, ptotalamtParameter, pduedateParameter, pbank_detailsParameter, premarksParameter, pincnoParameter, pCreateduserParameter, pinvoicedtParameter);
+        }
+    
+        public virtual int Usp_invoice_Auto(Nullable<System.DateTime> invdate)
+        {
+            var invdateParameter = invdate.HasValue ?
+                new ObjectParameter("invdate", invdate) :
+                new ObjectParameter("invdate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_invoice_Auto", invdateParameter);
+        }
+    
+        public virtual int Usp_Metermaster_All(string pFlag, Nullable<int> pid, string pUtility_id, string pUtility_Name, string pMeter_no, string pAccno, string pProperty_id, string pProperty_name, string punit_id, string punit_name, Nullable<int> pDueday, string pCreateduser)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pidParameter = pid.HasValue ?
+                new ObjectParameter("Pid", pid) :
+                new ObjectParameter("Pid", typeof(int));
+    
+            var pUtility_idParameter = pUtility_id != null ?
+                new ObjectParameter("PUtility_id", pUtility_id) :
+                new ObjectParameter("PUtility_id", typeof(string));
+    
+            var pUtility_NameParameter = pUtility_Name != null ?
+                new ObjectParameter("PUtility_Name", pUtility_Name) :
+                new ObjectParameter("PUtility_Name", typeof(string));
+    
+            var pMeter_noParameter = pMeter_no != null ?
+                new ObjectParameter("PMeter_no", pMeter_no) :
+                new ObjectParameter("PMeter_no", typeof(string));
+    
+            var pAccnoParameter = pAccno != null ?
+                new ObjectParameter("PAccno", pAccno) :
+                new ObjectParameter("PAccno", typeof(string));
+    
+            var pProperty_idParameter = pProperty_id != null ?
+                new ObjectParameter("PProperty_id", pProperty_id) :
+                new ObjectParameter("PProperty_id", typeof(string));
+    
+            var pProperty_nameParameter = pProperty_name != null ?
+                new ObjectParameter("PProperty_name", pProperty_name) :
+                new ObjectParameter("PProperty_name", typeof(string));
+    
+            var punit_idParameter = punit_id != null ?
+                new ObjectParameter("Punit_id", punit_id) :
+                new ObjectParameter("Punit_id", typeof(string));
+    
+            var punit_nameParameter = punit_name != null ?
+                new ObjectParameter("Punit_name", punit_name) :
+                new ObjectParameter("Punit_name", typeof(string));
+    
+            var pDuedayParameter = pDueday.HasValue ?
+                new ObjectParameter("PDueday", pDueday) :
+                new ObjectParameter("PDueday", typeof(int));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Metermaster_All", pFlagParameter, pidParameter, pUtility_idParameter, pUtility_NameParameter, pMeter_noParameter, pAccnoParameter, pProperty_idParameter, pProperty_nameParameter, punit_idParameter, punit_nameParameter, pDuedayParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_outstanding_Report_all(string pgroup, Nullable<System.DateTime> pfromdate, Nullable<System.DateTime> ptodate, string pfilter_field, string pfilter_value, string pagin_Filter, Nullable<int> pagin_Filter_From, Nullable<int> pagin_Filter_To, string prentalamt_Filter, Nullable<int> prentalamt_Filter_From, Nullable<int> prentalamt_Filter_To, string pCreateduser)
+        {
+            var pgroupParameter = pgroup != null ?
+                new ObjectParameter("Pgroup", pgroup) :
+                new ObjectParameter("Pgroup", typeof(string));
+    
+            var pfromdateParameter = pfromdate.HasValue ?
+                new ObjectParameter("Pfromdate", pfromdate) :
+                new ObjectParameter("Pfromdate", typeof(System.DateTime));
+    
+            var ptodateParameter = ptodate.HasValue ?
+                new ObjectParameter("Ptodate", ptodate) :
+                new ObjectParameter("Ptodate", typeof(System.DateTime));
+    
+            var pfilter_fieldParameter = pfilter_field != null ?
+                new ObjectParameter("Pfilter_field", pfilter_field) :
+                new ObjectParameter("Pfilter_field", typeof(string));
+    
+            var pfilter_valueParameter = pfilter_value != null ?
+                new ObjectParameter("Pfilter_value", pfilter_value) :
+                new ObjectParameter("Pfilter_value", typeof(string));
+    
+            var pagin_FilterParameter = pagin_Filter != null ?
+                new ObjectParameter("Pagin_Filter", pagin_Filter) :
+                new ObjectParameter("Pagin_Filter", typeof(string));
+    
+            var pagin_Filter_FromParameter = pagin_Filter_From.HasValue ?
+                new ObjectParameter("Pagin_Filter_From", pagin_Filter_From) :
+                new ObjectParameter("Pagin_Filter_From", typeof(int));
+    
+            var pagin_Filter_ToParameter = pagin_Filter_To.HasValue ?
+                new ObjectParameter("Pagin_Filter_To", pagin_Filter_To) :
+                new ObjectParameter("Pagin_Filter_To", typeof(int));
+    
+            var prentalamt_FilterParameter = prentalamt_Filter != null ?
+                new ObjectParameter("Prentalamt_Filter", prentalamt_Filter) :
+                new ObjectParameter("Prentalamt_Filter", typeof(string));
+    
+            var prentalamt_Filter_FromParameter = prentalamt_Filter_From.HasValue ?
+                new ObjectParameter("Prentalamt_Filter_From", prentalamt_Filter_From) :
+                new ObjectParameter("Prentalamt_Filter_From", typeof(int));
+    
+            var prentalamt_Filter_ToParameter = prentalamt_Filter_To.HasValue ?
+                new ObjectParameter("Prentalamt_Filter_To", prentalamt_Filter_To) :
+                new ObjectParameter("Prentalamt_Filter_To", typeof(int));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_outstanding_Report_all", pgroupParameter, pfromdateParameter, ptodateParameter, pfilter_fieldParameter, pfilter_valueParameter, pagin_FilterParameter, pagin_Filter_FromParameter, pagin_Filter_ToParameter, prentalamt_FilterParameter, prentalamt_Filter_FromParameter, prentalamt_Filter_ToParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_Payment_All(string pFlag, Nullable<int> pPaymentNo, Nullable<System.DateTime> pPaymentDate, Nullable<int> pagreement_no, string pProperty_ID, string pProperty_Name, string pUnit_ID, string punit_Name, Nullable<int> pSupplier_id, string pSupplier_Name, string pPaymentType, string pPaymentMode, Nullable<float> pTotalAmount, string pAmtInWords, string pDDChequeNo, Nullable<System.DateTime> pCheqdate, string ppdcstatus, string pBankAcCode, string pBankAcName, string pAdvAcCode, string pNarration, string pCreateduser, string pPaymentdt)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pPaymentNoParameter = pPaymentNo.HasValue ?
+                new ObjectParameter("PPaymentNo", pPaymentNo) :
+                new ObjectParameter("PPaymentNo", typeof(int));
+    
+            var pPaymentDateParameter = pPaymentDate.HasValue ?
+                new ObjectParameter("PPaymentDate", pPaymentDate) :
+                new ObjectParameter("PPaymentDate", typeof(System.DateTime));
+    
+            var pagreement_noParameter = pagreement_no.HasValue ?
+                new ObjectParameter("Pagreement_no", pagreement_no) :
+                new ObjectParameter("Pagreement_no", typeof(int));
+    
+            var pProperty_IDParameter = pProperty_ID != null ?
+                new ObjectParameter("PProperty_ID", pProperty_ID) :
+                new ObjectParameter("PProperty_ID", typeof(string));
+    
+            var pProperty_NameParameter = pProperty_Name != null ?
+                new ObjectParameter("PProperty_Name", pProperty_Name) :
+                new ObjectParameter("PProperty_Name", typeof(string));
+    
+            var pUnit_IDParameter = pUnit_ID != null ?
+                new ObjectParameter("PUnit_ID", pUnit_ID) :
+                new ObjectParameter("PUnit_ID", typeof(string));
+    
+            var punit_NameParameter = punit_Name != null ?
+                new ObjectParameter("Punit_Name", punit_Name) :
+                new ObjectParameter("Punit_Name", typeof(string));
+    
+            var pSupplier_idParameter = pSupplier_id.HasValue ?
+                new ObjectParameter("PSupplier_id", pSupplier_id) :
+                new ObjectParameter("PSupplier_id", typeof(int));
+    
+            var pSupplier_NameParameter = pSupplier_Name != null ?
+                new ObjectParameter("PSupplier_Name", pSupplier_Name) :
+                new ObjectParameter("PSupplier_Name", typeof(string));
+    
+            var pPaymentTypeParameter = pPaymentType != null ?
+                new ObjectParameter("PPaymentType", pPaymentType) :
+                new ObjectParameter("PPaymentType", typeof(string));
+    
+            var pPaymentModeParameter = pPaymentMode != null ?
+                new ObjectParameter("PPaymentMode", pPaymentMode) :
+                new ObjectParameter("PPaymentMode", typeof(string));
+    
+            var pTotalAmountParameter = pTotalAmount.HasValue ?
+                new ObjectParameter("PTotalAmount", pTotalAmount) :
+                new ObjectParameter("PTotalAmount", typeof(float));
+    
+            var pAmtInWordsParameter = pAmtInWords != null ?
+                new ObjectParameter("PAmtInWords", pAmtInWords) :
+                new ObjectParameter("PAmtInWords", typeof(string));
+    
+            var pDDChequeNoParameter = pDDChequeNo != null ?
+                new ObjectParameter("PDDChequeNo", pDDChequeNo) :
+                new ObjectParameter("PDDChequeNo", typeof(string));
+    
+            var pCheqdateParameter = pCheqdate.HasValue ?
+                new ObjectParameter("PCheqdate", pCheqdate) :
+                new ObjectParameter("PCheqdate", typeof(System.DateTime));
+    
+            var ppdcstatusParameter = ppdcstatus != null ?
+                new ObjectParameter("Ppdcstatus", ppdcstatus) :
+                new ObjectParameter("Ppdcstatus", typeof(string));
+    
+            var pBankAcCodeParameter = pBankAcCode != null ?
+                new ObjectParameter("PBankAcCode", pBankAcCode) :
+                new ObjectParameter("PBankAcCode", typeof(string));
+    
+            var pBankAcNameParameter = pBankAcName != null ?
+                new ObjectParameter("PBankAcName", pBankAcName) :
+                new ObjectParameter("PBankAcName", typeof(string));
+    
+            var pAdvAcCodeParameter = pAdvAcCode != null ?
+                new ObjectParameter("PAdvAcCode", pAdvAcCode) :
+                new ObjectParameter("PAdvAcCode", typeof(string));
+    
+            var pNarrationParameter = pNarration != null ?
+                new ObjectParameter("PNarration", pNarration) :
+                new ObjectParameter("PNarration", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            var pPaymentdtParameter = pPaymentdt != null ?
+                new ObjectParameter("PPaymentdt", pPaymentdt) :
+                new ObjectParameter("PPaymentdt", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Payment_All", pFlagParameter, pPaymentNoParameter, pPaymentDateParameter, pagreement_noParameter, pProperty_IDParameter, pProperty_NameParameter, pUnit_IDParameter, punit_NameParameter, pSupplier_idParameter, pSupplier_NameParameter, pPaymentTypeParameter, pPaymentModeParameter, pTotalAmountParameter, pAmtInWordsParameter, pDDChequeNoParameter, pCheqdateParameter, ppdcstatusParameter, pBankAcCodeParameter, pBankAcNameParameter, pAdvAcCodeParameter, pNarrationParameter, pCreateduserParameter, pPaymentdtParameter);
+        }
+    
+        public virtual int Usp_PDC_Cheque_Status_Report()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_PDC_Cheque_Status_Report");
+        }
+    
+        public virtual int Usp_pdc_Report_all(Nullable<System.DateTime> pfromdate, Nullable<System.DateTime> ptodate, string pfilter_field, string pfilter_value, string prentalamt_Filter, Nullable<int> prentalamt_Filter_From, Nullable<int> prentalamt_Filter_To, string pCreateduser)
+        {
+            var pfromdateParameter = pfromdate.HasValue ?
+                new ObjectParameter("pfromdate", pfromdate) :
+                new ObjectParameter("pfromdate", typeof(System.DateTime));
+    
+            var ptodateParameter = ptodate.HasValue ?
+                new ObjectParameter("ptodate", ptodate) :
+                new ObjectParameter("ptodate", typeof(System.DateTime));
+    
+            var pfilter_fieldParameter = pfilter_field != null ?
+                new ObjectParameter("Pfilter_field", pfilter_field) :
+                new ObjectParameter("Pfilter_field", typeof(string));
+    
+            var pfilter_valueParameter = pfilter_value != null ?
+                new ObjectParameter("Pfilter_value", pfilter_value) :
+                new ObjectParameter("Pfilter_value", typeof(string));
+    
+            var prentalamt_FilterParameter = prentalamt_Filter != null ?
+                new ObjectParameter("Prentalamt_Filter", prentalamt_Filter) :
+                new ObjectParameter("Prentalamt_Filter", typeof(string));
+    
+            var prentalamt_Filter_FromParameter = prentalamt_Filter_From.HasValue ?
+                new ObjectParameter("Prentalamt_Filter_From", prentalamt_Filter_From) :
+                new ObjectParameter("Prentalamt_Filter_From", typeof(int));
+    
+            var prentalamt_Filter_ToParameter = prentalamt_Filter_To.HasValue ?
+                new ObjectParameter("Prentalamt_Filter_To", prentalamt_Filter_To) :
+                new ObjectParameter("Prentalamt_Filter_To", typeof(int));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_pdc_Report_all", pfromdateParameter, ptodateParameter, pfilter_fieldParameter, pfilter_valueParameter, prentalamt_FilterParameter, prentalamt_Filter_FromParameter, prentalamt_Filter_ToParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_Properties_All(string pFlag, string pProperty_Flag, string pProperty_ID_Tawtheeq, Nullable<int> pProperty_Id, string pProperty_Name, string pCompound, string pZone, string psector, string pplotno, Nullable<int> pownedbyregistrant, string pProperty_Usage, string pProperty_Type, Nullable<int> pCommercial_villa, string pStreet_Name, string pAddress1, string pAddress2, string pAddress3, string pRegion_Name, string pCountry, string pCity, string pState, string pExternalrefno, Nullable<int> pNoofoffloors, Nullable<int> pNoofunits, Nullable<float> pBuiltarea, Nullable<float> pPlotarea, Nullable<float> pLeasablearea, Nullable<float> pcommonarea, Nullable<System.DateTime> pcompletion_Date, Nullable<float> pAEDvalue, Nullable<System.DateTime> pPurchased_date, Nullable<System.DateTime> pValued_Date, string pStatus, Nullable<System.DateTime> pVacant_Start_Date, string pCaretaker_Name, Nullable<int> pCaretaker_ID, Nullable<float> pRental_Rate_Month, string pComments, string pRef_unit_Property_ID_Tawtheeq, Nullable<int> pRef_Unit_Property_ID, string pRef_Unit_Property_Name, string pUnit_ID_Tawtheeq, string pUnit_Property_Name, string pExternalrefno_unit, Nullable<float> pAEDvalue_unit, Nullable<System.DateTime> pPurchased_date_unit, Nullable<System.DateTime> pValued_Date_unit, string pStatus_unit, Nullable<System.DateTime> pVacant_Start_Date_Unit, Nullable<float> pRental_Rate_Month_unit, string pFloorno, string pFloorlevel, string pProperty_Usage_unit, string pProperty_Type_unit, Nullable<float> pTotal_Area, Nullable<float> pUnit_Common_Area, Nullable<float> pCommon_Area, Nullable<int> pParkingno, string pUnitcomments, string pCreateduser, Nullable<int> pCompany_occupied_Flag, string ppropertiesdt, string ppropertiesdt1)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pProperty_FlagParameter = pProperty_Flag != null ?
+                new ObjectParameter("PProperty_Flag", pProperty_Flag) :
+                new ObjectParameter("PProperty_Flag", typeof(string));
+    
+            var pProperty_ID_TawtheeqParameter = pProperty_ID_Tawtheeq != null ?
+                new ObjectParameter("PProperty_ID_Tawtheeq", pProperty_ID_Tawtheeq) :
+                new ObjectParameter("PProperty_ID_Tawtheeq", typeof(string));
+    
+            var pProperty_IdParameter = pProperty_Id.HasValue ?
+                new ObjectParameter("PProperty_Id", pProperty_Id) :
+                new ObjectParameter("PProperty_Id", typeof(int));
+    
+            var pProperty_NameParameter = pProperty_Name != null ?
+                new ObjectParameter("PProperty_Name", pProperty_Name) :
+                new ObjectParameter("PProperty_Name", typeof(string));
+    
+            var pCompoundParameter = pCompound != null ?
+                new ObjectParameter("PCompound", pCompound) :
+                new ObjectParameter("PCompound", typeof(string));
+    
+            var pZoneParameter = pZone != null ?
+                new ObjectParameter("PZone", pZone) :
+                new ObjectParameter("PZone", typeof(string));
+    
+            var psectorParameter = psector != null ?
+                new ObjectParameter("Psector", psector) :
+                new ObjectParameter("Psector", typeof(string));
+    
+            var pplotnoParameter = pplotno != null ?
+                new ObjectParameter("Pplotno", pplotno) :
+                new ObjectParameter("Pplotno", typeof(string));
+    
+            var pownedbyregistrantParameter = pownedbyregistrant.HasValue ?
+                new ObjectParameter("Pownedbyregistrant", pownedbyregistrant) :
+                new ObjectParameter("Pownedbyregistrant", typeof(int));
+    
+            var pProperty_UsageParameter = pProperty_Usage != null ?
+                new ObjectParameter("PProperty_Usage", pProperty_Usage) :
+                new ObjectParameter("PProperty_Usage", typeof(string));
+    
+            var pProperty_TypeParameter = pProperty_Type != null ?
+                new ObjectParameter("PProperty_Type", pProperty_Type) :
+                new ObjectParameter("PProperty_Type", typeof(string));
+    
+            var pCommercial_villaParameter = pCommercial_villa.HasValue ?
+                new ObjectParameter("PCommercial_villa", pCommercial_villa) :
+                new ObjectParameter("PCommercial_villa", typeof(int));
+    
+            var pStreet_NameParameter = pStreet_Name != null ?
+                new ObjectParameter("PStreet_Name", pStreet_Name) :
+                new ObjectParameter("PStreet_Name", typeof(string));
+    
+            var pAddress1Parameter = pAddress1 != null ?
+                new ObjectParameter("PAddress1", pAddress1) :
+                new ObjectParameter("PAddress1", typeof(string));
+    
+            var pAddress2Parameter = pAddress2 != null ?
+                new ObjectParameter("PAddress2", pAddress2) :
+                new ObjectParameter("PAddress2", typeof(string));
+    
+            var pAddress3Parameter = pAddress3 != null ?
+                new ObjectParameter("PAddress3", pAddress3) :
+                new ObjectParameter("PAddress3", typeof(string));
+    
+            var pRegion_NameParameter = pRegion_Name != null ?
+                new ObjectParameter("PRegion_Name", pRegion_Name) :
+                new ObjectParameter("PRegion_Name", typeof(string));
+    
+            var pCountryParameter = pCountry != null ?
+                new ObjectParameter("PCountry", pCountry) :
+                new ObjectParameter("PCountry", typeof(string));
+    
+            var pCityParameter = pCity != null ?
+                new ObjectParameter("PCity", pCity) :
+                new ObjectParameter("PCity", typeof(string));
+    
+            var pStateParameter = pState != null ?
+                new ObjectParameter("PState", pState) :
+                new ObjectParameter("PState", typeof(string));
+    
+            var pExternalrefnoParameter = pExternalrefno != null ?
+                new ObjectParameter("PExternalrefno", pExternalrefno) :
+                new ObjectParameter("PExternalrefno", typeof(string));
+    
+            var pNoofoffloorsParameter = pNoofoffloors.HasValue ?
+                new ObjectParameter("PNoofoffloors", pNoofoffloors) :
+                new ObjectParameter("PNoofoffloors", typeof(int));
+    
+            var pNoofunitsParameter = pNoofunits.HasValue ?
+                new ObjectParameter("PNoofunits", pNoofunits) :
+                new ObjectParameter("PNoofunits", typeof(int));
+    
+            var pBuiltareaParameter = pBuiltarea.HasValue ?
+                new ObjectParameter("PBuiltarea", pBuiltarea) :
+                new ObjectParameter("PBuiltarea", typeof(float));
+    
+            var pPlotareaParameter = pPlotarea.HasValue ?
+                new ObjectParameter("PPlotarea", pPlotarea) :
+                new ObjectParameter("PPlotarea", typeof(float));
+    
+            var pLeasableareaParameter = pLeasablearea.HasValue ?
+                new ObjectParameter("PLeasablearea", pLeasablearea) :
+                new ObjectParameter("PLeasablearea", typeof(float));
+    
+            var pcommonareaParameter = pcommonarea.HasValue ?
+                new ObjectParameter("Pcommonarea", pcommonarea) :
+                new ObjectParameter("Pcommonarea", typeof(float));
+    
+            var pcompletion_DateParameter = pcompletion_Date.HasValue ?
+                new ObjectParameter("Pcompletion_Date", pcompletion_Date) :
+                new ObjectParameter("Pcompletion_Date", typeof(System.DateTime));
+    
+            var pAEDvalueParameter = pAEDvalue.HasValue ?
+                new ObjectParameter("PAEDvalue", pAEDvalue) :
+                new ObjectParameter("PAEDvalue", typeof(float));
+    
+            var pPurchased_dateParameter = pPurchased_date.HasValue ?
+                new ObjectParameter("PPurchased_date", pPurchased_date) :
+                new ObjectParameter("PPurchased_date", typeof(System.DateTime));
+    
+            var pValued_DateParameter = pValued_Date.HasValue ?
+                new ObjectParameter("PValued_Date", pValued_Date) :
+                new ObjectParameter("PValued_Date", typeof(System.DateTime));
+    
+            var pStatusParameter = pStatus != null ?
+                new ObjectParameter("PStatus", pStatus) :
+                new ObjectParameter("PStatus", typeof(string));
+    
+            var pVacant_Start_DateParameter = pVacant_Start_Date.HasValue ?
+                new ObjectParameter("PVacant_Start_Date", pVacant_Start_Date) :
+                new ObjectParameter("PVacant_Start_Date", typeof(System.DateTime));
+    
+            var pCaretaker_NameParameter = pCaretaker_Name != null ?
+                new ObjectParameter("PCaretaker_Name", pCaretaker_Name) :
+                new ObjectParameter("PCaretaker_Name", typeof(string));
+    
+            var pCaretaker_IDParameter = pCaretaker_ID.HasValue ?
+                new ObjectParameter("PCaretaker_ID", pCaretaker_ID) :
+                new ObjectParameter("PCaretaker_ID", typeof(int));
+    
+            var pRental_Rate_MonthParameter = pRental_Rate_Month.HasValue ?
+                new ObjectParameter("PRental_Rate_Month", pRental_Rate_Month) :
+                new ObjectParameter("PRental_Rate_Month", typeof(float));
+    
+            var pCommentsParameter = pComments != null ?
+                new ObjectParameter("PComments", pComments) :
+                new ObjectParameter("PComments", typeof(string));
+    
+            var pRef_unit_Property_ID_TawtheeqParameter = pRef_unit_Property_ID_Tawtheeq != null ?
+                new ObjectParameter("PRef_unit_Property_ID_Tawtheeq", pRef_unit_Property_ID_Tawtheeq) :
+                new ObjectParameter("PRef_unit_Property_ID_Tawtheeq", typeof(string));
+    
+            var pRef_Unit_Property_IDParameter = pRef_Unit_Property_ID.HasValue ?
+                new ObjectParameter("PRef_Unit_Property_ID", pRef_Unit_Property_ID) :
+                new ObjectParameter("PRef_Unit_Property_ID", typeof(int));
+    
+            var pRef_Unit_Property_NameParameter = pRef_Unit_Property_Name != null ?
+                new ObjectParameter("PRef_Unit_Property_Name", pRef_Unit_Property_Name) :
+                new ObjectParameter("PRef_Unit_Property_Name", typeof(string));
+    
+            var pUnit_ID_TawtheeqParameter = pUnit_ID_Tawtheeq != null ?
+                new ObjectParameter("PUnit_ID_Tawtheeq", pUnit_ID_Tawtheeq) :
+                new ObjectParameter("PUnit_ID_Tawtheeq", typeof(string));
+    
+            var pUnit_Property_NameParameter = pUnit_Property_Name != null ?
+                new ObjectParameter("PUnit_Property_Name", pUnit_Property_Name) :
+                new ObjectParameter("PUnit_Property_Name", typeof(string));
+    
+            var pExternalrefno_unitParameter = pExternalrefno_unit != null ?
+                new ObjectParameter("PExternalrefno_unit", pExternalrefno_unit) :
+                new ObjectParameter("PExternalrefno_unit", typeof(string));
+    
+            var pAEDvalue_unitParameter = pAEDvalue_unit.HasValue ?
+                new ObjectParameter("PAEDvalue_unit", pAEDvalue_unit) :
+                new ObjectParameter("PAEDvalue_unit", typeof(float));
+    
+            var pPurchased_date_unitParameter = pPurchased_date_unit.HasValue ?
+                new ObjectParameter("PPurchased_date_unit", pPurchased_date_unit) :
+                new ObjectParameter("PPurchased_date_unit", typeof(System.DateTime));
+    
+            var pValued_Date_unitParameter = pValued_Date_unit.HasValue ?
+                new ObjectParameter("PValued_Date_unit", pValued_Date_unit) :
+                new ObjectParameter("PValued_Date_unit", typeof(System.DateTime));
+    
+            var pStatus_unitParameter = pStatus_unit != null ?
+                new ObjectParameter("PStatus_unit", pStatus_unit) :
+                new ObjectParameter("PStatus_unit", typeof(string));
+    
+            var pVacant_Start_Date_UnitParameter = pVacant_Start_Date_Unit.HasValue ?
+                new ObjectParameter("PVacant_Start_Date_Unit", pVacant_Start_Date_Unit) :
+                new ObjectParameter("PVacant_Start_Date_Unit", typeof(System.DateTime));
+    
+            var pRental_Rate_Month_unitParameter = pRental_Rate_Month_unit.HasValue ?
+                new ObjectParameter("PRental_Rate_Month_unit", pRental_Rate_Month_unit) :
+                new ObjectParameter("PRental_Rate_Month_unit", typeof(float));
+    
+            var pFloornoParameter = pFloorno != null ?
+                new ObjectParameter("PFloorno", pFloorno) :
+                new ObjectParameter("PFloorno", typeof(string));
+    
+            var pFloorlevelParameter = pFloorlevel != null ?
+                new ObjectParameter("PFloorlevel", pFloorlevel) :
+                new ObjectParameter("PFloorlevel", typeof(string));
+    
+            var pProperty_Usage_unitParameter = pProperty_Usage_unit != null ?
+                new ObjectParameter("PProperty_Usage_unit", pProperty_Usage_unit) :
+                new ObjectParameter("PProperty_Usage_unit", typeof(string));
+    
+            var pProperty_Type_unitParameter = pProperty_Type_unit != null ?
+                new ObjectParameter("PProperty_Type_unit", pProperty_Type_unit) :
+                new ObjectParameter("PProperty_Type_unit", typeof(string));
+    
+            var pTotal_AreaParameter = pTotal_Area.HasValue ?
+                new ObjectParameter("PTotal_Area", pTotal_Area) :
+                new ObjectParameter("PTotal_Area", typeof(float));
+    
+            var pUnit_Common_AreaParameter = pUnit_Common_Area.HasValue ?
+                new ObjectParameter("PUnit_Common_Area", pUnit_Common_Area) :
+                new ObjectParameter("PUnit_Common_Area", typeof(float));
+    
+            var pCommon_AreaParameter = pCommon_Area.HasValue ?
+                new ObjectParameter("PCommon_Area", pCommon_Area) :
+                new ObjectParameter("PCommon_Area", typeof(float));
+    
+            var pParkingnoParameter = pParkingno.HasValue ?
+                new ObjectParameter("PParkingno", pParkingno) :
+                new ObjectParameter("PParkingno", typeof(int));
+    
+            var pUnitcommentsParameter = pUnitcomments != null ?
+                new ObjectParameter("PUnitcomments", pUnitcomments) :
+                new ObjectParameter("PUnitcomments", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            var pCompany_occupied_FlagParameter = pCompany_occupied_Flag.HasValue ?
+                new ObjectParameter("PCompany_occupied_Flag", pCompany_occupied_Flag) :
+                new ObjectParameter("PCompany_occupied_Flag", typeof(int));
+    
+            var ppropertiesdtParameter = ppropertiesdt != null ?
+                new ObjectParameter("Ppropertiesdt", ppropertiesdt) :
+                new ObjectParameter("Ppropertiesdt", typeof(string));
+    
+            var ppropertiesdt1Parameter = ppropertiesdt1 != null ?
+                new ObjectParameter("Ppropertiesdt1", ppropertiesdt1) :
+                new ObjectParameter("Ppropertiesdt1", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Properties_All", pFlagParameter, pProperty_FlagParameter, pProperty_ID_TawtheeqParameter, pProperty_IdParameter, pProperty_NameParameter, pCompoundParameter, pZoneParameter, psectorParameter, pplotnoParameter, pownedbyregistrantParameter, pProperty_UsageParameter, pProperty_TypeParameter, pCommercial_villaParameter, pStreet_NameParameter, pAddress1Parameter, pAddress2Parameter, pAddress3Parameter, pRegion_NameParameter, pCountryParameter, pCityParameter, pStateParameter, pExternalrefnoParameter, pNoofoffloorsParameter, pNoofunitsParameter, pBuiltareaParameter, pPlotareaParameter, pLeasableareaParameter, pcommonareaParameter, pcompletion_DateParameter, pAEDvalueParameter, pPurchased_dateParameter, pValued_DateParameter, pStatusParameter, pVacant_Start_DateParameter, pCaretaker_NameParameter, pCaretaker_IDParameter, pRental_Rate_MonthParameter, pCommentsParameter, pRef_unit_Property_ID_TawtheeqParameter, pRef_Unit_Property_IDParameter, pRef_Unit_Property_NameParameter, pUnit_ID_TawtheeqParameter, pUnit_Property_NameParameter, pExternalrefno_unitParameter, pAEDvalue_unitParameter, pPurchased_date_unitParameter, pValued_Date_unitParameter, pStatus_unitParameter, pVacant_Start_Date_UnitParameter, pRental_Rate_Month_unitParameter, pFloornoParameter, pFloorlevelParameter, pProperty_Usage_unitParameter, pProperty_Type_unitParameter, pTotal_AreaParameter, pUnit_Common_AreaParameter, pCommon_AreaParameter, pParkingnoParameter, pUnitcommentsParameter, pCreateduserParameter, pCompany_occupied_FlagParameter, ppropertiesdtParameter, ppropertiesdt1Parameter);
+        }
+    
+        public virtual int Usp_Propertytype_All(string pFlag, Nullable<int> pId, string pType_Flag, string pType_name, string pUsage_name, string pCreateduser)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pIdParameter = pId.HasValue ?
+                new ObjectParameter("PId", pId) :
+                new ObjectParameter("PId", typeof(int));
+    
+            var pType_FlagParameter = pType_Flag != null ?
+                new ObjectParameter("PType_Flag", pType_Flag) :
+                new ObjectParameter("PType_Flag", typeof(string));
+    
+            var pType_nameParameter = pType_name != null ?
+                new ObjectParameter("PType_name", pType_name) :
+                new ObjectParameter("PType_name", typeof(string));
+    
+            var pUsage_nameParameter = pUsage_name != null ?
+                new ObjectParameter("PUsage_name", pUsage_name) :
+                new ObjectParameter("PUsage_name", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Propertytype_All", pFlagParameter, pIdParameter, pType_FlagParameter, pType_nameParameter, pUsage_nameParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_Receipt_All(string pFlag, string pReccategory, string pRecpType, Nullable<int> pReceiptNo, Nullable<System.DateTime> pReceiptDate, Nullable<int> pagreement_no, string pProperty_id, string pProperty_Name, string pUnit_ID, string punit_Name, Nullable<int> pTenant_id, string pTenant_Name, Nullable<float> pTotalAmount, string pAmtInWords, string pDDChequeNo, string pPdcstatus, string pBankAcCode, string pBankAcName, string pAdvAcCode, Nullable<System.DateTime> pDDChequeDate, string pNarration, string pCreateduser, string pReceiptdt)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pReccategoryParameter = pReccategory != null ?
+                new ObjectParameter("PReccategory", pReccategory) :
+                new ObjectParameter("PReccategory", typeof(string));
+    
+            var pRecpTypeParameter = pRecpType != null ?
+                new ObjectParameter("PRecpType", pRecpType) :
+                new ObjectParameter("PRecpType", typeof(string));
+    
+            var pReceiptNoParameter = pReceiptNo.HasValue ?
+                new ObjectParameter("PReceiptNo", pReceiptNo) :
+                new ObjectParameter("PReceiptNo", typeof(int));
+    
+            var pReceiptDateParameter = pReceiptDate.HasValue ?
+                new ObjectParameter("PReceiptDate", pReceiptDate) :
+                new ObjectParameter("PReceiptDate", typeof(System.DateTime));
+    
+            var pagreement_noParameter = pagreement_no.HasValue ?
+                new ObjectParameter("Pagreement_no", pagreement_no) :
+                new ObjectParameter("Pagreement_no", typeof(int));
+    
+            var pProperty_idParameter = pProperty_id != null ?
+                new ObjectParameter("PProperty_id", pProperty_id) :
+                new ObjectParameter("PProperty_id", typeof(string));
+    
+            var pProperty_NameParameter = pProperty_Name != null ?
+                new ObjectParameter("PProperty_Name", pProperty_Name) :
+                new ObjectParameter("PProperty_Name", typeof(string));
+    
+            var pUnit_IDParameter = pUnit_ID != null ?
+                new ObjectParameter("PUnit_ID", pUnit_ID) :
+                new ObjectParameter("PUnit_ID", typeof(string));
+    
+            var punit_NameParameter = punit_Name != null ?
+                new ObjectParameter("Punit_Name", punit_Name) :
+                new ObjectParameter("Punit_Name", typeof(string));
+    
+            var pTenant_idParameter = pTenant_id.HasValue ?
+                new ObjectParameter("PTenant_id", pTenant_id) :
+                new ObjectParameter("PTenant_id", typeof(int));
+    
+            var pTenant_NameParameter = pTenant_Name != null ?
+                new ObjectParameter("PTenant_Name", pTenant_Name) :
+                new ObjectParameter("PTenant_Name", typeof(string));
+    
+            var pTotalAmountParameter = pTotalAmount.HasValue ?
+                new ObjectParameter("PTotalAmount", pTotalAmount) :
+                new ObjectParameter("PTotalAmount", typeof(float));
+    
+            var pAmtInWordsParameter = pAmtInWords != null ?
+                new ObjectParameter("PAmtInWords", pAmtInWords) :
+                new ObjectParameter("PAmtInWords", typeof(string));
+    
+            var pDDChequeNoParameter = pDDChequeNo != null ?
+                new ObjectParameter("PDDChequeNo", pDDChequeNo) :
+                new ObjectParameter("PDDChequeNo", typeof(string));
+    
+            var pPdcstatusParameter = pPdcstatus != null ?
+                new ObjectParameter("PPdcstatus", pPdcstatus) :
+                new ObjectParameter("PPdcstatus", typeof(string));
+    
+            var pBankAcCodeParameter = pBankAcCode != null ?
+                new ObjectParameter("PBankAcCode", pBankAcCode) :
+                new ObjectParameter("PBankAcCode", typeof(string));
+    
+            var pBankAcNameParameter = pBankAcName != null ?
+                new ObjectParameter("PBankAcName", pBankAcName) :
+                new ObjectParameter("PBankAcName", typeof(string));
+    
+            var pAdvAcCodeParameter = pAdvAcCode != null ?
+                new ObjectParameter("PAdvAcCode", pAdvAcCode) :
+                new ObjectParameter("PAdvAcCode", typeof(string));
+    
+            var pDDChequeDateParameter = pDDChequeDate.HasValue ?
+                new ObjectParameter("PDDChequeDate", pDDChequeDate) :
+                new ObjectParameter("PDDChequeDate", typeof(System.DateTime));
+    
+            var pNarrationParameter = pNarration != null ?
+                new ObjectParameter("PNarration", pNarration) :
+                new ObjectParameter("PNarration", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            var pReceiptdtParameter = pReceiptdt != null ?
+                new ObjectParameter("PReceiptdt", pReceiptdt) :
+                new ObjectParameter("PReceiptdt", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Receipt_All", pFlagParameter, pReccategoryParameter, pRecpTypeParameter, pReceiptNoParameter, pReceiptDateParameter, pagreement_noParameter, pProperty_idParameter, pProperty_NameParameter, pUnit_IDParameter, punit_NameParameter, pTenant_idParameter, pTenant_NameParameter, pTotalAmountParameter, pAmtInWordsParameter, pDDChequeNoParameter, pPdcstatusParameter, pBankAcCodeParameter, pBankAcNameParameter, pAdvAcCodeParameter, pDDChequeDateParameter, pNarrationParameter, pCreateduserParameter, pReceiptdtParameter);
+        }
+    
+        public virtual int Usp_Receipt_Auto(Nullable<System.DateTime> invdate)
+        {
+            var invdateParameter = invdate.HasValue ?
+                new ObjectParameter("invdate", invdate) :
+                new ObjectParameter("invdate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Receipt_Auto", invdateParameter);
+        }
+    
+        public virtual int Usp_Receipt_Fifo(Nullable<float> amt)
+        {
+            var amtParameter = amt.HasValue ?
+                new ObjectParameter("amt", amt) :
+                new ObjectParameter("amt", typeof(float));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Receipt_Fifo", amtParameter);
+        }
+    
+        public virtual int Usp_Region_All(string pFlag, Nullable<int> pId, string pRegion_Name, string pCountry, string pCreateduser)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pIdParameter = pId.HasValue ?
+                new ObjectParameter("PId", pId) :
+                new ObjectParameter("PId", typeof(int));
+    
+            var pRegion_NameParameter = pRegion_Name != null ?
+                new ObjectParameter("PRegion_Name", pRegion_Name) :
+                new ObjectParameter("PRegion_Name", typeof(string));
+    
+            var pCountryParameter = pCountry != null ?
+                new ObjectParameter("PCountry", pCountry) :
+                new ObjectParameter("PCountry", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Region_All", pFlagParameter, pIdParameter, pRegion_NameParameter, pCountryParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_REnewal_Report_all(string pgroup, Nullable<System.DateTime> pfromdate, Nullable<System.DateTime> ptodate, string pfilter_field, string pfilter_value, string pagin_Filter, Nullable<int> pagin_Filter_From, Nullable<int> pagin_Filter_To, string prentalamt_Filter, Nullable<int> prentalamt_Filter_From, Nullable<int> prentalamt_Filter_To, string pCreateduser)
+        {
+            var pgroupParameter = pgroup != null ?
+                new ObjectParameter("Pgroup", pgroup) :
+                new ObjectParameter("Pgroup", typeof(string));
+    
+            var pfromdateParameter = pfromdate.HasValue ?
+                new ObjectParameter("Pfromdate", pfromdate) :
+                new ObjectParameter("Pfromdate", typeof(System.DateTime));
+    
+            var ptodateParameter = ptodate.HasValue ?
+                new ObjectParameter("Ptodate", ptodate) :
+                new ObjectParameter("Ptodate", typeof(System.DateTime));
+    
+            var pfilter_fieldParameter = pfilter_field != null ?
+                new ObjectParameter("Pfilter_field", pfilter_field) :
+                new ObjectParameter("Pfilter_field", typeof(string));
+    
+            var pfilter_valueParameter = pfilter_value != null ?
+                new ObjectParameter("Pfilter_value", pfilter_value) :
+                new ObjectParameter("Pfilter_value", typeof(string));
+    
+            var pagin_FilterParameter = pagin_Filter != null ?
+                new ObjectParameter("Pagin_Filter", pagin_Filter) :
+                new ObjectParameter("Pagin_Filter", typeof(string));
+    
+            var pagin_Filter_FromParameter = pagin_Filter_From.HasValue ?
+                new ObjectParameter("Pagin_Filter_From", pagin_Filter_From) :
+                new ObjectParameter("Pagin_Filter_From", typeof(int));
+    
+            var pagin_Filter_ToParameter = pagin_Filter_To.HasValue ?
+                new ObjectParameter("Pagin_Filter_To", pagin_Filter_To) :
+                new ObjectParameter("Pagin_Filter_To", typeof(int));
+    
+            var prentalamt_FilterParameter = prentalamt_Filter != null ?
+                new ObjectParameter("Prentalamt_Filter", prentalamt_Filter) :
+                new ObjectParameter("Prentalamt_Filter", typeof(string));
+    
+            var prentalamt_Filter_FromParameter = prentalamt_Filter_From.HasValue ?
+                new ObjectParameter("Prentalamt_Filter_From", prentalamt_Filter_From) :
+                new ObjectParameter("Prentalamt_Filter_From", typeof(int));
+    
+            var prentalamt_Filter_ToParameter = prentalamt_Filter_To.HasValue ?
+                new ObjectParameter("Prentalamt_Filter_To", prentalamt_Filter_To) :
+                new ObjectParameter("Prentalamt_Filter_To", typeof(int));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_REnewal_Report_all", pgroupParameter, pfromdateParameter, ptodateParameter, pfilter_fieldParameter, pfilter_valueParameter, pagin_FilterParameter, pagin_Filter_FromParameter, pagin_Filter_ToParameter, prentalamt_FilterParameter, prentalamt_Filter_FromParameter, prentalamt_Filter_ToParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_Reptest(string pregion, string pcaretaker_name)
+        {
+            var pregionParameter = pregion != null ?
+                new ObjectParameter("pregion", pregion) :
+                new ObjectParameter("pregion", typeof(string));
+    
+            var pcaretaker_nameParameter = pcaretaker_name != null ?
+                new ObjectParameter("pcaretaker_name", pcaretaker_name) :
+                new ObjectParameter("pcaretaker_name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Reptest", pregionParameter, pcaretaker_nameParameter);
+        }
+    
+        public virtual int Usp_Slabmaster_All(string pFlag, Nullable<int> pslabid, string pUtility_id, string pUtility_Name, Nullable<int> pUnit_From, Nullable<int> pUnitto, Nullable<float> prate, string pColour, string pResidence_type, string pCreateduser)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pslabidParameter = pslabid.HasValue ?
+                new ObjectParameter("Pslabid", pslabid) :
+                new ObjectParameter("Pslabid", typeof(int));
+    
+            var pUtility_idParameter = pUtility_id != null ?
+                new ObjectParameter("PUtility_id", pUtility_id) :
+                new ObjectParameter("PUtility_id", typeof(string));
+    
+            var pUtility_NameParameter = pUtility_Name != null ?
+                new ObjectParameter("PUtility_Name", pUtility_Name) :
+                new ObjectParameter("PUtility_Name", typeof(string));
+    
+            var pUnit_FromParameter = pUnit_From.HasValue ?
+                new ObjectParameter("PUnit_From", pUnit_From) :
+                new ObjectParameter("PUnit_From", typeof(int));
+    
+            var pUnittoParameter = pUnitto.HasValue ?
+                new ObjectParameter("PUnitto", pUnitto) :
+                new ObjectParameter("PUnitto", typeof(int));
+    
+            var prateParameter = prate.HasValue ?
+                new ObjectParameter("Prate", prate) :
+                new ObjectParameter("Prate", typeof(float));
+    
+            var pColourParameter = pColour != null ?
+                new ObjectParameter("PColour", pColour) :
+                new ObjectParameter("PColour", typeof(string));
+    
+            var pResidence_typeParameter = pResidence_type != null ?
+                new ObjectParameter("PResidence_type", pResidence_type) :
+                new ObjectParameter("PResidence_type", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Slabmaster_All", pFlagParameter, pslabidParameter, pUtility_idParameter, pUtility_NameParameter, pUnit_FromParameter, pUnittoParameter, prateParameter, pColourParameter, pResidence_typeParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_split1(string screen_name, string combo_name, string deli, string target)
+        {
+            var screen_nameParameter = screen_name != null ?
+                new ObjectParameter("Screen_name", screen_name) :
+                new ObjectParameter("Screen_name", typeof(string));
+    
+            var combo_nameParameter = combo_name != null ?
+                new ObjectParameter("combo_name", combo_name) :
+                new ObjectParameter("combo_name", typeof(string));
+    
+            var deliParameter = deli != null ?
+                new ObjectParameter("deli", deli) :
+                new ObjectParameter("deli", typeof(string));
+    
+            var targetParameter = target != null ?
+                new ObjectParameter("target", target) :
+                new ObjectParameter("target", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_split1", screen_nameParameter, combo_nameParameter, deliParameter, targetParameter);
+        }
+    
+        public virtual int Usp_splitNew(string pSplittext, string deli, string target)
+        {
+            var pSplittextParameter = pSplittext != null ?
+                new ObjectParameter("PSplittext", pSplittext) :
+                new ObjectParameter("PSplittext", typeof(string));
+    
+            var deliParameter = deli != null ?
+                new ObjectParameter("deli", deli) :
+                new ObjectParameter("deli", typeof(string));
+    
+            var targetParameter = target != null ?
+                new ObjectParameter("target", target) :
+                new ObjectParameter("target", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_splitNew", pSplittextParameter, deliParameter, targetParameter);
+        }
+    
+        public virtual int Usp_Supplier_All(string pFlag, Nullable<int> pSupplier_Id, string pSupplier_Name, string pMarital_Status, string pTitle, string pFirst_Name, string pMiddle_Name, string pLast_Name, string paddress, string paddress1, string pLocationlink, string pEmirate, string pCity, string pPostboxNo, string pEmail, string pMobile_Countrycode, string pMobile_Areacode, string pMobile_No, string pLandline_Countrycode, string pLandline_Areacode, string pLandline_No, string pFax_Countrycode, string pFax_Areacode, string pFax_No, string pNationality, string pActitvity, string pCocandindustryuid, string pTradelicenseNo, Nullable<System.DateTime> pLicense_issueDate, Nullable<System.DateTime> pLicense_ExpiryDate, string pIssuance_authority, string pADWEA_Regid, string pType, string pCreateduser, string pEmirate_id, string pPsupplierdt, string psupplierdt1)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pSupplier_IdParameter = pSupplier_Id.HasValue ?
+                new ObjectParameter("PSupplier_Id", pSupplier_Id) :
+                new ObjectParameter("PSupplier_Id", typeof(int));
+    
+            var pSupplier_NameParameter = pSupplier_Name != null ?
+                new ObjectParameter("PSupplier_Name", pSupplier_Name) :
+                new ObjectParameter("PSupplier_Name", typeof(string));
+    
+            var pMarital_StatusParameter = pMarital_Status != null ?
+                new ObjectParameter("PMarital_Status", pMarital_Status) :
+                new ObjectParameter("PMarital_Status", typeof(string));
+    
+            var pTitleParameter = pTitle != null ?
+                new ObjectParameter("PTitle", pTitle) :
+                new ObjectParameter("PTitle", typeof(string));
+    
+            var pFirst_NameParameter = pFirst_Name != null ?
+                new ObjectParameter("PFirst_Name", pFirst_Name) :
+                new ObjectParameter("PFirst_Name", typeof(string));
+    
+            var pMiddle_NameParameter = pMiddle_Name != null ?
+                new ObjectParameter("PMiddle_Name", pMiddle_Name) :
+                new ObjectParameter("PMiddle_Name", typeof(string));
+    
+            var pLast_NameParameter = pLast_Name != null ?
+                new ObjectParameter("PLast_Name", pLast_Name) :
+                new ObjectParameter("PLast_Name", typeof(string));
+    
+            var paddressParameter = paddress != null ?
+                new ObjectParameter("Paddress", paddress) :
+                new ObjectParameter("Paddress", typeof(string));
+    
+            var paddress1Parameter = paddress1 != null ?
+                new ObjectParameter("Paddress1", paddress1) :
+                new ObjectParameter("Paddress1", typeof(string));
+    
+            var pLocationlinkParameter = pLocationlink != null ?
+                new ObjectParameter("PLocationlink", pLocationlink) :
+                new ObjectParameter("PLocationlink", typeof(string));
+    
+            var pEmirateParameter = pEmirate != null ?
+                new ObjectParameter("PEmirate", pEmirate) :
+                new ObjectParameter("PEmirate", typeof(string));
+    
+            var pCityParameter = pCity != null ?
+                new ObjectParameter("PCity", pCity) :
+                new ObjectParameter("PCity", typeof(string));
+    
+            var pPostboxNoParameter = pPostboxNo != null ?
+                new ObjectParameter("PPostboxNo", pPostboxNo) :
+                new ObjectParameter("PPostboxNo", typeof(string));
+    
+            var pEmailParameter = pEmail != null ?
+                new ObjectParameter("PEmail", pEmail) :
+                new ObjectParameter("PEmail", typeof(string));
+    
+            var pMobile_CountrycodeParameter = pMobile_Countrycode != null ?
+                new ObjectParameter("PMobile_Countrycode", pMobile_Countrycode) :
+                new ObjectParameter("PMobile_Countrycode", typeof(string));
+    
+            var pMobile_AreacodeParameter = pMobile_Areacode != null ?
+                new ObjectParameter("PMobile_Areacode", pMobile_Areacode) :
+                new ObjectParameter("PMobile_Areacode", typeof(string));
+    
+            var pMobile_NoParameter = pMobile_No != null ?
+                new ObjectParameter("PMobile_No", pMobile_No) :
+                new ObjectParameter("PMobile_No", typeof(string));
+    
+            var pLandline_CountrycodeParameter = pLandline_Countrycode != null ?
+                new ObjectParameter("PLandline_Countrycode", pLandline_Countrycode) :
+                new ObjectParameter("PLandline_Countrycode", typeof(string));
+    
+            var pLandline_AreacodeParameter = pLandline_Areacode != null ?
+                new ObjectParameter("PLandline_Areacode", pLandline_Areacode) :
+                new ObjectParameter("PLandline_Areacode", typeof(string));
+    
+            var pLandline_NoParameter = pLandline_No != null ?
+                new ObjectParameter("PLandline_No", pLandline_No) :
+                new ObjectParameter("PLandline_No", typeof(string));
+    
+            var pFax_CountrycodeParameter = pFax_Countrycode != null ?
+                new ObjectParameter("PFax_Countrycode", pFax_Countrycode) :
+                new ObjectParameter("PFax_Countrycode", typeof(string));
+    
+            var pFax_AreacodeParameter = pFax_Areacode != null ?
+                new ObjectParameter("PFax_Areacode", pFax_Areacode) :
+                new ObjectParameter("PFax_Areacode", typeof(string));
+    
+            var pFax_NoParameter = pFax_No != null ?
+                new ObjectParameter("PFax_No", pFax_No) :
+                new ObjectParameter("PFax_No", typeof(string));
+    
+            var pNationalityParameter = pNationality != null ?
+                new ObjectParameter("PNationality", pNationality) :
+                new ObjectParameter("PNationality", typeof(string));
+    
+            var pActitvityParameter = pActitvity != null ?
+                new ObjectParameter("PActitvity", pActitvity) :
+                new ObjectParameter("PActitvity", typeof(string));
+    
+            var pCocandindustryuidParameter = pCocandindustryuid != null ?
+                new ObjectParameter("PCocandindustryuid", pCocandindustryuid) :
+                new ObjectParameter("PCocandindustryuid", typeof(string));
+    
+            var pTradelicenseNoParameter = pTradelicenseNo != null ?
+                new ObjectParameter("PTradelicenseNo", pTradelicenseNo) :
+                new ObjectParameter("PTradelicenseNo", typeof(string));
+    
+            var pLicense_issueDateParameter = pLicense_issueDate.HasValue ?
+                new ObjectParameter("PLicense_issueDate", pLicense_issueDate) :
+                new ObjectParameter("PLicense_issueDate", typeof(System.DateTime));
+    
+            var pLicense_ExpiryDateParameter = pLicense_ExpiryDate.HasValue ?
+                new ObjectParameter("PLicense_ExpiryDate", pLicense_ExpiryDate) :
+                new ObjectParameter("PLicense_ExpiryDate", typeof(System.DateTime));
+    
+            var pIssuance_authorityParameter = pIssuance_authority != null ?
+                new ObjectParameter("PIssuance_authority", pIssuance_authority) :
+                new ObjectParameter("PIssuance_authority", typeof(string));
+    
+            var pADWEA_RegidParameter = pADWEA_Regid != null ?
+                new ObjectParameter("PADWEA_Regid", pADWEA_Regid) :
+                new ObjectParameter("PADWEA_Regid", typeof(string));
+    
+            var pTypeParameter = pType != null ?
+                new ObjectParameter("PType", pType) :
+                new ObjectParameter("PType", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            var pEmirate_idParameter = pEmirate_id != null ?
+                new ObjectParameter("PEmirate_id", pEmirate_id) :
+                new ObjectParameter("PEmirate_id", typeof(string));
+    
+            var pPsupplierdtParameter = pPsupplierdt != null ?
+                new ObjectParameter("PPsupplierdt", pPsupplierdt) :
+                new ObjectParameter("PPsupplierdt", typeof(string));
+    
+            var psupplierdt1Parameter = psupplierdt1 != null ?
+                new ObjectParameter("Psupplierdt1", psupplierdt1) :
+                new ObjectParameter("Psupplierdt1", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Supplier_All", pFlagParameter, pSupplier_IdParameter, pSupplier_NameParameter, pMarital_StatusParameter, pTitleParameter, pFirst_NameParameter, pMiddle_NameParameter, pLast_NameParameter, paddressParameter, paddress1Parameter, pLocationlinkParameter, pEmirateParameter, pCityParameter, pPostboxNoParameter, pEmailParameter, pMobile_CountrycodeParameter, pMobile_AreacodeParameter, pMobile_NoParameter, pLandline_CountrycodeParameter, pLandline_AreacodeParameter, pLandline_NoParameter, pFax_CountrycodeParameter, pFax_AreacodeParameter, pFax_NoParameter, pNationalityParameter, pActitvityParameter, pCocandindustryuidParameter, pTradelicenseNoParameter, pLicense_issueDateParameter, pLicense_ExpiryDateParameter, pIssuance_authorityParameter, pADWEA_RegidParameter, pTypeParameter, pCreateduserParameter, pEmirate_idParameter, pPsupplierdtParameter, psupplierdt1Parameter);
+        }
+    
+        public virtual int Usp_tally_customer()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_tally_customer");
+        }
+    
+        public virtual int Usp_Tenant_Company_All(string pFlag, Nullable<int> pTenant_Id, string pCompanyName, string pMarital_Status, string pTitle, string pFirst_Name, string pMiddle_Name, string pLast_Name, string paddress, string paddress1, string pEmirate, string pCity, string pPostboxNo, string pEmail, string pMobile_Countrycode, string pMobile_Areacode, string pMobile_No, string pLandline_Countrycode, string pLandline_Areacode, string pLandline_No, string pFax_Countrycode, string pFax_Areacode, string pFax_No, string pNationality, string pActitvity, string pCocandindustryuid, string pTradelicenseNo, Nullable<System.DateTime> pLicense_issueDate, Nullable<System.DateTime> pLicense_ExpiryDate, string pIssuance_authority, string pADWEA_Regid, string pType, string pCreateduser, string pEmirate_id, string ptenant_companydt, string ptenant_companydt1, string ptenant_companydoc)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pTenant_IdParameter = pTenant_Id.HasValue ?
+                new ObjectParameter("PTenant_Id", pTenant_Id) :
+                new ObjectParameter("PTenant_Id", typeof(int));
+    
+            var pCompanyNameParameter = pCompanyName != null ?
+                new ObjectParameter("PCompanyName", pCompanyName) :
+                new ObjectParameter("PCompanyName", typeof(string));
+    
+            var pMarital_StatusParameter = pMarital_Status != null ?
+                new ObjectParameter("PMarital_Status", pMarital_Status) :
+                new ObjectParameter("PMarital_Status", typeof(string));
+    
+            var pTitleParameter = pTitle != null ?
+                new ObjectParameter("PTitle", pTitle) :
+                new ObjectParameter("PTitle", typeof(string));
+    
+            var pFirst_NameParameter = pFirst_Name != null ?
+                new ObjectParameter("PFirst_Name", pFirst_Name) :
+                new ObjectParameter("PFirst_Name", typeof(string));
+    
+            var pMiddle_NameParameter = pMiddle_Name != null ?
+                new ObjectParameter("PMiddle_Name", pMiddle_Name) :
+                new ObjectParameter("PMiddle_Name", typeof(string));
+    
+            var pLast_NameParameter = pLast_Name != null ?
+                new ObjectParameter("PLast_Name", pLast_Name) :
+                new ObjectParameter("PLast_Name", typeof(string));
+    
+            var paddressParameter = paddress != null ?
+                new ObjectParameter("Paddress", paddress) :
+                new ObjectParameter("Paddress", typeof(string));
+    
+            var paddress1Parameter = paddress1 != null ?
+                new ObjectParameter("Paddress1", paddress1) :
+                new ObjectParameter("Paddress1", typeof(string));
+    
+            var pEmirateParameter = pEmirate != null ?
+                new ObjectParameter("PEmirate", pEmirate) :
+                new ObjectParameter("PEmirate", typeof(string));
+    
+            var pCityParameter = pCity != null ?
+                new ObjectParameter("PCity", pCity) :
+                new ObjectParameter("PCity", typeof(string));
+    
+            var pPostboxNoParameter = pPostboxNo != null ?
+                new ObjectParameter("PPostboxNo", pPostboxNo) :
+                new ObjectParameter("PPostboxNo", typeof(string));
+    
+            var pEmailParameter = pEmail != null ?
+                new ObjectParameter("PEmail", pEmail) :
+                new ObjectParameter("PEmail", typeof(string));
+    
+            var pMobile_CountrycodeParameter = pMobile_Countrycode != null ?
+                new ObjectParameter("PMobile_Countrycode", pMobile_Countrycode) :
+                new ObjectParameter("PMobile_Countrycode", typeof(string));
+    
+            var pMobile_AreacodeParameter = pMobile_Areacode != null ?
+                new ObjectParameter("PMobile_Areacode", pMobile_Areacode) :
+                new ObjectParameter("PMobile_Areacode", typeof(string));
+    
+            var pMobile_NoParameter = pMobile_No != null ?
+                new ObjectParameter("PMobile_No", pMobile_No) :
+                new ObjectParameter("PMobile_No", typeof(string));
+    
+            var pLandline_CountrycodeParameter = pLandline_Countrycode != null ?
+                new ObjectParameter("PLandline_Countrycode", pLandline_Countrycode) :
+                new ObjectParameter("PLandline_Countrycode", typeof(string));
+    
+            var pLandline_AreacodeParameter = pLandline_Areacode != null ?
+                new ObjectParameter("PLandline_Areacode", pLandline_Areacode) :
+                new ObjectParameter("PLandline_Areacode", typeof(string));
+    
+            var pLandline_NoParameter = pLandline_No != null ?
+                new ObjectParameter("PLandline_No", pLandline_No) :
+                new ObjectParameter("PLandline_No", typeof(string));
+    
+            var pFax_CountrycodeParameter = pFax_Countrycode != null ?
+                new ObjectParameter("PFax_Countrycode", pFax_Countrycode) :
+                new ObjectParameter("PFax_Countrycode", typeof(string));
+    
+            var pFax_AreacodeParameter = pFax_Areacode != null ?
+                new ObjectParameter("PFax_Areacode", pFax_Areacode) :
+                new ObjectParameter("PFax_Areacode", typeof(string));
+    
+            var pFax_NoParameter = pFax_No != null ?
+                new ObjectParameter("PFax_No", pFax_No) :
+                new ObjectParameter("PFax_No", typeof(string));
+    
+            var pNationalityParameter = pNationality != null ?
+                new ObjectParameter("PNationality", pNationality) :
+                new ObjectParameter("PNationality", typeof(string));
+    
+            var pActitvityParameter = pActitvity != null ?
+                new ObjectParameter("PActitvity", pActitvity) :
+                new ObjectParameter("PActitvity", typeof(string));
+    
+            var pCocandindustryuidParameter = pCocandindustryuid != null ?
+                new ObjectParameter("PCocandindustryuid", pCocandindustryuid) :
+                new ObjectParameter("PCocandindustryuid", typeof(string));
+    
+            var pTradelicenseNoParameter = pTradelicenseNo != null ?
+                new ObjectParameter("PTradelicenseNo", pTradelicenseNo) :
+                new ObjectParameter("PTradelicenseNo", typeof(string));
+    
+            var pLicense_issueDateParameter = pLicense_issueDate.HasValue ?
+                new ObjectParameter("PLicense_issueDate", pLicense_issueDate) :
+                new ObjectParameter("PLicense_issueDate", typeof(System.DateTime));
+    
+            var pLicense_ExpiryDateParameter = pLicense_ExpiryDate.HasValue ?
+                new ObjectParameter("PLicense_ExpiryDate", pLicense_ExpiryDate) :
+                new ObjectParameter("PLicense_ExpiryDate", typeof(System.DateTime));
+    
+            var pIssuance_authorityParameter = pIssuance_authority != null ?
+                new ObjectParameter("PIssuance_authority", pIssuance_authority) :
+                new ObjectParameter("PIssuance_authority", typeof(string));
+    
+            var pADWEA_RegidParameter = pADWEA_Regid != null ?
+                new ObjectParameter("PADWEA_Regid", pADWEA_Regid) :
+                new ObjectParameter("PADWEA_Regid", typeof(string));
+    
+            var pTypeParameter = pType != null ?
+                new ObjectParameter("PType", pType) :
+                new ObjectParameter("PType", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            var pEmirate_idParameter = pEmirate_id != null ?
+                new ObjectParameter("PEmirate_id", pEmirate_id) :
+                new ObjectParameter("PEmirate_id", typeof(string));
+    
+            var ptenant_companydtParameter = ptenant_companydt != null ?
+                new ObjectParameter("Ptenant_companydt", ptenant_companydt) :
+                new ObjectParameter("Ptenant_companydt", typeof(string));
+    
+            var ptenant_companydt1Parameter = ptenant_companydt1 != null ?
+                new ObjectParameter("Ptenant_companydt1", ptenant_companydt1) :
+                new ObjectParameter("Ptenant_companydt1", typeof(string));
+    
+            var ptenant_companydocParameter = ptenant_companydoc != null ?
+                new ObjectParameter("Ptenant_companydoc", ptenant_companydoc) :
+                new ObjectParameter("Ptenant_companydoc", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Tenant_Company_All", pFlagParameter, pTenant_IdParameter, pCompanyNameParameter, pMarital_StatusParameter, pTitleParameter, pFirst_NameParameter, pMiddle_NameParameter, pLast_NameParameter, paddressParameter, paddress1Parameter, pEmirateParameter, pCityParameter, pPostboxNoParameter, pEmailParameter, pMobile_CountrycodeParameter, pMobile_AreacodeParameter, pMobile_NoParameter, pLandline_CountrycodeParameter, pLandline_AreacodeParameter, pLandline_NoParameter, pFax_CountrycodeParameter, pFax_AreacodeParameter, pFax_NoParameter, pNationalityParameter, pActitvityParameter, pCocandindustryuidParameter, pTradelicenseNoParameter, pLicense_issueDateParameter, pLicense_ExpiryDateParameter, pIssuance_authorityParameter, pADWEA_RegidParameter, pTypeParameter, pCreateduserParameter, pEmirate_idParameter, ptenant_companydtParameter, ptenant_companydt1Parameter, ptenant_companydocParameter);
+        }
+    
+        public virtual int Usp_Tenant_Individual_All(string pFlag, Nullable<int> pTenant_Id, string pTitle, string pFirst_Name, string pMiddle_Name, string pLast_Name, string pCompany_Educational, string pProfession, string pMarital_Status, string paddress, string paddress1, string pEmirate, string pCity, string pPostboxNo, string pEmail, string pMobile_Countrycode, string pMobile_Areacode, string pMobile_No, string pLandline_Countrycode, string pLandline_Areacode, string pLandline_No, string pFax_Countrycode, string pFax_Areacode, string pFax_No, string pNationality, string pEmiratesid, Nullable<System.DateTime> pEmirate_issuedate, Nullable<System.DateTime> pEmirate_expirydate, string pPassportno, string pPlaceofissuance, Nullable<System.DateTime> pPassport_Issuedate, Nullable<System.DateTime> pPassport_Expirydate, string pVisaType, string pVisano, Nullable<System.DateTime> pVisa_IssueDate, Nullable<System.DateTime> pVisa_ExpiryDate, Nullable<System.DateTime> pDob, string pFamilyno, string pFamilybookcity, string pADWEA_Regid, string pType, string pCreateduser, string ptenantdocdetails)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pTenant_IdParameter = pTenant_Id.HasValue ?
+                new ObjectParameter("PTenant_Id", pTenant_Id) :
+                new ObjectParameter("PTenant_Id", typeof(int));
+    
+            var pTitleParameter = pTitle != null ?
+                new ObjectParameter("PTitle", pTitle) :
+                new ObjectParameter("PTitle", typeof(string));
+    
+            var pFirst_NameParameter = pFirst_Name != null ?
+                new ObjectParameter("PFirst_Name", pFirst_Name) :
+                new ObjectParameter("PFirst_Name", typeof(string));
+    
+            var pMiddle_NameParameter = pMiddle_Name != null ?
+                new ObjectParameter("PMiddle_Name", pMiddle_Name) :
+                new ObjectParameter("PMiddle_Name", typeof(string));
+    
+            var pLast_NameParameter = pLast_Name != null ?
+                new ObjectParameter("PLast_Name", pLast_Name) :
+                new ObjectParameter("PLast_Name", typeof(string));
+    
+            var pCompany_EducationalParameter = pCompany_Educational != null ?
+                new ObjectParameter("PCompany_Educational", pCompany_Educational) :
+                new ObjectParameter("PCompany_Educational", typeof(string));
+    
+            var pProfessionParameter = pProfession != null ?
+                new ObjectParameter("PProfession", pProfession) :
+                new ObjectParameter("PProfession", typeof(string));
+    
+            var pMarital_StatusParameter = pMarital_Status != null ?
+                new ObjectParameter("PMarital_Status", pMarital_Status) :
+                new ObjectParameter("PMarital_Status", typeof(string));
+    
+            var paddressParameter = paddress != null ?
+                new ObjectParameter("Paddress", paddress) :
+                new ObjectParameter("Paddress", typeof(string));
+    
+            var paddress1Parameter = paddress1 != null ?
+                new ObjectParameter("Paddress1", paddress1) :
+                new ObjectParameter("Paddress1", typeof(string));
+    
+            var pEmirateParameter = pEmirate != null ?
+                new ObjectParameter("PEmirate", pEmirate) :
+                new ObjectParameter("PEmirate", typeof(string));
+    
+            var pCityParameter = pCity != null ?
+                new ObjectParameter("PCity", pCity) :
+                new ObjectParameter("PCity", typeof(string));
+    
+            var pPostboxNoParameter = pPostboxNo != null ?
+                new ObjectParameter("PPostboxNo", pPostboxNo) :
+                new ObjectParameter("PPostboxNo", typeof(string));
+    
+            var pEmailParameter = pEmail != null ?
+                new ObjectParameter("PEmail", pEmail) :
+                new ObjectParameter("PEmail", typeof(string));
+    
+            var pMobile_CountrycodeParameter = pMobile_Countrycode != null ?
+                new ObjectParameter("PMobile_Countrycode", pMobile_Countrycode) :
+                new ObjectParameter("PMobile_Countrycode", typeof(string));
+    
+            var pMobile_AreacodeParameter = pMobile_Areacode != null ?
+                new ObjectParameter("PMobile_Areacode", pMobile_Areacode) :
+                new ObjectParameter("PMobile_Areacode", typeof(string));
+    
+            var pMobile_NoParameter = pMobile_No != null ?
+                new ObjectParameter("PMobile_No", pMobile_No) :
+                new ObjectParameter("PMobile_No", typeof(string));
+    
+            var pLandline_CountrycodeParameter = pLandline_Countrycode != null ?
+                new ObjectParameter("PLandline_Countrycode", pLandline_Countrycode) :
+                new ObjectParameter("PLandline_Countrycode", typeof(string));
+    
+            var pLandline_AreacodeParameter = pLandline_Areacode != null ?
+                new ObjectParameter("PLandline_Areacode", pLandline_Areacode) :
+                new ObjectParameter("PLandline_Areacode", typeof(string));
+    
+            var pLandline_NoParameter = pLandline_No != null ?
+                new ObjectParameter("PLandline_No", pLandline_No) :
+                new ObjectParameter("PLandline_No", typeof(string));
+    
+            var pFax_CountrycodeParameter = pFax_Countrycode != null ?
+                new ObjectParameter("PFax_Countrycode", pFax_Countrycode) :
+                new ObjectParameter("PFax_Countrycode", typeof(string));
+    
+            var pFax_AreacodeParameter = pFax_Areacode != null ?
+                new ObjectParameter("PFax_Areacode", pFax_Areacode) :
+                new ObjectParameter("PFax_Areacode", typeof(string));
+    
+            var pFax_NoParameter = pFax_No != null ?
+                new ObjectParameter("PFax_No", pFax_No) :
+                new ObjectParameter("PFax_No", typeof(string));
+    
+            var pNationalityParameter = pNationality != null ?
+                new ObjectParameter("PNationality", pNationality) :
+                new ObjectParameter("PNationality", typeof(string));
+    
+            var pEmiratesidParameter = pEmiratesid != null ?
+                new ObjectParameter("PEmiratesid", pEmiratesid) :
+                new ObjectParameter("PEmiratesid", typeof(string));
+    
+            var pEmirate_issuedateParameter = pEmirate_issuedate.HasValue ?
+                new ObjectParameter("PEmirate_issuedate", pEmirate_issuedate) :
+                new ObjectParameter("PEmirate_issuedate", typeof(System.DateTime));
+    
+            var pEmirate_expirydateParameter = pEmirate_expirydate.HasValue ?
+                new ObjectParameter("PEmirate_expirydate", pEmirate_expirydate) :
+                new ObjectParameter("PEmirate_expirydate", typeof(System.DateTime));
+    
+            var pPassportnoParameter = pPassportno != null ?
+                new ObjectParameter("PPassportno", pPassportno) :
+                new ObjectParameter("PPassportno", typeof(string));
+    
+            var pPlaceofissuanceParameter = pPlaceofissuance != null ?
+                new ObjectParameter("PPlaceofissuance", pPlaceofissuance) :
+                new ObjectParameter("PPlaceofissuance", typeof(string));
+    
+            var pPassport_IssuedateParameter = pPassport_Issuedate.HasValue ?
+                new ObjectParameter("PPassport_Issuedate", pPassport_Issuedate) :
+                new ObjectParameter("PPassport_Issuedate", typeof(System.DateTime));
+    
+            var pPassport_ExpirydateParameter = pPassport_Expirydate.HasValue ?
+                new ObjectParameter("PPassport_Expirydate", pPassport_Expirydate) :
+                new ObjectParameter("PPassport_Expirydate", typeof(System.DateTime));
+    
+            var pVisaTypeParameter = pVisaType != null ?
+                new ObjectParameter("PVisaType", pVisaType) :
+                new ObjectParameter("PVisaType", typeof(string));
+    
+            var pVisanoParameter = pVisano != null ?
+                new ObjectParameter("PVisano", pVisano) :
+                new ObjectParameter("PVisano", typeof(string));
+    
+            var pVisa_IssueDateParameter = pVisa_IssueDate.HasValue ?
+                new ObjectParameter("PVisa_IssueDate", pVisa_IssueDate) :
+                new ObjectParameter("PVisa_IssueDate", typeof(System.DateTime));
+    
+            var pVisa_ExpiryDateParameter = pVisa_ExpiryDate.HasValue ?
+                new ObjectParameter("PVisa_ExpiryDate", pVisa_ExpiryDate) :
+                new ObjectParameter("PVisa_ExpiryDate", typeof(System.DateTime));
+    
+            var pDobParameter = pDob.HasValue ?
+                new ObjectParameter("PDob", pDob) :
+                new ObjectParameter("PDob", typeof(System.DateTime));
+    
+            var pFamilynoParameter = pFamilyno != null ?
+                new ObjectParameter("PFamilyno", pFamilyno) :
+                new ObjectParameter("PFamilyno", typeof(string));
+    
+            var pFamilybookcityParameter = pFamilybookcity != null ?
+                new ObjectParameter("PFamilybookcity", pFamilybookcity) :
+                new ObjectParameter("PFamilybookcity", typeof(string));
+    
+            var pADWEA_RegidParameter = pADWEA_Regid != null ?
+                new ObjectParameter("PADWEA_Regid", pADWEA_Regid) :
+                new ObjectParameter("PADWEA_Regid", typeof(string));
+    
+            var pTypeParameter = pType != null ?
+                new ObjectParameter("PType", pType) :
+                new ObjectParameter("PType", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            var ptenantdocdetailsParameter = ptenantdocdetails != null ?
+                new ObjectParameter("Ptenantdocdetails", ptenantdocdetails) :
+                new ObjectParameter("Ptenantdocdetails", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Tenant_Individual_All", pFlagParameter, pTenant_IdParameter, pTitleParameter, pFirst_NameParameter, pMiddle_NameParameter, pLast_NameParameter, pCompany_EducationalParameter, pProfessionParameter, pMarital_StatusParameter, paddressParameter, paddress1Parameter, pEmirateParameter, pCityParameter, pPostboxNoParameter, pEmailParameter, pMobile_CountrycodeParameter, pMobile_AreacodeParameter, pMobile_NoParameter, pLandline_CountrycodeParameter, pLandline_AreacodeParameter, pLandline_NoParameter, pFax_CountrycodeParameter, pFax_AreacodeParameter, pFax_NoParameter, pNationalityParameter, pEmiratesidParameter, pEmirate_issuedateParameter, pEmirate_expirydateParameter, pPassportnoParameter, pPlaceofissuanceParameter, pPassport_IssuedateParameter, pPassport_ExpirydateParameter, pVisaTypeParameter, pVisanoParameter, pVisa_IssueDateParameter, pVisa_ExpiryDateParameter, pDobParameter, pFamilynoParameter, pFamilybookcityParameter, pADWEA_RegidParameter, pTypeParameter, pCreateduserParameter, ptenantdocdetailsParameter);
+        }
+    
+        public virtual int Usp_Userrights_All(string pFlag, Nullable<int> pid, string pName, string pUserid, string pPwd, string pCnfpwd, string pCategory, string pEmail, string pPhoneno, Nullable<int> pAddConfig, Nullable<int> pEditConfig, Nullable<int> pDeleteConfig, string pMenuConfig, Nullable<int> pActive, string pCreateduser, string pRegion_Name, string pCountry)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pidParameter = pid.HasValue ?
+                new ObjectParameter("Pid", pid) :
+                new ObjectParameter("Pid", typeof(int));
+    
+            var pNameParameter = pName != null ?
+                new ObjectParameter("PName", pName) :
+                new ObjectParameter("PName", typeof(string));
+    
+            var pUseridParameter = pUserid != null ?
+                new ObjectParameter("PUserid", pUserid) :
+                new ObjectParameter("PUserid", typeof(string));
+    
+            var pPwdParameter = pPwd != null ?
+                new ObjectParameter("PPwd", pPwd) :
+                new ObjectParameter("PPwd", typeof(string));
+    
+            var pCnfpwdParameter = pCnfpwd != null ?
+                new ObjectParameter("PCnfpwd", pCnfpwd) :
+                new ObjectParameter("PCnfpwd", typeof(string));
+    
+            var pCategoryParameter = pCategory != null ?
+                new ObjectParameter("PCategory", pCategory) :
+                new ObjectParameter("PCategory", typeof(string));
+    
+            var pEmailParameter = pEmail != null ?
+                new ObjectParameter("PEmail", pEmail) :
+                new ObjectParameter("PEmail", typeof(string));
+    
+            var pPhonenoParameter = pPhoneno != null ?
+                new ObjectParameter("PPhoneno", pPhoneno) :
+                new ObjectParameter("PPhoneno", typeof(string));
+    
+            var pAddConfigParameter = pAddConfig.HasValue ?
+                new ObjectParameter("PAddConfig", pAddConfig) :
+                new ObjectParameter("PAddConfig", typeof(int));
+    
+            var pEditConfigParameter = pEditConfig.HasValue ?
+                new ObjectParameter("PEditConfig", pEditConfig) :
+                new ObjectParameter("PEditConfig", typeof(int));
+    
+            var pDeleteConfigParameter = pDeleteConfig.HasValue ?
+                new ObjectParameter("PDeleteConfig", pDeleteConfig) :
+                new ObjectParameter("PDeleteConfig", typeof(int));
+    
+            var pMenuConfigParameter = pMenuConfig != null ?
+                new ObjectParameter("PMenuConfig", pMenuConfig) :
+                new ObjectParameter("PMenuConfig", typeof(string));
+    
+            var pActiveParameter = pActive.HasValue ?
+                new ObjectParameter("PActive", pActive) :
+                new ObjectParameter("PActive", typeof(int));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            var pRegion_NameParameter = pRegion_Name != null ?
+                new ObjectParameter("PRegion_Name", pRegion_Name) :
+                new ObjectParameter("PRegion_Name", typeof(string));
+    
+            var pCountryParameter = pCountry != null ?
+                new ObjectParameter("PCountry", pCountry) :
+                new ObjectParameter("PCountry", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Userrights_All", pFlagParameter, pidParameter, pNameParameter, pUseridParameter, pPwdParameter, pCnfpwdParameter, pCategoryParameter, pEmailParameter, pPhonenoParameter, pAddConfigParameter, pEditConfigParameter, pDeleteConfigParameter, pMenuConfigParameter, pActiveParameter, pCreateduserParameter, pRegion_NameParameter, pCountryParameter);
+        }
+    
+        public virtual int Usp_Utilities_All(string pFlag, Nullable<int> pId, string pUtility_id, string pUtility_Name, string pCreateduser)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pIdParameter = pId.HasValue ?
+                new ObjectParameter("PId", pId) :
+                new ObjectParameter("PId", typeof(int));
+    
+            var pUtility_idParameter = pUtility_id != null ?
+                new ObjectParameter("PUtility_id", pUtility_id) :
+                new ObjectParameter("PUtility_id", typeof(string));
+    
+            var pUtility_NameParameter = pUtility_Name != null ?
+                new ObjectParameter("PUtility_Name", pUtility_Name) :
+                new ObjectParameter("PUtility_Name", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Utilities_All", pFlagParameter, pIdParameter, pUtility_idParameter, pUtility_NameParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_utilitybill_notgenerated__Report(string pflag, string pmonth, Nullable<int> pyear, string putility, string pcountry, string pregion, string pCreateduser)
+        {
+            var pflagParameter = pflag != null ?
+                new ObjectParameter("Pflag", pflag) :
+                new ObjectParameter("Pflag", typeof(string));
+    
+            var pmonthParameter = pmonth != null ?
+                new ObjectParameter("Pmonth", pmonth) :
+                new ObjectParameter("Pmonth", typeof(string));
+    
+            var pyearParameter = pyear.HasValue ?
+                new ObjectParameter("Pyear", pyear) :
+                new ObjectParameter("Pyear", typeof(int));
+    
+            var putilityParameter = putility != null ?
+                new ObjectParameter("Putility", putility) :
+                new ObjectParameter("Putility", typeof(string));
+    
+            var pcountryParameter = pcountry != null ?
+                new ObjectParameter("Pcountry", pcountry) :
+                new ObjectParameter("Pcountry", typeof(string));
+    
+            var pregionParameter = pregion != null ?
+                new ObjectParameter("Pregion", pregion) :
+                new ObjectParameter("Pregion", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_utilitybill_notgenerated__Report", pflagParameter, pmonthParameter, pyearParameter, putilityParameter, pcountryParameter, pregionParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_Vacant_Report_all(string pgroup, Nullable<System.DateTime> pfromdate, Nullable<System.DateTime> ptodate, string pfilter_field, string pfilter_value, string pagin_Filter, Nullable<int> pagin_Filter_From, Nullable<int> pagin_Filter_To, string prentalamt_Filter, Nullable<int> prentalamt_Filter_From, Nullable<int> prentalamt_Filter_To, string pCreateduser)
+        {
+            var pgroupParameter = pgroup != null ?
+                new ObjectParameter("Pgroup", pgroup) :
+                new ObjectParameter("Pgroup", typeof(string));
+    
+            var pfromdateParameter = pfromdate.HasValue ?
+                new ObjectParameter("Pfromdate", pfromdate) :
+                new ObjectParameter("Pfromdate", typeof(System.DateTime));
+    
+            var ptodateParameter = ptodate.HasValue ?
+                new ObjectParameter("Ptodate", ptodate) :
+                new ObjectParameter("Ptodate", typeof(System.DateTime));
+    
+            var pfilter_fieldParameter = pfilter_field != null ?
+                new ObjectParameter("Pfilter_field", pfilter_field) :
+                new ObjectParameter("Pfilter_field", typeof(string));
+    
+            var pfilter_valueParameter = pfilter_value != null ?
+                new ObjectParameter("Pfilter_value", pfilter_value) :
+                new ObjectParameter("Pfilter_value", typeof(string));
+    
+            var pagin_FilterParameter = pagin_Filter != null ?
+                new ObjectParameter("Pagin_Filter", pagin_Filter) :
+                new ObjectParameter("Pagin_Filter", typeof(string));
+    
+            var pagin_Filter_FromParameter = pagin_Filter_From.HasValue ?
+                new ObjectParameter("Pagin_Filter_From", pagin_Filter_From) :
+                new ObjectParameter("Pagin_Filter_From", typeof(int));
+    
+            var pagin_Filter_ToParameter = pagin_Filter_To.HasValue ?
+                new ObjectParameter("Pagin_Filter_To", pagin_Filter_To) :
+                new ObjectParameter("Pagin_Filter_To", typeof(int));
+    
+            var prentalamt_FilterParameter = prentalamt_Filter != null ?
+                new ObjectParameter("Prentalamt_Filter", prentalamt_Filter) :
+                new ObjectParameter("Prentalamt_Filter", typeof(string));
+    
+            var prentalamt_Filter_FromParameter = prentalamt_Filter_From.HasValue ?
+                new ObjectParameter("Prentalamt_Filter_From", prentalamt_Filter_From) :
+                new ObjectParameter("Prentalamt_Filter_From", typeof(int));
+    
+            var prentalamt_Filter_ToParameter = prentalamt_Filter_To.HasValue ?
+                new ObjectParameter("Prentalamt_Filter_To", prentalamt_Filter_To) :
+                new ObjectParameter("Prentalamt_Filter_To", typeof(int));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Vacant_Report_all", pgroupParameter, pfromdateParameter, ptodateParameter, pfilter_fieldParameter, pfilter_valueParameter, pagin_FilterParameter, pagin_Filter_FromParameter, pagin_Filter_ToParameter, prentalamt_FilterParameter, prentalamt_Filter_FromParameter, prentalamt_Filter_ToParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_Vacant_Report_new(string pgroup, Nullable<System.DateTime> pfromdate, Nullable<System.DateTime> ptodate, string pfilter_field, string pfilter_value, string pagin_Filter, Nullable<int> pagin_Filter_From, Nullable<int> pagin_Filter_To, string prentalamt_Filter, string pCreateduser)
+        {
+            var pgroupParameter = pgroup != null ?
+                new ObjectParameter("Pgroup", pgroup) :
+                new ObjectParameter("Pgroup", typeof(string));
+    
+            var pfromdateParameter = pfromdate.HasValue ?
+                new ObjectParameter("Pfromdate", pfromdate) :
+                new ObjectParameter("Pfromdate", typeof(System.DateTime));
+    
+            var ptodateParameter = ptodate.HasValue ?
+                new ObjectParameter("Ptodate", ptodate) :
+                new ObjectParameter("Ptodate", typeof(System.DateTime));
+    
+            var pfilter_fieldParameter = pfilter_field != null ?
+                new ObjectParameter("Pfilter_field", pfilter_field) :
+                new ObjectParameter("Pfilter_field", typeof(string));
+    
+            var pfilter_valueParameter = pfilter_value != null ?
+                new ObjectParameter("Pfilter_value", pfilter_value) :
+                new ObjectParameter("Pfilter_value", typeof(string));
+    
+            var pagin_FilterParameter = pagin_Filter != null ?
+                new ObjectParameter("Pagin_Filter", pagin_Filter) :
+                new ObjectParameter("Pagin_Filter", typeof(string));
+    
+            var pagin_Filter_FromParameter = pagin_Filter_From.HasValue ?
+                new ObjectParameter("Pagin_Filter_From", pagin_Filter_From) :
+                new ObjectParameter("Pagin_Filter_From", typeof(int));
+    
+            var pagin_Filter_ToParameter = pagin_Filter_To.HasValue ?
+                new ObjectParameter("Pagin_Filter_To", pagin_Filter_To) :
+                new ObjectParameter("Pagin_Filter_To", typeof(int));
+    
+            var prentalamt_FilterParameter = prentalamt_Filter != null ?
+                new ObjectParameter("Prentalamt_Filter", prentalamt_Filter) :
+                new ObjectParameter("Prentalamt_Filter", typeof(string));
+    
+            var pCreateduserParameter = pCreateduser != null ?
+                new ObjectParameter("PCreateduser", pCreateduser) :
+                new ObjectParameter("PCreateduser", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_Vacant_Report_new", pgroupParameter, pfromdateParameter, ptodateParameter, pfilter_fieldParameter, pfilter_valueParameter, pagin_FilterParameter, pagin_Filter_FromParameter, pagin_Filter_ToParameter, prentalamt_FilterParameter, pCreateduserParameter);
+        }
+    
+        public virtual int Usp_approval_Screen_All1(string pFlag, string pAgreement_no, Nullable<int> pApproval_flag, string pRegion_Name)
+        {
+            var pFlagParameter = pFlag != null ?
+                new ObjectParameter("PFlag", pFlag) :
+                new ObjectParameter("PFlag", typeof(string));
+    
+            var pAgreement_noParameter = pAgreement_no != null ?
+                new ObjectParameter("PAgreement_no", pAgreement_no) :
+                new ObjectParameter("PAgreement_no", typeof(string));
+    
+            var pApproval_flagParameter = pApproval_flag.HasValue ?
+                new ObjectParameter("PApproval_flag", pApproval_flag) :
+                new ObjectParameter("PApproval_flag", typeof(int));
+    
+            var pRegion_NameParameter = pRegion_Name != null ?
+                new ObjectParameter("PRegion_Name", pRegion_Name) :
+                new ObjectParameter("PRegion_Name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Usp_approval_Screen_All", pFlagParameter, pAgreement_noParameter, pApproval_flagParameter, pRegion_NameParameter);
         }
     }
 }

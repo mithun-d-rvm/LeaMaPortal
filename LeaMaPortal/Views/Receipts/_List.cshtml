@@ -32,24 +32,28 @@
             <div class="divTableBody divFontBodyTable">
                 <div class="divTableHeading">
                     <div class="divTableCell">Receipt number</div>
+                    <div class="divTableCell">Tenant Name</div>
                     <div class="divTableCell">Property Name</div>
                     <div class="divTableCell">Unit Name</div>
-                    <div class="divTableCell">Tenant Name</div>
                     <div class="divTableCell">Agreement Number</div>
                     <div class="divTableCell">Receipt Type</div>
+                    <div class="divTableCell">Cheque No</div>
+                    <div class="divTableCell">PDC Status</div>
                     <div class="divTableCell">Total Amount</div>
-                    <div class="divTableCell">Action</div>
+                    <div class="divTableCell" style="width:7%">Action</div>
 
                 </div>
                 @foreach (var item in Model)
                 {
                     <div class="divTableRow">
                         <div class="divTableCell">@item.ReceiptNo</div>
+                        <div class="divTableCell">@item.Tenant_Name</div>
                         <div class="divTableCell">@item.Property_Name</div>
                         <div class="divTableCell">@item.unit_Name</div>
-                        <div class="divTableCell">@item.Tenant_Name</div>
                         <div class="divTableCell">@item.agreement_no</div>
                         <div class="divTableCell">@item.RecpType</div>
+                        <div class="divTableCell">@item.DDChequeNo</div>
+                        <div class="divTableCell">@item.PDCstatus</div>
                         <div class="divTableCell">@item.TotalAmount</div>
                         <div class="divTableCell">
                             @if (@ViewBag.IsEditable == 1)
@@ -64,6 +68,15 @@
                                     | @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash receipt-delete", @style = "color:red", @title = "Delete", @data_id = @item.Id })
                                 </span>
                             }
+
+                            <span>
+
+                                | @Html.ActionLink(" ", "Print", null, new { @class = "glyphicon glyphicon-print receipt-print", title = "Print", @data_toggle = "modal", @data_target = "#receiptModal", @data_receiptno = @item.ReceiptNo })
+
+                                @*@Html.ActionLink(" ", "Print", null, new { @class = "glyphicon glyphicon-print agreement-print", title = "Print", @data_toggle = "modal", @data_target = "#contractModal", @data_agreementno = @item.Agreement_No })*@
+                            </span>
+
+
 </div>
                     </div>
                 }
@@ -166,6 +179,7 @@
 
 <script>
     $(".receipt-edit").click(function (e) {
+        $("#agreement_no").prop('disabled', true);
         e.preventDefault();
         $("#master-loader-edit").removeClass("hide");
         $("#ContainerAddOrUpdate").hide();
@@ -229,5 +243,55 @@
                 });
         }
     });
+
+
+    //Print																				
+
+    $(".receipt-print").click(function (e) {
+        //alert(1);																				
+        // $("#img-loader").removeClass("hide");																				
+        e.preventDefault();
+        var id = $(this).data("receiptno");
+        // alert(id)																				
+        $.ajax(
+            {
+                url: "../Receipts/Print",
+
+                type: "Get",
+                data: { ReceiptNo: id },
+
+
+                success: function (result) {
+
+                    //var data=jQuery.parseJSON(result);																				
+                    if (result.Errors == undefined || result.Errors == "") {
+                        $("#PrintContainer").empty();
+                        $("#PrintContainer").html(result);
+                        $("#receiptModal").modal('show');
+
+                    }
+                    else {
+                        //alert(data.Errors);																				
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(result.Errors);
+                        $('#masterResultModal').modal('show');
+                    }
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");																				
+                    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                    $(".result-title").text("Failure");
+                    $(".result-modal-body span").text("Could not able to process your requests");
+                    $('#masterResultModal').modal('show');
+                },
+                complete: function () {
+                    // $("body").scrollTop(0);																				
+                }
+            });
+    });
+
 
 </script>

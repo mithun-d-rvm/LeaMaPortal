@@ -91,5 +91,8 @@ namespace LeaMaPortal.Models
         public float totalamount { get; set; }
         public float paidamount { get; set; }
         public float advancepending { get; set; }
+        public float total_rental_amount { get; set; }
+        public float Securityamount { get; set; }
+
     }
 }

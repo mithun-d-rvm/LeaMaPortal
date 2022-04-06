@@ -13,7 +13,7 @@
     <div class="blank dashboard-blank">
 
         <div class="portlet-grid-page">
-            <h4 class="p-b-25">OVERALL PERFORMANCE FOR CURRENT MONTH</h4>
+            <h4 class="p-b-25">OVERALL PERFORMANCE</h4>
 
 
             @*<div class="portlet-grid panel-primary earning-bg" id="earning-div">
@@ -86,7 +86,7 @@
                                 <span id="EarningHistory"> 0 </span>
                                 <span class="per-month">AED</span>
                             </div>
-                            <div>
+                            <div style="display:none">
                                 @*<img src="~/Images/next_32.png" class="image-rotate-270 earning-profit-loss-arrow" />*@
                                 <span class="earning-month" id="EarningHistoryMonth">
                                     JAN <span id="EarningHistoryYear">2017</span>
@@ -161,7 +161,11 @@
                         <div class="w-md-90">
                             <div class="col-md-6 total-loss-resid-div">
                                 <div class="m-t-16">
-                                    <span class="total-loss-res-text" id="VacantLossRes-count">RES</span> 0
+                                    @*<span class="total-loss-res-text" id="VacantLossRes-count">RES</span> 0*@
+                                    <span class="vacant-residential-text">Res</span>
+
+                                    <span  id="VacantLossRes-count">0</span> 
+
                                 </div>
                                 <div class="total-loss-res-amt">
                                     <span id="VacantLossRes"> 0</span>
@@ -170,7 +174,9 @@
                             </div>
                             <div class="col-md-6 total-loss-comm-div">
                                 <div class="m-t-16">
-                                    <span class="total-loss-comm-text" id="VacantLossCom-count">COM</span> 0
+                                    @*<span class="total-loss-comm-text" id="VacantLossCom-count">COM</span> 0*@
+                                    <span class="vacant-commercial-text">Comm</span>
+                                    <span  id="VacantLossCom-count">0</span> 
                                 </div>
                                 <div class="total-loss-res-amt">
                                     <span id="VacantLossCom"> 0</span>
@@ -254,19 +260,20 @@
                         IMPORTANT NOTIFICATIONS
                     </div>
                     <div class="col-md-8 font-15">
-                        <button data-toggle="modal" data-target="#myModal" class="notif-sub-text">
+                        <button id="PDC" data-toggle="modal" data-target="#myModal" class="notif-sub-text">
                             PDC Notification
                             <span class="notif-total" id="PDCNotification">0</span>
                         </button>
 
-                        <button data-toggle="modal" data-target="#myModal" class="notif-sub-text">
+                        <button id="RENE" data-toggle="modal" data-target="#myModal" class="notif-sub-text">
                             Renewals
                             <span class="notif-total" id="RenewalsNotification">0</span>
                         </button>
 
-                        <button data-toggle="modal" data-target="#myModal" class="notif-sub-text">
-                            Contracts Expiry
-                            <span class="notif-total" id="ContractExpiryNotification">0</span>
+                        <button id="LE" data-toggle="modal" data-target="#myModal" class="notif-sub-text">
+                            License Expiry
+                            <span class="notif-total" id="LicenseExpiryNotification">0</span>
+                            @*<span class="notif-total" id="ContractExpiryNotification">0</span>*@
                         </button>
                     </div>
                 </div>
@@ -276,6 +283,82 @@
 </div>
 
 <script>
+
+    $("#LE").click(function () {        
+        $("#LicenseExpiry").addClass("notification-filter active");
+
+        $("#Al").removeClass("notification-filter active");
+        $("#Al").addClass("notification-filter notify-menu");
+
+        $("#PDCDeposits").removeClass("notification-filter active");
+        $("#PDCDeposits").addClass("notification-filter notify-menu");
+
+        $("#Renewal").removeClass("notification-filter active");
+        $("#Renewal").addClass("notification-filter notify-menu");
+
+        $("#RentalDue").removeClass("notification-filter active");
+        $("#RentalDue").addClass("notification-filter notify-menu");
+
+        $("#UtilityDues").removeClass("notification-filter active");
+        $("#UtilityDues").addClass("notification-filter notify-menu");
+
+        $("#TCAapproval").removeClass("notification-filter active");
+        $("#TCAapproval").addClass("notification-filter notify-menu");
+
+        $(".notification-filter-content").empty();
+        getData("License Expiry");
+    })
+
+
+    $("#RENE").click(function () {
+        $("#Renewal").addClass("notification-filter active");
+
+        $("#Al").removeClass("notification-filter active");
+        $("#Al").addClass("notification-filter notify-menu");
+
+        $("#PDCDeposits").removeClass("notification-filter active");
+        $("#PDCDeposits").addClass("notification-filter notify-menu");
+
+        $("#LicenseExpiry").removeClass("notification-filter active");
+        $("#LicenseExpiry").addClass("notification-filter notify-menu");
+
+        $("#RentalDue").removeClass("notification-filter active");
+        $("#RentalDue").addClass("notification-filter notify-menu");
+
+        $("#UtilityDues").removeClass("notification-filter active");
+        $("#UtilityDues").addClass("notification-filter notify-menu");
+
+        $("#TCAapproval").removeClass("notification-filter active");
+        $("#TCAapproval").addClass("notification-filter notify-menu");
+
+        $(".notification-filter-content").empty();
+        getData("Renewals");
+    })
+
+    $("#PDC").click(function () {
+        $("#PDCDeposits").addClass("notification-filter active");
+
+        $("#Al").removeClass("notification-filter active");
+        $("#Al").addClass("notification-filter notify-menu");
+
+        $("#Renewal").removeClass("notification-filter active");
+        $("#Renewal").addClass("notification-filter notify-menu");
+
+        $("#LicenseExpiry").removeClass("notification-filter active");
+        $("#LicenseExpiry").addClass("notification-filter notify-menu");
+
+        $("#RentalDue").removeClass("notification-filter active");
+        $("#RentalDue").addClass("notification-filter notify-menu");
+
+        $("#UtilityDues").removeClass("notification-filter active");
+        $("#UtilityDues").addClass("notification-filter notify-menu");
+
+        $("#TCAapproval").removeClass("notification-filter active");
+        $("#TCAapproval").addClass("notification-filter notify-menu");
+
+        $(".notification-filter-content").empty();
+        getData("PDC Deposits");
+    })
 
     $(document).ready(function () {
         $("#earning-table").hide();
@@ -362,7 +445,7 @@
             processData: false,
             success: function (response) {
                 GetUtilityDues("Utility Due");
-                GetRentDues("Renatl due");
+                GetRentDues("Rental due");
                 GetTotalExpense("Expenses");
                 GetVacantLoss("Vacancy Loss");
                 GetVacantCount("Vacancy count");
@@ -483,7 +566,7 @@
                 $.each(response, function (index, el) {
                     $("#VacantCount").text(el.Total_Value);
                     $("#VacantCountRes").text(el.Residential);
-                    $("#VacantcountCom").text(el.Commercial);
+                    $("#VacantCountCom").text(el.Commercial);
                     $("#VacantLossRes-count").text(el.Residential);
                     $("#VacantLossCom-count").text(el.Commercial);
                 });
@@ -568,7 +651,8 @@
             contentType: "application/json",
             processData: false,
             success: function (response) {
-                $("#ContractExpiryNotification").text(response);
+                $("#LicenseExpiryNotification").text(response);
+                //$("#ContractExpiryNotification").text(response);
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");

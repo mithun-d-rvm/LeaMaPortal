@@ -14,7 +14,7 @@ namespace LeaMaPortal.DBContext
     
     public partial class pdc_report
     {
-        public int id { get; set; }
+        public Nullable<int> id { get; set; }
         public int Agreement_No { get; set; }
         public string Property_id { get; set; }
         public string Property_name { get; set; }

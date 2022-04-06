@@ -50,6 +50,84 @@ namespace LeaMaPortal.Models
         [DisplayName("Created User")]
         public string CreatedUser { get; set; }
     }
+
+    public class PropertyStatusReportModel
+    {
+        public int id { get; set; }
+        public string Property_Flag { get; set; }
+        public string Property_ID_Tawtheeq { get; set; }
+        public int Property_ID { get; set; }
+        public string Property_Name { get; set; }
+        public string Compound { get; set; }
+        public string Zone { get; set; }
+        public string sector { get; set; }
+        public string plotno { get; set; }
+        public string ownedbyregistrant { get; set; }
+        public string Property_Usage { get; set; }
+        public string Property_Type { get; set; }
+        public string Commercial_villa { get; set; }
+        public string Street_Name { get; set; }
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public string Address3 { get; set; }        
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Externalrefno { get; set; }
+        public string Noofoffloors { get; set; }
+        public string Noofunits { get; set; }
+        public string Builtarea { get; set; }
+        public string Plotarea { get; set; }
+        public string Leasablearea { get; set; }
+        public string commonarea { get; set; }
+        public string completion_Date { get; set; }
+        public string AEDvalue { get; set; }
+        public string Purchased_date { get; set; }
+        public string Valued_Date { get; set; }
+        public string Status { get; set; }
+        public string Vacant_Start_Date { get; set; }
+        public string Caretaker_Name { get; set; }
+        public int Cartaker_ID { get; set; }
+        public string Rental_Rate_Month { get; set; }
+        public string Comments { get; set; }
+        public string Ref_unit_Property_id_Tawtheeq { get; set; }
+        public string Ref_Unit_Property_ID { get; set; }
+        public string Ref_Unit_Property_Name { get; set; }
+        public string Unit_ID_Tawtheeq { get; set; }
+        public string Unit_Property_Name { get; set; }
+        public string Externalrefno_unit { get; set; }
+        public string AEDvalue_unit { get; set; }
+        public string Purchased_date_unit { get; set; }
+        public string Valued_Date_unit { get; set; }
+        public string Status_unit { get; set; }
+        public string Vacant_Start_Date_Unit { get; set; }
+        public string Rental_Rate_Month_unit { get; set; }
+        public string Floorno { get; set; }
+        public string Floorlevel { get; set; }
+        public string Property_Usage_unit { get; set; }
+        public string Property_Type_unit { get; set; }
+        public string Total_Area { get; set; }
+        public string Unit_Common_Area { get; set; }
+        public string Common_Area { get; set; }
+        public string Parkingno { get; set; }
+        public string Unitcomments { get; set; }
+        public string Company_occupied_Flag { get; set; }
+        public string Accyear { get; set; }
+        public string Createddatetime { get; set; }
+        public string Createduser { get; set; }
+        public string Delmark { get; set; }
+        public string Agreement_No { get; set; }
+        public string Agreement_Date { get; set; }
+        public string Ag_Tenant_id { get; set; }
+        public string Ag_Tenant_Name { get; set; }
+        public string Vacantstartdate { get; set; }
+        public string Agreement_Start_Date { get; set; }
+        public string Agreement_End_Date { get; set; }
+        public string Total_Rental_amount { get; set; }
+        public string user { get; set; }
+
+    }
     public class VacantRegionReportModel
     {
         public string Region_Name { get; set; }
@@ -354,4 +432,39 @@ namespace LeaMaPortal.Models
         public string pdcstatus { get; set; }
         public string user { get; set; }
     }
+
+    public class TallyReportModel
+    {
+        [DisplayName("ReportName:")]
+        public string ReportName { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayName("From Date:")]
+        public DateTime? FromDate { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayName("To Date:")]
+        public DateTime? ToDate { get; set; }
+    }
+
+    public class vacancy_report
+    {
+    public int id { get; set; }
+    public string Property_Flag { get; set; }
+    public string Property_id { get; set; }
+    public string Property_Name { get; set; }
+    public string Unit_id { get; set; }
+    public string Unitname { get; set; }
+    public string Region_Name { get; set; }
+    public string Country { get; set; }
+    public Nullable<int> Caretaker_id { get; set; }
+    public string Caretaker_Name { get; set; }
+    public Nullable<double> Rental_Rate_Month { get; set; }
+    public Nullable<System.DateTime> Vacant_Start_Date { get; set; }
+    public Nullable<int> Aging_Days { get; set; }
+    public Nullable<double> Loss_Amt { get; set; }
+    public string user { get; set; }
+   }
 }

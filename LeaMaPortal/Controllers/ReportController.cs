@@ -13,6 +13,10 @@ namespace LeaMaPortal.Controllers
         {
             try
             {
+                if (Session["Region"] == null)
+                {
+                    return RedirectToAction("Login", "Authentication");
+                }
                 ViewBag.ReportSelected = selected == 0 ? Common.DefaultReport : selected;
                 ViewBag.Reports = new SelectList(Common.ReportList, "Id", "ReportName");
                 return View();
@@ -63,6 +67,11 @@ namespace LeaMaPortal.Controllers
         public ActionResult GetVacancyReport()
         {
             return PartialView("../Report/VacancyReport/_VacancyReport");
+        }
+
+        public ActionResult GetPropertyStatusReport()
+        {
+            return PartialView("../Report/PropertyStatusReport/_PropertyStatusReport");
         }
 
         // GET: Report/Details/5
@@ -136,5 +145,17 @@ namespace LeaMaPortal.Controllers
                 return View();
             }
         }
+
+        public ActionResult GetTallyReport()
+        {
+            return PartialView("../Report/TallyReport/_TallyReport");
+        }
+
+        public ActionResult GetUtilityTrendRAGReport()
+        {
+
+            return PartialView("../Report/UtilityTrendRAGReport/_UtilityTrendRagReport");
+        }
+
     }
 }

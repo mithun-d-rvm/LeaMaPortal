@@ -20,6 +20,8 @@ namespace LeaMaPortal.DBContext
         public string Facility_Name { get; set; }
         public Nullable<int> Numbers_available { get; set; }
         public string Delmark { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     
         public virtual tbl_agreement_closure tbl_agreement_closure { get; set; }
     }

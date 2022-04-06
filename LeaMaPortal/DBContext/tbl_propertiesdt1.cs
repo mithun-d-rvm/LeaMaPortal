@@ -22,6 +22,8 @@ namespace LeaMaPortal.DBContext
         public string Utility_Name { get; set; }
         public Nullable<int> Accyear { get; set; }
         public string Delmark { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     
         public virtual tbl_propertiesmaster tbl_propertiesmaster { get; set; }
         public virtual tbl_utilitiesmaster tbl_utilitiesmaster { get; set; }

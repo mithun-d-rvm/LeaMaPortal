@@ -80,8 +80,8 @@
                     @Html.LabelFor(model => model.Pincode, htmlAttributes: new { @class = "leama-field-name" })
                 </div>
                 <div class="col-sm-4">
-                    @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "leama-field form-control", @min = "0", @type = "number" } })
-
+                    @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "leama-field form-control", @pattern = "[a-zA-Z0-9\\s]+", title = "Alphanumeric only" } })
+                    
                 </div>
                 <div class="col-md-2 pull-left">
                     @Html.LabelFor(model => model.Region_Name, htmlAttributes: new { @class = "leama-field-name" })

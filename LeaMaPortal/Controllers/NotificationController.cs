@@ -17,6 +17,10 @@ namespace LeaMaPortal.Controllers
         // GET: Notification
         public ActionResult Index()
         {
+            if (Session["Region"] == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
             return View();
         }
         [HttpGet]
@@ -30,7 +34,8 @@ namespace LeaMaPortal.Controllers
                 List<NotificationRentalDueModel> RentalDueData = new List<NotificationRentalDueModel>();
                 List<NotificationUtilityDuesModel> UtilityDuesData = new List<NotificationUtilityDuesModel>();
                 List<NotificationAgreementApprovalModel> AgreementData = new List<NotificationAgreementApprovalModel>();
-                List< NotificationContractApprovalModel > ContractData = new List<NotificationContractApprovalModel>();
+                List< NotificationContractApprovalModel> ContractData = new List<NotificationContractApprovalModel>();
+                List<NotificationLicenseExpiryModel> LicenseExpiryData = new List<NotificationLicenseExpiryModel>();
                 NotificationHelper notify = new NotificationHelper();
                 switch (filter)
                 {
@@ -52,6 +57,10 @@ namespace LeaMaPortal.Controllers
                     case StaticHelper.NOTIFICATION_CONTRACT_APPROVED:
                         ContractData = await notify.getNotificationContractApproval();
                         return Json(ContractData, JsonRequestBehavior.AllowGet);
+                    case StaticHelper.NOTIFICATION_LICENSE_EXPIRY:
+                        LicenseExpiryData = await notify.getNotificationLicenseExpiry();
+                        return Json(LicenseExpiryData, JsonRequestBehavior.AllowGet);
+                        
                     default :
                         return Json(data, JsonRequestBehavior.AllowGet);
                 }                
@@ -95,6 +104,20 @@ namespace LeaMaPortal.Controllers
                 //return Json(res, JsonRequestBehavior.AllowGet);
             }
             return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ActionResult> getTCAApproveStatus(string User)
+        {
+            try
+            {
+                var ApproveStatus = await db.Database.SqlQuery<AgreementFormViewModel>("select count(*) as cnt from tbl_approvalconfig where userid = {0} and ifnull(delmark,'')<>'*' and approval_flag='Yes'", User).ToListAsync();
+               
+                return Json(ApproveStatus, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
+            }
         }
         protected override void Dispose(bool disposing)
         {

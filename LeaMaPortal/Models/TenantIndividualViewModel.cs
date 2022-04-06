@@ -174,6 +174,9 @@ namespace LeaMaPortal.Models
 
         [StringLength(150)]
         public string Createduser { get; set; }
+
+        public string Region_name { get; set; }
+        public string Country { get; set; }
         
         public string tenantdocdetails { get; set; }
         public List<TenantDocumentVM> TenantDocument { get; set; }

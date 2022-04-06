@@ -14,7 +14,10 @@ namespace LeaMaPortal.ReportASPX.ContractReport
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            txt_CreatedUser.Text = System.Web.HttpContext.Current.User.Identity.Name;
+            if (!IsPostBack)
+            {
+                txt_CreatedUser.Text = System.Web.HttpContext.Current.User.Identity.Name;
+            }
         }
         protected void filterbyChange(object sender, EventArgs e)
         {
@@ -151,7 +154,7 @@ namespace LeaMaPortal.ReportASPX.ContractReport
                 if (dropDown_Group.SelectedItem.Value == "Property")
                 {
                     ContractReportViewer.LocalReport.ReportPath = "ReportRDLC\\Contract\\Renewalprop.rdlc";
-                    var property = entities.Database.SqlQuery<ContractPropertyReportModel>("Select id,Agreement_No,Property_id,Property_name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Ag_Tenant_Name,Agreement_End_Date,Notice_Period,Perday_Rental,Remaining_Days,Contract_Value,user from renewal_report where user='" + txt_CreatedUser.Text + "'").ToList();
+                    var property = entities.Database.SqlQuery<ContractPropertyReportModel>("Select Agreement_No,Property_id,Property_name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Ag_Tenant_Name,Agreement_End_Date,Notice_Period,Perday_Rental,Remaining_Days,Contract_Value,user from renewal_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC

@@ -1,0 +1,26 @@
+Tamil Account Details
+======================
+
+Account Holder Name : TAMIL SELVAN.S
+Account No          : 161001000923061
+IFSC Code           : CIUB0000161
+Bank                : City Union Bank
+Branch              : DHARAPURAM
+
+
+UnitIDTawtheeq
+UnitPropertyName
+
+
+TCA Renewal
+============
+* Payement Details and Check List Details should not get loaded
+* document should not get loaded
+* Agreement Start and End date validation
+* Secut=rity deposit can be there
+* Lock Tenant, caretaker,property,unit
+TCA EDIT
+============
+* Load Data's from tbl_agreement table and pdc tale and respective tables
+* Lock caretaker,property,unit
+

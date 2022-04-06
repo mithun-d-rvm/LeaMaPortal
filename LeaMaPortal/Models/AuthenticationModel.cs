@@ -23,5 +23,7 @@ namespace LeaMaPortal.Models
         public int? EditConfig { get; set; }
         public int? DeleteConfig { get; set; }
         public string MenuConfig { get; set; }
+        public string Region_Name { get; set; }
+
     }
 }

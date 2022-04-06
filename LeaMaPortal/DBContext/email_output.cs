@@ -30,5 +30,6 @@ namespace LeaMaPortal.DBContext
         public string signature { get; set; }
         public string Mailstatus { get; set; }
         public Nullable<System.DateTime> createddate { get; set; }
+        public string Error { get; set; }
     }
 }

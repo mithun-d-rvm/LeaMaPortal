@@ -22,10 +22,11 @@ namespace LeaMaPortal.Models
             agreementDocumentExistList = new List<AgreementDocumentExist>();
             AgreementCheckList = new List<AgreementCheckListViewModel>();
         }
+        public int cnt { get; set; }
         //public int Id { get; set; }
         [DisplayName("Single Unit or Multiple Unit")]
         public string Single_Multiple_Flag { get; set; }
-        [DisplayName("Existing Contract Contract Agreement")]
+        [DisplayName("Agreement Renewal Number")]
         public int Agreement_Refno { get; set; }
         [StringLength(20)]
         public string New_Renewal_flag { get; set; }
@@ -48,9 +49,10 @@ namespace LeaMaPortal.Models
         public string Property_ID_Tawtheeq { get; set; }
         [DisplayName("Property Name")]
         public string Properties_Name { get; set; }
-        [DisplayName("Unit Tawtheeq ID")]
+        [DisplayName("Unit Tawtheeq ID")]        
         public string Unit_ID_Tawtheeq { get; set; }
         [DisplayName("Unit Name")]
+       
         public string Unit_Property_Name { get; set; }
         [DisplayName("Property Available From")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -104,6 +106,9 @@ namespace LeaMaPortal.Models
         [StringLength(150)]
         public string Createduser { get; set; }
 
+        public string Status { get; set; }
+        public string Region_Name { get; set; }
+
         
         //lists longtext
         public string Agpdc { get; set; }
@@ -141,5 +146,8 @@ namespace LeaMaPortal.Models
         public int Caretaker_ID { get; set; }
         public string Caretaker_Name { get; set; }
         public string Vacantstartdate { get; set; }
+        public int Ref_Unit_Property_ID { get; set; }
+
+
     }
 }

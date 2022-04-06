@@ -16,6 +16,15 @@ namespace LeaMaPortal
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
+        }
+
+        public void Session_End()
+        {
+            if(Session["Region"].ToString() == "")
+            {
+                //RedirectToRouteResult();
+            }
         }
     }
 }

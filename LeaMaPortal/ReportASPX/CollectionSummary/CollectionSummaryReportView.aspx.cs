@@ -14,7 +14,11 @@ namespace LeaMaPortal.ReportASPX.CollectionSummary
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            txt_CreatedUser.Text = System.Web.HttpContext.Current.User.Identity.Name;
+            if (!IsPostBack)
+            {
+
+                txt_CreatedUser.Text = System.Web.HttpContext.Current.User.Identity.Name;
+            }
         }
         protected void filterbyChange(object sender, EventArgs e)
         {
@@ -34,10 +38,10 @@ namespace LeaMaPortal.ReportASPX.CollectionSummary
             if (dropDown_Group.SelectedItem.Value == "Property")
             {
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "--Select--", Value = "--Select--", Selected = true });
-                dropDown_FilterBy.Items.Add(new ListItem() { Text = "id", Value = "id" });
+               
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "Refno", Value = "Refno" });
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "Meterno", Value = "Meterno" });
-                dropDown_FilterBy.Items.Add(new ListItem() { Text = "property_id", Value = "property_id" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Property_ID_Tawtheeq", Value = "Property_ID_Tawtheeq" });
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "Property_Name", Value = "Property_Name" });
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "Unit_id", Value = "Unit_id" });
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "Unit_Property_Name", Value = "Unit_Property_Name" });
@@ -143,7 +147,7 @@ namespace LeaMaPortal.ReportASPX.CollectionSummary
                 if (dropDown_Group.SelectedItem.Value == "Property")
                 {
                     CollectionSummaryReportViewer.LocalReport.ReportPath = "ReportRDLC\\CollectionSummary\\summarycollectionprop.rdlc";
-                    var property = entities.Database.SqlQuery<CollectionSummaryReportModel>("Select id,property_id,Property_ID_Tawtheeq,Properties_Name,Unit_ID_Tawtheeq,Unit_Property_Name,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Ag_Tenant_Name,country,region_name,Reccategory,RecpType,pdcstatus,DDChequeNo,DDChequeDate,Total_Rental_amount,totalamount,user from summarycollection_report where user='" + txt_CreatedUser.Text + "'").ToList();
+                    var property = entities.Database.SqlQuery<CollectionSummaryReportModel>("Select property_id,Property_ID_Tawtheeq,Properties_Name,Unit_ID_Tawtheeq,Unit_Property_Name,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Ag_Tenant_Name,country,region_name,Reccategory,RecpType,pdcstatus,DDChequeNo,DDChequeDate,Total_Rental_amount,totalamount,user from summarycollection_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC
@@ -154,7 +158,7 @@ namespace LeaMaPortal.ReportASPX.CollectionSummary
                 else if (dropDown_Group.SelectedItem.Value == "Region")
                 {
                     CollectionSummaryReportViewer.LocalReport.ReportPath = "ReportRDLC\\CollectionSummary\\summarycollectionregion.rdlc";
-                    var region = entities.Database.SqlQuery<CollectionSummaryRegionReportModel>("Select Region_Name,Country,Noof_properties,Billamount,Paidamount,user from summaryebwater_region_report where user='" + txt_CreatedUser.Text + "'").ToList();
+                    var region = entities.Database.SqlQuery<CollectionSummaryRegionReportModel>("Select Region_Name,Country,Noof_properties,totalrentalamount,Totalpaidamt,user from summarycollection_region_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC

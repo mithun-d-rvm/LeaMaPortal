@@ -15,14 +15,19 @@
     @Html.HiddenFor(x => x.Properties_Name)
     @Html.HiddenFor(x => x.Unit_ID_Tawtheeq)
     @Html.HiddenFor(x => x.Unit_Property_Name)
+    @Html.HiddenFor(x => x.Single_Multiple_Flag)
+    @Html.HiddenFor(x => x.Security_Flag)
+    @Html.HiddenFor(x => x.Security_chequeno)
+    @Html.HiddenFor(x => x.Security_chequedate)
     @*@Html.HiddenFor(x => x.Caretaker_id)
     @Html.HiddenFor(x => x.Caretaker_Name)*@
     @Html.HiddenFor(x => x.Agreement_No)
-    @*@Html.HiddenFor(x => x.Tenant_Type)*@
+    @*@Html.HiddenFor(x => x.Tenant_Type)*@    
+
     <div class="font-smaller">
-        <div id="editAgreementForm">
+        <div id="editAgreementForm" data-backdrop="static">
             @Html.HiddenFor(m => m.New_Renewal_flag)
-            <button type="button" class="close font-40" data-dismiss="modal"> &times;</button>
+            <button type="button" onclick="javascript:window.location.reload()" class="close font-40" data-dismiss="modal"> &times;</button>
             <div class="text-uppercase popup-heading">
                 Contract Tenancy Agreement - Edit
             </div>
@@ -34,13 +39,13 @@
                             <span> Single Unit </span>
                         </div>
                         <div class="col-md-1">
-                            @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Single", new { @class = "input-checkbox", @required = "required", @id = "single", @readonly = "readonly" })
+                            @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Single", new { @class = "input-checkbox", @required = "required", @id = "single", @disabled = "disabled" }) @*@readonly = "readonly"*@
                         </div>
                         <div class="col-md-4 m-t-3">
                             <span> Multiple Unit </span>
                         </div>
                         <div class="col-md-1 m-l-m-40">
-                            @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Multiple", new { @class = "input-checkbox", @required = "required", @id = "multiple", @readonly = "readonly" })
+                            @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Multiple", new { @class = "input-checkbox", @required = "required", @id = "multiple", @disabled = "disabled" }) @*@readonly = "readonly"*@
                         </div>
                     </div>
                 </div>
@@ -94,7 +99,7 @@
                         </div>
                         <div class="col-md-6">
                             @*<input type="text" class="master-form-input form-control" />*@
-                            @Html.DropDownList("Ag_Tenantid", null, "-- Select --", new { @class = "master-form-input form-control", @Name = "Ag_Tenant_id", @required = "required" })
+                            @Html.DropDownList("Ag_Tenantid", null, "-- Select --", new { @class = "master-form-input form-control", @Name = "Ag_Tenantid", @required = "required" })
                             @*@Html.EditorFor(model => model.Ag_Tenant_id, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })*@
                         </div>
                     </div>
@@ -104,7 +109,7 @@
                         </div>
                         <div class="col-md-6">
                             @*<input type="text" class="master-form-input form-control" />*@
-                            @Html.DropDownList("Ag_TenantName", null, "-- Select --", new { @class = "master-form-input form-control", @Name = "Ag_Tenant_Name", @required = "required" })
+                            @Html.DropDownList("Ag_TenantName", null, "-- Select --", new { @class = "master-form-input form-control", @Name = "Ag_TenantName", @required = "required" })
                         </div>
                     </div>
                     
@@ -142,7 +147,7 @@
                         </div>
                         <div class="col-md-6">
                             @*<input type="text" class="master-form-input form-control" />*@
-                            @Html.DropDownList("TcaPropertyIDTawtheeq", null, "-- Select --", new { @class = "master-form-input form-control" })
+                            @Html.DropDownList("TcaEditPropertyIDTawtheeq", null, new { @class = "master-form-input form-control", @disabled = "disabled" })@*@disabled = "disabled"*@
                         </div>
                     </div>
                     <div class="col-md-12 p-b-7">
@@ -151,7 +156,7 @@
                         </div>
                         <div class="col-md-6">
                             @*<input type="text" class="master-form-input form-control" />*@
-                            @Html.DropDownList("TcaPropertyName", null, "-- Select --", new { @class = "master-form-input form-control" })
+                            @Html.DropDownList("TcaEditPropertyName", null, new { @class = "master-form-input form-control", @disabled = "disabled" }) @**@
                         </div>
                     </div>
                     <div class="col-md-12 p-b-7" id="UnitPropertyId">
@@ -160,7 +165,7 @@
                         </div>
                         <div class="col-md-6">
                             @*<input type="text" class="master-form-input form-control" />*@
-                            @Html.DropDownList("UnitIDTawtheeq", null, "-- Select --", new { @class = "master-form-input form-control" })
+                            @Html.DropDownList("TcaEditUnitIDTawtheeq", null, new { @class = "master-form-input form-control", @disabled = "disabled" })
                         </div>
                     </div>
                     <div class="col-md-12 p-b-7" id="Unitpropertyname">
@@ -169,7 +174,7 @@
                         </div>
                         <div class="col-md-6">
                             @*<input type="text" class="master-form-input form-control" />*@
-                            @Html.DropDownList("UnitPropertyName", null, "-- Select --", new { @class = "master-form-input form-control" })
+                            @Html.DropDownList("TcaEditUnitPropertyName", null, new { @class = "master-form-input form-control", @disabled = "disabled"} )
                         </div>
                     </div>
                 </div>
@@ -243,7 +248,7 @@
                                 <option> Payment 2 </option>
                                 <option> Payment 3 </option>
                             </select>*@
-                            @Html.DropDownList("SecurityFlag", null, new { @class = "master-form-input form-control" })
+                            @Html.DropDownList("TcaEditSecurityFlag", null, new { @class = "master-form-input form-control" })
                         </div>
                     </div>
                     <div class="col-md-12 p-b-7">
@@ -251,7 +256,7 @@
                             @Html.LabelFor(model => model.Security_chequeno, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.Security_chequeno, new { htmlAttributes = new { @class = "master-form-input form-control", @Name = "SecurityChequeno", disabled = "disabled" } })
+                            @Html.EditorFor(model => model.Security_chequeno, new { htmlAttributes = new { @class = "master-form-input form-control", @Name = "SecurityChequeno", disabled = "disabled", @id = "TcaEditSecurityChequeno" } })
                         </div>
                     </div>
                     <div class="col-md-12 p-b-7">
@@ -259,7 +264,7 @@
                             @Html.LabelFor(model => model.Security_chequedate, htmlAttributes: new { @class = "label-default-remove" })
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.Security_chequedate, new { htmlAttributes = new { @class = "master-form-input form-control", @Name = "SecurityChequedate", disabled = "disabled" } })
+                            @Html.EditorFor(model => model.Security_chequedate, new { htmlAttributes = new { @class = "master-form-input form-control", @Name = "SecurityChequedate", disabled = "disabled", @id = "TcaEditSecurityChequedate" } })
                         </div>
                     </div>
                     <div class="col-md-12 p-b-7">
@@ -323,7 +328,7 @@
             @*@Html.Partial("_AgreementDocument")*@
         </div>
         <!-- END AGREEMENT DOCUMENT -->
-        <div class="p-b-10">
+        <div class="row ht-5">
             &nbsp;
         </div>
         <div class="col-md-12 form-input-padding">
@@ -331,7 +336,7 @@
                 &nbsp;
             </div>
             <div class="col-md-4">
-                <input type="submit" class="btn master-form-btn" value="Update" />
+                <input type="submit" class="btn master-form-btn" value="Update" id="btnUpdate" />
             </div>
         </div>
     </div>
@@ -340,7 +345,8 @@
     sigleOrMultiple();
     function sigleOrMultiple()
     {
-        var single_multiple = $('input[name=radioName]:checked', '#editAgreementForm').val();
+        var single_multiple = $("input[type='radio'][name=Single_Multiple_Flag]:checked", '#editAgreementForm').val();
+        //alert(single_multiple);
         if (single_multiple == 'Multiple') {
             //$('#UnitIDTawtheeq').attr('disabled', true);
             //$('#UnitPropertyName').attr('disabled', true);
@@ -388,10 +394,10 @@
                        //$("#editAgreementForm #TcaPropertyId").empty();
 
                        var propertyidTawtheeqOptions = '<option value="" selected>--Select--</option>';
-                       $("#editAgreementForm #TcaPropertyIDTawtheeq").empty();
+                       $("#editAgreementForm #TcaEditPropertyIDTawtheeq").empty();
 
                        var propertyNameOptions = '<option value="" selected>--Select--</option>';
-                       $("#editAgreementForm #TcaPropertyName").empty();
+                       $("#editAgreementForm #TcaEditPropertyName").empty();
 
                        var unitidOptions = '<option value="" selected>--Select--</option>';
                        $("#editAgreementForm #UnitIDTawtheeq").empty();
@@ -408,8 +414,8 @@
                                unitnameOptions += '<option value="' + data.property_id + '">' + data.Unit_Property_Name + '</option>';
                            }
                        });
-                       $('#editAgreementForm #TcaPropertyIDTawtheeq').append(propertyidTawtheeqOptions);
-                       $('#editAgreementForm #TcaPropertyName').append(propertyNameOptions);
+                       $('#editAgreementForm #TcaEditPropertyIDTawtheeq').append(propertyidTawtheeqOptions);
+                       $('#editAgreementForm #TcaEditPropertyName').append(propertyNameOptions);
                        $('#editAgreementForm #UnitIDTawtheeq').append(unitidOptions);
                        $('#editAgreementForm #UnitPropertyName').append(unitnameOptions);
                    },
@@ -463,18 +469,18 @@
         }
     });
 
-    $("#editAgreementForm #SecurityFlag").change(function () {
+    $("#editAgreementForm #TcaEditSecurityFlag").change(function () {
          
-        var SecurityFlag = $("#editAgreementForm #SecurityFlag").val();
-        if (SecurityFlag != undefined && (SecurityFlag == "Cheque" || SecurityFlag == "Online" || SecurityFlag == "Cheque without date")) {
-            $('#editAgreementForm #Security_chequeno').removeAttr('disabled');
-            $('#editAgreementForm #Security_chequedate').removeAttr('disabled');
+        var SecurityFlag = $("#editAgreementForm #TcaEditSecurityFlag").val();
+        if (SecurityFlag != undefined && (SecurityFlag == "Cheque" || SecurityFlag == "Online" || SecurityFlag == "Cheque without date" || SecurityFlag == "DD")) {
+            $('#editAgreementForm #TcaEditSecurityChequeno').removeAttr('disabled');
+            $('#editAgreementForm #TcaEditSecurityChequedate').removeAttr('disabled');
             //$("SecurityChequeno").prop("disabled", false);
             //$("SecurityChequedate").prop("disabled", false);
         }
         else {
-            $('#editAgreementForm #Security_chequeno').attr('disabled', true);
-            $('#editAgreementForm #Security_chequedate').attr('disabled', true);
+            $('#editAgreementForm #TcaEditSecurityChequeno').attr('disabled', true);
+            $('#editAgreementForm #TcaEditSecurityChequedate').attr('disabled', true);
         }
         return;
     });
@@ -573,23 +579,30 @@
 
 
 
-    $("#editAgreementForm #TcaPropertyIDTawtheeq").change(function () {
-        var propertyid = $("#editAgreementForm #TcaPropertyIDTawtheeq").val();
-        $("#editAgreementForm #TcaPropertyName").val($("#editAgreementForm #TcaPropertyIDTawtheeq option:selected").val());
-        $("#editAgreementForm #UnitIDTawtheeq").val($("#editAgreementForm #TcaPropertyIDTawtheeq option:selected").val());
-        $("#editAgreementForm #UnitPropertyName").val($("#editAgreementForm #TcaPropertyIDTawtheeq option:selected").val());
+    $("#editAgreementForm #TcaEditPropertyIDTawtheeq").change(function () {
+        var propertyid = $("#editAgreementForm #TcaEditPropertyIDTawtheeq").val();
+        $("#editAgreementForm #TcaEditPropertyName").val($("#editAgreementForm #TcaEditPropertyIDTawtheeq option:selected").val());
+        $("#editAgreementForm #UnitIDTawtheeq").val($("#editAgreementForm #TcaEditPropertyIDTawtheeq option:selected").val());
+        $("#editAgreementForm #UnitPropertyName").val($("#editAgreementForm #TcaEditPropertyIDTawtheeq option:selected").val());
         $("#editAgreementForm #property_id").val(propertyid);
         setpropertyFieldsEdit();
         // $("#editAgreementForm #Ag_Tenant_Name").val($("#editAgreementForm #Ag_Tenant_id option:selected").text());
         return;
     });
-    $("#editAgreementForm #TcaPropertyName").change(function () {
-        var propertyid = $("#editAgreementForm #TcaPropertyName").val();
-        $("#editAgreementForm #TcaPropertyIDTawtheeq").val($("#editAgreementForm #TcaPropertyName option:selected").val());
-        $("#editAgreementForm #UnitIDTawtheeq").val($("#editAgreementForm #TcaPropertyName option:selected").val());
-        $("#editAgreementForm #UnitPropertyName").val($("#editAgreementForm #TcaPropertyName option:selected").val());
+    $("#editAgreementForm #TcaEditPropertyName").change(function () {
+        var propertyid = $("#editAgreementForm #TcaEditPropertyName").val();
+        //alert(propertyid);
+        //debugger;
+        $("#editAgreementForm #TcaEditPropertyIDTawtheeq").val($("#editAgreementForm #TcaEditPropertyName option:selected").val());
+        $("#editAgreementForm #UnitIDTawtheeq").val($("#editAgreementForm #TcaEditPropertyName option:selected").val());
+        $("#editAgreementForm #UnitPropertyName").val($("#editAgreementForm #TcaEditPropertyName option:selected").val());
         $("#editAgreementForm #property_id").val(propertyid);
         setpropertyFieldsEdit();
+
+        //$("#AgreementUnit-Renewal #Properties_Name").val($("#TcaEditPropertyName option:selected").val());
+        //$("#AgreementUnit-Renewal #Property_ID").val(propertyid);
+        //$("#AgreementUnit-Renewal #Property_ID_Tawtheeq").val($("#TcaEditPropertyName option:selected").val());
+        //$("#AgreementUnit-Renewal #Properties_Name").trigger("change");
         //$("#editAgreementForm #Ag_Tenant_id").val($("#editAgreementForm #Ag_Tenant_Name option:selected").text());
         return;
     });
@@ -628,8 +641,8 @@
     //    //$("#editAgreementForm #property").prop('checked', true).change();
     //});
     function setpropertyFieldsEdit() {
-        $("#editAgreementForm #Property_ID_Tawtheeq").val($("#editAgreementForm #TcaPropertyIDTawtheeq option:selected").text() == "--Select--" ? null : $("#editAgreementForm #TcaPropertyIDTawtheeq option:selected").text());
-        $("#editAgreementForm #Properties_Name").val($("#editAgreementForm #TcaPropertyName option:selected").text() == "--Select--" ? null : $("#editAgreementForm #TcaPropertyName option:selected").text());
+        $("#editAgreementForm #Property_ID_Tawtheeq").val($("#editAgreementForm #TcaEditPropertyIDTawtheeq option:selected").text() == "--Select--" ? null : $("#editAgreementForm #TcaPropertyIDTawtheeq option:selected").text());
+        $("#editAgreementForm #Properties_Name").val($("#editAgreementForm #TcaEditPropertyName option:selected").text() == "--Select--" ? null : $("#editAgreementForm #TcaPropertyName option:selected").text());
         var propertyid = parseInt($("#editAgreementForm #property_id").val());
         // alert(propertyid);
         if ($.isNumeric(propertyid)) {
@@ -640,7 +653,7 @@
     function GetPropertyOnChange() {
         try
         {
-            if ($("#editAgreementForm #TcaPropertyName").val() == "") {
+            if ($("#editAgreementForm #TcaEditPropertyName").val() == "") {
                 return;
             }
             $.ajax(
@@ -648,7 +661,7 @@
                 url: "../Tca/GetPropertyOnChange",
                 // dataType: "jsonp",
                 method: "GET",
-                data: { propertyId: $("#editAgreementForm #TcaPropertyName").val() }, //FormData(form.get(0)),
+                data: { propertyId: $("#editAgreementForm #TcaEditPropertyName").val() }, //FormData(form.get(0)),
                 contentType: "application/json",
                 success: function (response) {
                     if (response != null) {
@@ -697,8 +710,8 @@
                            //propertyidTawtheeqOptions += '<option value="' + data.Property_ID_Tawtheeq + '">' + data.Property_ID_Tawtheeq + '</option>';
                            // propertyNameOptions += '<option value="' + data.Property_ID_Tawtheeq + '">' + data.Property_Name + '</option>';
 
-                           unitidOptions += '<option value="' + data.Value + '">' + data.Value + '</option>';
-                           unitnameOptions += '<option value="' + data.Value + '">' + data.Text + '</option>';
+                           unitidOptions += '<option value="' + data.Ref_Unit_Property_ID + '">' + data.Unit_ID_Tawtheeq + '</option>';
+                           unitnameOptions += '<option value="' + data.Unit_ID_Tawtheeq + '">' + data.Unit_Property_Name + '</option>';
 
                        });
                        //$('#editAgreementForm #TcaPropertyIDTawtheeq').append(propertyidTawtheeqOptions);
@@ -759,6 +772,20 @@
             //var startDt = parseInt(SDate.getFullYear() + "" + SDate.getMonth() + "" + SDate.getDay());
             //var endDt = parseInt(EDate.getFullYear() + "" + EDate.getMonth() + "" + EDate.getDay());
 
+            //$("#editAgreementForm #Property_ID_Tawtheeq").val($("#editAgreementForm #TcaEditPropertyIDTawtheeq option:selected").text() == "--Select--" ? null : $("#editAgreementForm #TcaPropertyIDTawtheeq option:selected").text());
+            //$("#editAgreementForm #Properties_Name").val($("#editAgreementForm #TcaEditPropertyName option:selected").text() == "--Select--" ? null : $("#editAgreementForm #TcaPropertyName option:selected").text());
+            //$("#editAgreementForm #Unit_ID_Tawtheeq").val($("#editAgreementForm #UnitIDTawtheeq option:selected").text() == "--Select--" ? null : $("#editAgreementForm #UnitIDTawtheeq option:selected").text());
+            
+
+            //alert($("#editAgreementForm #Ag_TenantName option:selected").text() == "--Select--" ? null : $("#editAgreementForm #Ag_TenantName option:selected").text());
+            //alert($("#editAgreementForm #Ag_Tenant_id").text());
+            //alert($("#editAgreementForm #Ag_Tenant_Name").text());
+
+
+            //$("#editAgreementForm #Security_Flag").val($("#editAgreementForm #SecurityFlag option:selected").text());
+            //$("#editAgreementForm #Security_chequeno").val($("#editAgreementForm #TcaEditSecurityChequeno").val());
+            //$("#editAgreementForm #Security_chequedate").val($("#editAgreementForm #TcaEditSecurityChequeno").val());
+
 
             var AgreementUtilityCount =parseInt($("#AgreementUtilityListCountRenewal").val());
             var nofopayments = parseInt($("#TcaRenewal #nofopayments").val());
@@ -797,11 +824,27 @@
             }
             else {
                 e.preventDefault();
+                //$("#editAgreementForm #Unit_Property_Name").val($("#editAgreementForm #UnitPropertyName option:selected").text() == "--Select--" ? null : $("#editAgreementForm #UnitIDTawtheeq option:selected").text());
+                //alert($("#editAgreementForm #Ag_TenantName option:selected").text() == "--Select--" ? null : $("#editAgreementForm #Ag_TenantName option:selected").text());
+                //alert($("#editAgreementForm #Ag_Tenantid option:selected").text() == "--Select--" ? null : $("#editAgreementForm #Ag_Tenantid option:selected").text());
+                //alert($("#TcaEditSecurityFlag option:selected").text() == "--Select--" ? null : $("#editAgreementForm #TcaEditSecurityFlag option:selected").text());
+                //alert($("#editAgreementForm #TcaEditSecurityChequeno").val());
+                //alert($("#editAgreementForm #TcaEditSecurityChequedate").val());
+                //alert($("#editAgreementForm #TcaEditSecurityChequeno").val());
+                $("#editAgreementForm #Single_Multiple_Flag").val($("input[type='radio'][name=Single_Multiple_Flag]:checked", '#editAgreementForm').val());
+                $("#TcaRenewal #Ag_Tenant_id").val($("#editAgreementForm #Ag_Tenantid option:selected").text() == "--Select--" ? null : $("#editAgreementForm #Ag_Tenantid option:selected").text());
+                $("#TcaRenewal #Ag_Tenant_Name").val($("#editAgreementForm #Ag_TenantName option:selected").text() == "--Select--" ? null : $("#editAgreementForm #Ag_TenantName option:selected").text());
+                $("#TcaRenewal #Security_Flag").val($("#editAgreementForm #TcaEditSecurityFlag option:selected").text() == "--Select--" ? null : $("#editAgreementForm #TcaEditSecurityFlag option:selected").text());
+                $("#TcaRenewal #Security_chequeno").val($("#editAgreementForm #TcaEditSecurityChequeno").val());
+                $("#TcaRenewal #Security_chequedate").val($("#editAgreementForm #TcaEditSecurityChequedate").val());
+
                 var formData = new FormData($(this)[0]);
+                //$("#btnUpdate").prop('display', 'none');
+                $("#btnUpdate").prop('disabled', true);
                 try {
                     $.ajax(
                         {
-                            url: "../Tca/AddOrUpdate",
+                            url: "  ../Tca/AddOrUpdate",
                             method: "POST",
                             data: formData,
                             contentType: false,
@@ -848,4 +891,53 @@
         }
 
     });
+
+    function getAgreementList() {
+        $.ajax(
+           {
+               url: "../Tca/List",
+               type: "Get",
+               data: { Search: "", page: 1 },
+               success: function (html) {
+                   $("#agreementList").html(html);
+               },
+               error: function (jqXhr, textStatus, errorThrown) {
+                   //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                   $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                   $(".result-title").text("Failure");
+                   $(".result-modal-body span").text("Could not able to process your requests");
+                   $('#masterResultModal').modal('show');
+               },
+               complete: function () {
+                   //   $("#VerifyIdDetailsLoader").addClass("hide");
+               }
+           });
+    }
+
+    $(document).ready(function () {
+        //$('#btnUpdate').bind('dblclick', function (e) {
+        //    e.preventDefault();
+        //});
+
+        $("#btnUpdate").on('click', function (event) {
+            //alert("hi");
+            //$("#btnUpdate").prop('visibility', 'hidden');
+            //$("#btnUpdate").prop('display', 'none');
+            //$("#btnUpdate").prop('disabled', true);
+            
+            //event.preventDefault();
+        });
+    });
+
+    //$('#renewalModal').on('hidden.bs.modal', function () {
+    //    alert("s");
+    //    location.reload();
+    //})
+
+    $('#renewalModal').modal({
+        backdrop: 'static',
+        keyboard: false
+    })
+   
 </script>

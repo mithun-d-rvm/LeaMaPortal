@@ -25,6 +25,8 @@ namespace LeaMaPortal.DBContext
         public string Remarks { get; set; }
         public string Description { get; set; }
         public string Delmark { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     
         public virtual tbl_receipthd tbl_receipthd { get; set; }
     }

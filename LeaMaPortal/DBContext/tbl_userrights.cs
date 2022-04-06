@@ -31,5 +31,7 @@ namespace LeaMaPortal.DBContext
         public Nullable<System.DateTime> Createddatetime { get; set; }
         public string Createduser { get; set; }
         public string Delmark { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     }
 }

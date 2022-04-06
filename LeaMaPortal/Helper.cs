@@ -19,11 +19,11 @@ namespace LeaMaPortal
             foreach (var property in model.GetType().GetProperties().ToList())
             {
                 if (property.Name == "Createduser")
-                    parameters.Add(new MySqlParameter("@P" + property.Name, CreatedUser));
+                    parameters.Add(new MySqlParameter("@P" + property.Name, CreatedUser));                
                 else
                     parameters.Add(new MySqlParameter("@P" + property.Name, property.GetValue(model)));
             }
-
+           
             return parameters.ToArray();
         }
         public static string GetTcaMySqlParametersNames<T>(T model, string flag, string CreatedUser = null, MySqlParameter optionalParam = null)

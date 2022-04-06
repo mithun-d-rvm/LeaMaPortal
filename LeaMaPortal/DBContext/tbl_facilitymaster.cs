@@ -17,7 +17,6 @@ namespace LeaMaPortal.DBContext
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbl_facilitymaster()
         {
-            this.tbl_agreement_facility = new HashSet<tbl_agreement_facility>();
             this.tbl_propertiesdt = new HashSet<tbl_propertiesdt>();
         }
     
@@ -28,9 +27,9 @@ namespace LeaMaPortal.DBContext
         public Nullable<System.DateTime> Createddatetime { get; set; }
         public string Createduser { get; set; }
         public string Delmark { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_agreement_facility> tbl_agreement_facility { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_propertiesdt> tbl_propertiesdt { get; set; }
     }

@@ -1,112 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="outstanding_propds">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>3ee1aa56-121d-4629-acd2-217399354b19</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="id">
-          <DataField>id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Agreement_No">
-          <DataField>Agreement_No</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Property_id">
-          <DataField>Property_id</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Property_name">
-          <DataField>Property_name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Unit_id">
-          <DataField>Unit_id</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Unitname">
-          <DataField>Unitname</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Region_Name">
-          <DataField>Region_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Country">
-          <DataField>Country</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Caretaker_id">
-          <DataField>Caretaker_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Caretaker_Name">
-          <DataField>Caretaker_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Ag_Tenant_id">
-          <DataField>Ag_Tenant_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Ag_Tenant_Name">
-          <DataField>Ag_Tenant_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Agreement_Start_Date">
-          <DataField>Agreement_Start_Date</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="Agreement_End_Date">
-          <DataField>Agreement_End_Date</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="Total_Rental_amount">
-          <DataField>Total_Rental_amount</DataField>
-          <rd:TypeName>System.Single</rd:TypeName>
-        </Field>
-        <Field Name="outstanding_amt">
-          <DataField>outstanding_amt</DataField>
-          <rd:TypeName>System.Double</rd:TypeName>
-        </Field>
-        <Field Name="Perday_Rental">
-          <DataField>Perday_Rental</DataField>
-          <rd:TypeName>System.Single</rd:TypeName>
-        </Field>
-        <Field Name="Remaining_Days">
-          <DataField>Remaining_Days</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Contract_Value">
-          <DataField>Contract_Value</DataField>
-          <rd:TypeName>System.Double</rd:TypeName>
-        </Field>
-        <Field Name="user">
-          <DataField>user</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>outstanding_propds</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>outstanding_propds</rd:DataSetName>
-        <rd:SchemaPath>D:\mysql\RDLC\RDLCApplicationWithParamstest\RDLCApplicationWithParams\outstanding_propds.xsd</rd:SchemaPath>
-        <rd:TableName>outstanding_report</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>outstanding_reportTableAdapter</rd:TableAdapterName>
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
@@ -116,7 +9,7 @@
               <Width>1.07414in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.07414in</Width>
+              <Width>1.25747in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.07414in</Width>
@@ -125,7 +18,7 @@
               <Width>1.07414in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.63664in</Width>
+              <Width>1.45331in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.28247in</Width>
@@ -198,7 +91,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Unit Id</Value>
+                              <Value>Unit Tawtheeq Id</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -264,7 +157,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Region Name</Value>
+                              <Value>Region </Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -1990,7 +1883,7 @@
           <TablixMembers>
             <TablixMember>
               <TablixHeader>
-                <Size>1.07414in</Size>
+                <Size>1.55747in</Size>
                 <CellContents>
                   <Textbox Name="Textbox36">
                     <CanGrow>true</CanGrow>
@@ -1999,7 +1892,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>Property Id</Value>
+                            <Value>Property Tawtheeq Id</Value>
                             <Style>
                               <FontWeight>Bold</FontWeight>
                             </Style>
@@ -2041,7 +1934,7 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>1.07414in</Size>
+                    <Size>1.55747in</Size>
                     <CellContents>
                       <Textbox Name="Group1">
                         <CanGrow>true</CanGrow>
@@ -2088,7 +1981,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1.07414in</Size>
+                    <Size>1.55747in</Size>
                     <CellContents>
                       <Textbox Name="Textbox60">
                         <CanGrow>true</CanGrow>
@@ -2128,10 +2021,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>4.08in</Top>
+        <Top>4.12167in</Top>
         <Left>0.13208in</Left>
         <Height>1in</Height>
-        <Width>18.67337in</Width>
+        <Width>19.1567in</Width>
         <Visibility>
           <Hidden>=false</Hidden>
           <ToggleItem>Textbox63</ToggleItem>
@@ -2149,7 +2042,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Outstanding  Report- Propertywise</Value>
+                <Value>Outstanding - Propertywise</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -2164,7 +2057,7 @@
         <Top>0.10083in</Top>
         <Left>0.13208in</Left>
         <Height>0.25in</Height>
-        <Width>18.67337in</Width>
+        <Width>19.1567in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -2323,6 +2216,9 @@
                 <CrossAt>NaN</CrossAt>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
               <ChartAxis Name="Secondary">
                 <Style>
@@ -2357,6 +2253,9 @@
                 <Location>Opposite</Location>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
             </ChartCategoryAxes>
             <ChartValueAxes>
@@ -2391,6 +2290,9 @@
                 <CrossAt>NaN</CrossAt>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
               <ChartAxis Name="Secondary">
                 <Style>
@@ -2424,6 +2326,9 @@
                 <Location>Opposite</Location>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
             </ChartValueAxes>
             <Style>
@@ -2477,8 +2382,8 @@
           </Style>
         </ChartNoDataMessage>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.37861in</Top>
-        <Left>1.20152in</Left>
+        <Top>0.42027in</Top>
+        <Left>1.2154in</Left>
         <Height>3.63195in</Height>
         <Width>8.34722in</Width>
         <ZIndex>2</ZIndex>
@@ -2512,7 +2417,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox62</rd:DefaultName>
-        <Top>0.42027in</Top>
+        <Top>0.40639in</Top>
         <Left>0.14596in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
@@ -2545,7 +2450,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox63</rd:DefaultName>
-        <Top>0.71194in</Top>
+        <Top>0.72583in</Top>
         <Left>0.13208in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
@@ -2572,6 +2477,114 @@
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
-  <rd:ReportID>d04b652a-bb69-41bb-9088-2f64fd67f01f</rd:ReportID>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="outstanding_propds">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>3ee1aa56-121d-4629-acd2-217399354b19</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>outstanding_propds</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="id">
+          <DataField>id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Agreement_No">
+          <DataField>Agreement_No</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Property_id">
+          <DataField>Property_id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Property_name">
+          <DataField>Property_name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Unit_id">
+          <DataField>Unit_id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Unitname">
+          <DataField>Unitname</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Region_Name">
+          <DataField>Region_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Country">
+          <DataField>Country</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Caretaker_id">
+          <DataField>Caretaker_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Caretaker_Name">
+          <DataField>Caretaker_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Ag_Tenant_id">
+          <DataField>Ag_Tenant_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Ag_Tenant_Name">
+          <DataField>Ag_Tenant_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Agreement_Start_Date">
+          <DataField>Agreement_Start_Date</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Agreement_End_Date">
+          <DataField>Agreement_End_Date</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Total_Rental_amount">
+          <DataField>Total_Rental_amount</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
+        </Field>
+        <Field Name="outstanding_amt">
+          <DataField>outstanding_amt</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Perday_Rental">
+          <DataField>Perday_Rental</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
+        </Field>
+        <Field Name="Remaining_Days">
+          <DataField>Remaining_Days</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Contract_Value">
+          <DataField>Contract_Value</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="user">
+          <DataField>user</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>outstanding_propds</rd:DataSetName>
+        <rd:SchemaPath>D:\mysql\RDLC\RDLCApplicationWithParamstest\RDLCApplicationWithParams\outstanding_propds.xsd</rd:SchemaPath>
+        <rd:TableName>outstanding_report</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>outstanding_reportTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>d04b652a-bb69-41bb-9088-2f64fd67f01f</rd:ReportID>
 </Report>

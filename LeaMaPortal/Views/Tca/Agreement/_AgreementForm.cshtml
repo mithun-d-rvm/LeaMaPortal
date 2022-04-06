@@ -8,13 +8,18 @@
 @model LeaMaPortal.Models.AgreementFormViewModel
 @*@using (Html.BeginForm("AddOrUpdate", "Tca", FormMethod.Post, new { @id = "Tca", @enctype = "multipart/form-data" }))*@
 @{
-    @Html.HiddenFor(x=>x.Ag_Tenant_id)
+    @Html.HiddenFor(model=>model.Ag_Tenant_id)
     @Html.HiddenFor(x => x.Ag_Tenant_Name)
     @*@Html.HiddenFor(x=>x.property_id)*@
     @Html.HiddenFor(x=>x.Property_ID_Tawtheeq)
-    @Html.HiddenFor(x => x.Properties_Name)
+    @Html.HiddenFor(x =>x.Properties_Name)
     @Html.HiddenFor(x=>x.Unit_ID_Tawtheeq)
     @Html.HiddenFor(x=>x.Unit_Property_Name)
+    @Html.HiddenFor(x => x.Security_Flag)
+    @Html.HiddenFor(x => x.Security_chequeno)
+    @Html.HiddenFor(x => x.Security_chequedate)
+    @*<input type="hidden" name="hdnUnit_ID_Tawtheeq" id="hdnUnit_ID_Tawtheeq"/>
+    <input type="hidden" name="hdnUnit_Property_Name" id="hdnUnit_Property_Name" />*@
     @*@Html.HiddenFor(x=>x.Caretaker_id)
     @Html.HiddenFor(x=>x.Caretaker_Name)*@
     <div class="font-smaller">
@@ -140,7 +145,7 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("TcaPropertyIDTawtheeq", null, "-- Select --", new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("TcaPropertyIDTawtheeq", null, "-- Select --", new { @class = "master-form-input form-control", @disabled = "disabled" })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -150,24 +155,29 @@
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
                         @Html.DropDownList("TcaPropertyName", null, "-- Select --", new { @class = "master-form-input form-control" })
+                        <input type="hidden" id="hdnPropUntMonthlyRentPerDay" />
+                        <input type="hidden" id="hdnPropMonthlyRent" />
+                        <input type="hidden" id="hdnUnitMonthlyRent" />
+                        <input type="hidden" id="hdnDateDiff"/>
+                        <input type="hidden" id="hdnPropUnitMonthlyRent" />
                     </div>
                 </div>
-                <div class="col-md-12 p-b-7" id="UnitPropertyId">
+                <div class="col-md-12 p-b-7" id="divUnitPropertyId">
                     <div class="col-md-6">
                         @Html.LabelFor(model => model.Unit_ID_Tawtheeq, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("UnitIDTawtheeq", null, "-- Select --", new { @class = "master-form-input form-control"})
+                        @Html.DropDownList("TcaUnitIDTawtheeq", null, "-- Select --", new { @class = "master-form-input form-control", @disabled = "disabled" })
                     </div>
                 </div>
-                <div class="col-md-12 p-b-7" id="Unitpropertyname">
+                <div class="col-md-12 p-b-7" id="divUnitpropertyname">
                     <div class="col-md-6">
                         @Html.LabelFor(model => model.Unit_Property_Name, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("UnitPropertyName", null, "-- Select --", new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("TcaUnitPropertyName", null, "-- Select --", new { @class = "master-form-input form-control", @disabled = "disabled" })
                     </div>
                 </div>
             </div>
@@ -249,7 +259,7 @@
                         @Html.LabelFor(model => model.Security_chequeno, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Security_chequeno, new { htmlAttributes = new { @class = "master-form-input form-control", @Name = "SecurityChequeno", disabled = "disabled" } })
+                        @Html.EditorFor(model => model.Security_chequeno, new { htmlAttributes = new { @class = "master-form-input form-control", @Name = "SecurityChequeno",@id = "Securitycheq", disabled = "disabled" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -257,7 +267,7 @@
                         @Html.LabelFor(model => model.Security_chequedate, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Security_chequedate, new { htmlAttributes = new { @class = "master-form-input form-control", @Name = "SecurityChequedate", disabled = "disabled" } })
+                        @Html.EditorFor(model => model.Security_chequedate, new { htmlAttributes = new { @class = "master-form-input form-control", @Name = "SecurityChequedate", @id = "SecuritycheqDate",disabled = "disabled" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -288,21 +298,26 @@
     }
     singleOrMultiple();
     function singleOrMultiple()
-    {
+    {  
         var value = $('input[type=radio][name=Single_Multiple_Flag]').val();
         if (value == 'Multiple') {
             //$('#UnitIDTawtheeq').attr('disabled', true);
             //$('#UnitPropertyName').attr('disabled', true);
-            $("#UnitPropertyId").hide();
-            $("#Unitpropertyname").hide();
+          
+            $("#divUnitPropertyId").hide();
+            $("#divUnitpropertyname").hide();
             $("#AgreementUnit").show();
+            //$("#TcaPropertyIDTawtheeq").empty();
         }
         else {
             //$('#UnitIDTawtheeq').removeAttr('disabled');
             //$('#UnitPropertyName').removeAttr('disabled');
-            $("#UnitPropertyId").show();
-            $("#Unitpropertyname").show();
+           
+            $("#divUnitPropertyId").show();
+            $("#divUnitpropertyname").show();
             $("#AgreementUnit").hide();
+            $("TcaUnitPropertyName").prop("disabled", true);
+            //$("#TcaPropertyIDTawtheeq").empty();
         }
     }
     $('input[type=radio][name=Single_Multiple_Flag]').change(function () {
@@ -310,16 +325,18 @@
         if (this.value == 'Multiple') {
             //$('#UnitIDTawtheeq').attr('disabled', true);
             //$('#UnitPropertyName').attr('disabled', true);
-            $("#UnitPropertyId").hide();
-            $("#Unitpropertyname").hide();
+            $("#divUnitPropertyId").hide();
+            $("#divUnitpropertyname").hide();
             $("#AgreementUnit").show();
+            
         }
         else {
             //$('#UnitIDTawtheeq').removeAttr('disabled');
             //$('#UnitPropertyName').removeAttr('disabled');
-            $("#UnitPropertyId").show();
-            $("#Unitpropertyname").show();
+            $("#divUnitPropertyId").show();
+            $("#divUnitpropertyname").show();
             $("#AgreementUnit").hide();
+            
         }
         $("#property_id").val(null);
         $.ajax(
@@ -327,40 +344,20 @@
                    url: "../Tca/GetPropertiesDetails",
                    // dataType: "jsonp",
                    method: "GET",
-                   data: { Type: this.value }, //FormData(form.get(0)),
+                   data: { Type: this.value, flg: 0 }, //FormData(form.get(0)),
                    contentType: "application/json",
 
                    success: function (response) {
-                        
-                       //var propertyidOptions = '<option value="" selected>--Select--</option>';
-                       //$("#TcaPropertyId").empty();
 
                        var propertyidTawtheeqOptions = '<option value="" selected>--Select--</option>';
                        $("#TcaPropertyIDTawtheeq").empty();
 
-                       var propertyNameOptions = '<option value="" selected>--Select--</option>';
-                       $("#TcaPropertyName").empty();
-
-                       var unitidOptions = '<option value="" selected>--Select--</option>';
-                       $("#UnitIDTawtheeq").empty();
-
-                       var unitnameOptions = '<option value="" selected>--Select--</option>';
-                       $("#UnitPropertyName").empty();
-
                        $.each(response, function (index, data) {
-                           //propertyidOptions += '<option value="' + data.property_id + '">' + data.property_id + '</option>';
                            propertyidTawtheeqOptions += '<option value="' + data.property_id + '">' + data.Property_ID_Tawtheeq + '</option>';
-                           propertyNameOptions += '<option value="' + data.property_id + '">' + data.Property_Name + '</option>';
-                           if (this.value != 'Multiple') {
-                               unitidOptions += '<option value="' + data.property_id + '">' + data.Unit_ID_Tawtheeq + '</option>';
-                               unitnameOptions += '<option value="' + data.property_id + '">' + data.Unit_Property_Name + '</option>';
-                           }
                        });
                        $('#TcaPropertyIDTawtheeq').append(propertyidTawtheeqOptions);
-                       $('#TcaPropertyName').append(propertyNameOptions);
-                       $('#UnitIDTawtheeq').append(unitidOptions);
-                       $('#UnitPropertyName').append(unitnameOptions);
                    },
+
                    error: function (jqXhr, textStatus, errorThrown) {
                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                    },
@@ -368,7 +365,133 @@
                        // $("#").addClass("hide");
                    }
 
-               });
+               }
+            );
+        $.ajax(
+                {
+                    url: "../Tca/GetPropertiesDetails",
+                    method: "GET",
+                    data: { Type: this.value, flg: 1},
+                    contentType: "application/json",
+
+                    success: function (response) {
+
+                        var propertyNameOptions = '<option value="" selected>--Select--</option>';
+                        $("#TcaPropertyName").empty();
+
+                        $.each(response, function (index, data){
+                            propertyNameOptions += '<option value="' + data.property_id + '">' + data.Property_Name + '</option>';
+                        });
+                        $('#TcaPropertyName').append(propertyNameOptions);
+                    },
+
+                    error: function (jqXhr, textStatus, errorThrown){
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+
+                    }
+                }
+            );
+        $.ajax(
+                {
+                    url: "../Tca/GetPropertiesDetails",
+                    method: "GET",
+                    data: { Type: this.value, flg: 2},
+                    contentType: "application/json",
+
+                    success: function (response) {
+
+                        var unitidOptions = '<option value="" selected>--Select--</option>';
+                        $("#TcaUnitIDTawtheeq").empty();
+
+                        $.each(response, function (index, data){
+                            if (this.value != 'Multiple') {
+                                unitidOptions += '<option value="' + data.Ref_Unit_Property_ID + '">' + data.Unit_ID_Tawtheeq + '</option>';
+                                
+                              }
+                        });
+                        $('#TcaUnitIDTawtheeq').append(unitidOptions);
+                    },
+
+                    error: function (jqXhr, textStatus, errorThrown){
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+
+                    }
+                }
+            );
+        $.ajax(
+               {
+                   url: "../Tca/GetPropertiesDetails",
+                   method: "GET",
+                   data: { Type: this.value, flg: 3},
+                   contentType: "application/json",
+
+                   success: function (response) {
+
+                       var unitnameOptions = '<option value="" selected>--Select--</option>';
+                       $("#TcaUnitPropertyName").empty();
+
+                       $.each(response, function (index, data){
+                           if (this.value != 'Multiple') {
+                               unitnameOptions += '<option value="' + data.Unit_ID_Tawtheeq + '">' + data.Unit_Property_Name + '</option>';
+                           }
+                       });
+                       $('#TcaUnitPropertyName').append(unitnameOptions);
+                   },
+
+                   error: function (jqXhr, textStatus, errorThrown){
+                       alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   },
+                   complete: function () {
+
+                   }
+               }
+           );
+
+        
+
+                   //success: function (response) {
+                        
+                   //    //var propertyidOptions = '<option value="" selected>--Select--</option>';
+                   //    //$("#TcaPropertyId").empty();
+
+                   //    var propertyidTawtheeqOptions = '<option value="" selected>--Select--</option>';
+                   //    $("#TcaPropertyIDTawtheeq").empty();
+
+                   //    var propertyNameOptions = '<option value="" selected>--Select--</option>';
+                   //    $("#TcaPropertyName").empty();
+
+                   //    var unitidOptions = '<option value="" selected>--Select--</option>';
+                   //    $("#UnitIDTawtheeq").empty();
+
+                   //    var unitnameOptions = '<option value="" selected>--Select--</option>';
+                   //    $("#UnitPropertyName").empty();
+
+                   //    $.each(response, function (index, data) {
+                   //        //propertyidOptions += '<option value="' + data.property_id + '">' + data.property_id + '</option>';
+                   //        propertyidTawtheeqOptions += '<option value="' + data.property_id + '">' + data.Property_ID_Tawtheeq + '</option>';
+                   //        propertyNameOptions += '<option value="' + data.property_id + '">' + data.Property_Name + '</option>';
+                   //        if (this.value != 'Multiple') {
+                   //            unitidOptions += '<option value="' + data.property_id + '">' + data.Unit_ID_Tawtheeq + '</option>';
+                   //            unitnameOptions += '<option value="' + data.property_id + '">' + data.Unit_Property_Name + '</option>';
+                   //        }
+                   //    });
+                       
+                   //    $('#TcaPropertyIDTawtheeq').append(propertyidTawtheeqOptions);
+                   //    //$('#TcaPropertyIDTawtheeq').empty();
+                   //    $('#TcaPropertyName').append(propertyNameOptions);
+                   //    $('#UnitIDTawtheeq').append(unitidOptions);
+                   //    $('#UnitPropertyName').append(unitnameOptions);
+                   //},
+                   
+
+              
+
+
+               //);
     });
 
     $("#Tenant_Type").on('change', function (e) {
@@ -414,31 +537,41 @@
     $("#SecurityFlag").change(function () {
          
         var SecurityFlag = $("#SecurityFlag").val();
-        if (SecurityFlag != undefined && (SecurityFlag == "Cheque" || SecurityFlag == "Online" || SecurityFlag == "Cheque without date")) {
-            $('#Security_chequeno').removeAttr('disabled');
-            $('#Security_chequedate').removeAttr('disabled');
+        //if (SecurityFlag != undefined && (SecurityFlag == "Cheque" || SecurityFlag == "Online" || SecurityFlag == "Cheque without date")) {
+        if (SecurityFlag != undefined && (SecurityFlag != "Cash" )) {
+            //$('#Security_chequeno').removeAttr('disabled');
+            //$('#Security_chequedate').removeAttr('disabled');
+
+            $('#Securitycheq').removeAttr('disabled');
+            $('#SecuritycheqDate').removeAttr('disabled');
+
             //$("SecurityChequeno").prop("disabled", false);
             //$("SecurityChequedate").prop("disabled", false);
         }
         else {
-            $('#Security_chequeno').attr('disabled', true);
-            $('#Security_chequedate').attr('disabled', true);
+            //$('#Security_chequeno').attr('disabled', true);
+            //$('#Security_chequedate').attr('disabled', true);
+
+            $('#Securitycheq').attr('disabled', true);
+            $('#SecuritycheqDate').attr('disabled', true);
         }
         return;
     });
 
     $("#Ag_Tenantid").change(function () {
          
-        var tenantid = $("#Ag_Tenantid").val();
+        //var tenantid = $("#Ag_Tenantid").val();
         $("#Ag_TenantName").val($("#Ag_Tenantid option:selected").val());
 
         $("#Ag_Tenant_id").val($("#Ag_Tenantid option:selected").text() == "--Select--" ? null : $("#Ag_Tenantid option:selected").text());
         $("#Ag_Tenant_Name").val($("#Ag_TenantName option:selected").text() == "--Select--" ? null : $("#Ag_TenantName option:selected").text());
+        //alert($("#Ag_Tenant_id").val());
+        //alert($("#Ag_TenantName").val());
        // $("#Ag_Tenant_Name").val($("#Ag_Tenant_id option:selected").text());
         return;
     });
     $("#Ag_TenantName").change(function () {
-        var tenantid = $("#Ag_TenantName").val();
+        //var tenantid = $("#Ag_TenantName").val();
         $("#Ag_Tenantid").val($("#Ag_TenantName option:selected").val());
         $("#Ag_Tenant_id").val($("#Ag_Tenantid option:selected").text() == "--Select--" ? null : $("#Ag_Tenantid option:selected").text());
         $("#Ag_Tenant_Name").val($("#Ag_TenantName option:selected").text() == "--Select--" ? null : $("#Ag_TenantName option:selected").text());
@@ -446,92 +579,247 @@
         return;
     });
 
-    $("#Caretakerid").change(function () {
-        var Caretakerid = $("#Caretakerid").val();
-        $("#CaretakerName").val($("#Caretakerid option:selected").val());
+    //$("#Caretakerid").change(function () {
+    //    var Caretakerid = $("#Caretakerid").val();
+    //    $("#CaretakerName").val($("#Caretakerid option:selected").val());
 
-        $("#Caretaker_id").val($("#Caretakerid option:selected").text() == "--Select--" ? null : $("#Caretakerid option:selected").text());
-        $("#Caretaker_Name").val($("#CaretakerName option:selected").text() == "--Select--" ? null : $("#CaretakerName option:selected").text());
+    //    $("#Caretaker_id").val($("#Caretakerid option:selected").text() == "--Select--" ? null : $("#Caretakerid option:selected").text());
+    //    $("#Caretaker_Name").val($("#CaretakerName option:selected").text() == "--Select--" ? null : $("#CaretakerName option:selected").text());
 
-        // $("#Ag_Tenant_Name").val($("#Ag_Tenant_id option:selected").text());
-        return;
-    });
-    $("#CaretakerName").change(function () {
-        var Caretakerid = $("#CaretakerName").val();
-        $("#Caretakerid").val($("#CaretakerName option:selected").val());
+    //    // $("#Ag_Tenant_Name").val($("#Ag_Tenant_id option:selected").text());
+    //    return;
+    //});
+    //$("#CaretakerName").change(function () {
+    //    var Caretakerid = $("#CaretakerName").val();
+    //    $("#Caretakerid").val($("#CaretakerName option:selected").val());
 
-        $("#Caretaker_id").val($("#Caretakerid option:selected").text() == "--Select--" ? null : $("#Caretakerid option:selected").text());
-        $("#Caretaker_Name").val($("#CaretakerName option:selected").text() == "--Select--" ? null : $("#CaretakerName option:selected").text());
-        //$("#Ag_Tenant_id").val($("#Ag_Tenant_Name option:selected").text());
-        return;
-    });
+    //    $("#Caretaker_id").val($("#Caretakerid option:selected").text() == "--Select--" ? null : $("#Caretakerid option:selected").text());
+    //    $("#Caretaker_Name").val($("#CaretakerName option:selected").text() == "--Select--" ? null : $("#CaretakerName option:selected").text());
+    //    //$("#Ag_Tenant_id").val($("#Ag_Tenant_Name option:selected").text());
+    //    return;
+    //});
 
-    $("#TcaPropertyIDTawtheeq").change(function () {
-        var propertyid = $("#TcaPropertyIDTawtheeq").val();
-        $("#TcaPropertyName").val($("#TcaPropertyIDTawtheeq option:selected").val());
-        $("#UnitIDTawtheeq").val($("#TcaPropertyIDTawtheeq option:selected").val());
-        $("#UnitPropertyName").val($("#TcaPropertyIDTawtheeq option:selected").val());
-        $("#property_id").val(propertyid);
-        setpropertyFields();
-        // $("#Ag_Tenant_Name").val($("#Ag_Tenant_id option:selected").text());
-        return;
-    });
+    //$("#TcaPropertyIDTawtheeq").change(function () {
+    //    var propertyid = $("#TcaPropertyIDTawtheeq").val();
+    //    //alert(propertyid);
+
+    //    $("#property_id").val(propertyid);
+    //    $("#TcaPropertyName").val(propertyid);
+    //    $("#UnitIDTawtheeq").val(propertyid);       
+    //    $("#UnitPropertyName").val(propertyid);
+    //    //$("#TcaPropertyName").val($("#TcaPropertyIDTawtheeq option:selected").val());
+    //    //$("#UnitIDTawtheeq").val($("#TcaPropertyIDTawtheeq option:selected").val());
+    //    //$("#UnitPropertyName").val($("#TcaPropertyIDTawtheeq option:selected").val());
+    //    //$("#property_id").val(propertyid);
+    //    setpropertyFields();
+    //    // $("#Ag_Tenant_Name").val($("#Ag_Tenant_id option:selected").text());
+    //    return;
+    //});
     $("#TcaPropertyName").change(function () {
+        debugger;
         var propertyid = $("#TcaPropertyName").val();
+        if ($("#single").prop('checked') == true)
+        {
+
+            if ($("#TcaPropertyName option:selected").text() == "--Select--") {
+                $("#TcaUnitPropertyName").attr("disabled", true);
+            }
+            else if ($("#TcaPropertyName option:selected").text() != "--Select--") {
+                $("#TcaUnitPropertyName").attr("disabled", false);
+            }
+        }
+        else
+        {
+            //alert("hi");
+            $("#AgreementUnit #Properties_Name").val($("#TcaPropertyName option:selected").val());
+            $("#AgreementUnit #Property_ID").val(propertyid);
+            $("#AgreementUnit #Property_ID_Tawtheeq").val($("#TcaPropertyName option:selected").val());
+            $("#AgreementUnit #Properties_Name").trigger("change");
+
+        }
+        
+        
+
         $("#TcaPropertyIDTawtheeq").val($("#TcaPropertyName option:selected").val());
-        $("#UnitIDTawtheeq").val($("#TcaPropertyName option:selected").val());
-        $("#UnitPropertyName").val($("#TcaPropertyName option:selected").val());
         $("#property_id").val(propertyid);
         setpropertyFields();
-        //$("#Ag_Tenant_id").val($("#Ag_Tenant_Name option:selected").text());
+        getmonthrentamt("Property");
+        //var proprent = $("hdnPropMonthlyRent").val();
+        //proprent = parseFloat(proprent).toFixed(2);
+        //proprent = Math.ceil(proprent);
+       
         return;
+        //$("#UnitIDTawtheeq").val($("#TcaPropertyName option:selected").val());
+       // $("#UnitPropertyName").val($("#TcaPropertyName option:selected").val());
+
+
+        //$("#Ag_Tenant_id").val($("#Ag_Tenant_Name option:selected").text());
     });
 
-    $("#UnitIDTawtheeq").change(function () {
-        //var propertyid = $("#UnitIDTawtheeq").val();
-        //$("#TcaPropertyIDTawtheeq").val($("#UnitIDTawtheeq option:selected").val());
-        //$("#TcaPropertyName").val($("#UnitIDTawtheeq option:selected").val());
-        //$("#UnitPropertyName").val($("#UnitIDTawtheeq option:selected").val());
+    //$("#UnitIDTawtheeq").change(function () {
+    //    var propertyid = $("#UnitIDTawtheeq").val();
+
+    //    $("#TcaPropertyIDTawtheeq").val(propertyid);
+    //    $("#TcaPropertyName").val(propertyid);
+    //    //$("#UnitPropertyName").val(propertyid);
+    //    $("#property_id").val(propertyid);
+    //    setunitFields();
+    //    //$("#Ag_Tenant_id").val($("#Ag_Tenant_Name option:selected").text());
+    //    //alert($("#UnitIDTawtheeq option:selected").text());
+    //    $("#UnitPropertyName").val($("#UnitIDTawtheeq option:selected").text() == "--Select--" ? null : $("#UnitIDTawtheeq  option:selected").text());
+    //    setunitFields();
+    //    return;
+    //});
+
+    $("#TcaUnitPropertyName").change(function () {
+        $("#TcaUnitIDTawtheeq option:selected").text($("#TcaUnitPropertyName option:selected").text() == "--Select--" ? "--Select--" : $("#TcaUnitPropertyName").val());
+
+
+        $("#Unit_ID_Tawtheeq").val($("#TcaUnitIDTawtheeq option:selected").text() == "--Select--" ? null : $("#TcaUnitIDTawtheeq option:selected").text());
+        //alert($("#Unit_ID_Tawtheeq").val());
+        $("#Unit_Property_Name").val($("#TcaUnitPropertyName option:selected").text() == "--Select--" ? null : $("#TcaUnitPropertyName option:selected").text());
+        //alert($("#Unit_Property_Name").val());
+        // setunitFields();
+
+       // $("#UnitPropertyName option:selected").text($("#UnitPropertyName option:selected").text() == "--Select--" ? "--Select--" : $("#UnitPropertyName").val());
+        //var propertyid = $("#UnitIDTawtheeq option:selected").val();
+        //$("#TcaPropertyIDTawtheeq").val(propertyid);
+        //$("#TcaPropertyName").val(propertyid);
         //$("#property_id").val(propertyid);
-        setunitFields();
-        //$("#Ag_Tenant_id").val($("#Ag_Tenant_Name option:selected").text());
-        $("#UnitPropertyName").val($("#Property_ID_Tawtheeq option:selected").text() == "--Select--" ? null : $("#UnitIDTawtheeq").val());
-        setunitFields();
-        return;
-    });
-
-    $("#UnitPropertyName").change(function () {
         
-        $("#UnitIDTawtheeq").val($("#UnitPropertyName option:selected").text() == "--Select--" ? null : $("#UnitPropertyName").val());
-       setunitFields();
         //$("#Ag_Tenant_id").val($("#Ag_Tenant_Name option:selected").text());
+        getmonthrentamt("Unit");
         return;
     });
 
+
+    function getmonthrentamt(type)
+    {
+        $.ajax(
+            {
+                url: "../Tca/GetPropertyUnitMonthlyRent",
+                // dataType: "jsonp",
+                method: "GET",
+                data: { PropertyID: $("#TcaPropertyName").val(), UnitTawtheeqID: $("#TcaUnitPropertyName").val(), PropUnitFlag:type }, //FormData(form.get(0)),
+                contentType: "application/json",
+
+                success: function (response) {
+
+                    //var propertyidTawtheeqOptions = '<option value="" selected>--Select--</option>';
+                    //$("#TcaPropertyIDTawtheeq").empty();
+
+                    //$.each(response, function (index, data) {
+                    //    propertyidTawtheeqOptions += '<option value="' + data.property_id + '">' + data.Property_ID_Tawtheeq + '</option>';
+                    //});
+                    //$('#TcaPropertyIDTawtheeq').append(propertyidTawtheeqOptions);
+                    //debugger;
+                    var propmonthrent;
+                    var unitmonthrent;
+                    //var propflag;
+                    $.each(response, function (index, data) {
+                        propmonthrent = data.Rental_Rate_Month;
+                        unitmonthrent = data.Rental_Rate_Month_unit;                       
+                    });
+                    propmonthrent = propmonthrent / 30;
+                    unitmonthrent = unitmonthrent / 30;
+
+                    if (type == "Property")
+                    {
+                        $("#hdnPropMonthlyRent").val(propmonthrent);
+                        $("#hdnPropUntMonthlyRentPerDay").val(propmonthrent);
+                        $("#hdnPropUnitMonthlyRent").val(propmonthrent * 30);
+                    }
+                    else if (type == "Unit")
+                    {
+                        $("#hdnUnitMonthlyRent").val(unitmonthrent);
+                        $("#hdnPropUntMonthlyRentPerDay").val(unitmonthrent);
+                        $("#hdnPropUnitMonthlyRent").val(unitmonthrent * 30);
+                    }
+                    var tst = $("#hdnPropUntMonthlyRentPerDay").val();
+                    tst = parseFloat(tst).toFixed(2);
+                    //tst = Math.ceil(tst);
+                    $("#hdnPropUntMonthlyRentPerDay").val(tst);
+                    //alert($("#hdnPropUntMonthlyRentPerDay").val());
+
+                    //$("#hdnUnitMonthlyRent").val(unitmonthrent);
+                    //alert($("#hdnPropMonthlyRent").val());
+                    //alert($("#hdnUnitMonthlyRent").val());
+                    
+                    //debugger;
+                    //alert(tst);
+                    
+                   
+
+                    //alert(parseFloat(tst).toFixed(2));
+
+                    //debugger;
+                    //
+                    //alert(tst);
+                },
+
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    // $("#").addClass("hide");
+                }
+
+            }
+         );
+    }
+
+    
     $(document).ready(function () {
          
-        if ($("#single")[0].checked) {
-            $("#single").prop('checked', true).change();
-            //$("select option").prop("selected", false);
-        }
-        else {
+        if ($("#multiple")[0].checked) {
             $("#multiple").prop('checked', true).change();
             //$("select option").prop("selected", false);
+            
+        }
+        else {
+            $("#single").prop('checked', true).change();
+            //$("select option").prop("selected", false);
+            //$("#UnitPropertyName").attr("disabled", true);
         }
         //$("#property").prop('checked', true).change();
     });
+
+    //$("#single").change()(function () {
+    //    disableunit();
+    //});
+    //$("#multiple").change()(function () {
+    //    disableunit();
+    //});
+    //function disableunit()
+    //{
+    //    if(($("#single").prop('checked') == true))
+    //    {
+    //        $("#UnitPropertyName").attr("disabled", true);
+    //    }
+    //}
+
     function setpropertyFields() {
         $("#Property_ID_Tawtheeq").val($("#TcaPropertyIDTawtheeq option:selected").text() == "--Select--" ? null : $("#TcaPropertyIDTawtheeq option:selected").text());
         $("#Properties_Name").val($("#TcaPropertyName option:selected").text() == "--Select--" ? null : $("#TcaPropertyName option:selected").text());
+        
+
         var propertyid =parseInt($("#property_id").val());
-       // alert(propertyid);
+       //alert(propertyid);
         if($.isNumeric(propertyid))
         {
-            getUnit(propertyid);
+            //alert(propertyid);
+            //alert("getUnit");
+            if ($("#single").prop('checked') == true)
+            {
+               // alert("single");
+            }
+            $("#TcaUnitPropertyName").empty();
+            getUnits(propertyid);
             GetPropertyOnChange();
+           
         }  
     }
-    function getUnit(propertyId)
+    function getUnits(propertyId)
     {
         $.ajax(
                {
@@ -553,24 +841,26 @@
                        //$("#TcaPropertyName").empty();
 
                        var unitidOptions = '<option value="" selected>--Select--</option>';
-                       $("#UnitIDTawtheeq").empty();
+                       $("#TcaUnitIDTawtheeq").empty();
 
                        var unitnameOptions = '<option value="" selected>--Select--</option>';
-                       $("#UnitPropertyName").empty();
+                      
 
                        $.each(response, function (index, data) {
                            //propertyidOptions += '<option value="' + data.property_id + '">' + data.property_id + '</option>';
                            //propertyidTawtheeqOptions += '<option value="' + data.Property_ID_Tawtheeq + '">' + data.Property_ID_Tawtheeq + '</option>';
                            // propertyNameOptions += '<option value="' + data.Property_ID_Tawtheeq + '">' + data.Property_Name + '</option>';
 
-                           unitidOptions += '<option value="' + data.Value + '">' + data.Value + '</option>';
-                           unitnameOptions += '<option value="' + data.Value + '">' + data.Text + '</option>';
+                           unitidOptions += '<option value="' + data.Ref_Unit_Property_ID + '">' + data.Unit_ID_Tawtheeq + '</option>';
+                           unitnameOptions += '<option value="' + data.Unit_ID_Tawtheeq + '">' + data.Unit_Property_Name + '</option>';
 
                        });
                        //$('#TcaPropertyIDTawtheeq').append(propertyidTawtheeqOptions);
                        //$('#TcaPropertyName').append(propertyNameOptions);
-                       $('#UnitIDTawtheeq').append(unitidOptions);
-                       $('#UnitPropertyName').append(unitnameOptions);
+
+                       $('#TcaUnitIDTawtheeq').append(unitidOptions);
+                       //$("#UnitPropertyName").empty();
+                       $('#TcaUnitPropertyName').append(unitnameOptions);
                    },
                    error: function (jqXhr, textStatus, errorThrown) {
                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -581,11 +871,17 @@
 
                });
     }
-    function setunitFields()
-    {
-        $("#Unit_ID_Tawtheeq").val($("#UnitIDTawtheeq option:selected").text() == "--Select--" ? null : $("#UnitIDTawtheeq option:selected").text());
-        $("#Unit_Property_Name").val($("#UnitPropertyName option:selected").text() == "--Select--" ? null : $("#UnitIDTawtheeq option:selected").text());
-    }
+    //function setunitFields()
+    //{        
+    //    $("#Unit_ID_Tawtheeq").val($("#UnitIDTawtheeq option:selected").text() == "--Select--" ? null : $("#UnitIDTawtheeq option:selected").text());
+    //    alert($("#Unit_ID_Tawtheeq").val());
+    //    $("#Unit_Property_Name").val($("#UnitPropertyName option:selected").text() == "--Select--" ? null : $("#UnitPropertyName option:selected").text());
+    //    alert($("#Unit_Property_Name").val());
+    //    //$("#hdnUnit_ID_Tawtheeq").val($("#Unit_ID_Tawtheeq").val());
+    //    //$("#hdnUnit_Property_Name").val($("#Unit_Property_Name").val());
+    //    ////alert("#hdnUnit_ID_Tawtheeq").val();
+    //    //alert("#hdnUnit_Property_Name").val();
+    //}
     $("#Agreement_Start_Date").change(function () {
         setContractAmountPerDay();
     });
@@ -593,17 +889,20 @@
         setContractAmountPerDay();
     });
     $("#Total_Rental_amount").change(function () {
+       
         setContractAmountPerDay();
     });
     setContractAmountPerDay();
     function setContractAmountPerDay()
     {
+      
         var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
         var firstDate = new Date($("#Agreement_Start_Date").val());
         var secondDate = new Date($("#Agreement_End_Date").val());
         var Total_Rental_amount = parseFloat($("#Total_Rental_amount").val());
-        var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
+        var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));        
         var amountperday = 0.0;
+        //debugger;
         if (firstDate < secondDate)
         {
             if (diffDays > 0) {
@@ -614,12 +913,30 @@
         {
             amountperday = Total_Rental_amount;
         }
+
+        var PUMonthlyRentPerday = $("#hdnPropUntMonthlyRentPerDay").val();
+        var MinRent = diffDays * PUMonthlyRentPerday;
+        if (Total_Rental_amount > 0)
+        {
+            if (MinRent > Total_Rental_amount) {
+                var RentDiff = MinRent - Total_Rental_amount;
+                if (RentDiff > 50) {
+                    debugger;
+                    //alert("Rental Amount Less than Minimum Rental Amount\nMonthly Rental:" + $("#hdnPropUnitMonthlyRent").val() + "\nPer Day Rental(Monthly Rental /30):" + PUMonthlyRentPerday + "\nTotal Agreement Days:" + diffDays + "\nMinimum Rental(Per Day Rental*Total Agreement Days):" + MinRent + "\nAgreement Rental Amount:" + Total_Rental_amount + "\nAmount Difference(Minimum Rental-Agreement Rental Amount):" + RentDiff);
+                    alert("Rental Amount Less than Minimum Rental Amount\nExpected Rental Amount:" + Math.ceil(MinRent) + "\nAgreement Rental Amount:" + Total_Rental_amount);
+                }
+            }
+        }
+       
+
         
         $("#Perday_Rental").val(amountperday);
     }
     //GetPropertyOnChange
     function GetPropertyOnChange()
     {
+        //alert($("#TcaPropertyName").val());
+        //alert($("#TcaPropertyName option:selected").val());
         if($("#TcaPropertyName").val()=="")
         {
             return;

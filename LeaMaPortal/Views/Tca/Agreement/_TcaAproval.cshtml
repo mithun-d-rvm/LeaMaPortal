@@ -19,9 +19,9 @@
     @Html.HiddenFor(x => x.Caretaker_Name)
     @Html.HiddenFor(x => x.Agreement_No)
     @*@Html.HiddenFor(x => x.Tenant_Type)*@
-    <div class="font-smaller">
+    <div style="max-height:650px; overflow:scroll" class="font-smaller">
         @Html.HiddenFor(m => m.New_Renewal_flag)
-        <button type="button" class="close font-40" data-dismiss="modal"> &times;</button>
+        <button type="button" class="close font-40"  onclick="javascript:window.location.reload()"  data-dismiss="modal"> &times;</button>
         <div class="text-uppercase popup-heading">
             Contract Tenancy Agreement - Aproval
         </div>
@@ -33,13 +33,13 @@
                         <span> Single Unit </span>
                     </div>
                     <div class="col-md-1">
-                        @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Single", new { @class = "input-checkbox", @required = "required", @id = "single", @readonly = "readonly" })
+                        @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Single", new { @class = "input-checkbox", @required = "required", @id = "single", @readonly = "readonly", @disabled = "disabled" })
                     </div>
                     <div class="col-md-4 m-t-3">
                         <span> Multiple Unit </span>
                     </div>
                     <div class="col-md-1 m-l-m-40">
-                        @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Multiple", new { @class = "input-checkbox", @required = "required", @id = "multiple", @readonly = "readonly" })
+                        @Html.RadioButtonFor(model => model.Single_Multiple_Flag, "Multiple", new { @class = "input-checkbox", @required = "required", @id = "multiple", @readonly = "readonly", @disabled = "disabled" })
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                     </div>
                     <div class="col-md-6">
                         @*@Html.EditorFor(model => model.Agreement_Date, new { htmlAttributes = new { @class = "master-form-input" } })*@
-                        @Html.EditorFor(model => model.Agreement_Date, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Agreement_Date, new { htmlAttributes = new { @class = "master-form-input form-control", @disabled = "disabled" } })
                         @Html.ValidationMessageFor(model => model.Agreement_Date, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                         @Html.LabelFor(model => model.Tenant_Type, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.DropDownList("Tenant_Type", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @readonly = "readonly" })
+                        @Html.DropDownList("Tenant_Type", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @readonly = "readonly", @disabled = "disabled" })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -94,7 +94,7 @@
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
                         @*@Html.DropDownList("Ag_Tenantid", null, "-- Select --", new { @class = "master-form-input form-control", @Name = "Ag_Tenant_id", @required = "required",@disabled= "disabled" })*@
-                        @Html.EditorFor(model => model.Ag_Tenant_id, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
+                        @Html.EditorFor(model => model.Ag_Tenant_id, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly", @disabled = "disabled" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.EditorFor(model => model.Ag_Tenant_Name, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly" } })
+                        @Html.EditorFor(model => model.Ag_Tenant_Name, new { htmlAttributes = new { @class = "master-form-input form-control", @readonly = "readonly", @disabled = "disabled" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -112,7 +112,7 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("Caretakerid", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @readonly = "readonly" })
+                        @Html.DropDownList("Caretakerid", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @readonly = "readonly", @disabled = "disabled" })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -121,7 +121,7 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("CaretakerName", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @readonly = "readonly" })
+                        @Html.DropDownList("CaretakerName", null, "-- Select --", new { @class = "master-form-input form-control", @required = "required", @readonly = "readonly", @disabled = "disabled" })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -141,7 +141,7 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("TcaPropertyIDTawtheeq", null, "-- Select --", new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("TcaPropertyIDTawtheeq", null, new { @class = "master-form-input form-control", @disabled = "disabled" }) @*, "-- Select --"*@
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -150,7 +150,7 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("TcaPropertyName", null, "-- Select --", new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("TcaPropertyName", null, new { @class = "master-form-input form-control", @disabled = "disabled" }) @*, "-- Select --"*@
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7" id="UnitPropertyId">
@@ -159,7 +159,7 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("UnitIDTawtheeq", null, "-- Select --", new { @class = "master-form-input form-control", @readonly = "readonly" })
+                        @Html.DropDownList("UnitIDTawtheeq", null, new { @class = "master-form-input form-control", @readonly = "readonly", @disabled = "disabled" }) @*, "-- Select --"*@
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7" id="Unitpropertyname">
@@ -168,7 +168,7 @@
                     </div>
                     <div class="col-md-6">
                         @*<input type="text" class="master-form-input form-control" />*@
-                        @Html.DropDownList("UnitPropertyName", null, "-- Select --", new { @class = "master-form-input form-control", @readonly = "readonly" })
+                        @Html.DropDownList("UnitPropertyName", null, new { @class = "master-form-input form-control", @readonly = "readonly", @disabled = "disabled" }) @*, "-- Select --"*@
                     </div>
                 </div>
             </div>
@@ -181,7 +181,7 @@
                         @Html.LabelFor(model => model.Vacantstartdate, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Vacantstartdate, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Vacantstartdate, new { htmlAttributes = new { @class = "master-form-input form-control", @disabled = "disabled" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -189,7 +189,7 @@
                         @Html.LabelFor(model => model.Agreement_Start_Date, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Agreement_Start_Date, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Agreement_Start_Date, new { htmlAttributes = new { @class = "master-form-input form-control", @disabled = "disabled" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -197,7 +197,7 @@
                         @Html.LabelFor(model => model.Agreement_End_Date, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Agreement_End_Date, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Agreement_End_Date, new { htmlAttributes = new { @class = "master-form-input form-control", @disabled = "disabled" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -205,7 +205,7 @@
                         @Html.LabelFor(model => model.Total_Rental_amount, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Total_Rental_amount, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'TcaRenewal #Total_Rental_amount');" } })
+                        @Html.EditorFor(model => model.Total_Rental_amount, new { htmlAttributes = new { @class = "master-form-input form-control", @disabled = "disabled", @onkeypress = "allow_only_Float(event,'TcaRenewal #Total_Rental_amount');" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -213,7 +213,7 @@
                         @Html.LabelFor(model => model.Perday_Rental, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Perday_Rental, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'TcaRenewal #Perday_Rental');", @readonly = "readonly" } })
+                        @Html.EditorFor(model => model.Perday_Rental, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_Float(event,'TcaRenewal #Perday_Rental');", @readonly = "readonly", @disabled = "disabled" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -221,7 +221,7 @@
                         @Html.LabelFor(model => model.nofopayments, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);" } })
+                        @Html.EditorFor(model => model.nofopayments, new { htmlAttributes = new { @class = "master-form-input form-control", @disabled = "disabled", @onkeypress = "allow_only_numbers(event);" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -229,7 +229,7 @@
                         @Html.LabelFor(model => model.Advance_Security_Amount, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Advance_Security_Amount, new { htmlAttributes = new { @class = "master-form-input form-control" } })
+                        @Html.EditorFor(model => model.Advance_Security_Amount, new { htmlAttributes = new { @class = "master-form-input form-control", @disabled = "disabled" } })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -242,7 +242,7 @@
                                 <option> Payment 2 </option>
                                 <option> Payment 3 </option>
                             </select>*@
-                        @Html.DropDownList("SecurityFlag", null, new { @class = "master-form-input form-control" })
+                        @Html.DropDownList("SecurityFlag", null, new { @class = "master-form-input form-control", @disabled = "disabled" })
                     </div>
                 </div>
                 <div class="col-md-12 p-b-7">
@@ -266,7 +266,7 @@
                         @Html.LabelFor(model => model.Notice_Period, htmlAttributes: new { @class = "label-default-remove" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.Notice_Period, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);" } })
+                        @Html.EditorFor(model => model.Notice_Period, new { htmlAttributes = new { @class = "master-form-input form-control", @disabled = "disabled", @onkeypress = "allow_only_numbers(event);" } })
                     </div>
                 </div>
 
@@ -332,7 +332,7 @@
                 &nbsp;
             </div>
             <div class="col-md-2">
-                <input type="button" class="btn master-form-btn tca-approve" data-dismiss="modal" data-agreementno="@Model.Agreement_No" value="Aprove" />
+                <input type="button" class="btn master-form-btn tca-approve" data-dismiss="modal" data-agreementno="@Model.Agreement_No" value="Approve" />
             </div>
             <div class="col-md-1">&nbsp;</div>
             <div class="col-md-2">
@@ -345,7 +345,36 @@
     </div>
 }
 <script>
+    singleOrMultiple();
+    function singleOrMultiple() {
+        //alert("i");
+        var value = $('input[type=radio][name=Single_Multiple_Flag]:checked').val();
+        //alert(value);
+        if (value == 'Multiple') {
+            //$('#UnitIDTawtheeq').attr('disabled', true);
+            //$('#UnitPropertyName').attr('disabled', true);
+            //alert(value);
+            $("#UnitPropertyId").hide();
+            $("#Unitpropertyname").hide();
+            $("#AgreementUnitR").show();
+            //$("#TcaPropertyIDTawtheeq").empty();
+            $("#AgreementUnitR #Unit_Property_Name").prop("disabled","disabled");
+        }
+        else {
+            //$('#UnitIDTawtheeq').removeAttr('disabled');
+            //$('#UnitPropertyName').removeAttr('disabled');
 
+            $("#UnitPropertyId").show();
+            $("#Unitpropertyname").show();
+            $("#AgreementUnitR").hide();
+            $("#AgreementUnitR Unit_Property_Name").prop("disabled","disabled");
+            //$("#TcaPropertyIDTawtheeq").empty();
+        }
+    }
+    $('input[type=radio][name=Single_Multiple_Flag]').change(function () {
+        //alert("change");
+        singleOrMultiple();
+    });
 
     
 
@@ -425,6 +454,7 @@
                 $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-success");
                 $(".result-title").text("Success");
                 $(".result-modal-body span").text("TCA approved successfully");
+                getAgreementList();
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
@@ -484,4 +514,31 @@
         AgreementRejected(id);
       
     });
+    function getAgreementList() {
+        $.ajax(
+           {
+               url: "../Tca/List",
+               type: "Get",
+               data: { Search: "", page: 1 },
+               success: function (html) {
+                   $("#agreementList").html(html);
+               },
+               error: function (jqXhr, textStatus, errorThrown) {
+                   //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                   $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                   $(".result-title").text("Failure");
+                   $(".result-modal-body span").text("Could not able to process your requests");
+                   $('#masterResultModal').modal('show');
+               },
+               complete: function () {
+                   //   $("#VerifyIdDetailsLoader").addClass("hide");
+               }
+           });
+    }
+
+    $('#renewalModal').modal({
+        backdrop: 'static',
+        keyboard: false
+    })
 </script>

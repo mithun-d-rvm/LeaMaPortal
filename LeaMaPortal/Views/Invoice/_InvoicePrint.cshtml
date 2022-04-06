@@ -1,0 +1,370 @@
+﻿@Html.Raw(ViewBag.invdtas)
+@model LeaMaPortal.Models.InvoicePrintModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+   
+
+
+</head>
+<body>
+    <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" style="margin-top: -25px;margin-right: -26px;font-size: xx-large; color:black;background-color:white">×</button>
+        <div id="PrintelementID">
+            <div class="modal-body">
+                <div style="text-align:center; font-size:14px;">
+                    <img src="~/Images/logo.jpg">
+                </div>
+                <div style="padding-bottom:2%">&nbsp</div>
+                <div style="text-align:center; font-size:14px;">
+                    <table class="alpha">
+                        <tr>
+                            <td rowspan="" style="width:5%;">
+                                <div style="float:left; text-align:left;">
+                                    <p style="margin-bottom:2px !important;">Tel: +971-2-2222844</p>
+                                    <p style="margin-bottom:2px !important;">Fax: +971-2-2222874</p>
+                                    <p style="margin-bottom:2px !important;">P.O. Box: 60885</p>
+                                    <p style="margin-bottom:2px !important;">Abu Dhabi, U.A.E</p>
+                                    <p style="margin-bottom:2px !important;">E-Mail: info@hameeminvest.com</p>
+                                    <p style="margin-bottom:2px !important;font-size:10px;">Limited Liability Company, Paid up Capital 150,000</p>
+                                </div>
+                            </td>
+                            <td style="width:20%; font-size:25px;text-align:left;padding-left: 18%;font-weight: bold;padding-bottom: 5%;">INVOICE</td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div style="padding-bottom:2%">&nbsp</div>
+                <div style="text-align:right; font-size:14px;">
+                    <table class="alpha">
+                        <tr>
+                            <td style="text-align:left;" width="70%">
+                                <div>
+                                    Tenant Name & Address:
+                                </div>
+                                <div style="padding-left:20px; padding-top:10px;">
+                                    @Model.Tenant_Name
+                                </div>
+                                <div style="padding-left:20px;">
+                                    @Model.Ag_Tenant_Address
+                                </div>
+                            </td>
+                            <td style="text-align:right;" width="30%">
+                                <table class="gama1">
+                                    <tr>
+                                        <td style="text-align:left;">InvoiceNo</td>
+                                        <td>&nbsp;</td>
+                                        <td>: </td>
+                                        <td>@Model.invno</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left;">Invoice Date</td>
+                                        <td>&nbsp;</td>
+                                        <td>: </td>
+                                        <td>@Model.invdate</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left;">Invoice Month</td>
+                                        <td>&nbsp;</td>
+                                        <td>: </td>
+                                        <td>@Model.month</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left;">Invoice Type</td>
+                                        <td>&nbsp;</td>
+                                        <td>: </td>
+                                        <td>@Model.invtype</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+
+                <div style="padding-bottom:2%">&nbsp</div>
+                <div>
+                    <table class="gama">
+                        <tr>
+                            <td style="text-align:center; font-weight:bold;">Agreement No</td>
+                            <td style="text-align:center; font-weight:bold;">Agreement Date</td>
+                            <td style="text-align:center; font-weight:bold;">Unit Name</td>
+                            <td style="text-align:center; font-weight:bold;">Property Name</td>
+                        </tr>
+                        <tr>
+                            <td>@Model.Agreement_No</td>
+                            <td>@Model.Agreementdate</td>
+                            <td>@Model.unit_Name</td>
+                            <td>@Model.Property_Name</td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="padding-bottom:2%">&nbsp</div>
+                <style>
+                    table.gama {
+                        border-collapse: collapse;
+                        width: 100%;
+                        text-align: left;
+                        padding-left: 15px;
+                        font-size: 13px;
+                    }
+
+                    .gama td, th {
+                        border: 1px solid black;
+
+                        padding: 5px;
+                    }
+
+                    .gama1 td:nth-child(2) {width:10px;
+                    }
+
+                    .gama td {
+                        vertical-align: top;
+                    }
+
+                    .gama1 td, th {
+                        border: none;
+                        padding: 0px 10px;
+                        font-size: 13px;
+                    }
+
+                    table.alpha {
+                        border:none;
+                        width: 100%;
+                    }
+
+                    .alpha td, th {
+                        padding: 5px;
+                    }
+
+                    table.beta1 {
+                        border-collapse: collapse;
+                        width: 100%;
+                        text-align: center;
+                        font-size:14px;
+                    }
+
+                    .beta1 th {
+                        border: 1px solid black;
+                        border-bottom:none;
+                        padding: 5px;
+                        text-align:center;
+                    }
+
+                     table.beta2 {
+                        border-collapse: collapse;
+                        width: 100%;
+                        text-align: center;
+                        font-size:13px;
+                        min-height:250px;
+                        max-height:250px;
+                    }
+
+                    .beta2 td{
+                        border: 1px solid black;
+                        padding: 5px;
+                        padding-top:10px;
+                        text-align:center;
+                        vertical-align: top;
+                    }
+
+                    table.beta3 {
+                        border-collapse: collapse;
+                        width: 100%;
+                        text-align: center;
+                        font-size:13px;
+                        min-height:200px;
+                        max-height:200px;
+                    }
+
+                    .beta3 td{
+                        border: 1px solid black;
+                        padding: 5px;
+                        padding-bottom:10px;
+                        text-align:center;
+                        vertical-align: bottom;
+                    }
+
+
+                </style>
+                <div>
+
+                    
+
+                    @if (ViewBag.invdtas.Count > 0)
+                {
+
+                        <table class="beta1">
+                            <thead>
+                            <th style="width:10%;">Item</th>
+                            <th style="width:65%;">Description</th>
+                            <th style="width:10%;">Qty</th>
+                            <th style="width:15%;">Amount</th>
+
+                        </table>
+                        <table class="beta2">
+                            @foreach (var item in ViewBag.invdtas)
+                        {
+                                
+                                <tr>
+
+                                    <td style="width:10%;">
+                                        @item.item
+                                    </td>
+                                    <td style="width:65%;text-align:left;">
+                                        @item.description
+                                    </td>
+                                    <td style="width:10%;">
+                                        @item.qty                                                                         
+                                    </td>
+                                    <td style="width:15%;">
+                                        @item.amount
+                                    </td>
+                                </tr>
+
+                        }
+                        </table>
+                        <div style="padding-bottom:2%">&nbsp</div>                       
+                        <table style="float:right;text-align:right; font-size:14px; width:100%">
+                            @*<tr style="padding-bottom:10px;"><td>Subtotal:</td><td style="min-width:100px; max-width:100px;">&nbsp;</td></tr>
+                            <tr style="padding-bottom:10px;"><td>Discount/ round off:</td><td style="min-width:100px; max-width:100px;">&nbsp;</td></tr>*@
+                            <tr style="padding-bottom:10px;">
+                                <td style="text-align:left;padding:1%;width:14%">Amounts In Words:</td>
+                                <td style="text-align:left">@Model.amtinwords</td>
+                                <td>TOTAL&nbsp;:</td>
+                                <td style="min-width:100px; max-width:100px;text-align:left;padding-left:1%">@Model.totalamt </td>
+                            </tr>
+                        </table>
+                        <div style="padding-bottom:2%">&nbsp</div>
+                }
+                </div>
+
+
+
+
+                <div style="padding-top:10px;font-size:13px;clear:both;">
+                    <div style="width:50%; float:left; text-align:left">
+                        @*<b>Terms and conditions</b><br />*@
+                        <b>Remarks</b><br />
+
+                        <ul>
+                            <li style="list-style:none">@Model.remarks</li>
+                            @*1. @Model.remarks
+                            <br />
+                            2.
+                            <br />
+                            3.*@
+
+                        </ul>
+
+                    </div>
+                    <div style="width:30%; float:right; text-align:center">
+                        <b>For Hameem Investments LLC</b>
+                        @*<div style="min-width:200px;max-width:200px;min-height:30px;max-height:30px;border:thin solid #000;"></div>*@
+                        <br /> <br />  (Authorised Signatory)
+                    </div>
+                </div>
+                <div style="padding-bottom:2%;clear:both;">&nbsp</div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+            <textarea rows="5" class="form-control" id="otherTerms" placeholder="other terms" style="display:none"></textarea>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+
+
+    </div>
+    <div class="row" style="padding-top:8%; text-align:center;">
+        <input type="button" style="background-color: #554289;
+    color: white;
+    border-radius: 15px !important;
+    width: 200px;
+    padding: 10px !important;" value="Print" id="btnPrint" />
+
+        @*<input type="button" class="Invoice-print-update" style="background-color: #554289;
+    color: white;
+    border-radius: 15px !important;
+    width: 200px;
+
+    padding: 10px !important;" value="Update Other Terms" data-invoiceno="@Model.invno " target="#InvoiceModal" />*@
+        @*@Html.ActionLink(" ", "Print", null, new { @class = "glyphicon glyphicon-print  agreement-print-update", title = "Update other terms", @data_toggle = "modal", @data_target = "#contractModal", @data_agreementno = Model.Agreement_No })*@
+    </div>
+    
+
+    <script type="text/javascript">
+
+    $(".Invoice-print-update").click(function (e) {
+        // $("#img-loader").removeClass("hide");
+        e.preventDefault();
+        var id = $(this).data("invoiceno");
+
+        $.ajax(
+            {
+                url: "../Invoice/Print",
+                type: "Get",
+                data: { InvoiceNo: id, otherTerms:$("#otherTerms").val() },
+                success: function (result) {
+                    //var data=jQuery.parseJSON(result);
+                    if (result.Errors == undefined || result.Errors == "") {
+                        $("#PrintContainer").empty();
+                        $("#PrintContainer").html(result);
+                        $("#InvoiceModal").modal('show');
+
+                    }
+                    else {
+                        $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                        $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                        $(".result-title").text("Failure");
+                        $(".result-modal-body span").text(data.Errors);
+                        $('#masterResultModal').modal('show');
+                        //alert(data.Errors);
+                    }
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                },
+                complete: function () {
+                    // $("body").scrollTop(0);
+                }
+            });
+    });
+    function printData() {
+        //alert(1);
+        var divToPrint = document.getElementById("PrintelementID");
+        newWin = window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+        //$("#contractModal").modal('hide');
+    }
+    //printData();
+        $(document).ready()
+        {
+
+         //btnPrint button id
+            $('#btnPrint').on('click', function () {
+                               printData();
+            })
+
+        }
+    </script>
+</body>
+</html>
+
+

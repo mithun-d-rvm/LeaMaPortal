@@ -30,9 +30,10 @@ namespace LeaMaPortal.Controllers
                 int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
                 ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, defaultPageSize);
                 IList<SlabViewModel> list;
+                string RegionNam = Session["Region"].ToString();
                 if (string.IsNullOrWhiteSpace(Search))
                 {
-                    list = db.tbl_slabmaster.Where(x => x.Delmark != "*").OrderBy(x => x.id).Select(x => new SlabViewModel()
+                    list = db.tbl_slabmaster.Where(x => x.Delmark != "*" && x.Region_Name == RegionNam).OrderBy(x => x.id).Select(x => new SlabViewModel()
                     {
                         Id = x.id,
                         SlabId = x.slabid,
@@ -47,7 +48,7 @@ namespace LeaMaPortal.Controllers
                 }
                 else
                 {
-                    list = db.tbl_slabmaster.Where(x => x.Delmark != "*"
+                    list = db.tbl_slabmaster.Where(x => x.Delmark != "*" && x.Region_Name == RegionNam
                                     && (x.slabid.ToString().ToLower().Contains(Search.ToLower())
                                     || x.Residence_type.ToLower().Contains(Search.ToLower())
                                     || x.Utility_Name.ToLower().Contains(Search.ToLower())))
@@ -75,12 +76,15 @@ namespace LeaMaPortal.Controllers
         [HttpGet]
         public PartialViewResult AddOrUpdate()
         {
+            string RegNam = Session["Region"].ToString();
             SlabViewModel model = new SlabViewModel();
-            ViewBag.Utility_Name = new SelectList(db.tbl_utilitiesmaster.OrderBy(o => o.Utility_Name).Distinct(), "Utility_Name", "Utility_Name");
+            //   ViewBag.Utility_Name = new SelectList(db.tbl_utilitiesmaster.OrderBy(o => o.Utility_Name).Distinct(), "Utility_Name", "Utility_Name");
+
+            ViewBag.Utility_Name = new SelectList(db.tbl_utilitiesmaster.Where (x=> x.Region_Name == RegNam).OrderBy(o => o.Utility_Name).Distinct(), "Utility_Name", "Utility_Name"); //x.Createduser == System.Web.HttpContext.Current.User.Identity.Name
             ViewBag.Colour = new SelectList(StaticHelper.GetStaticData(StaticHelper.SLAB_COLOUR_DROPDOWN), "Name", "Name");
             //ViewBag.Unit_id = new SelectList(db.tbl_propertiesmaster.OrderBy(o => o.Unit_Property_Name).Distinct(), "Unit_Property_Name", "Unit_Property_Name");
             ViewBag.Residence_type = new SelectList(StaticHelper.GetStaticData(StaticHelper.SLAB_RESIDENCE_DROPDOWN), "Name", "Name");
-            model.SlabId = db.tbl_slabmaster.OrderByDescending(o => o.id).Select(s => s.slabid).FirstOrDefault();
+            model.SlabId = db.tbl_slabmaster.Where(o => o.Region_Name == RegNam).OrderByDescending(o => o.id).Select(s => s.slabid).FirstOrDefault();
             model.SlabId = model.SlabId ==null ? 1 : model.SlabId +1;
             //model.SlabId = Convert.ToInt32(model.SlabId) + 1;
             return PartialView("../Master/SlabMaster/_AddOrUpdate", model);
@@ -94,19 +98,20 @@ namespace LeaMaPortal.Controllers
             MessageResult result = new MessageResult();
             try
             {
+                string RegNam = Session["Region"].ToString(); 
                 if (ModelState.IsValid)
                 {
                     MySqlParameter pa = new MySqlParameter();
                     string PFlag = "INSERT";
                     result.Message = "Slab created successfully";
-                    if (db.tbl_slabmaster.Any(x => x.Residence_type == model.Residence_type && x.Utility_id == model.Utility_id && x.Colour == model.Colour && x.id != model.Id))
+                    if (db.tbl_slabmaster.Any(x => x.Residence_type == model.Residence_type && x.Utility_id == model.Utility_id && x.Colour == model.Colour && x.id != model.Id && x.Region_Name == RegNam))
                     {
                         result.Errors = "Combination of residence, utility and colour already exists";
                         return Json(result, JsonRequestBehavior.AllowGet);
                     }
                     if (model.Id == 0)
                     {
-                        model.SlabId = db.tbl_slabmaster.OrderByDescending(o => o.id).Select(s => s.slabid).FirstOrDefault();
+                        model.SlabId = db.tbl_slabmaster.Where(o => o.Region_Name == RegNam).OrderByDescending(o => o.id).Select(s => s.slabid).FirstOrDefault();
                         model.SlabId = model.SlabId == null ? 1 : model.SlabId + 1;
                     }
                     else
@@ -133,9 +138,11 @@ namespace LeaMaPortal.Controllers
                                             new MySqlParameter("@Prate",model.rate),
                                             new MySqlParameter("@PColour",model.Colour),
                                             new MySqlParameter("@PResidence_type",model.Residence_type),
-                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name),
+                                           new MySqlParameter ("@PRegion_Name",Session["Region"].ToString()),
+                                           new MySqlParameter ("@PCountry",Session["Country"].ToString())
                                          };
-                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Slabmaster_All(@PFlag,@Pslabid,@PUtility_id,@PUtility_Name,@PUnit_From,@PUnitto,@Prate,@PColour,@PResidence_type,@PCreateduser)", param).ToListAsync();
+                    var RE = await db.Database.SqlQuery<object>("CALL Usp_Slabmaster_All(@PFlag,@Pslabid,@PUtility_id,@PUtility_Name,@PUnit_From,@PUnitto,@Prate,@PColour,@PResidence_type,@PCreateduser,@PRegion_Name,@PCountry)", param).ToListAsync();
                     await db.SaveChangesAsync();
                 }
                 return Json(result, JsonRequestBehavior.AllowGet);
@@ -147,6 +154,7 @@ namespace LeaMaPortal.Controllers
         }
         public async Task<ActionResult> Edit(int Id)
         {
+            string RegNam = Session["Region"].ToString();
             try
             {
                 if (Id == 0)
@@ -201,9 +209,11 @@ namespace LeaMaPortal.Controllers
                                             new MySqlParameter("@Prate",tbl_slab.rate),
                                             new MySqlParameter("@PColour",tbl_slab.Colour),
                                             new MySqlParameter("@PResidence_type",tbl_slab.Residence_type),
-                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name),
+                                                new MySqlParameter ("@PRegion_Name",tbl_slab.Region_Name),
+                                           new MySqlParameter ("@PCountry",tbl_slab.Country  )
                                          };
-                var RE = await db.Database.SqlQuery<object>("CALL Usp_Slabmaster_All(@PFlag,@Pslabid,@PUtility_id,@PUtility_Name,@PUnit_From,@PUnitto,@Prate,@PColour,@PResidence_type,@PCreateduser)", param).ToListAsync();
+                var RE = await db.Database.SqlQuery<object>("CALL Usp_Slabmaster_All(@PFlag,@Pslabid,@PUtility_id,@PUtility_Name,@PUnit_From,@PUnitto,@Prate,@PColour,@PResidence_type,@PCreateduser,@PRegion_Name,@PCountry)", param).ToListAsync();
                 result.Message = "Slab details deleted successfully";
                 return Json(result, JsonRequestBehavior.AllowGet);
             }

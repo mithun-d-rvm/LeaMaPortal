@@ -17,7 +17,6 @@ namespace LeaMaPortal.DBContext
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbl_propertiesmaster()
         {
-            this.tbl_agreement = new HashSet<tbl_agreement>();
             this.tbl_propertiesdt = new HashSet<tbl_propertiesdt>();
             this.tbl_propertiesdt1 = new HashSet<tbl_propertiesdt1>();
         }
@@ -87,8 +86,6 @@ namespace LeaMaPortal.DBContext
         public string Createduser { get; set; }
         public string Delmark { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_agreement> tbl_agreement { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_propertiesdt> tbl_propertiesdt { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

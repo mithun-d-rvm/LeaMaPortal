@@ -44,6 +44,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.87.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.87.1\lib\net40\ClosedXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -219,10 +227,10 @@
     <Compile Include="DBContext\dashboard_rental.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBContext\dashboard_vacancy.cs">
+    <Compile Include="DBContext\dashboard_utility.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBContext\ebwater_report.cs">
+    <Compile Include="DBContext\dashboard_vacancy.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="DBContext\email_output.cs">
@@ -258,7 +266,19 @@
     <Compile Include="DBContext\summarycollection_report.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBContext\summaryebwater_report.cs">
+    <Compile Include="DBContext\summaryebwater_colour.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\summaryebwater_colour_prop.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\summaryebwater_treand.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\summaryebwater_treand_property.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\summaryebwater_treand_year.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="DBContext\tbl_aging_range.cs">
@@ -426,16 +446,25 @@
     <Compile Include="DBContext\test_report2.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBContext\vacancy_caretaker_report.cs">
+    <Compile Include="DBContext\utilitybill_notgenerated.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBContext\vacancy_report.cs">
+    <Compile Include="DBContext\vacancy_caretaker_report.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="DBContext\view_agreement_close_pending.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBContext\view_agreement_update.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\view_agree_recp_chequenowise_pending.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBContext\view_auto_receipt.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\view_expirydate_notifications.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="DBContext\view_find_pdcstatus.cs">
@@ -447,14 +476,47 @@
     <Compile Include="DBContext\view_invoice_receipt_pending.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBContext\view_invoice_receipt_pending_test.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\view_propertymastergridfill.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\view_receipt_screen_advance_pending.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\view_regionupdate.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\view_security.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\view_security_pending.cs">
+      <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBContext\view_tenant.cs">
       <DependentUpon>LeamaDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportASPX\PropertyStatusReport\PropertyStatusReportView.aspx.cs">
+      <DependentUpon>PropertyStatusReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportASPX\PropertyStatusReport\PropertyStatusReportView.aspx.designer.cs">
+      <DependentUpon>PropertyStatusReportView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportASPX\Region\GetRegions.aspx.cs">
+      <DependentUpon>GetRegions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportASPX\Region\GetRegions.aspx.designer.cs">
+      <DependentUpon>GetRegions.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\NotificationHelper.cs" />
     <Compile Include="Helpers\NumberToText.cs" />
+    <Compile Include="Helpers\NumberToText1.cs" />
     <Compile Include="Helpers\StaticHelper.cs" />
     <Compile Include="Models\AgreementFacilityViewModel.cs" />
     <Compile Include="Models\ApprovalSettingsViewModel.cs" />
@@ -480,6 +542,7 @@
     <Compile Include="Models\MasterViewModel.cs" />
     <Compile Include="Models\NotificationAgreementApprovalModel.cs" />
     <Compile Include="Models\NotificationContractApprovalModel.cs" />
+    <Compile Include="Models\NotificationLicenseExpiryModel.cs" />
     <Compile Include="Models\NotificationPdcModel.cs" />
     <Compile Include="Models\NotificationRenewalModel.cs" />
     <Compile Include="Models\NotificationRentalDueModel.cs" />
@@ -487,6 +550,7 @@
     <Compile Include="Models\PaymentViewModel.cs" />
     <Compile Include="Models\OptionModel.cs" />
     <Compile Include="Models\PropertyTypeViewModel.cs" />
+    <Compile Include="Models\propertyviewgrid.cs" />
     <Compile Include="Models\ReceiptViewModel.cs" />
     <Compile Include="Models\PropertyViewModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
@@ -538,6 +602,20 @@
     <Compile Include="ReportASPX\SummaryEBWater\SummaryEBWaterReportView.aspx.designer.cs">
       <DependentUpon>SummaryEBWaterReportView.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReportASPX\TallyReport\TallyReportView.aspx.cs">
+      <DependentUpon>TallyReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportASPX\TallyReport\TallyReportView.aspx.designer.cs">
+      <DependentUpon>TallyReportView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportASPX\UtilityTrendRagReport\UtilityTrendragReportView.aspx.cs">
+      <DependentUpon>UtilityTrendragReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportASPX\UtilityTrendRagReport\UtilityTrendragReportView.aspx.designer.cs">
+      <DependentUpon>UtilityTrendragReportView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReportASPX\Utility\EBWaterReportView.aspx.cs">
       <DependentUpon>EBWaterReportView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -579,6 +657,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom.css" />
     <Content Include="Content\LeamaStyles.css" />
+    <Content Include="Content\recipt.css" />
     <Content Include="DBContext\LeamaDBContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LeamaDBContext.edmx</DependentUpon>
@@ -594,16 +673,22 @@
     <Content Include="Documents\TenantCompany\49abe8b9-7733-4443-86d0-1a710ece4c74Event.png" />
     <Content Include="Documents\TenantCompany\73710731-c90c-4ea9-a47b-db252bd9850f00000000f9c17368_01032017110049.jpg" />
     <Content Include="favicon.ico" />
+    <Content Include="ReportASPX\PropertyStatusReport\PropertyStatusReportView.aspx" />
+    <Content Include="ReportASPX\Region\GetRegions.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\alarm_32.png" />
     <Content Include="Images\CloseCont.png" />
+    <Content Include="Images\Hameem_Login_Banner.png" />
     <Content Include="Images\home_32.png" />
     <Content Include="Images\invoice.png" />
+    <Content Include="Images\Login_Bg.png" />
     <Content Include="Images\Logo-Bitmap.png" />
     <Content Include="Images\Logo-thumb.png" />
+    <Content Include="Images\logo.jpg" />
     <Content Include="Images\Logo.png" />
     <Content Include="Images\loader.gif" />
+    <Content Include="Images\logoR.jpg" />
     <Content Include="Images\next_32.png" />
     <Content Include="Images\next_white_32.png" />
     <Content Include="Images\Notification.png" />
@@ -619,6 +704,8 @@
     <Content Include="ReportASPX\Outstanding\OutstandingReportView.aspx" />
     <Content Include="ReportASPX\PDC\PDCReportView.aspx" />
     <Content Include="ReportASPX\SummaryEBWater\SummaryEBWaterReportView.aspx" />
+    <Content Include="ReportASPX\TallyReport\TallyReportView.aspx" />
+    <Content Include="ReportASPX\UtilityTrendRagReport\UtilityTrendragReportView.aspx" />
     <Content Include="ReportASPX\Utility\EBWaterReportView.aspx" />
     <Content Include="ReportASPX\VacancyReport\VacancyReportView.aspx" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
@@ -932,6 +1019,15 @@
     <Content Include="Views\Tca\Contract\_TermsResidential.cshtml" />
     <Content Include="Views\Tca\Contract\_TermsCommercial.cshtml" />
     <Content Include="Views\Tca\Agreement\_TcaAproval.cshtml" />
+    <Content Include="Views\Report\TallyReport\_TallyReport.cshtml" />
+    <Content Include="Views\Invoice\_InvoicePrint.cshtml" />
+    <Content Include="Views\Payment\_PaymentPrint.cshtml" />
+    <Content Include="Views\EbWater\_EbWaterPrint.cshtml" />
+    <Content Include="Views\Receipts\_ReceiptsPrint.cshtml" />
+    <Content Include="Views\UtilityPayment\_UtilityPrint.cshtml" />
+    <Content Include="Views\Report\UtilityTrendRAGReport\_UtilityTrendRagReport.cshtml" />
+    <Content Include="Views\Report\Region\getregion.cshtml" />
+    <Content Include="Views\Report\PropertyStatusReport\_PropertyStatusReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -961,9 +1057,15 @@
     <EmbeddedResource Include="ReportRDLC\Outstanding\outstandingregion.rdlc" />
     <EmbeddedResource Include="ReportRDLC\Outstanding\outstanding_prop.rdlc" />
     <EmbeddedResource Include="ReportRDLC\PDC\PDCreport.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\PropertyStatus\PropertyStatusNew.rdlc" />
     <EmbeddedResource Include="ReportRDLC\SummaryEBWater\summaryebwatercaretaker.rdlc" />
     <EmbeddedResource Include="ReportRDLC\SummaryEBWater\summaryebwaterprop.rdlc" />
     <EmbeddedResource Include="ReportRDLC\SummaryEBWater\summaryebwaterregion.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\UtilityTrendReport\EBWATERcolour.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\UtilityTrendReport\EBWATERcolourprop.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\UtilityTrendReport\EbwatertrendAll.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\UtilityTrendReport\EBWATERtrendproperty.rdlc" />
+    <EmbeddedResource Include="ReportRDLC\UtilityTrendReport\Ebwatertrendyearnew.rdlc" />
     <EmbeddedResource Include="ReportRDLC\Utility\ebwatercaretaker.rdlc" />
     <EmbeddedResource Include="ReportRDLC\Utility\ebwaterprop.rdlc" />
     <EmbeddedResource Include="ReportRDLC\Utility\ebwaterregion.rdlc" />

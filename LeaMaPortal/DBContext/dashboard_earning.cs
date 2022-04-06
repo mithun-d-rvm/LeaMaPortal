@@ -14,31 +14,12 @@ namespace LeaMaPortal.DBContext
     
     public partial class dashboard_earning
     {
-        public int id { get; set; }
-        public string Reccategory { get; set; }
-        public string RecpType { get; set; }
-        public int ReceiptNo { get; set; }
-        public Nullable<System.DateTime> ReceiptDate { get; set; }
-        public Nullable<int> agreement_no { get; set; }
-        public string Property_id { get; set; }
+        public string ReceiptNo { get; set; }
+        public string ReceiptDate { get; set; }
         public string Property_Name { get; set; }
-        public string Unit_ID { get; set; }
         public string unit_Name { get; set; }
-        public Nullable<int> Tenant_id { get; set; }
         public string Tenant_Name { get; set; }
-        public Nullable<float> TotalAmount { get; set; }
-        public string AmtInWords { get; set; }
-        public string DDChequeNo { get; set; }
-        public string PDCstatus { get; set; }
-        public string BankAcCode { get; set; }
-        public string BankAcName { get; set; }
-        public string AdvAcCode { get; set; }
-        public Nullable<System.DateTime> DDChequeDate { get; set; }
-        public string Narration { get; set; }
-        public Nullable<int> Accyear { get; set; }
-        public Nullable<System.DateTime> Createddatetime { get; set; }
-        public string Createduser { get; set; }
-        public string Delmark { get; set; }
+        public float TotalAmount { get; set; }
         public string Month { get; set; }
         public Nullable<long> year { get; set; }
     }

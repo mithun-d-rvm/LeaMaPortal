@@ -7,6 +7,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using MySql.Data;
+using System.Configuration;
+using System.Data;
 
 namespace LeaMaPortal.ReportASPX.PDC
 {
@@ -16,9 +19,10 @@ namespace LeaMaPortal.ReportASPX.PDC
         {
             if (!IsPostBack)
             {
+                // Countryconnect();
                 txt_CreatedUser.Text = System.Web.HttpContext.Current.User.Identity.Name;
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "--Select--", Value = "--Select--", Selected = true });
-                dropDown_FilterBy.Items.Add(new ListItem() { Text = "id", Value = "id" });
+
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "Agreement_No", Value = "Agreement_No" });
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "Propertyid", Value = "Property_id" });
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "Propertyname", Value = "Property_name" });
@@ -40,6 +44,59 @@ namespace LeaMaPortal.ReportASPX.PDC
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "pdcstatus", Value = "pdcstatus" });
             }
         }
+
+        //public void Regionconnect()
+        //{
+        //    string leemaconn = ConfigurationManager.ConnectionStrings["leamaConnectionString"].ConnectionString;
+        //    //string leemaconn = ConfigurationManager.ConnectionStrings["leamatest"].ConnectionString;
+        //    MySqlConnection cn = new MySqlConnection(leemaconn);
+        //    cn.Open();
+        //    DataTable dt = new DataTable();
+        //    MySqlCommand cmd = new MySqlCommand("select distinct Id,Region_Name,Country from tbl_region where country = '" + dropdowncountry.SelectedItem.Text + "'", cn);
+        //    MySqlDataAdapter ada = new MySqlDataAdapter(cmd);
+        //    ada.Fill(dt);
+        //    dropdownregion.DataSource = dt;
+        //    dropdownregion.DataTextField = "Region_Name";
+        //    dropdownregion.DataValueField = "Id";
+        //    dropdownregion.DataBind();
+        //    //if (dropDown_Group.SelectedItem.Text == "Monthly Trend Report" || dropDown_Group.SelectedItem.Text == "RAG Report")
+        //    //{
+        //    //    dropdownregion.Items.Insert(0, new ListItem("--Select Region--", "0"));
+        //    //    dropdownregion.Items.Insert(1, new ListItem("All", "1"));
+        //    //}
+        //    //else
+        //    //{
+        //    //    dropdownregion.Items.Insert(0, new ListItem("--Select Region--", "0"));
+        //    //}
+        //    dropdownregion.Items.Insert(0, new ListItem("--Select Region--", "0"));
+        //    cn.Close();
+        //}
+        //public void Countryconnect()
+        //{
+        //    string leemaconn = ConfigurationManager.ConnectionStrings["leamaConnectionString"].ConnectionString;
+        //    //string leemaconn = ConfigurationManager.ConnectionStrings["leamatest"].ConnectionString;
+        //    MySqlConnection cn = new MySqlConnection(leemaconn);
+        //    cn.Open();
+        //    DataTable dt = new DataTable();
+        //    MySqlCommand cmd = new MySqlCommand("select distinct Country from tbl_region", cn);
+        //    MySqlDataAdapter ada = new MySqlDataAdapter(cmd);
+        //    ada.Fill(dt);
+        //    dropdowncountry.DataSource = dt;
+        //    dropdowncountry.DataTextField = "Country";
+        //    dropdowncountry.DataValueField = "Country";
+        //    dropdowncountry.DataBind();
+        //    //if (dropDown_Group.SelectedItem.Text == "Monthly Trend Report" || dropDown_Group.SelectedItem.Text == "RAG Report")
+        //    //{
+        //    //    dropdowncountry.Items.Insert(0, new ListItem("--Select Country--", "0"));
+        //    //    dropdowncountry.Items.Insert(1, new ListItem("All", "1"));
+        //    //}
+        //    //else
+        //    //{
+        //    //    dropdowncountry.Items.Insert(0, new ListItem("--Select Country--", "0"));
+        //    //}
+        //    dropdowncountry.Items.Insert(0, new ListItem("--Select Country--", "0"));
+        //    cn.Close();
+        //}
         protected void filterbyChange(object sender, EventArgs e)
         {
             if (dropDown_FilterBy.SelectedItem.Value == "--Select--")
@@ -66,6 +123,81 @@ namespace LeaMaPortal.ReportASPX.PDC
         //        txt_toAging.Visible = true;
         //    }
         //}
+        protected void groupDropdownChange(object sender, EventArgs e)
+        {
+            dropDown_FilterBy.Items.Clear();
+            if (dropDown_Group.SelectedItem.Value == "Property")
+            {
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "--Select--", Value = "--Select--", Selected = true });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Agreement_No", Value = "Agreement_No" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Propertyid", Value = "Property_id" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Propertyname", Value = "Property_name" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Unitid", Value = "Unit_id" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Unitname", Value = "Unitname" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "RegionName", Value = "Region_Name" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Country", Value = "Country" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Caretakerid", Value = "Caretaker_id" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Caretakername", Value = "Caretaker_Name" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Ag_Tenant_id", Value = "Ag_Tenant_id" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Ag_Tenant_Name", Value = "Ag_Tenant_Name" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Agreement_Start_Date", Value = "Agreement_Start_Date" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Agreement_End_Date", Value = "Agreement_End_Date" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Total_Rental_amount", Value = "Total_Rental_amount" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "outstanding_amt", Value = "outstanding_amt" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "cheque_amount", Value = "cheque_amount" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Cheque_No", Value = "Cheque_No" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "cheque_date", Value = "cheque_date" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "pdcstatus", Value = "pdcstatus" });
+            }
+            else if (dropDown_Group.SelectedItem.Value == "Region")
+            {
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "--Select--", Value = "--Select--", Selected = true });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Agreement_No", Value = "Agreement_No" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Propertyid", Value = "Property_id" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Propertyname", Value = "Property_name" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Unitid", Value = "Unit_id" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Unitname", Value = "Unitname" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "RegionName", Value = "Region_Name" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Country", Value = "Country" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Caretakerid", Value = "Caretaker_id" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Caretakername", Value = "Caretaker_Name" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Ag_Tenant_id", Value = "Ag_Tenant_id" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Ag_Tenant_Name", Value = "Ag_Tenant_Name" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Agreement_Start_Date", Value = "Agreement_Start_Date" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Agreement_End_Date", Value = "Agreement_End_Date" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Total_Rental_amount", Value = "Total_Rental_amount" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "outstanding_amt", Value = "outstanding_amt" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "cheque_amount", Value = "cheque_amount" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Cheque_No", Value = "Cheque_No" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "cheque_date", Value = "cheque_date" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "pdcstatus", Value = "pdcstatus" });
+            }
+            else if (dropDown_Group.SelectedItem.Value == "Caretaker")
+            {
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "--Select--", Value = "--Select--", Selected = true });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Agreement_No", Value = "Agreement_No" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Propertyid", Value = "Property_id" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Propertyname", Value = "Property_name" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Unitid", Value = "Unit_id" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Unitname", Value = "Unitname" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "RegionName", Value = "Region_Name" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Country", Value = "Country" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Caretakerid", Value = "Caretaker_id" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Caretakername", Value = "Caretaker_Name" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Ag_Tenant_id", Value = "Ag_Tenant_id" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Ag_Tenant_Name", Value = "Ag_Tenant_Name" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Agreement_Start_Date", Value = "Agreement_Start_Date" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Agreement_End_Date", Value = "Agreement_End_Date" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Total_Rental_amount", Value = "Total_Rental_amount" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "outstanding_amt", Value = "outstanding_amt" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "cheque_amount", Value = "cheque_amount" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "Cheque_No", Value = "Cheque_No" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "cheque_date", Value = "cheque_date" });
+                dropDown_FilterBy.Items.Add(new ListItem() { Text = "pdcstatus", Value = "pdcstatus" });
+            }
+            txt_filterBy.Text = "";
+            txt_filterBy.ReadOnly = true;
+        }
 
         protected void valueRangeChange(object sender, EventArgs e)
         {
@@ -83,7 +215,7 @@ namespace LeaMaPortal.ReportASPX.PDC
         protected void btn_showReport_Click(object sender, EventArgs e)
         {
             try
-            {   
+            {
                 DBContext.LeamaEntities entities = new DBContext.LeamaEntities();
                 object[] parameters = {
                          new MySqlParameter("@Pfromdate", string.IsNullOrWhiteSpace(txt_fromDate.Text)?null:txt_fromDate.Text),
@@ -102,45 +234,46 @@ namespace LeaMaPortal.ReportASPX.PDC
                 ReportDataSource reportDataSource = new ReportDataSource();
                 PDCReportViewer.LocalReport.ReportPath = "ReportRDLC\\PDC\\PDCreport.rdlc";
                 var property = entities.Database.SqlQuery<PDCReportModel>("Select id,Agreement_No,Property_id,Property_name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Ag_Tenant_Name,Agreement_Start_Date,Agreement_End_Date,Total_Rental_amount,outstanding_amt,cheque_amount,Cheque_No,cheque_date,pdcstatus,user from pdc_report where user='" + txt_CreatedUser.Text + "'").ToList();
-                reportDataSource = new ReportDataSource
+                //reportDataSource = new ReportDataSource
+                //{
+                //    // Must match the DataSource in the RDLC
+                //    Name = "DataSet1",
+                //    Value = property
+                //};
+                if (dropDown_Group.SelectedItem.Value == "Property")
                 {
-                    // Must match the DataSource in the RDLC
-                    Name = "DataSet1",
-                    Value = property
-                };
-                //if (dropDown_Group.SelectedItem.Value == "Property")
-                //{
-                //    OutstandingReportViewer.LocalReport.ReportPath = "ReportRDLC\\Outstanding\\outstanding_prop.rdlc";
-                //    var property = entities.Database.SqlQuery<OutstandingPropertyReportModel>("Select id,Agreement_No,Property_id,Property_name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Agreement_Start_Date,Ag_Tenant_Name,Agreement_End_Date,Total_Rental_amount,outstanding_amt,Perday_Rental,Remaining_Days,Contract_Value,user from outstanding_report").ToList();
-                //    reportDataSource = new ReportDataSource
-                //    {
-                //        // Must match the DataSource in the RDLC
-                //        Name = "DataSet1",
-                //        Value = property
-                //    };
-                //}
-                //else if (dropDown_Group.SelectedItem.Value == "Region")
-                //{
-                //    OutstandingReportViewer.LocalReport.ReportPath = "ReportRDLC\\Outstanding\\outstandingregion.rdlc";
-                //    var region = entities.Database.SqlQuery<OutstandingRegionReportModel>("Select Region_Name,Country,Noof_properties,Remaining_Days,Remaining_Range,Amount_Range,outstanding_amt,user from outstanding_region_report").ToList();
-                //    reportDataSource = new ReportDataSource
-                //    {
-                //        // Must match the DataSource in the RDLC
-                //        Name = "DataSet1",
-                //        Value = region
-                //    };
-                //}
-                //else if (dropDown_Group.SelectedItem.Value == "Caretaker")
-                //{
-                //    OutstandingReportViewer.LocalReport.ReportPath = "ReportRDLC\\Outstanding\\outstandingcaretaker.rdlc";
-                //    var caretaker = entities.Database.SqlQuery<OutstandingCaretakerReportModel>("Select Caretaker_id,Caretaker_Name,Region_Name,Country,Noof_properties,Remaining_Days,Remaining_Range,Amont_Range,outstanding_amt,user from outstanding_caretaker_report").ToList();
-                //    reportDataSource = new ReportDataSource
-                //    {
-                //        // Must match the DataSource in the RDLC
-                //        Name = "DataSet1",
-                //        Value = caretaker
-                //    };
-                //}
+                    PDCReportViewer.LocalReport.ReportPath = "ReportRDLC\\PDC\\PDCreport.rdlc";
+                    var propertyreport = entities.Database.SqlQuery<PDCReportModel>("Select id,Agreement_No,Property_id,Property_name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Ag_Tenant_Name,Agreement_Start_Date,Agreement_End_Date,Total_Rental_amount,outstanding_amt,cheque_amount,Cheque_No,cheque_date,pdcstatus,user from pdc_report where user='" + txt_CreatedUser.Text + "'").ToList();
+
+                    reportDataSource = new ReportDataSource
+                    {
+                        // Must match the DataSource in the RDLC
+                        Name = "DataSet1",
+                        Value = propertyreport
+                    };
+                }
+                else if (dropDown_Group.SelectedItem.Value == "Region")
+                {
+                    PDCReportViewer.LocalReport.ReportPath = "ReportRDLC\\PDC\\PDCreport - Regionwise.rdlc";
+                    var region = entities.Database.SqlQuery<PDCReportModel>("Select id,Agreement_No,Property_id,Property_name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Ag_Tenant_Name,Agreement_Start_Date,Agreement_End_Date,Total_Rental_amount,outstanding_amt,cheque_amount,Cheque_No,cheque_date,pdcstatus,user from pdc_report where user='" + txt_CreatedUser.Text + "'").ToList();
+                    reportDataSource = new ReportDataSource
+                    {
+                        // Must match the DataSource in the RDLC
+                        Name = "DataSet1",
+                        Value = region
+                    };
+                }
+                else if (dropDown_Group.SelectedItem.Value == "Caretaker")
+                {
+                    PDCReportViewer.LocalReport.ReportPath = "ReportRDLC\\PDC\\PDCreport - Caretakerwise.rdlc";
+                    var caretaker = entities.Database.SqlQuery<PDCReportModel>("Select id,Agreement_No,Property_id,Property_name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Ag_Tenant_Name,Agreement_Start_Date,Agreement_End_Date,Total_Rental_amount,outstanding_amt,cheque_amount,Cheque_No,cheque_date,pdcstatus,user from pdc_report where user='" + txt_CreatedUser.Text + "'").ToList();
+                    reportDataSource = new ReportDataSource
+                    {
+                        // Must match the DataSource in the RDLC
+                        Name = "DataSet1",
+                        Value = caretaker
+                    };
+                }
                 //ReportDataSource reportDataSource = new ReportDataSource
                 //{
                 //    // Must match the DataSource in the RDLC
@@ -154,6 +287,23 @@ namespace LeaMaPortal.ReportASPX.PDC
             {
 
             }
+        }
+
+        protected void dropdowncountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //if (dropdowncountry.SelectedItem.Text != "")
+            //{
+            //    Regionconnect();
+            //}
+            //else
+            //{
+
+            //}
+        }
+
+        protected void dropDown_Group_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

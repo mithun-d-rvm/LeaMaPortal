@@ -21,6 +21,10 @@ namespace LeaMaPortal.Controllers
         {
             try
             {
+                if (Session["Region"] == null)
+                {
+                    return RedirectToAction("Login", "Authentication");
+                }
                 //var currentUser=Request.Cookies.Get()
                 MasterViewModel model = new MasterViewModel();
                 ViewBag.FormMasterSelected = selected == 0 ? Common.DefaultMaster : selected;

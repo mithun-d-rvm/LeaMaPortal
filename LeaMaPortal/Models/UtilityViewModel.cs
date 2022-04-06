@@ -13,6 +13,9 @@ namespace LeaMaPortal.Models
         public string Utility_id { get; set; }
         [DisplayName("Utility Name")]
         public string Utility_Name { get; set; }
+
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
         //public string Utility_Name_Key { get; set; }
         //public string Utility_id_Key { get; set; }
     }

@@ -18,11 +18,21 @@ namespace LeaMaPortal.Controllers
         // GET: Authentication
         public ActionResult Index()
         {
+            ////var regnam = db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Property" && w.Delmark != "*" && w.Region_Name == RegNam).OrderBy(o => o.id);
+            //var regnam = db.tbl_region.Where(r => r.Delmark != "*").OrderBy(o => o.Id);
+            ////var Regions = db.Database.SqlQuery<RegionViewModel>("select Region_Name from tbl_region where ifnull(delmark,'')<>'*'").ToListAsync();
+            //ViewBag.Region_Name = new SelectList(regnam, "Region_Name", "Region_Name");
+            //ViewData["Region_Name"] = new SelectList(regnam, "Region_Name", "Region_Name");
             return View();
         }
 
         public ActionResult Login()
-        {
+        { 
+            ////var regnam = db.tbl_propertiesmaster.Where(w => w.Property_Flag == "Property" && w.Delmark != "*" && w.Region_Name == RegNam).OrderBy(o => o.id);
+            //var regnam = db.tbl_region.Where(r => r.Delmark != "*").OrderBy(o => o.Id);
+            ////var Regions = db.Database.SqlQuery<RegionViewModel>("select Region_Name from tbl_region where ifnull(delmark,'')<>'*'").ToListAsync();
+            //ViewBag.Region_Name = new SelectList(regnam, "Region_Name", "Region_Name");
+            //ViewData["Region_Name"] = new SelectList(regnam, "Region_Name", "Region_Name");
             return View();
         }
 
@@ -36,9 +46,18 @@ namespace LeaMaPortal.Controllers
                 if (user == null)
                 {
                     ViewBag.ErrorMessage = ErrorMessage.InvalidUsernameAndPassword;
+                    Session["Region"] = "";
+                    Session["Country"] = "";
+                    Session["Category"] = "";
+                    Session["Userid"] = "";
                     return View(LoginModel);
                 }
                 FormsAuthentication.SetAuthCookie(LoginModel.UserName, true);
+                Session["Region"] = user.Region_Name;
+                Session["Country"] = user.Country;
+                Session["Category"] = user.Category;
+                Session["Userid"] = user.Userid;
+                //Session[""];
                 return RedirectToLocal(returnUrl);
             }
             catch (Exception e)
@@ -52,7 +71,7 @@ namespace LeaMaPortal.Controllers
             HttpCookie cookie1 = new HttpCookie(FormsAuthentication.FormsCookieName, "");
             cookie1.Expires = DateTime.Now.AddYears(-1);
             Response.Cookies.Add(cookie1);
-            //Session.Abandon();
+            Session.Abandon();
             return RedirectToAction("Login");
         }
 
@@ -137,6 +156,20 @@ namespace LeaMaPortal.Controllers
             {
                 return Redirect("../Dashboard/Index");
                 //return RedirectToAction("Index", "Dashboard");
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetRegions()
+        {
+            try
+            {
+                var Regions = await db.Database.SqlQuery<RegionViewModel>("select Region_Name from tbl_region where ifnull(delmark,'')<>'*'").ToListAsync();
+                return Json(Regions, JsonRequestBehavior.AllowGet);                                       
+            }
+            catch (Exception e)
+            {
+                throw;
             }
         }
     }

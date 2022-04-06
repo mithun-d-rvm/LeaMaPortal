@@ -27,11 +27,11 @@ namespace LeaMaPortal.Models
         public string Tenant_Name { get; set; }
         [DisplayName("Agreement No")]
         public int? Agreement_No { get; set; }
-        [DisplayName("Property ID")]
+        [DisplayName("Property Tawtheeq ID")]
         public string Property_ID { get; set; }
         [DisplayName("Property Name")]
         public string Property_Name { get; set; }
-        [DisplayName("Unit ID")]
+        [DisplayName("Unit Tawtheeq ID")]
         public string Unit_ID { get; set; }
         [DisplayName("Unit Name")]
         public string unit_Name { get; set; }
@@ -67,6 +67,11 @@ namespace LeaMaPortal.Models
         public float? amount { get; set; }
 
     }
+
+    public class AgreementDropDown
+    {
+        public int AgreementNo { get; set;  }
+    }
     public class TenantDropdown
     {
         public int Tenantid { get; set; }
@@ -82,6 +87,11 @@ namespace LeaMaPortal.Models
         public string Unitid { get; set; }
         public string unitName { get; set; }
     }
+
+    //public class InvDropDown
+    //{
+    //    public string InvNum { get; set; }
+    //}
     public class ChequeDropdown
     {
         public string Cheque_No { get; set; }
@@ -94,11 +104,15 @@ namespace LeaMaPortal.Models
     {
         public InvoiceDropdown()
         {
+            Agreement = new List<AgreementDropDown>();
             Tenants = new List<TenantDropdown>();
             Units = new List<UnitDropdown>();
             Properties = new List<PropertyDropdown>();
             Cheques = new List<ChequeDropdown>();
+           // InvoiceNo = new List<InvDropDown>();
         }
+
+        public List<AgreementDropDown> Agreement { get; set; }
         public List<TenantDropdown> Tenants { get; set; }
         public List<UnitDropdown> Units { get; set; }
         public List<PropertyDropdown> Properties { get; set; }
@@ -106,5 +120,13 @@ namespace LeaMaPortal.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? AgreementDate { get; set; }
+        public DateTime Security_chequedate { get; set; } 
+        public string Security_Flag { get; set; }
+        public string DDChequeNo { get; set; }
+        public decimal Security_Amount { get; set; }
+        public string BankAcCode { get; set; }
+        public string BankAcName { get; set; }
+       // public List<InvDropDown> InvoiceNo { get; set; }
+
     }
 }

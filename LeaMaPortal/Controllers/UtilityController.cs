@@ -18,20 +18,23 @@ namespace LeaMaPortal.Controllers
     public class UtilityController : BaseController
     {
         private LeamaEntities db = new LeamaEntities();
+        public static string Regnam;
 
         // GET: Utility
         public PartialViewResult Index(string Search, int? page, int? defaultPageSize)
         {
             try
             {
+                Regnam = Session["Region"].ToString();
                 ViewData["Search"] = Search;
                 int currentPageIndex = page.HasValue ? page.Value : 1;
                 int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
                 ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, defaultPageSize);
                 IList<UtilityViewModel> list;
+                string regname = Session["Region"].ToString();
                 if (string.IsNullOrWhiteSpace(Search))
                 {
-                    list = db.tbl_utilitiesmaster.Where(x => x.Delmark != "*").OrderByDescending(x=>x.id).Select(x => new UtilityViewModel()
+                    list = db.tbl_utilitiesmaster.Where(x => x.Delmark != "*" && x.Region_Name == regname).OrderByDescending(x=>x.id).Select(x => new UtilityViewModel()
                     {
                         Id = x.id,
                         Utility_id = x.Utility_id,
@@ -40,7 +43,7 @@ namespace LeaMaPortal.Controllers
                 }
                 else
                 {
-                    list = db.tbl_utilitiesmaster.Where(x => x.Delmark != "*"
+                    list = db.tbl_utilitiesmaster.Where(x => x.Delmark != "*" && x.Region_Name == regname
                                     && (x.Utility_id.ToLower().Contains(Search.ToLower())
                                     || x.Utility_Name.ToLower().Contains(Search.ToLower())))
                                   .OrderByDescending(x => x.id).Select(x => new UtilityViewModel()
@@ -77,7 +80,7 @@ namespace LeaMaPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (db.tbl_utilitiesmaster.Any(a => a.Utility_Name == model.Utility_Name && a.Delmark != "*" && a.id != model.Id))
+                    if (db.tbl_utilitiesmaster.Any(a => a.Utility_Name == model.Utility_Name && a.Delmark != "*" && a.id != model.Id && a.Region_Name == Regnam))
                     {
                         result.Errors = "Utility name already exists";
                     }
@@ -95,13 +98,24 @@ namespace LeaMaPortal.Controllers
                         {
                             result.Message = "Utility created successfully";
                         }
+                        string regname = Session["Region"].ToString();
+                        if (regname != "")
+                        {
+                            model.Region_Name = regname;
+
+                            var countryname = db.tbl_region.Where(x => x.Region_Name == model.Region_Name).OrderByDescending(x => x.Id).FirstOrDefault();
+
+                            model.Country = countryname.Country;
+                        }
                         object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PId", model.Id),
                                            new MySqlParameter("@PUtility_id",model.Utility_id),
                                             new MySqlParameter("@PUtility_Name",model.Utility_Name),
-                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name),
+                                           new MySqlParameter ("@PRegion_Name",model.Region_Name ),
+                                           new MySqlParameter ("@PCountry",model.Country )
                                          };
-                        var RE = await db.Database.SqlQuery<object>("CALL Usp_Utilities_All(@PFlag,@PId,@PUtility_id,@PUtility_Name,@PCreateduser)", param).ToListAsync();
+                        var RE = await db.Database.SqlQuery<object>("CALL Usp_Utilities_All(@PFlag,@PId,@PUtility_id,@PUtility_Name,@PCreateduser,@PRegion_Name,@PCountry)", param).ToListAsync();
                         await db.SaveChangesAsync();
                     }
                 }
@@ -159,9 +173,11 @@ namespace LeaMaPortal.Controllers
                                            new MySqlParameter("@PId", tbl_utility.id),
                                            new MySqlParameter("@PUtility_id",tbl_utility.Utility_id),
                                            new MySqlParameter("@PUtility_Name",tbl_utility.Utility_Name),
-                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name),
+                                           new MySqlParameter ("@PRegion_Name",tbl_utility.Region_Name ),
+                                           new MySqlParameter ("@PCountry",tbl_utility.Country )
                                          };
-                var spResult = await db.Database.SqlQuery<object>("Usp_Utilities_All(@PFlag,@PId,@PUtility_id,@PUtility_Name,@PCreateduser)", param).ToListAsync();
+                var spResult = await db.Database.SqlQuery<object>("Usp_Utilities_All(@PFlag,@PId,@PUtility_id,@PUtility_Name,@PCreateduser,@PRegion_Name,@PCountry)", param).ToListAsync();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

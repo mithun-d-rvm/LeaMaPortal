@@ -19,20 +19,20 @@ namespace LeaMaPortal.DBContext
         public string Prperty_id { get; set; }
         public string Property_name { get; set; }
         public string Unit_id { get; set; }
-        public string Unitname { get; set; }
+        public string Unit_name { get; set; }
         public string Region_Name { get; set; }
         public string Country { get; set; }
-        public int Caretaker_id { get; set; }
+        public string Caretaker_id { get; set; }
         public string Caretaker_Name { get; set; }
-        public int Ag_Tenant_id { get; set; }
+        public string Ag_Tenant_id { get; set; }
         public string Ag_Tenant_Name { get; set; }
-        public Nullable<System.DateTime> Agreement_Start_Date { get; set; }
-        public Nullable<System.DateTime> Agreement_End_Date { get; set; }
+        public string Agreement_Start_Date { get; set; }
+        public string Agreement_End_Date { get; set; }
         public string payment_mode { get; set; }
         public string Cheque_No { get; set; }
-        public Nullable<System.DateTime> cheque_date { get; set; }
+        public string cheque_date { get; set; }
         public string user { get; set; }
-        public Nullable<float> Cheque_Amount { get; set; }
-        public float totalamount { get; set; }
+        public float Cheque_Amount { get; set; }
+        public double totalamount { get; set; }
     }
 }

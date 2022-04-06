@@ -12,31 +12,33 @@ namespace LeaMaPortal.DBContext
     using System;
     using System.Collections.Generic;
     
-    public partial class ebwater_report
+    public partial class summaryebwater_colour_prop
     {
-        public int id { get; set; }
-        public Nullable<int> Refno { get; set; }
+        public long Refno { get; set; }
         public string Meterno { get; set; }
         public string property_id { get; set; }
         public string Property_Name { get; set; }
         public string Unit_id { get; set; }
         public string Unit_Property_Name { get; set; }
-        public Nullable<float> Total_units { get; set; }
+        public float Total_units { get; set; }
         public string Meterreadingno { get; set; }
-        public Nullable<System.DateTime> Reading_date { get; set; }
-        public Nullable<System.DateTime> billdate { get; set; }
-        public Nullable<int> billno { get; set; }
-        public Nullable<System.DateTime> duedate { get; set; }
+        public string Reading_date { get; set; }
+        public string billdate { get; set; }
+        public long billno { get; set; }
+        public string duedate { get; set; }
         public string utility_id { get; set; }
         public string Utility_Name { get; set; }
         public string Region_Name { get; set; }
         public string country { get; set; }
         public string Caretaker_Name { get; set; }
-        public Nullable<int> Caretaker_ID { get; set; }
-        public Nullable<double> Billamount { get; set; }
-        public Nullable<double> Paidamount { get; set; }
-        public Nullable<double> OutstandingAmt { get; set; }
-        public Nullable<int> Aging_Days { get; set; }
+        public long Caretaker_ID { get; set; }
+        public double Billamount { get; set; }
+        public double Paidamount { get; set; }
+        public long Aging_Days { get; set; }
         public string user { get; set; }
+        public string Monthname { get; set; }
+        public Nullable<int> mno { get; set; }
+        public Nullable<int> yearno { get; set; }
+        public string colour { get; set; }
     }
 }

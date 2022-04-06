@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -20,6 +21,10 @@ namespace LeaMaPortal.Controllers
         // GET: EBWater
         public ActionResult Index()
         {
+            if (Session["Region"] == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
             return View();
         }
         [HttpGet]
@@ -32,11 +37,12 @@ namespace LeaMaPortal.Controllers
                 int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
                 ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, PageSize);
                 var EBDetails = db.tbl_eb_water_billentryhd.Where(x => x.Delmark != "*");
+                
                 if (!string.IsNullOrWhiteSpace(Search))
                 {
-                    EBDetails = EBDetails.Where(x => x.Refno.ToString().Contains(Search));
+                    EBDetails = EBDetails.Where(x => x.Refno.ToString().Contains(Search) || x.refdate .ToString ().Contains (Search ) || x.utility_name.Contains(Search) || x.Supplier_name.Contains(Search));
                 }
-                var invoice = EBDetails.OrderBy(x => x.id).Select(x => new EBWaterModel()
+                var invoice = EBDetails.OrderByDescending(x => x.id).Select(x => new EBWaterModel()
                 {
                     BillEnteryNo = x.Refno,
                     BillEntryDate = x.refdate,
@@ -76,11 +82,16 @@ namespace LeaMaPortal.Controllers
             try
             {
                 EBWaterModel model = new EBWaterModel();
-                int? refNo = await db.tbl_eb_water_billentryhd.MaxAsync(x => (int?)x.Refno);
+                //int? refNo = await db.tbl_eb_water_billentryhd.MaxAsync(x => (int?)x.Refno);
                 //int paymentno = await db.tbl_paymenthd.Select(x => x.PaymentNo).DefaultIfEmpty(0).MaxAsync();
-                model.BillEnteryNo = refNo == null ? 1 : refNo.Value + 1;
+                //model.BillEnteryNo = refNo == null ? 1 : refNo.Value + 1;
+
+                var refNo = db.tbl_eb_water_billentryhd.OrderByDescending(x => x.id).FirstOrDefault();
+                model.BillEnteryNo = refNo != null ? refNo.id + 1 : 1;
+
                 //model.BillEntryDate = DateTime.ParseExact(DateTime.Now.ToString(), "yyyy/MM/dd", CultureInfo.InvariantCulture);
-                model.BillEntryDate = DateTime.UtcNow;
+               // model.BillEntryDate = DateTime.UtcNow;
+                model.BillEntryDate = DateTime.Now;
                 //var paymentType_result = db.Database.SqlQuery<string>(@"call usp_split('Receipts','Reccategory',',',null)").ToList();
                 var utilities = await db.tbl_utilitiesmaster.Where(w => w.Delmark != "*").ToListAsync();
                 //ViewBag.UtilityId = new SelectList(utilities, "Utility_id", "Utility_id");
@@ -291,5 +302,48 @@ namespace LeaMaPortal.Controllers
                 throw ex;
             }
         }
+
+        public async Task<PartialViewResult> Print(int EntryNo, string OtherTerms)
+        {
+            try
+            {
+                Thread.Sleep(1000);
+                EBWaterPrintModel model = new EBWaterPrintModel();
+                //TcaPrintModel model = new TcaPrintModel();
+                var Ebwater = await db.tbl_eb_water_billentryhd.FirstOrDefaultAsync(x => x.id == EntryNo);
+                var Supplier = await db.tbl_suppliermaster.FirstOrDefaultAsync(x => x.id == EntryNo);
+
+                if (Ebwater != null)
+                    if (Ebwater.id != 0)
+                    { model.id = Ebwater.id; }
+                if (Ebwater.Refno != 0)
+                { model.Refno = Ebwater.Refno; }
+                if (Ebwater.refdate.HasValue)
+                { model.refdate = Ebwater.refdate.Value.ToShortDateString(); }
+                if (Ebwater.Utility_id != "")
+                { model.Utility_id = Ebwater.Utility_id; }
+                if (Ebwater.utility_name != "")
+                { model.utility_name = Ebwater.utility_name; }
+                if (Ebwater.Supplier_id != 0)
+                { model.Supplier_id = Ebwater.Supplier_id; }
+                if (Ebwater.Supplier_name != "")
+                { model.Supplier_name = Ebwater.Supplier_name; }
+                if (Supplier.address != "" && Supplier.address != null)
+                { model.Supplier_address = Supplier.address; }
+
+                LeamaEntities l = new LeamaEntities();
+                var filter = l.tbl_eb_water_billentrydt.Where(x => x.id == model.id);
+                var Ebwaterdata = filter.ToList();
+
+                ViewBag.Ebdtas = Ebwaterdata;
+                return PartialView("../EbWater/_EbWaterPrint", model);
+                //return PartialView("../Views/Receipts/_ReceiptsPrint", model);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
     }
 }

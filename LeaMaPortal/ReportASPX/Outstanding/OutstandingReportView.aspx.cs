@@ -14,7 +14,12 @@ namespace LeaMaPortal.ReportASPX.Outstanding
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            txt_CreatedUser.Text = System.Web.HttpContext.Current.User.Identity.Name;
+            if (!IsPostBack)
+            {
+                txt_CreatedUser.Text = System.Web.HttpContext.Current.User.Identity.Name;
+                txt_fromDate.Text = DateTime.Now.Date.ToString();
+                txt_toDate.Text = DateTime.Now.Date.ToString();
+            }
         }
         protected void filterbyChange(object sender, EventArgs e)
         {
@@ -34,7 +39,7 @@ namespace LeaMaPortal.ReportASPX.Outstanding
             if (dropDown_Group.SelectedItem.Value == "Property")
             {
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "--Select--", Value = "--Select--", Selected = true });
-                dropDown_FilterBy.Items.Add(new ListItem() { Text = "id", Value = "id" });
+        
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "Agreement_No", Value = "Agreement_No" });
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "Propertyid", Value = "Property_id" });
                 dropDown_FilterBy.Items.Add(new ListItem() { Text = "Propertyname", Value = "Property_name" });
@@ -152,7 +157,7 @@ namespace LeaMaPortal.ReportASPX.Outstanding
                 if (dropDown_Group.SelectedItem.Value == "Property")
                 {
                     OutstandingReportViewer.LocalReport.ReportPath = "ReportRDLC\\Outstanding\\outstanding_prop.rdlc";
-                    var property = entities.Database.SqlQuery<OutstandingPropertyReportModel>("Select id,Agreement_No,Property_id,Property_name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Agreement_Start_Date,Ag_Tenant_Name,Agreement_End_Date,Total_Rental_amount,outstanding_amt,Perday_Rental,Remaining_Days,Contract_Value,user from outstanding_report where user='" + txt_CreatedUser.Text + "'").ToList();
+                    var property = entities.Database.SqlQuery<OutstandingPropertyReportModel>("Select Agreement_No,Property_id,Property_name,Unit_id,Unitname,Region_Name,Country,Caretaker_id,Caretaker_Name,Ag_Tenant_id,Agreement_Start_Date,Ag_Tenant_Name,Agreement_End_Date,Total_Rental_amount,outstanding_amt,Perday_Rental,Remaining_Days,Contract_Value,user from outstanding_report where user='" + txt_CreatedUser.Text + "'").ToList();
                     reportDataSource = new ReportDataSource
                     {
                         // Must match the DataSource in the RDLC

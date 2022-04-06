@@ -18,5 +18,6 @@ namespace LeaMaPortal.DBContext
         public Nullable<double> totalamount { get; set; }
         public double paidamount { get; set; }
         public double advancepending { get; set; }
+        public string Region_Name { get; set; }
     }
 }

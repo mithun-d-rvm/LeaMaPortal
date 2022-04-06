@@ -20,5 +20,7 @@ namespace LeaMaPortal.DBContext
         public string Doc_name { get; set; }
         public string Doc_Path { get; set; }
         public string Delmark { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     }
 }

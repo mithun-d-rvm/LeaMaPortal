@@ -867,18 +867,18 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   var Modal = function (element, options) {
     this.options   = options
     this.$element  = $(element)
-    this.$backdrop =
+    this.$backdrop = 
     this.isShown   = null
 
     if (this.options.remote) this.$element.load(this.options.remote)
   }
 
   Modal.DEFAULTS = {
-      backdrop: true
-    , keyboard: true
+      backdrop: 'static'
+    , keyboard: false
     , show: true
   }
-
+ 
   Modal.prototype.toggle = function (_relatedTarget) {
     return this[!this.isShown ? 'show' : 'hide'](_relatedTarget)
   }
@@ -895,7 +895,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
     this.escape()
 
-    this.$element.on('click.dismiss.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
+    //this.$element.on('click.dismiss.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
 
     this.backdrop(function () {
       var transition = $.support.transition && that.$element.hasClass('fade')
@@ -925,6 +925,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
           })
           .emulateTransitionEnd(300) :
         that.$element.focus().trigger(e)
+        
     })
   }
 

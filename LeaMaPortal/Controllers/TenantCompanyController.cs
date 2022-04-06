@@ -34,10 +34,12 @@ namespace LeaMaPortal.Controllers
                 int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
                 ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, PageSize);
                 //TenantCompanyViewModel model = new TenantCompanyViewModel();
-                var tenantCompanies = db.tbl_tenant_company.Where(x => x.Delmark != "*");
+                string regname = Session["Region"].ToString();
+                var tenantCompanies = db.tbl_tenant_company.Where(x => x.Delmark != "*" && x.Region_Name == regname);
                 if (!string.IsNullOrWhiteSpace(Search))
                 {
-                    tenantCompanies = tenantCompanies.Where(x => x.CompanyName.Contains(Search));
+                    //tenantCompanies = tenantCompanies.Where(x => x.CompanyName.Contains(Search));
+                    tenantCompanies = tenantCompanies.Where(x => x.CompanyName.Contains(Search) || x.Type.Contains (Search ) || x.First_Name.Contains (Search ) || x.Last_Name.Contains (Search ) || x.CompanyName .Contains (Search ) || x.City.Contains (Search ) || x.TradelicenseNo.Contains (Search ) || x.Emirate.Contains (Search ) || x.TradelicenseNo .Contains (Search )  ) ;
                 }
                 var tenantCompany = tenantCompanies.OrderBy(x => x.Id).Select(x => new TenantCompanyViewModel()
                 {
@@ -259,7 +261,7 @@ namespace LeaMaPortal.Controllers
             }
 
             //var _companyActivity = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Actitvity',',',null);").ToList();
-            var _companyActivity = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant Company" && x.comboname == "Actitvity");
+            var _companyActivity = await db.tbl_combo_master.OrderBy (x=>x.comboname ).FirstOrDefaultAsync(x => x.screen_name == "Tenant Company" && x.comboname == "Actitvity");
             if (_companyActivity != null)
             {
                 ViewBag.ComapanyActivity = new SelectList(_companyActivity.combovalue.Split(','), tenantCompany.Actitvity);
@@ -292,6 +294,8 @@ namespace LeaMaPortal.Controllers
                 CompanyName = tenantCompany.CompanyName,
                 Email = tenantCompany.Email,
                 Emirate = tenantCompany.Emirate,
+                Emiratesid =  tenantCompany.Emirate_id ,
+
                 FaxAreaCode = tenantCompany.Fax_Areacode,
                 FaxCountryCode = tenantCompany.Fax_Countrycode,
                 FaxNo = tenantCompany.Fax_No,
@@ -304,7 +308,7 @@ namespace LeaMaPortal.Controllers
                 LandlineNo = tenantCompany.Landline_No,
                 LastName = tenantCompany.Last_Name,
                 LicenseIssueDate = tenantCompany.License_issueDate,
-                MaritalStatus = tenantCompany.Marital_Status,
+               // MaritalStatus = tenantCompany.Marital_Status,
                 MiddleName = tenantCompany.Middle_Name,
                 MobileAreaCode = tenantCompany.Mobile_Areacode,
                 MobileCountryCode = tenantCompany.Mobile_Countrycode,
@@ -325,7 +329,7 @@ namespace LeaMaPortal.Controllers
                     MobileNo = z.MobNo,
                     Phone = z.Phone,
                     Salutations = z.Salutations,
-                    TenantId = z.Tenant_Id
+                    TenantId = z.Tenant_Id                    
                 }).ToList(),
                 CompanyDetails = db.tbl_tenant_companydt.Where(y => y.Tenant_Id == tenantCompany.Tenant_Id).Select(z => new CompanyDetail()
                 {
@@ -465,6 +469,16 @@ namespace LeaMaPortal.Controllers
                             
                         }
                     }
+                    string regname = Session["Region"].ToString();
+                    if (regname != "")
+                    {
+                        model.Region_Name = regname;
+
+                        var countryname = db.tbl_region.Where(x => x.Region_Name == model.Region_Name).OrderByDescending(x => x.Id).FirstOrDefault();
+
+                        model.Country = countryname.Country;
+                    }
+                   
 
                     object[] parameters = {
                          new MySqlParameter("@PFlag", PFlag),
@@ -500,12 +514,14 @@ namespace LeaMaPortal.Controllers
                          new MySqlParameter("@PADWEA_Regid", model.ADWEARegid),
                          new MySqlParameter("@PType", model.TenantType),
                          new MySqlParameter("@PCreateduser", System.Web.HttpContext.Current.User.Identity.Name),
+                         new MySqlParameter("@PEmirate_id",model.Emiratesid ),
                          new MySqlParameter("@Ptenant_companydt", companyDet),
                          new MySqlParameter("@Ptenant_companydt1", companyContactDetails),
-                         new MySqlParameter("@Ptenant_companydoc", companyDoc)
-
+                         new MySqlParameter("@Ptenant_companydoc", companyDoc),
+                         new MySqlParameter("@PRegion_Name", model.Region_Name ),
+                         new MySqlParameter("@PCountry", model.Country )
                     };
-                    var tenantCompany = await db.Database.SqlQuery<object>("CALL Usp_Tenant_Company_All(@PFlag, @PTenant_Id, @PCompanyName, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser, @Ptenant_companydt, @Ptenant_companydt1, @Ptenant_companydoc)", parameters).ToListAsync();
+                    var tenantCompany = await db.Database.SqlQuery<object>("CALL Usp_Tenant_Company_All(@PFlag, @PTenant_Id, @PCompanyName, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser, @PEmirate_id,@Ptenant_companydt, @Ptenant_companydt1, @Ptenant_companydoc,@PRegion_Name,@PCountry)", parameters).ToListAsync();
                 }
                 //return RedirectToAction("../Master/Index", new { selected = 10 });
                 return Json(result, JsonRequestBehavior.AllowGet);
@@ -528,6 +544,8 @@ namespace LeaMaPortal.Controllers
                 {
                     return Json(new MessageResult() { Errors = "Not found" }, JsonRequestBehavior.AllowGet);
                 }
+                string region = Session["Region"].ToString();
+                string country = Session["Country"].ToString();
                 object[] parameters = {
                      new MySqlParameter("@PFlag", "DELETE"),
                      new MySqlParameter("@PTenant_Id", id),
@@ -562,12 +580,15 @@ namespace LeaMaPortal.Controllers
                      new MySqlParameter("@PADWEA_Regid", ""),
                      new MySqlParameter("@PType", ""),
                      new MySqlParameter("@PCreateduser", ""),
+                     new MySqlParameter("@PEmirate_id","" ),
                      new MySqlParameter("@Ptenant_companydt", ""),
                      new MySqlParameter("@Ptenant_companydt1", ""),
-                     new MySqlParameter("@Ptenant_companydoc", "")
+                     new MySqlParameter("@Ptenant_companydoc", ""),
+                     new MySqlParameter("@PRegion_Name",region),
+                     new MySqlParameter ("@PCountry",country)
 
                 };
-                var spResult = await db.Database.SqlQuery<object>("CALL Usp_Tenant_Company_All(@PFlag, @PTenant_Id, @PCompanyName, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser, @Ptenant_companydt, @Ptenant_companydt1, @Ptenant_companydoc)", parameters).ToListAsync();
+                var spResult = await db.Database.SqlQuery<object>("CALL Usp_Tenant_Company_All(@PFlag, @PTenant_Id, @PCompanyName, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser,@PEmirate_id ,@Ptenant_companydt, @Ptenant_companydt1, @Ptenant_companydoc,@PRegion_Name,@PCountry)", parameters).ToListAsync();
                 result.Message = "Tenant company deleted successfully";
                 //await db.SaveChangesAsync();
                 //tbl_country.Delmark = "*";

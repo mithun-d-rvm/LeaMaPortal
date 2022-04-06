@@ -14,7 +14,6 @@ namespace LeaMaPortal.DBContext
     
     public partial class outstanding_report
     {
-        public int id { get; set; }
         public int Agreement_No { get; set; }
         public string Property_id { get; set; }
         public string Property_name { get; set; }

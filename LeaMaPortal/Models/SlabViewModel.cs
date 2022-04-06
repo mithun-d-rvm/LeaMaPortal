@@ -26,5 +26,8 @@ namespace LeaMaPortal.Models
         public string Colour { get; set; }
         [DisplayName("Residence Type")]
         public string Residence_type { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
+
     }
 }

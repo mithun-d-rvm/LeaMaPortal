@@ -228,7 +228,7 @@
                             Invoice Description*
                         </div>
                         <div class="col-md-2">
-                            Remarks*
+                            Remarks
                         </div>
                     </div>
                 </div>
@@ -536,12 +536,12 @@
     {
         if (paymentType != "against invoice") {
             document.getElementById('paymentDetail').style.display = "none";
-            $("#TotalAmount").prop("readonly", false);
+            //$("#TotalAmount").prop("readonly", false);
         }
         else
         {
             document.getElementById('paymentDetail').style.display = "block";
-            $("#TotalAmount").prop("readonly", true);
+            //$("#TotalAmount").prop("readonly", true);
         }
     }
     $("#PaymentType").change(function () { showHideSubForm($("#PaymentType").val()) });
@@ -587,15 +587,15 @@
     }
     function ShowHidePaymentModeFields(paymentModeValue) {
          
-        if (paymentModeValue == "cheque") {
+        if (paymentModeValue == "cheque" || paymentModeValue == "DD") {
             showHideChequeField(false);
             showhideAdvancePayment(true);
-            showhidePDC(false);
+            showhidePDC(true);
             if ($("#PaymentType").val() == "against invoice") {
-                $("#TotalAmount").prop("readonly", true);
+                //$("#TotalAmount").prop("readonly", true);
             }
             else {
-                $("#TotalAmount").prop("readonly", false);
+                //$("#TotalAmount").prop("readonly", false);
             }
         }
         else if (paymentModeValue == "cash") {
@@ -605,10 +605,10 @@
             showhideAdvancePayment(true);
             showhidePDC(true);
             if ($("#PaymentType").val() == "against invoice") {
-                $("#TotalAmount").prop("readonly", true);
+                //$("#TotalAmount").prop("readonly", true);
             }
             else {
-                $("#TotalAmount").prop("readonly", false);
+                //$("#TotalAmount").prop("readonly", false);
             }
 
         }
@@ -617,10 +617,10 @@
             showhideAdvancePayment(true);
             showhidePDC(true);
             if ($("#PaymentType").val() == "against invoice") {
-                $("#TotalAmount").prop("readonly", true);
+                //$("#TotalAmount").prop("readonly", true);
             }
             else {
-                $("#TotalAmount").prop("readonly", false);
+                //$("#TotalAmount").prop("readonly", false);
             }
         }
         else if (paymentModeValue == "pdc") {
@@ -628,17 +628,17 @@
             showhideAdvancePayment(true);
             showhidePDC(false);
             if ($("#PaymentType").val() == "against invoice") {
-                $("#TotalAmount").prop("readonly", true);
+                //$("#TotalAmount").prop("readonly", true);
             }
             else {
-                $("#TotalAmount").prop("readonly", false);
+                //$("#TotalAmount").prop("readonly", false);
             }
         }
         else if (paymentModeValue == "Advance adjust") {
             showHideChequeField(true);
             showhideAdvancePayment(false);
             showhidePDC(true);
-            $("#TotalAmount").prop("readonly", true);
+            //$("#TotalAmount").prop("readonly", true);
             //if ($("#PaymentType").val() == "against invoice") {
             //    $("#TotalAmount").prop("readonly", true);
             //}
@@ -651,10 +651,10 @@
             showhideAdvancePayment(true);
             showhidePDC(true);
             if ($("#PaymentType").val() == "against invoice") {
-                $("#TotalAmount").prop("readonly", true);
+                //$("#TotalAmount").prop("readonly", true);
             }
             else {
-                $("#TotalAmount").prop("readonly", false);
+                //$("#TotalAmount").prop("readonly", false);
             }
         }
     }
@@ -960,7 +960,9 @@
         var Balance = document.getElementById("Balance").value;
         var Remarks = document.getElementById("Remarks").value;
 
-        if ((Invno == null || Invno == "") || (InvoiceDate == null || InvoiceDate == "") || (Description == null || Description == "") || (InvoiceAmount == null || InvoiceAmount == "") || (DebitAmount == null || DebitAmount == "") || (PaidAmount == null || PaidAmount == "") || (Balance == null || Balance == "") || (Remarks == null || Remarks == "")) {
+        //|| (Remarks == null || Remarks == "")
+
+        if ((Invno == null || Invno == "") || (InvoiceDate == null || InvoiceDate == "") || (Description == null || Description == "") || (InvoiceAmount == null || InvoiceAmount == "") || (DebitAmount == null || DebitAmount == "") || (PaidAmount == null || PaidAmount == "") || (Balance == null || Balance == "") ) {
             $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
             $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
             $(".result-title").text("Failure");

@@ -37,7 +37,7 @@
             @Html.DropDownList("Month", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
         </div>
         <div class="col-md-1 w-md-10">
-            <input type="number" name="Year" id="Year" step="1" class="master-form-input form-control" onkeypress = "allow_only_numbers(event);" min="@DateTime.Now.Year" />
+            <input type="number" name="Year" id="Year" step="1" class="master-form-input form-control" onkeypress = "allow_only_numbers(event);" min="2010" />  @*@DateTime.Now.Year*@
             @*@Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);", @min = DateTime.Now.Year } })*@
         </div>
         <div class="col-md-1 w-md-13">
@@ -159,16 +159,16 @@
         var Cheque_Date = $("#AgreementPdRenewal #Cheque_Date").val();
         var Cheque_Amount = parseFloat($("#AgreementPdRenewal #Cheque_Amount").val());
         var cYear = new Date().getFullYear();
-        if (Year < cYear) {
-            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
-            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
-            $(".result-title").text("Failure");
-            $(".result-modal-body span").text("Year should not be past");
-            $('#masterResultModal').modal('show');
-            //alert("Year not past");
-            return;
-        }
-        if (Month == '' || Year == '' || Payment_Mode == '' || $("#AgreementPdRenewal #Cheque_Amount").val() == '') {
+        //if (Year < cYear) {
+        //    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+        //    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+        //    $(".result-title").text("Failure");
+        //    $(".result-modal-body span").text("Year should not be past");
+        //    $('#masterResultModal').modal('show');
+        //    //alert("Year not past");
+        //    return;
+        //}
+        if (Month == '' || Year < 2010 || isNaN(Year) || Payment_Mode == '' || $("#AgreementPdRenewal #Cheque_Amount").val() == '') {
             $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
             $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
             $(".result-title").text("Failure");
@@ -329,17 +329,34 @@
     $("#AgreementPdRenewal #Payment_Mode").change(function () {
          
         var type = $("#AgreementPdRenewal #Payment_Mode").val();
-        if (type == "Cheque") {
-            $("#AgreementPdRenewal #Cheque_No").attr("disabled", false);
-            $("#AgreementPdRenewal #Cheque_Date").attr("disabled", false);
+        if (type != undefined && (type != "Cash")) {
+            $('#AgreementPdRenewal #BankName').removeAttr('disabled');
+            $('#AgreementPdRenewal #Cheque_No').removeAttr('disabled');
+            $('#AgreementPdRenewal #Cheque_Date').removeAttr('disabled');
         }
         else {
-            $("#AgreementPdRenewal #Cheque_No").val('');
-            $("#AgreementPdRenewal #Cheque_Date").val('NULL')
-            $("#AgreementPdRenewal #Cheque_No").attr("disabled", true);
-            $("#AgreementPdRenewal #Cheque_Date").attr("disabled", true);
+            $('#AgreementPdRenewal #BankName').attr('disabled', true);
+            $('#AgreementPdRenewal #Cheque_No').attr('disabled', true);
+            $('#AgreementPdRenewal #Cheque_Date').attr('disabled', true);
+
+            $('#AgreementPdRenewal #BankName').val('');
+            $('#AgreementPdRenewal #Cheque_No').val('');
+            $('#AgreementPdRenewal #Cheque_Date').val('mm/dd/yyyy');
         }
+
+        //var type = $("#AgreementPdRenewal #Payment_Mode").val();
+        //if (type == "Cheque") {
+        //    $("#AgreementPdRenewal #Cheque_No").attr("disabled", false);
+        //    $("#AgreementPdRenewal #Cheque_Date").attr("disabled", false);
+        //}
+        //else {
+        //    $("#AgreementPdRenewal #Cheque_No").val('');
+        //    $("#AgreementPdRenewal #Cheque_Date").val('NULL')
+        //    $("#AgreementPdRenewal #Cheque_No").attr("disabled", true);
+        //    $("#AgreementPdRenewal #Cheque_Date").attr("disabled", true);            
+        //}
         return;
     });
+   
     
 </script>

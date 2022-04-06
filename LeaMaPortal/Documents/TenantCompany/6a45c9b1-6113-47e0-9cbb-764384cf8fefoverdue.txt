@@ -1,0 +1,29 @@
+
+
+
+SELECT distinct 
+Y.Region_Name as 'Region Name',ifnull(x.Properties_Name,y2.Ref_Unit_Property_Name) as 'Property Name',ifnull(x.Unit_Property_Name,'') as 'Unit Name'
+,x.Ag_Tenant_Name as 'Tenant Name',x.Agreement_No as 'Agreement No',z.payment_mode as 'Payment Mode',z.Cheque_No as 'Cheque No'
+,ifnull(z.cheque_date,'') as 'Cheque Date',z.Cheque_Amount as 'Cheque Amount',z4.Amount  from tbl_agreement  x
+inner join tbl_propertiesmaster y2 on x.property_id=y2.Property_Id
+inner join tbl_propertiesmaster y on y.Property_ID_Tawtheeq =ifnull(x.Property_ID_Tawtheeq,
+ (select  Ref_unit_Property_ID_Tawtheeq from
+ tbl_propertiesmaster where  x.Unit_ID_Tawtheeq=Unit_ID_Tawtheeq)
+ )
+inner  JOIN TBL_AGREEMENT_PDC Z ON Z.agreement_no=x.agreement_no 
+inner join view_tenant y1 on x.Ag_Tenant_Name=y1.First_Name
+inner join tbl_caretaker z2 on z2.Caretaker_id=x.Caretaker_id
+inner join tbl_emailtemplate z3 on z3.templatename='Rental overdue single'
+inner join view_agree_recp_chequenowise_pending z4 on z4.agreement_no=z.agreement_no
+
+and ifnull(z4.Cheque_No,'')=ifnull(z.Cheque_No,'')
+and ifnull(z4.Cheque_Date,'')=ifnull(z.cheque_date,'')
+and ifnull(z4.Payment_Mode,'')=ifnull(z.Payment_Mode,'')
+
+where  ifnull(x.Approval_Flag,0)=1 and ifnull(x.status,'')='' and ifnull(x.delmark,'')<>'*'
+
+and( z.payment_mode<>'pdc'
+or z.payment_mode='pdc' )
+and z.cheque_date<=current_date()
+order by x.agreement_no;
+

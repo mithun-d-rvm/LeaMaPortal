@@ -1,0 +1,46 @@
+TCA Form:
+==========
+1. Check how tenant values are taken
+2. Check how drop down values are taken to db
+3. Check for document
+4. Make payable by dropdown, hardcode values
+
+
+Edit Form , Renewal , Closure , approval
+
+
+Invoice:
+========
+1. Make Bank Details Drop Down
+
+
+Payments:
+=========
+1. Load Advance Payment Number based on supplier no,agreemnet no,property id,unit id
+
+
+Receipts
+=========
+1. Add Security Deposit
+2. Enable DD cheque no for DD
+
+
+UPDATE `leama_new`.`tbl_combo_master` SET `combovalue`='Cash,Cheque,Online,Cheque without date,DD' WHERE `id`='19';
+ 
+
+
+
+**********************************************************
+
+UPDATE `leama_test`.`tbl_combo_master` SET `combovalue`='Company,Government' WHERE `id`='18';
+select * from tbl_combo_master;
+INSERT INTO `leama_test`.`tbl_combo_master` (`screen_name`, `comboname`, `combovalue`) VALUES ('Payment', 'PaymentMode', 'cheque,cash,online,DD,Advance adjust');
+UPDATE `leama_test`.`tbl_combo_master` SET `combovalue`='cheque,cash,online,pdc,DD,Advance adjust' WHERE `id`='26';
+
+delete from tbl_combo_master where id in (32,33)
+
+UPDATE `leama_test`.`tbl_formmaster` SET `MenuName`='Tenant Master - Person' WHERE `Menutype`='M' and`MenuName`='Tenant Master - Individual';
+
+select * from tbl_formmaster order by id
+
+*******************************************************

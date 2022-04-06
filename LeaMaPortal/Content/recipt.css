@@ -1,0 +1,80 @@
+﻿/* Haniel recipt*/
+
+.pad_20 {
+    padding-top:20px;
+    padding-right:20px;
+    padding-left:20px;
+}
+
+.marg {
+    margin-bottom:16px;
+    padding-top:18.4px;
+}
+
+.tecent {
+    text-align:center;
+}
+
+.teleft {
+    text-align:left;
+}
+
+.teright {
+    text-align:right;
+}
+
+.tecent,.teleft,.teright p {
+    font-size:13px;
+}
+
+.col-xs-8.padzero, .col-xs-4.padzero, .col-xs-12.padzero   {
+    padding:0px;
+}
+
+.botto {
+    border-width:5px;  
+    border-style:dotted;
+}
+
+.dun {
+    border-bottom:3px dotted #b5b5b5;
+    width:300px;
+}
+
+.bod-bot {
+    border-bottom:solid thin #b5b5b5;
+    padding-bottom:5px;
+    margin-bottom:5px;
+}
+
+.pad_20lr {
+       padding-right:20px;
+    padding-left:20px; 
+}
+
+
+p.no_bot_marg {
+    margin-bottom:2px !important;
+}
+
+p.no_bot_marg_10 {
+    margin-bottom:2px !important;
+    font-size:10px;
+}
+
+.pad_b {
+    padding-bottom:30px;
+}
+
+/************************* Contract details *******************/
+
+.head1 {
+    text-transform:uppercase;
+    font-size:16px;
+}
+
+.head_cent {
+    font-size:x-large;
+    color:#973132;
+    font-weight:bold;
+}

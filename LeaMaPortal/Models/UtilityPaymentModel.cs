@@ -86,5 +86,7 @@ namespace LeaMaPortal.Models
         public string meterno { get; set; }
         public int billno { get; set; }
         public int amount { get; set; }
+
+        public DateTime billdate { get; set; }
     }
 }

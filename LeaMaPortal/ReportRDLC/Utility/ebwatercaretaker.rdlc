@@ -1,80 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="ebwater_caretakerds">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>8ef34057-37d6-48c9-8505-74ec1e7da562</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="Caretaker_id">
-          <DataField>Caretaker_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Caretaker_Name">
-          <DataField>Caretaker_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Region_Name">
-          <DataField>Region_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Country">
-          <DataField>Country</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Noof_properties">
-          <DataField>Noof_properties</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Aging_days">
-          <DataField>Aging_days</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Aging_Range">
-          <DataField>Aging_Range</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Amont_Range">
-          <DataField>Amont_Range</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="OutstandingAmt">
-          <DataField>OutstandingAmt</DataField>
-          <rd:TypeName>System.Single</rd:TypeName>
-        </Field>
-        <Field Name="user">
-          <DataField>user</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="utility_id">
-          <DataField>utility_id</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Utility_Name">
-          <DataField>Utility_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>ebwater_caretakerds</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>ebwatercaretakerds1</rd:DataSetName>
-        <rd:SchemaPath>D:\mysql\RDLC\RDLCApplicationWithParamstest\RDLCApplicationWithParams\ebwatercaretakerds1.xsd</rd:SchemaPath>
-        <rd:TableName>ebwater_caretaker_report</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>ebwater_caretaker_reportTableAdapter</rd:TableAdapterName>
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Textbox Name="Textbox17">
@@ -294,6 +219,9 @@
                 <CrossAt>NaN</CrossAt>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
               <ChartAxis Name="Secondary">
                 <Style>
@@ -328,6 +256,9 @@
                 <Location>Opposite</Location>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
             </ChartCategoryAxes>
             <ChartValueAxes>
@@ -362,6 +293,9 @@
                 <CrossAt>NaN</CrossAt>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
               <ChartAxis Name="Secondary">
                 <Style>
@@ -395,6 +329,9 @@
                 <Location>Opposite</Location>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
             </ChartValueAxes>
             <Style>
@@ -449,8 +386,8 @@
         </ChartNoDataMessage>
         <DataSetName>DataSet1</DataSetName>
         <Top>0.42027in</Top>
-        <Left>1.29694in</Left>
-        <Height>2.99653in</Height>
+        <Left>1.29695in</Left>
+        <Height>3.00487in</Height>
         <Width>10.02264in</Width>
         <ZIndex>1</ZIndex>
         <Visibility>
@@ -483,7 +420,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox72</rd:DefaultName>
-        <Top>0.43417in</Top>
+        <Top>0.42027in</Top>
         <Left>0.2275in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
@@ -516,7 +453,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox73</rd:DefaultName>
-        <Top>0.72583in</Top>
+        <Top>0.73971in</Top>
         <Left>0.2275in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
@@ -535,10 +472,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.76709in</Width>
+              <Width>1.77084in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.76708in</Width>
+              <Width>1.77083in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1051,7 +988,7 @@
           <TablixMembers>
             <TablixMember>
               <TablixHeader>
-                <Size>1.76708in</Size>
+                <Size>1.77083in</Size>
                 <CellContents>
                   <Textbox Name="Textbox151">
                     <CanGrow>true</CanGrow>
@@ -1087,7 +1024,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.05875in</Size>
+                    <Size>2.0625in</Size>
                     <CellContents>
                       <Textbox Name="Textbox153">
                         <CanGrow>true</CanGrow>
@@ -1123,7 +1060,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.965in</Size>
+                        <Size>1.96875in</Size>
                         <CellContents>
                           <Textbox Name="Textbox155">
                             <CanGrow>true</CanGrow>
@@ -1159,7 +1096,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>1.76708in</Size>
+                            <Size>1.77083in</Size>
                             <CellContents>
                               <Textbox Name="Textbox157">
                                 <CanGrow>true</CanGrow>
@@ -1168,7 +1105,7 @@
                                   <Paragraph>
                                     <TextRuns>
                                       <TextRun>
-                                        <Value>Region Name</Value>
+                                        <Value>Region </Value>
                                         <Style>
                                           <FontWeight>Bold</FontWeight>
                                         </Style>
@@ -1215,7 +1152,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>1.76708in</Size>
+                <Size>1.77083in</Size>
                 <CellContents>
                   <Textbox Name="Group1">
                     <CanGrow>true</CanGrow>
@@ -1261,7 +1198,7 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>2.05875in</Size>
+                    <Size>2.0625in</Size>
                     <CellContents>
                       <Textbox Name="Group2">
                         <CanGrow>true</CanGrow>
@@ -1310,7 +1247,7 @@
                         </SortExpression>
                       </SortExpressions>
                       <TablixHeader>
-                        <Size>1.965in</Size>
+                        <Size>1.96875in</Size>
                         <CellContents>
                           <Textbox Name="Group3">
                             <CanGrow>true</CanGrow>
@@ -1359,7 +1296,7 @@
                             </SortExpression>
                           </SortExpressions>
                           <TablixHeader>
-                            <Size>1.76708in</Size>
+                            <Size>1.77083in</Size>
                             <CellContents>
                               <Textbox Name="Group4">
                                 <CanGrow>true</CanGrow>
@@ -1409,7 +1346,7 @@
                         </TablixMember>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>1.76708in</Size>
+                            <Size>1.77083in</Size>
                             <CellContents>
                               <Textbox Name="Textbox180">
                                 <CanGrow>true</CanGrow>
@@ -1451,7 +1388,7 @@
                     </TablixMember>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.965in</Size>
+                        <Size>1.96875in</Size>
                         <CellContents>
                           <Textbox Name="Textbox185">
                             <CanGrow>true</CanGrow>
@@ -1487,7 +1424,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>1.76708in</Size>
+                            <Size>1.77083in</Size>
                             <CellContents>
                               <Textbox Name="Textbox186">
                                 <CanGrow>true</CanGrow>
@@ -1531,7 +1468,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.05875in</Size>
+                    <Size>2.0625in</Size>
                     <CellContents>
                       <Textbox Name="Textbox190">
                         <CanGrow>true</CanGrow>
@@ -1567,7 +1504,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.965in</Size>
+                        <Size>1.96875in</Size>
                         <CellContents>
                           <Textbox Name="Textbox191">
                             <CanGrow>true</CanGrow>
@@ -1603,7 +1540,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>1.76708in</Size>
+                            <Size>1.77083in</Size>
                             <CellContents>
                               <Textbox Name="Textbox192">
                                 <CanGrow>true</CanGrow>
@@ -1649,7 +1586,7 @@
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>1.76708in</Size>
+                <Size>1.77083in</Size>
                 <CellContents>
                   <Textbox Name="Textbox195">
                     <CanGrow>true</CanGrow>
@@ -1685,7 +1622,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.05875in</Size>
+                    <Size>2.0625in</Size>
                     <CellContents>
                       <Textbox Name="Textbox196">
                         <CanGrow>true</CanGrow>
@@ -1721,7 +1658,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.965in</Size>
+                        <Size>1.96875in</Size>
                         <CellContents>
                           <Textbox Name="Textbox197">
                             <CanGrow>true</CanGrow>
@@ -1757,7 +1694,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>1.76708in</Size>
+                            <Size>1.77083in</Size>
                             <CellContents>
                               <Textbox Name="Textbox198">
                                 <CanGrow>true</CanGrow>
@@ -1801,10 +1738,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>3.94458in</Top>
-        <Left>0.2275in</Left>
+        <Top>3.49458in</Top>
+        <Left>0.22167in</Left>
         <Height>1.75in</Height>
-        <Width>11.09209in</Width>
+        <Width>11.11459in</Width>
         <ZIndex>4</ZIndex>
         <Visibility>
           <ToggleItem>Textbox73</ToggleItem>
@@ -1827,6 +1764,82 @@
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
-  <rd:ReportID>d857bd3c-2cd0-4700-b9ad-d341678c546b</rd:ReportID>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="ebwater_caretakerds">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>8ef34057-37d6-48c9-8505-74ec1e7da562</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>ebwater_caretakerds</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Caretaker_id">
+          <DataField>Caretaker_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Caretaker_Name">
+          <DataField>Caretaker_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Region_Name">
+          <DataField>Region_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Country">
+          <DataField>Country</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Noof_properties">
+          <DataField>Noof_properties</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Aging_days">
+          <DataField>Aging_days</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Aging_Range">
+          <DataField>Aging_Range</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Amont_Range">
+          <DataField>Amont_Range</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OutstandingAmt">
+          <DataField>OutstandingAmt</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
+        </Field>
+        <Field Name="user">
+          <DataField>user</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="utility_id">
+          <DataField>utility_id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Utility_Name">
+          <DataField>Utility_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>ebwatercaretakerds1</rd:DataSetName>
+        <rd:SchemaPath>D:\mysql\RDLC\RDLCApplicationWithParamstest\RDLCApplicationWithParams\ebwatercaretakerds1.xsd</rd:SchemaPath>
+        <rd:TableName>ebwater_caretaker_report</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>ebwater_caretaker_reportTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>d857bd3c-2cd0-4700-b9ad-d341678c546b</rd:ReportID>
 </Report>

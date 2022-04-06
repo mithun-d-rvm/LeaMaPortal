@@ -21,7 +21,7 @@ namespace LeaMaPortal.DBContext
         public Nullable<float> qty { get; set; }
         public Nullable<float> amount { get; set; }
         public string Delmark { get; set; }
-    
-        public virtual tbl_invoicehd tbl_invoicehd { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     }
 }

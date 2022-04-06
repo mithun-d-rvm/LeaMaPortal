@@ -19,6 +19,7 @@ namespace LeaMaPortal.Controllers
     {
         private LeamaEntities db = new LeamaEntities();
 
+
         // GET: Facility
         public PartialViewResult Index(string Search, int? page, int? defaultPageSize)
         {
@@ -29,9 +30,10 @@ namespace LeaMaPortal.Controllers
                 int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
                 ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, defaultPageSize);
                 IList<FacilityViewModel> list;
+                string regname = Session["Region"].ToString();
                 if (string.IsNullOrWhiteSpace(Search))
                 {
-                    list = db.tbl_facilitymaster.Where(x => x.Delmark != "*").OrderByDescending(x => x.Id).Select(x => new FacilityViewModel()
+                    list = db.tbl_facilitymaster.Where(x => x.Delmark != "*" && x.Region_Name == regname ).OrderByDescending(x => x.Id).Select(x => new FacilityViewModel()
                     {
                         Id = x.Id,
                         Facility_id = x.Facility_id,
@@ -40,7 +42,7 @@ namespace LeaMaPortal.Controllers
                 }
                 else
                 {
-                    list = db.tbl_facilitymaster.Where(x => x.Delmark != "*"
+                    list = db.tbl_facilitymaster.Where(x => x.Delmark != "*" && x.Region_Name == regname
                                     && (x.Facility_id.ToLower().Contains(Search.ToLower())
                                     || x.Facility_Name.ToLower().Contains(Search.ToLower()))).OrderByDescending(x=>x.Id)
                                   .Select(x => new FacilityViewModel()
@@ -95,13 +97,26 @@ namespace LeaMaPortal.Controllers
                         {
                             result.Message = "Facility created successfully";
                         }
+
+                        string regname = Session["Region"].ToString();
+                        if (regname != "")
+                        {
+                            model.Region_Name = regname;
+
+                            var countryname = db.tbl_region.Where(x => x.Region_Name == model.Region_Name).OrderByDescending(x => x.Id).FirstOrDefault();
+
+                            model.Country = countryname.Country;
+                        }
+
                         object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PId", model.Id),
                                            new MySqlParameter("@PFacility_id",model.Facility_id),
                                             new MySqlParameter("@PFacility_Name",model.Facility_Name),
-                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name),
+                                           new MySqlParameter ("@PRegion_Name",model.Region_Name ),
+                                           new MySqlParameter ("@PCountry",model.Country )
                                          };
-                        var RE = await db.Database.SqlQuery<object>("CALL Usp_Facility_All(@PFlag,@PId,@PFacility_id,@PFacility_Name,@PCreateduser)", param).ToListAsync();
+                        var RE = await db.Database.SqlQuery<object>("CALL Usp_Facility_All(@PFlag,@PId,@PFacility_id,@PFacility_Name,@PCreateduser,@PRegion_Name,@PCountry)", param).ToListAsync();
                         await db.SaveChangesAsync();
                     }
                 }
@@ -158,9 +173,11 @@ namespace LeaMaPortal.Controllers
                                            new MySqlParameter("@PId", tbl_facility.Id),
                                            new MySqlParameter("@PFacility_id",tbl_facility.Facility_id),
                                            new MySqlParameter("@PFacility_Name",tbl_facility.Facility_Name),
-                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name),
+                                               new MySqlParameter ("@PRegion_Name",tbl_facility.Region_Name ),
+                                           new MySqlParameter ("@PCountry",tbl_facility.Country )
                                          };
-                var spResult = await db.Database.SqlQuery<object>("Usp_Facility_All(@PFlag,@PId,@PFacility_id,@PFacility_Name,@PCreateduser)", param).ToListAsync();
+                var spResult = await db.Database.SqlQuery<object>("Usp_Facility_All(@PFlag,@PId,@PFacility_id,@PFacility_Name,@PCreateduser,@PRegion_Name,@PCountry)", param).ToListAsync();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

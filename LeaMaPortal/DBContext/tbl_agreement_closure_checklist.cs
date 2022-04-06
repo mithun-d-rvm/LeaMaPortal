@@ -21,6 +21,8 @@ namespace LeaMaPortal.DBContext
         public Nullable<int> Status { get; set; }
         public string Remarks { get; set; }
         public string Delmark { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     
         public virtual tbl_agreement_closure tbl_agreement_closure { get; set; }
     }

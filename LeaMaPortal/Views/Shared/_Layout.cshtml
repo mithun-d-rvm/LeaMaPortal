@@ -8,6 +8,7 @@
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- Layout Files -->
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/recipt.css")
     @Styles.Render("~/Content/abel-font")
     @Styles.Render("~/Content/LeamaStyles.css")
     @Styles.Render("~/Content/custom.css")
@@ -127,6 +128,7 @@
         window.slabAdded = "Slab master added successfully";
         window.meterAdded = "Meter master added successfully";
         window.emailTemplateAdded = "Email template added successfully";
+        window.tallyreport = "Tally Report";
         //Invoice
         window.invoiceAdded = "Invoice master added successfully";
         //Payment
@@ -142,6 +144,18 @@
     <script src="~/theme/js/bootstrap.js"> </script>
     <script src="~/Scripts/inputvalidations.js"></script>
     <!-- mother grid end here-->
+
+    <script>
+    //session end
+    var sessionTimeoutWarning = @Session.Timeout- 1;
+
+    var sTimeout = parseInt(sessionTimeoutWarning) * 60 * 1000;
+    setTimeout('SessionEnd()', sTimeout);
+
+    function SessionEnd() {
+        window.location = "/LeaMaPortal/Authentication/Login";
+    }
+    </script>
 </body>
 @RenderSection("scripts", required: false)
 </html>

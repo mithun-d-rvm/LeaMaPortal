@@ -26,5 +26,14 @@ namespace LeaMaPortal.Models
         [DisplayName("Property Tawtheeq Id")]
         public string Property_id { get; set; }
 
+        [DisplayName("Property Name")]
+        public string Property_Name { get; set; }
+
+        [DisplayName("Unit Name")]
+        public string Unit_Name { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
+
+
     }
 }

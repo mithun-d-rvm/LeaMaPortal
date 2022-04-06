@@ -37,9 +37,10 @@ namespace LeaMaPortal.Models
         public string State { get; set; }
         //[DisplayName("Area")]
         //public string Area { get; set; }
-        [DisplayName("Pincode")]
+        // [DisplayName("Pincode")]
+        [DisplayName("Emirates Id")]
         public string Pincode { get; set; }
-        [DisplayName("Phoneno")]
+        [DisplayName("Phone number")]
         public string Phoneno { get; set; }
         [DisplayName("Email ID")]
         public string Email { get; set; }

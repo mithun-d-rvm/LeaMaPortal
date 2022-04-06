@@ -70,7 +70,7 @@
 </div>
 
 <script>
-   
+    var AgreementDocumentCount = parseInt($("#agreementDocumentListCount").val());
     var i = 0;
     function agreementdoc(e) {
         e.preventDefault();
@@ -125,6 +125,8 @@
         html = html + "</tr>"
         $('#AgreementDetailsList').append(html);
         i++;
+        AgreementDocumentCount++;
+        $("#agreementDocumentListCount").val(AgreementDocumentCount);
         return false;
     }
 
@@ -152,6 +154,8 @@
 
         });
         i = newindex;
+        AgreementDocumentCount = newindex;
+        $("#agreementDocumentListCount").val(AgreementDocumentCount);
     });
    
     $(document).on('click', 'button.remove-exist-file', function () {

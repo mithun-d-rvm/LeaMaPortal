@@ -35,6 +35,7 @@ namespace LeaMaPortal.Models
 
         public string LastName { get; set; }
 
+        public string Emiratesid { get; set; }
         public string Address { get; set; }
 
         public string Address1 { get; set; }
@@ -72,6 +73,9 @@ namespace LeaMaPortal.Models
         public string Cocandindustryuid { get; set; }
 
         public string TradelicenseNo { get; set; }
+
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -117,6 +121,10 @@ namespace LeaMaPortal.Models
         public string FaxNo { get; set; }
 
         public string Remarks { get; set; }
+
+        public string Region { get; set; }
+
+        //public string Country { get; set; }
     }
     public class CompanyContactDetail
     {
@@ -137,6 +145,10 @@ namespace LeaMaPortal.Models
         public string MobileNo { get; set; }
 
         public string Salutations { get; set; }
+
+        public string Region { get; set; }
+
+        public string Country { get; set; }
 
     }
 

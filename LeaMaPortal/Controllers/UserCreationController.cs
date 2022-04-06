@@ -25,10 +25,12 @@ namespace LeaMaPortal.Controllers
                 int currentPageIndex = page.HasValue ? page.Value : 1;
                 int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
                 ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, defaultPageSize);
-                var users = db.tbl_userrights.Where(x => x.Delmark != "*");
+              //  string regname = Session["Region"].ToString();
+                var users = db.tbl_userrights.Where(x => x.Delmark != "*"  );
                 if (!string.IsNullOrWhiteSpace(Search))
                 {
-                    users = users.Where(x => x.Name.Contains(Search));
+                    // users = users.Where(x => x.Name.Contains(Search));
+                    users = users.Where(x => x.Name.Contains(Search) );
                 }
                 return PartialView("../Master/UserCreation/_List", users.OrderBy(x => x.id).Select(x => new UserCreationViewModel()
                 {
@@ -44,7 +46,9 @@ namespace LeaMaPortal.Controllers
                     Name = x.Name,
                     Phoneno = x.Phoneno,
                     Pwd = x.Pwd,
-                    Userid = x.Userid
+                    Userid = x.Userid,
+                    Activests = (x.Active == 1) ? "Yes" : "No"
+
                 }).ToPagedList(currentPageIndex, PageSize));
             }
             catch (Exception e)
@@ -59,6 +63,7 @@ namespace LeaMaPortal.Controllers
             try
             {
                 ViewBag.Category = new SelectList(Common.Role);
+                ViewBag.Region_Name = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
                 ViewBag.MenuRights = await db.tbl_formmaster.OrderBy(x => x.Id).Select(x => new MenuRights()
                 {
                     Id = x.Id,
@@ -71,6 +76,22 @@ namespace LeaMaPortal.Controllers
                 throw;
             }
         }
+        //[HttpGet]
+        //public PartialViewResult AddOrUpdate()
+        //{
+        //    ViewBag.Region_Name = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name");
+        //    var caretaker = db.tbl_caretaker.OrderByDescending(x => x.Caretaker_id).FirstOrDefault();
+        //    if (caretaker != null)
+        //    {
+        //        ViewBag.CaretakerId = caretaker.Caretaker_id + 1;
+        //    }
+        //    else
+        //    {
+        //        ViewBag.CaretakerId = 1;
+        //    }
+
+        //    return PartialView("../Master/Caretaker/_AddOrUpdate", new CaretakerViewModel());
+        //}
 
         [HttpPost]
         public async Task<ActionResult> AddOrUpdate(UserCreationViewModel model)
@@ -117,9 +138,11 @@ namespace LeaMaPortal.Controllers
                          new MySqlParameter("@PDeleteConfig", model.DeleteConfig),
                          new MySqlParameter("@PMenuConfig", model.MenuConfig),
                          new MySqlParameter("@PActive", model.Active),
-                         new MySqlParameter("@PCreatedUser",System.Web.HttpContext.Current.User.Identity.Name)
+                         new MySqlParameter("@PCreatedUser",System.Web.HttpContext.Current.User.Identity.Name),
+                         new MySqlParameter("@PRegion_Name",model.Region_Name ),
+                         new MySqlParameter ("@PCountry",model.Country )
                     };
-                    var userCreation = await db.Database.SqlQuery<object>("call Usp_Userrights_All(@PFlag, @Pid, @PName, @PUserid, @PPwd, @PCnfpwd, @PCategory, @PEmail, @PPhoneno, @PAddConfig, @PEditConfig, @PDeleteConfig, @PMenuConfig, @PActive, @PCreateduser)", parameters).ToListAsync();
+                    var userCreation = await db.Database.SqlQuery<object>("call Usp_Userrights_All(@PFlag, @Pid, @PName, @PUserid, @PPwd, @PCnfpwd, @PCategory, @PEmail, @PPhoneno, @PAddConfig, @PEditConfig, @PDeleteConfig, @PMenuConfig, @PActive, @PCreateduser,@PRegion_Name,@PCountry)", parameters).ToListAsync();
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
                 else
@@ -137,7 +160,8 @@ namespace LeaMaPortal.Controllers
         {
             try
             {
-                var userRights = db.tbl_userrights.FirstOrDefault(x => x.Delmark != "*" && x.id == id);
+                   var userRights = db.tbl_userrights.FirstOrDefault(x => x.Delmark != "*" && x.id == id);
+                //var userRights = db.tbl_userrights.FirstOrDefault(x=> x.id == id);
                 if (userRights == null)
                 {
                     return PartialView("../Master/UserCreation/_AddOrUpdate", new UserCreationViewModel());
@@ -164,6 +188,7 @@ namespace LeaMaPortal.Controllers
                         IsChecked = false
                     });
                 }
+                ViewBag.Region_Name = new SelectList(db.tbl_region.Where(x => x.Delmark != "*").OrderBy(x => x.Region_Name), "Region_Name", "Region_Name", userRights.Region_Name);
 
                 UserCreationViewModel model = new UserCreationViewModel()
                 {
@@ -180,8 +205,11 @@ namespace LeaMaPortal.Controllers
                     Phoneno = userRights.Phoneno,
                     Pwd = userRights.Pwd,
                     Userid = userRights.Userid,
-                    Active = userRights.Active
-                };
+                    Active = userRights.Active,
+                    Region_Name = userRights.Region_Name,
+                    Country = userRights.Country
+                   
+                               };
                 return PartialView("../Master/UserCreation/_AddOrUpdate", model);
             }
             catch
@@ -212,10 +240,13 @@ namespace LeaMaPortal.Controllers
                          new MySqlParameter("@PDeleteConfig", 0),
                          new MySqlParameter("@PMenuConfig", ""),
                          new MySqlParameter("@PActive", 0),
-                         new MySqlParameter("@PCreatedUser",System.Web.HttpContext.Current.User.Identity.Name)
+
+                         new MySqlParameter("@PCreatedUser",System.Web.HttpContext.Current.User.Identity.Name),
+                          new MySqlParameter("@PRegion_Name","" ),
+                         new MySqlParameter ("@PCountry","" )
                     };
 
-            var userCreation = await db.Database.SqlQuery<object>("call Usp_Userrights_All(@PFlag, @Pid, @PName, @PUserid, @PPwd, @PCnfpwd, @PCategory, @PEmail, @PPhoneno, @PAddConfig, @PEditConfig, @PDeleteConfig, @PMenuConfig, @PActive, @PCreateduser)", parameters).ToListAsync();
+            var userCreation = await db.Database.SqlQuery<object>("call Usp_Userrights_All(@PFlag, @Pid, @PName, @PUserid, @PPwd, @PCnfpwd, @PCategory, @PEmail, @PPhoneno, @PAddConfig, @PEditConfig, @PDeleteConfig, @PMenuConfig, @PActive, @PCreateduser,@PRegion_Name,@PCountry)", parameters).ToListAsync();
             result.Message = "User deleted successfully";
             return Json(result, JsonRequestBehavior.AllowGet);
         }

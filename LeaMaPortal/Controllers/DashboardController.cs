@@ -17,6 +17,10 @@ namespace LeaMaPortal.Controllers
         // GET: Dashboard
         public ActionResult Index()
         {
+            if(Session["Region"] == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
             return View();
         }
         public ActionResult IntialLoader()
@@ -54,53 +58,53 @@ namespace LeaMaPortal.Controllers
         {
             try
             {
-                string query = @"select count(*) as pdccount from (
-select 
-TemplateID
-,z.TemplateName
-,z.toid 
-,z.cc
-,z.bcc
-,Subject
-,Body
-,SubjectParameter
-,BodyParameter
-,toparameter
-,ccparameter
-,bccparameter
-,signature
-,Agreement_No 
-,y.Tenant_id 
-,Tenant_Name
-,ifnull(x.Property_id,'') as Property_id
-,ifnull(x.Property_Name,'') as Property_Name
-,ifnull(x.Unit_ID ,'') as Unit_ID
-,ifnull(x.unit_Name ,'') as unit_Name
-,pdc_Amount 
-,DDChequeNo 
-,DDChequedate 
-,z1.Caretaker_id
-,z1.Caretaker_Name
-,y.Emailid as Tenantemailid
-,z1.email as  caretakeremailid
-,ifnull(y1.address1,'') as address1
-,ifnull(y1.address2,'') as address2
-,ifnull(y1.address3,'') as address3
-,ifnull(y1.Region_Name ,'') as Region_Name
-,ifnull(y1.Country,'') as Country
-from view_pdc_pending x 
-inner join view_tenant y on x.Tenant_id=y.Tenant_id
+//                string query = @"select count(*) as pdccount from (
+//select 
+//TemplateID
+//,z.TemplateName
+//,z.toid 
+//,z.cc
+//,z.bcc
+//,Subject
+//,Body
+//,SubjectParameter
+//,BodyParameter
+//,toparameter
+//,ccparameter
+//,bccparameter
+//,signature
+//,Agreement_No 
+//,y.Tenant_id 
+//,Tenant_Name
+//,ifnull(x.Property_id,'') as Property_id
+//,ifnull(x.Property_Name,'') as Property_Name
+//,ifnull(x.Unit_ID ,'') as Unit_ID
+//,ifnull(x.unit_Name ,'') as unit_Name
+//,pdc_Amount 
+//,DDChequeNo 
+//,DDChequedate 
+//,z1.Caretaker_id
+//,z1.Caretaker_Name
+//,y.Emailid as Tenantemailid
+//,z1.email as  caretakeremailid
+//,ifnull(y1.address1,'') as address1
+//,ifnull(y1.address2,'') as address2
+//,ifnull(y1.address3,'') as address3
+//,ifnull(y1.Region_Name ,'') as Region_Name
+//,ifnull(y1.Country,'') as Country
+//from view_pdc_pending x 
+//inner join view_tenant y on x.Tenant_id=y.Tenant_id
 
-inner join tbl_propertiesmaster y1 on y1.Property_ID_Tawtheeq =ifnull(x.Property_ID,
- (select  Ref_unit_Property_ID_Tawtheeq from
- tbl_propertiesmaster where  x.Unit_ID=Unit_ID_Tawtheeq)
- )
- inner join tbl_caretaker z1 on z1.Caretaker_id=y1.Caretaker_id
-inner join tbl_emailtemplate z on z.templatename='Pdc pending'
-where current_date()+INTERVAL 5 DAY>=ddchequedate
-)x 
-";
-
+//inner join tbl_propertiesmaster y1 on y1.Property_ID_Tawtheeq =ifnull(x.Property_ID,
+// (select  Ref_unit_Property_ID_Tawtheeq from
+// tbl_propertiesmaster where  x.Unit_ID=Unit_ID_Tawtheeq)
+// )
+// inner join tbl_caretaker z1 on z1.Caretaker_id=y1.Caretaker_id
+//inner join tbl_emailtemplate z on z.templatename='Pdc pending'
+//where current_date()+INTERVAL 5 DAY>=ddchequedate
+//)x 
+//";
+                string query = @"select count(*) as pdccount from (select distinct ifnull(y1.Region_Name, '') as region_name, ifnull(x.Property_Name, '') as Property_Name,ifnull(x.unit_Name, '') as unit_Name,Tenant_Name,Agreement_No,DDChequeNo,DDChequedate,pdc_Amount from view_pdc_pending x inner join view_tenant y on x.Tenant_id = y.Tenant_id inner join tbl_propertiesmaster y1 on y1.Property_ID_Tawtheeq = ifnull(x.Property_ID, (select Ref_unit_Property_ID_Tawtheeq from tbl_propertiesmaster where x.Unit_ID = Unit_ID_Tawtheeq)  )  inner join tbl_caretaker z1 on z1.Caretaker_id = y1.Caretaker_id inner join tbl_emailtemplate z on z.templatename = 'Pdc pending' where current_date() + INTERVAL 5 DAY >= ddchequedate)x";
                 var result = await db.Database.SqlQuery<int>(query).ToListAsync();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -114,14 +118,21 @@ where current_date()+INTERVAL 5 DAY>=ddchequedate
         {
             try
             {
-                string query = @"select count(*) from(
-select Agreement_no from tbl_agreement where current_date() + INTERVAL Notice_Period DAY =agreement_End_date 
-union 
-select Agreement_no from tbl_agreement where current_date() + INTERVAL Notice_Period DAY >=agreement_End_date 
-union 
-select Agreement_no from tbl_agreement where agreement_End_date between current_date() and date_ADD(current_date(), INTERVAL 7 DAY)
-)x
-";
+                //                string query = @"select count(*) from(
+                //select Agreement_no from tbl_agreement where current_date() + INTERVAL Notice_Period DAY =agreement_End_date and ifnull(status, '') <> 'Closed'
+                //union 
+                //select Agreement_no from tbl_agreement where current_date() + INTERVAL Notice_Period DAY >=agreement_End_date and ifnull(status, '') <> 'Closed'
+                //union 
+                //select Agreement_no from tbl_agreement where agreement_End_date between current_date() and date_ADD(current_date(), INTERVAL 7 DAY) and ifnull(status, '') <> 'Closed'
+                //)x
+                //";
+
+                string query = @"select count(*)  from 
+tbl_agreement x inner join tbl_propertiesmaster y1 on y1.Property_ID_Tawtheeq = ifnull(x.Property_ID_Tawtheeq,
+(select Ref_unit_Property_ID_Tawtheeq from tbl_propertiesmaster where x.Unit_ID_Tawtheeq = Unit_ID_Tawtheeq) ) 
+ where current_date() + INTERVAL Notice_Period DAY >= agreement_End_date  and ifnull(x.status, '') = '' 
+ and ifnull(x.delmark, '') <> '*' and ifnull(x.Approval_Flag, 0) = 1
+                ";
 
                 var result = await db.Database.SqlQuery<int>(query).ToListAsync();
                 return Json(result, JsonRequestBehavior.AllowGet);
@@ -136,15 +147,16 @@ select Agreement_no from tbl_agreement where agreement_End_date between current_
         {
             try
             {
-                string query = @"select count(*) from(
-select Agreement_no from tbl_agreement where current_date() + INTERVAL Notice_Period DAY =agreement_End_date 
-union 
-select Agreement_no from tbl_agreement where current_date() + INTERVAL Notice_Period DAY >=agreement_End_date 
-union 
-select Agreement_no from tbl_agreement where agreement_End_date between current_date() and date_ADD(current_date(), INTERVAL 7 DAY)
-)x
-";
-
+                // For Contract Expiry Count.
+                //                string query = @"select count(*) from(
+                //select Agreement_no from tbl_agreement where current_date() + INTERVAL Notice_Period DAY =agreement_End_date 
+                //union 
+                //select Agreement_no from tbl_agreement where current_date() + INTERVAL Notice_Period DAY >=agreement_End_date 
+                //union 
+                //select Agreement_no from tbl_agreement where agreement_End_date between current_date() and date_ADD(current_date(), INTERVAL 7 DAY)
+                //)x
+                //";
+                string query = "select Count(*) from view_expirydate_notifications";
                 var result = await db.Database.SqlQuery<int>(query).ToListAsync();
                 return Json(result, JsonRequestBehavior.AllowGet);
             }

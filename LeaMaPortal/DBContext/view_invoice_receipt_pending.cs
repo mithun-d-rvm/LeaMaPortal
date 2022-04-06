@@ -28,6 +28,10 @@ namespace LeaMaPortal.DBContext
         public Nullable<int> incno { get; set; }
         public string invtype { get; set; }
         public Nullable<float> totalamt { get; set; }
+        public string remarks { get; set; }
+        public string Description { get; set; }
         public Nullable<double> InvoiceAmount { get; set; }
+        public string Region_name { get; set; }
+        public string Country { get; set; }
     }
 }

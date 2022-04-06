@@ -30,9 +30,11 @@ namespace LeaMaPortal.Controllers
                 int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
                 ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, defaultPageSize);
                 IList<PropertyTypeViewModel> list;
+                string regname = Session["Region"].ToString();
                 if (string.IsNullOrWhiteSpace(Search))
                 {
-                    list = db.tbl_propertytypemaster.Where(x => x.Delmark != "*").OrderBy(x => x.Type_name).Select(x => new PropertyTypeViewModel()
+                   
+                    list = db.tbl_propertytypemaster.Where(x => x.Delmark != "*" && x.Region_Name == regname).OrderBy(x => x.Type_name).Select(x => new PropertyTypeViewModel()
                     {
                         Id = x.Id,
                         PropertyType = x.Type_name,
@@ -42,7 +44,7 @@ namespace LeaMaPortal.Controllers
                 }
                 else
                 {
-                    list = db.tbl_propertytypemaster.Where(x => x.Delmark != "*"
+                    list = db.tbl_propertytypemaster.Where(x => x.Delmark != "*" && x.Region_Name == regname
                                     && (x.Type_name.ToLower().Contains(Search.ToLower())
                                     || x.Usage_name.ToLower().Contains(Search.ToLower())))
                                   .OrderBy(x => x.Type_name).Select(x => new PropertyTypeViewModel()
@@ -76,11 +78,12 @@ namespace LeaMaPortal.Controllers
             MessageResult result = new MessageResult();
             try
             {
+                string regname = Session["Region"].ToString();
                 if (ModelState.IsValid)
                 {
                     if (db.tbl_propertytypemaster.Any(a => a.Type_name == model.PropertyCategory
                          && a.Usage_name == model.Usage_name
-                          && a.Type_Flag==model.PropertyType && a.Id!=model.Id))
+                          && a.Type_Flag==model.PropertyType && a.Id!=model.Id && a.Region_Name == regname  ))
                     {
                         result.Errors = "Property type already exists!";
                     }
@@ -94,14 +97,26 @@ namespace LeaMaPortal.Controllers
                             PFlag = "UPDATE";
                             result.Message = "Property type updated successfully";
                         }
+
+                     
+                        if (regname != "")
+                        {
+                            model.Region_Name = regname;
+
+                            var countryname = db.tbl_region.Where(x => x.Region_Name == model.Region_Name).OrderByDescending(x => x.Id).FirstOrDefault();
+
+                            model.Country = countryname.Country;
+                        }
                         object[] param = { new MySqlParameter("@PFlag", PFlag),
                                            new MySqlParameter("@PId", model.Id),
                                            new MySqlParameter("@PType_name",model.PropertyType),
                                             new MySqlParameter("@PType_Flag",model.PropertyCategory),
                                             new MySqlParameter("@PUsage_name",model.Usage_name),
-                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name),
+                                           new MySqlParameter ("@PRegion_Name",model.Region_Name ),
+                                           new MySqlParameter ("@PCountry",model.Country )
                                          };
-                        var RE = await db.Database.SqlQuery<object>("CALL Usp_Propertytype_All(@PFlag,@PId,@PType_name,@PType_Flag,@PUsage_name,@PCreateduser)", param).ToListAsync();
+                        var RE = await db.Database.SqlQuery<object>("CALL Usp_Propertytype_All(@PFlag,@PId,@PType_name,@PType_Flag,@PUsage_name,@PCreateduser,@PRegion_Name,@PCountry)", param).ToListAsync();
                         await db.SaveChangesAsync();
                     }
                 }
@@ -159,10 +174,12 @@ namespace LeaMaPortal.Controllers
                                            new MySqlParameter("@PType_name",tbl_propertytype.Type_name),
                                             new MySqlParameter("@PType_Flag",tbl_propertytype.Type_Flag),
                                             new MySqlParameter("@PUsage_name",tbl_propertytype.Usage_name),
-                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name)
+                                           new MySqlParameter("@PCreateduser",System.Web.HttpContext.Current.User.Identity.Name),
+                                           new MySqlParameter("@PRegion_Name",tbl_propertytype.Region_Name ),
+                                           new MySqlParameter ("@PCountry",tbl_propertytype.Country )
                                          };
-                var spResult = await db.Database.SqlQuery<object>("Usp_Propertytype_All(@PFlag,@PId,@PType_name,@PType_Flag,@PUsage_name,@PCreateduser)", param).ToListAsync();
-                result.Message = "Property details added successfully";
+                var spResult = await db.Database.SqlQuery<object>("Usp_Propertytype_All(@PFlag,@PId,@PType_name,@PType_Flag,@PUsage_name,@PCreateduser,@PRegion_Name,@PCountry)", param).ToListAsync();
+                result.Message = "Property details deleted successfully";
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

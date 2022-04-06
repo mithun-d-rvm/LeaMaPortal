@@ -23,10 +23,11 @@ namespace LeaMaPortal.Controllers
             int currentPageIndex = page.HasValue ? page.Value : 1;
             int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
             ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, PageSize);
-            var suppliers = db.tbl_suppliermaster.Where(x => x.Delmark != "*");
+            string regname = Session["Region"].ToString();
+            var suppliers = db.tbl_suppliermaster.Where(x => x.Delmark != "*" && x.Region_Name == regname);
             if (!string.IsNullOrWhiteSpace(Search))
             {
-                suppliers = suppliers.Where(x => x.Supplier_Name.Contains(Search));
+                suppliers = suppliers.Where(x => x.Supplier_Name.Contains(Search) || x.Supplier_Id.ToString ().Contains (Search ) || x.First_Name.Contains (Search ) || x.address .Contains (Search ));
             }
             return PartialView("../Master/Supplier/_List", suppliers.OrderBy(x=>x.Supplier_Id).Select(x => new SupplierViewModel()
             {
@@ -178,6 +179,15 @@ namespace LeaMaPortal.Controllers
                         }
                     }
                     model.supplierdt1 = companyContactDetails;
+                    string regname = Session["Region"].ToString();
+                    if (regname != "")
+                    {
+                        model.Region_Name = regname;
+
+                        var countryname = db.tbl_region.Where(x => x.Region_Name == model.Region_Name).OrderByDescending(x => x.Id).FirstOrDefault();
+
+                        model.Country = countryname.Country;
+                    }
 
                     object[] parameters = {
                          new MySqlParameter("@PFlag", PFlag),
@@ -214,15 +224,18 @@ namespace LeaMaPortal.Controllers
                          new MySqlParameter("@PADWEA_Regid", model.ADWEA_Regid),
                          new MySqlParameter("@PType", model.Type),
                          new MySqlParameter("@PCreateduser", System.Web.HttpContext.Current.User.Identity.Name),
+                         new MySqlParameter ("@PEmirate_id",model.EmiratesId ),
                          new MySqlParameter("@Psupplierdt", model.supplierdt),
-                         new MySqlParameter("@Psupplierdt1", model.supplierdt1)
+                         new MySqlParameter("@Psupplierdt1", model.supplierdt1),
+                         new MySqlParameter ("@PRegion_Name",model.Region_Name ),
+                         new MySqlParameter ("@PCountry",model.Country )
                     };
 
 
 
                     //object[] param = Helper.GetMySqlParameters<SupplierViewModel>(model, PFlag, System.Web.HttpContext.Current.User.Identity.Name);
-
-                    var _result = await db.Database.SqlQuery<object>(@"call Usp_Supplier_All(@PFlag, @PSupplier_Id, @PSupplier_Name, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PLocationlink, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser, @Psupplierdt, @Psupplierdt1)", parameters).ToListAsync();
+                    var _result = await db.Database.SqlQuery<object>(@"call Usp_Supplier_All(@PFlag, @PSupplier_Id, @PSupplier_Name, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PLocationlink, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser,@PEmirate_id,@Psupplierdt, @Psupplierdt1,@PRegion_Name,@PCountry)", parameters).ToListAsync();
+                    //var _result = await db.Database.SqlQuery<object>(@"call Usp_Supplier_All(@PFlag, @PSupplier_Id, @PSupplier_Name, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PLocationlink, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser,@PEmirate_id,@Psupplierdt, @Psupplierdt1)", parameters).ToListAsync();
                 }
                 return RedirectToAction("../Master/Index", new { selected = 15 });
                 //return Json(result, JsonRequestBehavior.AllowGet);
@@ -322,6 +335,7 @@ namespace LeaMaPortal.Controllers
                 }
                 //ViewBag.Emirate = new SelectList(_emirateResult);
 
+                //var _emirateidResult = await db.tbl_combo_master
                 //var _companyActivity = db.Database.SqlQuery<string>(@"call usp_split('Tenant Company','Actitvity',',',null);").ToList();
                 var _companyActivity = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Tenant Company" && x.comboname == "Actitvity");
                 if (_companyActivity != null)
@@ -375,30 +389,102 @@ namespace LeaMaPortal.Controllers
 
         // POST: Supplier/Delete/5
         [HttpPost]
-        public async Task<ActionResult> Delete(int Supplier_Id)
+        //public async Task<ActionResult> Delete(int Supplier_Id)
+        //{
+        //    try
+        //    {
+        //        MessageResult result = new MessageResult();
+        //        try
+        //        {
+        //            var model = await db.tbl_suppliermaster.FirstOrDefaultAsync(r => r.Supplier_Id == Supplier_Id);
+        //            object[] param = Helper.GetMySqlParameters<SupplierViewModel>(Map(model), Common.DELETE, System.Web.HttpContext.Current.User.Identity.Name);
+        //            var _result = await db.Database.SqlQuery<object>(@"call Usp_Supplier_All(@PFlag, @PSupplier_Id, @PSupplier_Name, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PLocationlink, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser,@PEmirate_id,@Psupplierdt, @Psupplierdt1)", param).ToListAsync();
+        //            //var _result = await db.Database.SqlQuery<object>(@"call Usp_Supplier_All(@PFlag, @PSupplier_Id, @PSupplier_Name, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PLocationlink, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser,@PEmirate_id, @Psupplierdt, @Psupplierdt1)", param).ToListAsync();
+        //            result.Message = "Supplier deleted successfully";
+        //            return Json(result, JsonRequestBehavior.AllowGet);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            return Json(new MessageResult() { Errors = "Internal server error" }, JsonRequestBehavior.AllowGet);
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return View();
+        //    }
+        //}
+
+        public async Task<ActionResult> Delete(int? Supplier_Id)
         {
             try
             {
                 MessageResult result = new MessageResult();
-                try
+                if (Supplier_Id == null)
                 {
-                    var model = await db.tbl_suppliermaster.FirstOrDefaultAsync(r => r.Supplier_Id == Supplier_Id);
-                    object[] param = Helper.GetMySqlParameters<SupplierViewModel>(Map(model), Common.DELETE, System.Web.HttpContext.Current.User.Identity.Name);
+                    return Json(new MessageResult() { Errors = "Bad request" }, JsonRequestBehavior.AllowGet);
+                }
+                string region = Session["Region"].ToString();
+                string country = Session["Country"].ToString();
+                object[] parameters = {
+                         new MySqlParameter("@PFlag", "DELETE"),
+                         new MySqlParameter("@PSupplier_Id", Supplier_Id),
+                         new MySqlParameter("@PSupplier_Name",""),
+                         new MySqlParameter("@PMarital_Status", ""),
+                         new MySqlParameter("@PTitle", ""),
+                         new MySqlParameter("@PFirst_Name", ""),
+                         new MySqlParameter("@PMiddle_Name", ""),
+                         new MySqlParameter("@PLast_Name", ""),
+                         new MySqlParameter("@Paddress", ""),
+                         new MySqlParameter("@Paddress1", ""),
+                         new MySqlParameter("@PLocationlink", ""),
+                         new MySqlParameter("@PEmirate", ""),
+                         new MySqlParameter("@PCity", ""),
+                         new MySqlParameter("@PPostboxNo", ""),
 
-                    var _result = await db.Database.SqlQuery<object>(@"call Usp_Supplier_All(@PFlag, @PSupplier_Id, @PSupplier_Name, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PLocationlink, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser, @Psupplierdt, @Psupplierdt1)", param).ToListAsync();
-                    result.Message = "Supplier deleted successfully";
-                    return Json(result, JsonRequestBehavior.AllowGet);
-                }
-                catch (Exception ex)
-                {
-                    return Json(new MessageResult() { Errors = "Internal server error" }, JsonRequestBehavior.AllowGet);
-                }
+                         new MySqlParameter("@PEmail", ""),
+                         new MySqlParameter("@PMobile_Countrycode", ""),
+                         new MySqlParameter("@PMobile_Areacode", ""),
+                         new MySqlParameter("@PMobile_No", ""),
+                         new MySqlParameter("@PLandline_Countrycode", ""),
+                         new MySqlParameter("@PLandline_Areacode", ""),
+                         new MySqlParameter("@PLandline_No", ""),
+                         new MySqlParameter("@PFax_Countrycode", ""),
+
+
+                         new MySqlParameter("@PFax_Areacode", ""),
+                         new MySqlParameter("@PFax_No", ""),
+                         new MySqlParameter("@PNationality", ""),
+                         new MySqlParameter("@PActitvity", ""),
+                         new MySqlParameter("@PCocandindustryuid", ""),
+                         new MySqlParameter("@PTradelicenseNo", ""),
+                         new MySqlParameter("@PLicense_issueDate", DBNull.Value),
+                         new MySqlParameter("@PLicense_ExpiryDate", DBNull.Value),
+
+
+                         new MySqlParameter("@PIssuance_authority", ""),
+                         new MySqlParameter("@PADWEA_Regid", ""),
+                         new MySqlParameter("@PType", ""),
+                         new MySqlParameter ("@PCreateduser",""),
+                         new MySqlParameter("@PEmirate_id", ""),
+                         new MySqlParameter("@PPsupplierdt", ""),
+                         new MySqlParameter("@Psupplierdt1", ""),
+                         new MySqlParameter ("@PRegion_Name",region),
+                         new MySqlParameter ("@PCountry", country)
+
+                    };
+
+                var _result = await db.Database.SqlQuery<object>(@"call Usp_Supplier_All(@PFlag, @PSupplier_Id, @PSupplier_Name, @PMarital_Status, @PTitle, @PFirst_Name, @PMiddle_Name, @PLast_Name, @Paddress, @Paddress1, @PLocationlink, @PEmirate, @PCity, @PPostboxNo, @PEmail, @PMobile_Countrycode, @PMobile_Areacode, @PMobile_No, @PLandline_Countrycode, @PLandline_Areacode, @PLandline_No, @PFax_Countrycode, @PFax_Areacode, @PFax_No, @PNationality, @PActitvity, @PCocandindustryuid, @PTradelicenseNo, @PLicense_issueDate, @PLicense_ExpiryDate, @PIssuance_authority, @PADWEA_Regid, @PType, @PCreateduser,@PEmirate_id,@PPsupplierdt, @Psupplierdt1,@PRegion_Name,@PCountry)", parameters).ToListAsync();
+                result.Message = "User deleted successfully";
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception e)
+            catch(Exception ex)
             {
-                return View();
+                throw ex;
             }
+            
         }
+
+
         private SupplierViewModel Map(tbl_suppliermaster model)
         {
             SupplierViewModel viewModel = new SupplierViewModel()
@@ -439,7 +525,10 @@ namespace LeaMaPortal.Controllers
                 Supplier_Name = model.Supplier_Name,
                 Title = model.Title,
                 TradelicenseNo = model.TradelicenseNo,
-                Type = model.Type
+                Type = model.Type,
+                EmiratesId = model.Emirate_id ,
+                Region_Name = model .Region_Name ,
+                Country = model .Country 
             };
             return viewModel;
         }

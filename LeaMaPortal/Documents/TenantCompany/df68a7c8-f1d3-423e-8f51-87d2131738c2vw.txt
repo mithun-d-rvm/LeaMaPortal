@@ -1,0 +1,19 @@
+backup database HRrecruitment to disk = 'g:/backup~1/HRrecruitment10052017.bak'
+--restore database HRMSTEST from disk ='g:/backup~1/HRrecruitment10052017.bak'
+
+--sp_helpfile 
+--F:\Program Files\Microsoft SQL Server Client DB\MSSQL10_50.CLDB\MSSQL\DATA\HRrecruitment.mdf
+--F:\Program Files\Microsoft SQL Server Client DB\MSSQL10_50.CLDB\MSSQL\DATA\HRrecruitment_log.ldf
+
+use master
+restore verifyonly
+from disk = 'g:/backup~1/HRrecruitment10052017.bak'
+
+alter database HRMSTEST 
+set single_user with 
+rollback immediate
+
+restore database HRMSTEST
+from disk = 'g:/backup~1/HRrecruitment10052017.bak'
+with move 'HRre cruitment.mdf' to '',
+move '' to ''

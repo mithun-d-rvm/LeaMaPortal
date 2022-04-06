@@ -1,92 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="vacancypropds">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>c3124ccb-ae20-4da8-9dec-3e9494bc87cd</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="id">
-          <DataField>id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Property_Flag">
-          <DataField>Property_Flag</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Property_id">
-          <DataField>Property_id</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Property_Name">
-          <DataField>Property_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Unit_id">
-          <DataField>Unit_id</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Unitname">
-          <DataField>Unitname</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Region_Name">
-          <DataField>Region_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Country">
-          <DataField>Country</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Caretaker_id">
-          <DataField>Caretaker_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Caretaker_Name">
-          <DataField>Caretaker_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Rental_Rate_Month">
-          <DataField>Rental_Rate_Month</DataField>
-          <rd:TypeName>System.Double</rd:TypeName>
-        </Field>
-        <Field Name="Vacant_Start_Date">
-          <DataField>Vacant_Start_Date</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="Aging_Days">
-          <DataField>Aging_Days</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Loss_Amt">
-          <DataField>Loss_Amt</DataField>
-          <rd:TypeName>System.Double</rd:TypeName>
-        </Field>
-        <Field Name="user">
-          <DataField>user</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>vacancypropds</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>vacancypropds1</rd:DataSetName>
-        <rd:SchemaPath>D:\mysql\RDLC\RDLCApplicationWithParamstest\RDLCApplicationWithParams\vacancypropds1.xsd</rd:SchemaPath>
-        <rd:TableName>vacancy_report</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>vacancy_reportTableAdapter</rd:TableAdapterName>
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
@@ -96,7 +9,7 @@
               <Width>1.29672in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.14047in</Width>
+              <Width>1.30714in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.14047in</Width>
@@ -105,7 +18,7 @@
               <Width>1.14047in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.71339in</Width>
+              <Width>1.54672in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.2863in</Width>
@@ -171,7 +84,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Unit Id</Value>
+                              <Value>Unit Tawtheeq Id</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -241,7 +154,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Region Name</Value>
+                              <Value>Region </Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -1546,7 +1459,7 @@
           <TablixMembers>
             <TablixMember>
               <TablixHeader>
-                <Size>1.14047in</Size>
+                <Size>1.53214in</Size>
                 <CellContents>
                   <Textbox Name="Textbox28">
                     <CanGrow>true</CanGrow>
@@ -1555,7 +1468,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>Property Id</Value>
+                            <Value>Property Tawtheeq Id</Value>
                             <Style>
                               <FontWeight>Bold</FontWeight>
                             </Style>
@@ -1598,7 +1511,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>1.14047in</Size>
+                <Size>1.53214in</Size>
                 <CellContents>
                   <Textbox Name="Group1">
                     <CanGrow>true</CanGrow>
@@ -1647,7 +1560,7 @@
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>1.14047in</Size>
+                <Size>1.53214in</Size>
                 <CellContents>
                   <Textbox Name="Textbox43">
                     <CanGrow>true</CanGrow>
@@ -1687,10 +1600,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>3.84042in</Top>
+        <Top>3.78833in</Top>
         <Left>0.10083in</Left>
         <Height>1in</Height>
-        <Width>14.45142in</Width>
+        <Width>14.84309in</Width>
         <Visibility>
           <ToggleItem>Textbox63</ToggleItem>
         </Visibility>
@@ -1707,7 +1620,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Vacancy Report- Propertywise</Value>
+                <Value>Vacant Report - Propertywise</Value>
                 <Style>
                   <FontSize>12pt</FontSize>
                   <FontWeight>Bold</FontWeight>
@@ -1723,7 +1636,7 @@
         <Top>0.10083in</Top>
         <Left>0.10083in</Left>
         <Height>0.25in</Height>
-        <Width>14.45145in</Width>
+        <Width>14.84309in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -1856,6 +1769,9 @@
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
                 <Angle>90</Angle>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
               <ChartAxis Name="Secondary">
                 <Style>
@@ -1890,6 +1806,9 @@
                 <Location>Opposite</Location>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
             </ChartCategoryAxes>
             <ChartValueAxes>
@@ -1924,6 +1843,9 @@
                 <CrossAt>NaN</CrossAt>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
               <ChartAxis Name="Secondary">
                 <Style>
@@ -1957,6 +1879,9 @@
                 <Location>Opposite</Location>
                 <Minimum>NaN</Minimum>
                 <Maximum>NaN</Maximum>
+                <ChartAxisScaleBreak>
+                  <Style />
+                </ChartAxisScaleBreak>
               </ChartAxis>
             </ChartValueAxes>
             <Style>
@@ -1984,7 +1909,7 @@
         </ChartLegends>
         <ChartTitles>
           <ChartTitle Name="Default">
-            <Caption>Vacancy Report  - Propertywise</Caption>
+            <Caption>Vacant Report - Propertywise</Caption>
             <Style>
               <BackgroundGradientType>None</BackgroundGradientType>
               <FontWeight>Bold</FontWeight>
@@ -2010,10 +1935,10 @@
           </Style>
         </ChartNoDataMessage>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.3925in</Top>
-        <Left>1.30916in</Left>
+        <Top>0.42028in</Top>
+        <Left>1.17027in</Left>
         <Height>3.29861in</Height>
-        <Width>13.27089in</Width>
+        <Width>13.64864in</Width>
         <ZIndex>2</ZIndex>
         <Visibility>
           <ToggleItem>Textbox62</ToggleItem>
@@ -2045,8 +1970,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox63</rd:DefaultName>
-        <Top>0.71195in</Top>
-        <Left>0.23972in</Left>
+        <Top>0.73972in</Top>
+        <Left>0.10083in</Left>
         <Height>0.2743in</Height>
         <Width>1in</Width>
         <ZIndex>3</ZIndex>
@@ -2079,7 +2004,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox62</rd:DefaultName>
         <Top>0.42028in</Top>
-        <Left>0.23972in</Left>
+        <Left>0.10083in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>4</ZIndex>
@@ -2094,10 +2019,10 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>35.69111in</Height>
+    <Height>4.93417in</Height>
     <Style />
   </Body>
-  <Width>14.84395in</Width>
+  <Width>15.11058in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -2105,6 +2030,94 @@
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
-  <rd:ReportID>425248f4-71ed-4d50-a748-2acf95d8f516</rd:ReportID>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="vacancypropds">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>c3124ccb-ae20-4da8-9dec-3e9494bc87cd</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>vacancypropds</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="id">
+          <DataField>id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Property_Flag">
+          <DataField>Property_Flag</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Property_id">
+          <DataField>Property_id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Property_Name">
+          <DataField>Property_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Unit_id">
+          <DataField>Unit_id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Unitname">
+          <DataField>Unitname</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Region_Name">
+          <DataField>Region_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Country">
+          <DataField>Country</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Caretaker_id">
+          <DataField>Caretaker_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Caretaker_Name">
+          <DataField>Caretaker_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Rental_Rate_Month">
+          <DataField>Rental_Rate_Month</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Vacant_Start_Date">
+          <DataField>Vacant_Start_Date</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Aging_Days">
+          <DataField>Aging_Days</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Loss_Amt">
+          <DataField>Loss_Amt</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="user">
+          <DataField>user</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>vacancypropds1</rd:DataSetName>
+        <rd:SchemaPath>D:\mysql\RDLC\RDLCApplicationWithParamstest\RDLCApplicationWithParams\vacancypropds1.xsd</rd:SchemaPath>
+        <rd:TableName>vacancy_report</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>vacancy_reportTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>425248f4-71ed-4d50-a748-2acf95d8f516</rd:ReportID>
 </Report>

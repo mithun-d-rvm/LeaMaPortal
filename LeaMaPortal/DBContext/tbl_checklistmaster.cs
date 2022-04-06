@@ -14,12 +14,6 @@ namespace LeaMaPortal.DBContext
     
     public partial class tbl_checklistmaster
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_checklistmaster()
-        {
-            this.tbl_agreement_checklist = new HashSet<tbl_agreement_checklist>();
-        }
-    
         public int Id { get; set; }
         public string Checklist_id { get; set; }
         public string Checklist_Name { get; set; }
@@ -28,8 +22,7 @@ namespace LeaMaPortal.DBContext
         public Nullable<System.DateTime> Createddatetime { get; set; }
         public string Createduser { get; set; }
         public string Delmark { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_agreement_checklist> tbl_agreement_checklist { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     }
 }

@@ -13,5 +13,7 @@ namespace LeaMaPortal.Models
         public string Facility_id { get; set; }
         [DisplayName("Facility Name")]
         public string Facility_Name { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     }
 }

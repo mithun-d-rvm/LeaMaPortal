@@ -7,9 +7,11 @@ using LeaMaPortal.Models;
 using LeaMaPortal.DBContext;
 using System.Data.Entity;
 using System.Data;
+using System.Threading;
 using System.Threading.Tasks;
 using MvcPaging;
 using MySql.Data.MySqlClient;
+using LeaMaPortal.Helpers;
 
 namespace LeaMaPortal.Controllers
 {
@@ -20,6 +22,10 @@ namespace LeaMaPortal.Controllers
         // GET: UtilityPayment
         public ActionResult Index()
         {
+            if (Session["Region"] == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
             return View();
         }
 
@@ -33,9 +39,9 @@ namespace LeaMaPortal.Controllers
             var invoiceDetails = db.tbl_eb_water_paymenthd.Where(x => x.Delmark != "*");
             if (!string.IsNullOrWhiteSpace(Search))
             {
-                invoiceDetails = invoiceDetails.Where(x => x.PaymentNo.ToString().Contains(Search));
+                invoiceDetails = invoiceDetails.Where(x => x.PaymentNo.ToString().Contains(Search) || x.Utiltiy_name.ToString().Contains(Search) || x.Supplier_name.ToString().Contains(Search) || x.PaymentMode.ToString().Contains(Search));
             }
-            var invoice = invoiceDetails.OrderBy(x => x.id).Select(x => new UtilityPaymentModel()
+            var invoice = invoiceDetails.OrderByDescending(x => x.id).Select(x => new UtilityPaymentModel()
             {
                 AdvAcCode = x.AdvAcCode,
                 AmtInWords = x.AmtInWords,
@@ -90,15 +96,17 @@ namespace LeaMaPortal.Controllers
                 if (_paymentType != null)
                 {
                     ViewBag.PaymentType = new SelectList(_paymentType.combovalue.Split(','));
+                    
                 }
                 else
                 {
                     ViewBag.PaymentType = new SelectList(null);
                 }
-                var _paymentmode = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "Receipts" && x.comboname == "RecpType");
+                var _paymentmode = await db.tbl_combo_master.FirstOrDefaultAsync(x => x.screen_name == "UtilityPayment" && x.comboname == "PaymentMode");
                 if (_paymentmode != null)
                 {
                     ViewBag.PaymentMode = new SelectList(_paymentmode.combovalue.Split(','));
+                    //ViewBag.PaymentMode = new SelectList((ViewBag.PaymentMode).where ViewBag.PaymentMode != "pdc");
                 }
                 else
                 {
@@ -125,6 +133,25 @@ namespace LeaMaPortal.Controllers
                 return PartialView("../UtilityPayment/_AddorUpdate", model);
             }
             catch(Exception e)
+            {
+                throw e;
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetUtilityBillDetails(string UtilityName,string SupplierName)
+        {
+            try
+            {
+                //var ubd = await db.tbl_propertiesmaster.Where(x => x.Ref_Unit_Property_ID == propertyId && x.Status != "Avail").ToListAsync();
+
+                //ViewBag.UnitIDTawtheeq = new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_ID_Tawtheeq");
+                //ViewBag.UnitPropertyName = new SelectList(unit, "Unit_ID_Tawtheeq", "Unit_Property_Name");
+                var utilitydetailslist = await db.Database.SqlQuery<UtilityPaymentDetail>("select Refno,Meterno,billNo from view_ebbill_payment_pending where Supplier_name = {0} and utility_name = {1} order by Refno", SupplierName, UtilityName).ToListAsync();
+                return Json(utilitydetailslist, JsonRequestBehavior.AllowGet);
+                //return Json(new SelectList(unit, "Ref_Unit_Property_ID", "Unit_Property_Name"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
             {
                 throw e;
             }
@@ -432,6 +459,103 @@ namespace LeaMaPortal.Controllers
             {
                 throw ex;
             }
+        }
+
+        public async Task<PartialViewResult> Print(int EntryNo, string OtherTerms)
+        {
+            try
+            {
+                Thread.Sleep(1000);
+                UtilityPaymentPrintModel model = new UtilityPaymentPrintModel();
+                //TcaPrintModel model = new TcaPrintModel();
+                var Ebwater = await db.tbl_eb_water_paymenthd.FirstOrDefaultAsync(x => x.id == EntryNo);
+
+
+                if (Ebwater != null)
+                    model.id = Ebwater.id;
+                model.PaymentNo = Ebwater.PaymentNo;
+                if (Ebwater.PaymentDate.HasValue)
+                { model.PaymentDate = Ebwater.PaymentDate.Value.ToShortDateString(); }
+
+                model.Utility_id = Ebwater.Utility_id;
+                model.Utiltiy_name = Ebwater.Utiltiy_name;
+                model.Supplier_id = Ebwater.Supplier_id;
+                var Supplier = await db.tbl_suppliermaster.FirstOrDefaultAsync(x => x.Supplier_Id == model.Supplier_id);
+                model.Supplier_name = Ebwater.Supplier_name;
+                model.Supplier_address = Supplier.address;
+                model.PaymentType = Ebwater.PaymentType;
+                model.PaymentMode = Ebwater.PaymentMode;
+                model.TotalAmount = Ebwater.TotalAmount;
+                model.Narration = Ebwater.Narration;
+                model.OtherTerms = OtherTerms;
+                string decimalPart = "";
+                if (Ebwater.TotalAmount > 0)
+                {
+                    float amt1 = float.Parse(Ebwater.TotalAmount.ToString());
+                    int i = (int)amt1;
+                    float n1 = amt1 - i;
+                    if (n1 > 0)
+                    {
+                        decimalPart = amt1.ToString().Split('.')[1];
+                    }
+                    model.Dhirams = Convert.ToString(i);
+                    if (decimalPart == "")
+                    { model.Fils = "0"; }
+                    else
+                    {
+                        model.Fils = decimalPart;
+                    }
+                }
+                model.AmtInWords = Ebwater.AmtInWords;
+                model.AmtInWords = AmountInWords(Convert.ToDecimal(Ebwater.TotalAmount));
+                model.DDChequeNo = Ebwater.DDChequeNo;
+                if (Ebwater.Cheqdate.HasValue)
+                { model.Cheqdate = Ebwater.Cheqdate.Value.ToShortDateString(); }
+                model.pdcstatus = Ebwater.pdcstatus;
+                model.BankAcCode = Ebwater.BankAcCode;
+                model.BankAcName = Ebwater.BankAcName;
+                model.AdvAcCode = Ebwater.AdvAcCode;
+                model.Narration = Ebwater.Narration;
+
+
+                LeamaEntities l = new LeamaEntities();
+                var filter = l.tbl_eb_water_paymentdt.Where(x => x.id == model.id);
+                var Ebwaterdata = filter.ToList();
+
+                ViewBag.EdPaymentds = Ebwaterdata;
+                return PartialView("../UtilityPayment/_UtilityPrint", model);
+                //return PartialView("../Views/Receipts/_ReceiptsPrint", model);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+
+
+        [HttpGet]
+        public string AmountInWords(decimal amount)
+        {
+            string decimalPart = "", text = "";
+            decimal amt1 = amount;
+            int i = (int)amt1;
+            decimal n1 = amount - (int)amount;
+            if (n1 > 0)
+            {
+                decimalPart = amt1.ToString().Split('.')[1];
+            }
+
+            string t1 = NumberToText1.NumberToText(i, true, false);
+            string t2 = NumberToText1.DecimalToText(decimalPart);
+            string t3 = "";
+            //string text = NumberToText1.NumberToText (i, true, false) +"" +""+ "Dirhams " + "and"+ NumberToText1. DecimalToText(decimalPart) +""+ ""+"fils";
+            if (t1 != "" && t2 != "")
+            { text = t1 + "" + t3 + " Dirhams " + "and" + t2 + "" + "" + " fils "; }
+            else
+            { text = t1 + "" + t3 + " Dirhams "; }            
+            return text;
+            
         }
     }
 }

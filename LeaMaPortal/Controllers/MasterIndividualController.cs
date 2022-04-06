@@ -22,15 +22,20 @@ namespace LeaMaPortal.Controllers
         {
             try
             {
+                if (Session["Region"] == null)
+                {
+                    return RedirectToAction("Login", "Authentication");
+                }
                 ViewData["Search"] = Search;
                 int currentPageIndex = page.HasValue ? page.Value : 1;
                 int PageSize = defaultPageSize.HasValue ? defaultPageSize.Value : PagingProperty.DefaultPageSize;
                 ViewBag.defaultPageSize = new SelectList(PagingProperty.DefaultPagelist, PageSize);
+                string regname = Session["Region"].ToString();
                 //TenantCompanyViewModel model = new TenantCompanyViewModel();
-                var query = db.tbl_tenant_individual.Where(x => x.Delmark != "*");
+                var query = db.tbl_tenant_individual.Where(x => x.Delmark != "*" && x.Region_Name == regname );
                 if (!string.IsNullOrWhiteSpace(Search))
                 {
-                    query = query.Where(x => x.First_Name.Contains(Search));
+                    query = query.Where(x => x.First_Name.Contains(Search) || x.Last_Name .Contains (Search ) || x.Company_Educational.Contains (Search ) || x.City.Contains (Search ) || x.Emiratesid.Contains (Search )  ) ;
                 }
                 var list = query.OrderBy(x => x.Tenant_Id).ToPagedList(currentPageIndex, PageSize);
                 return PartialView("../Master/TenantIndividual/_List",list);
@@ -170,6 +175,17 @@ namespace LeaMaPortal.Controllers
                 }
                 catch { }
                 model.tenantdocdetails = tenantDoc;
+
+                string regname = Session["Region"].ToString();
+                if (regname != "")
+                {
+                    model.Region_name = regname;
+
+                    var countryname = db.tbl_region.Where(x => x.Region_Name == model.Region_name).OrderByDescending(x => x.Id).FirstOrDefault();
+
+                    model.Country = countryname.Country;
+                }
+
                 object[] param = Helper.GetMySqlParameters<TenantIndividualViewModel>(model, PFlag, System.Web.HttpContext.Current.User.Identity.Name);
 
                 var _result = await db.Database.SqlQuery<object>(@"CALL Usp_Tenant_Individual_All(@PFlag,@PTenant_Id,@PTitle  ,@PFirst_Name  ,@PMiddle_Name  ,@PLast_Name  ,@PCompany_Educational   ,@PProfession  ,@PMarital_Status  ,@Paddress  ,@Paddress1  ,@PEmirate  ,@PCity  ,@PPostboxNo  ,@PEmail  ,@PMobile_Countrycode  ,@PMobile_Areacode  ,@PMobile_No  ,@PLandline_Countrycode  ,@PLandline_Areacode  ,@PLandline_No  ,@PFax_Countrycode  ,@PFax_Areacode  ,@PFax_No  ,@PNationality  ,@PEmiratesid  ,@PEmirate_issuedate  ,@PEmirate_expirydate  ,@PPassportno  
@@ -186,7 +202,9 @@ namespace LeaMaPortal.Controllers
                 ,@PADWEA_Regid  
                 ,@PType  
                 ,@PCreateduser  
-                ,@Ptenantdocdetails 
+                ,@Ptenantdocdetails
+                ,@PRegion_Name
+                ,@PCountry 
                                     )", param).ToListAsync();
                 //MasterViewModel mastermodel = new MasterViewModel();
                 //ViewBag.FormMasterSelected = 11;
@@ -271,6 +289,7 @@ namespace LeaMaPortal.Controllers
             {
                  Id = tenant.Id,
                 Tenant_Id = tenant.Tenant_Id,
+                
                 Title = tenant.Title,
                 First_Name = tenant.First_Name,
                 Middle_Name = tenant.Middle_Name,
@@ -309,7 +328,9 @@ namespace LeaMaPortal.Controllers
                 Familyno = tenant.Familyno,
                 Familybookcity = tenant.Familybookcity,
                 ADWEA_Regid = tenant.ADWEA_Regid,
-                Type = tenant.Type
+                Type = tenant.Type,
+                Region_name = tenant.Region_Name ,
+                Country = tenant.Country 
             };
         }
         // GET: MasterIndividual/Delete/5
@@ -322,7 +343,7 @@ namespace LeaMaPortal.Controllers
 
                 object[] param = Helper.GetMySqlParameters<TenantIndividualViewModel>(Map(model), Common.DELETE, System.Web.HttpContext.Current.User.Identity.Name);
 
-                var _result = await db.Database.SqlQuery<object>(@"CALL Usp_Tenant_Individual_All(@PFlag,@PTenant_Id,@PTitle  ,@PFirst_Name  ,@PMiddle_Name  ,@PLast_Name  ,@PCompany_Educational   ,@PProfession  ,@PMarital_Status  ,@Paddress  ,@Paddress1  ,@PEmirate  ,@PCity  ,@PPostboxNo  ,@PEmail  ,@PMobile_Countrycode  ,@PMobile_Areacode  ,@PMobile_No  ,@PLandline_Countrycode  ,@PLandline_Areacode  ,@PLandline_No  ,@PFax_Countrycode  ,@PFax_Areacode  ,@PFax_No  ,@PNationality  ,@PEmiratesid  ,@PEmirate_issuedate  ,@PEmirate_expirydate  ,@PPassportno  
+                var _result = await db.Database.SqlQuery<object>(@"CALL Usp_Tenant_Individual_All(@PFlag,@PTenant_id,@PTitle  ,@PFirst_Name  ,@PMiddle_Name  ,@PLast_Name  ,@PCompany_Educational   ,@PProfession  ,@PMarital_Status  ,@Paddress  ,@Paddress1  ,@PEmirate  ,@PCity  ,@PPostboxNo  ,@PEmail  ,@PMobile_Countrycode  ,@PMobile_Areacode  ,@PMobile_No  ,@PLandline_Countrycode  ,@PLandline_Areacode  ,@PLandline_No  ,@PFax_Countrycode  ,@PFax_Areacode  ,@PFax_No  ,@PNationality  ,@PEmiratesid  ,@PEmirate_issuedate  ,@PEmirate_expirydate  ,@PPassportno  
                 ,@PPlaceofissuance  
                 ,@PPassport_Issuedate
                 ,@PPassport_Expirydate  
@@ -337,7 +358,8 @@ namespace LeaMaPortal.Controllers
                 ,@PType  
                 ,@PCreateduser  
                 ,@Ptenantdocdetails 
-                                    )", param).ToListAsync();
+                ,@PRegion_Name
+                ,@PCountry)", param).ToListAsync();
                 result.Message = "Tenant person deleted successfully";
                 return Json(result, JsonRequestBehavior.AllowGet);
             }

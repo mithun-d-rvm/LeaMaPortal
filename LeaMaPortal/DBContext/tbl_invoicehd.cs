@@ -14,12 +14,6 @@ namespace LeaMaPortal.DBContext
     
     public partial class tbl_invoicehd
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_invoicehd()
-        {
-            this.tbl_invoicedt = new HashSet<tbl_invoicedt>();
-        }
-    
         public int id { get; set; }
         public string invno { get; set; }
         public Nullable<System.DateTime> date { get; set; }
@@ -42,7 +36,9 @@ namespace LeaMaPortal.DBContext
         public Nullable<System.DateTime> Createddatetime { get; set; }
         public string Createduser { get; set; }
         public string Delmark { get; set; }
-    
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_invoicedt> tbl_invoicedt { get; set; }
     }

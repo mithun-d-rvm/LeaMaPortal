@@ -19,16 +19,16 @@ namespace LeaMaPortal.DBContext
         public string Property_id { get; set; }
         public string Property_Name { get; set; }
         public string Unit_id { get; set; }
-        public string Unitname { get; set; }
+        public string Unit_name { get; set; }
         public string Property_Usage { get; set; }
         public string Region_Name { get; set; }
         public string Country { get; set; }
-        public Nullable<int> Caretaker_id { get; set; }
+        public string Caretaker_id { get; set; }
         public string Caretaker_Name { get; set; }
-        public Nullable<double> Rental_Rate_Month { get; set; }
-        public Nullable<System.DateTime> Vacant_Start_Date { get; set; }
-        public Nullable<int> Aging_Days { get; set; }
-        public Nullable<double> Loss_Amt { get; set; }
+        public string Rental_Rate_Month { get; set; }
+        public string Vacant_Start_Date { get; set; }
+        public string Aging_Days { get; set; }
+        public string Loss_Amt { get; set; }
         public string user { get; set; }
     }
 }

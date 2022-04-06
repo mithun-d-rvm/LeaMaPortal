@@ -4746,3 +4746,28 @@ ul.dropdown-menu {
     padding: 4px 7px 7px 7px;
 }
 }
+
+.regin {
+     display:none;
+    position:absolute;
+    background-color:#fff;
+    padding:20px 10px 20px 10px;
+    width:150px;
+    border:thin solid #bbb;
+    z-index:5;
+    max-height:130px;
+    overflow:scroll;
+    overflow-x:hidden;
+}
+
+.reg:hover .regin {
+    display:block;
+}
+
+.regin:hover  {
+    display:block;
+}
+
+.reg {
+    background-color:#fff;
+    }

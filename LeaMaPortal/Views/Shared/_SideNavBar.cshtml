@@ -34,10 +34,20 @@
                     <div class="p-t-17">NOTIFICATION</div>
                 </a>
             </li>*@
+
+          
             <li id="menu-home-tca">
                 <a href="~/Tca/Index">
                     <img src="~/Images/PropertyProf.png" /><br />
                     <div class="p-t-17">TCA</div>
+                </a>
+            </li>
+            <li id="menu-home-receipts">
+                <a href="~/Receipts/Index">
+                    <img src="~/Images/Reciepts.png" /><br />
+                    <div class="p-t-17">
+                        RECEIPTS
+                    </div>
                 </a>
             </li>
             <li id="menu-home-invoice">
@@ -56,32 +66,6 @@
                     </div>
                 </a>
             </li>
-            <li id="menu-home-receipts">
-                <a href="~/Receipts/Index">
-                    <img src="~/Images/Reciepts.png" /><br />
-                    <div class="p-t-17">
-                        RECEIPTS
-                    </div>
-                </a>
-            </li>
-            @*<li id="menu-home">
-                <a href="index.html">
-                    <img src="~/Images/RenewContract.png" /><br />
-                    <div class="p-t-17">RENEW CONTRACT</div>
-                </a>
-            </li>
-            <li id="menu-home">
-                <a href="index.html">
-                    <img src="~/Images/CloseCont.png" /><br />
-                    <div class="p-t-17">CLOSE CONTRACT</div>
-                </a>
-            </li>*@
-            <li id="menu-home-reporting">
-                <a href="~/Report/Index">
-                    <img src="~/Images/REPORTING.png" /><br />
-                    <div class="p-t-17">REPORTING</div>
-                </a>
-            </li>
             <li id="menu-home-utility-billentry">
                 <a href="~/EbWater/Index">
                     <img src="~/Images/Reciepts.png" /><br />
@@ -98,11 +82,29 @@
                     </div>
                 </a>
             </li>
-            <li id="menu-home">
+            <li id="menu-home-reporting">
+                <a href="~/Report/Index">
+                    <img src="~/Images/REPORTING.png" /><br />
+                    <div class="p-t-17">REPORTING</div>
+                </a>
+            </li>
+            <li id="menu-home-master">
                 <a href="~/Master/Index" class="sidebar-btn">
                     MASTERS
                 </a>
             </li>
+            @*<li id="menu-home">
+                <a href="index.html">
+                    <img src="~/Images/RenewContract.png" /><br />
+                    <div class="p-t-17">RENEW CONTRACT</div>
+                </a>
+            </li>
+            <li id="menu-home">
+                <a href="index.html">
+                    <img src="~/Images/CloseCont.png" /><br />
+                    <div class="p-t-17">CLOSE CONTRACT</div>
+                </a>
+            </li>*@
         </ul>
     </div>
 </div>
@@ -120,7 +122,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Modal Header</h4>
                 </div>*@
-            <div class="modal-body" style="height: 328px;padding-left: 0px; padding-right: 5px;">
+            <div class="modal-body" style="height: 328px;padding-left: 0px; padding-r   ight: 5px;">
                 <div class="notification-left-black-line">
                     &nbsp;
                 </div>
@@ -140,23 +142,25 @@
                     <div class="col-md-10 notification-filter-div">
                         <div class="p-b-25 notification-menu">
                             <span class="color-f5a623 notification-modal-filter">Filter notifications by</span>
-                            <span class="notification-filter" onclick="getMenu()">All</span>
+                            <span id="Al" class="notification-filter active" onclick="getMenu(111)">All</span>
                             @*<span class="notification-filter-line"> &nbsp; </span>*@
-                            <span class="notification-filter notify-menu active ">PDC Deposits</span>
+                            <span id="PDCDeposits" class="notification-filter notify-menu">PDC Deposits</span>
                             @*<span class="notification-filter-line"> &nbsp; </span>*@
-                            <span class="notification-filter notify-menu">Renewals</span>
+                            <span id="Renewal" class="notification-filter notify-menu">Renewals</span>
                             @*<span class="notification-filter-line"> &nbsp; </span>*@
-                            <span class="notification-filter notify-menu">Rental Due</span>
+                            <span id="RentalDue" class="notification-filter notify-menu">Rental Due</span>
                             @*<span class="notification-filter-line"> &nbsp; </span>*@
-                            <span class="notification-filter notify-menu">Utility Dues</span>
+                            <span id="UtilityDues" class="notification-filter notify-menu">Utility Dues</span>
                             @*<span class="notification-filter-line"> &nbsp; </span>*@
                             @*<span class="notification-filter notify-menu">Agreement approval</span>*@
-                            <span class="notification-filter notify-menu">TCA approval</span>
+                            <span id="TCAapproval" class="notification-filter notify-menu" style="display:none">TCA approval</span>
+                            <span id="LicenseExpiry" class="notification-filter notify-menu">License Expiry</span>
                             @*<span class="notification-filter-line"> &nbsp; </span>*@
                             @*<span class="notification-filter notify-menu">Contract Approval</span>*@
                             @*<span class="pull-right"> Expand to page </span>*@
                         </div>
                         <div class="notification-filter-content"></div>
+                        <input type="hidden" id="hdnTcaApproveStatus"/>
                     </div>
                 </div>
             </div>
@@ -192,9 +196,35 @@
         allRecordCount = 0;
         getData(filter);
     });
-    $(".notification-filter-content").empty();
+    $("#menu-home-notification").click(function () {
+        $("#Al").addClass("notification-filter active");
+
+        $("#LicenseExpiry").removeClass("notification-filter active");
+        $("#LicenseExpiry").addClass("notification-filter notify-menu");
+
+        $("#PDCDeposits").removeClass("notification-filter active");
+        $("#PDCDeposits").addClass("notification-filter notify-menu");
+
+        $("#Renewal").removeClass("notification-filter active");
+        $("#Renewal").addClass("notification-filter notify-menu");
+
+        $("#RentalDue").removeClass("notification-filter active");
+        $("#RentalDue").addClass("notification-filter notify-menu");
+
+        $("#UtilityDues").removeClass("notification-filter active");
+        $("#UtilityDues").addClass("notification-filter notify-menu");
+
+        $("#TCAapproval").removeClass("notification-filter active");
+        $("#TCAapproval").addClass("notification-filter notify-menu");
+
+        //$(".notification-filter-content").empty();
+        getMenu(111);
+    })
     getData("PDC Deposits");
-    function getData(filter) {
+    $(".notification-filter-content").empty();
+    function getData(filter, flgg) {
+        //alert(flgg);
+        //alert(filter);
         allRecordCount = 0;
         $.ajax(
                 {
@@ -208,25 +238,44 @@
                         //alert(allRecordCount);
                         //alert(response.length);
                         allRecordCount = allRecordCount + response.length;
+                        //alert(allRecordCount);
                         if (allRecordCount == "NaN")
                         {
                             allRecordCount = 0;
                         }
-                        $("#count").text(allRecordCount);
-                        $("#notify-count").text(allRecordCount);                        
+                        
+                        $("#notify-count").text(allRecordCount);
+                        if ((filter != "Renewals" || filter != "PDC Deposits" || filter != "Rental Due" || filter != "Utility Dues" || filter != "TCA approval" || filter != "Contract Approval" || filter != "License Expiry") && flgg == 111)
+                        {
+                            $("#count").text(allRecordCount);
+                        }
+                        
                         var i = 1;
                         $.each(response, function (index, obj) {
-                            data = "<div class='notification-msg-line'></div><div>";
+                           
                              
                             if (filter == "Renewals") {
+                                //data += '<div>';
+                                //data += '<span class="notification-vr-1">Region Name</span>';
+                                //data += '<span class="notification-vr-2">Properties Name</span>';
+                                //data += '<span class="notification-vr-2">Unit Name</span>';
+                                //data += '<span class="notification-vr-2">Agreement No</span>';
+                                //data += '<span class="notification-vr-2">Start Date</span>';
+                                //data += '<span class="notification-vr-2">End Date</span>';
+                                //data += '</div>';
+                                //data += '<div>';
+                                data = "<div class='notification-msg-line'></div><div>";
                                 data += '<span class="notification-vr-1"> ' + obj.region_name + ' </span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Properties_Name + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Unit_Property_Name + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Agreement_No + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.StartDate + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.EndDate + '</span>';
+                                data += '</div><hr class="notification-hr" />';
+                                //data += '</div>';
                             }
                             else if (filter == "PDC Deposits") {
+                                data = "<div class='notification-msg-line'></div><div>";
                                 data += '<span class="notification-vr-1"> ' + obj.Region_Name + ' </span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Property_Name + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.unit_Name + '</span>';
@@ -235,8 +284,10 @@
                                 data += '<span class="notification-vr-2"> ' + obj.DDChequeNo + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.DDDate + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.pdc_Amount + '</span>';
+                                data += '</div><hr class="notification-hr" />';
                             }
                             else if (filter == "Rental Due") {
+                                data = "<div class='notification-msg-line'></div><div>";
                                 data += '<span class="notification-vr-1"> ' + obj.Region_Name + ' </span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Properties_Name + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Ag_Tenant_Name + '</span>';
@@ -245,8 +296,10 @@
                                 data += '<span class="notification-vr-2"> ' + obj.Cheque_No + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.ChequeDate + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Cheque_Amount + '</span>';
+                                data += '</div><hr class="notification-hr" />';
                             }
                             else if (filter == "Utility Dues") {
+                                data = "<div class='notification-msg-line'></div><div>";
                                 data += '<span class="notification-vr-1"> ' + obj.Region_Name + ' </span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Property_Name + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Unit_Property_Name + '</span>';
@@ -256,17 +309,26 @@
                                 data += '<span class="notification-vr-2"> ' + obj.BDate + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Billamount + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.DDate + '</span>';
-                            }
+                                data += '</div><hr class="notification-hr" />';
+                            }// && flgg != 111
                             else if (filter == "TCA approval") {
+                                data = '<div id="TCADiv" style="display:none" class="dsp">'
+
+                                data += "<div class='notification-msg-line'></div><div>";
                                 data += '<span class="notification-vr-1"> ' + obj.Region_Name + ' </span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Properties_Name + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Unit_Property_Name + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Ag_Tenant_Name + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Agreement_No + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.Total_Rental_amount + '</span>';
-                                data += '<span class="notification-vr-2"><button type="button" onclick="approveTca(' + obj.Agreement_No + ')" data-toggle = "modal" data-target = "#renewalModal">Approve</button></span>';
+                                data += '<span class="notification-vr-2"><button type="button" onclick="approveTca(' + obj.Agreement_No + ')" data-toggle = "modal" data-target = "#renewalModal">Approve</button></span>'; //,' + obj.Region_Name + '
+                                data += '</div><hr class="notification-hr" />';
+                                data += '</div>'
+                                getTCAApproveStatus();
                             }
+                           
                             else if (filter == "Contract Approval") {
+                                data = "<div class='notification-msg-line'></div><div>";
                                 data += '<input type="hidden" id="contractId_'+i+'" value="' + obj.Id + '" />';
                                 data += '<span class="notification-vr-1"> ' + obj.AgreementNo + '</span>';
                                 data += '<span class="notification-vr-2"> ' + obj.TenantName + ' </span>';
@@ -275,9 +337,22 @@
                                 data += '<span class="notification-vr-2"><button type="button" onclick="approveContract('+i+')">Approve</button></span>';
                                 data += '<span class="notification-vr-2"><button type="button">Reject</button></span>';
                                 data += '<span class="notification-vr-2"><button type="button">View</button></span>';
+                                data += '</div><hr class="notification-hr" />';
                                 i = i + 1;
                             }
-                            data += '</div><hr class="notification-hr" />';
+                            else if (filter == "License Expiry") {
+                                //alert("in");
+                                data = "<div class='notification-msg-line'></div><div>";
+                                data += '<span class="notification-vr-1"> ' + obj.Flag + ' </span>';
+                                data += '<span class="notification-vr-2"> ' + obj.id + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Name + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Category + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.Status + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.ISSDAT + '</span>';
+                                data += '<span class="notification-vr-2"> ' + obj.EXPDAT + '</span>';
+                                data += '</div><hr class="notification-hr" />';
+                            }
+                           
                             $(".notification-filter-content").append(data);
                         });
                     },
@@ -289,7 +364,8 @@
                 });
     }
     
-    function getMenu() {
+    function getMenu(flgg) {
+        //alert(flgg);
         $.ajax(
                 {
                     url: "../Notification/getNotificationMenu",
@@ -300,7 +376,7 @@
                         var data = "";
                         $(".notification-filter-content").empty();
                         $.each(response, function (index, obj) {
-                            getData(obj.Name);
+                            getData(obj.Name, flgg);
                         });
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
@@ -381,7 +457,9 @@
          
         var user = $.cookie("CurrentUser");
         var currentUser = JSON.parse(user);
+        //alert(currentUser.Userid);
         menus = currentUser.MenuConfig.split(",");
+        //alert(menus);
         jQuery.each(menus, function (index, item) {
              
             //if (item == 2) {
@@ -396,17 +474,17 @@
             } if (item == 25) {
                 $("#menu-home-receipts").show();
             }
-            //if (item == 2) {
-            $("#menu-home-reporting").show();
-            //}
-            //if (item == 2) {
-            $("#menu-home-master").show();
-            //}
+            if (item == 3) {
+                $("#menu-home-master").show();
+            }
             if (item == 27) {
                 $("#menu-home-utility-billentry").show();
             }
             if (item == 28) {
                 $("#menu-home-utility-payments").show();
+            }
+            if (item == 23) {
+                $("#menu-home-reporting").show();
             }
 
 
@@ -593,13 +671,14 @@
 
     
 
-    function approveTca(Agreement_No) {
+    function approveTca(Agreement_No) { //,regionnam
         var id = Agreement_No;
+        //var reg = regionnam;
         $.ajax(
             {
                 url: "../Tca/Approval",
                 type: "Get",
-                data: { AgreementNo: id },
+                data: { AgreementNo: id }, //, Regionnam: reg 
                 success: function (result) {
                      
                     //var data=jQuery.parseJSON(result);
@@ -631,6 +710,45 @@
             });
 
     }
+
+    function getTCAApproveStatus() {
+        var user = $.cookie("CurrentUser");
+        var currentUser = JSON.parse(user);
+        //alert(flgg);
+        $.ajax(
+                {
+                    url: "../Notification/getTCAApproveStatus",
+                    type: "GET",
+                    data:{user: currentUser.Userid},
+                    contentType: "application/json",
+                    success: function (response) {
+
+                        //var data = "";
+                        //$(".notification-filter-content").empty();
+                        $.each(response, function (index, data) {                            
+                            //alert(data.cnt);
+                            if(data.cnt > 0)
+                            {
+                                //alert("Hi");
+                                $("#TCAapproval").show();
+
+                                $("#TCADiv").show();
+                                $("[id=TCADiv]").show();
+                            }
+                        });
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                    },
+                    complete: function () {
+                    }
+                });
+    }
+
+    $(document).ready(function () {
+        getMenu(111);
+        getTCAApproveStatus();
+    });
 
    
 </script>

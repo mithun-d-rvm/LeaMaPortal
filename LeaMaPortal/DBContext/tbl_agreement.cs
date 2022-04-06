@@ -14,17 +14,6 @@ namespace LeaMaPortal.DBContext
     
     public partial class tbl_agreement
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_agreement()
-        {
-            this.tbl_agreement_facility = new HashSet<tbl_agreement_facility>();
-            this.tbl_agreement_unit_inner = new HashSet<tbl_agreement_unit_inner>();
-            this.tbl_agreement_pdc = new HashSet<tbl_agreement_pdc>();
-            this.tbl_agreement_checklist = new HashSet<tbl_agreement_checklist>();
-            this.tbl_agreement_doc = new HashSet<tbl_agreement_doc>();
-            this.tbl_agreement_utility = new HashSet<tbl_agreement_utility>();
-        }
-    
         public int id { get; set; }
         public string Single_Multiple_Flag { get; set; }
         public Nullable<int> Agreement_Refno { get; set; }
@@ -60,20 +49,7 @@ namespace LeaMaPortal.DBContext
         public Nullable<System.DateTime> Createddatetime { get; set; }
         public string Createduser { get; set; }
         public string Delmark { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_agreement_facility> tbl_agreement_facility { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_agreement_unit_inner> tbl_agreement_unit_inner { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_agreement_pdc> tbl_agreement_pdc { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_agreement_checklist> tbl_agreement_checklist { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_agreement_doc> tbl_agreement_doc { get; set; }
-        public virtual tbl_propertiesmaster tbl_propertiesmaster { get; set; }
-        public virtual tbl_caretaker tbl_caretaker { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_agreement_utility> tbl_agreement_utility { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     }
 }

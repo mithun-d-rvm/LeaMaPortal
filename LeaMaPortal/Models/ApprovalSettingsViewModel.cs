@@ -10,6 +10,9 @@ namespace LeaMaPortal.Models
     {
         public int Id { get; set; }
         [DisplayName("TCA Approval Required")]
+
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
         public string Approval_flag { get; set; }
         [DisplayName("Approval User")]
         public string Userid { get; set; }

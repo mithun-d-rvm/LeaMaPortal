@@ -14,7 +14,7 @@ namespace LeaMaPortal.DBContext
     
     public partial class summarycollection_report
     {
-        public int id { get; set; }
+        public Nullable<int> Id { get; set; }
         public int property_id { get; set; }
         public string Property_ID_Tawtheeq { get; set; }
         public string Properties_Name { get; set; }

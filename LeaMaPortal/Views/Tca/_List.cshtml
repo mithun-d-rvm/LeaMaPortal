@@ -15,7 +15,7 @@
             <input type="text" id="Search" name="Search" value="@ViewData["Search"]" class="leama-field form-control" />
         </div>
         <div class="col-md-4">
-            <button type="submit" class="btn btn-info leama-search-btn col-md-4">Go</button>
+            <button type="submit" class="btn btn-info leama-search-btn col-md-4" id="go">Go</button>
         </div>
     </div>
 
@@ -28,9 +28,11 @@
 
         <div class="divTableBody divFontBodyTable">
             <div class="divTableHeading">
+                <div class="divTableCell" style="display:none">PropertyType</div>
+                <div class="divTableCell" style="display:none">PropertyID</div>
                 <div class="divTableCell">Agreement No</div>
-                <div class="divTableCell">Property Name</div>
                 <div class="divTableCell">Tenant Name</div>
+                <div class="divTableCell">Property Name</div>
                 <div class="divTableCell">Unit Name</div>
                 <div class="divTableCell">Action</div>
 
@@ -38,18 +40,21 @@
             @foreach (var item in Model)
             {
                 <div class="divTableRow">
+                    <div class="divTableCell" style="display:none">@item.Single_Multiple_Flag</div>
+                    <div class="divTableCell" style="display:none">@item.property_id</div>
                     <div class="divTableCell">@item.Agreement_No</div>
-                    <div class="divTableCell">@item.Properties_Name</div>
                     <div class="divTableCell">@item.Ag_Tenant_Name</div>
+                    <div class="divTableCell">@item.Properties_Name</div>
                     <div class="divTableCell">@item.Unit_Property_Name</div>
+
                     <div class="divTableCell">
-                        @if (@ViewBag.IsRenewalVisible && item.Approval_Flag==1)
+                        @if (@ViewBag.IsRenewalVisible && item.Approval_Flag==1 && item.Status != "Renewed")
                         {
                             <span>
                                 @Html.ActionLink(" ", "Renewal", null, new { @class = "glyphicon glyphicon-open agreement-renewal", title = "Renewal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-renewal" })  |
                             </span>
                         }
-                        @if (@ViewBag.IsClosureVisible && item.Approval_Flag == 1)
+                        @if (@ViewBag.IsClosureVisible && item.Approval_Flag == 1 && item.Status != "Closed")
                         {
                             <span>
                                 @Html.ActionLink(" ", "Closue", null, new { @class = "glyphicon glyphicon-save agreement-closure", title = "Closure", @data_toggle = "modal", @data_target = "#closureModal", @data_agreementno = @item.Agreement_No, @id = "#menu-home-tca-closure" })  |
@@ -70,7 +75,7 @@
                         @if (@ViewBag.IsDeletable == 1)
                         {
                             <span>
-                                @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash agreement-delete", @style = "color:red", title = "Delete", @data_agreementno = @item.Agreement_No }) |
+                                @Html.ActionLink(" ", "Delete", null, new { @class = "glyphicon glyphicon-trash agreement-delete", @style = "color:red", title = "Delete", @data_agreementno = @item.Agreement_No, @data_singlemultipleflag = @item.Single_Multiple_Flag, @data_propid = @item.property_id }) |
                             </span>
                         }
                         @if (item.Approval_Flag == 1)
@@ -219,6 +224,8 @@
                         $("#closureContainer").empty();
                         $("#closureContainer").html(result);
                         $("#closureModal").modal('show');
+                        //alert(result.Agreement_No);
+                        //$("#Agreement_No").val(result.Agreement_No);
                         //$("#CountryId").val(result.Id);
                         //$("#CountryName").val(result.Country);
                     }
@@ -305,6 +312,7 @@
 
     $(".agreement-edit").click(function (e) {
         // $("#img-loader").removeClass("hide");
+        //alert("jhb");
         e.preventDefault();
         var id = $(this).data("agreementno");
         $.ajax(
@@ -398,35 +406,61 @@
         e.preventDefault();
 
         try {
-            var form = $("form#Status");
-
+            //var form = $("form#Status");
+            var search = $("Search").val();
+            alert($("Search").val());
+            alert("search");
+            $.ajax(
+           {
+               url: "../Tca/List",
+               type: "Get",
+               data: { Search: search, page: page, defaultPageSize: defaultPageSize },
+               success: function (html) {
+                   $("#agreementList").empty();
+                   $("#agreementList").html(html);
+               },
+               error: function (jqXhr, textStatus, errorThrown) {
+                   //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                   $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                   $(".result-title").text("Failure");
+                   $(".result-modal-body span").text("Could not able to process your requests");
+                   $('#masterResultModal').modal('show');
+               },
+               complete: function () {
+                   //   $("#VerifyIdDetailsLoader").addClass("hide");
+               }
+           });
             // var form = $('"form#VerifyId')[0]; // You need to use standart javascript object here
             //var formData = new FormData(form);
-            $.ajax(
-                {
-                    url: "../Tca/Status",
-                    // dataType: "jsonp",
-                    method: "POST",
-                    data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
-                    contentType: "application/json",
-                    processData: false,
-                    success: function (response) {
-                        $("#statusModal").modal('hide');
-                        $(".result-title").text("Success");
-                        $(".result-modal-body span").text("Status saved successfully.");
-                    },
-                    error: function (jqXhr, textStatus, errorThrown) {
-                        //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
 
-                        $(".result-title").text("Failure");
-                        $(".result-modal-body span").text(masterResultError);
-                    },
-                    complete: function () {
-                        // $("#").addClass("hide");
-                        $('#masterResultModal').modal('show');
-                    }
+            //$.ajax(
+            //    {
+            //        url: "../Tca/Status",
+            //        // dataType: "jsonp",
+            //        method: "POST",
+            //        data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
+            //        contentType: "application/json",
+            //        processData: false,
+            //        success: function (response) {
+            //            $("#statusModal").modal('hide');
+            //            $(".result-title").text("Success");
+            //            $(".result-modal-body span").text("Status saved successfully.");
+            //        },
+            //        error: function (jqXhr, textStatus, errorThrown) {
+            //            //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
 
-                });
+            //            $(".result-title").text("Failure");
+            //            $(".result-modal-body span").text(masterResultError);
+            //        },
+            //        complete: function () {
+            //            // $("#").addClass("hide");
+            //            $('#masterResultModal').modal('show');
+            //        }
+
+            //    });
+
+              
 
         }
         catch (ex) {
@@ -631,6 +665,9 @@
         });
     }
     function getAgreementList(search, page, defaultPageSize) {
+        var search ;
+        var page;
+        var defaultPageSize;
         $.ajax(
            {
                url: "../Tca/List",
@@ -656,6 +693,9 @@
     $(".agreement-delete").click(function (e) {
         e.preventDefault();
         var id = $(this).data("agreementno");
+        var single_multiple_flg = $(this).data("singlemultipleflag");
+        var propertyid = $(this).data("propid");
+        //alert(single_multiple_flg);
         var r = confirm("Are you sure want to delete?");
         if (r == false) {
             return;
@@ -666,11 +706,11 @@
                     url: "../Tca/Delete",
                     type: "Get",
 
-                    data: { AgreementNo: id },
+                    data: { AgreementNo: id, SingleMultipleFlag: single_multiple_flg, PropertyID: propertyid },
 
                     success: function (response) {
 
-                        getAgreementList();
+                        getAgreementList("","","");
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
 
@@ -729,5 +769,71 @@
             });
     });
 
+    $("#go").click(function (e) {
+        e.preventDefault();
 
+        try {
+            //var form = $("form#Status");
+            var search = $("#Search").val();
+            var page;
+            var defaultPageSize;
+            //alert($("#Search").val());
+            //alert(search);
+            $.ajax(
+           {
+               url: "../Tca/List",
+               type: "Get",
+               data: { Search: search, page: page, defaultPageSize: defaultPageSize },
+               success: function (html) {
+                   $("#agreementList").empty();
+                   $("#agreementList").html(html);
+               },
+               error: function (jqXhr, textStatus, errorThrown) {
+                   //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+                   $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+                   $(".result-title").text("Failure");
+                   $(".result-modal-body span").text("Could not able to process your requests");
+                   $('#masterResultModal').modal('show');
+               },
+               complete: function () {
+                   //   $("#VerifyIdDetailsLoader").addClass("hide");
+               }
+           });
+            // var form = $('"form#VerifyId')[0]; // You need to use standart javascript object here
+            //var formData = new FormData(form);
+
+            //$.ajax(
+            //    {
+            //        url: "../Tca/Status",
+            //        // dataType: "jsonp",
+            //        method: "POST",
+            //        data: JSON.stringify($(form).serializeObject()), //FormData(form.get(0)),
+            //        contentType: "application/json",
+            //        processData: false,
+            //        success: function (response) {
+            //            $("#statusModal").modal('hide');
+            //            $(".result-title").text("Success");
+            //            $(".result-modal-body span").text("Status saved successfully.");
+            //        },
+            //        error: function (jqXhr, textStatus, errorThrown) {
+            //            //alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+
+            //            $(".result-title").text("Failure");
+            //            $(".result-modal-body span").text(masterResultError);
+            //        },
+            //        complete: function () {
+            //            // $("#").addClass("hide");
+            //            $('#masterResultModal').modal('show');
+            //        }
+
+            //    });
+
+
+
+        }
+        catch (ex) {
+            alert(ex);
+        }
+    });
 </script>

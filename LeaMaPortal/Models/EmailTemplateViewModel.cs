@@ -21,5 +21,7 @@ namespace LeaMaPortal.Models
         public string BodyText { get; set; }
         [DisplayName("Subject Parameter")]
         public string SubjectParameter { get; set; }
+        public string Region_Name { get; set; }
+        public string Country { get; set; }
     }
 }

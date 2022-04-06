@@ -63,6 +63,7 @@ namespace LeaMaPortal.Helpers
         public const string NOTIFICATION_UTILITY_DUES = "Utility Dues";
         public const string NOTIFICATION_TCA_APPROVAL = "TCA approval";
         public const string NOTIFICATION_CONTRACT_APPROVED = "Contract Approval";
+        public const String NOTIFICATION_LICENSE_EXPIRY = "License Expiry";
 
         private static List<OptionModel> GetCheckListDropdown()
         {   
@@ -151,6 +152,7 @@ namespace LeaMaPortal.Helpers
             options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_RENEWAL });
             options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_RENTAL_DUE });
             options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_UTILITY_DUES });
+            options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_LICENSE_EXPIRY });
             //options.Add(new OptionModel { Name = StaticHelper.NOTIFICATION_CONTRACT_APPROVED });
             return options;
         }

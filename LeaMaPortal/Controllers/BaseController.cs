@@ -13,13 +13,30 @@ namespace LeaMaPortal.Controllers
     {
         public BaseController()
         {
-            GetUserRights();
+            try
+            {
+                GetUserRights();
+            }
+            catch(Exception e)
+            {
+                throw;
+            }
+            
         }
         public LoggedinUser CurrentUser
         {
+           
             get
             {
-                return AuthenticationHelper.GetLoggedinUserDetails(System.Web.HttpContext.Current).Result;
+                try
+                {
+                    return AuthenticationHelper.GetLoggedinUserDetails(System.Web.HttpContext.Current).Result;
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+                
             }
         }
         public void GetUserRights()

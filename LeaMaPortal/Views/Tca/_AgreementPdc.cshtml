@@ -37,7 +37,7 @@
             @Html.DropDownList("Month", null, "--Select--", new { @class = "form-control master-form-input AgreementPdMonth" })
         </div>
         <div class="col-md-1 w-md-10">
-            <input type="number" name="Year" id="Year" step="1" class="master-form-input form-control" onkeypress="allow_only_numbers(event);" min="@DateTime.Now.Year" />
+            <input type="number" name="Year" id="Year" step="1" class="master-form-input form-control" onkeypress="allow_only_numbers(event);" min="2010" />
             @*@Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "master-form-input form-control", @onkeypress = "allow_only_numbers(event);",@min=DateTime.Now.Year } })*@
         </div>
         <div class="col-md-1 w-md-13">
@@ -89,18 +89,18 @@
         var Cheque_Date = $("#AgreementPd #Cheque_Date").val();
         var Cheque_Amount = parseFloat($("#AgreementPd #Cheque_Amount").val());
         var cYear = new Date().getFullYear();
-        if (Year < cYear)
-        {
-            $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
-            $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
-            $(".result-title").text("Failure");
-            $(".result-modal-body span").text("Year should not be past");
-            $('#masterResultModal').modal('show');
-            //alert("Year not past");
-            return;
-        }
+        //if (Year < cYear)
+        //{
+        //    $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
+        //    $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
+        //    $(".result-title").text("Failure");
+        //    $(".result-modal-body span").text("Year should not be past");
+        //    $('#masterResultModal').modal('show');
+        //    //alert("Year not past");
+        //    return;
+        //}
        
-        if (Month == '' || Year == '' || Payment_Mode == '' || $("#AgreementPd #Cheque_Amount").val() == '') {
+        if (Month == '' || Year < 2010 || isNaN(Year) || Payment_Mode == '' || $("#AgreementPd #Cheque_Amount").val() == '') {
             $("#masterResultModal").contents().find(".modal-header").removeClass("result-modal-success");
             $("#masterResultModal").contents().find(".modal-header").addClass("result-modal-error");
             $(".result-title").text("Failure");
@@ -169,6 +169,7 @@
         $("#AgreementPdcDetailsList").append(html);
         AgreementPdCount++;
         $("#AgreementPdcListCount").val(AgreementPdCount);
+        //alert($("#AgreementPdcListCount").val(AgreementPdCount));
     }
     function isExistAgreementPdc(Month, Year, Payment_Mode, BankName, Cheque_No, Cheque_Date, Cheque_Amount) {
         
@@ -274,18 +275,35 @@
         $("#AgreementPdcListCount").val(AgreementPdCount);
     });
     $("#Payment_Mode").change(function () {
-         
+        //alert("Hijbmn");
         var type = $("#Payment_Mode").val();
-        if (type == "Cheque") {
-            $("#Cheque_No").attr("disabled", false);
-            $("#Cheque_Date").attr("disabled", false);
+        if (type != undefined && (type != "Cash")) {
+            $('#BankName').removeAttr('disabled');
+            $('#Cheque_No').removeAttr('disabled');
+            $('#Cheque_Date').removeAttr('disabled');
+            //$("SecurityChequeno").prop("disabled", false);
+            //$("SecurityChequedate").prop("disabled", false);
         }
         else {
-            $("#Cheque_No").val('');
-            $("#Cheque_Date").val('');
-            $("#Cheque_No").attr("disabled", true);
-            $("#Cheque_Date").attr("disabled", true);
+            $('#BankName').attr('disabled', true);
+            $('#Cheque_No').attr('disabled', true);
+            $('#Cheque_Date').attr('disabled', true);
+            $('#BankName').val('');
+            $('#Cheque_No').val('');
+            $('#Cheque_Date').val('mm/dd/yyyy');
         }
+        
+
+        //if (type == "Cheque") {
+        //    $("#Cheque_No").attr("disabled", false);
+        //    $("#Cheque_Date").attr("disabled", false);
+        //}
+        //else {
+        //    $("#Cheque_No").val('');
+        //    $("#Cheque_Date").val('');
+        //    $("#Cheque_No").attr("disabled", true);
+        //    $("#Cheque_Date").attr("disabled", true);
+        //}
         return;
     });
     

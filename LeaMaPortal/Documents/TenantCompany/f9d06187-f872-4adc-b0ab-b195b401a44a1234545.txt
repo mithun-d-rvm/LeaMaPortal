@@ -1,0 +1,5 @@
+
+tbl_invoicehd.cs
+
+  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_invoicedt> tbl_invoicedt { get; set; }

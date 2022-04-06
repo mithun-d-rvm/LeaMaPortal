@@ -5,6 +5,7 @@
   Notes          : <Notes>
 -->
 <!--header start here-->
+
 @{
     var user = LeaMaPortal.Helpers.AuthenticationHelper.GetLoggedinUserDetails(HttpContext.Current).GetAwaiter().GetResult();
 }
@@ -13,8 +14,9 @@
 
 <link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
 <link href="~/Content/bootstrap-datepicker3.min.css" rel="stylesheet" />
-
 <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+@*<script type="text/javascript" src="Scripts/jquery-ui-1.10.2.js"></script>*@
+
 
 <style>
     .regionDropBtn, .propDropBtn {
@@ -87,14 +89,14 @@
 
 <div class="sub-header-main">
     <div class="col-md-6 pull-left" style="padding: 35px;" id="TopNavBarFilter">
-        <span> 
+        @*<span> 
         <img src="~/Images/settings.png" class="image-rotate-270" />
             &nbsp;&nbsp;&nbsp;
             <span style="border-right :1px solid #eee; color:#554289;">
                 FILTER PERFORMANCE BY
                 &nbsp;&nbsp;
             </span>    
-        </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*@
 
 
         @*<span class="filter-span">
@@ -109,15 +111,15 @@
             </span>
         </span>*@
 
-        <span class="regionDropdown filter-span" style="width: 80px;">
+        @*<span class="regionDropdown filter-span" style="width: 80px;">
             By Month 
             <span class="input-group input-append date" id="datePicker" style="top: -20px;left: 70px;">
                 <input type="hidden" class="form-control" name="date" />
                     <i class="fa fa-calendar regionDropBtn"></i>
             </span>
-        </span>
+        </span>*@
 
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        @*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span class="regionDropdown filter-span" style="margin-right: 10px;">
             By Region <i class="fa fa-angle-down regionDropBtn" onclick="showRegionList()"></i>
 
@@ -147,13 +149,21 @@
                 <a href="#tools">Tools</a>
             </span>
 
-        </span>
+        </span>*@
 
         <div class="clearfix"> </div>
     </div>
     <div class="col-md-1 pull-left"><br /><br /> <img src="~/Images/loader.gif" class="fa hide" id="img-loader" /></div>
-    <div class="col-md-5 pull-right" style="padding:18px 12px;">
-        <div class="profile_details" style="font-size: 16px;">
+    <div id="rgdiv" class="col-md-1 pull-left text-right" style="font-size: 13px; padding-top: 9px; display:block;font-weight: bold"> @**@
+      @*@Html.DropDownList("Region_Name", null, "-- Select --", new { @class = "master-form-input form-control", @Name = "Region_Name", })*@   
+       
+           <a>Change Region</a>
+           <iframe id="if" src="~/ReportASPX/Region/GetRegions.aspx" style="border:none;display:none; height:64px"></iframe>
+           
+      
+    </div>
+    <div class="col-md-4 pull-right" style="padding:18px 12px;">
+        <div class="profile_details" style="font-size: 16px;">            
             <ul>
                 <li class="dropdown profile_details_drop">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -162,7 +172,7 @@
                         </div>
                         <div class="user-name">
                             <p class="logName">@user.Name</p>
-                            <span>@user.Category</span>
+                            <span id="usrcat">@user.Category</span>&nbsp;&nbsp;- <span ><span id="inireg">@Session["Region"].ToString()</span>@Html.Label("", htmlAttributes: new { @id = "lblregion" })</span>                            
                             <label class="width-35 logged-arrow">
                                 <i class="fa fa-angle-down"></i>
                                 <i class="fa fa-angle-up"></i>
@@ -188,8 +198,119 @@
         $('#datePicker')
             .datepicker({
                 format: 'mm/dd/yyyy'
-            })
+            });
+
+        var usrcat = $("#usrcat").text();
+        //alert(usrcat);
+        if (usrcat != "Management") {
+            $("#rgdiv").hide();
+        }
+        else {
+            $("#rgdiv").show();
+        }
+
+        @*$("#inireg").text() = @Session["Region"].ToString();*@ 
+           
+
+            @*var usrcat = "" + @Session["Region"].ToString() + "";
+            alert(usrcat);*@
+       
+
+      
+
+        $.ajax(
+               {
+                   url: "../Authentication/GetRegions",
+                   // dataType: "jsonp",
+                   method: "GET",
+                   data: {  }, //FormData(form.get(0)),
+                   contentType: "application/json",
+
+                   success: function (response) {
+                       //var reg;
+                       //var rgdiv = document.getElementById("regdiv");
+                       ////var rgdiv = '<option value="" selected>--Select--</option>';
+                       ////$("#selreg").empty();
+                       ////reg = "<select id='selreg'>"
+                       //var region = '<option value="" selected>--Select--</option>';
+                       //$("#Region_Name").empty();
+                       $.each(response, function (index,data) {
+                           //reg = "<input type='radio' name='radreg' value =" + data.Region_Name + " />" + data.Region_Name + "</br>"; //" + data.Region_Name + "
+                           //rgdiv.innerHTML += reg;
+                           //region += "<options value='" + data.Region_Name + "'>" + data.Region_Name + "</options>"
+                       });
+                       //$('#Region_Name').append(region);
+                   },
+
+                   error: function (jqXhr, textStatus, errorThrown) {
+                       alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+                   },
+                   complete: function () {
+                       // $("#").addClass("hide");
+                   }
+
+               }
+            );
+
+        //debugger;
+        //$('input:radio[name=radreg]').change(function () {
+        //    alert("Hi");
+        //    var reg1 = $('input:radio[name=radreg]:checked').val();
+        //    var reg2 = $('input[type=radio][name=radreg]:checked').val();
+        //    alert(reg1);
+        //    alert(reg2);
+        //});
+
+        //$("#regform #radreg").change(function () {
+
+        //    //var val = "3";
+        //    //loadOrders(val);
+        //    alert("Hi");
+        //    $("#radreg")[0].checked = false;
+        //    $("#radreg")[0].checked = false;
+        //});
+
+        //$('input[type=radio][name=radreg]').change(function () {
+        //    //alert("Hi");
+        //    var reg1 = $('input:radio[name=radreg]:checked').val();
+        //    var reg2 = $('input[type=radio][name=radreg]:checked').val();
+        //    alert(reg1);
+        //    alert(reg2);
+        //});
+
+        $("#rgdiv").click(function () {
+            $("#if").show();
+        })
+
+        //$("#rgdiv").mouseover(function () {
+
+        //        $("#img-loader").removeClass("hide");
+        //        //$("#ReportArea").empty();
+        //        $.ajax(
+        //        {
+        //            url: "../Report/Region",
+        //            type: "Get",
+        //            data: {},
+        //            contentType: "application/json",
+        //            processData: false,
+        //            success: function (html) {
+        //                $("#GetReg").html('');
+        //                $("#GetReg").html(html);
+        //            },
+        //            error: function (jqXhr, textStatus, errorThrown) {
+        //                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
+        //            },
+        //            complete: function () {
+        //                $("#img-loader").addClass("hide");
+        //            }
+        //        });
+
+        //})
+
     });
+
+    //debugger;
+
 
     function showRegionList() {
         document.getElementById("dropDownRegion").classList.toggle("show");
@@ -228,6 +349,18 @@
             }
         }
     }
+
+
+
+
+    //$("#input[name='radreg']").change(function (e) {
+    //    $('input[type=radio][name=radreg]').change(function () {
+    //    alert("Hi");
+    //    var reg1 = $('input:radio[name=radreg]:checked').val();
+    //    var reg2 = $('input[type=radio][name=radreg]:checked').val();
+    //    alert(reg1);
+    //    alert(reg2);
+    //});
 
     //window.onclick = function (event) {
     //    if (!event.target.matches('.regiondropbtn')) {
